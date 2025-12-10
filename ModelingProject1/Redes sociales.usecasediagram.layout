@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Redes sociales">
+  <useCaseModelRootMoniker Id="cf5af500-1e99-41b5-8d84-aa2d10a1c010" />
+  <nestedChildShapes>
+    <actorShape Id="4b1f1593-8f5a-4a4d-8b28-0a82f9c8358c" absoluteBounds="1.75, 2.125, 0.5, 0.5" isReference="false" heightOffset="0">
+      <actorMoniker Id="d754cc95-6511-441f-ad90-ebc660a1a64c" LastKnownName="Usuario" />
+      <relativeChildShapes />
+    </actorShape>
+    <SubsystemShape Id="cfb57ebe-fb79-431a-836b-89b8768debf6" absoluteBounds="3.125, 0.5, 3, 4.125" customColor="White">
+      <subsystemMoniker Id="9c6c1a66-297e-4ab4-9df9-93d412423037" LastKnownName="SISTEMA" />
+      <nestedChildShapes>
+        <useCaseShape Id="00a23922-60ef-484c-afd9-a46e8d2a633d" absoluteBounds="3.75, 3.75, 1.875, 0.5" customColor="238, 237, 131" heightOffset="0">
+          <useCaseMoniker Id="57ac9c09-226e-40bf-9a30-734fe28f921d" LastKnownName="Autenticacion Google" />
+          <relativeChildShapes />
+        </useCaseShape>
+        <useCaseShape Id="87430098-b18e-4a00-b76f-4b462deed684" absoluteBounds="3.625, 1, 1.875, 0.5" customColor="238, 237, 131" heightOffset="0">
+          <useCaseMoniker Id="ec19d578-7b7a-4cc4-b16c-bcb4cbcebcee" LastKnownName="Autenticacion facebook" />
+          <relativeChildShapes />
+        </useCaseShape>
+        <useCaseShape Id="d3b51d4b-5294-44d0-af88-29529759b052" absoluteBounds="3.75, 2.25, 1.875, 0.5" customColor="238, 237, 131" heightOffset="0">
+          <useCaseMoniker Id="74612463-70c5-4554-9630-21a45405130c" LastKnownName="Autenticacion directorio activo" />
+          <relativeChildShapes />
+        </useCaseShape>
+      </nestedChildShapes>
+    </SubsystemShape>
+    <useCaseDependencyConnector edgePoints="[(2.25 : 2.52616279069767); (4.3091956092794 : 3.77125781026196)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <dependencyMoniker Id="996afd9e-8ff2-425a-bfea-8f508fc325b3" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="4b1f1593-8f5a-4a4d-8b28-0a82f9c8358c" />
+        <useCaseShapeMoniker Id="00a23922-60ef-484c-afd9-a46e8d2a633d" />
+      </nodes>
+    </useCaseDependencyConnector>
+    <useCaseDependencyConnector edgePoints="[(2.25 : 2.26524390243902); (4.07580312549883 : 1.46367179856149)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <dependencyMoniker Id="04fca15f-2955-4e6e-96e9-3d786d3d8605" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="4b1f1593-8f5a-4a4d-8b28-0a82f9c8358c" />
+        <useCaseShapeMoniker Id="87430098-b18e-4a00-b76f-4b462deed684" />
+      </nodes>
+    </useCaseDependencyConnector>
+    <useCaseDependencyConnector edgePoints="[(2.25 : 2.38662790697674); (3.76394290965807 : 2.45704385626317)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <dependencyMoniker Id="b02d09fa-f9ad-4459-9ec3-4738fb7548fe" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="4b1f1593-8f5a-4a4d-8b28-0a82f9c8358c" />
+        <useCaseShapeMoniker Id="d3b51d4b-5294-44d0-af88-29529759b052" />
+      </nodes>
+    </useCaseDependencyConnector>
+  </nestedChildShapes>
+</useCaseDiagram>

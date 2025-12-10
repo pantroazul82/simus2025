@@ -1,0 +1,17 @@
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\bin\Debug\net48\SM.Utilidades.dll.config
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\bin\Debug\net48\SM.Utilidades.dll
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\bin\Debug\net48\SM.Utilidades.pdb
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\bin\Debug\net48\Microsoft.Owin.dll
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\bin\Debug\net48\Microsoft.Owin.Security.dll
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\bin\Debug\net48\Microsoft.Owin.Security.Facebook.dll
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\bin\Debug\net48\Newtonsoft.Json.dll
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\bin\Debug\net48\Owin.dll
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\obj\Debug\net48\SM.Utilidades.csproj.AssemblyReference.cache
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\obj\Debug\net48\SM.Utilidades.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\obj\Debug\net48\SM.Utilidades.AssemblyInfoInputs.cache
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\obj\Debug\net48\SM.Utilidades.AssemblyInfo.cs
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\obj\Debug\net48\SM.Utilidades.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\obj\Debug\net48\SM.Utilidades.sourcelink.json
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\obj\Debug\net48\SM.Utili.7CCB4384.Up2Date
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\obj\Debug\net48\SM.Utilidades.dll
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\SM.Utilidades\obj\Debug\net48\SM.Utilidades.pdb

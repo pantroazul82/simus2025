@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="WS.Simus.AgentesService" CodeBehind="AgentesService.svc.cs" %>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="cf5af500-1e99-41b5-8d84-aa2d10a1c010" name="Redes sociales" linkedPackageId="3ded1014-acb0-4bc0-a829-a0026d8d4726" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <profileInstances>
+    <packageHasProfileInstances Id="4eb4fb8f-be4b-4034-9691-8b7b6f980759">
+      <profileInstance Id="625e6221-9fa5-47a2-87f9-465b302bc2cf" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="8ebca070-0b42-4e10-a655-8ba852bcd7c1">
+      <profileInstance Id="21f662ec-611d-4d26-8441-c5fe1ecdef62" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="d754cc95-6511-441f-ad90-ebc660a1a64c" name="Usuario" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="584f4ffc-a8ce-4392-9073-9a0a302cef40" />
+        <suppliersInternal>
+          <dependency Id="04fca15f-2955-4e6e-96e9-3d786d3d8605">
+            <useCaseMoniker Id="ec19d578-7b7a-4cc4-b16c-bcb4cbcebcee" LastKnownName="Autenticacion facebook" />
+            <elementDefinition Id="0b218ec4-d222-4a89-9618-53860d60950f" />
+          </dependency>
+          <dependency Id="996afd9e-8ff2-425a-bfea-8f508fc325b3">
+            <useCaseMoniker Id="57ac9c09-226e-40bf-9a30-734fe28f921d" LastKnownName="Autenticacion Google" />
+            <elementDefinition Id="1965fe67-a9b6-45f8-be84-55ead0abb0f9" />
+          </dependency>
+          <dependency Id="b02d09fa-f9ad-4459-9ec3-4738fb7548fe">
+            <useCaseMoniker Id="74612463-70c5-4554-9630-21a45405130c" LastKnownName="Autenticacion directorio activo" />
+            <elementDefinition Id="9b15f35d-5446-4f63-82fa-09bbb799dc61" />
+          </dependency>
+        </suppliersInternal>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="ec19d578-7b7a-4cc4-b16c-bcb4cbcebcee" name="Autenticacion facebook" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="224b2c65-c2ad-4729-b693-5a002dbb4c36" />
+        <subjects>
+          <subsystemMoniker Id="9c6c1a66-297e-4ab4-9df9-93d412423037" LastKnownName="SISTEMA" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="57ac9c09-226e-40bf-9a30-734fe28f921d" name="Autenticacion Google" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="5a575b51-3eb1-4635-9cc1-f522e1a1598e" />
+        <subjects>
+          <subsystemMoniker Id="9c6c1a66-297e-4ab4-9df9-93d412423037" LastKnownName="SISTEMA" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="9c6c1a66-297e-4ab4-9df9-93d412423037" name="SISTEMA" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="95a2a277-c247-49c0-a2ef-e7fd5f703741" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="74612463-70c5-4554-9630-21a45405130c" name="Autenticacion directorio activo" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="7b5c0445-60f0-439a-96ea-45a036c529a0" />
+        <subjects>
+          <subsystemMoniker Id="9c6c1a66-297e-4ab4-9df9-93d412423037" LastKnownName="SISTEMA" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="3ded1014-acb0-4bc0-a829-a0026d8d4726" name="ModelingProject1">
+    <elementDefinition Id="f6361c3e-453a-4b03-b45f-04d3b1ecd2fa" />
+  </package>
+</useCaseModelRoot>

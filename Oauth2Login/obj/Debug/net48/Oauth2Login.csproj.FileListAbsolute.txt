@@ -1,0 +1,14 @@
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\Oauth2Login\bin\Debug\net48\Oauth2Login.dll.config
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\Oauth2Login\bin\Debug\net48\Oauth2Login.dll
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\Oauth2Login\bin\Debug\net48\Oauth2Login.pdb
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\Oauth2Login\bin\Debug\net48\Newtonsoft.Json.dll
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\Oauth2Login\bin\Debug\net48\System.Configuration.ConfigurationManager.dll
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\Oauth2Login\obj\Debug\net48\Oauth2Login.csproj.AssemblyReference.cache
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\Oauth2Login\obj\Debug\net48\Oauth2Login.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\Oauth2Login\obj\Debug\net48\Oauth2Login.AssemblyInfoInputs.cache
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\Oauth2Login\obj\Debug\net48\Oauth2Login.AssemblyInfo.cs
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\Oauth2Login\obj\Debug\net48\Oauth2Login.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\Oauth2Login\obj\Debug\net48\Oauth2Login.sourcelink.json
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\Oauth2Login\obj\Debug\net48\Oauth2Lo.1E062C66.Up2Date
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\Oauth2Login\obj\Debug\net48\Oauth2Login.dll
+C:\Users\Admin\Documents\Proyecto Carlos\Simus_Web\Oauth2Login\obj\Debug\net48\Oauth2Login.pdb

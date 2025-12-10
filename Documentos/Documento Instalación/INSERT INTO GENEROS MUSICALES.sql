@@ -1,0 +1,104 @@
+ALTER TABLE ART_MUSICA_GENEROS_MUSICALES ALTER COLUMN PadreId int null
+select * from ART_MUSICA_GENEROS_MUSICALES  
+
+/*Nilvel 1*/
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (NULL, 'Académicas', 1, 1)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (NULL, 'Populares', 1, 1)
+
+/*Nilvel 2*/
+
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (2, 'Bandas de Viento', 1, 2)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (2, 'Orquestas', 1, 2)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (2, 'Coros', 1, 2)
+
+
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (3, 'Tradicionales Isleñas', 1,2)
+
+
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (3, 'Tradicionales Caribe Occidental', 1, 2)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (3, 'Tradicionales Andinas Centro Oriente', 1, 2)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (3, 'Tradicionales Andinas Noroccidente', 1, 2)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (3, 'Tradicionales Andinas Centro Sur', 1, 2)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (3, 'Tradicionales Andinas Sur Occidente ', 1, 2)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (3, 'Tradicionales Pacifico Norte', 1, 2)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (3, 'Tradicionales Pacifico Sur', 1, 2)
+
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (3, 'Tradicionales Llanera', 1, 2)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (3, 'Tradicionales Trapecio Amazónico', 1, 2)
+
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (3, 'Tradicionales Llanera', 1, 2)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (3, 'Urbanas Tropicales', 1, 2)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (3, 'Urbanas Despecho', 1, 2)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (3, 'Urbanas Mixtas', 1, 2)
+
+/* Nivel 3 */
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (8, 'Tradicionales Isleñas', 1,3)
+
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (4, 'Filarmónica', 1, 3)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (4, 'Voces Blancas', 1, 3)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (4, 'Voces Cambiantes', 1, 3)
+
+/*Orquesta*/
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (5, 'Big Band', 1, 3)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (5, 'Cámara', 1, 3)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (5, 'Sínfonica', 1, 3)
+
+/*Bandas de viento*/
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (6, 'Sinfónica', 1, 3)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (6, 'Pelayera', 1, 3)
+
+
+
+select * from ART_MUSICA_GENEROS_MUSICALES where nivel = 3
+/* Nivel 4 */
+
+select * from ART_MUSICA_GENEROS_MUSICALES where nivel = 4
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (21, 'Filarmónica', 1, 4)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (22, 'Voces Blancas', 1, 4)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (23, 'Voces Cambiantes', 1, 4)
+
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (27, 'Big Band', 1, 4)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (28, 'Cámara', 1, 4)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (29, 'Sínfonica', 1, 4)
+
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (33, 'Sinfónica', 1, 4)
+INSERT INTO ART_MUSICA_GENEROS_MUSICALES VALUES (34, 'Pelayera', 1, 4)
+
+
+
+
+/* PROCEDIMIENTO ALMACENADO*/
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Grey Milena Jiménez
+-- Create date: 21/11/2015
+-- Description:	Obtener los generos musicales
+-- =============================================
+CREATE PROCEDURE ART_MUSICA_OBTENER_GENEROS_MUSICALES
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    select Nivel4.Id, 
+			Nivel1.Nombre + ' - ' + Nivel2.Nombre + ' - ' + Nivel3.Nombre + ' - ' + Nivel4.Nombre as Nombre 
+	from ART_MUSICA_GENEROS_MUSICALES as Nivel1
+	inner join ART_MUSICA_GENEROS_MUSICALES as Nivel2 On Nivel1.Id = Nivel2.PadreId
+	inner join ART_MUSICA_GENEROS_MUSICALES as Nivel3 On Nivel2.Id = Nivel3.PadreId
+	inner join ART_MUSICA_GENEROS_MUSICALES as Nivel4 On Nivel3.Id = Nivel4.PadreId
+	where Nivel1.PadreId is null
+	and Nivel1.Nivel = 1
+	and Nivel2.Nivel =2
+	and Nivel3.Nivel = 3
+	and Nivel4.Nivel = 4
+
+END
+GO
+
+
