@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="19ba970ec3be451e8f650f35895b8817" Name="Diagram1" ZoomLevel="50">
+        <EntityTypeShape EntityType="SIPAModel.ADM_OPCIONES" Width="3.75" PointX="9.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ADM_USUARIOS" Width="3.75" PointX="6.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ENTIDAD_UBICACION" Width="3.75" PointX="15.875" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ENTIDADES_ARTES" Width="3.75" PointX="11.375" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ENTIDADES_TIPO_ENTIDAD" Width="3.75" PointX="1.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_INFRAESTRUCTURA_AREAS_ARTISTICAS" Width="3.75" PointX="25.375" PointY="34.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_INFRAESTRUCTURA_ENTIDADES" Width="3.75" PointX="20.875" PointY="32.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ME_ESCUELA_SOLUCIONES_ACUSTICAS" Width="3.75" PointX="1.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ME_FORMULARIOS" Width="3.75" PointX="14.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ME_FORMULARIOS_COLUMNAS" Width="3.75" PointX="23.75" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ME_FORMULARIOS_LISTAS" Width="3.75" PointX="19.25" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ME_FORMULARIOS_LISTAS_ELEMENTOS" Width="3.75" PointX="23.75" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ME_FORMULARIOS_REGISTRO" Width="3.75" PointX="23.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ME_FORMULARIOS_SECCIONES" Width="3.75" PointX="19.25" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ME_FORMULARIOS_VALORES" Width="3.75" PointX="28.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ME_IMAGENES_ESCUELAS" Width="3.75" PointX="15.875" PointY="51.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ME_PERFILES" Width="3.75" PointX="1.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ME_SOLICITUDES_COMENTARIOS" Width="3.75" PointX="10.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ME_USUARIOS" Width="3.75" PointX="10.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ME_VIDEOS_ESCUELAS" Width="3.75" PointX="15.875" PointY="107.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_CATEGORIA_ESCUELA" Width="3.75" PointX="16.375" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ENTIDAD_CATEGORIZACION" Width="3.75" PointX="20.875" PointY="53.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ENTIDAD_FORMACION" Width="3.75" PointX="15.875" PointY="141.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ENTIDAD_INFRAESTRUCTURA" Width="3.75" PointX="15.875" PointY="56.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ENTIDAD_PARTICIPACION" Width="3.75" PointX="25.875" PointY="47" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ENTIDAD_PRODUCCION" Width="3.75" PointX="15.875" PointY="122.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ENTIDAD_TIPOS_INTERNET" Width="3.75" PointX="20.875" PointY="50.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_FACTOR_CATEGORIZACION" Width="3.75" PointX="20.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_FUENTES_DOTACION" Width="3.75" PointX="20.375" PointY="56.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_MATERIAL_PEDAGOGICO" Width="3.75" PointX="20.375" PointY="59" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_NIVEL_FUENTES_DOTACION" Width="3.75" PointX="20.375" PointY="61.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ORGANIZACION_COMUNITARIA" Width="3.75" PointX="21.375" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_TIPO_DATO_RETORNO" Width="3.75" PointX="15.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_TIPO_DOCUMENTO_CREACION" Width="3.75" PointX="22.625" PointY="116.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_TIPO_PROY_ORG_COM" Width="3.75" PointX="30.375" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_TIPO_VINCULACION" Width="3.75" PointX="20.375" PointY="103.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_TIPOS_INTERNET" Width="3.75" PointX="16.375" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.BAS_ZONAS_GEOGRAFICAS" Width="3.75" PointX="6.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_FACTOR_CATEGORIZACION_1" Width="3.75" PointX="22.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ME_SOLICITUDES_COMENTARIOS_ADM_USUARIOS" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ME_USUARIOS_ADM_USUARIOS" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ENTIDAD_UBICACION_ART_ENTIDADES_ARTES" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ENTIDAD_UBICACION_BAS_ZONAS_GEOGRAFICAS" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.ART_ENTIDADES_ARTES_ART_MUSICA_ENTIDAD_FORMACION_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.ART_ENTIDADES_ARTES_ART_MUSICA_ENTIDAD_INFRAESTRUCTURA_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.ART_ENTIDADES_ARTES_ART_MUSICA_ENTIDAD_PARTICIPACION_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.ART_ENTIDADES_ARTES_ART_MUSICA_ENTIDAD_PRODUCCION_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_INFRAESTRUCTURA_ENTIDADES_ART_ENTIDADES_ARTES" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ME_IMAGENES_ESCUELAS_ART_ENTIDADES_ARTES" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ME_VIDEOS_ESCUELAS_ART_ENTIDADES_ARTES" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ENTIDAD_CATEGORIZACION_ART_ENTIDADES_ARTES" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ENTIDAD_TIPOS_INTERNET_ART_ENTIDADES_ARTES" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_INFRAESTRUCTURA_AREAS_ARTISTICAS_ART_INFRAESTRUCTURA_ENTIDADES" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_INFRAESTRUCTURA_ENTIDADES_BAS_ZONAS_GEOGRAFICAS" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ME_FORMULARIOS_COLUMNAS_ART_ME_FORMULARIOS" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ME_FORMULARIOS_SECCIONES_ART_ME_FORMULARIOS" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ME_FORMULARIOS_VALORES_ART_ME_FORMULARIOS" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ME_FORMULARIOS_COLUMNAS_ART_ME_FORMULARIOS_LISTAS" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ME_FORMULARIOS_COLUMNAS_ART_ME_FORMULARIOS_SECCIONES" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ME_FORMULARIOS_VALORES_ART_ME_FORMULARIOS_COLUMNAS" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ME_FORMULARIOS_LISTAS_ELEMENTOS_ART_ME_FORMULARIOS_LISTAS" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ME_FORMULARIOS_VALORES_ART_ME_FORMULARIOS_REGISTRO" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ME_USUARIOS_BAS_ZONAS_GEOGRAFICAS" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ME_USUARIOS_BAS_ZONAS_GEOGRAFICAS1" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ENTIDAD_CATEGORIZACION_ART_MUSICA_CATEGORIA_ESCUELA" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.ART_MUSICA_ORGANIZACION_COMUNITARIA_ART_MUSICA_ENTIDAD_PARTICIPACION_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ENTIDAD_TIPOS_INTERNET_ART_MUSICA_TIPOS_INTERNET" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_FACTOR_CATEGORIZACION_ART_MUSICA_TIPO_DATO_RETORNO" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.FK_FACTOR_CATEGORIZACION_FACTOR_CATEGORIZACION" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.ART_ME_PERFILES_DEPARTAMENTOS" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.ART_MUS_TIP_PROY_ORG_COM_ENT_PARTICIPACION" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.ART_MUSICA_ENT_INFR_FUENTES_DOTACION" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.ART_MUSICA_ENT_INFR_MATERIAL_PEGAOGICO" ManuallyRouted="false" />
+        <AssociationConnector Association="SIPAModel.ART_MUSICA_ENT_INFR_NIVEL_FUENTES_DOTACION" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SIPAModel.BAS_TIPOS_DOCUMENTOS_IDENTIDAD" Width="3.75" PointX="6.875" PointY="57.75" />
+        <EntityTypeShape EntityType="SIPAModel.BAS_ZONAS_PAISES" Width="3.75" PointX="16.375" PointY="30.375" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ENTIDAD_UBICACION_BAS_ZONAS_PAISES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ENTIDADES_ARTES_BAS_TIPOS_DOCUMENTOS_IDENTIDAD" />
+        <AssociationConnector Association="SIPAModel.FK_ART_INFRAESTRUCTURA_ENTIDADES_BAS_ZONAS_PAISES" />
+        <EntityTypeShape EntityType="SIPAModel.ART_REGIMEN_ENTIDAD" Width="3.75" PointX="6.875" PointY="55.25" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ENTIDADES_ARTES_ART_REGIMEN_ENTIDAD" />
+        <EntityTypeShape EntityType="SIPAModel.ART_NIVEL_ADMINISTRACION" Width="3.75" PointX="20.375" PointY="27.625" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ESPACIO_PRINCIPAL" Width="3.75" PointX="23.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_AGENTE" Width="3.75" PointX="7.375" PointY="75.25" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_AGENTE_GENEROS" Width="4.375" PointX="29.125" PointY="104.5" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_GENEROS_MUSICALES" Width="2.625" PointX="25.75" PointY="104" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_OFICIOS" Width="3.375" PointX="11.75" PointY="90.125" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_PROCESOS" Width="2.75" PointX="8.25" PointY="90.375" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_RECURSO" Width="2.5" PointX="4.125" PointY="94.875" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ROL" Width="1.875" PointX="1.75" PointY="90.375" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ROL_RECURSO" Width="1.875" PointX="7.375" PointY="94.125" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_USUARIO" Width="1.875" PointX="1.75" PointY="75.25" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_USUARIO_ROL" Width="2.125" PointX="4.375" PointY="83.5" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTE_ART_MUSICA_USUARIO" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTE_GENEROS_ART_MUSICA_GENEROS_MUSICALES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_GENEROS_MUSICALES_ART_MUSICA_GENEROS_MUSICALES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_OFICIOS_ART_MUSICA_PROCESOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ROL_RECURSO_ART_MUSICA_RECURSO" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ROL_RECURSO_ART_MUSICA_ROL" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_USUARIO_ROL_ART_MUSICA_ROL" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_USUARIO_ROL_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ESTADOS" Width="2.25" PointX="1.375" PointY="69.25" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTE_ART_MUSICA_ESTADOS" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_WS_USUARIO" Width="3" PointX="10.75" PointY="13.375" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_WS_USUARIO_ART_MUSICA_WS_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_USER_CIUDAD" Width="3.25" PointX="1.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_TIPO_ENTIDAD" Width="4.125" PointX="16" PointY="64.625" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_AGENTE_EXPERIENCIA" Width="2.75" PointX="11.875" PointY="125.875" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTE_EXPERIENCIA_ART_MUSICA_AGENTE" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ENTIDADES" Width="2.75" PointX="12.375" PointY="76.5" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ENTIDADES_ART_MUSICA_ENTIDADES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ENTIDADES_ART_MUSICA_ESTADOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ENTIDADES_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_FORMULARIO_ARCHIVOS" Width="3" PointX="28.25" PointY="14.625" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_FORMULARIO_ARCHIVOS_ART_ME_FORMULARIOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_FORMULARIO_ARCHIVOS_ART_ME_FORMULARIOS_COLUMNAS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_FORMULARIO_ARCHIVOS_ART_ME_FORMULARIOS_REGISTRO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_TIPO_AGRUPACION" Width="2.875" PointX="0.75" PointY="66.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_NATURALEZA_AGRUPACION" Width="1.5" PointX="2.125" PointY="87.125" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_AGENTE_AGRUPACION" Width="5.625" PointX="14.875" PointY="73.5" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTE_AGRUPACION_ART_MUSICA_AGENTE" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ENTIDAD_TIPOENTIDAD" Width="4" PointX="20.875" PointY="85.5" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ENTIDAD_TIPOENTIDAD_ART_MUSICA_ENTIDADES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ENTIDAD_TIPOENTIDAD_ART_MUSICA_TIPO_ENTIDAD" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_GRUPOS" Width="4" PointX="13.375" PointY="113.875" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_DOCUMENTOS" Width="2.875" PointX="4.375" PointY="125.75" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_DOCUMENTOS_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_CELEBRA_CATEGORIA" Width="3" PointX="17.375" PointY="93.625" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_PROCESO_FORMACION" Width="2.5" PointX="17.875" PointY="111.25" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ARTISTAS_CELEBRA" Width="2.875" PointX="21.125" PointY="95.125" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ARTISTAS_CELEBRA_ART_MUSICA_CATEGORIA" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ARTISTAS_CELEBRA_ART_MUSICA_PROCESO_FORMACION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ARTISTAS_CELEBRA_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_EVENTOS" Width="1.5" PointX="15.875" PointY="98.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_GRUPOEVENTOS" Width="1.5" PointX="18.125" PointY="103.5" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_EVENTOS_ART_MUSICA_AGENTE" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ARTISTAS_CELEBRA_ART_MUSICA_EVENTOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_EVENTOS_ART_MUSICA_DOCUMENTOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_EVENTOS_ART_MUSICA_ENTIDADES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_EVENTOS_ART_MUSICA_ESTADOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_EVENTOS_ART_MUSICA_USUARIO" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_GRUPOEVENTOS_ART_MUSICA_EVENTOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_GRUPOEVENTOS_ART_MUSICA_GRUPOS1" />
+        <EntityTypeShape EntityType="SIPAModel.ART_ENTIDAD_NATURALEZA_JURIDICA" Width="1.5" PointX="24.875" PointY="57.25" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ENTIDAD_NATURALEZA_JURIDICA_ART_ENTIDADES_ARTES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ENTIDAD_NATURALEZA_JURIDICA_ART_NIVEL_ADMINISTRACION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ENTIDAD_NATURALEZA_JURIDICA_ART_NIVEL_ADMINISTRACION1" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_REGISTRO_OPERACION" Width="1.5" PointX="4.375" PointY="130.375" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_REGISTRO_OPERACION_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ENTIDAD_IDENTIFICACION" Width="1.5" PointX="20.875" PointY="40.875" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ENTIDAD_IDENTIFICACION_ADM_USUARIOS" />
+        <AssociationConnector Association="SIPAModel.ART_ENTIDADES_ARTES_ART_MUSICA_ENTIDAD_IDENTIFICACION_FK1" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_TIP_DOC_CRE_ENT_INSTITUC" Width="1.5" PointX="27.125" PointY="65.25" />
+        <AssociationConnector Association="SIPAModel.ART_MUSICA_TIPO_DOCUMENTO_CREACION_ART_MUS_TIP_DOC_CRE_ENT_INSTITUC_FK1" />
+        <EntityTypeShape EntityType="SIPAModel.ART_TIPOS_ESCUELAS" Width="1.5" PointX="1.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_AGENTEXOCUPACION" Width="5" PointX="11.875" PointY="130" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTEXOCUPACION_ART_MUSICA_AGENTE" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_AGENTE_SERVICIO" Width="6.125" PointX="11.875" PointY="132.875" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTE_SERVICIO_ART_MUSICA_AGENTE" />
+        <EntityTypeShape EntityType="SIPAModel.ART_TIPO_AREA" Width="1.5" PointX="13.625" PointY="36.5" />
+        <AssociationConnector Association="SIPAModel.FK_ART_ENTIDAD_UBICACION_ART_TIPO_AREA" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_INSTRUMENTOS" Width="2.875" PointX="1.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_AGENTES_INSTRUMENTOS" Width="1.5" PointX="15.875" PointY="83.25" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTES_INSTRUMENTOS_ART_MUSICA_AGENTE" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTES_INSTRUMENTOS_ART_MUSICA_OFICIOS" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ESCUELAS_DOCUMENTOS" Width="2.5" PointX="8" PointY="126.625" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ESCUELAS_DOCUMENTOS_ART_ENTIDADES_ARTES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ESCUELAS_DOCUMENTOS_ART_MUSICA_DOCUMENTOS" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_PARAMETROS" Width="3.5" PointX="5.375" PointY="16.875" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_REDES_SOCIALES" Width="1.5" PointX="5.125" PointY="91.125" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_TIPOS_PARAMETROS" Width="2.875" PointX="1.75" PointY="17.125" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTE_ART_MUSICA_REDES_SOCIALES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ENTIDADES_ART_MUSICA_REDES_SOCIALES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_PARAMETROS_ART_MUSICA_TIPOS_PARAMETROS" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_TRADICIONAL_AUDIOS" Width="3.625" PointX="18.375" PointY="5.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_TRADICIONAL_GENEROS" Width="2.75" PointX="14.875" PointY="2.875" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_TRADICIONAL_MUNICIPIOS" Width="4.625" PointX="18.375" PointY="1.75" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_TRADICIONAL_AUDIOS_ART_MUSICA_TRADICIONAL_GENEROS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_TRADICIONAL_MUNICIPIOS_ART_MUSICA_TRADICIONAL_GENEROS" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_EJES" Width="3.375" PointX="10.75" PointY="2.625" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_TRADICIONAL_GENEROS_ART_MUSICA_EJES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_TRADICIONAL_MUNICIPIOS_ART_MUSICA_EJES" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_RED_SOCIAL" Width="4" PointX="1.75" PointY="22" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_RED_SOCIAL_ACTORES" Width="6.125" PointX="6.5" PointY="22" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_RED_SOCIAL_ACTORES_ART_MUSICA_RED_SOCIAL" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_INTERESES" Width="2.125" PointX="13" PointY="94.375" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_INTERESES_ART_MUSICA_PROCESOS" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_AGENTE_INTERESES" Width="3.75" PointX="15.875" PointY="79.25" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTE_INTERESES_ART_MUSICA_AGENTE" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_AGRUPACION" Width="1.5" PointX="4.375" PointY="69.25" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTE_AGRUPACION_ART_MUSICA_AGRUPACION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGRUPACION_ART_MUSICA_ESTADOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGRUPACION_ART_MUSICA_NATURALEZA_AGRUPACION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGRUPACION_ART_MUSICA_TIPO_AGRUPACION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGRUPACION_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_AGRUPACION_GENEROS" Width="3.25" PointX="6.625" PointY="72.5" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGRUPACION_GENEROS_ART_MUSICA_AGRUPACION" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_CONVOCATORIA_ACTORES" Width="3" PointX="24.125" PointY="74.125" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_CONVOCATORIAS" Width="1.5" PointX="21.875" PointY="69.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_PARAMETROS_SERVICIOS" Width="1.5" PointX="10.125" PointY="68.125" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CONVOCATORIAS_ART_MUSICA_AGENTE" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CONVOCATORIAS_ART_MUSICA_AGRUPACION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CONVOCATORIA_ACTORES_ART_MUSICA_CONVOCATORIAS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CONVOCATORIAS_ART_MUSICA_ENTIDADES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CONVOCATORIAS_ART_MUSICA_PARAMETROS_SERVICIOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CONVOCATORIAS_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_DOTACION" Width="4" PointX="15.875" PointY="88" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ENTIDAD_DOTACION" Width="1.5" PointX="26.125" PointY="77" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_VARIABLES" Width="2.25" PointX="14.75" PointY="21.75" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ENTIDAD_DOTACION_ART_MUSICA_CONVOCATORIAS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_DOTACION_ART_MUSICA_ENTIDADES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ENTIDAD_DOTACION_ART_MUSICA_ENTIDADES" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_DOTACION_DOCUMENTOS" Width="2" PointX="20.625" PointY="107.75" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_DOTACION_DOCUMENTOS_ART_MUSICA_DOCUMENTOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_DOTACION_DOCUMENTOS_ART_MUSICA_DOTACION" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_DOTACION_INSTRUMENTOS" Width="2.25" PointX="20.625" PointY="88.875" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_DOTACION_INSTRUMENTOS_ART_MUSICA_DOTACION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTE_INTERESES_ART_MUSICA_INTERESES" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_AGENTE_OFICIOS" Width="1.5" PointX="15.875" PointY="76.5" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_PARTICIPACION" Width="2.5" PointX="28.125" PointY="71.75" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTE_OFICIOS_ART_MUSICA_AGENTE" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTE_OFICIOS_ART_MUSICA_OFICIOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_PARTICIPACION_ART_MUSICA_CONVOCATORIAS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_PARTICIPACION_ART_MUSICA_PARAMETROS_SERVICIOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_PARTICIPACION_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_UTILIDAD_GENEROS" Width="2.875" PointX="24.75" PointY="8.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_UTILIDAD_SERVICIO" Width="3.75" PointX="24.75" PointY="11.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_MODULO_SERVICIOS" Width="1.5" PointX="12.375" PointY="66.125" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_MODULO_SERVICIOS_ART_MUSICA_PARAMETROS_SERVICIOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_MODULO_SERVICIOS_ART_MUSICA_PARAMETROS_SERVICIOS1" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_MODULO_SERVICIOS_ART_MUSICA_PARAMETROS_SERVICIOS2" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_MODULO_SERVICIOS_ART_MUSICA_USUARIO" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_MODULO_SERVICIOS_ART_MUSICA_USUARIO1" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_HERRAMIENTAS" Width="1.5" PointX="8" PointY="100.375" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_HERRAMIENTAS_ART_MUSICA_DOCUMENTOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_HERRAMIENTAS_ART_MUSICA_ESTADOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_HERRAMIENTAS_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_PRACTICA_MUSICAL" Width="3.375" PointX="20.375" PointY="146.875" />
+        <AssociationConnector Association="SIPAModel.ART_MUSICA_PRAC_MUS_ENT_FORMACION" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_HISTORICO_ESCUELAS" Width="2.875" PointX="1.75" PointY="25.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_EVENTOS_PERIODICOS" Width="1.5" PointX="23.875" PointY="77.5" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_EVENTOS_RELACIONADOS" Width="1.5" PointX="26.125" PointY="90.875" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_IMAGENES" Width="3" PointX="5.75" PointY="25.75" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_EVENTOS_PERIODICOS_ART_MUSICA_EVENTOS_PERIODICOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_EVENTOS_PERIODICOS_ART_MUSICA_ESTADOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_EVENTOS_RELACIONADOS_ART_MUSICA_EVENTOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_EVENTOS_PERIODICOS_ART_MUSICA_USUARIO" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_EVENTOS_RELACIONADOS_ART_MUSICA_EVENTOS_PERIODICOS" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_DOCUMENTOS_ESCENARIOS" Width="2.875" PointX="9.75" PointY="25.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_RED_SOCIAL_ESCENARIOS" Width="2.5" PointX="26.125" PointY="80.375" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_RED_SOCIAL_ESCENARIOS_ART_MUSICA_EVENTOS_PERIODICOS" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_SERVICIOS" Width="3.25" PointX="27.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_CONVOCATORIA_ESTIMULOS" Width="1.5" PointX="4.375" PointY="78.75" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CONVOCATORIA_ESTIMULOS_ART_MUSICA_ESTADOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CONVOCATORIA_ESTIMULOS_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_SOLICITUD_USUARIOS" Width="1.5" PointX="4.375" PointY="86.875" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_SOLICITUD_USUARIOS_ART_MUSICA_ESTADOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_SOLICITUD_USUARIOS_ART_MUSICA_USUARIO" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ENTIDAD_IDENTIFICACION_ART_MUSICA_ESTADOS" />
+     
+     
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ESCENARIO_DIAS" Width="1.5" PointX="23.125" PointY="92.5" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ESCENARIOS" Width="1.5" PointX="20.875" PointY="76.375" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ESCENARIOS_ART_MUSICA_AGENTE" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ESCENARIOS_ART_MUSICA_AGRUPACION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ESCENARIOS_ART_MUSICA_ENTIDADES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ESCENARIO_DIAS_ART_MUSICA_ESCENARIOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ESCENARIOS_ART_MUSICA_ESTADOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ESCENARIOS_ART_MUSICA_USUARIO" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_RED_SOCIAL_ESCENARIOS_ART_MUSICA_ESCENARIOS" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_PRACTICAS_PNMC" Width="2.625" PointX="28.5" PointY="97.375" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_PRACTICAS_PNMC_ART_ENTIDADES_ARTES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_PRACTICAS_PNMC_ART_MUSICA_PRACTICA_MUSICAL" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_FORMACION_DOCENTES" Width="1.5" PointX="6.75" PointY="14.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_FORMACION_PRACTICA" Width="2.875" PointX="25.5" PointY="100.125" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_FORMACION_PRACTICA_ART_ENTIDADES_ARTES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_FORMACION_PRACTICA_ART_MUSICA_PRACTICA_MUSICAL" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_PRACTICA_GENERO" Width="3.375" PointX="29.125" PointY="100.25" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_PRACTICA_GENERO_ART_MUSICA_FORMACION_PRACTICA" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_PRACTICA_GENERO_ART_MUSICA_GENEROS_MUSICALES" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_PRACTICA_NIVEL" Width="1.5" PointX="29.125" PointY="76.75" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_PRACTICA_NIVEL_ART_ENTIDADES_ARTES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_PRACTICA_NIVEL_ART_MUSICA_FORMACION_PRACTICA" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ESCUELA_ASESORIA" Width="1.5" PointX="15.875" PointY="136.375" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ESCUELA_CLASIFICACION" Width="1.5" PointX="15.875" PointY="118.5" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ESCUELA_MATRIZ" Width="1.5" PointX="15.875" PointY="26.25" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ESCUELA_OBSERVACION" Width="1.5" PointX="15.875" PointY="47" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ESCUELA_REPERTORIOS" Width="1.5" PointX="20.75" PointY="13.75" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ESCUELA_ASESORIA_ART_ENTIDADES_ARTES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ESCUELA_CLASIFICACION_ART_ENTIDADES_ARTES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ESCUELA_MATRIZ_ART_ENTIDADES_ARTES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ESCUELA_OBSERVACION_ART_ENTIDADES_ARTES" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_MOTIVO_HISTORICO" Width="1.5" PointX="15.875" PointY="67.125" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_MOTIVO_HISTORICO_ART_ENTIDADES_ARTES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_MOTIVO_HISTORICO_ART_MUSICA_AGENTE" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_MOTIVO_HISTORICO_ART_MUSICA_AGRUPACION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_MOTIVO_HISTORICO_ART_MUSICA_ENTIDADES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_MOTIVO_HISTORICO_ART_MUSICA_ESTADOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_MOTIVO_HISTORICO_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_AGENTEXCONVENIO" Width="1.5" PointX="11.875" PointY="86.125" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_CONTENIDOS" Width="1.5" PointX="25.375" PointY="94" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_CONVENIOS" Width="1.5" PointX="18.875" PointY="97" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTEXCONVENIO_ART_MUSICA_AGENTE" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CONVENIOS_ART_MUSICA_AGENTE" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTEXCONVENIO_ART_MUSICA_CONVENIOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AGENTEXCONVENIO_ART_MUSICA_USUARIO" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CONTENIDOS_ART_MUSICA_USUARIO" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CONVENIOS_ART_MUSICA_ENTIDADES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CONVENIOS_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_CONVENIO_DOTACION" Width="1.5" PointX="27.625" PointY="115.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_EVALUACION_PREGUNTAS" Width="1.5" PointX="29.375" PointY="93.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ASISTENCIA" Width="1.5" PointX="30.625" PointY="85.375" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_AVANCE" Width="1.5" PointX="27.625" PointY="85.25" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_CRONOGRAMA" Width="1.5" PointX="25.375" PointY="98.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_CRONOGRAMAXAGENTE" Width="1.5" PointX="28.625" PointY="89.375" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ASISTENCIA_ART_MUSICA_AGENTE" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AVANCE_ART_MUSICA_AGENTE" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AVANCE_ART_MUSICA_AGENTE1" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CRONOGRAMAXAGENTE_ART_MUSICA_AGENTE" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ASISTENCIA_ART_MUSICA_ASISTENCIA" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ASISTENCIA_ART_MUSICA_USUARIO" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AVANCE_ART_MUSICA_CRONOGRAMA" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AVANCE_ART_MUSICA_USUARIO" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CRONOGRAMA_ART_MUSICA_USUARIO" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CRONOGRAMAXAGENTE_ART_MUSICA_CRONOGRAMA" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CRONOGRAMAXAGENTE_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ACTIVIDADES" Width="1.5" PointX="21.125" PointY="111.125" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ENTIDAD_INSTITUCIONALIDAD" Width="1.5" PointX="24.875" PointY="62.875" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_ESCUELA_INSTRUMENTOS" Width="1.5" PointX="15.875" PointY="154.75" />
+        <AssociationConnector Association="SIPAModel.ART_ENTIDADES_ARTES_ART_MUSICA_ENTIDAD_INSTITUCIONALIDAD_FK1" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ESCUELA_INSTRUMENTOS_ART_ENTIDADES_ARTES" />
+        <AssociationConnector Association="SIPAModel.ART_MUSICA_ENTIDAD_INSTITUCIONALIDAD_ART_MUS_TIP_DOC_CRE_ENT_INSTITUC_FK1" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ACTIVIDADES_ART_MUSICA_CONVENIOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CONTENIDOS_ART_MUSICA_ACTIVIDADES" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CRONOGRAMA_ART_MUSICA_CRONOGRAMA" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ENTIDAD_INSTITUCIONALIDAD_ART_MUSICA_TIPO_VINCULACION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CONVENIO_DOTACION_ART_MUSICA_CRONOGRAMA" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_CRONOGRAMA_DOCUMENTO" Width="1.5" PointX="24.75" PointY="26.75" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_ACTIVIDADES_ART_MUSICA_DOCUMENTOS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_CONVENIOS_ART_MUSICA_DOCUMENTOS" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_EVALUACION" Width="1.5" PointX="29.625" PointY="81.375" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_EVALUACION_ART_MUSICA_AGENTE" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_EVALUACION_ART_MUSICA_CRONOGRAMA" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_EVALUACION_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUSICA_AUTOEVALUACION_RESPUESTA" Width="1.5" PointX="31.625" PointY="89.375" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AUTOEVALUACION_RESPUESTA_ART_MUSICA_AGENTE" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AUTOEVALUACION_RESPUESTA_ART_MUSICA_CRONOGRAMA" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AUTOEVALUACION_RESPUESTA_ART_MUSICA_EVALUACION_PREGUNTAS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUSICA_AUTOEVALUACION_RESPUESTA_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_FESTIVALES" Width="1.5" PointX="4.375" PointY="63.5" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_FESTIVALES_ART_MUSICA_USUARIO" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_FESTIVALES_VERSION" Width="1.5" PointX="6.625" PointY="62.25" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_FESTIVALES_VERSION_ART_MUS_FESTIVALES" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_FESTIVALES_ENTIDADES_ALIADAS" Width="1.5" PointX="8.875" PointY="62.5" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_FESTIVALES_ESTADO" Width="1.5" PointX="2.125" PointY="64.875" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_FESTIVALES_EXPRESIONES_ARTISTICAS" Width="1.5" PointX="16.625" PointY="127.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_FESTIVALES_EXPRESIONXVERSION" Width="1.5" PointX="18.875" PointY="68.625" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_FESTIVALES_FUENTE_FINANCIACION" Width="1.5" PointX="4.375" PointY="61.25" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_FESTIVALES_MODALIDADES_PARTICIPACION" Width="1.5" PointX="6.625" PointY="49.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_FESTIVALES_MODALIDADES_PARTICIPACIONXVERSION" Width="1.5" PointX="8.875" PointY="65.625" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_FESTIVALES_NATURALEZA_ENTIDAD" Width="1.5" PointX="6.625" PointY="52.875" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_FESTIVALES_REGION_OCAD" Width="1.5" PointX="13.5" PointY="0.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_FESTIVALES_TIPO_ORGANIZADOR" Width="1.5" PointX="4.375" PointY="57.875" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_FESTIVALES_TIPOLOGIA" Width="1.5" PointX="4.375" PointY="55.25" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_FESTIVALES_ZONA" Width="1.5" PointX="8.5" PointY="41.625" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_FESTIVALES_ZONA_TITULACION_COLECTIVA" Width="1.5" PointX="8.5" PointY="39" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_LOCALIZACIONXVERSION" Width="1.5" PointX="10.75" PointY="39.875" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_MATERIALMULTIMEDIA" Width="1.5" PointX="8.875" PointY="87.75" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_TERRITORIOS_SONOROS" Width="1.5" PointX="6.625" PointY="55.875" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_TERRITORIOS_SONOROSXVERSION" Width="1.5" PointX="8.875" PointY="55.625" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_TIPOINGRESO" Width="1.5" PointX="16.625" PointY="160.875" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_TIPOINGRESOXVERSION" Width="1.5" PointX="18.875" PointY="71.625" />
+        <EntityTypeShape EntityType="SIPAModel.ART_MUS_ZONAXREGION_OCAD" Width="1.5" PointX="15.75" PointY="8.5" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_FESTIVALES_ART_MUS_FESTIVALES_ESTADO" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_FESTIVALES_ENTIDADES_ALIADAS_ART_MUS_FESTIVALES_NATURALEZA_ENTIDAD" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_FESTIVALES_ENTIDADES_ALIADAS_ART_MUS_FESTIVALES_VERSION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_FESTIVALES_EXPRESIONXVERSION_ART_MUS_FESTIVALES_EXPRESIONES_ARTISTICAS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_FESTIVALES_EXPRESIONXVERSION_ART_MUS_FESTIVALES_VERSION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_FESTIVALES_VERSION_ART_MUS_FESTIVALES_FUENTE_FINANCIACION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_FESTIVALES_VERSION_ART_MUS_FESTIVALES_FUENTE_FINANCIACION1" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_FESTIVALES_MODALIDADES_PARTICIPACIONXVERSION_ART_MUS_FESTIVALES_MODALIDADES_PARTICIPACION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_FESTIVALES_MODALIDADES_PARTICIPACIONXVERSION_ART_MUS_FESTIVALES_VERSION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_ZONAXREGION_OCAD_ART_MUS_FESTIVALES_REGION_OCAD" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_FESTIVALES_VERSION_ART_MUS_FESTIVALES_TIPO_ORGANIZADOR" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_FESTIVALES_VERSION_ART_MUS_FESTIVALES_TIPOLOGIA" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_LOCALIZACIONXVERSION_ART_MUS_FESTIVALES_VERSION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_MATERIALMULTIMEDIA_ART_MUS_FESTIVALES_VERSION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_TERRITORIOS_SONOROSXVERSION_ART_MUS_FESTIVALES_VERSION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_TIPOINGRESOXVERSION_ART_MUS_FESTIVALES_VERSION" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_LOCALIZACIONXVERSION_ART_MUS_FESTIVALES_ZONA" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_LOCALIZACIONXVERSION_ART_MUS_FESTIVALES_ZONA_TITULACION_COLECTIVA" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_LOCALIZACIONXVERSION_BAS_ZONAS_GEOGRAFICAS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_TERRITORIOS_SONOROSXVERSION_ART_MUS_TERRITORIOS_SONOROS" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_TIPOINGRESOXVERSION_ART_MUS_TIPOINGRESO" />
+        <AssociationConnector Association="SIPAModel.FK_ART_MUS_ZONAXREGION_OCAD_BAS_ZONAS_GEOGRAFICAS" />
+        <EntityTypeShape EntityType="SIPAModel.BAS_DEPARTAMENTOS_ZONA_PADRE" Width="1.5" PointX="0.75" PointY="3.75" />
+        <AssociationConnector Association="SIPAModel.FK_BAS_DEPARTAMENTOS_ZONA_PADRE_BAS_DEPARTAMENTOS_ZONA_PADRE" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

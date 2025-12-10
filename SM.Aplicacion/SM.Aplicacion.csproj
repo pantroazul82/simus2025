@@ -1,0 +1,90 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <AssemblyTitle>SM.Aplicacion</AssemblyTitle>
+    <Product>SM.Aplicacion</Product>
+    <Copyright>Copyright ©  2015</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Owin" Version="4.2.2" />
+    <PackageReference Include="Microsoft.Owin.Security" Version="4.2.2" />
+    <PackageReference Include="Microsoft.Owin.Security.Facebook" Version="4.2.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Owin" Version="1.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Service References\ServicioEstimulos\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SM.Datos\SM.Datos.csproj" />
+    <ProjectReference Include="..\SM.LibreriaComun\SM.LibreriaComun.csproj" />
+    <ProjectReference Include="..\SM.SIPA\SM.SIPA.csproj" />
+    <ProjectReference Include="..\SM.Utilidades\SM.Utilidades.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Service References\ServicioEstimulos\ServicioResultadoEstimulos5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Service References\ServicioEstimulos\ServicioResultadoEstimulos51.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Service References\ServicioEstimulos\ServicioResultadoEstimulos52.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Service References\ServicioEstimulos\ServicioResultadoEstimulos53.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Service References\ServicioEstimulos\ServicioResultadoEstimulos54.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Service References\ServicioEstimulos\SM.Aplicacion.ServicioEstimulos.ConvocatoriasDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Update="Service References\ServicioEstimulos\SM.Aplicacion.ServicioEstimulos.EstadoInscripcionDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Update="Service References\ServicioEstimulos\SM.Aplicacion.ServicioEstimulos.ModalidadDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Update="Service References\ServicioEstimulos\SM.Aplicacion.ServicioEstimulos.ResultadosDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServicioEstimulos\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Service References\ServicioEstimulos\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SqlServerTypes\" />
+  </ItemGroup>
+</Project>

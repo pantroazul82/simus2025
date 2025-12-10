@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WsResultadosEstimulos.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WsResultadosEstimulos.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfConvocatoriasDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ConvocatoriasDTO" nillable="true" type="tns:ConvocatoriasDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfConvocatoriasDTO" nillable="true" type="tns:ArrayOfConvocatoriasDTO" />
+  <xs:complexType name="ConvocatoriasDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodigoConvocatoria" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreConvocatoria" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ConvocatoriasDTO" nillable="true" type="tns:ConvocatoriasDTO" />
+  <xs:complexType name="ArrayOfResultadosDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ResultadosDTO" nillable="true" type="tns:ResultadosDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfResultadosDTO" nillable="true" type="tns:ArrayOfResultadosDTO" />
+  <xs:complexType name="ResultadosDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Anio" type="xs:short" />
+      <xs:element minOccurs="0" name="Area" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CausalRechazo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodigoMunicipio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Departamento" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaNacimiento" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Genero" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="Municipio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreConvocatoria" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreEstado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreModalidad" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreParticipante" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreProyecto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumeroRadicacion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Participante" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Resolucion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Seudonimo" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultadosDTO" nillable="true" type="tns:ResultadosDTO" />
+</xs:schema>

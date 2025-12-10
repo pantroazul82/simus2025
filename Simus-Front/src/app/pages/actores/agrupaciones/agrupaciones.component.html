@@ -1,0 +1,63 @@
+<div class="container mx-auto px-4 py-8">
+  <!-- Encabezado y Filtros -->
+  <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+    <h1 class="text-3xl font-bold text-cultura-violeta mb-4">Agrupaciones</h1>
+    <p class="text-gray-600 mb-6">Explora las agrupaciones culturales de todo el país. Utiliza los filtros para refinar tu búsqueda.</p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div>
+        <label for="departamento" class="block text-sm font-medium text-gray-700 mb-2">Departamento</label>
+        <select id="departamento" [(ngModel)]="selectedDepartamento" (change)="applyFilters()" class="w-full p-3 border border-gray-300 rounded-md focus:ring-cultura-violeta focus:border-cultura-violeta">
+          <option value="">Todos los departamentos</option>
+          <option *ngFor="let dep of departamentos" [value]="dep">{{ dep }}</option>
+        </select>
+      </div>
+      <div>
+        <label for="municipio" class="block text-sm font-medium text-gray-700 mb-2">Municipio</label>
+        <select id="municipio" [(ngModel)]="selectedMunicipio" (change)="applyFilters()" class="w-full p-3 border border-gray-300 rounded-md focus:ring-cultura-violeta focus:border-cultura-violeta">
+          <option value="">Todos los municipios</option>
+          <option *ngFor="let mun of municipios" [value]="mun">{{ mun }}</option>
+        </select>
+      </div>
+      <div class="flex items-end">
+        <button (click)="clearFilters()" class="w-full md:w-auto border border-gray-300 text-gray-700 px-4 py-3 rounded-md hover:bg-gray-50 transition-colors">
+          Limpiar Filtros
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid de Agrupaciones -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+    <div *ngFor="let agrupacion of filteredAgrupaciones" class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-1 transition-transform duration-300">
+      <div class="relative">
+        <img [src]="agrupacion.fotoUrl || 'assets/images/logos/logo-simus-color.png'" alt="Foto de {{ agrupacion.nombre }}" class="w-full h-48 object-cover">
+        <div class="absolute top-0 right-0 bg-cultura-violeta text-white px-2 py-1 text-xs font-bold rounded-bl-lg">{{ agrupacion.municipio }}</div>
+      </div>
+      <div class="p-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-2 truncate" title="{{ agrupacion.nombre }}">{{ agrupacion.nombre }}</h2>
+        <p class="text-sm text-gray-600 mb-4">{{ agrupacion.departamento }}</p>
+        
+        <div class="flex items-center justify-center space-x-4">
+          <a *ngIf="agrupacion.facebookUrl" [href]="agrupacion.facebookUrl" target="_blank" class="text-gray-400 hover:text-cultura-azul">
+            <img src="assets/images/icons/brand-facebook.svg" class="w-6 h-6" alt="Facebook">
+          </a>
+          <a *ngIf="agrupacion.instagramUrl" [href]="agrupacion.instagramUrl" target="_blank" class="text-gray-400 hover:text-cultura-magenta">
+            <img src="assets/images/icons/brand-instagram.svg" class="w-6 h-6" alt="Instagram">
+          </a>
+          <a *ngIf="agrupacion.youtubeUrl" [href]="agrupacion.youtubeUrl" target="_blank" class="text-gray-400 hover:text-cultura-rojo">
+            <img src="assets/images/icons/brand-youtube.svg" class="w-6 h-6" alt="YouTube">
+          </a>
+           <a *ngIf="agrupacion.twitterUrl" [href]="agrupacion.twitterUrl" target="_blank" class="text-gray-400 hover:text-black">
+            <img src="assets/images/icons/brand-x.svg" class="w-6 h-6" alt="X">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensaje si no hay resultados -->
+    <div *ngIf="filteredAgrupaciones.length === 0" class="col-span-full text-center py-12">
+      <p class="text-gray-500 text-lg">No se encontraron agrupaciones con los filtros seleccionados.</p>
+    </div>
+  </div>
+</div>

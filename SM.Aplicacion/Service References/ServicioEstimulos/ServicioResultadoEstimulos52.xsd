@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WsResultadosEstimulos" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WsResultadosEstimulos" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfModalidadDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ModalidadDTO" nillable="true" type="tns:ModalidadDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfModalidadDTO" nillable="true" type="tns:ArrayOfModalidadDTO" />
+  <xs:complexType name="ModalidadDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodigoModalidad" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreModalidad" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ModalidadDTO" nillable="true" type="tns:ModalidadDTO" />
+  <xs:complexType name="ArrayOfEstadoInscripcionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EstadoInscripcionDTO" nillable="true" type="tns:EstadoInscripcionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEstadoInscripcionDTO" nillable="true" type="tns:ArrayOfEstadoInscripcionDTO" />
+  <xs:complexType name="EstadoInscripcionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodigoEstado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreEstado" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EstadoInscripcionDTO" nillable="true" type="tns:EstadoInscripcionDTO" />
+</xs:schema>

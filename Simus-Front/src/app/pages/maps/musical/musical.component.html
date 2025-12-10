@@ -1,0 +1,174 @@
+<div class="min-h-screen bg-gray-50">
+    <!-- Header de la página -->
+    <div class="bg-cultura-violeta text-white py-8">
+        <div class="w-full px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <h1 class="text-4xl font-bold font-sans mb-2">Mapa Musical</h1>
+                <p class="text-lg text-gray-200">Explora la diversidad musical de Colombia a través de nuestro mapa
+                    interactivo</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="w-full px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Filtros y controles -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold text-cultura-violeta mb-4">Filtros de Búsqueda</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Región</label>
+                        <select [(ngModel)]="selectedRegion" (change)="onFilterChange()"
+                            class="w-full p-3 border border-gray-300 rounded-md focus:ring-cultura-violeta focus:border-cultura-violeta">
+                            <option value="">Todas las regiones</option>
+                            <option value="andina">Región Andina</option>
+                            <option value="caribe">Región Caribe</option>
+                            <option value="pacifica">Región Pacífica</option>
+                            <option value="orinoquia">Región Orinoquía</option>
+                            <option value="amazonia">Región Amazonía</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Género Musical</label>
+                        <select [(ngModel)]="selectedGenre" (change)="onFilterChange()"
+                            class="w-full p-3 border border-gray-300 rounded-md focus:ring-cultura-violeta focus:border-cultura-violeta">
+                            <option value="">Todos los géneros</option>
+                            <option value="cumbia">Cumbia</option>
+                            <option value="vallenato">Vallenato</option>
+                            <option value="bambuco">Bambuco</option>
+                            <option value="currulao">Currulao</option>
+                            <option value="joropo">Joropo</option>
+                            <option value="champeta">Champeta</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Expresión</label>
+                        <select [(ngModel)]="selectedExpression" (change)="onFilterChange()"
+                            class="w-full p-3 border border-gray-300 rounded-md focus:ring-cultura-violeta focus:border-cultura-violeta">
+                            <option value="">Todas las expresiones</option>
+                            <option value="tradicional">Música Tradicional</option>
+                            <option value="contemporanea">Música Contemporánea</option>
+                            <option value="fusion">Fusión</option>
+                            <option value="urbana">Música Urbana</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <button (click)="applyFilters()"
+                        class="bg-cultura-violeta text-white px-4 py-2 rounded-md hover:bg-cultura-violeta-darker transition-colors">
+                        Aplicar Filtros
+                    </button>
+                    <button (click)="clearFilters()"
+                        class="border border-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-50 transition-colors">
+                        Limpiar Filtros
+                    </button>
+                    <button (click)="showPointSelector()"
+                        class="bg-cultura-amarillo text-cultura-violeta px-4 py-2 rounded-md hover:bg-yellow-300 transition-colors">
+                        Seleccionar Punto
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mapa interactivo -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+                <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-cultura-violeta">Mapa Interactivo de Colombia</h2>
+                    <p class="text-gray-600 mt-1">Explora los diferentes puntos musicales del país</p>
+                </div>
+
+                <!-- Contenedor del mapa -->
+                <div id="googleMap"
+                    style="width: 100%; height: 500px; background-color: #f0f0f0; border: 1px solid #ccc;"></div>
+            </div>
+
+            <!-- Panel de información -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- Información de la región seleccionada -->
+                <!-- <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-semibold text-cultura-violeta mb-4">Información de la Región</h3>
+                        <div *ngIf="selectedRegionInfo; else noRegionSelected">
+                            <h4 class="text-lg font-medium text-gray-900 mb-2">{{ selectedRegionInfo.name }}</h4>
+                            <p class="text-gray-600 mb-4">{{ selectedRegionInfo.description }}</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-medium text-gray-900 mb-2">Géneros Principales:</h5>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li *ngFor="let genre of selectedRegionInfo.genres">• {{ genre }}</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium text-gray-900 mb-2">Instrumentos Típicos:</h5>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li *ngFor="let instrument of selectedRegionInfo.instruments">• {{ instrument }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <ng-template #noRegionSelected>
+                            <div class="text-center py-8">
+                                <div
+                                    class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <p class="text-gray-500">Selecciona un punto en el mapa para ver información detallada
+                                </p>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div> -->
+
+                <!-- Géneros musicales destacados -->
+                <!-- <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-cultura-violeta mb-4">Géneros Destacados</h3>
+
+                    <div class="space-y-4">
+                        <div *ngFor="let genre of featuredGenres" class="border-l-4 border-cultura-amarillo pl-4">
+                            <h4 class="font-medium text-gray-900">{{ genre.name }}</h4>
+                            <p class="text-sm text-gray-600">{{ genre.region }}</p>
+                        </div>
+                    </div>
+
+                    <button
+                        class="w-full mt-4 text-cultura-violeta font-medium hover:text-cultura-violeta-darker transition-colors">
+                        Ver todos los géneros →
+                    </button>
+                </div> -->
+            </div>
+
+            <!-- Estadísticas -->
+            <!-- <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
+                <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                    <div class="text-3xl font-bold text-cultura-violeta mb-2">{{ stats.genres }}+</div>
+                    <div class="text-gray-600">Géneros Musicales</div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                    <div class="text-3xl font-bold text-cultura-violeta mb-2">{{ stats.departments }}</div>
+                    <div class="text-gray-600">Departamentos</div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                    <div class="text-3xl font-bold text-cultura-violeta mb-2">{{ stats.municipalities }}+</div>
+                    <div class="text-gray-600">Municipios</div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                    <div class="text-3xl font-bold text-cultura-violeta mb-2">{{ stats.regions }}</div>
+                    <div class="text-gray-600">Regiones</div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+<div class="flex items-center justify-center min-h-screen bg-ui-primary">
+  <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+    <div class="flex justify-center">
+      <img src="assets/images/logos/logo-simus-color.png" alt="SIMUS Logo" class="w-60">
+    </div>
+    <h2 class="text-2xl font-bold text-center text-gray-900">Iniciar sesión</h2>
+    <form class="space-y-6" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
+        <div class="mt-1">
+          <input id="email" name="email" type="email" autocomplete="email" formControlName="email"
+            class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-cultura-violeta focus:border-cultura-violeta sm:text-sm">
+          <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['required']"
+            class="text-sm text-red-600">
+            El correo es requerido.
+          </div>
+          <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['email']"
+            class="text-sm text-red-600">
+            Formato de correo inválido.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+        <div class="mt-1">
+          <input id="password" name="password" type="password" autocomplete="current-password"
+            formControlName="password"
+            class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-cultura-violeta focus:border-cultura-violeta sm:text-sm">
+          <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']"
+            class="text-sm text-red-600">
+            La contraseña es requerida.
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <input id="remember-me" name="remember-me" type="checkbox" formControlName="remember-me"
+            class="w-4 h-4 rounded border-gray-300 text-cultura-violeta focus:ring-cultura-violeta-dark">
+          <label for="remember-me" class="block ml-2 text-sm text-gray-900">Recordar</label>
+        </div>
+      </div>
+
+      <div class="flex items-center">
+        <input id="terms" name="terms" type="checkbox" formControlName="terms"
+          class="w-4 h-4 rounded border-gray-300 text-cultura-violeta focus:ring-cultura-violeta-dark">
+        <label for="terms" class="block ml-2 text-sm text-gray-900">Acepto los <a href="#"
+            class="text-cultura-violeta hover:text-cultura-violeta-dark">términos y condiciones</a></label>
+        <div *ngIf="loginForm.get('terms')?.touched && loginForm.get('terms')?.errors?.['requiredTrue']"
+          class="text-sm text-red-600 ml-2">
+          Debes aceptar los términos.
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" [disabled]="!loginForm.valid"
+          class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-ui-primary hover:bg-cultura-violeta focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cultura-violeta-dark disabled:bg-gray-400">
+          Ingresar
+        </button>
+      </div>
+    </form>
+
+    <div class="relative">
+      <div class="absolute inset-0 flex items-center">
+        <div class="w-full border-t border-gray-300"></div>
+      </div>
+      <div class="relative flex justify-center text-sm">
+        <span class="px-2 text-gray-500 bg-white">O continuar con</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <a href="#"
+            class="inline-flex justify-center w-full p-3 text-white bg-cultura-violeta border border-transparent rounded-md shadow-sm hover:bg-cultura-violeta-dark">
+            <span class="sr-only">Iniciar sesión con Google</span>
+            <img class="w-6 h-6" src="assets/images/icons/brand-google.svg" alt="Google">
+          </a>
+        </div>
+        <div>
+          <a href="#"
+            class="inline-flex justify-center w-full p-3 text-white bg-cultura-violeta border border-transparent rounded-md shadow-sm hover:bg-cultura-violeta-dark">
+            <span class="sr-only">Iniciar sesión con Microsoft</span>
+            <img class="w-6 h-6" src="assets/images/icons/brand-windows.svg" alt="Microsoft">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

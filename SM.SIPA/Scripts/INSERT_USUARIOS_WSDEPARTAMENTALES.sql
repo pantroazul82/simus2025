@@ -1,0 +1,22 @@
+
+select * from ART_MUSICA_WS_USUARIO
+
+select * from BAS_ZONAS_GEOGRAFICAS where ZON_PADRE_ID = 66
+
+select * from ART_AREA_ARTISTICAS
+
+INSERT INTO ART_MUSICA_WS_USUARIO values ('UserR1s4r4ld4', 'T3stR1s4r4ld4', '66', 1)
+INSERT INTO ART_MUSICA_WS_USUARIO values ('UserC3s4r', 'W3bC3s4r4041', '20', 1)
+
+select * from BAS_TIPOS_DOCUMENTOS_IDENTIDAD
+
+select * from BAS_ZONAS_PAISES where zop_nombre like '%COLOMBIA%'
+
+select * from ART_MUSICA_AGENTE
+
+SELECT * FROM ART_MUSICA_ESTADOS
+
+INSERT INTO ART_MUSICA_ESTADOS  values ('Pendiente')
+
+SELECT * FROM ART_MUSICA_USUARIO
+INSERT INTO ART_MUSICA_AGENTE VALUES (1, 'Yeimy', 'Angelica', 'Silva', 'Novoa', null, 2, '523444333', '1990-06-06', 'F',52, '66001', NULL, 'CARRERA 9', '57898833', '', 15, GETDATE(), GETDATE(), 1,'ysilva@mincultura.gov.co')

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://mctucano:28827/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mctucano:28827/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://mctucano:28827/Imports">
+      <xsd:import schemaLocation="http://mctucano:28827/ServicioResultadoEstimulos.svc?xsd=xsd0" namespace="http://mctucano:28827/" />
+      <xsd:import schemaLocation="http://mctucano:28827/ServicioResultadoEstimulos.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://mctucano:28827/ServicioResultadoEstimulos.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://mctucano:28827/ServicioResultadoEstimulos.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WsResultadosEstimulos" />
+      <xsd:import schemaLocation="http://mctucano:28827/ServicioResultadoEstimulos.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/WsResultadosEstimulos.DTO" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServicioResultadoEstimulos_DoWork_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoWork" />
+  </wsdl:message>
+  <wsdl:message name="IServicioResultadoEstimulos_DoWork_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoWorkResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioResultadoEstimulos_GetAnios_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAnios" />
+  </wsdl:message>
+  <wsdl:message name="IServicioResultadoEstimulos_GetAnios_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAniosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioResultadoEstimulos_GetModalidades_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetModalidades" />
+  </wsdl:message>
+  <wsdl:message name="IServicioResultadoEstimulos_GetModalidades_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetModalidadesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioResultadoEstimulos_GetEstadoInscripcion_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEstadoInscripcion" />
+  </wsdl:message>
+  <wsdl:message name="IServicioResultadoEstimulos_GetEstadoInscripcion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEstadoInscripcionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioResultadoEstimulos_GetConvocatorias_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetConvocatorias" />
+  </wsdl:message>
+  <wsdl:message name="IServicioResultadoEstimulos_GetConvocatorias_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetConvocatoriasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioResultadoEstimulos_GetResultados_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetResultados" />
+  </wsdl:message>
+  <wsdl:message name="IServicioResultadoEstimulos_GetResultados_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetResultadosResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServicioResultadoEstimulos">
+    <wsdl:operation name="DoWork">
+      <wsdl:input wsaw:Action="http://mctucano:28827/IServicioResultadoEstimulos/DoWork" message="tns:IServicioResultadoEstimulos_DoWork_InputMessage" />
+      <wsdl:output wsaw:Action="http://mctucano:28827/IServicioResultadoEstimulos/DoWorkResponse" message="tns:IServicioResultadoEstimulos_DoWork_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAnios">
+      <wsdl:input wsaw:Action="http://mctucano:28827/IServicioResultadoEstimulos/GetAnios" message="tns:IServicioResultadoEstimulos_GetAnios_InputMessage" />
+      <wsdl:output wsaw:Action="http://mctucano:28827/IServicioResultadoEstimulos/GetAniosResponse" message="tns:IServicioResultadoEstimulos_GetAnios_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModalidades">
+      <wsdl:input wsaw:Action="http://mctucano:28827/IServicioResultadoEstimulos/GetModalidades" message="tns:IServicioResultadoEstimulos_GetModalidades_InputMessage" />
+      <wsdl:output wsaw:Action="http://mctucano:28827/IServicioResultadoEstimulos/GetModalidadesResponse" message="tns:IServicioResultadoEstimulos_GetModalidades_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEstadoInscripcion">
+      <wsdl:input wsaw:Action="http://mctucano:28827/IServicioResultadoEstimulos/GetEstadoInscripcion" message="tns:IServicioResultadoEstimulos_GetEstadoInscripcion_InputMessage" />
+      <wsdl:output wsaw:Action="http://mctucano:28827/IServicioResultadoEstimulos/GetEstadoInscripcionResponse" message="tns:IServicioResultadoEstimulos_GetEstadoInscripcion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConvocatorias">
+      <wsdl:input wsaw:Action="http://mctucano:28827/IServicioResultadoEstimulos/GetConvocatorias" message="tns:IServicioResultadoEstimulos_GetConvocatorias_InputMessage" />
+      <wsdl:output wsaw:Action="http://mctucano:28827/IServicioResultadoEstimulos/GetConvocatoriasResponse" message="tns:IServicioResultadoEstimulos_GetConvocatorias_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResultados">
+      <wsdl:input wsaw:Action="http://mctucano:28827/IServicioResultadoEstimulos/GetResultados" message="tns:IServicioResultadoEstimulos_GetResultados_InputMessage" />
+      <wsdl:output wsaw:Action="http://mctucano:28827/IServicioResultadoEstimulos/GetResultadosResponse" message="tns:IServicioResultadoEstimulos_GetResultados_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

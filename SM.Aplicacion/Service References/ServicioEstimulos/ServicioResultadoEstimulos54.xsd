@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://mctucano:28827/" elementFormDefault="qualified" targetNamespace="http://mctucano:28827/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://mctucano:28827/ServicioResultadoEstimulos.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://mctucano:28827/ServicioResultadoEstimulos.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WsResultadosEstimulos" />
+  <xs:import schemaLocation="http://mctucano:28827/ServicioResultadoEstimulos.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/WsResultadosEstimulos.DTO" />
+  <xs:element name="DoWork">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DoWorkResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAnios">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAniosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetAniosResult" nillable="true" type="q1:ArrayOfshort" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetModalidades">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetModalidadesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WsResultadosEstimulos" minOccurs="0" name="GetModalidadesResult" nillable="true" type="q2:ArrayOfModalidadDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEstadoInscripcion">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEstadoInscripcionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/WsResultadosEstimulos" minOccurs="0" name="GetEstadoInscripcionResult" nillable="true" type="q3:ArrayOfEstadoInscripcionDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetConvocatorias">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="anio" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="modalidad" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetConvocatoriasResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/WsResultadosEstimulos.DTO" minOccurs="0" name="GetConvocatoriasResult" nillable="true" type="q4:ArrayOfConvocatoriasDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetResultados">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="anio" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="modalidad" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="convocatoria" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="estadoinscripcion" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetResultadosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/WsResultadosEstimulos.DTO" minOccurs="0" name="GetResultadosResult" nillable="true" type="q5:ArrayOfResultadosDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

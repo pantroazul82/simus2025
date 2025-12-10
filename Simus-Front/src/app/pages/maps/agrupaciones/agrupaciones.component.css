@@ -1,0 +1,86 @@
+/* Estilos específicos para el componente Mapa Musical */
+.mapa-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.region-highlight {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.region-highlight:hover {
+  fill: #f59e0b;
+  filter: brightness(1.1);
+}
+
+/* Estilos específicos para Google Maps */
+#googleMap {
+  min-height: 500px !important;
+  width: 100% !important;
+  position: relative !important;
+}
+
+#googleMap * {
+  box-sizing: border-box;
+}
+
+/* Forzar estilos para elementos de Google Maps */
+#googleMap .gm-style {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#googleMap .gm-style > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Animaciones para los filtros */
+.filter-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos para los cards informativos */
+.info-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el contenedor del mapa */
+#googleMap {
+  min-height: 400px;
+  border-radius: 8px;
+}
+
+/* Responsive design específico */
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #googleMap {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 640px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

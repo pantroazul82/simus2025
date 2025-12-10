@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="cce7ea0d-1ac7-408e-b7c3-c88ff4f96f19" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://mctucano:28827/ServicioResultadoEstimulos.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServicioResultadoEstimulos5.xsd" MetadataType="Schema" ID="764fa34f-842d-4226-b759-b57d852e51f1" SourceId="1" SourceUrl="http://mctucano:28827/ServicioResultadoEstimulos.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServicioResultadoEstimulos1.wsdl" MetadataType="Wsdl" ID="4e503606-d755-47ca-9071-08a14998bd54" SourceId="1" SourceUrl="http://mctucano:28827/ServicioResultadoEstimulos.svc?wsdl" />
+    <MetadataFile FileName="ServicioResultadoEstimulos11.wsdl" MetadataType="Wsdl" ID="d5d2bf0c-23d4-40f1-8699-5d88cb6c2a85" SourceId="1" SourceUrl="http://mctucano:28827/ServicioResultadoEstimulos.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="ServicioResultadoEstimulos51.xsd" MetadataType="Schema" ID="e174bb73-9cd8-440e-842c-8e9fc6fec787" SourceId="1" SourceUrl="http://mctucano:28827/ServicioResultadoEstimulos.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServicioResultadoEstimulos52.xsd" MetadataType="Schema" ID="ecc5b640-99cd-4c3e-9889-59b0699dcc72" SourceId="1" SourceUrl="http://mctucano:28827/ServicioResultadoEstimulos.svc?xsd=xsd3" />
+    <MetadataFile FileName="ServicioResultadoEstimulos53.xsd" MetadataType="Schema" ID="04ac7ed6-f12a-408f-9aaa-84dd961cc8ce" SourceId="1" SourceUrl="http://mctucano:28827/ServicioResultadoEstimulos.svc?xsd=xsd4" />
+    <MetadataFile FileName="ServicioResultadoEstimulos54.xsd" MetadataType="Schema" ID="933985c0-e9da-4834-ab3b-4a7a4b7f6087" SourceId="1" SourceUrl="http://mctucano:28827/ServicioResultadoEstimulos.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServicioResultadoEstimulos1.disco" MetadataType="Disco" ID="9170edca-8b84-40c4-be77-eb63d3b1686a" SourceId="1" SourceUrl="http://mctucano:28827/ServicioResultadoEstimulos.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

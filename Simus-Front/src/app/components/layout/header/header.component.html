@@ -1,0 +1,113 @@
+<!-- Barra superior GOV.CO -->
+<div class="bg-cultura-violeta-darker p-2">
+  <div class="w-full px-4 sm:px-6 lg:px-8 flex justify-start">
+    <img src="/assets/images/logos/logo-gov.svg" alt="Logo Gov.co" class="h-8">
+  </div>
+</div>
+
+<!-- Encabezado Principal -->
+<header class="bg-cultura-violeta text-white shadow-lg border-b-4 border-cultura-violeta-darker font-sans">
+  <div class="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between p-4">
+    <!-- Logo SIMUS -->
+    <div class="flex items-center">
+      <div>
+        <a href="/">
+          <img src="/assets/images/logos/logo-simus.png" alt="Logo SIMUS" class="h-20">
+        </a>
+      </div>
+    </div>
+
+    <!-- Menú de Navegación (Desktop) -->
+    <nav class="hidden lg:flex items-center space-x-1 text-base font-bold mx-8">
+      @for (item of menuItems; track item.name) {
+      <div class="relative group pb-2">
+        <a [routerLink]="item.path" (click)="item.children && $event.preventDefault()"
+          class="px-3 py-2 rounded-md flex items-center hover:text-cultura-amarillo transition-colors duration-300">
+          <span>{{ item.name }}</span>
+          @if (item.children) {
+          <img src="/assets/images/icons/chevron-down.svg" alt="down" class="w-4 h-4 ml-1">
+          }
+        </a>
+        @if (item.children) {
+        <div
+          class="absolute top-full left-0 w-56 bg-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 z-10 invisible group-hover:visible">
+          <div class="py-1">
+            @for (child of item.children; track child.name) {
+            <a [routerLink]="child.path"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-cultura-gris hover:text-cultura-violeta">{{
+              child.name
+              }}</a>
+            }
+          </div>
+        </div>
+        }
+      </div>
+      }
+    </nav>
+
+    <!-- Botones y Logo Ministerio (Desktop) -->
+    <div class="hidden lg:flex items-center space-x-8">
+      <div class="flex items-center space-x-2">
+        <a [routerLink]="['/cuenta/ingresar']"
+          class="bg-cultura-amarillo text-cultura-violeta font-bold py-2 px-4 rounded-md hover:bg-yellow-300 transition-colors duration-300 text-base">Ingresar</a>
+        <a [routerLink]="['/cuenta/registro']"
+          class="border border-cultura-amarillo text-cultura-amarillo font-bold py-2 px-4 rounded-md hover:bg-cultura-amarillo hover:text-cultura-violeta transition-colors duration-300 text-base">Registrarse</a>
+        <button class="p-2 rounded-md hover:bg-cultura-violeta-dark transition-colors duration-300">
+          <img src="/assets/images/icons/search.svg" alt="Buscar" class="h-8">
+        </button>
+      </div>
+      <img src="/assets/images/logos/logo-culturas.svg" alt="Logo Ministerio de las Culturas" class="h-20">
+    </div>
+
+    <!-- Botón de Menú (Móvil) -->
+    <div class="lg:hidden">
+      <button (click)="toggleMenu()" class="text-white focus:outline-none">
+        <img src="/assets/images/icons/menu-2.svg" alt="Logo Ministerio de las Culturas" class="w-8 h-8">
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú desplegable (Móvil) -->
+  <div [class.hidden]="!isMenuOpen" class="lg:hidden bg-cultura-violeta-darker">
+    <nav class="flex flex-col space-y-1 p-4">
+      @for (item of menuItems; track item.name) {
+      <div>
+        <a [routerLink]="item.path"
+          (click)="item.children && toggleDropdown(item.name); !item.children && (isMenuOpen = false)"
+          class="px-3 py-2 rounded-md flex items-center justify-between hover:text-cultura-amarillo transition-colors duration-300">
+          <span>{{ item.name }}</span>
+          @if (item.children) {
+          <svg class="w-4 h-4 ml-1 transition-transform duration-300" [class.rotate-180]="openDropdown === item.name"
+            fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+          }
+        </a>
+        @if (item.children && openDropdown === item.name) {
+        <div class="pl-4 mt-1 space-y-1">
+          @for (child of item.children; track child.name) {
+          <a [routerLink]="child.path"
+            class="block px-3 py-2 rounded-md text-sm text-gray-300 hover:bg-cultura-violeta hover:text-white">{{
+            child.name
+            }}</a>
+          }
+        </div>
+        }
+      </div>
+      }
+      <div class="flex flex-col space-y-4 w-full pt-4 border-t border-cultura-violeta">
+        <a [routerLink]="['/cuenta/ingresar']"
+          class="bg-cultura-amarillo text-cultura-violeta text-center font-bold py-2 px-4 rounded-md hover:bg-yellow-300 transition-colors duration-300">Ingresar</a>
+        <a [routerLink]="['/cuenta/registro']"
+          class="border border-cultura-amarillo text-cultura-amarillo text-center font-bold py-2 px-4 rounded-md hover:bg-cultura-amarillo hover:text-cultura-violeta transition-colors duration-300">Registrarse</a>
+      </div>
+      <div class="relative w-full pt-4">
+        <input type="text" placeholder="Buscar..."
+          class="bg-cultura-violeta text-white placeholder-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-cultura-amarillo">
+        <div class="absolute inset-y-0 right-0 flex items-center pr-">
+          <img src="/assets/images/icons/search.svg" alt="Buscar" class="h-5 w-5">
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>

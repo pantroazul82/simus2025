@@ -1,0 +1,853 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <AssemblyTitle>SM.SIPA</AssemblyTitle>
+    <Product>SM.SIPA</Product>
+    <Copyright>Copyright ©  2015</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Owin" Version="4.2.2" />
+    <PackageReference Include="Microsoft.Owin.Security" Version="4.2.2" />
+    <PackageReference Include="Microsoft.Owin.Security.Facebook" Version="4.2.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Owin" Version="1.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="ADM_OPCIONES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ADM_USUARIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ENTIDADES_ARTES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ENTIDADES_TIPO_ENTIDAD.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ENTIDAD_NATURALEZA_JURIDICA.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ENTIDAD_UBICACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_INFRAESTRUCTURA_AREAS_ARTISTICAS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_INFRAESTRUCTURA_ENTIDADES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ENTIDADES_ARTES_ObtenerDatosBasicosPorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ENTIDADES_ARTES_ObtenerParaAdmin_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ENTIDADES_ARTES_ObtenerPorId_produccion_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ENTIDADES_ARTES_ObtenerPorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ENTIDADES_ARTES_ObtenerPorUsuario_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ENTIDADES_ARTES_ObtenerTodosParaAdmin_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ENTIDADES_ARTES_ObtenerTodosPorUsuario_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ENTIDADES_ARTES_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ENTIDAD_INFRAESTRUCTURA_ObtenerPorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ENTIDAD_INFRAESTRUCTURA_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ENTIDAD_NATURALEZA_JURIDICA_ObtenerPorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ENTIDAD_NATURALEZA_JURIDICA_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ENTIDAD_UBICACION_ObtenerPorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ENTIDAD_UBICACION_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ESPACIO_PRINCIPAL_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ME_ESCUELA_SOLUCIONES_ACUSTICAS_ObtenerPorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ME_IMAGENES_ESCUELAS_ObtenerPorENT_ID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ME_IMAGENES_ESCUELAS_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ME_SOLUCIONES_ACUSTICAS_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ME_VIDEOS_ESCUELAS_ObtenerPorENT_ID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_ME_VIDEOS_ESCUELAS_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENTIDAD_FORMACION_ObtenerPorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENTIDAD_FORMACION_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENTIDAD_FORMACION_TOTALES_ObtenerPorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENTIDAD_FORMACION_TOTALES_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENTIDAD_IDENTIFICACION_ObtenerPorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENTIDAD_INFRAESTRUCTURA_ObtenerPorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENTIDAD_INFRAESTRUCTURA_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENTIDAD_INSTITUCIONALIDAD_ObtenerPorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENTIDAD_INSTITUCIONALIDAD_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENTIDAD_PARTICIPACION_ObtenerPorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENTIDAD_PARTICIPACION_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENTIDAD_PARTICIPACION_PorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENTIDAD_PRODUCCION_ObtenerPorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENTIDAD_PRODUCCION_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENT_INFR_FUENTES_DOTACION_ObtenerPorENT_ID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENT_INFR_MATERIAL_PEGAOGICO_ObtenerPorENT_ID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENT_INFR_NIVELFUENTESDOTACION_ObtenerPorENT_ID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENT_INFR_NIVEL_FUENTES_DOTACION_ObtenerPorENT_ID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ENT_MATERIALPEGAOGICO_ObtenerPorENT_ID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_FACTOR_CATEGORIZACION_ObtenerHijos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_FACTOR_CATEGORIZACION_ObtenerPadres_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_FACTOR_CATEGORIZACION_ObtenerPorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_FORMULARIOS_VALORES_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_FUENTES_DOTACION_ObtenerPorENT_ID_produccion_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_FUENTES_DOTACION_ObtenerPorENT_ID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_FUENTES_DOTACION_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_MATERIAL_PEDAGOGICO_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_NIVEL_FUENTES_DOTACION_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_ORGANIZACION_COMUNITARIA_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_PRACTICAMUSICAL_ObtenerPorENT_ID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_PRACTICA_MUSICAL_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_PRAC_MUS_ENT_FORMACION_ObtenerPorENT_ID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_PROYECTOSORGANIZACION_ObtenerPorENT_ID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_SOLUCIONESACUSTICAS_ObtenerPorId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_TIPO_DOCUMENTO_CREACION_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_TIPO_PROY_ORG_COM_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUSICA_TIPO_VINCULACION_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_MUS_TIP_PROY_ORG_COM_ENT_PARTICIPACION_ObtenerPorENT_ID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_NIVEL_ADMINISTRACION_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_REGIMEN_ENTIDAD_ObtenerTodosHijos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_REGIMEN_ENTIDAD_ObtenerTodosPadres_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ART_TIPO_AREA_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_ESCUELA_SOLUCIONES_ACUSTICAS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_FORMULARIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_FORMULARIOS_COLUMNAS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_FORMULARIOS_LISTAS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_FORMULARIOS_LISTAS_ELEMENTOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_FORMULARIOS_REGISTRO.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_FORMULARIOS_SECCIONES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_FORMULARIOS_VALORES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_IMAGENES_ESCUELAS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_PERFILES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_Reporte_General_Datos_Basicos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_SOLICITUDES_COMENTARIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_USUARIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_ME_VIDEOS_ESCUELAS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ACTIVIDADES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTES_INSTRUMENTOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTEXCONVENIO.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTEXOCUPACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_AGRUPACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_datos_EstadoId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_datos_Id_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_datos_UsuarioId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_EstadoId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_EXPERIENCIA.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_GENEROS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_ID1_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_ID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_INTERESES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_OBTENERDATOSPORID1_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_OBTENERDATOSPORID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_OBTENERTODOS_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_OBTENER_DATOSID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_OBTENER_DATOS_ID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_OFICIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_POR_DEPARTAMENTO_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_SERVICIO.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_Todos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGENTE_UsuarioId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGRUPACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGRUPACION_GENEROS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AGRUPACION_Id_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ARTISTAS_CELEBRA.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ASISTENCIA.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AUTOEVALUACION_RESPUESTA.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_AVANCE.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_CATEGORIA_ESCUELA.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_CELEBRA_CATEGORIA.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_CONTENIDOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_CONVENIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_CONVENIO_DOTACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_CONVOCATORIAS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_CONVOCATORIA_ACTORES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_CONVOCATORIA_ESTIMULOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_CRONOGRAMA.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_CRONOGRAMAXAGENTE.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_CRONOGRAMA_DOCUMENTO.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_DOCUMENTOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_DOCUMENTOS_ESCENARIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_DOTACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_DOTACION_DOCUMENTOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_DOTACION_INSTRUMENTOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_EJES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADESObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_Id1_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_Id_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_OBTENERTODOS_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_Obtener_Todos1_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_Obtener_Todos2_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_OBTENER_TODOS_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_porId_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_POR_DEPARTAMENTO1_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_POR_DEPARTAMENTO_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_POR_ESTADOID1_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_POR_ESTADOID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_POR_ID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_POR_USUARIOID1_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_POR_USUARIOID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_Todos1_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDADES_Todos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDAD_CATEGORIZACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDAD_DOTACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDAD_FORMACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDAD_IDENTIFICACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDAD_INFRAESTRUCTURA.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDAD_INSTITUCIONALIDAD.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDAD_PARTICIPACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDAD_PRODUCCION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDAD_TIPOENTIDAD.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ENTIDAD_TIPOS_INTERNET.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ESCENARIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ESCENARIO_DIAS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ESCUELAS_DOCUMENTOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ESCUELAS_ObtenerTodos1_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ESCUELAS_ObtenerTodos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ESCUELAS_Obtener_Todos_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ESCUELA_ASESORIA.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ESCUELA_CLASIFICACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ESCUELA_INSTRUMENTOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ESCUELA_MATRIZ.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ESCUELA_OBSERVACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ESCUELA_REPERTORIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ESTADOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_EVALUACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_EVALUACION_PREGUNTAS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_EVENTOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_EVENTOS_PERIODICOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_EVENTOS_RELACIONADOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_FACTOR_CATEGORIZACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_FACTOR_CATEGORIZACION_1.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_FORMACION_DOCENTES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_FORMACION_PRACTICA.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_FORMULARIO_ARCHIVOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_FUENTES_DOTACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_GENEROS_MUSICALES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_GRUPOEVENTOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_GRUPOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_HERRAMIENTAS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_HISTORICO_ESCUELAS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_IMAGENES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_INSTRUMENTOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_INTERESES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_MATERIAL_PEDAGOGICO.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_MODULO_SERVICIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_MOTIVO_HISTORICO.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_NATURALEZA_AGRUPACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_NIVEL_FUENTES_DOTACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_NOMBRE_CATEGORIA_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_OBTENER_GENEROS_MUSICALES_AGENTEID_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_OBTENER_GENEROS_MUSICALES_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_OBTENER_VALORES_FORMULARIOS_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_OFICIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ORGANIZACION_COMUNITARIA.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_PARAMETROS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_PARAMETROS_SERVICIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_PARTICIPACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_PRACTICAS_PNMC.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_PRACTICA_GENERO.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_PRACTICA_MUSICAL.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_PRACTICA_NIVEL.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_PROCESOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_PROCESO_FORMACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_RECURSO.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_REDES_SOCIALES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_RED_SOCIAL.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_RED_SOCIAL_ACTORES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_RED_SOCIAL_ESCENARIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_REGISTRO_OPERACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ROL.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_ROL_RECURSO.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_SERVICIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_SOLICITUD_USUARIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_TIPOS_INTERNET.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_TIPOS_PARAMETROS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_TIPO_AGRUPACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_TIPO_DATO_RETORNO.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_TIPO_DOCUMENTO_CREACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_TIPO_ENTIDAD.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_TIPO_PROY_ORG_COM.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_TIPO_VINCULACION.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_TRADICIONAL_AUDIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_TRADICIONAL_GENEROS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_TRADICIONAL_MUNICIPIOS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_USER_CIUDAD.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_USUARIO.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_USUARIO_ROL.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_UTILIDAD_GENEROS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_UTILIDAD_SERVICIO.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_VALORES_CATEGORIZACION_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_VARIABLES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUSICA_WS_USUARIO.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ART_MUS_TIP_DOC_CRE_ENT_INSTITUC.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="BAS_TIPOS_DOCUMENTOS_IDENTIDAD.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="BAS_ZONAS_GEOGRAFICAS.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="BAS_ZONAS_PAISES.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="PAT_GEO_INMUEBLES_Result.cs">
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="SIPA.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SIPA.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Update="SIPA.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SIPA.tt</DependentUpon>
+    </Compile>
+    <Compile Update="SIPA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SIPA.edmx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="SIPA.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SIPA.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Update="SIPA.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SIPA.edmx</DependentUpon>
+      <LastGenOutput>SIPA.Context.cs</LastGenOutput>
+    </None>
+    <None Update="SIPA.edmx.diagram">
+      <DependentUpon>SIPA.edmx</DependentUpon>
+    </None>
+    <None Update="SIPA.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SIPA.edmx</DependentUpon>
+      <LastGenOutput>SIPA.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\ACTUALIZACION CODIGO TIPOS DOCUMENTOS.sql" />
+    <Content Include="Scripts\ACTUALIZACION SP INSERT ART_ENTIDAD_ACTIVIDAD.sql" />
+    <Content Include="Scripts\ADD COLUMN PARTICIPACION.sql" />
+    <Content Include="Scripts\Adicionar imagen.sql" />
+    <Content Include="Scripts\ALTER TABLE TIPO DOCUMENTOS.sql" />
+    <Content Include="Scripts\ART_ME_ART_ENTIDADES_ARTES_ObtenerporId.sql" />
+    <Content Include="Scripts\ART_ME_ART_MUSICA_ENTIDAD_PARTICIPACION_PorId.sql" />
+    <Content Include="Scripts\ART_ME_ART_MUSICA_FORMULARIOS_VALORES.sql" />
+    <Content Include="Scripts\ART_ME_ART_MUSICA_PRACTICAMUSICAL_ObtenerPorENT_ID.sql" />
+    <Content Include="Scripts\ART_ME_ART_MUSICA_PROYECTOSORGANIZACION_ObtenerPorENT_ID.sql" />
+    <Content Include="Scripts\ART_ME_ART_MUSICA_SOLUCIONESACUSTICAS_ObtenerPorId.sql" />
+    <Content Include="Scripts\ART_MUSICA_ESCUELAS_ObtenerTodos.sql" />
+    <Content Include="Scripts\ART_MUSICA_NOMBRE_CATEGORIA.sql" />
+    <Content Include="Scripts\ART_MUSICA_VALORES_CATEGORIZACION.sql" />
+    <Content Include="Scripts\CREATE ART_MUSICA_ENTIDAD_TIPOS_INTERNET.sql" />
+    <Content Include="Scripts\CREATE ART_MUSICA_TIPOS_INTERNET.sql" />
+    <Content Include="Scripts\INSERT ART_MUSICA_TIPOS_INTERNET.sql" />
+    <Content Include="Scripts\MODIFY FORMACION.sql" />
+    <Content Include="Scripts\REPORTES.sql" />
+    <Content Include="Scripts\ROLES.sql" />
+    <Content Include="Scripts\TABLES ENTIDADES.sql" />
+    <Content Include="Scripts\[ART_ME_ART_MUSICA_ENT_INFR_NIVELFUENTESDOTACION_ObtenerPorENT_ID].sql" />
+    <Content Include="Scripts\[ART_ME_ART_MUSICA_ENT_MATERIALPEGAOGICO_ObtenerPorENT_ID].sql" />
+    <Content Include="Scripts\[ART_ME_ART_MUSICA_FUENTES_DOTACION_ObtenerPorENT_ID].sql" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Auditoria\" />
+  </ItemGroup>
+</Project>

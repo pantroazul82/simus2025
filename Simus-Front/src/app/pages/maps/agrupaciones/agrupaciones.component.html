@@ -1,0 +1,91 @@
+<div class="min-h-screen bg-gray-50">
+    <!-- Header de la página -->
+    <div class="bg-cultura-violeta text-white py-8">
+        <div class="w-full px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <h1 class="text-4xl font-bold mb-2">Mapa de Agrupaciones</h1>
+                <p class="text-lg text-gray-200">Explora la diversidad de agrupaciones de Colombia a través de nuestro mapa
+                    interactivo</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="w-full px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Filtros y controles -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold text-cultura-violeta mb-4">Filtros de Búsqueda</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Región</label>
+                        <select [(ngModel)]="selectedRegion" (change)="onFilterChange()"
+                            class="w-full p-3 border border-gray-300 rounded-md focus:ring-cultura-violeta focus:border-cultura-violeta">
+                            <option value="">Todas las regiones</option>
+                            <option value="andina">Región Andina</option>
+                            <option value="caribe">Región Caribe</option>
+                            <option value="pacifica">Región Pacífica</option>
+                            <option value="orinoquia">Región Orinoquía</option>
+                            <option value="amazonia">Región Amazonía</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Género Musical</label>
+                        <select [(ngModel)]="selectedGenre" (change)="onFilterChange()"
+                            class="w-full p-3 border border-gray-300 rounded-md focus:ring-cultura-violeta focus:border-cultura-violeta">
+                            <option value="">Todos los géneros</option>
+                            <option value="cumbia">Cumbia</option>
+                            <option value="vallenato">Vallenato</option>
+                            <option value="bambuco">Bambuco</option>
+                            <option value="currulao">Currulao</option>
+                            <option value="joropo">Joropo</option>
+                            <option value="champeta">Champeta</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Expresión</label>
+                        <select [(ngModel)]="selectedExpression" (change)="onFilterChange()"
+                            class="w-full p-3 border border-gray-300 rounded-md focus:ring-cultura-violeta focus:border-cultura-violeta">
+                            <option value="">Todas las expresiones</option>
+                            <option value="tradicional">Música Tradicional</option>
+                            <option value="contemporanea">Música Contemporánea</option>
+                            <option value="fusion">Fusión</option>
+                            <option value="urbana">Música Urbana</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <button (click)="applyFilters()"
+                        class="bg-cultura-violeta text-white px-4 py-2 rounded-md hover:bg-cultura-violeta-darker transition-colors">
+                        Aplicar Filtros
+                    </button>
+                    <button (click)="clearFilters()"
+                        class="border border-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-50 transition-colors">
+                        Limpiar Filtros
+                    </button>
+                    <button (click)="showPointSelector()"
+                        class="bg-cultura-amarillo text-cultura-violeta px-4 py-2 rounded-md hover:bg-yellow-300 transition-colors">
+                        Seleccionar Punto
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mapa interactivo -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+                <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-cultura-violeta">Mapa Interactivo de Colombia</h2>
+                    <p class="text-gray-600 mt-1">Explora los diferentes puntos de agrupaciones del país</p>
+                </div>
+
+                <!-- Contenedor del mapa -->
+                <div id="googleMap"
+                    style="width: 100%; height: 500px; background-color: #f0f0f0; border: 1px solid #ccc;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
