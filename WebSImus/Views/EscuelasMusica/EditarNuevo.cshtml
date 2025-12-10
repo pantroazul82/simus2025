@@ -1,0 +1,304 @@
+﻿@model WebSImus.Models.EscuelasNuevo
+@{
+    ViewBag.Title = @ViewBag.NombreEscuela;
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("EditarNuevo", "EscuelasMusica", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Escuelas", "Consulta", "EscuelasMusica")</li>
+        <li>@Html.ActionLink("Exportar", "Exportar", "EscuelasMusica", new { Id = Model.EscuelaId }, null)</li>
+        <li>@Html.ActionLink("Encuestas", "Formulario", "EscuelasMusica", new { Id = Model.EscuelaId }, null)</li>
+        <li>@Html.ActionLink("Certificado", "CertificadoPdf", "Certificacion", new { Id = Model.EscuelaId, Modulo = "Escuelas" }, null)</li>
+    </ul>
+    <!-- START DEFAULT WIZARD -->
+    <div class="panel panel-colorful">
+        <div class="row push-down-20">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.ActionLink(" Certificado", "CertificadoPdf", "Certificacion", new { Id = Model.EscuelaId, Modulo = "Escuelas" }, new { @class = "btn btn-warning glyphicon glyphicon-link" })
+
+                    @Html.ActionLink(" Histórico", "Index", "Certificacion", new { Id = Model.EscuelaId, Modulo = "Escuelas" }, new { @class = "btn btn-success glyphicon glyphicon-user" })
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" id="panelEditar">
+            <h3>@ViewBag.NuevoTitulo</h3>
+         
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.Partial("_PasoAPaso")
+                   
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.HiddenFor(model => model.EscuelaId)
+                    @Html.Partial("_EditarDatosBasicos", Model.Escuelas)
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.Partial("_RedesSociales", Model.RedesSociales)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.Partial("_DocumentoEscuelas", Model.Documentos)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="message-box message-box-success animated fadeIn" id="message-box-success">
+        <div class="mb-container">
+            <div class="mb-middle">
+                <div class="mb-title"><span class="fa fa-check"></span> Success</div>
+                <div class="mb-content">
+                    <p>La información se actualizó con éxito</p>
+                </div>
+                <div class="mb-footer">
+                    <button class="btn btn-default btn-lg pull-right mb-control-close">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- END WIZARD WITH VALIDATION -->
+
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+<script src="~/Scripts/escuelasvalidate.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        HabilitarDeshabilitarPasos();
+        $("#step1").addClass("active");
+    });
+
+    $(function () {
+        $("#btnBuscarMapa").click(function () {
+            dialogMap.show({
+                coord_separator: ".",
+                initial: { // Inidica llos parametros de entrada del componente en funcion de selector de JQuery
+                    'address': "#Direccion",
+                    'municipality': "#MunicipioSelector",
+                    'department': "#DepartamentoSelector",
+                    'latitude': "#Latitud",
+                    'longitude': "#Longitud"
+                },
+                target: { // Nodos(Inputs) objetivo en el cual se va a volcar la informacion
+                    "Latitud": "marker.getPosition().lat()",
+                    "Longitud": "marker.getPosition().lng()",
+                    "Direccion": "marker.info.address",
+                },
+                onComplete: function () { },
+                onAccept: function (self, marker) {
+
+                }
+            });
+        });
+
+      
+     
+
+    });
+    $('#AnoValue').attr('data-live-search', true)
+    var url = $('#UrlYoutube').val();
+    $(function () {
+        $('#DepartamentoSelector').change(function () {
+            var selectedDep = $(this).val();
+            var city = $('#MunicipioSelector');
+
+            if (selectedDep != null && selectedDep != '') {
+
+                $.getJSON('@Url.Action("GetMunicipio")', { departamento: selectedDep }, function (data) {
+                    var items = '';
+                    items = '<option>Seleccione un valor </option>';
+                    $.each(data, function (i, municipio) {
+                        items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                    });
+                    city.empty();
+                    city.html(items);
+                    city.click();
+
+                });
+
+            }
+
+        })
+    });
+
+    $('#DocumentoEscuela').fileinput({
+        showUpload: false,
+        language: 'es',
+        overwriteInitial: false,
+        maxFileSize: 3080,
+        allowedFileExtensions: ['pdf', 'xls', 'doc', 'xlsx', 'docx', 'csv'],
+    });
+    $('#imagenPerfil').fileinput({
+        showUpload: false,
+        language: 'es',
+        overwriteInitial: true,
+        maxFileSize: 1024,
+        allowedFileExtensions: ['jpg', 'png'],
+    });
+    $('#mySubmit').click(function () {
+
+
+        var varurl = $("#UrlYoutube").val();
+        var varClasificacion = $('#ClasificacionVideos').text();
+        var varDescripcion = $('#DescripcionVideo').val();
+
+
+        if (varurl == '') {
+            alert("La url del vídeo de youtube es obligatoria");
+            return;
+        }
+
+        if (varClasificacion == '0') {
+            alert("La clasificación del vídeo es obligatoria");
+            return;
+        }
+
+
+        var url = '@Url.Action("AgregarVideo", "EscuelasMusica")';
+        var varEscuelaId = '@Model.Escuelas.EscuelaId';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                id: varEscuelaId, clasificacion: $('#ClasificacionVideos').val(), urlVideo: $('#UrlYoutube').val(), descripcion: $('#DescripcionVideo').val()
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    Limpiarcampos(varEscuelaId, 0, 0);
+                }
+            },
+
+        });
+    });
+
+    $('#btnDocumentoEscuela').click(function () {
+
+        var varcategoria = $("#Categoria").val();
+        var varEscuelaId = '@Model.Escuelas.EscuelaId';
+        var fileUpload = $("#DocumentoEscuela").get(0);
+        var files = fileUpload.files;
+
+        // Create FormData object
+        var fileData = new FormData();
+
+        // Looping over all files and add it to FormData object
+        for (var i = 0; i < files.length; i++) {
+            fileData.append(files[i].name, files[i]);
+        }
+
+        // Adding one more key to FormData object
+        fileData.append('username', 'Manas');
+
+
+        if (varcategoria == '') {
+            alert("La categoria es obligatoria");
+            return;
+        }
+
+        var url = '@Url.Action("AgregarDocumento", "EscuelasMusica")';
+        var varEscuelaId = '@Model.Escuelas.EscuelaId';
+        $.ajax({
+            url: '/EscuelasMusica/AgregarDocumento?id=' + varEscuelaId + '&cat=' + varcategoria,
+            type: 'POST',
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            data: fileData,
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    ActualizarListadoDocumentos(varEscuelaId, 0);
+
+
+                }
+            },
+
+        });
+
+
+    });
+
+    $("li").click(function () {
+
+        switch ($(this).data("step")) {
+            case 1:
+                window.location = "@Url.Action("EditarNuevo", "EscuelasMusica", new { id = Model.EscuelaId,  wizard = 1 })";
+                break;
+            case 2:
+                window.location = "@Url.Action("Beneficiarios", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 3:
+                window.location = "@Url.Action("Organizacion", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 4:
+                window.location = "@Url.Action("Formacion", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 5:
+                window.location = "@Url.Action("Infraestructura", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 6:
+                window.location = "@Url.Action("Produccion", "EscuelasMusica",  new { id = Model.EscuelaId })";
+                break;
+            case 61:
+                window.location = "@Url.Action("Produccion", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 7:
+                window.location = "@Url.Action("Asesoria", "FichaAsesoria", new { id = Model.EscuelaId })";
+                break;
+
+        }
+    });
+</script>
+
+<script type="text/javascript">
+
+    var paletaInformacionDocentes = ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c"];
+
+    
+
+ 
+
+     
+
+   
+
+ 
+
+ 
+   
+
+  
+
+
+</script>
+
+}

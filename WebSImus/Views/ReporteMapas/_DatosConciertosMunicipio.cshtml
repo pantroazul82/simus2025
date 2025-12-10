@@ -1,0 +1,105 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.GEO.ConciertosDTO>
+
+<div class="modal animated fadeIn" id="modal_datosconciertos" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+
+                    <div class="col-md-8 col-sm-6 col-xs-6 titulo_municipio"> @ViewBag.NombreMunicipio - @ViewBag.NombreDepto<img style="padding-top:10px;" src="../img/iconos/conciertos_window.png"></div>
+                    <div class="col-md-4 col-sm-6 col-xs-6 titulo_infowindow"> Conciertos</div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 tabla_blanca2">
+                        <img class="img-responsive" style="padding-top:10px;" src="../img/logo_celebra_correo.png">
+                    </div>
+                </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12 tabla_blanca2">
+
+                                <div class="col-md-4 col-sm-4 col-xs-4 primera_tabla">
+                                    <div class="fa-entidades fa-3x col-md-2 col-sm-2 col-xs-2"></div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-4 col-xs-4 primera_tabla">
+                                    <div class="fa-mapas  fa-3x col-md-2  col-sm-2 col-xs-2"></div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-4 col-xs-4 primera_tabla">
+                                    <div class="fa-reloj fa-3x col-md-2  col-sm-2 col-xs-2"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            @if (Model != null)
+                            {
+                                var i = "Gris";
+                                foreach (SM.LibreriaComun.DTO.GEO.ConciertosDTO item in Model)
+                                {
+                                    <div class="row">
+                                        @if (i == "Gris")
+                                        {
+                                            <div class="col-md-12 tabla_gris">
+
+                                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                                    @item.EntidadOrganizadora
+                                                </div>
+                                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                                    @item.Lugar
+                                                </div>
+
+                                                <div class="col-md-4 col-sm-4 col-xs-4">
+
+                                                    @item.hora
+                                                </div>
+
+                                            </div>
+                                            i = "Blanco";
+                                        }
+                                        else
+                                        {
+                                            i = "Gris";
+                                            <div class="col-md-12 tabla_blanca">
+
+                                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                                    @item.EntidadOrganizadora
+                                                </div>
+                                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                                    @item.Lugar
+                                                </div>
+
+                                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                                    @item.hora
+                                                </div>
+
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <div class="modal-footer">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <a href="@ViewBag.ver_Mas" class="btn vermas" target=" _blank">Ver más </a>
+
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <button type="button" class="btn vermas" data-dismiss="modal">Cerrar</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+</div>

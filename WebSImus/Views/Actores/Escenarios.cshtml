@@ -1,0 +1,184 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<WebSImus.Models.ActoresHomeModels>
+@{
+    ViewBag.Title = "Escuelas";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2 col-sm-6 col-xs-6"><img style="padding-top:10px;" src="~/img/iconos/escenario.png"></div>
+        <div class="titulo_seccion col-md-10 col-sm-6 col-xs-6">Escenarios</div>
+    </div>
+</div>
+
+<br />
+<div class="row">
+    <div class=" col-md-1 titulo_filtros" style=" border-bottom:1px dashed #444;">Filtros</div>
+    <div class=" col-md-11 titulo_filtros">
+
+
+        <div class=" col-md-3 btn-group">
+            @Html.DropDownList("CodigoDepartamento", (SelectList)ViewBag.departamentos, "Departamento", new { @class = "btn btn-default dropdown-toggle btn-select" })
+        </div>
+
+        <div class="col-md-3 btn-group">
+            @Html.DropDownList("CodigoMunicipio", (SelectList)ViewBag.municipios, "Municipio", new { @class = "btn btn-default dropdown-toggle btn-select" })
+        </div>
+
+        <div class="col-md-3 btn-group">
+            @Html.DropDownList("TipoAgrupacion", (SelectList)ViewBag.tipo, "Clasificación", new { @class = "btn btn-default dropdown-toggle btn-select" })
+        </div>
+        <div class="col-md-2 btn-group">
+            <button type="button" id="btnSearch" class="btn btn-primary">Volver a cargar</button>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="space1">  </div>
+    <div class="space1">  </div>
+    <div id="formacionTabla">
+        @Html.Partial("_PartialResultadoEscenarios", Model)
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(function () {
+            $('#CodigoDepartamento').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#CodigoMunicipio');
+
+                if (selectedDep != null && selectedDep != '') {
+                    $.getJSON('@Url.Action("GetMunicipio")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un municipio </option>';
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+                        CargarDepartamento(selectedDep);
+                    });
+
+                }
+
+            })
+
+
+            $('#CodigoMunicipio').change(function () {
+                var selectedDep = $(this).val();
+                if (selectedDep != null && selectedDep != '') {
+                    CargarMunicipio(selectedDep);
+                }
+            })
+
+            $('#TipoAgrupacion').change(function () {
+                var selectedDep = $(this).val();
+                if (selectedDep != null && selectedDep != '') {
+                    CargarTipo(selectedDep);
+                }
+            })
+        });
+
+        function CargarDepartamento(vardepartamento) {
+            var varTipo = "";
+            $.ajax({
+
+                url: "/Actores/EscenarioDepartamento",
+                type: "GET",
+                data: { Id: vardepartamento, Tipo: varTipo }
+            })
+           .done(function (partialViewResult) {
+               $("#formacionTabla").html(partialViewResult);
+
+           });
+        }
+
+        function CargarMunicipio(varMunicipio) {
+            var varTipo = "";
+            $.ajax({
+
+                url: "/Actores/EscenarioMunicipio",
+                type: "GET",
+                data: { Id: varMunicipio, Tipo: varTipo }
+            })
+           .done(function (partialViewResult) {
+               $("#formacionTabla").html(partialViewResult);
+
+           });
+
+
+
+        }
+
+        function CargarTipo(varTipo) {
+            var varMunicipio = $('#CodigoMunicipio').val();
+            var vardepto = $('#CodigoDepartamento').val();
+            $.ajax({
+
+                url: "/Actores/EscenarioTipo",
+                type: "GET",
+                data: { Id: varTipo, codDepto: vardepto, codMunicipio: varMunicipio }
+            })
+           .done(function (partialViewResult) {
+               $("#formacionTabla").html(partialViewResult);
+
+           });
+        }
+
+        $('#btnSearch').click(function () {
+            $("#CodigoDepartamento").val("").change();
+            $("#TipoAgrupacion").val("").change();
+            ActualizarMunicipios();
+            $.ajax({
+
+                url: "/Actores/CargarTodoEscenarios",
+                type: "GET",
+                data: {}
+            })
+           .done(function (partialViewResult) {
+               $("#formacionTabla").html(partialViewResult);
+
+           });
+        });
+
+        function ActualizarMunicipios() {
+            var city = $('#CodigoMunicipio')
+            var items = '';
+            items = '<option>Municipios </option>';
+            city.empty();
+            city.html(items);
+            city.click();
+
+        }
+    </script>
+
+    <script type="text/javascript">
+        //$(function () {
+        $('#myPager').on('click', 'a', function () {
+            $.ajax({
+
+                url: this.href,
+                type: "GET",
+                cache: false,
+            })
+         .done(function (partialViewResult) {
+             //alert("entro aqui");
+             $("#formacionTabla").html(partialViewResult);
+
+         });
+            return false;
+        });
+        //});
+
+    </script>
+}
+

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> SIMUS - @ViewBag.Title </title>
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="page-container-boxed1">
+    <div class="login-container">
+
+        <div class="login-box animated fadeInDown">
+            <div class="page-content">
+                <div class="page-content-wrap">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @{ Html.RenderPartial("_Alertas"); }
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+
+            </div>
+            <div class="login-footer">
+                <div class="pull-left">
+                    <a href="~/Home/Index">  SIMUS </a>
+                </div>
+                <div class="pull-right">
+                    @*<a href="~/Estatico/Acercade">Acerca de</a> |
+                    <a href="~/Estatico/Politicas">Políticas de privacidad</a> |
+                    <a href="~/Estatico/Contactenos">Contáctenos</a>*@
+                </div>
+            </div>
+        </div>
+
+    </div>
+    @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/Scripts/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

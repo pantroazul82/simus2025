@@ -1,0 +1,43 @@
+﻿@model SM.LibreriaComun.DTO.EntidadesOperadoras.ConvenioDTO
+
+@{
+    ViewBag.Title = "Consulta Convenio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Convenios", "Index", "Convenio")</li>
+    </ul>
+    <div class="col-md-12">
+
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.ActionLink(" Exportar", "ExportTo", "Convenio", null, new { @class = "btn btn-warning glyphicon glyphicon-export" })
+                    @Html.ActionLink(" Nuevo", "Crear", "Convenio", null, new { @class = "btn btn-success glyphicon glyphicon-plus-sign" })
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+      
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div id="Tabla">
+                        @Html.Action("GridViewPartial")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

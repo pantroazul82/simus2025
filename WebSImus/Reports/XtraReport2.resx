@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="sqlDataSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="customSqlQuery1.Sql" xml:space="preserve">
+    <value>SELECT distinct BAS_ZONAS_GEOGRAFICAS.ZON_ID as CODIGOMUNICIPIO,
+		   BAS_ZONAS_GEOGRAFICAS.ZON_PADRE_ID AS CODIGODEPARTAMENTO,
+		   ART_ENTIDADES_ARTES.ENT_ID,
+		   dbo.FN_DEPARTAMENTOS(BAS_ZONAS_GEOGRAFICAS.ZON_ID) AS DEPARTAMENTO, 
+		   BAS_ZONAS_GEOGRAFICAS.ZON_NOMBRE AS MUNICIPIO,
+		   ART_ENTIDADES_ARTES.ENT_NOMBRE as Nombre,
+		  CASE ART_ENTIDADES_ARTES.ENT_ESTADO WHEN 'E' THEN 'PUBLICADO' WHEN 'N' THEN 'NO PUBLICADO' ELSE '' END AS ESTADO, 
+	      ISNULL (ART_MUSICA_CATEGORIA_ESCUELA.DESCRIPCION_CATEGORIA, '') AS CATEGORÍA, 
+          ISNULL (ART_MUSICA_ENTIDAD_CATEGORIZACION.PORCENTAJE_TOTAL, 0) AS PORCENTAJE, 
+          ART_ENTIDADES_ARTES.ENT_FECHA_ACTUALIZACION AS FECHA_ACTUALIZACIÓN,
+		   (select ART_TIPOS_ESCUELAS.Nombre from ART_TIPOS_ESCUELAS where ART_TIPOS_ESCUELAS.Id = ART_MUSICA_ENTIDAD_IDENTIFICACION.ENT_TIPO_ESCUELA  ) AS TipoEscuela
+	FROM ART_ENTIDADES_ARTES
+	LEFT OUTER JOIN ART_MUSICA_ENTIDAD_CATEGORIZACION ON ART_ENTIDADES_ARTES.ENT_ID = ART_MUSICA_ENTIDAD_CATEGORIZACION.ENT_ID
+	LEFT OUTER JOIN ART_MUSICA_CATEGORIA_ESCUELA ON ART_MUSICA_ENTIDAD_CATEGORIZACION.ID_CATEGORIA = ART_MUSICA_CATEGORIA_ESCUELA.ID_CATEGORIA
+	INNER JOIN ART_ENTIDAD_UBICACION ON  ART_ENTIDADES_ARTES.ENT_ID = ART_ENTIDAD_UBICACION.ENT_ID		
+	INNER JOIN BAS_ZONAS_GEOGRAFICAS ON BAS_ZONAS_GEOGRAFICAS.ZON_ID = ART_ENTIDAD_UBICACION.ZON_ID 
+   	INNER JOIN ART_MUSICA_ENTIDAD_IDENTIFICACION ON  ART_ENTIDADES_ARTES.ENT_ID = ART_MUSICA_ENTIDAD_IDENTIFICACION.ENT_ID	
+	INNER JOIN ART_ME_VIDEOS_ESCUELAS ON  ART_ENTIDADES_ARTES.ENT_ID = ART_ME_VIDEOS_ESCUELAS.ENT_ID		  	                   	
+WHERE  ART_ENTIDADES_ARTES.ENT_TIPO = 'E'
+order by ART_ENTIDADES_ARTES.ENT_NOMBRE</value>
+  </data>
+  <data name="customSqlQuery2.Sql" xml:space="preserve">
+    <value>select ART_ME_VIDEOS_ESCUELAS.ENT_ID,
+  CASE ART_ME_VIDEOS_ESCUELAS.VID_CLASIFICACION WHEN '1' THEN 'Proceso Formativo' 
+  WHEN '2' THEN 'Encuentros' 
+  WHEN '3' THEN 'Festivales' 
+  WHEN '4' THEN 'Presentaciones públicas' 
+  WHEN '5' THEN 'Ensayos' 
+  WHEN '7' THEN 'Infraestructura' 
+  WHEN '8' THEN 'Agrupaciones' 
+  WHEN '9' THEN 'Recolección de fondos' 
+  WHEN '10' THEN 'Intercambios musicales' 
+  WHEN '11' THEN 'Jornadas de esparcimiento' 
+  WHEN '12' THEN 'Vídeo institucional' 
+  ELSE '' END AS CLASIFICACION,
+ART_ME_VIDEOS_ESCUELAS.VID_CLASIFICACION,
+ART_ME_VIDEOS_ESCUELAS.VID_DESCRIPCION,
+ART_ME_VIDEOS_ESCUELAS.VID_ID,
+ART_ME_VIDEOS_ESCUELAS.VID_FECHA_PUBLICACION,
+ART_ME_VIDEOS_ESCUELAS.VID_URL 
+from ART_ME_VIDEOS_ESCUELAS
+order by ART_ME_VIDEOS_ESCUELAS.VID_FECHA_PUBLICACION</value>
+  </data>
+  <data name="sqlDataSource1.ResultSchemaSerializable" xml:space="preserve">
+    <value>PERhdGFTZXQgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxWaWV3IE5hbWU9IkN1c3RvbVNxbFF1ZXJ5Ij48RmllbGQgTmFtZT0iQ09ESUdPTVVOSUNJUElPIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkNPRElHT0RFUEFSVEFNRU5UTyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJFTlRfSUQiIFR5cGU9IkRlY2ltYWwiIC8+PEZpZWxkIE5hbWU9IkRFUEFSVEFNRU5UTyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJNVU5JQ0lQSU8iIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iTm9tYnJlIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkVTVEFETyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJDQVRFR09Sw41BIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlBPUkNFTlRBSkUiIFR5cGU9IkRlY2ltYWwiIC8+PEZpZWxkIE5hbWU9IkZFQ0hBX0FDVFVBTElaQUNJw5NOIiBUeXBlPSJEYXRlVGltZSIgLz48RmllbGQgTmFtZT0iVGlwb0VzY3VlbGEiIFR5cGU9IlN0cmluZyIgLz48L1ZpZXc+PFZpZXcgTmFtZT0iQ3VzdG9tU3FsUXVlcnlfMSI+PEZpZWxkIE5hbWU9IkVOVF9JRCIgVHlwZT0iRGVjaW1hbCIgLz48RmllbGQgTmFtZT0iQ0xBU0lGSUNBQ0lPTiIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJWSURfQ0xBU0lGSUNBQ0lPTiIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJWSURfREVTQ1JJUENJT04iIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iVklEX0lEIiBUeXBlPSJEZWNpbWFsIiAvPjxGaWVsZCBOYW1lPSJWSURfRkVDSEFfUFVCTElDQUNJT04iIFR5cGU9IkRhdGVUaW1lIiAvPjxGaWVsZCBOYW1lPSJWSURfVVJMIiBUeXBlPSJTdHJpbmciIC8+PC9WaWV3PjxSZWxhdGlvbiBNYXN0ZXI9IkN1c3RvbVNxbFF1ZXJ5IiBEZXRhaWw9IkN1c3RvbVNxbFF1ZXJ5XzEiPjxLZXlDb2x1bW4gTWFzdGVyPSJFTlRfSUQiIERldGFpbD0iRU5UX0lEIiAvPjwvUmVsYXRpb24+PC9EYXRhU2V0Pg==</value>
+  </data>
+</root>

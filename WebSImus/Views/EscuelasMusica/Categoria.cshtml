@@ -1,0 +1,72 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.CategorizacionResumenDTO>
+@{
+    ViewBag.Title = ViewBag.Nombre;
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+    <li>@Html.ActionLink("Escuelas", "Consulta", "EscuelasMusica")</li>
+</ul>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="widget widget-success widget-padding-sm">
+            <div class="widget-item-left">
+                <input class="knob" data-width="100" data-height="100" data-min="0" data-max="100" data-displayinput=false data-bgcolor="#FFF" data-fgcolor="#33414e" value=@ViewBag.Suma data-readonly="true" data-thickness=".2" />
+            </div>
+            <div class="widget-data">
+                <div class="widget-big-int"><span class="num-count">@ViewBag.Suma </span>%</div>
+                <div class="widget-title">@ViewBag.Factor</div>
+                <div class="widget-subtitle">Factor de categorización</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row" id="nestable-categorizacion">
+    <div class="col-md-6">
+
+        <div class="dd" id="nestable">
+            <ol class="dd-list">
+                @foreach (var item in Model.Where(x => x.PadreId == 0))
+                {
+                    <li class="dd-item" data-id=@item.Id>
+                        <div class="dd-handle">@item.Descripcion  <strong>@item.ValorPorcentaje</strong></div>
+                        <div class="progress progress-small">
+                            @{if (item.Valor == 0)
+                            {
+                                item.Valor = 5;
+                            }
+                            }
+                            <div class=@item.Estilo role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: @item.barra%;">@item.Valor%</div>
+                        </div>
+
+                        <ol class="dd-list">
+                            @foreach (var child in Model.Where(m => m.PadreId == item.Id))
+                            {
+                                <li class="dd-item" data-id=@child.Id>
+                                    <div class="dd-handle">@child.Descripcion <strong>@child.ValorPorcentaje</strong></div>
+                                    <ol class="dd-list">
+                                        @foreach (var tercernivel in Model.Where(y => y.PadreId == child.Id))
+                                        {
+                                            <li class="dd-item" data-id=@tercernivel.Id>
+                                                <div class="dd-handle">@tercernivel.Descripcion <strong>@tercernivel.ValorPorcentaje</strong></div>
+                                            </li>
+                                        }
+                                    </ol>
+                                </li>
+                            }
+                        </ol>
+                    </li>
+                }
+            </ol>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script src="~/Scripts/plugins/knob/jquery.knob.js"></script>
+
+}

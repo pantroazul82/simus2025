@@ -1,0 +1,109 @@
+﻿@model WebSImus.Models.EstimuloModel
+
+@{
+    ViewBag.Title = "Nueva Convocatoria Estimulo";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Crear", "Estimulo", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Convocatoria de Estimulos", "Index", "Estimulo")</li>
+    </ul>
+
+    <div class="panel panel-primary form-horizontal">
+        @Html.ValidationSummary(true)
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-star"></span> Convocatorias Estímulos</h3>
+        </div>
+        <div class="panel-body" id="panelEditar">
+            @Html.ValidationSummary(true, "", new { @style = "color:red;" })
+            @Html.Partial("_DatosBasicos", Model)
+
+        </div>
+    </div>
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script type="text/javascript">
+   
+
+        $('#Documento').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: false,
+            maxFileSize: 2048,
+            allowedFileExtensions: ['pdf'],
+        });
+
+
+
+     
+        $('#FechaPublicacion').datepicker({
+            minDate: 0,
+            maxDate: "+60D",
+            numberOfMonths: 2,
+            format: 'yyyy-mm-dd',
+            onSelect: function (selected) {
+                $("#FechaCierre").datepicker("option", "minDate", selected)
+            }
+        });
+        $('#FechaApertura').datepicker({
+            minDate: 0,
+            maxDate: "+60D",
+            numberOfMonths: 2,
+            format: 'yyyy-mm-dd',
+            onSelect: function (selected) {
+                $("#FechaCierre").datepicker("option", "minDate", selected)
+            }
+        });
+
+        $('#FechaCierre').datepicker({
+
+            format: 'yyyy-mm-dd',
+            minDate: 0,
+            maxDate: "+60D",
+            numberOfMonths: 2,
+            onSelect: function (selected) {
+                $("#FechaApertura").datepicker("option", "maxDate", selected)
+            }
+        });
+
+         $(function () {
+             $("#FechaApertura").select(function () {
+                 var from = $("#FechaApertura").val();
+                 var to = $("#FechaCierre").val();
+
+                 alert("1222");
+                 if (Date.parse(from) > Date.parse(to)) {
+                     $("#FechaCierre").val('');
+                     alert("La fecha de cierre no puede ser menor a la de apertura");
+                 }
+
+             })
+         });
+
+        $(function () {
+            $('#FechaCierre').select(function () {
+                var from = $("#FechaApertura").val();
+                var to = $("#FechaCierre").val();
+                alert("1222");
+                if (Date.parse(from) > Date.parse(to)) {
+                    $("#FechaCierre").val('');
+                    alert("La fecha de cierre no puede ser menor a la de apertura");
+                }
+
+            })
+        });
+
+
+    </script>
+}

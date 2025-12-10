@@ -1,0 +1,72 @@
+﻿@model SM.LibreriaComun.DTO.EntidadesOperadoras.AutoEvaluacionDTO
+
+<div class="modal animated fadeIn" id="modal_datosAuto" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-md">
+            <div class="modal-header">
+                <div class=" fondo_caja_item row">
+                    @Html.HiddenFor(model => model.CronogramaId)
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.ParticipanteId)
+
+                    <div class="col-md-12 titulo_alumnos">
+                        <span><i class="fa fa-musical"></i>Auto-Evaluación</span>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>  @Html.DisplayFor(model => model.NombreCompleto)</h3>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+
+                            <thead>
+                                <tr>
+                                    <th>Preguntas</th>
+                                    <th>Respuesta</th>
+                                </tr>
+                            </thead>
+                            @if ((Model != null) && (Model.listadoPreguntas != null))
+                            {
+                                foreach (var item in Model.listadoPreguntas)
+                                {
+                                    <tbody>
+                                        <tr>
+                                            <td> @item.Pregunta  </td>
+
+                                            <td>
+                                                @Html.CheckBox(item.preguntaId.ToString(), item.boolrespondio, new { onclick = string.Format("AgregarPregunta('{0},{1} ')", Model.ParticipanteId, item.preguntaId) })
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                }
+                            }
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12 col-sm-6 col-xs-6">
+
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

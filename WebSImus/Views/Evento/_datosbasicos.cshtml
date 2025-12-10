@@ -1,0 +1,117 @@
+﻿@model WebSImus.Models.EventoModels
+<div class="panel panel-default">
+    <div class="row">
+        <div class="col-md-4 push-up-20">
+            <div class="form-group">
+                <div class="" id="user_image">
+                    <img src="@Url.Content(ViewBag.ImageData)" class="img-thumbnail" />
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="col-md-8 push-up-20">
+
+            @Html.HiddenFor(model => model.Tipo)
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-group">
+                <label class="col-md-3 control-label">* Departamento</label>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.CodigoDepartamento, (SelectList)ViewBag.listDepartamentos, "Seleccione un departamento", new { @class = "styled-select" })
+                    @Html.ValidationMessageFor(model => model.CodigoDepartamento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">* Municipio</label>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.CodigoMunicipio, (SelectList)ViewBag.listMunicipio, "Seleccione un municipio", new { @class = "styled-select" })
+                    @Html.ValidationMessageFor(model => model.CodigoMunicipio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">* Nombre</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control text", @maxlength = "255" })
+                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">* Entidad Organizadora</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.EntidadOrganizadora, new { @class = "form-control text", @maxlength = "500" })
+                    @Html.ValidationMessageFor(model => model.EntidadOrganizadora, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">* Teléfono de la entidad</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control text" })
+                    @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Correo electrónico de la entidad</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control text" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">* Lugar Evento</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.LugarEvento, new { @class = "form-control text", @maxlength = "500" })
+                    @Html.ValidationMessageFor(model => model.LugarEvento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">* Fecha Evento</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.FechaEvento, new { @class = "form-control datepicker" })
+                    @Html.ValidationMessageFor(model => model.FechaEvento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">* Hora Evento</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.HoraEvento, new { @class = "form-control icon-time" })
+                    @Html.ValidationMessageFor(model => model.HoraEvento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 push-up-20">
+        </div>
+        <div class="col-md-8 push-up-20">
+
+
+
+            <div class="form-group">
+                <label class="col-md-3 control-label"> Subir foto</label>
+
+                <div class="col-md-9">
+                    <p>Tipos de archivo permitidos: .jpg y .png de tamaño máximo 2.5 Mb</p>
+                    <input onclick="resizePanel()" id="imagenPerfil" name="imagenPerfil" type="file">
+                </div>
+
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Descripción</label>
+                <div class="col-md-9">
+                    @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control text", @rows = "5", @cols = "50" })
+                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

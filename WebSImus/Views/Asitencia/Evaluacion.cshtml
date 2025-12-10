@@ -1,0 +1,161 @@
+﻿@model SM.LibreriaComun.DTO.EntidadesOperadoras.CronogramaDTO
+@{
+    ViewBag.Title = " Evaluación";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Evaluacion", "Asitencia", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Cronograma", "Index", "Cronograma", new { Id = Model.ActividadId }, null)</li>
+        <li>@Html.ActionLink("Ver Actividad", "Editar", "Actividad", new { Id = Model.ActividadId }, null)</li>
+    </ul>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+
+                @Html.ActionLink("Cronograma ", "Editar", "Cronograma", new { Id = Model.Id }, new { @class = "btn btn-success glyphicon glyphicon-plus-sign" })
+              
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ActividadId)
+        @Html.HiddenFor(model => model.TipoActividadID)
+        <div class="panel-body" id="panelEditar">
+            <div class="row push-up-20">
+                <div class="col-md-12">
+                    <div id="DivTablaContenido" class="panel-body">
+                        @Html.Action("TablaEvaluacion", new { CronogramaId = Model.Id, EliminarId = 0 })
+                    </div>
+                    <div id="panelAgregarContenido" class="panel-body">
+                        @Html.Action("_AgregarEvaluacion", new { Id = 0, cronogramaId = Model.Id })
+                    </div>
+
+                    <div id="panelAgregarAuto" class="panel-body">
+                        @Html.Action("_AgregarAutoEva", new { Id = 0, cronogramaId = Model.Id })
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script type="text/javascript">
+        function ActualizarlistadoEvaluacion(varEliminar) {
+            var varCronogramaId = '@Model.Id';
+     
+            $.ajax({
+
+                url: "/Asitencia/TablaEvaluacion",
+                type: "GET",
+                data: { CronogramaId: varCronogramaId }
+            })
+            .done(function (partialViewResult) {
+
+                $("#DivTablaContenido").html(partialViewResult);
+
+            });
+        }
+
+        function CargarModalEvaluacion(varId) {
+            var varCronogramaId = '@Model.Id';
+
+            var url = '@Url.Action("_AgregarEvaluacion", "Asitencia")';
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: { id: varId, cronogramaId: varCronogramaId },
+                success: function (response) {
+
+                },
+                error: function (result) {
+                    alert('ERROR ' + result.status + ' ' + result.statusText);
+                }
+            })
+            .done(function (partialViewResult) {
+                $("#panelAgregarContenido").html(partialViewResult);
+                $('#modal_datosContenido').modal('show');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+
+            });
+
+        }
+
+        function CargarModalAuto(varId) {
+            var varCronogramaId = '@Model.Id';
+
+            var url = '@Url.Action("_AgregarAutoEva", "Asitencia")';
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: { id: varId, cronogramaId: varCronogramaId },
+                success: function (response) {
+
+                },
+                error: function (result) {
+                    alert('ERROR ' + result.status + ' ' + result.statusText);
+                }
+            })
+            .done(function (partialViewResult) {
+                $("#panelAgregarAuto").html(partialViewResult);
+                $('#modal_datosAuto').modal('show');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+
+            });
+
+        }
+
+// Evaluación
+        function EvaluacionAgregar(varID) {
+            alert(varID);
+            var varCronogramaId = '@Model.Id';
+            var registro1 = {
+               
+                Evaluacion: $("#Evaluacion").val(),
+                Descripcion: $("#Descripcion").val()
+
+            };
+
+            var url = '@Url.Action("AgregarEvaluacion", "Asitencia")';
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    Id: varCronogramaId, agenteId: varID, model: registro1
+                },
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        ActualizarlistadoEvaluacion(0);
+                    }
+                },
+
+            });
+        }
+      
+
+        
+    </script>
+}
+
+

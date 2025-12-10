@@ -1,0 +1,93 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<WebSImus.Models.ResultadoModels>
+
+<div id="formacion3">
+    <div class="row">
+
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            @if (Model != null)
+            {
+
+                if (Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class=" fondo_caja_item row">
+                            <div class="row">
+                                <div class="col-md-1 col-sm-1 col-xs-1 col-xs-push-1 fa-lg fa-play" style="color:#4c2c54; margin-top:18px;"></div>
+                                <div class="col-md-11 col-sm-11 col-xs-11 titulo_escenario" style="margin-top: 15px; right: -20px; ">
+                                    @item.Titulo
+                                    <div class=" col-md-6 divider"></div>
+                                    <div class="col-md-9 col-sm-9 col-xs-11 parrafo_ficha" style="text-align: left;">
+                                        <span class="ciudad_noticia">
+                                            <br><p> <span style="font-weight: bold; ">@item.Descripcion</p><br />
+                                        </span>
+                                    </div>
+                                    <div class="col-md-12" style="margin-top: -20px; padding-bottom: 20px;">
+                                        <div class="col-md-8 col-sm-6 col-xs-6"></div>
+                                        <div class="col-md-4 col-sm-6 col-xs-6"><a href="#" onclick="window.location.href='@Url.Action("DetalleAgrupacion", "Home")' + '?Id=' + @item.Id"><span class="" style="font-size: 16px;  ">Ver detalle</span></a> <span class="fa-angle-right icon_centrado"></span> </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+
+    </div>
+
+    <div class="space1">  </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-12 col-sm-9 col-xs-9">
+                <div id="myPagerAgrupacion" class="pagination">
+                    @Html.PagedListPager(
+        Model,
+        page => Url.Action(
+                                                               "_BusquedaAgrupaciones",
+            new
+            {
+                param = ViewBag.Palabra,
+
+                page = page
+            }
+        ),
+        new PagedListRenderOptions
+        {
+            LinkToFirstPageFormat = "<<",
+            LinkToPreviousPageFormat = "<",
+            LinkToNextPageFormat = ">",
+            LinkToLastPageFormat = ">>",
+        }
+    )
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $('#myPagerAgrupacion').on('click', 'a', function () {
+        $.ajax({
+
+            url: this.href,
+            type: "GET",
+            cache: false,
+        })
+     .done(function (partialViewResult) {
+
+         $("#formacion3").html(partialViewResult);
+
+     });
+        return false;
+    });
+
+</script>

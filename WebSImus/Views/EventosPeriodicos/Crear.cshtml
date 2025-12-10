@@ -1,0 +1,96 @@
+﻿@model SM.LibreriaComun.DTO.Circulacion.EventoPeriodicoNuevoDTO
+@{
+    ViewBag.Title = "Nuevo Evento Periódico";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Crear", "EventosPeriodicos", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+     <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Escenarios", "Index", "EventosPeriodicos")</li>
+    </ul>
+            <!-- END BREADCRUMB -->
+     <!-- START DEFAULT WIZARD -->
+    <div class="panel panel-colorful" id="panelEditar">
+        <div class="panel-body">
+
+            @*<blockquote class="blockquote-success">
+                    <p class="text-danger ">Los campos marcados con asterisco (*) son obligatorios</p>
+                </blockquote>*@
+            @Html.Partial("_AgregarDatosBasicos", Model)
+        </div>
+    </div>
+    <!-- END DEFAULT WIZARD -->
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+
+
+    <script type="text/javascript">
+
+       
+        $(function () {
+
+            $('#CodDepartamento').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#codMunicipio');
+                var varmunicipio = $('#codMunicipio');
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerMunicipio", "Agente")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un municipio </option>';
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+
+                    });
+
+                }
+
+            })
+
+
+        });
+
+        $(function () {
+            $('#Tipo').change(function () {
+                var selected = $(this).val();
+                var city = $('#ActorId');
+
+                if (selected != null && selected != '') {
+
+                    $.getJSON('@Url.Action("GetActor", "Convocatoria")', { tipo: selected }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un actor </option>';
+
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                }
+
+            })
+        });
+    </script>
+}
+
+

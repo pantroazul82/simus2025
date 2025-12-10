@@ -1,0 +1,187 @@
+﻿@model WebSImus.Models.AgentePadreModel
+@{
+    ViewBag.Title = "Agregar nuevo agente";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Crear", "Agente", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Agente", "Index", "Agente")</li>
+    </ul>
+    <!-- START DEFAULT WIZARD -->
+    <div class="panel panel-colorful">
+        <div class="panel-body">
+            <h3>@ViewBag.NuevoTitulo</h3>
+            <blockquote class="blockquote-success">
+                <p class="text-danger ">Los campos marcados con asterisco (*) son obligatorios</p>
+            </blockquote>
+            <div class="wizard" id="wizarAgentes">
+
+                <ul>
+                    <li>
+                        <a href="#step-1">
+                            <span class="stepNumber">1</span>
+                            <span class="stepDesc">Registrarse <br /><small>Datos básicos</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-2">
+                            <span class="stepNumber">2</span>
+                            <span class="stepDesc">Perfil <br /><small>Estudios/Experiencias/Ocupación </small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-3">
+                            <span class="stepNumber">3</span>
+                            <span class="stepDesc">Oferta<br /><small>Servicios/Productos</small></span>
+                        </a>
+                    </li>
+                   
+                </ul>
+                <div id="step-1">
+                    @Html.Partial("_AgregarDatosBasicos", Model.DatosBasicos)
+                </div>
+                <div id="step-2">
+                    <h4>Antes debe completar el registro para continuar con este paso</h4>
+                </div>
+                <div id="step-3">
+                    <h4>Antes debe completar el registro para continuar con este paso</h4>
+                </div>
+             
+            </div>
+        </div>
+    </div>
+    <!-- END DEFAULT WIZARD -->
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/smartwizard/jquery.smartWizard-2.0.js")"></script>
+
+<script src="~/Scripts/escuelasvalidate.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#encabezado').css("background-size", "cover");
+            $('#encabezado').css("background-position", "0 50%");
+            $('#CodigoPais').attr('data-live-search', true)
+
+
+            $(window).resize(function () { // Remover alto del panel cuando la ventana cambie de tamaño
+                $('.stepContainer').css("height", "");
+            });
+        });
+
+        $('#NumeroDocumento').keypress(function () {
+         
+            ValidaSoloNumeros();
+        });
+        $(document).ready(function () {
+            $("#SegundoApellido").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Agente/CargarLista",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+                        success: function (data) {
+                             response($.map(data, function (item) {
+                                //alert(item.text);
+                                return { label: item.text, value: item.text };
+                            }))
+
+                        }
+
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+
+                }
+
+            });
+        })
+
+
+        $('#imagenPerfil').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 1024,
+            allowedFileExtensions: ['jpg', 'png'],
+        });
+
+        var today = new Date("01/31/1910");
+        $('#FechaNacimiento').datepicker({
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+            endDate: 'd',
+            format: 'yyyy-mm-dd'
+        })
+
+        function resizePanel() {
+
+            var h = $("#panelEditar").height();
+            $('#panelEditar').css("height", h + (h * 0.2));
+        };
+
+        $(function () {
+            if ($('#FechaNacimiento').val() == "0001-01-01")
+            { $('#FechaNacimiento').val(''); }
+            $('#CodigoDepartamento').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#CodigoMunicipio');
+                var varmunicipio = $('#CodigoMunicipio');
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerMunicipio")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un municipio </option>';
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+
+                    });
+
+                }
+
+            })
+
+            // por país
+            $('#CodigoPais').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#CodigoDepartamento');
+
+                if (selectedDep != null && selectedDep != '') {
+                    var varmunicipio = $('#CodigoMunicipio');
+                    $.getJSON('@Url.Action("ObtenerDepartamento")', { codigopais: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un departamento </option>';
+                        $.each(data, function (i, departamento) {
+                            items += "<option value='" + departamento.value + "'>" + departamento.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+                        varmunicipio.empty();
+
+                    });
+
+                }
+
+            })
+        });
+    </script>
+}

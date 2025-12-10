@@ -1,0 +1,98 @@
+﻿@model  WebSImus.Models.UtilidadHomeModels
+<div class="modal animated fadeIn" id="modal_datosconciertos" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <div class="row">
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 img-responsive" style="padding-left: 0px">
+                        @if (!String.IsNullOrEmpty(Model.rutaFoto))
+                        {
+                            <img class="img-responsive" style="border-radius: 5px 0px 0px 0px;" src="@Model.rutaFoto" />
+                        }
+                        else
+                        {
+                            <img class="img-responsive" style="border-radius: 5px 0px 0px 0px;" src="@WebSImus.Models.Usuarios.CreateImageThumbnail(@Model.Imagen)" />
+                        }
+                        <div class="row titulo_eventoc">
+                            <div class="row">
+                                <div class="col-md-12">@Model.Titulo</div>
+                                <div class="col-md-12"><span style="color:#ffbd04">@Model.NombreActor</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-8 col-sm-12 col-xs-12">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span style="color:#4c2c54" class="titulo_ficha_item">@Model.Clasificacion</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @if (Model.documentoArchivo != null && Model.documentoArchivo.Count > 0)
+                            {
+
+                                foreach (var registro in Model.documentoArchivo)
+                                {
+
+                                    <span class="txt_link_morado">
+                                        @Html.ActionLink("Ver documento", "Descargar", "Documento", new { Id = registro.DocumentoId }, new { title = string.Format("Descargar archivo descriptivo del evento") })
+                                    </span>
+                                }
+
+                            }
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 titulo_escuela scroll-area" style="width:100%; height:150px;">
+
+                                <div class="col-md-12 texto_modal_calendar ">@Model.Descripcion </div>
+                            </div>
+                        </div>
+
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-12 titulo_agendamusical">
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="col-md-2 fa-reloj fa-2x">
+                                    </div>
+                                    <div class="col-md-10 ">@Model.FechaInicio<p><span style="color:#4C2C54;">@Model.FechaFin</span></div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="col-md-2 fa-pencil-1 fa-2x">
+                                    </div>
+                                    <div class="col-md-10">
+                                        @Model.Direccion<p><span style="color:#4C2C54">@Model.Ubicacion</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 titulo_agendamusical">
+                                <div class="col-md-2 fa-pencil-1 fa-2x">
+                                </div>
+                                <div class="col-md-10">
+                                    @Model.Email<p><span style="color:#4C2C54">@Model.Telefono</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12 col-sm-6 col-xs-6">
+                            <button type="button" class="btn vermas" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

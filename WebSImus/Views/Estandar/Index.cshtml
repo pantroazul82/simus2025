@@ -1,0 +1,161 @@
+﻿@{
+    ViewBag.Title = "Página en blanco";
+    Layout = "~/Views/Shared/_LayoutDiseño.cshtml";
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+    </script>
+
+}
+
+
+<!-- START PRIMARY PANEL -->
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Dropdownlist: en cascada sencillo</h3>
+    </div>
+    <div class="panel-body">
+        <!-- INICIO Grupo de elemtos del formulario (etiqueta + control)-->
+        <div class="form-group form-horizontal">
+            <label class="col-sm-3 control-label">Etiqueta para <i>Dropdownlist</i></label>
+            <div class="col-md-9">
+                <select class="form-control select">
+                    <option>Seleccionar...</option>
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                    <option>Option 4</option>
+                    <option>Option 5</option>
+                </select>
+            </div>
+        </div>
+        <!-- FIN Grupo de elemtos del formulario (etiqueta + control)-->
+    </div>
+</div>
+<!-- END PRIMARY PANEL -->
+<!-- START MESSAGE BOX -->
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Mensajes de notificación</h3>
+    </div>
+    <div class="panel-body">
+        <p>Los mensajes de notificación son bloques de código encabezados de la siguiente forma: </p>
+
+        <pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;message-box animated fadeIn&quot;</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;message-box-default&quot;</span><span style="color: #007700">&gt;</span></pre>
+        <p>&nbsp;</p>
+
+
+        <div class="form-group">
+            <button type="button" class="btn btn-default mb-control" data-box="#message-box-default">Default</button>
+        </div>
+        <h4>Estados</h4>
+        <p>El evento se dispara al <i>click</i> en el botón y puede llamar colores de cuadro emergente según el tipo de mensaje</p>
+        <div class="form-group">
+            <button type="button" class="btn btn-success mb-control" data-box="#message-box-success">Success</button>
+            <button type="button" class="btn btn-info mb-control" data-box="#message-box-info">Info</button>
+            <button type="button" class="btn btn-warning mb-control" data-box="#message-box-warning">Warning</button>
+            <button type="button" class="btn btn-danger mb-control" data-box="#message-box-danger">Danger</button>
+        </div>
+    </div>
+</div>
+<!-- END MESSAGE BOX -->
+<!-- Message Boxes -->
+<!-- default -->
+<div class="message-box animated fadeIn" id="message-box-default">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-globe"></span> Some <strong>Title</strong></div>
+            <div class="mb-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus sed mauris mollis pellentesque nec a ligula. Quisque ultricies eleifend lacinia. Nunc luctus quam pretium massa semper tincidunt. Praesent vel mollis eros. Fusce erat arcu, feugiat ac dignissim ac, aliquam sed urna. Maecenas scelerisque molestie justo, ut tempor nunc.</p>
+            </div>
+            <div class="mb-footer">
+                <button class="btn btn-success mb-control-close"><i class="fa fa-check"></i> Si</button>
+                <button class="btn btn-danger mb-control-close"><i class="fa fa-times"></i> No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end default -->
+<!-- success -->
+<div class="message-box message-box-success animated fadeIn" id="message-box-success">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-check"></span> Success</div>
+            <div class="mb-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus sed mauris mollis pellentesque nec a ligula. Quisque ultricies eleifend lacinia. Nunc luctus quam pretium massa semper tincidunt. Praesent vel mollis eros. Fusce erat arcu, feugiat ac dignissim ac, aliquam sed urna. Maecenas scelerisque molestie justo, ut tempor nunc.</p>
+            </div>
+            <div class="mb-footer">
+                <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end success -->
+<!-- warning -->
+<div class="message-box message-box-warning animated fadeIn" id="message-box-warning">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-warning"></span> Warning</div>
+            <div class="mb-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus sed mauris mollis pellentesque nec a ligula. Quisque ultricies eleifend lacinia. Nunc luctus quam pretium massa semper tincidunt. Praesent vel mollis eros. Fusce erat arcu, feugiat ac dignissim ac, aliquam sed urna. Maecenas scelerisque molestie justo, ut tempor nunc.</p>
+            </div>
+            <div class="mb-footer">
+                <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end danger -->
+<!-- info -->
+<div class="message-box message-box-info animated fadeIn" id="message-box-info">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-info"></span> Information</div>
+            <div class="mb-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus sed mauris mollis pellentesque nec a ligula. Quisque ultricies eleifend lacinia. Nunc luctus quam pretium massa semper tincidunt. Praesent vel mollis eros. Fusce erat arcu, feugiat ac dignissim ac, aliquam sed urna. Maecenas scelerisque molestie justo, ut tempor nunc.</p>
+            </div>
+            <div class="mb-footer">
+                <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end info -->
+<!-- danger -->
+<div class="message-box message-box-danger animated fadeIn" id="message-box-danger">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-times"></span> Danger</div>
+            <div class="mb-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus sed mauris mollis pellentesque nec a ligula. Quisque ultricies eleifend lacinia. Nunc luctus quam pretium massa semper tincidunt. Praesent vel mollis eros. Fusce erat arcu, feugiat ac dignissim ac, aliquam sed urna. Maecenas scelerisque molestie justo, ut tempor nunc.</p>
+            </div>
+            <div class="mb-footer">
+                <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end danger -->
+<!-- END Message Boxes -->
+<!-- MESSAGE BOX-->
+<div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
+            <div class="mb-content">
+                <p>Are you sure you want to log out?</p>
+                <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
+            </div>
+            <div class="mb-footer">
+                <div class="pull-right">
+                    <a href="pages-login.html" class="btn btn-success btn-lg">Yes</a>
+                    <button class="btn btn-default btn-lg mb-control-close">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MESSAGE BOX-->

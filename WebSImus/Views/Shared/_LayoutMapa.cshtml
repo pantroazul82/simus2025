@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="keywords" content="SIMUS, Sistema de Información de la Música">
+    <meta name="description" content="Simus · Público."> <!-- META SECCION -->
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Simus - Público </title>
+    <link rel="icon" href="~/img/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    @Styles.Render("~/Content/publico.css")
+
+
+
+    @*<link rel="stylesheet" type="text/css" href="https://mincultura-dot-cdn-components.appspot.com/libs/viewer/v1.2/styles/component_maps.min.css" />*@
+    <link rel="stylesheet" type="text/css" href="https://mincultura-dot-cdn-components.appspot.com/libs/viewer/v1.3/styles/component_maps.min.css" />
+
+
+</head>
+        <body>
+            <!-- START PAGE CONTAINER -->
+            <div class="page-container">
+                <!-- START PAGE SIDEBAR -->
+                <div class="page-header">
+                    <!-- page header holder -->
+                    <div class="page-header-holder">
+
+                        <!-- page logo -->
+
+
+
+                        <!-- ./page logo -->
+                        <!-- search -->
+                        <!-- #section:basics/content.searchbox -->
+                        <!-- /.nav-search -->
+                        <!-- ./search -->
+                        <!-- nav mobile bars -->
+
+                        <!-- ./nav mobile bars -->
+
+
+                    </div>
+                    <!-- ./page header holder -->
+
+                </div>
+
+                <!-- END PAGE SIDEBAR -->
+                <!-- PAGE CONTENT -->
+                <div class="page-content">
+
+                    <!-- PAGE CONTENT WRAPPER -->
+                    <div class="page-content-wrap bg-light">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @{ Html.RenderPartial("_Alertas"); }
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <!-- END PAGE CONTENT -->
+            </div>
+            <!-- END PAGE CONTAINER -->
+            <!-- START SCRIPTS -->
+            <!-- START PLUGINS-->
+
+            <!-- START PLUGINS-->
+            @Scripts.Render("~/Scripts/jquery")
+            @Scripts.Render("~/Scripts/bootstrap")
+
+            @RenderSection("scripts", required: false)
+            <!-- END PLUGINS -->
+            <!-- START TEMPLATE-->
+
+
+
+            <script src="@Url.Content("~/Scripts/toDo/actions_front-end.js")"></script>
+            <script src="@Url.Content("~/Scripts/ServinfComponents/Libs/Namespace.js")"></script>
+            <script src="@Url.Content("~/Scripts/plugins/appear/jquery.appear.js")"></script>
+
+
+            @*<script src="https://mincultura-dot-cdn-components.appspot.com/libs/viewer/v1.2/scripts/component_maps.min.js"></script>*@
+            <script src="https://mincultura-dot-cdn-components.appspot.com/libs/viewer/v1.3/scripts/component_maps.min.js"></script>
+    <!-- END SCRIPTS -->
+    </body>
+</html>

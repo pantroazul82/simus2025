@@ -1,0 +1,45 @@
+﻿
+@model WebSImus.Models.CertificacionModel
+
+@{
+    ViewBag.Title = "Histórico de notificaciones y certificaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+      
+    </ul>
+    <div class="col-md-12">
+
+
+      
+        <br />
+        <br />
+    
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div id="Tabla">
+                        @Html.Action("GridViewPartial", new { Id = Model.Id, Modulo = Model.modulo })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+
+    <script src="@Url.Content("~/Scripts/dx.webappjs.js")"></script>
+
+ 
+
+}

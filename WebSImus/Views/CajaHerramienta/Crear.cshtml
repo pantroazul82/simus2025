@@ -1,0 +1,65 @@
+﻿@model WebSImus.Models.HerramientaModel
+@{
+    ViewBag.Title = "Nueva herramienta";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Crear", "CajaHerramienta", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Caja de Herramientas", "Index", "CajaHerramienta")</li>
+    </ul>
+
+    <div class="panel panel-primary form-horizontal">
+        @Html.ValidationSummary(true)
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-star"></span> Datos Básicos</h3>
+        </div>
+        <div class="panel-body" id="panelEditar">
+            @Html.Partial("_DatosBasicos", Model)
+
+        </div>
+    </div>
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script type="text/javascript">
+
+        $("#PanelOtraCiudad").hide();
+        $("#PanelNacional").hide();
+        CargarModal();
+        var pagecontentwrapHeight = $(".page-content-wrap").height();
+        $('#panelEditar').css("height", pagecontentwrapHeight);
+
+        $('#Documento').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: false,
+            maxFileSize: 2048,
+            allowedFileExtensions: ['pdf'],
+        });
+
+       
+
+        $(window).on('resize', function () {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_panelbodyHeight);
+            $('#panelEditar').css("min-height", pagecontentwrapHeight + 350);
+        });
+
+        function resizePanel() {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_pagecontentwrapHeight);
+        };
+
+   
+    </script>
+}

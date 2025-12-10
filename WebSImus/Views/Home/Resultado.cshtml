@@ -1,0 +1,228 @@
+﻿@*@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<WebSImus.Models.ResultadoModels>*@
+
+@{
+    ViewBag.Title = "Resultado Busqueda";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<div class="row">
+    <!-- ficha escuela -->
+    <div class="col-md-12">
+        <div class="col-md-2 col-sm-5 col-xs-5"><img style="padding-top:10px; padding-left:30px;" class="img-responsive" src="~/img/iconos/search.png"></div>
+        <div class="titulo_seccion col-md-10 col-sm-7 col-xs-7">Resultado De La Búsqueda</div>
+
+    </div>
+</div>
+<div class="row">
+
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span style="text-align: left; padding: 5px;"></span>Palabra clave @ViewBag.Palabra</div>
+</div>
+
+
+
+
+
+
+<div class="row">
+
+    <div class="page-content-wrap">
+
+
+
+        <!-- page content holder -->
+        <div class="page-content-holder">
+            <div class="row tabla_blue">
+                <div class="col-md-12 ">
+                    <div class="col-md-2 col-sm-2 col-xs-2 ">
+
+                        <span class="txt_cla2 "><span class="fa-escuelas fa-2x"></span>&nbsp;ESCUELAS </span>
+                    </div>
+
+                </div>
+            </div>
+       
+            <div id="formacionTabla">
+                @Html.Action("_BusquedaEscuelas", new { param = ViewBag.Palabra})
+            </div>
+            </div>
+
+        <!-- ./2 -->
+    </div>
+   
+    <div class="row">
+
+        <div class="page-content-wrap">
+
+
+
+            <!-- page content holder -->
+            <div class="page-content-holder">
+                <div class="row tabla_yellow">
+                    <div class="col-md-12 ">
+                        <div class="col-md-2 col-sm-2 col-xs-2 ">
+
+                            <span class="txt_cla2 "><span class="fa-agrupacion fa-2x"></span>&nbsp;AGRUPACIONES</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="TablaAgrupaciones">
+                    @Html.Action("_BusquedaAgrupaciones", new { param = ViewBag.Palabra })
+                </div>
+
+            </div>
+            <div class="page-content-holder">
+                <div class="row tabla_red">
+                    <div class="col-md-12 ">
+                        <div class="col-md-2 col-sm-2 col-xs-2 ">
+
+                            <span class="txt_cla2"><span class="fa-solid fa-chevron-right fa-2x "></span>&nbsp;AGENTES</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="TablaAgentes">
+                    @Html.Action("_BusquedaAgentes", new { param = ViewBag.Palabra })
+                </div>
+
+            </div>
+            <div class="page-content-holder">
+                <div class="row tabla_gren">
+                    <div class="col-md-12 ">
+                        <div class="col-md-2 col-sm-2 col-xs-2 ">
+                            <span class="txt_cla2"><span class="fa-entidades fa-2x" style=" clip: rect(0px,60px,200px,0px);"></span>&nbsp;ENTIDADES</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="TablaEntidades">
+                    @Html.Action("_BusquedaEntidades", new { param = ViewBag.Palabra })
+                </div>
+
+            </div>
+
+            <div class="page-content-holder">
+                <div class="row tabla_gren">
+                    <div class="col-md-12 ">
+                        <div class="col-md-2 col-sm-2 col-xs-2 ">
+                            <span class="txt_cla2"><span class="fa-editorial fa-2x" style=" clip: rect(0px,60px,200px,0px);"></span>&nbsp;EVENTOS</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="TablaEventos">
+                    @Html.Action("_BusquedaEventos", new { param = ViewBag.Palabra })
+                </div>
+
+            </div>
+            <!-- ./2 -->
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="space1"></div>  <!-- ./page content wrapper -->
+        <!-- page content wrapper -->
+        <!-- ./page content wrapper -->
+        <!-- ./page content wrapper -->
+        <!-- page content wrapper -->
+
+
+
+
+
+
+    </div>
+</div>
+
+@section Scripts {
+<script type="text/javascript">
+
+        $('#myPager').on('click', 'a', function () {
+            $.ajax({
+
+                url: this.href,
+                type: "GET",
+                cache: false,
+            })
+         .done(function (partialViewResult) {
+             //alert("entro aqui");
+             $("#formacionTabla").html(partialViewResult);
+
+         });
+            return false;
+        });
+
+        $('#myPagerAgrupacion').on('click', 'a', function () {
+            $.ajax({
+
+                url: this.href,
+                type: "GET",
+                cache: false,
+            })
+         .done(function (partialViewResult) {
+             //alert("entro aqui");
+             $("#TablaAgrupaciones").html(partialViewResult);
+
+         });
+            return false;
+        });
+
+        $('#myPagerEntidad').on('click', 'a', function () {
+            $.ajax({
+
+                url: this.href,
+                type: "GET",
+                cache: false,
+            })
+         .done(function (partialViewResult) {
+             //alert("entro aqui");
+             $("#TablaEntidades").html(partialViewResult);
+
+         });
+            return false;
+        });
+
+
+        $('#myPagerAgentes').on('click', 'a', function () {
+            $.ajax({
+
+                url: this.href,
+                type: "GET",
+                cache: false,
+            })
+         .done(function (partialViewResult) {
+             //alert("entro aqui");
+             $("#TablaAgentes").html(partialViewResult);
+
+         });
+            return false;
+        });
+
+        $('#myPagerEventos').on('click', 'a', function () {
+            $.ajax({
+
+                url: this.href,
+                type: "GET",
+                cache: false,
+            })
+         .done(function (partialViewResult) {
+             //alert("entro aqui");
+             $("#TablaEventos").html(partialViewResult);
+
+         })
+            return false;
+        });
+</script>
+}

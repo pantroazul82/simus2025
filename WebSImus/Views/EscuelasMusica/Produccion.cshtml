@@ -1,0 +1,146 @@
+﻿@model WebSImus.Models.ProduccionModel
+@{
+    ViewBag.Title = ViewBag.NombreEscuela;
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Produccion", "EscuelasMusica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true, "", new { @class = "mf-validation-summary" }) @* Estilo para el resumen de validación *@
+
+    <nav aria-label="breadcrumb" class="modern-breadcrumb">
+        <span class="breadcrumb-item">
+            @Html.ActionLink("Inicio", "Index", "Inicio", null, new { @class = "breadcrumb-link" })
+        </span>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item">
+            @Html.ActionLink("Escuelas", "Consulta", "EscuelasMusica", null, new { @class = "breadcrumb-link" })
+        </span>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item">
+            @Html.ActionLink("Exportar", "Exportar", "EscuelasMusica", new { Id = Model.EscuelaId }, new { @class = "breadcrumb-link" })
+        </span>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item current">
+            @* "Producción" es la página activa en este contexto *@
+            @Html.ActionLink("Producción", "Produccion", "EscuelasMusica", new { Id = Model.EscuelaId }, new { @class = "breadcrumb-link" })
+        </span>
+    </nav>
+
+    <div class="modern-form-container">
+        <div class="form-header">
+            <h2 class="form-title">
+               @ViewBag.NuevoTitulo
+            </h2>
+        </div>
+
+        <div class="mb-6">
+            @* Espacio para el componente de pasos *@
+            @Html.Partial("_PasoAPaso")
+        </div>
+
+        <div>
+            @* Contenedor para la vista parcial _Produccion *@
+            @Html.HiddenFor(model => model.EscuelaId)
+            @Html.Partial("_Produccion", Model) @* Aquí se renderiza la parcial que ya modernizamos *@
+        </div>
+    </div>
+
+    @* Caja de Mensaje de Éxito Modernizada - Asegúrate que el JS que la muestra/oculta siga funcionando *@
+    if (TempData["MostrarMensajeExitoProduccion"] != null && (bool)TempData["MostrarMensajeExitoProduccion"])
+    {
+        <div class="mf-message-box mf-message-box-success mf-show animated fadeIn" id="message-box-success">
+            <div class="mf-message-box-header">
+                <h5 class="mf-message-box-title"><i class="fas fa-check-circle"></i> Éxito</h5>
+                <button type="button" class="mf-message-box-close mb-control-close" aria-label="Close">×</button>
+            </div>
+            <div class="mf-message-box-content">
+                <p>La información se actualizó con éxito.</p>
+            </div>
+            @* No es necesario el footer si solo es un mensaje con botón de cerrar en la cabecera *@
+        </div>
+    }
+}
+
+
+
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script src="~/Scripts/escuelasvalidate.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        HabilitarDeshabilitarPasos();
+        $("#step6").addClass("active");
+    });
+    $("li").click(function () {
+
+        switch ($(this).data("step")) {
+            case 1:
+                window.location = "@Url.Action("EditarNuevo", "EscuelasMusica", new { id = Model.EscuelaId,  wizard = 1 })";
+                break;
+            case 2:
+                window.location = "@Url.Action("Beneficiarios", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 3:
+                window.location = "@Url.Action("Organizacion", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 4:
+                window.location = "@Url.Action("Formacion", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 5:
+                window.location = "@Url.Action("Infraestructura", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 6:
+                window.location = "@Url.Action("Produccion", "EscuelasMusica",  new { id = Model.EscuelaId })";
+                break;
+            case 61:
+                window.location = "@Url.Action("Produccion", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 7:
+                window.location = "@Url.Action("Asesoria", "FichaAsesoria", new { id = Model.EscuelaId })";
+                break;
+
+        }
+    });
+    </script>
+    <script type="text/javascript">
+        /* Limita todos los spinner a valores positivos */
+        $(".spinner_default").attr('min', 0.0);
+
+        var InformacionProduccion = ["#CantidadGirasNacionales", "#CantidadGirasInternacionales", "#CantidadConciertos", "#CantidadDiscos", "#CantidadRepertorios", "#CantidadMaterialDivulgativo", "#CantidadMaterialPedagogico", "#CantidadAgrupaciones"];
+        var InformacionProduccionLength = InformacionProduccion.length;
+
+        //Produccion
+        for (var i = 0; i < InformacionProduccionLength; i++) {
+            var spinner = $(InformacionProduccion[i]).spinner({
+                step: 1,
+                min: 0,
+                max: 999,
+                icons: { down: "ui-icon-custom-down", up: "ui-icon-custom-up" },
+                stop: function (event, ui) {
+
+                }
+            });
+        }
+
+        //Produccion
+        for (var i = 0; i < InformacionProduccionLength; i++) {
+            $(InformacionProduccion[i]).keypress(function () {
+                ValidaSoloNumeros();
+            });
+        }
+
+    </script>
+}
+
+
+
+
+

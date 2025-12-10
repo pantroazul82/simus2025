@@ -1,0 +1,103 @@
+﻿@model SM.LibreriaComun.DTO.EscuelasEstadisticasDTO
+
+<div class="row mb-4">
+    <div class="col-12 d-flex flex-wrap justify-content-center gap-3">
+        <a id="hNaturaleza" href="#" class="btn btn-outline-primary">Naturaleza</a>
+        <a id="hlegalmente" href="#" class="btn btn-outline-primary">Legalmente Constituida</a>
+        <a id="hTipo" href="#" class="btn btn-outline-primary">Tipo Escuela</a>
+        <a id="hTipoNaturaleza" href="#" class="btn btn-outline-primary">Tipo y Naturaleza</a>
+        <a id="hFamilia" href="#" class="btn btn-outline-primary">Familia Instrumental</a>
+        <a id="hPractica" href="#" class="btn btn-outline-primary">Prácticas Musicales</a>
+        <a id="hDependientes" href="#" class="btn btn-outline-primary">Dependientes</a>
+    </div>
+</div>
+
+<div class="chart-section">
+    <h2 class="chart-title">Naturaleza de las escuelas</h2>
+    <p class="chart-desc">Relación de escuelas de música registradas de acuerdo a su naturaleza jurídica: pública, privada o mixta.</p>
+    <div class="chart-container">
+        <div id="chartContainer" style="height: 400px;"></div>
+    </div>
+    <div class="d-flex justify-content-between mt-2">
+        <a href="#top" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-up"></i> Ir arriba</a>
+        @Html.ActionLink("Exportar datos a Excel", "descargar", "Indicadores", new { numReporte = 1, periodo = Model.selectorAno }, new { @class = "btn btn-outline-primary" })
+    </div>
+</div>
+
+<div class="chart-section">
+    <h2 class="chart-title">Legalmente constituidas</h2>
+    <p class="chart-desc">Para el Plan Nacional de Música para la Convivencia, la constitución legal de las escuelas de música es uno de los factores que garantizan su sostenibilidad.</p>
+    <div class="chart-container">
+        <div id="legalmenteContainer" style="height: 350px;"></div>
+    </div>
+    <div class="d-flex justify-content-between mt-2">
+        <a href="#top" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-up"></i> Ir arriba</a>
+        @Html.ActionLink("Exportar datos a Excel", "descargar", "Indicadores", new { numReporte = 2, periodo = Model.selectorAno }, new { @class = "btn btn-outline-primary" })
+    </div>
+</div>
+
+<div id="PanelTipoEscuela" class="chart-section">
+    <h2 class="chart-title">Por tipo de escuela</h2>
+    <div class="chart-container">
+        <div id="TipoPieContainer" style="height: 450px;"></div>
+    </div>
+    <div class="d-flex justify-content-between mt-2">
+        <a href="#top" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-up"></i> Ir arriba</a>
+        @Html.ActionLink("Exportar datos a Excel", "descargar", "Indicadores", new { numReporte = 3, periodo = Model.selectorAno }, new { @class = "btn btn-outline-primary" })
+    </div>
+
+    <h2 class="chart-title mt-5">Tipos de escuela por naturaleza</h2>
+    <div class="chart-container">
+        <div id="TipoContainer" style="height: 430px;"></div>
+    </div>
+    <div class="d-flex justify-content-between mt-2">
+        <a href="#top" class=btn btn-outline-primary"><i class="fa-solid fa-arrow-up"></i> Ir arriba</a>
+        @Html.ActionLink("Exportar datos a Excel", "descargar", "Indicadores", new { numReporte = 3, periodo = Model.selectorAno }, new { @class = "btn btn-outline-primary" })
+    </div>
+</div>
+
+<div class="chart-section">
+    <h2 class="chart-title">Familia instrumental</h2>
+    <p class="chart-desc">Existencias de los diferentes tipos de instrumentos con los que cuentan las escuelas de música del país.</p>
+    <div class="chart-container">
+        <div id="TipoInstrumentoContainer" style="height: 400px;"></div>
+    </div>
+    <div class="d-flex justify-content-between mt-2">
+        <a href="#top" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-up"></i> Ir arriba</a>
+        @Html.ActionLink("Exportar datos a Excel", "descargar", "Indicadores", new { numReporte = 4, periodo = Model.selectorAno }, new { @class = "btn btn-outline-primary" })
+    </div>
+</div>
+
+<div class="chart-section">
+    <h2 class="chart-title">Prácticas musicales</h2>
+    <p class="chart-desc">Escuelas que desarrollan diferentes prácticas musicales en sus procesos formativos.</p>
+    <div class="chart-container">
+        <div id="PracticaContainer" style="height: 350px;"></div>
+    </div>
+    <div class="d-flex justify-content-between mt-2">
+        <a href="#top" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-up"></i> Ir arriba</a>
+        @Html.ActionLink("Exportar datos a Excel", "descargar", "Indicadores", new { numReporte = 5, periodo = Model.selectorAno }, new { @class = "btn btn-outline-primary" })
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-6 chart-section">
+        <h2 class="chart-title">Dependientes de otra entidad</h2>
+        <p class="chart-desc">Escuelas que dependen de otra entidad, ya sea gubernamental o privada.</p>
+        <img src="~/img/Dashboard/entidad.png" class="img-fluid mb-2" />
+        <div class="text-muted">Total: @Html.DisplayFor(m => m.TotalDepende)</div>
+        <div class="fw-bold text-primary">Pública: @Html.DisplayFor(m => m.PublicaDepende)</div>
+        <div class="fw-bold text-warning">Mixta: @Html.DisplayFor(m => m.MixtaDepende)</div>
+        <div class="fw-bold text-success">Privada: @Html.DisplayFor(m => m.PrivadaDepende)</div>
+    </div>
+
+    <div class="col-md-6 chart-section">
+        <h2 class="chart-title">Con organización comunitaria</h2>
+        <p class="chart-desc">Escuelas que cuentan con al menos una organización comunitaria para el respaldo de sus procesos.</p>
+        <img src="~/img/Dashboard/orga_comu.png" class="img-fluid mb-2" />
+        <div class="text-muted">Total: @Html.DisplayFor(m => m.TotalOrganizacion)</div>
+        <div class="fw-bold text-primary">Pública: @Html.DisplayFor(m => m.PublicaOrganizacion)</div>
+        <div class="fw-bold text-warning">Mixta: @Html.DisplayFor(m => m.MixtaOrganizacion)</div>
+        <div class="fw-bold text-success">Privada: @Html.DisplayFor(m => m.PrivadaOrganizacion)</div>
+    </div>
+</div>

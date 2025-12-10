@@ -1,0 +1,355 @@
+﻿
+@{
+    ViewBag.Title = "Estimulos";
+    Layout = "~/Views/Shared/_LayoutConsulta.cshtml";
+}
+
+<h2>Estimulos</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2 col-sm-5 col-xs-5"><img style="padding-top:10px; padding-left:30px;" class="img-responsive" src="~/img/iconos/caja_big.png"></div>
+        <div class="titulo_seccion col-md-10 col-sm-7 col-xs-7">Caja de Herramientas</div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span class="fa-agrupacion fa-lg" style="text-align: left; padding: 5px;"></span>Listado Convocatorias de Estímulos 2017</div>
+</div>
+<div class="col-md-12 well carousel-search" style="margin-top:40px;">
+    <div class="row">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="htab1">
+                <div class="divider"></div>
+                <div class="page-content-wrap">
+
+                    <!-- page content holder -->
+                    <div class="page-content-holder">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="http://convocatorias.mincultura.gov.co/Inscripciones/Ingreso/Login.aspx?AREID=5&SECID=75&SERID=87&SUBID=0&OPC_ID=460&Redir=%2fConvocatorias_PUBLICO%2fEstimulos%2fInscripcionesListado.aspx%3fAREID%3d5%26SECID%3d75%26SERID%3d87%26SUBID%3d0%26OPC_ID%3d460" target="_blank">
+                                    <h4>Participa aquí</h4>
+                                </a>
+                            </div>
+                            <div class="col-md-offset-9">
+                                <a href="~/assets/pdf/Estimulos2017.pdf" target="_blank">
+                                    <h4>Descargar PDF</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class=" this-animate" data-animate="fadeInRight bounce">
+                                <div class="col-md-12">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <div class="row">
+
+                                                <div class=" col-md-12 titulo_alumnos">Música </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_linea ">
+
+                                                        <div class="col-md-4 col-sm-4 col-xs-4 txt_morado">
+                                                            Convocatoria
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-4 txt_morado">
+                                                            Fecha de Apertura
+                                                        </div>
+
+                                                        <div class="col-md-2 col-sm-2 col-xs-4 txt_morado">
+                                                            Fecha de Cierre
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-4 txt_morado">
+                                                            Publicación Resultados
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-4 txt_morado">
+                                                            Archivos
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                           
+                                                <div class="row" id="dPartituras">
+                                                    <form >
+                                                        <SharePoint:FormDigest ID="FormDigest1" ></SharePoint:FormDigest>
+                                                    </form>
+                                                </div>
+                                                </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                            <!-- ./2 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/plugins/mixitup/jquery.mixitup.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/appear/jquery.appear.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+
+
+
+@*<script type="text/javascript">
+    $(function () {
+        ConsultarConvocatorias();
+    })
+    function ConsultarConvocatorias()
+    {
+        var ValorEstado = "'Sí'";
+        var urls = 'http://celebralamusica.mincultura.gov.co';
+        var listname = 'ConvocatoriasEstimulos';
+        var campos = '?$select=Title,documento,apertura,cierre,publicacion';
+        var filtros = '&$filter=(activo eq ' + ValorEstado + ') ';
+        var orden = '&$orderby=Title';
+
+        // Getting our list items
+        $.support.cors = true;
+        $.ajax({
+            url: urls + "/_api/web/lists/getbytitle('" + listname + "')/items/"+ campos + filtros + orden,
+            method: "GET",
+            async: false,
+            crossDomain: true,
+            dataType: "json",
+            contentType: "application/json;odata=verbose",
+            headers: {
+                "Accept": "application/json; odata=verbose"
+              
+            },
+             success: function (data) {
+                alert("funciono");
+                MostrarPartituras(data);
+
+            },
+            error: function (data) {
+                alert("fallo");
+                Sinpartituras(data);
+            }
+        });
+    }
+
+
+    function MostrarPartituras(data) {
+        console.log(data);
+        var items = [];
+        var nuevoitems = [];
+
+        items.push('<div' + ' class="' + 'row tabla_amarilla' + '">' +
+         '<div' + ' class="' + 'col-md-12' + '">' +
+         '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2 txt_fichas' + '">' +
+         '<span' + ' class="' + 'txt_fichas' + '">' + 'TITULO' + '</span>' +
+         '</div>' +
+         '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2 txt_fichas' + '">' +
+         '<span' + ' class="' + 'txt_fichas' + '">' + 'AUTOR' + '</span>' +
+         '</div>' +
+
+         '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2 txt_fichas' + '">' +
+         '<span' + ' class="' + 'txt_fichas' + '">' + 'FORMATO' + '</span>' +
+         '</div>' +
+         '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2 txt_fichas' + '">' +
+         '<span' + ' class="' + 'txt_fichas' + '">' + 'GÉNERO' + '</span>' +
+         '</div>' +
+         '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2 txt_fichas' + '">' +
+         '<span' + ' class="' + 'txt_fichas' + '">' + 'PARTES' + '</span>' +
+         '</div>' +
+         '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2 txt_fichas' + '">' +
+         '<span' + ' class="' + 'txt_fichas' + '">' + 'SCORE' + '</span>' +
+         '</div>' +
+         '</div>' +
+         '</div>');
+
+        var colorlinea = 'gris';
+
+        $(data.d.results).each(function () {
+            var vargenero = ' ';
+            var vararreglo = ' ';
+            var varautor = ' ';
+            var varpartes = ' ';
+            var varscore = ' ';
+
+            if (this.documento != null)
+            { vargenero = this.documento; }
+
+            alert(vargenero);
+            if (this.arreglo != null)
+            { vararreglo = this.arreglo; }
+            if (this.autor != null)
+            { varautor = this.autor; }
+            if (this.partes != null)
+            { varpartes = '<a' + ' href=' + this.partes + ' target="_blank">' + '<img src="../iconos/download_2.png" alt="descarga"/>' + '</a>'; }
+
+            if (this.score != null)
+            { varscore = '<a' + ' href=' + this.score + ' target="_blank">' + '<img src="../iconos/download_2.png" alt="descarga"/>' + '</a>'; }
+
+
+            switch (colorlinea) {
+                case 'gris':
+                    items.push('<div' + ' class="' + 'row tabla_gris' + '">' +
+                '<div' + ' class="' + 'col-md-12' + '">' +
+                '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2' + '">' +
+                this.Title +
+                '</div>' +
+                '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2' + '">' +
+                varautor +
+                '</div>' +
+
+                '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2' + '">' +
+                this.formato +
+                '</div>' +
+                '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2' + '">' +
+                vargenero +
+                '</div>' +
+                '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2' + '">' +
+                varpartes +
+                '</div>' +
+                '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2' + '">' +
+                varscore +
+                '</div>' +
+                '</div>' +
+
+                '</div>');
+                    colorlinea = 'azul';
+                    break;
+                case 'azul':
+                    items.push('<div' + ' class="' + 'row tabla_blanca' + '">' +
+                '<div' + ' class="' + 'col-md-12' + '">' +
+                '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2' + '">' +
+                this.Title +
+                '</div>' +
+                '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2' + '">' +
+                varautor +
+                '</div>' +
+
+                '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2' + '">' +
+                this.formato +
+                '</div>' +
+                '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2' + '">' +
+                vargenero +
+                '</div>' +
+                '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2' + '">' +
+                varpartes +
+                '</div>' +
+                '<div' + ' class="' + 'col-md-2 col-sm-2 col-xs-2' + '">' +
+                varscore +
+                '</div>' +
+                '</div>' +
+
+                '</div>');
+                    colorlinea = 'gris';
+                    break;
+                default:
+
+            }
+
+        });
+
+
+        $("#dPartituras").html(items.join(''))
+    }
+
+    function Sinpartituras(data) {
+
+        $("#dPartituras").html('No hay partituras.')
+
+    }
+
+    
+    </script>*@
+
+<script type="text/javascript">
+    var hostweburl;
+    var appweburl;
+
+    // Load the required SharePoint libraries
+    $(document).ready(function () {
+        //Get the URI decoded URLs.
+        var listname = 'ConvocatoriasEstimulos';
+        var campos = '?$select=Title,documento,apertura,cierre,publicacion';
+        hostweburl = "http://celebralamusica.mincultura.gov.co";
+            
+        appweburl = hostweburl + "/_api/web/lists/getbytitle('" + listname + "')/items/" + campos;
+            
+ 
+        // resources are in URLs in the form:
+        // web_url/_layouts/15/resource
+        var scriptbase = hostweburl + "/_layouts/15/";
+
+        // Load the js files and continue to the successHandler
+        $.getScript(scriptbase + "SP.RequestExecutor.js", execCrossDomainRequest);
+    });
+
+    // Function to prepare and issue the request to get
+    //  SharePoint data
+    function execCrossDomainRequest() {
+    
+        // executor: The RequestExecutor object
+        // Initialize the RequestExecutor with the add-in web URL.
+        var executor = new SP.RequestExecutor(hostweburl);
+
+        // Issue the call against the add-in web.
+        // To get the title using REST we can hit the endpoint:
+        //      appweburl/_api/web/lists/getbytitle('listname')/items
+        // The response formats the data in the JSON format.
+        // The functions successHandler and errorHandler attend the
+        //      sucess and error events respectively.
+        executor.executeAsync(
+            {
+                url:
+                    appweburl,
+                method: "GET",
+                headers: { "Accept": "application/json; odata=verbose" },
+                success: successHandler,
+                error: errorHandler
+            }
+        );
+    }
+
+    // Function to handle the success event.
+    // Prints the data to the page.
+    function successHandler(data) {
+        alert("funciono");
+        var jsonObject = JSON.parse(data.body);
+        var announcementsHTML = "";
+
+        var results = jsonObject.d.results;
+        for (var i = 0; i < results.length; i++) {
+            announcementsHTML = announcementsHTML +
+                "<p><h1>" + results[i].Title +
+                "</h1>" + results[i].Body +
+                "</p><hr>";
+        }
+
+        document.getElementById("renderAnnouncements").innerHTML =
+            announcementsHTML;
+    }
+
+    // Function to handle the error event.
+    // Prints the error message to the page.
+    function errorHandler(data, errorCode, errorMessage) {
+        alert(errorMessage);
+    }
+
+    // Function to retrieve a query string value.
+    // For production purposes you may want to use
+    //  a library to handle the query string.
+    function getQueryStringParameter(paramToRetrieve) {
+        var params =
+            document.URL.split("?")[1].split("&amp;");
+        var strParams = "";
+        for (var i = 0; i < params.length; i = i + 1) {
+            var singleParam = params[i].split("=");
+            if (singleParam[0] == paramToRetrieve)
+                return singleParam[1];
+        }
+    }
+</script>
+}

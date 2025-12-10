@@ -1,0 +1,23 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.Servicios.NoticiasDataDTO>
+<div class="col-md-12">
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <div class="row ">
+                <div class="col-md-12 col-sm-12 col-xs-12 titulo_home_item"><span class="fa-arrow-right-b" style="color: #D52443; margin-top: 10px;"></span>@item.Titulo </div>
+                <br><span style="font-style:italic; font-size: 13px;">@item.Descripcion, </span><span style="font-style:italic; font-size: 13px;">@item.FechaInicio</span><br />
+
+            </div>
+        }
+    }
+
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6"></div>
+        <div class="col-md-5 col-sm-11 col-xs-11">	 <br><span style="font-style:italic; font-size: 13px; float: right;">Ver programación completa</span></br></div><div class="col-md-1 col-sm-1 col-xs-1" style="margin-top: 15px;"> <a href="~/UtilidadHome/Agenda" alt="Agenda musical" title="Agenda musical">	<img src="~/img/iconos/mas.png" alt=""> </a></div>
+
+
+
+
+    </div>
+</div>

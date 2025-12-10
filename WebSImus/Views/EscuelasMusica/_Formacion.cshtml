@@ -1,0 +1,195 @@
+﻿@using MvcCheckBoxList.Model
+@model WebSImus.Models.FormacionModel
+
+
+<div class="panel panel-default"> 
+    <div class="panel-heading">
+        <h3><span class="fa-formacion fa-2x"></span> FORMACIÓN</h3>
+    </div>
+    <div class="panel-body">
+        <h3><span class="fa-clasificados fa-2x"></span> Procesos de Formación</h3>
+        @Html.HiddenFor(m => m.NombreEscuela)
+        @Html.HiddenFor(m => m.EscuelaId)
+            <div class="form-group">
+                <label class="col-md-3 control-label">¿Cuáles son los procesos de formación que imparte la escuela?</label>
+                <div class="col-md-9">
+                    @Html.TextAreaFor(model => model.ProcesosFormacion, new { @class = "form-control text", @rows = "6", @cols = "30" })
+                    @Html.ValidationMessageFor(model => model.ProcesosFormacion, "", new { @class = "text-danger" })
+                   
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <p class="text-info"><i class="fa-ayuda"></i> Debe seleccionar por lo menos una práctica musical.</p>
+                <label class="col-md-3 control-label">Prácticas musicales realizadas en la Escuela</label>
+                <div class="col-md-9">
+                    @{
+                        var htmlListInfo = new HtmlListInfo(HtmlTag.vertical_columns, 1);
+
+                        @Html.CheckBoxListFor(model => model.Publicado.PracticaMusicalIds,
+                                           model => model.PracticaMusicalData,
+                                           entity => entity.Id,
+                                           entity => entity.Nombre,
+                                           model => model.PracticaMusicalSeleccionada, htmlListInfo);
+                    }
+                </div>
+
+
+            </div>
+
+     
+
+
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">¿Realiza la escuela talleres independientes?</label>
+                <div class="col-md-3">
+                    <label class="check">@Html.RadioButtonFor(m => m.TieneTalleresIndependientes, 1, new { @class = "iradio_minimal-grey" }) Si</label>
+                </div>
+                <div class="col-md-3">
+                    <label class="check">@Html.RadioButtonFor(m => m.TieneTalleresIndependientes, 2, new { @class = "iradio_minimal-grey" }) No</label>
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">¿Posee la escuela programas formulados por escrito?</label>
+                <div class="col-md-3">
+                    <label class="check">@Html.RadioButtonFor(m => m.TieneProgramasPorEscrito, 1, new { @class = "iradio_minimal-grey" }) Si</label>
+                </div>
+                <div class="col-md-3">
+                    <label class="check">@Html.RadioButtonFor(m => m.TieneProgramasPorEscrito, 2, new { @class = "iradio_minimal-grey" }) No</label>
+                </div>
+            </div>
+
+    </div>
+    <div class="panel-body">
+        <h3><span class="fa-clasificados fa-2x"></span> Educación por Niveles</h3>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label"></label>
+                <label class="col-md-3 control-label">Población atendida</label>
+                <label class="col-md-3 control-label">Duración prom (meses)</label>
+                <label class="col-md-3 control-label">Intensidad horario(semanal)</label>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Inicio</label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.PoblacionInicio, new { @class = "form-control spinner_default" })
+                    @Html.ValidationMessageFor(model => model.PoblacionInicio, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.DuracionInicio, new { @class = "form-control spinner_default" })
+                    @Html.ValidationMessageFor(model => model.DuracionInicio, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.HorasInicio, new { @class = "form-control spinner_default" })
+                    @Html.ValidationMessageFor(model => model.HorasInicio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Básico</label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.PoblacionBasico, new { @class = "form-control spinner_default" })
+                    @Html.ValidationMessageFor(model => model.PoblacionBasico, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.DuracionBasico, new { @class = "form-control spinner_default" })
+                    @Html.ValidationMessageFor(model => model.DuracionBasico, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.HorasBasico, new { @class = "form-control spinner_default" })
+                    @Html.ValidationMessageFor(model => model.HorasBasico, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Medio</label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.PoblacionMedio, new { @class = "form-control spinner_default" })
+                    @Html.ValidationMessageFor(model => model.PoblacionMedio, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.DuracionMedio, new { @class = "form-control spinner_default" })
+                    @Html.ValidationMessageFor(model => model.DuracionMedio, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.HorasMedio, new { @class = "form-control spinner_default" })
+                    @Html.ValidationMessageFor(model => model.HorasMedio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Observaciones</label>
+                <div class="col-md-9">
+                    @Html.TextAreaFor(model => model.ObservacionesNiveles, new { @class = "form-control text", @rows = "4", @cols = "30" })
+                    @Html.ValidationMessageFor(model => model.ObservacionesNiveles, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+    </div>
+    <div class="panel-body">
+        <h3><span class="fa-clasificados fa-2x"></span> Educación Informal</h3>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label"></label>
+                <label class="col-md-3 control-label">Población atendida</label>
+                <label class="col-md-3 control-label">Duración prom (Meses)</label>
+                <label class="col-md-3 control-label">Intensidad horario(semanal)</label>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Cursos o talleres</label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.PoblacionCursos, new { @class = "form-control spinner_default" })
+                    @Html.ValidationMessageFor(model => model.PoblacionCursos, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.DuracionCursos, new { @class = "form-control spinner_default" })
+                    @Html.ValidationMessageFor(model => model.DuracionCursos, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.HorasCursos, new { @class = "form-control spinner_default" })
+                    @Html.ValidationMessageFor(model => model.HorasCursos, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Pedagogías Tradicionales</label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.PoblacionPedagogias, new { @class = "form-control spinner_default" })
+                    @Html.ValidationMessageFor(model => model.PoblacionPedagogias, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.DuracionPedagogias, new { @class = "form-control spinner_default" })
+                    @Html.ValidationMessageFor(model => model.DuracionPedagogias, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.HorasPedagogias, new { @class = "form-control spinner_default" })
+                    @Html.ValidationMessageFor(model => model.HorasPedagogias, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Observaciones</label>
+                <div class="col-md-9">
+                    @Html.TextAreaFor(model => model.ObservacionesTalleres, new { @class = "form-control text", @rows = "4", @cols = "30" })
+                    @Html.ValidationMessageFor(model => model.ObservacionesTalleres, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    </div>
+</div>
+
+<div class="panel-footer">
+    <input type="submit" value="Siguiente" name="TabFormacion" class="btn btn-primary pull-right" id="btnGuardarFormacion" />
+    @Html.ActionLink("Anterior", "Organizacion", "EscuelasMusica", new { Id = Model.EscuelaId }, new { @class = "btn btn-primary pull-right" })
+</div>

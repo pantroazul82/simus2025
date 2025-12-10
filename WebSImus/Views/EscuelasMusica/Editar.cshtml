@@ -1,0 +1,614 @@
+﻿@model WebSImus.Models.EscuelasPadre
+
+@{
+    ViewBag.Title = @ViewBag.NombreEscuela;
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+
+@using (Html.BeginForm("Editar", "EscuelasMusica", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Escuelas", "Consulta", "EscuelasMusica")</li>
+        <li>@Html.ActionLink("Exportar", "Exportar", "EscuelasMusica", new { Id = Model.Escuelas.EscuelaId }, null)</li>
+        <li>@Html.ActionLink("Encuestas", "Formulario", "EscuelasMusica", new { Id = Model.Escuelas.EscuelaId }, null)</li>
+      
+    </ul>
+    <!-- START DEFAULT WIZARD -->
+    <div class="panel panel-colorful">
+        <div class="panel-body" id="panelEditar">
+            <h3>@ViewBag.NuevoTitulo</h3>
+            @*<p class="text-danger"><i class="fa fa-exclamation-triangle"></i> Los campos marcados con asterisco (*) son obligatorios</p>*@
+            <div class="wizard" id="wizardEditar">
+                <ul>
+                    <li>
+                        <a href="#step-1">
+                            <span class="stepNumber">1</span>
+                            <span class="stepDesc">Registrarse <br /><small>Datos básicos</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-2">
+                            <span class="stepNumber">2</span>
+                            <span class="stepDesc">Consolidación <br /><small>Estado de la escuela</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-3">
+                            <span class="stepNumber">3</span>
+                            <span class="stepDesc">Redes sociales<br /><small>y multimedia</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-4">
+                            <span class="stepNumber">4</span>
+                            <span class="stepDesc">Documentos<br /><small> documentos</small></span>
+                        </a>
+                    </li>
+                </ul>
+                <div id="step-1">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            @Html.Partial("_EditarDatosBasicos", Model.Escuelas)
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END step 1 -->
+                <div id="step-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="text-info"><i class="fa-question"></i> Este paso contiene cinco pestañas, recuerde diligenciarlas todas para completar su perfil en el sistema.</p>
+                            <div class="panel panel-default tabs" id="tabs">
+                                <ul class="nav nav-tabs selected" role="tablist">
+                                    <li><a href="#tab-first" role="tab" data-toggle="tab">Institucionalidad</a></li>
+                                    <li><a href="#tab-second" role="tab" data-toggle="tab">Infraestructura y dotación</a></li>
+                                    <li><a href="#tab-third" role="tab" data-toggle="tab">Participación</a></li>
+                                    <li><a href="#tab-fourth" role="tab" data-toggle="tab">Formación</a></li>
+                                    <li><a href="#tab-fifth" role="tab" data-toggle="tab">Producción</a></li>
+                                </ul>
+                                <div class="panel-body tab-content">
+                                    <div class="tab-pane active" id="tab-first">
+                                        @Html.Partial("_Institucionalidad", Model.Institucionalidad)
+                                    </div>
+                                    <div class="tab-pane" id="tab-second">
+                                        @Html.Partial("_Infraestructura", Model.Infraestructura)
+                                    </div>
+                                    <div class="tab-pane" id="tab-third">
+                                        @Html.Partial("_Participacion", Model.Participacion)
+                                    </div>
+                                    <div class="tab-pane" id="tab-fourth">
+                                        @Html.Partial("_Formacion", Model.Formacion)
+                                    </div>
+                                    <div class="tab-pane" id="tab-fifth">
+                                        @Html.Partial("_Produccion", Model.Produccion)
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END step 2 -->
+                <div id="step-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.Partial("_RedesSociales", Model.RedesSociales)
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END step 3 -->
+                <div id="step-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.Partial("_DocumentoEscuelas", Model.Documentos)
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END step 4 -->
+            </div>
+        </div>
+    </div>
+
+    <div class="message-box message-box-success animated fadeIn" id="message-box-success">
+        <div class="mb-container">
+            <div class="mb-middle">
+                <div class="mb-title"><span class="fa fa-check"></span> Success</div>
+                <div class="mb-content">
+                    <p>La información se actualizó con éxito</p>
+                </div>
+                <div class="mb-footer">
+                    <button class="btn btn-default btn-lg pull-right mb-control-close">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- END WIZARD WITH VALIDATION -->
+
+}
+
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/smartwizard/jquery.smartWizard-2.0.js")"></script>
+
+    <script src="~/Scripts/escuelasvalidate.js"></script>
+
+    <script type="text/javascript">
+
+
+        $(function () {
+            $("#btnBuscarMapa").click(function () {
+                dialogMap.show({
+                    coord_separator: ".",
+                    initial: { // Inidica llos parametros de entrada del componente en funcion de selector de JQuery
+                        'address': "#Direccion",
+                        'municipality': "#MunicipioSelector",
+                        'department': "#DepartamentoSelector",
+                        'latitude': "#Latitud",
+                        'longitude': "#Longitud"
+                    },
+                    target: { // Nodos(Inputs) objetivo en el cual se va a volcar la informacion
+                        "Latitud": "marker.getPosition().lat()",
+                        "Longitud": "marker.getPosition().lng()",
+                        "Direccion": "marker.info.address",
+                    },
+                    onComplete: function () { },
+                    onAccept: function (self, marker) {
+
+                    }
+                });
+            });
+
+            //$('.page-container').addClass('page-navigation-toggled page-container-wide');
+            $('#encabezado').css("background-image", "url(../assets/images/ocean.jpg)");
+            $('#encabezado').css("background-size", "cover");
+            $('#encabezado').css("background-position", "0 50%");
+            $('#AnoValue').attr('data-live-search', true)
+            var url = $('#UrlYoutube').val();
+            document.getElementById("Estado").disabled = true;
+            var pasos = '@ViewBag.Pasos';
+            if ($('#FechaNacimiento').val() == "0001-01-01") {
+                $('#FechaNacimiento').val('');
+            }
+            else if ($('#FechaNacimiento').val() == "1900-01-01")
+            { $('#FechaNacimiento').val(''); }
+
+
+
+
+            $(window).on('resize', function () {
+                var stepContainerHeight = $(".stepContainer").height()
+                var panelbodyHeight = $('.tab-content').height();
+                var panelEditarHeight = $('#panelEditar').height();
+                var new_panelbodyHeight = panelbodyHeight + 350;
+                //console.log("new_panelbodyHeight: " + new_panelbodyHeight);
+                //console.log("stepContainerHeight: " + stepContainerHeight);
+                $('#panelEditar').css("height", new_panelbodyHeight);
+                $('#panelEditar').css("min-height", stepContainerHeight + 350);
+            });
+
+            var panelbodyHeight = $('.tab-content').height();
+            var today = new Date("01/31/1910");
+            $('#FechaNacimiento').datepicker({
+                startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+                endDate: 'd',
+                format: 'yyyy-mm-dd'
+            })
+            $('#FechaDocumentoCreacion').datepicker({
+                startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+                endDate: 'd',
+                format: 'yyyy-mm-dd'
+            })
+            $('#DocumentoCreacion').fileinput({
+                showUpload: false,
+                language: 'es',
+                overwriteInitial: true,
+                maxFileSize: 2048,
+                allowedFileExtensions: ['pdf'],
+            });
+            $('#DocumentoEscuela').fileinput({
+                showUpload: false,
+                language: 'es',
+                overwriteInitial: false,
+                maxFileSize: 2048,
+                allowedFileExtensions: ['pdf', 'xls', 'doc', 'xlsx', 'docx', 'csv'],
+            });
+            $(document).ready(function () {
+                // Initialize Smart Wizard with ajax content load
+                $('#wizardEditar').smartWizard({
+                    selected: pasos,
+                    enablePagination: false,
+                    enableFinishButton: false,
+                    // Disables the next and previou
+                    enableAllSteps: true,
+                });
+
+
+            });
+
+            /* Limita todos los spinner a valores positivos */
+            $(".spinner_default").attr('min', 0.0);
+        });
+
+
+
+
+        function resizePanel() {
+
+            var h = $("#panelEditar").height();
+            $('#panelEditar').css("height", h + (h * 0.2));
+        };
+
+
+        $(function () {
+            $('#DepartamentoSelector').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#MunicipioSelector');
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("GetMunicipio")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un valor </option>';
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+                      
+                    });
+
+                }
+
+            })
+        });
+
+        $('#imagenPerfil').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 1024,
+            allowedFileExtensions: ['jpg', 'png'],
+        });
+
+        $(function () {
+            $('#Regimen').change(function () {
+                var selectedDep = $(this).val();
+                var listadosubregimen = $('#SubRegimen');
+
+                if (selectedDep != null && selectedDep != '') {
+                    $.getJSON('@Url.Action("ConsultarSubRegimen")', { padre: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un valor </option>';
+                        $.each(data, function (i, parametro) {
+                            items += "<option value='" + parametro.value + "'>" + parametro.text + "</option>";
+
+                        });
+                        listadosubregimen.empty();
+                        listadosubregimen.html(items);
+                        listadosubregimen.click();
+                    });
+
+                }
+
+            })
+        });
+
+
+
+        $('#mySubmit').click(function () {
+
+
+            var varurl = $("#UrlYoutube").val();
+            var varClasificacion = $('#ClasificacionVideos').text();
+            var varDescripcion = $('#DescripcionVideo').val();
+
+
+            if (varurl == '') {
+                alert("La url del vídeo de youtube es obligatoria");
+                return;
+            }
+
+            if (varClasificacion == '0') {
+                alert("La clasificación del vídeo es obligatoria");
+                return;
+            }
+
+
+            var url = '@Url.Action("AgregarVideo", "EscuelasMusica")';
+            var varEscuelaId = '@Model.Escuelas.EscuelaId';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    id: varEscuelaId, clasificacion: $('#ClasificacionVideos').val(), urlVideo: $('#UrlYoutube').val(), descripcion: $('#DescripcionVideo').val()
+                },
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        Limpiarcampos(varEscuelaId, 0, 0);
+                    }
+                },
+
+            });
+        });
+
+        $('#btnDocumentoEscuela').click(function () {
+
+            var varcategoria = $("#Categoria").val();
+            var varEscuelaId = '@Model.Escuelas.EscuelaId';
+            var fileUpload = $("#DocumentoEscuela").get(0);
+            var files = fileUpload.files;
+
+            // Create FormData object
+            var fileData = new FormData();
+
+            // Looping over all files and add it to FormData object
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+
+            // Adding one more key to FormData object
+            fileData.append('username', 'Manas');
+
+
+            if (varcategoria == '') {
+                alert("La categoria es obligatoria");
+                return;
+            }
+
+            var url = '@Url.Action("AgregarDocumento", "EscuelasMusica")';
+            var varEscuelaId = '@Model.Escuelas.EscuelaId';
+            $.ajax({
+                url: '/EscuelasMusica/AgregarDocumento?id=' + varEscuelaId + '&cat=' + varcategoria,
+                type: 'POST',
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        ActualizarListadoDocumentos(varEscuelaId, 0);
+
+
+                    }
+                },
+
+            });
+
+
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        var paletaInformacionDocentes = ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c"];
+
+        /* Enviar valor desde el spiner a la gráfica */
+        var InformacionDocentesArray = ["#Voluntarios", "#ContratoLaboral", "#ContratoHonorario", "#OrdenPrestacionServicios"];
+        var InformacionDocentesLength = InformacionDocentesArray.length;
+
+        var InformacionInstitucionalidad = ["#Primaria", "#Secundaria", "#Tecnico", "#UniversitariaSinTitulo", "#PregradoMusica", "#PregradoOtrasAreas", "#PostGrado", "#VoluntariosAdministrativo", "#ContratoLaboralAdministrativo", "#ContratoHonorariosAdministrativo", "#OrdenPrestacionServiciosAdministrativo"];
+        var InformacionInstitucionalidadLength = InformacionInstitucionalidad.length;
+        //Infraestructura
+        var InformacionInfraestructuraArray = ["#CantidadSillas", "#CantidadAtriles", "#CantidadEstanterias", "#CantidadTableros", "#CantidadCuerdasPulsadas", "#CantidadCuerdasSinfonicas", "#CantidadVientosMadera", "#CantidadVientosMetales", "#CantidadPercusionMenor", "#CantidadPercusionSinfonica", "#CantidadOtros", "#CantidadTitulosBibliograficos", "#PorcentajeAdecuacion"];
+        var InformacionInfraestructuraLength = InformacionInfraestructuraArray.length;
+        // Participacion
+        var InformacionParticipacionArray = ["#CantidadCupos", "#CantidadPrimeraInfancia", "#CantidaEntre6y11", "#CantidaEntre12y18", "#CantidaEntre19y26", "#CantidaEntre27y60", "#CantidadMayores60", "#CantidadIndigenas", "#CantidadAfrocolombiana", "#CantidadRom", "#CantidadRaizales", "#CantidadEtniaOtros", "#CantidadHombres", "#CantidadMujeres", "#CantidadRural", "#CantidadUrbana", "#CantidadDicapacitados", "#CantidadRedUnidos", "#CantidadDesplazados", "#NumeroIntegrantes"];
+        var InformacionParticipacionLength = InformacionParticipacionArray.length;
+
+        var InformacionFormacion = ["#PoblacionInicio", "#DuracionInicio", "#HorasInicio", "#PoblacionBasico", "#DuracionBasico", "#HorasBasico", "#PoblacionMedio", "#DuracionMedio", "#HorasMedio", "#PoblacionCursos", "#DuracionCursos", "#HorasCursos", "#PoblacionPedagogias", "#DuracionPedagogias", "#HorasPedagogias"];
+        var InformacionFormacionLength = InformacionFormacion.length;
+
+        var InformacionProduccion = ["#CantidadGirasNacionales", "#CantidadGirasInternacionales", "#CantidadConciertos", "#CantidadDiscos", "#CantidadRepertorios", "#CantidadMaterialDivulgativo", "#CantidadMaterialPedagogico", "#CantidadAgrupaciones"];
+        var InformacionProduccionLength = InformacionProduccion.length;
+
+        var spinner = $("#PorcentajeAdecuacion").spinner({
+            step: 1,
+            min: 0,
+            max: 100,
+            icons: { down: "ui-icon-custom-down", up: "ui-icon-custom-up" },
+            stop: function (event, ui) {
+                //  pintarInformacionDocentesSpinnerValue(ui.value);
+            }
+        });
+
+        /* Enviar valor cuando se digita hacia la gráfica */
+        var spinner = $(InformacionDocentesArray[0]).spinner({
+            step: 1,
+            min: 0,
+            max: 999,
+            icons: { down: "ui-icon-custom-down", up: "ui-icon-custom-up" },
+            stop: function (event, ui) {
+                //  pintarInformacionDocentesSpinnerValue(ui.value);
+            }
+        });
+        var spinner = $(InformacionDocentesArray[1]).spinner({
+            step: 1,
+            min: 0,
+            max: 999,
+            icons: { down: "ui-icon-custom-down", up: "ui-icon-custom-up" },
+            stop: function (event, ui) {
+                //pintarInformacionDocentesSpinnerValue(ui.value);
+            }
+        });
+        var spinner = $(InformacionDocentesArray[2]).spinner({
+            step: 1,
+            min: 0,
+            max: 999,
+            icons: { down: "ui-icon-custom-down", up: "ui-icon-custom-up" },
+            stop: function (event, ui) {
+                //pintarInformacionDocentesSpinnerValue(ui.value);
+            }
+        });
+        var spinner = $(InformacionDocentesArray[3]).spinner({
+            step: 1,
+            min: 0,
+            max: 999,
+            icons: { down: "ui-icon-custom-down", up: "ui-icon-custom-up" },
+            stop: function (event, ui) {
+                //pintarInformacionDocentesSpinnerValue(ui.value);
+            }
+        });
+
+        //Produccion
+        for (var i = 0; i < InformacionProduccionLength; i++) {
+            var spinner = $(InformacionProduccion[i]).spinner({
+                step: 1,
+                min: 0,
+                max: 999,
+                icons: { down: "ui-icon-custom-down", up: "ui-icon-custom-up" },
+                stop: function (event, ui) {
+
+                }
+            });
+        }
+        //Participacion
+        for (var i = 0; i < InformacionParticipacionLength; i++) {
+            var spinner = $(InformacionParticipacionArray[i]).spinner({
+                step: 1,
+                min: 0,
+                max: 999,
+                icons: { down: "ui-icon-custom-down", up: "ui-icon-custom-up" },
+                stop: function (event, ui) {
+
+                }
+            });
+        }
+
+        for (var i = 0; i < InformacionInfraestructuraLength; i++) {
+            var spinner = $(InformacionInfraestructuraArray[i]).spinner({
+                step: 1,
+                min: 0,
+                max: 999,
+                icons: { down: "ui-icon-custom-down", up: "ui-icon-custom-up" },
+                stop: function (event, ui) {
+
+                }
+            });
+        }
+
+        for (var i = 0; i < InformacionInstitucionalidadLength; i++) {
+            var spinner = $(InformacionInstitucionalidad[i]).spinner({
+                step: 1,
+                min: 0,
+                max: 999,
+                icons: { down: "ui-icon-custom-down", up: "ui-icon-custom-up" },
+                stop: function (event, ui) {
+
+                }
+            });
+        }
+
+        //Formacion
+        for (var i = 0; i < InformacionFormacionLength; i++) {
+            var spinner = $(InformacionFormacion[i]).spinner({
+                step: 1,
+                min: 0,
+                max: 999,
+                icons: { down: "ui-icon-custom-down", up: "ui-icon-custom-up" },
+                stop: function (event, ui) {
+
+                }
+            });
+        }
+
+        /* Enviar valor desde el spiner a la gráfica */
+
+        //$(InformacionDocentesArray[0]).change('input', function () {
+        //    $(this).val() // get the current value of the input field.
+        //    $("#InformacionDocentesD3").html("");
+        //    pintarInformacionDocentes();
+        //    totalizarInformacionDocentes();
+        //});
+        //$(InformacionDocentesArray[1]).change('input', function () {
+        //    $(this).val() // get the current value of the input field.
+        //    $("#InformacionDocentesD3").html("");
+        //    pintarInformacionDocentes();
+        //    totalizarInformacionDocentes();
+        //});
+        //$(InformacionDocentesArray[2]).change('input', function () {
+        //    $(this).val() // get the current value of the input field.
+        //    $("#InformacionDocentesD3").html("");
+        //    pintarInformacionDocentes();
+        //    totalizarInformacionDocentes();
+        //});
+        //$(InformacionDocentesArray[3]).change('input', function () {
+        //    $(this).val() // get the current value of the input field.
+        //    $("#InformacionDocentesD3").html("");
+        //    pintarInformacionDocentes();
+        //    totalizarInformacionDocentes();
+        //});
+
+
+
+        /* Validar escribir solo números */
+        function ValidaSoloNumeros() {
+            console.log("ValidaSoloNumeros");
+            if ((event.keyCode < 48) || (event.keyCode > 57))
+                event.returnValue = false;
+        }
+
+
+        //Produccion
+        for (var i = 0; i < InformacionProduccionLength; i++) {
+            $(InformacionProduccion[i]).keypress(function () {
+                ValidaSoloNumeros();
+            });
+        }
+
+        //Formacion
+        for (var i = 0; i < InformacionFormacionLength; i++) {
+            $(InformacionFormacion[i]).keypress(function () {
+                ValidaSoloNumeros();
+            });
+        }
+        //Institucionalidad
+        for (var i = 0; i < InformacionDocentesLength; i++) {
+            $(InformacionDocentesArray[i]).keypress(function () {
+                ValidaSoloNumeros();
+            });
+        }
+
+        //Infraestructura
+        for (var i = 0; i < InformacionInfraestructuraLength; i++) {
+            $(InformacionInfraestructuraArray[i]).keypress(function () {
+                ValidaSoloNumeros();
+
+            });
+        }
+
+        //Participacion
+        for (var i = 0; i < InformacionParticipacionLength; i++) {
+            $(InformacionParticipacionArray[i]).keypress(function () {
+                ValidaSoloNumeros();
+            });
+        }
+        /* Graficar la dona */
+
+
+
+    </script>
+}

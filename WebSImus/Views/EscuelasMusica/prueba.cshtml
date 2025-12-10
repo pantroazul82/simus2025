@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "prueba";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+<h2>prueba</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="text-info"><i class="fa-question"></i> Este paso contiene cinco pestañas, recuerde diligenciarlas todas para completar su perfil en el sistema.</p>
+        <div class="panel panel-default tabs" id="tabs">
+            <ul class="nav nav-tabs selected" role="tablist">
+                <li><a href="#tab-1" role="tab" data-toggle="tab">Institucionalidad</a></li>
+                <li><a href="#tab-2" role="tab" data-toggle="tab">Infraestructura y dotación</a></li>
+                <li><a href="#tab-3" role="tab" data-toggle="tab">Participación</a></li>
+                <li><a href="#tab-4" role="tab" data-toggle="tab">Formación</a></li>
+                <li><a href="#tab-5" role="tab" data-toggle="tab">Producción</a></li>
+            </ul>
+            <div class="panel-body tab-content">
+                <div class="tab-pane active" id="tab-1">
+                    <label class="col-md-4 control-label">Uno</label>
+                </div>
+                <div class="tab-pane" id="tab-2">
+                    <label class="col-md-4 control-label">Dos</label>
+                </div>
+                <div class="tab-pane" id="tab-3">
+                    <label class="col-md-4 control-label">tres</label>
+                </div>
+                <div class="tab-pane" id="tab-4">
+                    <label class="col-md-4 control-label">cuatro</label>
+                </div>
+                <div class="tab-pane" id="tab-5">
+                    <label class="col-md-4 control-label">cinco</label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/smartwizard/jquery.smartWizard-2.0.js")"></script>
+
+
+    <script src="~/Scripts/escuelasvalidate.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var index = $('#tabs a[href="#tab-1"]').parent().index();
+
+            alert(index);
+            $('#tabs').tabs('options', 'active', index);
+            $("#tabs").tabs();
+            getContentTab (index);
+        });
+
+        function getContentTab(index) {
+            var url='_Infraestructura' + index;
+            var targetDiv = "#tabs-" + index;
+        
+    
+ 
+         $.get(url,null, function(result) {
+             $(targetDiv).html(result);
+         });
+        }
+
+    
+    </script>
+}

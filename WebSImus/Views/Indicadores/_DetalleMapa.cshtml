@@ -1,0 +1,33 @@
+﻿@model SM.LibreriaComun.DTO.DepartamentoEstadisticasDTO
+
+<div class="modal-map-custom">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">
+            <i class="fa-solid fa-map-location-dot me-2"></i> @Html.DisplayFor(m => m.NombreDepto)
+        </h3>
+        <img src="../img/iconos/escuelas_window2.png" alt="Escuelas" style="height: 40px;">
+    </div>
+
+    <div class="row">
+        <div class="col-6 bg-light p-3 rounded">
+            <div class="text-muted">Escuelas de Música</div>
+            <div class="fw-bold fs-4">@Html.DisplayFor(m => m.TotalEscuelas)</div>
+        </div>
+        <div class="col-6 bg-primary text-white p-3 rounded">
+            <div class="text-white">Escuelas Públicas</div>
+            <div class="fw-bold fs-4">@Html.DisplayFor(m => m.Publica)</div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-6 bg-danger text-white p-3 rounded">
+            <div class="text-white">Escuelas Privadas</div>
+            <div class="fw-bold fs-4">@Html.DisplayFor(m => m.Privada)</div>
+        </div>
+        <div class="col-6 bg-warning text-dark p-3 rounded">
+            <div class="text-dark">Escuelas Mixtas</div>
+            <div class="fw-bold fs-4">@Html.DisplayFor(m => m.Mixta)</div>
+        </div>
+    </div>
+</div>
+

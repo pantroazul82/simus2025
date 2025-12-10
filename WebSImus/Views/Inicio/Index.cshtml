@@ -1,0 +1,309 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+<link href="~/Content/dashboard.css" rel="stylesheet" />
+
+
+<div class="dashboard-container">
+    <div id="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fa fa-spinner fa-spin"></i>
+            <span style="margin-top:10px;">Cargando datos del dashboard...</span>
+        </div>
+    </div>
+
+    <!-- Encabezado -->
+    <div class="dashboard-header">
+        <div class="dashboard-date-group">
+            <button id="refresh-data" class="btn btn-refresh">
+                <i class="fa-solid fa-rotate"></i> Actualizar
+            </button>
+            <div class="dashboard-date">
+                <i class="fa-regular fa-calendar"></i> @DateTime.Now.ToString("dddd, dd MMMM yyyy")
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Widgets principales -->
+    <div class="dashboard-grid">
+        <!-- Widget 1 -->
+        <div class="card">
+            <div class="card-body widget-stat">
+                <div class="widget-value cant-agente">@Html.Raw(ViewBag.cantAgente.ToString("N"))</div>
+                <div class="widget-label">Cantidad de agentes</div>
+            </div>
+        </div>
+
+        <!-- Widget 2 -->
+        <div class="card">
+            <div class="card-body widget-stat">
+                <div class="widget-value total-comunitaria">@Html.Raw(ViewBag.totalComunitaria)</div>
+                <div class="widget-label">Escuelas con organización comunitaria</div>
+                <div class="widget-actions">
+                    <a href="@Url.Action("descargar", "Inicio", new { numReporte = 6 })" class="btn btn-download" title="Descargar">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Widget 3 -->
+        <div class="card">
+            <div class="card-body widget-stat">
+                <div class="widget-value Entdependeotra">@Html.Raw(ViewBag.Entdependeotra)</div>
+                <div class="widget-label">Dependen de otra entidad</div>
+                <div class="widget-actions">
+                    <a href="@Url.Action("descargar", "Inicio", new { numReporte = 7 })" class="btn btn-download" title="Descargar">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Widget 4 -->
+        <div class="card">
+            <div class="card-body widget-stat">
+                <div class="widget-value cant-entidad">@Html.Raw(ViewBag.cantEntidad)</div>
+                <div class="widget-label">Entidades registradas</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Segunda fila de widgets -->
+    <div class="dashboard-grid">
+        <!-- Widget 5 -->
+        <div class="card">
+            <div class="card-body widget-stat">
+                <div class="widget-value total-estudiantes">@Html.Raw(ViewBag.totalEstudiantes.ToString("N"))</div>
+                <div class="widget-label">Estudiantes en escuelas de música</div>
+                <div class="widget-actions">
+                    <a href="@Url.Action("descargar", "Inicio", new { numReporte = 2 })" class="btn btn-download" title="Descargar">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Widget 6: Profesores -->
+        <div class="card">
+            <div class="card-body widget-stat">
+                <div class="widget-value total-profesores">@Html.Raw(ViewBag.totalProfesores)</div>
+                <div class="widget-label">Población por profesor</div>
+                <div class="widget-actions">
+                    <a href="@Url.Action("descargar", "Inicio", new { numReporte = 3 })" class="btn btn-download" title="Descargar">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Widget 7: Escenarios -->
+        <div class="card">
+            <div class="card-body widget-stat">
+                <div class="widget-value estd-escenarios">@Html.Raw(ViewBag.EstdEscenarios.ToString("N"))</div>
+                <div class="widget-label">Circulación en escenarios</div>
+                <div class="widget-actions">
+                    <a href="@Url.Action("descargar", "Inicio", new { numReporte = 5 })" class="btn btn-download" title="Descargar">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficos principales -->
+    <div class="dashboard-grid">
+        <!-- Gráfico 1 -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Escuelas de música según su estado de sostenibilidad</h3>
+                <ul class="panel-controls">
+
+                    <a href="@Url.Action("descargar", "Inicio", new { numReporte = 4 })" class="btn btn-download btn-icon" title="Descargar">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="chart-holder" id="dashboard-donut-10" style="height: 250px;"></div>
+            </div>
+        </div>
+
+        <!-- Gráfico 2 -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Nivel educativo de los docentes</h3>
+                <ul class="panel-controls">
+
+                    <a href="@Url.Action("descargar", "Inicio", new { numReporte = 8 })" class="btn btn-download btn-icon" title="Descargar">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="chart-holder" id="dashboard-donut-11" style="height: 250px;"></div>
+            </div>
+        </div>
+
+        <!-- Gráfico 3 -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Naturaleza de escuelas de música</h3>
+                <span>Pública, privada y mixtas</span>
+            </div>
+            <div class="card-body">
+                <div class="chart-holder" id="dashboard-donut-2" style="height: 250px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficos secundarios -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Escuelas por departamento</h3>
+                    <ul class="panel-controls">
+
+                        <a href="@Url.Action("descargar", "Inicio", new { numReporte = 1 })" class="btn btn-download btn-icon" title="Descargar">
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </a>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="chart-holder" id="dashboard-donut-1" style="height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Prácticas musicales en las escuelas</h3>
+                    <ul class="panel-controls">
+
+                        <a href="@Url.Action("descargar", "Inicio", new { numReporte = 10 })" class="btn btn-download btn-icon" title="Descargar">
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </a>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="chart-holder" id="dashboard-bar-1" style="height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Reporte 1 -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Familia instrumental en las escuelas</h3>
+                <ul class="panel-controls">
+
+                    <a href="@Url.Action("descargar", "Inicio", new { numReporte = 9 })" class="btn btn-download btn-icon" title="Descargar">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="chart-holder" id="dashboard-donut-12" style="height: 200px"></div>
+            </div>
+        </div>
+
+        <!-- Reporte 2 -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Población por rangos de edad</h3>
+                <ul class="panel-controls">
+
+                    <a href="@Url.Action("descargar", "Inicio", new { numReporte = 2 })" class="btn btn-download btn-icon" title="Descargar">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="chart-holder" id="dashboard-donut-5" style="height: 200px;"></div>
+            </div>
+        </div>
+
+        <!-- Reporte 3 -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Población por minoría étnica</h3>
+            </div>
+            <div class="card-body">
+                <div class="chart-holder" id="dashboard-donut-6" style="height: 200px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de otros reportes -->
+    <div class="reports-section">
+        <h3 class="section-title">Otros reportes</h3>
+
+
+
+        <!-- Segunda fila de reportes -->
+        <div class="dashboard-grid">
+            <!-- Reporte 4 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Población por género</h3>
+                </div>
+                <div class="card-body">
+                    <div class="chart-holder" id="dashboard-donut-7" style="height: 200px;"></div>
+                </div>
+            </div>
+
+            <!-- Reporte 5 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Cobertura territorial</h3>
+                    <ul class="panel-controls">
+
+                        <a href="@Url.Action("descargar", "Inicio", new { numReporte = 11 })" class="btn btn-download btn-icon" title="Descargar">
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </a>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="chart-holder" id="dashboard-donut-8" style="height: 200px;"></div>
+                </div>
+            </div>
+
+            <!-- Reporte 6 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Población en condiciones especiales</h3>
+                    <ul class="panel-controls">
+
+                        <a href="@Url.Action("descargar", "Inicio", new { numReporte = 12 })" class="btn btn-download btn-icon" title="Descargar">
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </a>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="chart-holder" id="dashboard-donut-9" style="height: 200px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/plugins/morris/raphael.js"></script>
+    <script src="~/Scripts/plugins/morris/morris.js"></script>
+    <script src="~/Scripts/plugins/rickshaw/d3.js"></script>
+    <script src="~/Scripts/plugins/rickshaw/rickshaw.js"></script>
+    <script src="~/Scripts/plugins/owl/owl.carousel.js"></script>
+    <script src="~/Scripts/dashboard-charts.js"></script>
+
+}
+
+
+

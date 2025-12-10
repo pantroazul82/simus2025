@@ -1,0 +1,83 @@
+﻿@model SM.LibreriaComun.DTO.EntidadesOperadoras.CronogramaDTO
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-2">
+                <h3> Actividad </h3>
+            </div>
+            <div class="col-md-5">
+                <h3>  @Html.DisplayFor(model => model.Nombreactividad)</h3>
+            </div>
+        </div>
+       
+    </div>
+    <div class="form-horizontal">
+        <h4>Cronograma</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ActividadId)
+        @Html.HiddenFor(model => model.TipoActividadID)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cod_departamento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.DropDownListFor(model => model.Cod_departamento, (SelectList)ViewBag.listDepartamentos, "Seleccione", new { @class = "styled-select" })
+                @Html.ValidationMessageFor(model => model.Cod_departamento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cod_municipio, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Cod_municipio, (SelectList)ViewBag.listMunicipio, "Seleccione", new { @class = "styled-select" })
+                @Html.ValidationMessageFor(model => model.Cod_municipio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Escuela, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Escuela, (SelectList)ViewBag.listEscuelas, "Seleccione", new { @class = "styled-select" })
+                @Html.ValidationMessageFor(model => model.Escuela, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cupo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cupo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cupo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+    </div>
+}
+

@@ -1,0 +1,93 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.EntidadesOperadoras.AsistenciaDTO>
+<div class="panel panel-default" id="divevaluacion">
+
+    <div class="form-group">
+        <div class="row">
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th>Identificación</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>                    
+                        <th>Evaluación</th>
+                        <th>Auto-Evaluación</th>
+
+                    </tr>
+                </thead>
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@item.Identificacion</td>
+                                <td>@item.Nombres</td>
+                                <td>@item.Apellidos</td>                             
+                               <td><a href="" class="fa-pencil-1" data-toggle="modal" data-target="#modal_datosMatriz" title="Agregar evaluación" onclick="javascript: CargarModalEvaluacion('@item.ParticipanteId');">Evaluación</a></td>
+                                <td><a href="" class="fa-pencil-1" data-toggle="modal" data-target="#modal_datosMatriz" title="Agregar Auto-evaluación" onclick="javascript: CargarModalAuto('@item.ParticipanteId');">Auto - Evaluación</a></td>
+                            </tr>
+                        </tbody>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    function AgregarAsistencia1(varId) {
+
+        var vararray = varId.split(',');
+        AgregarAsistencia(vararray[0], vararray[1]);
+
+    }
+
+    function AgregarAsistencia(agenteId, varfecha) {
+
+
+        var VarCronogramaId = '@Model.FirstOrDefault().CronogramaId';
+        alert(VarCronogramaId);
+        var url = '@Url.Action("AgregarAsistencia", "Asitencia")';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                Id: VarCronogramaId, agenteId: agenteId, fecha: varfecha
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    ActualizarlistadoAsistencia1(VarCronogramaId);
+
+                }
+            },
+
+        });
+    }
+
+    function ActualizarlistadoAsistencia1(VarCronogramaId) {
+
+        $.ajax({
+
+            url: "/Asitencia/TablaAsistencia",
+            type: "GET",
+            data: { CronogramaId: VarCronogramaId }
+        })
+   .done(function (partialViewResult) {
+
+       $("#divasistencia").html(partialViewResult);
+
+   });
+    }
+
+</script>
+
+

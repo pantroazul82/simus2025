@@ -1,0 +1,54 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.DotacionInstrumentoDTO>
+<div class="panel panel-default">
+    <div class="form-group">
+        <div class="row">
+            <table class="table">
+                @Html.Hidden("item-to-delete-instrumento", "", new { @id = "item-to-delete-instrumento" })
+                <thead>
+                    <tr>
+                        <th width="30%">Instrumento</th>
+                        <th width="20%">Prioridad</th>
+                        <th width="30%">Cantidad</th>
+                        <th width="10%">Eliminar</th>
+
+                    </tr>
+                </thead>
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@item.Instrumento</td>
+                                <td>@item.Prioridad</td>
+                                <td>@item.Cantidad</td>
+                                <td><a href="" class="fa-trash-a" data-toggle="modal" data-target="#modalConfirmarInstrumentos" data-id="@item.DotacionInstrumentoId" onclick="javascript: CargarModalInstrumento('@item.DotacionInstrumentoId');"></a></td>
+
+                            </tr>
+
+
+                        </tbody>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+
+    <div id="modalConfirmarInstrumentos" class="modal modal-vcenter fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Esta a punto de eliminar el instrumento. <strong>Tenga en cuenta que esta acción no se puede revertir</strong>.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="myDelete" class="btn btn-danger" data-dismiss="modal" onclick="EliminarInstrumento()">Eliminar</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

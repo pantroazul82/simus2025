@@ -1,0 +1,27 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.Servicios.NoticiasDataDTO>
+<div class="row">
+    <div class="col-md-12 caja_morada">Eventos recientes...</div>
+</div>
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-md-12 fecha_mini ">@item.FechaInicio - @item.FechaFinal </div>
+            <div class="col-md-12 noticia_mini">@item.Titulo</div>
+            <div class="row">
+
+                <div class="col-md-12 texto_noticias">
+                  @item.Descripcion
+                </div>
+            </div>
+
+        </div>
+    }
+}
+
+<div class="row fa-3x">
+    <div class="col-md-6 fa-regular fa-circle-right fa-flip-horizontal">    </div>
+    <div class="col-md-6 fa-regular fa-circle-right">
+    </div>
+</div>

@@ -1,0 +1,95 @@
+﻿@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridParticipacion";
+        settings.CallbackRouteValues = new { Controller = "Convocatoria", Action = "GridViewPartialParticipacion", Id = ViewData["convocatoriaId"] };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Entidad", Action = "GridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Entidad", Action = "GridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Entidad", Action = "GridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.Width = System.Web.UI.WebControls.Unit.Percentage(6);
+        //settings.CommandColumn.Caption = "Eliminar";
+
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        settings.KeyFieldName = "Id";
+
+      
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "RelacionadoA";
+            column.Caption = "RelacionadoA";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(20);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Nombre";
+            column.Caption = "Nombre";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(20);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "FechaRegistro";
+            column.Caption = "FechaRegistro";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Usuario";
+            column.Caption = "Usuario";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Descripcion";
+            column.Caption = "Descripcion";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(25);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+
+
+
+        settings.SettingsPager.PageSize = 50;
+        settings.SettingsBehavior.FilterRowMode = GridViewFilterRowMode.Auto;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "50", "100", "150" };
+    });
+
+
+
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()
+
+

@@ -1,0 +1,190 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<WebSImus.Models.ActoresHomeModels>
+<div id="formacion1">
+    <div class="row">
+        <div class="col-md-12 col-sm-6 col-xs-6 titulo_filtros"> Cantidad Registros: @ViewBag.CantidadRegistros</div>
+    </div>
+    <div class="space1">  </div>
+    <div class="row">
+        <div class="col-md-12">
+            @if (Model != null)
+            {
+
+                if (Model.Count > 0)
+                {
+                    if (Model.Count <= 3)
+                    {
+                        <div class="row">
+                            <div class="col-md-12">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col-md-4 col-sm-6 col-xs-12 cuadro_noticia" data-animate="fadeInLeft bounce">
+
+                                        @if (!String.IsNullOrEmpty(item.rutaFoto))
+                                        {
+                                            <a href="@item.verMas">
+                                                <img class="img-responsive img-artistas" src=@item.rutaFoto />
+                                            </a>
+                                        }
+                                        else
+                                        {
+
+                                            <a href="@item.verMas">
+                                                <img class="img-responsive" src="@WebSImus.Models.Usuarios.CreateImage(@item.Imagen, 440, 300) " />
+                                            </a>
+                                        }
+                                        <div class="col-md-4 noticias_description">
+
+
+                                            <span class="fecha_noti">@item.Departamento</span>
+                                            <span class="ciudad_noticia ">·</span>
+                                            <span class="ciudad_noticia ">@item.Municipio</span>
+                                        </div>
+
+                                        <div class="titulo_negro_noticias row">
+                                            <div class="col-md-10 texto_foto_noticias">@item.Nombres</div>
+                                            <a href="@item.verMas"> <div class="col-md-2 fa-lg fa-play" style="color:#019CCD; margin-top: 10px;"></div></a>
+                                        </div>
+                                        <div class="titulo_negro_noticias row">
+                                            <div class="col-md-12 texto_resumen_noticias">@item.Tipo</div>
+                                        </div>
+                                    </div>
+
+
+
+                                }
+                            </div>
+                        </div>
+                    }
+                    if (Model.Count > 3)
+                    {
+                        var filas = 2;
+                        if (Model.Count > 6)
+                        {
+                            filas = 3;
+                        }
+                        var total = Model.Count;
+                        var inicio = 0;
+                        for (int j = 1; j <= filas; j++)
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @if (j == 1)
+                                    {
+                                        total = 3;
+                                        inicio = 0;
+                                    }
+                                    else
+                                    {
+                                        inicio = inicio + 3;
+                                        total = total + 3;
+                                        if (total > Model.Count - 1)
+                                        {
+                                            total = Model.Count - 1;
+                                        }
+                                    }
+                                    @for (int i = inicio; i <= total; i++)
+                                    {
+
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 cuadro_noticia" data-animate="fadeInLeft bounce">
+
+                                            @if (!String.IsNullOrEmpty(Model[i].rutaFoto))
+                                            {
+                                                <a href="@Model[i].verMas">
+                                                    <img src=@Model[i].rutaFoto class="img-responsive" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+
+                                                <a href="@Model[i].verMas">
+                                                    <img src="@WebSImus.Models.Usuarios.CreateImage(@Model[i].Imagen, 440, 300)" class="img-responsive" />
+                                                </a>
+                                            }
+                                            <div class="col-md-4 noticias_description">
+
+
+                                                <span class="fecha_noti">@Model[i].Departamento</span>
+                                                <span class="ciudad_noticia ">·</span>
+                                                <span class="ciudad_noticia ">@Model[i].Municipio</span>
+                                            </div>
+
+                                            <div class="titulo_negro_noticias row">
+                                                <div class="col-md-10 texto_foto_noticias">@Model[i].Nombres</div>
+                                                <a href="@Model[i].verMas"> <div class="col-md-2 fa-lg fa-play" style="color:#019CCD; margin-top: 10px;"></div></a>
+                                            </div>
+                                            <div class="titulo_negro_noticias row">
+                                                <div class="col-md-12 texto_resumen_noticias">@Model[i].Tipo</div>
+                                            </div>
+                                        </div>
+
+                                    }
+
+
+                                </div>
+                            </div>
+                            <div class="space1">  </div>
+                        }
+                    }
+                }
+
+                <div class="space1">  </div>
+
+            }
+
+        </div>
+    </div>
+    <div class="space1">  </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-12 col-sm-9 col-xs-9">
+                <div id="myPager" class="pagination">
+                    @Html.PagedListPager(
+        Model,
+        page => Url.Action(
+                                                               "Escenarios",
+            new
+            {
+                CodDepto = ViewBag.CodDepto,
+                codMunicipio = ViewBag.codMunicipio,
+                tipo = "",
+                page = page
+            }
+        ),
+        new PagedListRenderOptions
+        {
+            LinkToFirstPageFormat = "<<",
+            LinkToPreviousPageFormat = "<",
+            LinkToNextPageFormat = ">",
+            LinkToLastPageFormat = ">>",
+        }
+    )
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //$(function () {
+    $('#myPager').on('click', 'a', function () {
+        $.ajax({
+
+            url: this.href,
+            type: "GET",
+            cache: false,
+        })
+     .done(function (partialViewResult) {
+         //alert("entro aqui 1244");
+         $("#formacion1").html(partialViewResult);
+
+     });
+        return false;
+    });
+    //});
+
+</script>
+

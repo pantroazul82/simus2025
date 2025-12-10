@@ -1,0 +1,366 @@
+﻿@model WebSImus.Models.ConsultaModel
+@{
+
+    Layout = "~/Views/Shared/_LayoutMapa.cshtml";
+}
+
+<style type="text/css">
+    #PanelMapa {
+        height: 700px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-1 col-sm-6 col-xs-6"><img style="padding-top:10px;" src="~/img/iconos/mapas_big.png"></div>
+        <div class="titulo_seccion col-md-11 col-sm-6 col-xs-6">MAPAS</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span class="fa-escuelas fa-lg" style="text-align: left; padding: 5px;"></span>Celebra la Música</div>
+</div>
+
+<div class="col-md-12 well carousel-search">
+
+    <div class=" col-md-8 ">
+
+        <form>
+            <div class="hidden-sm" style="padding-top:20px; ">
+                <div class="btn-group">
+                    @Html.DropDownList("DepartamentoSelector", (SelectList)ViewBag.departamentos, "Departamento", new { @class = "btn btn-default dropdown-toggle btn-select" })
+                </div>
+
+                <div class="btn-group">
+                    @Html.DropDownList("MunicipioSelector", (SelectList)ViewBag.municipios, "Municipio", new { @class = "btn btn-default dropdown-toggle btn-select2" })
+
+                </div>
+                <div class="btn-group">
+                    @Html.DropDownListFor(model => model.selectorAno, (SelectList)ViewBag.listAnos, "Seleccione un valor", new { @class = "btn btn-default dropdown-toggle btn-select2" })
+
+                </div>
+                <div class="btn-group">
+                    <button type="button" id="btnSearch" class="btn btn-primary">Volver a cargar</button>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <form action="#" class="form-horizontal">
+                <div class="panel panel-default">
+
+                    <div id="PanelMapa" class="col-md-12">
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+        <!-- FIN GRILLA  -->
+
+    </div>
+
+    <div id="modalInformacion" class="panel-body">
+        @Html.Action("_DatosConciertosMunicipio", "ReporteMapas", new { Id = "", intAno = "" })
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/x-handlebars-template" id="infowin_escuelas-template">
+
+        <div id="infowin_escuelas">
+
+            @*<div class="col-md-12 col-sm-4 col-xs-9">*@
+
+            <div class="row">
+                <div class="col-md-12 col-sm-6 col-xs-6 titulo_municipio_peque">{{municipio}} - {{departamento}}<img src="../img/iconos/conciertos_window.png" width="50px" height="50px"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6 titulo_infowindow"> Conciertos</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 tabla_blanca2">
+
+                    <div class="col-md-4 col-sm-4 col-xs-4 primera_tabla">
+                        <div class="fa-entidades fa-3x col-md-2 col-sm-2 col-xs-2"></div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-4 primera_tabla">
+                        <div class="fa-mapas  fa-3x col-md-2  col-sm-2 col-xs-2"></div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-4 primera_tabla">
+                        <div class="fa-reloj fa-3x col-md-2  col-sm-2 col-xs-2"></div>
+                    </div>
+                </div>
+            </div>
+            {{#each conciertos}}
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 tabla_blanca2">
+
+                    <div class="col-md-4 col-sm-4 col-xs-4 primera_tabla">
+                        {{entidadOrganizadora}}
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-4 primera_tabla">
+                        {{lugar}}
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-4 primera_tabla">
+                        {{hora}}
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+
+                        @*<a href="{{ver_Mas}}" class="btn vermas" target="_blank">Ver Mas</a>*@
+
+
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <button type="button" class="btn vermas" onclick="streetView('{{geometry.LATITUD}}', '{{geometry.LONGITUD}}')">Ver StreetView</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </script>
+
+    <script type="text/javascript">
+        $(document).on('ONCLICK_MARKER_INLAYER', function (e) {
+            var selector = $('#selectorAno').val();
+            ActualizarListado(e.detail.info.cod_Municipio, selector);
+        });
+
+        function ActualizarListado(varCodMunicipio, varano) {
+
+            $.ajax({
+
+                url: "/ReporteMapas/_DatosConciertosMunicipio",
+                type: "GET",
+                data: { id: varCodMunicipio, intAno: varano }
+            })
+           .done(function (partialViewResult) {
+               $("#modalInformacion").html(partialViewResult);
+               $("#modal_datosconciertos").modal('show');
+               $('body').removeClass('modal-open');
+               $('.modal-backdrop').remove();
+               //$('myModal').modal('toggle').css({ 'width': '800px', 'margin-left': function () { return -($(this).width() / 2); } })
+           });
+
+        }
+
+        $(document).on('ON_COMPLETE_LOAD_COMPONENT', function () {
+            var selector = $('#selectorAno').val();
+            var urlHost = "http://" + window.location.host;
+            window.componentMaps = new com.servinf[window.spaceName].ComponentMaps('#PanelMapa', {
+                'module': com.servinf.ComponentMaps.Config.modules.VIEWER_DATA, //Indica que el mapa va a visualizar capas
+                'request_position': false,  // Realizar la solicitud de la posicion actual del usuario
+                'search_bar': false,        // Barra de busqueda dentro del mapa
+                'streetview_panel': false,  // El panel de streetview en un porcentaje de la pantalla. Ej: 50
+                'map_type': "roadmap",      // Tipo de mapa a iniciar: hybrid, satellite, terrain, roadmap
+                'map_options': false,
+                'initial_position': {
+                    'lat': 5.065781,
+                    'lng': -75.507820,
+                    'zoom': 6
+                },
+                'details': {                // Especificaciones del vista
+                    '_initialPoint': {
+                        'name': "Casa Museo Casa de Nariño",
+                        'routing': true,
+                        'streetview': false,
+                        'Latitud': 4.599872,
+                        'Longitud': -74.072898,
+                        'templateString': "Este es el punto inicial"
+                    },
+                    'layers': [{            // Capas a mostrar
+                        'id': "celebra_mapa",     // Identificador de la capa, sirve para accederla de manera remota.
+                        'name': "Celebra la Música",   // Nombre de la capa
+                        'type': "webservice",           // Tipo de capa (catodb,webservice,cartoviz)
+                        'autoload': true,               // Indica que se cargara de manera automatica la capa al iniciar el mapa
+                        'keyTitle': "municipio",           // Indica el tooltip que llevaran los OVERLAYS (Objetos dibujados en el mapa)
+                        'fitBounds': false,             // Indica que se hara zoom a la capa en donde sea dibujada
+                        'cluster': true,                // True si quieres que clusterize (solo si la capa es de puntos)
+                        'cluster_options': {            // Opciones de cluster
+                            'group_key': "municipio",
+                            'primary_key': "municipio",
+                            'seconday_key': "entidadOrganizadora"
+                        },
+                        'heat_map': false,              // True si quieres que realize el mapa de calor (solo si la capa es de puntos)
+                        'heat_map_options': {           // Opciones del Mapa de calor
+                            'max_zoom': 7               // Zoom Maximo a cambiar de Mapa de calor a puntos
+                        },
+                        'url': urlHost + "/Api/CelebraGeo/" + selector, // Url del servicio (En caso de que sea de tipo 'webservice)
+                        'specifications': {                             // Especificaciones del servicio
+                            'node_list': "celebra"                     // Indica el NODO de responseData sobre cual iterar
+                        },
+                        'thematic': [                   // Tematicos (Indicar Iconos, colores, etc..)
+                             {
+                                 'name': "mapa celebra la música",
+                                 'icon': "http://simus.mincultura.gov.co/img/marcadores/marker_concierto.png",
+                                 'rule': {
+                                     'key': "",
+                                     'operator': "*",
+                                     'value': "",
+                                 }
+                             }
+
+                        ]
+                    }]
+                }
+            });
+        });
+
+
+
+        $(function () {
+            $('#DepartamentoSelector').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#MunicipioSelector');
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("GetMunicipio")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Municipio </option>';
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                    var filter = [{ 'key': 'cod_Departamento', 'operator': 'equals', value: selectedDep }];
+                    componentMaps.getLayers()['celebra_mapa'].filter(filter, function (result) {
+
+                        if (result.length === 0) {
+                            alert("No existe datos");
+                        }
+                    })
+                }
+
+            })
+
+            $('#MunicipioSelector').change(function () {
+                var cod = $(this).val();
+                var filter = [{ 'key': 'cod_Municipio', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['celebra_mapa'].filter(filter, function (result) {
+
+                    if (result.length === 0) {
+                        alert("No existe datos");
+                    }
+                })
+            })
+
+        });
+
+        $('#selectorAno').change(function () {
+            var VarTipo = $('#selectorAno').val();
+            $("#DepartamentoSelector").val("").change();
+            ActualizarMunicipios();
+            $.ajaxSetup({
+                cache: false
+            });
+            $.ajax({
+
+                //url: "/ReporteMapas/MapaCelebra",
+                //type: "GET",
+                //data: { Id: VarTipo }
+            })
+           .done(function (partialViewResult) {
+
+               var selector = $('#selectorAno').val();
+               var urlHost = "http://" + window.location.host;
+               window.componentMaps = new com.servinf[window.spaceName].ComponentMaps('#PanelMapa', {
+                   'module': com.servinf.ComponentMaps.Config.modules.VIEWER_DATA, //Indica que el mapa va a visualizar capas
+                   'request_position': false,  // Realizar la solicitud de la posicion actual del usuario
+                   'search_bar': false,        // Barra de busqueda dentro del mapa
+                   'streetview_panel': false,  // El panel de streetview en un porcentaje de la pantalla. Ej: 50
+                   'map_type': "roadmap",      // Tipo de mapa a iniciar: hybrid, satellite, terrain, roadmap
+                   'map_options': false,
+                   'initial_position': {
+                       'lat': 5.065781,
+                       'lng': -75.507820,
+                       'zoom': 6
+                   },
+                   'details': {                // Especificaciones del vista
+                       '_initialPoint': {
+                           'name': "Casa Museo Casa de Nariño",
+                           'routing': true,
+                           'streetview': false,
+                           'Latitud': 4.599872,
+                           'Longitud': -74.072898,
+                           'templateString': "Este es el punto inicial"
+                       },
+                       'layers': [{            // Capas a mostrar
+                           'id': "celebra_mapa",     // Identificador de la capa, sirve para accederla de manera remota.
+                           'name': "Celebra la Música",   // Nombre de la capa
+                           'type': "webservice",           // Tipo de capa (catodb,webservice,cartoviz)
+                           'autoload': true,               // Indica que se cargara de manera automatica la capa al iniciar el mapa
+                           'keyTitle': "municipio",           // Indica el tooltip que llevaran los OVERLAYS (Objetos dibujados en el mapa)
+                           'fitBounds': false,             // Indica que se hara zoom a la capa en donde sea dibujada
+                           'cluster': true,                // True si quieres que clusterize (solo si la capa es de puntos)
+                           'cluster_options': {            // Opciones de cluster
+                               'group_key': "municipio",
+                               'primary_key': "municipio",
+                               'seconday_key': "entidadOrganizadora"
+                           },
+                           'heat_map': false,              // True si quieres que realize el mapa de calor (solo si la capa es de puntos)
+                           'heat_map_options': {           // Opciones del Mapa de calor
+                               'max_zoom': 7               // Zoom Maximo a cambiar de Mapa de calor a puntos
+                           },
+                           'url': urlHost + "/Api/CelebraGeo/" + selector, // Url del servicio (En caso de que sea de tipo 'webservice)
+                           'specifications': {                             // Especificaciones del servicio
+                               'node_list': "celebra"                     // Indica el NODO de responseData sobre cual iterar
+                           },
+                           'thematic': [                   // Tematicos (Indicar Iconos, colores, etc..)
+                                {
+                                    'name': "mapa celebra la música",
+                                    'icon': "http://simus.mincultura.gov.co/img/marcadores/marker_concierto.png",
+                                    'rule': {
+                                        'key': "",
+                                        'operator': "*",
+                                        'value': "",
+                                    }
+                                }
+
+                           ]
+                       }]
+                   }
+               });
+           });
+        });
+
+        $('#btnSearch').click(function () {
+            componentMaps.getLayers()['celebra_mapa'].filter()
+            $("#DepartamentoSelector").val("").change();
+            ActualizarMunicipios();
+        });
+
+        function ActualizarMunicipios() {
+            var city = $('#MunicipioSelector')
+            var items = '';
+            items = '<option>Municipios </option>';
+            city.empty();
+            city.html(items);
+            city.click();
+
+        }
+    </script>
+}
+
+

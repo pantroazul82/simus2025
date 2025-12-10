@@ -1,0 +1,70 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.FichaAsesoria.RepertorioNuevoDTO>
+
+<div class="mf-table-container">
+    @Html.Hidden("item-to-deleter", "", new { @id = "item-to-deleter" })
+    <table class="mf-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Compositor</th>
+                <th>Arreglista</th>
+                <th>Grado Dificultad</th>
+                <th class="text-center">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Nombre</td>
+                        <td>@item.Compositor</td>
+                        <td>@item.Arreglista</td>
+                        <td>@item.Dificultad</td>
+                        <td class="text-center">
+                            <a href="#" class="mf-action-icon-btn mf-action-delete"
+                               data-id="@item.Id"
+                               onclick="CargarModalRepertorio('@item.Id'); mostrarModalRepertorio(); return false;">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div id="modalConfirmarRepertorio" class="modal fade" style="display:none;" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content card">
+            <div class="mf-modal-body">
+                <p>
+                    Está a punto de eliminar un elemento de su lista de repertorios musicales.<br />
+                    <strong>Tenga en cuenta que esta acción no se puede revertir.</strong>
+                </p>
+            </div>
+            <div class="mf-modal-footer">
+                <button type="button" class="btn btn-warning" onclick="ocultarModalRepertorio()">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button type="button" id="myDeleteForma" class="btn mf-btn-danger" onclick="EliminarRepertorios(); ocultarModalRepertorio();">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function mostrarModalRepertorio() {
+        $('#modalConfirmarRepertorio').fadeIn().addClass('show');
+    }
+
+    function ocultarModalRepertorio() {
+        $('#modalConfirmarRepertorio').fadeOut().removeClass('show');
+    }
+</script>
+

@@ -1,0 +1,32 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="error-container">
+    <div class="error-code">Error</div>
+    <div class="error-text push-down-20">¡Uy! Algo salió mal</div>
+
+    <!-- START PANEL WITH CONTROL CLASSES -->
+    <div class="panel panel-default panel-toggled">
+        <a href="#" class="panel-collapse">
+            <div class="panel-heading text-info">
+                Lamentamos la interrupción de tu navegación. Ya estamos al tanto de este error.
+            </div>
+        </a>
+        <div class="panel-body">
+            <div class="error-subtext">
+                <p>Controller = @Model.ControllerName</p>
+                <p>Message = @Model.Exception.Message</p>
+                <p>Detalle :</p>
+                <pre>@Model.Exception.StackTrace</pre> 
+            </div>
+        </div>
+    </div>
+    <!-- END PANEL WITH CONTROL CLASSES -->
+</div>  
+
+

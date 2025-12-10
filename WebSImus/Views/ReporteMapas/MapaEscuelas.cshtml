@@ -1,0 +1,543 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<style type="text/css">
+    #PanelMapa {
+        height: 700px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-1 col-sm-6 col-xs-6"><img style="padding-top:10px;" src="~/img/iconos/mapas_big.png"></div>
+        <div class="titulo_seccion col-md-11 col-sm-6 col-xs-6">MAPAS</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span class="fa-escuelas fa-lg" style="text-align: left; padding: 5px;"></span>Escuelas de música</div>
+</div>
+
+<div class="col-md-12 well carousel-search">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="usuarios col-md-15 col-sm-3">
+                <a href="#" id="TipoIcono1">
+                    <div class="iconos_usuarios fa-brands fa-bluesky fa-2x"> </div>
+                </a>
+                <a href="#" id="Tipo1"> <p class="titulo_porcentaje"> Escuela municipal de música </p> </a>
+
+            </div>
+
+            <div class="usuarios col-md-15 col-sm-3">
+                <a href="#" id="TipoIcono2">
+                    <div class="iconos_usuarios fa-brands fa-bluesky fa-2x"></div>
+                </a>
+                <a href="#" id="Tipo2"><p class="titulo_porcentaje">Escuela comunitaria</p></a>
+
+            </div>
+            <div class="usuarios col-md-15 col-sm-3">
+                <a href="#" id="TipoIcono3">
+                    <div class="iconos_usuarios fa-brands fa-bluesky fa-2x"></div>
+                </a>
+                <a href="#" id="Tipo3"><p class="titulo_porcentaje">Institución educativa</p>  </a>
+
+            </div>
+
+            <div class="usuarios col-md-15 col-sm-3">
+                <a href="#" id="TipoIcono4">
+                    <div class="iconos_usuarios fa-brands fa-bluesky fa-2x"></div>
+                </a>
+                <a href="#" id="Tipo4"><p class="titulo_porcentaje">Conservatorio</p></a>
+
+            </div>
+            <div class="usuarios col-md-15 col-sm-3">
+                <a href="#" id="TipoIcono5">
+                    <div class="iconos_usuarios fa-brands fa-bluesky fa-2x"></div>
+                </a>
+                <a href="#" id="Tipo5">    <p class="titulo_porcentaje">Escuela virtual</p></a>
+
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="usuarios col-md-15 col-sm-3">
+                <a href="#" id="TipoIcono6">
+                    <div class="iconos_usuarios fa-brands fa-bluesky fa-2x"></div>
+                </a>
+                <a href="#" id="Tipo6">   <p class="titulo_porcentaje">Formación técnica/tecnológica </p></a>
+
+            </div>
+            <div class="usuarios col-md-15 col-sm-3">
+                <a href="#" id="TipoIcono7">
+                    <div class="iconos_usuarios fa-brands fa-bluesky fa-2x"> </div>
+                </a>
+                <a href="#" id="Tipo7"><p class="titulo_porcentaje ">Formación profesional</p></a>
+
+            </div>
+            <div class="usuarios col-md-15 col-sm-3">
+                <a href="#" id="TipoIcono10">
+                    <div class="iconos_usuarios fa-brands fa-bluesky fa-2x"></div>
+                </a>
+                <a href="#" id="Tipo10">  <p class="titulo_porcentaje">Escuelas de música (Privada)</p></a>
+
+            </div>
+
+            <div class="usuarios col-md-15 col-sm-3">
+                <a href="#" id="TipoIcono9">
+                    <div class="iconos_usuarios fa-brands fa-bluesky fa-2x"></div>
+                </a>
+                <a href="#" id="Tipo9">   <p class="titulo_porcentaje">Centro musical Batuta</p></a>
+
+            </div>
+            <div class="usuarios col-md-15 col-sm-3">
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class=" col-md-6 ">
+
+            <form>
+                <div class="hidden-sm" style="padding-top:20px; ">
+                    <div class="btn-group">
+                        @Html.DropDownList("DepartamentoSelector", (SelectList)ViewBag.departamentos, "Departamento", new { @class = "btn btn-default dropdown-toggle btn-select" })
+                    </div>
+
+                    <div class="btn-group">
+                        @Html.DropDownList("MunicipioSelector", (SelectList)ViewBag.municipios, "Municipio", new { @class = "btn btn-default dropdown-toggle btn-select2" })
+
+                    </div>
+
+                    @*<div class="btn-group">
+                        <button type="button" id="btnSearch" class="btn btn-primary">Volver a cargar</button>
+                    </div>*@
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <form action="#" class="form-horizontal">
+                <div class="panel panel-default">
+
+                    <div id="PanelMapa" class="col-md-12">
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+        <!-- FIN GRILLA  -->
+
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/x-handlebars-template" id="infowin_escuelas-template">
+        <div id="infowin_escuelas">
+            <div class="col-md-12 col-sm-4 col-xs-9">
+                @*<div class="modal-header">
+                        <div class="img-responsive">
+                            <img src="../img/agrupacion.jpg" class="img-responsive" alt="escuela" />
+                        </div>
+                    </div>*@
+                <div class="titulo_director">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{nombre}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 titulo_escuela">
+                        <div class="col-md-2 fa-escuelas fa-2x">  </div>
+                        <div class="col-md-10 texto_tipo"> {{tipoEscuela}} </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="social-bar">
+                        <div class="row">
+                            <div class="fa-mapas fa-2x col-md-2"></div> <div class="col-md-10 social-txt">{{direccion}}, {{municipio}}, {{departamento}}    </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="fa-celular fa-2x col-md-2"></div> <div class="col-md-10 social-txt"> {{telefono}} </div>
+                        </div>
+                        <div class="row">
+                            <div class="fa-correo fa-2x col-md-2"></div> <div class="col-md-10 social-txt">{{correoElectronico}}  </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            {{#if urlFacebook}}
+                            <div class="col-md-4 col-sm-4 col-xs-4"><a href={{urlFacebook}} target="_blank"><span class="fa-face fa-2x"></span></a> </div>
+                            {{/if}}
+                            {{#if urlTwitter}}
+                            <div class="col-md-4 col-sm-4 col-xs-4"><a href={{urlTwitter}} target="_blank"><span class="fa-twitter2 fa-2x"></span></a></div>
+                            {{/if}}
+                            {{#if urlYoutube}}
+                            <div class="col-md-4 col-sm-4 col-xs-4"><a href={{urlYoutube}} target="_blank"><span class="fa-youtube2 fa-2x"></span></a></div>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3 ">
+                            <a href="{{ver_Mas}}" class="btn vermas" target="_blank">Ver Mas</a>
+                        </div>
+                        <div class="col-md-offset-7">
+                            <button type="button" class="btn btn-default" onclick="streetView('{{geometry.LATITUD}}', '{{geometry.LONGITUD}}')">Ver StreetView</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </script>
+
+    <script type="text/javascript">
+
+
+        $(document).on('ON_COMPLETE_LOAD_COMPONENT', function () {
+            window.componentMaps = new com.servinf[window.spaceName].ComponentMaps('#PanelMapa', {
+                'module': com.servinf.ComponentMaps.Config.modules.VIEWER_DATA, //Indica que el mapa va a visualizar capas
+                'request_position': false,  // Realizar la solicitud de la posicion actual del usuario
+                'search_bar': false,        // Barra de busqueda dentro del mapa
+                'streetview_panel': false,  // El panel de streetview en un porcentaje de la pantalla. Ej: 50
+                'map_type': "roadmap",      // Tipo de mapa a iniciar: hybrid, satellite, terrain, roadmap
+                'map_options': false,
+                'initial_position': {
+                    'lat': 5.065781,
+                    'lng': -75.507820,
+                    'zoom': 6
+                },
+                'details': {                // Especificaciones del vista
+                    '_initialPoint': {
+                        'name': "Casa Museo Casa de Nariño",
+                        'routing': true,
+                        'streetview': false,
+                        'Latitud': 4.599872,
+                        'Longitud': -74.072898,
+                        'templateString': "Este es el punto inicial"
+                    },
+                    'layers': [{            // Capas a mostrar
+                        'id': "escuelas_mapa",     // Identificador de la capa, sirve para accederla de manera remota.
+                        'name': "Escuelas de Música",   // Nombre de la capa
+                        'type': "webservice",           // Tipo de capa (catodb,webservice,cartoviz)
+                        'autoload': true,               // Indica que se cargara de manera automatica la capa al iniciar el mapa
+                        'keyTitle': "nombre",           // Indica el tooltip que llevaran los OVERLAYS (Objetos dibujados en el mapa)
+                        'fitBounds': false,             // Indica que se hara zoom a la capa en donde sea dibujada
+                        'cluster': true,                // True si quieres que clusterize (solo si la capa es de puntos)
+                        'cluster_options': {            // Opciones de cluster
+                            'group_key': "nombre",
+                            'primary_key': "nombre",
+                            'seconday_key': "direccion"
+                        },
+                        'heat_map': false,              // True si quieres que realize el mapa de calor (solo si la capa es de puntos)
+                        'heat_map_options': {           // Opciones del Mapa de calor
+                            'max_zoom': 7               // Zoom Maximo a cambiar de Mapa de calor a puntos
+                        },
+                        'url': "/api/EscuelasGeo",                      // Url del servicio (En caso de que sea de tipo 'webservice)
+                        'specifications': {                             // Especificaciones del servicio
+                            'node_list': "escuelas"                     // Indica el NODO de responseData sobre cual iterar
+                        },
+                        'template_settings': {                          // Infowindow
+                            'element': "infowin_escuelas-template"      // Nodo Plantilla de Handlebars
+                        },
+                        'thematic': [                   // Tematicos (Indicar Iconos, colores, etc..)
+                             {
+                                 'name': "ESCUELAS MUNICIPAL",
+                                 'icon': "@Url.Content("~/img/marcadores/marker_escuela.png")",
+                                 'rule': {
+                                     'key': "tipoEscuelaId",
+                                     'operator': "equals",
+                                     'value': "1",
+                                 }
+                             }, {
+                                 'name': "ESCUELAS PRIVADAS",
+                                 'icon': "@Url.Content("~/img/marcadores/marker_escuela.png")",
+                                 'rule': {
+                                     'key': "tipoEscuelaId",
+                                     'operator': "equals",
+                                     'value': "10",
+                                 }
+                             }, {
+                                 'name': "Institución Educativa",
+                                 'icon': "@Url.Content("~/img/marcadores/institucion_educativa_2.png")",
+                                 'rule': {
+                                     'key': "tipoEscuelaId",
+                                     'operator': "equals",
+                                     'value': "3",
+                                 }
+                             }, {
+                                 'name': "formacion profesional",
+                                 'icon': "@Url.Content("~/img/marcadores/formacion_profesional_2.png")",
+                                 'rule': {
+                                     'key': "tipoEscuelaId",
+                                     'operator': "equals",
+                                     'value': "7",
+                                 }
+                             }, {
+                                 'name': "escuela virtual",
+                                 'icon': "@Url.Content("~/img/marcadores/escuela_virtual_2.png")",
+                                 'rule': {
+                                     'key': "tipoEscuelaId",
+                                     'operator': "equals",
+                                     'value': "5",
+                                 }
+                             }, {
+                                 'name': "escuela tecnica",
+                                 'icon': "@Url.Content("~/img/marcadores/escuela_tecnica_2.png")",
+                                 'rule': {
+                                     'key': "tipoEscuelaId",
+                                     'operator': "equals",
+                                     'value': "6",
+                                 }
+                             }, {
+                                 'name': "escuela comunitaria",
+                                 'icon': "@Url.Content("~/img/marcadores/escuela_comunitaria_2.png")",
+                                 'rule': {
+                                     'key': "tipoEscuelaId",
+                                     'operator': "equals",
+                                     'value': "2",
+                                 }
+                             }, {
+                                 'name': "conservatorio",
+                                 'icon': "@Url.Content("~/img/marcadores/conservatorio_2.png")",
+                                 'rule': {
+                                     'key': "tipoEscuelaId",
+                                     'operator': "equals",
+                                     'value': "4",
+                                 }
+                             }, {
+                                 'name': "CENTRO ORQUESTAL",
+                                 'icon': "@Url.Content("~/img/marcadores/centro_orquestal_2.png")",
+                                 'rule': {
+                                     'key': "tipoEscuelaId",
+                                     'operator': "equals",
+                                     'value': "9",
+                                 }
+                             }
+                        ]
+                    }]//Hasta aqui
+                }
+            });
+        });
+
+
+
+        $(function () {
+
+            $('#DepartamentoSelector').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#MunicipioSelector');
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("GetMunicipio")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+
+                        items = '<option>Municipio </option>';
+
+                        $.each(data, function (i, municipio) {
+                            //alert(municipio.value);
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                    var filter = [{ 'key': 'cod_Departamento', 'operator': 'equals', value: selectedDep }];
+                    componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                        if (result.length === 0) {
+                            alert("No existe datos");
+                        }
+                    })
+                }
+
+            })
+
+            $('#MunicipioSelector').change(function () {
+                var cod = $(this).val();
+                var filter = [{ 'key': 'cod_Municipio', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                    if (result.length === 0) {
+                        alert("No existe datos");
+                    }
+                })
+            })
+
+
+            $('#Tipo1').click(function () {
+                var cod = "1";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+                })
+            });
+
+            $('#TipoIcono1').click(function () {
+                var cod = "1";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+                })
+            });
+            $('#Tipo2').click(function () {
+                var cod = "2";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#TipoIcono2').click(function () {
+                var cod = "2";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Tipo3').click(function () {
+                var cod = "3";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#TipoIcono3').click(function () {
+                var cod = "3";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Tipo4').click(function () {
+                var cod = "4";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#TipoIcono4').click(function () {
+                var cod = "4";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Tipo5').click(function () {
+                var cod = "5";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#TipoIcono5').click(function () {
+                var cod = "5";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Tipo6').click(function () {
+                var cod = "6";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#TipoIcono6').click(function () {
+                var cod = "6";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Tipo7').click(function () {
+                var cod = "7";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#TipoIcono7').click(function () {
+                var cod = "7";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Tipo9').click(function () {
+                var cod = "9";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#TipoIcono9').click(function () {
+                var cod = "9";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Tipo10').click(function () {
+                var cod = "10";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#TipoIcono10').click(function () {
+                var cod = "10";
+                var filter = [{ 'key': 'tipoEscuelaId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['escuelas_mapa'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('a[href="#"]').on('click', function (e) {
+                e.preventDefault();
+            });
+
+        });
+
+        $('#btnSearch').click(function () {
+            componentMaps.getLayers()['escuelas_mapa'].filter()
+            $("#DepartamentoSelector").val("").change();
+            $("#TipoEscuelaSelector").val("").change();
+            ActualizarMunicipios();
+        });
+        function ActualizarMunicipios() {
+            var city = $('#MunicipioSelector')
+            var items = '';
+            items = '<option>Municipios </option>';
+            city.empty();
+            city.html(items);
+            city.click();
+
+        }
+    </script>
+}

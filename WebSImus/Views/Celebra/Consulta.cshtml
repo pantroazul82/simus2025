@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Consulta";
+    Layout = "~/Views/Shared/_LayoutGrillaCelebra.cshtml";
+}
+
+<div class="row">
+    <br />
+    <div class="col-md-12">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Listado de eventos</h3>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Sí desea exportar el listado de eventos pulse el siguiente link.. </label>
+                    <div class="col-md-7">
+                        @Html.ActionLink("Exportar", "ExportToPermisos")
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label class="col-md-3 control-label">Departamento @ViewBag.Departamento </label>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+
+                    <div id="Tabla">
+                        @Html.Action("GridViewPartialPermisos")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/globalize/globalize.js")"></script>
+    <script src="@Url.Content("~/Scripts/dx.webappjs.js")"></script>
+
+}
+
+
+
+

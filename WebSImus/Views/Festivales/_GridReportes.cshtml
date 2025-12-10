@@ -1,0 +1,36 @@
+@model IEnumerable<WebSImus.Models.FestivalReporteItemViewModel>
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridReportesFestivales";
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.CallbackRouteValues = new { Controller = "Festivales", Action = "GridReportesPartial" };
+
+        settings.SettingsPager.PageSize = 30;
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "20", "30", "50" };
+
+        settings.KeyFieldName = "NombreFestival";
+
+        // Columnas principales para visualización
+        settings.Columns.Add(c => { c.FieldName = "Organizacion"; c.Caption = "Organizaci&oacute;n"; c.Width = System.Web.UI.WebControls.Unit.Percentage(10); });
+        settings.Columns.Add(c => { c.FieldName = "NombreFestival"; c.Caption = "Nombre del festival"; c.Width = System.Web.UI.WebControls.Unit.Percentage(12); });
+        settings.Columns.Add(c => { c.FieldName = "VersionNumero"; c.Caption = "N&uacute;mero versi&oacute;n"; c.Width = System.Web.UI.WebControls.Unit.Percentage(6); });
+        settings.Columns.Add(c => { c.FieldName = "NombreVersion"; c.Caption = "Nombre de la versi&oacute;n"; c.Width = System.Web.UI.WebControls.Unit.Percentage(10); });
+        settings.Columns.Add(c => { c.FieldName = "FechaInicio"; c.Caption = "Fecha Inicio"; c.Width = System.Web.UI.WebControls.Unit.Percentage(8); });
+        settings.Columns.Add(c => { c.FieldName = "FechaFin"; c.Caption = "Fecha Fin"; c.Width = System.Web.UI.WebControls.Unit.Percentage(8); });
+        settings.Columns.Add(c => { c.FieldName = "Departamento"; c.Caption = "Departamento"; c.Width = System.Web.UI.WebControls.Unit.Percentage(9); });
+        settings.Columns.Add(c => { c.FieldName = "Municipio"; c.Caption = "Municipio"; c.Width = System.Web.UI.WebControls.Unit.Percentage(9); });
+        settings.Columns.Add(c => { c.FieldName = "Tipologia"; c.Caption = "Tipolog&iacute;a"; c.Width = System.Web.UI.WebControls.Unit.Percentage(9); });
+        settings.Columns.Add(c => { c.FieldName = "TipoOrganizador"; c.Caption = "Tipo Organizador"; c.Width = System.Web.UI.WebControls.Unit.Percentage(9); });
+        settings.Columns.Add(c => { c.FieldName = "Director"; c.Caption = "Director"; c.Width = System.Web.UI.WebControls.Unit.Percentage(10); });
+    });
+}
+@grid.Bind(Model).GetHtml()

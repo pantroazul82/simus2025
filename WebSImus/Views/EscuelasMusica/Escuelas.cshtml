@@ -1,0 +1,472 @@
+﻿@model WebSImus.Models.Escuelas
+
+@{
+    ViewBag.Title = "Escuelas de música";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+
+@using (Html.BeginForm("Escuelas", "EscuelasMusica", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+
+    <!-- Breadcrumb modernizado -->
+    <div class="modern-breadcrumb">
+        <div class="breadcrumb-item">
+            @Html.ActionLink("Inicio", "Index", "Inicio", null, new { @class = "breadcrumb-link" })
+            <i class="fas fa-chevron-right breadcrumb-separator"></i>
+        </div>
+        <div class="breadcrumb-item">
+            @Html.ActionLink("Escuelas", "Consulta", "EscuelasMusica", null, new { @class = "breadcrumb-link" })
+            <i class="fas fa-chevron-right breadcrumb-separator"></i>
+        </div>
+        <div class="breadcrumb-item current">
+            <span class="breadcrumb-current">@ViewBag.NuevoTitulo</span>
+        </div>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="modern-form-container">
+        <div class="form-header">
+            <h2 class="form-title">
+                <i class="fas fa-music"></i> @ViewBag.NuevoTitulo
+            </h2>
+            <p class="form-subtitle">Complete la información requerida en cada paso para registrar la escuela de música</p>
+        </div>
+
+        <!-- Wizard de pasos -->
+        <div class="wizard-container">
+            <div class="wizard-progress">
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 14.3%"></div>
+                </div>
+            </div>
+
+            <div class="wizard-steps">
+                <div class="step-item active" data-step="1" id="step1">
+                    <div class="step-circle">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <div class="step-label">
+                        <span class="step-title">Datos Básicos</span>
+                        <span class="step-description">Información general</span>
+                    </div>
+                </div>
+
+                <div class="step-item" data-step="2" id="step2">
+                    <div class="step-circle">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="step-label">
+                        <span class="step-title">Beneficiarios</span>
+                        <span class="step-description">Población objetivo</span>
+                    </div>
+                </div>
+
+                <div class="step-item" data-step="3" id="step3">
+                    <div class="step-circle">
+                        <i class="fas fa-school-flag"></i>
+                    </div>
+                    <div class="step-label">
+                        <span class="step-title">Organización</span>
+                        <span class="step-description">Estructura organizativa</span>
+                    </div>
+                </div>
+
+                <div class="step-item" data-step="4" id="step4">
+                    <div class="step-circle">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="step-label">
+                        <span class="step-title">Formación</span>
+                        <span class="step-description">Programas educativos</span>
+                    </div>
+                </div>
+
+                <div class="step-item" data-step="5" id="step5">
+                    <div class="step-circle">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="step-label">
+                        <span class="step-title">Infraestructura</span>
+                        <span class="step-description">Instalaciones y equipos</span>
+                    </div>
+                </div>
+
+                <div class="step-item" data-step="6" id="step6">
+                    <div class="step-circle">
+                        <i class="fas fa-compact-disc"></i>
+                    </div>
+                    <div class="step-label">
+                        <span class="step-title">Giras y Productos</span>
+                        <span class="step-description">Presentaciones y creaciones</span>
+                    </div>
+                </div>
+
+                <div class="step-item" data-step="7" id="step7">
+                    <div class="step-circle">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="step-label">
+                        <span class="step-title">Asesoría Técnica</span>
+                        <span class="step-description">Apoyo especializado</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido del paso actual -->
+        <div class="step-content">
+            @Html.Partial("_EscuelaDatosBasicos", Model)
+        </div>
+    </div>
+}
+
+<!-- Estilos CSS -->
+<style>
+    /* Breadcrumb moderno */
+    .modern-breadcrumb {
+        background: #f8f9fa;
+        padding: 15px 25px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .breadcrumb-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .breadcrumb-link {
+        color: #4b3c8c;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+
+    .breadcrumb-link:hover {
+        color: #281e52;
+        text-decoration: none;
+    }
+
+    .breadcrumb-separator {
+        color: #6c757d;
+        font-size: 12px;
+    }
+
+    .breadcrumb-current {
+        color: #6c757d;
+        font-weight: 500;
+    }
+
+    /* Contenedor principal */
+    .modern-form-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #ecf0f1;
+    }
+
+    .form-title {
+        color: #4b3c8c;
+        font-weight: 600;
+        margin-bottom: 10px;
+        font-size: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .form-subtitle {
+        color: #6c757d;
+        font-size: 16px;
+        margin: 0;
+    }
+
+    /* Wizard de pasos */
+    .wizard-container {
+        margin-bottom: 40px;
+    }
+
+    .wizard-progress {
+        margin-bottom: 30px;
+    }
+
+    .progress-bar-container {
+        width: 100%;
+        height: 4px;
+        background-color: #ecf0f1;
+        border-radius: 2px;
+        overflow: hidden;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #4b3c8c 0%, #6c5ce7 100%);
+        border-radius: 2px;
+        transition: width 0.5s ease;
+    }
+
+    .wizard-steps {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .step-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        flex: 1;
+        min-width: 120px;
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .step-item:hover {
+        background-color: #f8f9fa;
+    }
+
+    .step-circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #ecf0f1;
+        color: #6c757d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        margin-bottom: 10px;
+        transition: all 0.3s;
+    }
+
+    .step-item.active .step-circle {
+        background-color: #4b3c8c;
+        color: white;
+        box-shadow: 0 0 0 4px rgba(75, 60, 140, 0.2);
+    }
+
+    .step-item.completed .step-circle {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .step-label {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .step-title {
+        font-weight: 600;
+        color: #34495e;
+        font-size: 14px;
+        line-height: 1.2;
+    }
+
+    .step-description {
+        font-size: 12px;
+        color: #6c757d;
+        line-height: 1.2;
+    }
+
+    .step-item.active .step-title {
+        color: #4b3c8c;
+    }
+
+    /* Contenido del paso */
+    .step-content {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 30px;
+        min-height: 400px;
+    }
+
+   
+    /* Animaciones adicionales */
+    .step-item {
+        position: relative;
+    }
+
+    .step-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 25px;
+        right: -50%;
+        width: 100%;
+        height: 2px;
+        background-color: #ecf0f1;
+        z-index: -1;
+    }
+
+    .step-item.completed:not(:last-child)::after {
+        background-color: #4b3c8c;
+    }
+
+
+</style>
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/smartwizard/jquery.smartWizard-2.0.js")"></script>
+
+
+    <script type="text/javascript">
+        $(function () {
+            $("#btnBuscarMapa").click(function () {
+                $('#Latitud').val("");
+                $('#Longitud').val("");
+                dialogMap.show({
+                    coord_separator: ".",
+                    initial: { // Inidica llos parametros de entrada del componente en funcion de selector de JQuery
+                        'address': "#Direccion",
+                        'municipality': "#MunicipioSelector",
+                        'department': "#DepartamentoSelector",
+                        'latitude': "#Latitud",
+                        'longitude': "#Longitud"
+                    },
+                    target: { // Nodos(Inputs) objetivo en el cual se va a volcar la informacion
+                        "Latitud": "marker.getPosition().lat()",
+                        "Longitud": "marker.getPosition().lng()",
+                        "Direccion": "marker.info.address",
+                    },
+                    onComplete: function () { },
+                    onAccept: function (self, marker) {
+
+                    }
+                });
+            });
+            //$('.page-container').addClass('page-navigation-toggled page-container-wide');
+            $('#encabezado').css("background-image", "url(../assets/images/ocean.jpg)");
+            $('#encabezado').css("background-size", "cover");
+            $('#encabezado').css("background-position", "0 50%");
+            $('#AnoValue').attr('data-live-search', true)
+            //$('.panel-colorful').css("height", "1570px");
+
+            $(window).resize(function () { // Remover alto del panel cuando la ventana cambie de tamaño
+                $('.stepContainer').css("height", "");
+            });
+        });
+
+
+        $(function () {
+
+            $('#DepartamentoSelector').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#MunicipioSelector');
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("GetMunicipio")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+
+                        items = '<option>Seleccione un valor </option>';
+
+                        $.each(data, function (i, municipio) {
+                            //alert(municipio.value);
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+
+                        city.empty();
+                        city.html(items);
+                        city.click();
+                        //city.removeAttr('disabled');
+
+                    });
+
+                }
+
+            })
+
+            $('#MunicipioSelector').change(function () {
+                var selectedMun = $(this).val();
+
+                if (selectedMun != null && selectedMun != '') {
+                    CargarEscuelas(selectedMun);
+                }
+
+            })
+        });
+
+        function CargarEscuelas(varMunicipio) {
+
+            $.ajax({
+
+                url: "/EscuelasMusica/_ValidacionEscuelas",
+                type: "GET",
+                data: { CodMunicipio: varMunicipio }
+            })
+           .done(function (partialViewResult) {
+               $("#panelAgregar").html(partialViewResult);
+
+               $('#modalValidacionEscuelas').modal({ show: true });
+
+
+           });
+
+        }
+
+        function SolicitarPermisos(varEscuelaId) {
+            var varCodMunicipio = $('#MunicipioSelector').val();
+            var url = '@Url.Action("AgregarUsuario", "EscuelasMusica")';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    EscuelaId: varEscuelaId, CodMunicipio: varCodMunicipio
+                },
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        $("#modalValidacionEscuelas").modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
+                        alert("Se realizo la solicitud con éxito.")
+                        window.location.href = '/EscuelasMusica/Consulta';
+                    }
+                },
+
+            });
+
+        }
+        $('#imagenPerfil').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 1024,
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+        });
+
+    </script>
+
+
+}

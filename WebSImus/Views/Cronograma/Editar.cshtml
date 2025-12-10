@@ -1,0 +1,450 @@
+﻿@model SM.LibreriaComun.DTO.EntidadesOperadoras.CronogramaDTO
+@{
+    ViewBag.Title = " Cronograma";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Editar", "Cronograma", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Cronograma", "Index", "Cronograma", new { Id = Model.ActividadId }, null)</li>
+        <li>@Html.ActionLink("Ver Actividad", "Editar", "Actividad", new { Id = Model.ActividadId }, null)</li>
+    </ul>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.ActionLink("Asistencia", "Asistencia", "Asitencia", new { Id = Model.Id }, new { @class = "btn btn-warning glyphicon glyphicon-plus-sign" })
+                @Html.ActionLink("Evaluación", "Evaluacion", "Asitencia", new { Id = Model.Id }, new { @class = "btn btn-warning glyphicon glyphicon-plus-sign" })
+                @Html.ActionLink("Nuevo", "Crear", "Cronograma", new { Id = Model.ActividadId }, new { @class = "btn btn-success glyphicon glyphicon-plus-sign" })
+                @Html.ActionLink("Ver cronogramas", "Index", "Cronograma", new { Id = Model.ActividadId }, new { @class = "btn btn-success glyphicon glyphicon-plus-sign" })
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ActividadId)
+        @Html.HiddenFor(model => model.TipoActividadID)
+        <div class="panel-body" id="panelEditar">
+            @Html.Partial("_Datos", Model)
+            <div class="panel-footer">
+                <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("_DatosResponsable", Model)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("_DatosParticipantes", Model)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("_AgregarDocumentos", Model.Documentos)
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default" id="panelMasterDotacion">
+        <div class="row push-down-20">
+            <h3><span class="fa-representante fa-2x"></span> Dotación</h3>
+            <ul class="breadcrumb">
+                <li>@Html.ActionLink("Exportar", "Exportar", "Cronograma", new { Id = Model.Id }, null)</li>
+            </ul>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12 col-xs-12">
+
+                <a href="#" id="btnAgregarDotacion" class="btn btn-success glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#modal_datosContenido" onclick="javascript: CargarModalDotacion('0');" title="Agregar/editar contenido"> Agregar/Editar </a>
+            </div>
+        </div>
+        <div class="row push-up-20">
+            <div class="col-md-12">
+                <div id="DivTablaDotacion" class="panel-body">
+                    @Html.Action("TablaDotacion", new { CronogramaId = Model.Id, EliminarId = 0 })
+                </div>
+                <div id="panelAgregarDotacion" class="panel-body">
+                    @Html.Action("_AgregarDotacion", new { Id = 0, CronogramaId = Model.Id })
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var valor = $("#TipoActividadID").val();
+          
+            if (valor == "209")
+                $("#panelMasterDotacion").show();
+            else
+                $("#panelMasterDotacion").hide();
+        });
+
+        function DotacionAgregar(varID) {
+
+            var varCronogramaId = '@Model.Id';
+            var registro1 = {
+                Id: varID,
+                CronogramaUd: varCronogramaId,
+                TipoId: $("#TipoId").val(),
+                ElementoId: $("#ElementoId").val(),
+                FormatoId: $("#FormatoId").val(),
+                Marca: $("#Marca").val(),
+                Referencia: $("#Referencia").val(),
+                Serial: $("#Serial").val(),
+                Garantia: $("#Garantia").val(),
+                Diagnostico: $("#Diagnostico").val(),
+                Precio: $("#Precio").val(),
+                Aprobado: $("#Aprobado").val(),
+                Proveedor: $("#Proveedor").val(),
+                Descripcion: $("#Descripcion").val()
+
+            };
+
+            var url = '@Url.Action("AgregarDotacion", "Cronograma")';
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    Id: varID, CronogramaId: varCronogramaId, model: registro1
+                },
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        ActualizarlistadoCronograma(0);
+                    }
+                },
+
+            });
+        }
+        function ActualizarlistadoCronograma(varEliminar) {
+            var varCronogramaId = '@Model.Id';
+
+            $("#TipoId").val("");
+            $("#ElementoId").val("");
+            $("#FormatoId").val("");
+            $("#Marca").val("");
+            $("#Referencia").val();
+            $("#Serial").val("");
+            $("#Garantia").val("");
+            $("#Diagnostico").val("");
+            $("#Precio").val("");
+            $("#Aprobado").val("");
+            $("#Prooveedor").val("");
+            $("#Descripcion").val("");
+
+            $.ajax({
+
+                url: "/Cronograma/TablaDotacion",
+                type: "GET",
+                data: { CronogramaId: varCronogramaId, EliminarId: varEliminar }
+            })
+           .done(function (partialViewResult) {
+
+               $("#DivTablaDotacion").html(partialViewResult);
+
+           });
+        }
+        function CargarModalDotacion(varId) {
+            var varCronogramaId = '@Model.Id';
+            var url = '@Url.Action("_AgregarDotacion", "Cronograma")';
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: { id: varId, CronogramaId: varCronogramaId },
+                success: function (response) {
+
+                },
+                error: function (result) {
+                    alert('ERROR ' + result.status + ' ' + result.statusText);
+                }
+            })
+            .done(function (partialViewResult) {
+                $("#panelAgregarDotacion").html(partialViewResult);
+                $('#modal_datosDotacion').modal('show');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+
+            });
+
+        }
+
+        function EliminarDotacion() {
+            var varId = $('#item-to-deleted').val();
+            ActualizarlistadoContenido(varId);
+        }
+        $('#FechaInicio').datepicker({
+            minDate: 0,
+            maxDate: "+60D",
+            numberOfMonths: 2,
+            format: 'yyyy-mm-dd',
+            onSelect: function (selected) {
+                $("#FechaFin").datepicker("option", "minDate", selected)
+            }
+        })
+
+        $('#FechaFin').datepicker({
+
+            format: 'yyyy-mm-dd',
+            minDate: 0,
+            maxDate: "+60D",
+            numberOfMonths: 2,
+            onSelect: function (selected) {
+                $("#FechaInicio").datepicker("option", "maxDate", selected)
+            }
+        })
+
+
+
+        function ValidaSoloNumeros() {
+            console.log("ValidaSoloNumeros");
+            if ((event.keyCode < 48) || (event.keyCode > 57))
+                event.returnValue = false;
+        }
+
+        $('#Cupo').keypress(function () {
+            ValidaSoloNumeros();
+        });
+
+        $("#FechaFin").change(function () {
+            var startDate = document.getElementById("FechaInicio").value;
+            var endDate = document.getElementById("FechaFin").value;
+
+            if ((Date.parse(startDate) > Date.parse(endDate))) {
+                alert("La fecha final no puede ser menor a la inicial");
+                document.getElementById("FechaFin").value = "";
+            }
+        });
+
+
+        $(function () {
+
+            $('#Cod_departamento').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#Cod_municipio');
+                var varescuela = $('#Escuela');
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerMunicipio", "Agente")', { departamento: selectedDep }, function (data) {
+                        var itemescuela = '';
+                        itemescuela = '<option>Seleccione  </option>';
+                        var items = '';
+                        items = '<option>Seleccione  </option>';
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        varescuela.empty();
+                        varescuela.html(itemescuela);
+                        varescuela.click();
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                }
+
+            })
+        });
+
+
+
+        $('#mysubmitResponsable').click(function () {
+            var varServicio = $("#Persona").val();
+
+            if (varServicio == '') {
+                alert("Es obligatorio escribir la identificacion");
+                return;
+            }
+
+            var url = '@Url.Action("agregaragente", "Cronograma")';
+            var varcronogramaId = '@Model.Id';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    atributo: $('#Persona').val(), cronogramaId: varcronogramaId, tipoid: '1'
+                },
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        ActualizarListadoAgenteR(varcronogramaId, 0);
+                    }
+                },
+
+            });
+        });
+
+
+        $('#mysubmitParticipante').click(function () {
+            var varServicio = $("#PersonaP").val();
+
+            if (varServicio == '') {
+                alert("Es obligatorio escribir la identificacion");
+                return;
+            }
+
+            var url = '@Url.Action("agregaragente", "Cronograma")';
+            var varcronogramaId = '@Model.Id';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    atributo: varServicio, cronogramaId: varcronogramaId, tipoid: '2'
+                },
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        ActualizarListadoAgenteP(varcronogramaId, 0);
+                    }
+                },
+
+            });
+        });
+        function ActualizarListadoAgenteR(varcronogramaId, varEliminar) {
+
+            $('#Persona').val("");
+            $.ajax({
+
+                url: "/Cronograma/CargarAgentesResponsable",
+                type: "GET",
+                data: { cronogramaId: varcronogramaId, EliminarId: varEliminar }
+            })
+           .done(function (partialViewResult) {
+               $("#TablaAgenteR").html(partialViewResult);
+
+           });
+        }
+        function ActualizarListadoAgenteP(varcronogramaId, varEliminar) {
+
+            $('#PersonaP').val("");
+            $.ajax({
+
+                url: "/Cronograma/CargarAgentesParticipantes",
+                type: "GET",
+                data: { cronogramaId: varcronogramaId, EliminarId: varEliminar }
+            })
+           .done(function (partialViewResult) {
+               $("#TablaAgenteP").html(partialViewResult);
+
+           });
+        }
+
+
+
+        $(function () {
+            $('#Cod_municipio').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#Escuela');
+                alert("entro aqui");
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerEscuela", "Cronograma")', { municipio: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione  </option>';
+                        $.each(data, function (i, registro) {
+                            items += "<option value='" + registro.value + "'>" + registro.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                }
+
+            })
+        });
+
+        $('#DocumentoEPK').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: false,
+            maxFileSize: 2048,
+            allowedFileExtensions: ['pdf'],
+        });
+
+        $('#btnDocumentoEscuela').click(function () {
+
+            var varcategoria = $("#Tipo").val();
+            var fileUpload = $("#DocumentoEPK").get(0);
+            var files = fileUpload.files;
+
+            // Create FormData object
+            var fileData = new FormData();
+
+            // Looping over all files and add it to FormData object
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+
+            // Adding one more key to FormData object
+            fileData.append('username', 'Manas');
+
+
+            if (varcategoria == '') {
+                alert("El tipo es obligatorio");
+                return;
+            }
+
+            var url = '@Url.Action("AgregarDocumento", "Cronograma")';
+            var VarCronogramaId = '@Model.Id';
+            $.ajax({
+                url: '/Cronograma/AgregarDocumento?id=' + VarCronogramaId + '&cat=' + varcategoria,
+                type: 'POST',
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        ActualizarListadoDocumentos(VarCronogramaId, 0);
+
+
+                    }
+                },
+
+            });
+
+
+        });
+    </script>
+}
+
+
+
+

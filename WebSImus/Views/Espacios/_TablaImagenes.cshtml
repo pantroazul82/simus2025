@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.Circulacion.ImagenDataDTO>
+<div class="panel panel-default">
+    <div class="form-group">
+        <div class="row">
+            <table class="table">
+                @Html.Hidden("item-to-delete-documento", "", new { @id = "item-to-delete-documento" })
+                <thead>
+                    <tr>
+                        <th width="70%">Imagen</th>
+                        <th width="20%">Principal</th>
+                       <th width="10%">Eliminar</th>
+
+                    </tr>
+                </thead>
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img class="img-responsive" src="@WebSImus.Models.Usuarios.CreateImageThumbnail(item.imagen, 80, 80)"/>
+                                </td>
+
+                                <td><input type="checkbox" name="vehicle" value="@item.EsPrincipal"> </td>
+                                <td><a href="" class="fa-trash-a" data-toggle="modal" data-target="#modalConfirmarDocumentos" data-id="@item.ImagenId" onclick="javascript: CargarModalDocumentos('@item.ImagenId');"></a></td>
+
+                            </tr>
+
+
+                        </tbody>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+
+    <div id="modalConfirmarDocumentos" class="modal modal-vcenter fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Esta a punto de eliminar una imagen. <strong>Tenga en cuenta que esta acción no se puede revertir</strong>.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="myDelete" class="btn btn-danger" data-dismiss="modal" onclick="EliminarDocumento()">Eliminar</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

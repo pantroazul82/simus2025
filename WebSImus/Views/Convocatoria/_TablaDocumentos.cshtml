@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.EscuelaDocumentoDTO>
+<div class="panel panel-default">
+    <div class="form-group">
+        <div class="row">
+            <table class="table">
+                @Html.Hidden("item-to-delete-documento", "", new { @id = "item-to-delete-documento" })
+                <thead>
+                    <tr>
+                        <th width="30%">Nombre Archivo</th>
+                        <th width="20%">Fecha</th>
+                        <th width="30%">Categoria</th>
+                        <th width="10%">Eliminar</th>
+
+                    </tr>
+                </thead>
+
+                @if (Model != null)
+                {
+                    foreach (SM.LibreriaComun.DTO.EscuelaDocumentoDTO item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@Html.ActionLink(item.NombreArchivo, "Descargar", "Documento", new { id = item.DocumentoId }, new { title = string.Format("Descargar archivo: {0}\nFecha registro: {1}\nTamaño: {2} bytes", item.NombreArchivo, item.Fecha.ToString("dd/MM/yyyy"), item.TamanoArchivo) })</td>
+                                <td>@item.FechaRegistro</td>
+                                <td>@item.Categoria</td>
+                                <td><a href="" class="fas fa-trash-alt" data-toggle="modal" data-target="#modalConfirmarDocumentos" data-id="@item.DotacionDocumentoId" onclick="javascript: CargarModalDocumentos('@item.DotacionDocumentoId');"></a></td>
+
+                            </tr>
+
+
+                        </tbody>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+
+    <div id="modalConfirmarDocumentos" class="modal modal-vcenter fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Esta a punto de eliminar un documento. <strong>Tenga en cuenta que esta acción no se puede revertir</strong>.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="myDelete" class="btn btn-danger" data-dismiss="modal" onclick="EliminarDocumento()">Eliminar</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

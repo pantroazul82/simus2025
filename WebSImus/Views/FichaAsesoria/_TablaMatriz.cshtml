@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.FichaAsesoria.MatrizNuevoDTO>
+
+<div class="mf-table-container">
+    @Html.Hidden("item-to-deletem", "", new { @id = "item-to-deletem" })
+
+    <table class="mf-table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Fortalezas</th>
+                <th>Dificultades</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Clasificacion</td>
+                        <td>@item.Fortaleza</td>
+                        <td>@item.Dificultades</td>
+                        <td>
+                            <a href="#" class="mf-action-icon-btn" title="Editar la información"
+                               data-toggle="modal" data-target="#modal_datosMatriz"
+                               onclick="CargarModalMatriz('@item.Id', '@item.TipoM')">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div id="modalConfirmarMatriz" class="modal fade animated fadeIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content card">
+            <div class="mf-modal-body">
+                <p>
+                    Está a punto de eliminar un elemento de su lista de instrumentos.
+                    <strong>Tenga en cuenta que esta acción no se puede revertir.</strong>
+                </p>
+            </div>
+            <div class="mf-modal-footer">
+                <button type="button" class="btn border" data-dismiss="modal">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button type="button" id="myDeleteForma" class="btn mf-btn-danger" data-dismiss="modal" onclick="EliminarInstrumentos()">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

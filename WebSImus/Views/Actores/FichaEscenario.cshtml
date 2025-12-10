@@ -1,0 +1,264 @@
+﻿@using SM.LibreriaComun.DTO;
+
+@model EscenariohomeDTO
+@{
+    ViewBag.Title = "FichaEscenario";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<div class="page-content">
+    <div class="row">
+        <!-- ficha escuela -->
+        <div class="col-md-12">
+
+
+            <div class="col-md-2 col-sm-5 col-xs-5"><img style="padding-top:10px; padding-left:30px;" class="img-responsive" src="~/img/iconos/escenario.png"></div>
+
+
+            <div class="titulo_seccion col-md-10 col-sm-7 col-xs-7">Escenarios</div>
+
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span style="text-align: left; padding: 5px;"></span>SIMUS</div>
+    </div>
+    <div class="row">
+
+        <div class="page-content-wrap">
+
+
+
+            <!-- page content holder -->
+            <div class="page-content-holder">
+
+
+                <div class="row">
+
+
+                    <div class="col-md-12 col-sm-12 col-xs-12 this-animate" data-animate="fadeInLeft bounce">
+                        <div class=" fondo_caja_item row">
+                            <div class="row">
+                                <div class="col-md-1 col-sm-1 col-xs-1 fa-lg fa-play" style="color:#4c2c54; margin-top:18px;"></div>
+                                <div class="col-md-5 col-sm-12 col-xs-12 titulo_escenario" style="margin-top: 15px;">
+                                    @Html.DisplayFor(m => m.Nombre)
+                                    <div class=" col-md-6 divider"></div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6 parrafo_ficha" style="text-align: left;">@Html.DisplayFor(m => m.Clasificacion)</div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6 parrafo_ficha" style="text-align: left;">@Html.DisplayFor(m => m.Municipio)    <span class="ciudad_noticia ">@Html.DisplayFor(m => m.Departamento)</span></div>
+                                </div>
+
+                                <div class="col-md-6" style="margin-top: 35px;">
+
+                                    <div class="col-md-4 col-xs-4 col-sm-4 fa-telephone fa-2x" style="color: #4C2C54;">
+                                        <span class="parrafo_ficha">"@Model.Telefono"</span>
+                                    </div>
+                                    <div class="col-md-4 col-xs-4 col-sm-4 fa-web fa-2x" style="color: #4C2C54">
+                                        <span class="parrafo_ficha"><a href="@Model.PaginaWeb" target="_blank">website </a></span>
+                                    </div>
+                                    <div class="col-md-4 col-xs-4 col-sm-4 fa-reloj fa-2x  " style="color: #4C2C54">
+                                        <span class="parrafo_ficha">"@Model.HoraApertura" a "@Model.HoraCierre"</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 col-sm-6  parrafo_ficha">
+                                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                        <!-- Indicators -->
+                                        <ol class="carousel-indicators">
+                                            @if (Model.banner != null)
+                                            {
+                                                var j = 0;
+                                                foreach (var item in Model.banner)
+                                                {
+                                                    if (j == 0)
+                                                    {
+                                                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                                    }
+                                                    else
+                                                    {
+                                                     
+                                                        <li data-target="#carousel-example-generic" data-slide-to="@j"></li>
+                                                    }
+                                                    j = j + 1;
+                                                }
+                                            }
+
+                                        </ol>
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner">
+
+                                            @if (Model.banner != null)
+                                            {
+                                                var j = 0;
+                                                foreach (var item in Model.banner)
+                                                {
+                                                    if (j == 0)
+                                                    {
+                                                        <div class="item active">
+                                                            <img class="img-responsive" src="@WebSImus.Models.Usuarios.CreateImageThumbnail(@item.imagen)" />
+                                                            <div class="carousel-caption1 blackbox1 hidden-xs">
+                                                            </div>
+                                                            <div class="carousel-caption1 blackbox2 hidden-md hidden-lg hidden-sm">   </div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="item">
+                                                            <img class="img-responsive" src="@WebSImus.Models.Usuarios.CreateImageThumbnail(@item.imagen)" />
+                                                            <div class="carousel-caption1 blackbox1 hidden-xs">
+
+
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    j = j + 1;
+                                                }
+                                            }
+                                           
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-xs-12 col-sm-12 ">
+                                        <div class="col-md-5 col-xs-5 col-sm-5" style=" margin-top: 10px;">
+                                            Diás de Funcionamiento
+
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" value="">L</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" value="">M</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" value="">M</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" value="">J</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" value="">V</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" value="">S</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" value="">D</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6 col-sm-6 parrafo_ficha">
+
+
+                                    <br><p> <span style="font-weight: bold;"> @Html.DisplayFor(m => m.descripcion)</span></p><br />
+
+                                    <div class="row roll_tooltip">
+                                        <div class="col-md-12 ">
+                                            <div class="col-md-12 col-sm-6  col-xs-12 cabeza_tooltip_grey" style="padding-right: 70px;">
+                                                Responsable
+
+                                            </div>
+                                            <div class="col-md-12  parrafo_ficha">
+                                                @Html.DisplayFor(m => m.NombreActor)
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6 col-sm-6 col-xs-6 ">
+                                                <div class="col-md-12 cabeza_tooltip_grey" style="padding-right: 70px;">
+                                                    Encargado
+
+                                                </div>
+                                                <div class="col-md-12 parrafo_ficha">
+                                                    @Html.DisplayFor(m => m.Contacto)
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-6 ">
+                                                <div class="col-md-12 cabeza_tooltip_grey">
+                                                    Aforo
+
+                                                </div>
+                                                <div class="col-md-12 cuerpo_tooltip_black">
+                                                    @Html.DisplayFor(m => m.Aforo)
+
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12 col-sm-12 " style="padding-top:5px;">
+                                    <div class="col-md-6 col-xs-6 col-sm-6">
+                                        <div class="col-md-2 col-xs-2 col-sm-2 fa-file-pdf fa-2x">
+
+                                        </div>
+                                        @if (Model.documentoId > 0)
+                                        {
+                                            <div class="col-md-10 col-xs-10 col-sm-10" style="padding-top:10px;">
+                                                @Html.ActionLink("Documentos", "Descargar", "Documento", new { Id = Model.documentoId }, new { title = string.Format("Descargar documentos") })
+                                            </div>
+                                        }
+
+
+                                    </div>
+
+                                    <div class="col-md-6 col-xs-6 col-sm-6 ">
+                                        <div class="col-md-2 col-xs-2 col-sm-2 fa-pencil-1 fa-2x">
+
+                                        </div>
+                                        <div class="col-md-10 col-xs-10 col-sm-10" style="padding-top:10px;">
+                                            <span class="parrafo_ficha">@Html.DisplayFor(m => m.Direccion)</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 col-xs-12 col-sm-12 ">
+                                    <div class="row">
+                                        <a href="mailto:@Model.CorreoElectronico">
+                                            <div class="col-md-3 col-xs-3 col-sm-3 fa-correo fa-3x"> </div>
+                                        </a>
+                                        <div class="col-md-3 col-xs-3 col-sm-3 fa-face fa-3x"> </div>
+                                        <div class="col-md-3 col-xs-3 col-sm-3 fa-twitter2 fa-3x"> </div>
+                                        <div class="col-md-3 col-xs-3 col-sm-3 fa-flickr2 fa-3x">  </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ./2 -->
+        </div>
+
+        <div class="space1"></div>  <!-- ./page content wrapper -->
+
+    </div>
+</div>

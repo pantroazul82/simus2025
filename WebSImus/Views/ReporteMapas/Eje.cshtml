@@ -1,0 +1,155 @@
+﻿@model SM.LibreriaComun.DTO.GEO.EjeDTO
+
+@{
+    ViewBag.Title = "Eje";
+    Layout = "~/Views/Shared/_LayoutEstatico.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-1 col-sm-6 col-xs-6"><img style="padding-top:10px;" src="~/img/iconos/mapas_big.png"></div>
+        <div class="titulo_seccion col-md-11 col-sm-6 col-xs-6">Ejes Regionales</div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span class="fa-musical fa-lg" style="text-align: left; padding: 5px;"></span>@Html.DisplayFor(m => m.Eje)</div>
+</div>
+
+
+<div class="col-md-12 well carousel-search">
+    <div class=" row">
+        <div class="col-md-12 col-sm-12 titulo_escuela" style="margin-left:30px;">Reseña</div>
+    </div>
+
+    <div class="row" style="padding-top:30px; margin-left:30px; text-align:justify;">
+        <div class="col-md-6">
+
+            @Html.Raw(ViewBag.resena)
+
+        </div>
+        <div class="col-md-4">
+
+            <!-- Preview Image -->
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                </ol>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="@Model.RutaGaleria1" alt="">
+                    </div>
+                    <div class="item">
+                        <img src="@Model.RutaGaleria2"alt="">
+                    </div>
+                    <div class="item">
+                        <img src="@Model.RutaGaleria3"  alt="">
+
+                    </div>
+                    <div class="item">
+                        <img src="@Model.RutaGaleria4"  alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-header">
+    <div class="row">
+        <div class="col-md-8 col-sm-6 col-xs-6 titulo_audios">   <div class="@Model.RutaMarcador"></div> @Html.DisplayFor(m => m.Eje)</div> 
+        <div class="col-md-4 col-sm-6 col-xs-6 titulo_infowindow"> Audios</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 cabeza_modal">
+
+            <div class="col-md-2 col-sm-2 col-xs-2">
+                Género
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-2">
+                Título
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                Derechos
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                Audio
+            </div>
+        </div>
+    </div>
+
+    @if (Model != null)
+    {
+        var i = "Gris";
+        foreach (SM.LibreriaComun.DTO.GEO.GenerosGeoDTO item in Model.listadoGeneros)
+        {
+            <div class="row">
+                @if (i == "Gris")
+                {
+                    <div class="col-md-12 tabla_gris">
+
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            @item.Genero
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            @item.Titulo
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            @item.Detalle
+                        </div>
+
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <audio controls>
+                                <source src=@item.Ruta type="audio/mpeg" />
+                                <object type="application/x-shockwave-flash" data="media/OriginalMusicPlayer.swf" width="225" height="86">
+                                    <param name="movie" value="media/OriginalMusicPlayer.swf" />
+                                    <param name="FlashVars" value="mediaPath=vincent.mp3" />
+                                </object>
+                            </audio>
+                        </div>
+
+                    </div>
+                    i = "Blanco";
+                }
+                else
+                {
+                    i = "Gris";
+                    <div class="col-md-12 tabla_blanca">
+
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            @item.Genero
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            @item.Titulo
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            @item.Detalle
+                        </div>
+
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <audio controls>
+                                <source src=@item.Ruta type="audio/mpeg" />
+                                <object type="application/x-shockwave-flash" data="media/OriginalMusicPlayer.swf" width="225" height="86">
+                                    <param name="movie" value="media/OriginalMusicPlayer.swf" />
+                                    <param name="FlashVars" value="mediaPath=vincent.mp3" />
+                                </object>
+                            </audio>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        }
+    }
+
+
+</div>
+

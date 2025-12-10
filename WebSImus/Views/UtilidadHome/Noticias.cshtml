@@ -1,0 +1,60 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<SM.LibreriaComun.DTO.Servicios.UtilidadHomeDataDTO>
+@{
+    ViewBag.Title = "Noticias SIMUS";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<div class="modern-form-container">
+    <div class="form-header">
+        <h1 class="form-title">
+            <i class="fas fa-newspaper"></i> Noticias
+        </h1>
+    </div>
+
+    <div class="mf-grid md:mf-grid-cols-3 mf-gap-6">
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="mf-image-container mf-mb-4">
+                    @if (!String.IsNullOrEmpty(item.rutaFoto))
+                    {
+                        <img src="@item.rutaFoto" class="img-responsive" />
+                    }
+                    else
+                    {
+                        <img src="@WebSImus.Models.Usuarios.CreateImageThumbnail(item.Imagen)" class="img-responsive" />
+                    }
+                </div>
+                <div class="text-sm text-gray-800 mb-2">
+                    <span>@item.FechaInicio</span> · <span>@item.Ubicacion</span>
+                </div>
+                <div class="mf-mb-4">
+                    <a href="@Url.Action("Detalle", "UtilidadHome", new { id = item.UtilidadId })" class="text-indigo-600 font-semibold text-xl">
+                        @item.Titulo
+                    </a>
+                </div>
+                <div class="text-sm text-gray-800">@item.Descripcion</div>
+            </div>
+        }
+    </div>
+
+    <div class="mf-form-footer">
+        @Html.PagedListPager(Model, page => Url.Action("Noticias", "UtilidadHome", new { page = page }),
+            new PagedListRenderOptions()
+            {
+                Display = PagedListDisplayMode.IfNeeded,
+                DisplayItemSliceAndTotal = true,
+                ItemSliceAndTotalFormat = "Mostrando Registros {0} a {1} de {2}."
+            })
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/plugins/mixitup/jquery.mixitup.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/appear/jquery.appear.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+}
+
+

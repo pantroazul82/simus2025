@@ -1,0 +1,29 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.EstandarDTO>
+<div class="panel panel-default">
+    <div class="form-group">
+        <div class="row">
+            @Html.Hidden("item-to-delete", "", new { @id = "item-to-delete" })
+
+            @if (Model != null)
+            {
+                foreach (SM.LibreriaComun.DTO.EstandarDTO item in Model)
+                {
+                    <div class="col-lg-4">
+                        <div class="blog-carousel">
+                            <div class="blog-carousel-header">
+                                <div class="blog-carousel-meta">
+                                    <span><i class="fa fa-musical"></i> @(item.Nombre)</span>
+                                    <a href="" class="fa-trash-a" data-toggle="modal" data-id="@item.Id" onclick="javascript: EliminarGeneros('@item.Id');"></a>
+                                </div><!-- end blog-carousel-meta -->
+                            </div><!-- end blog-carousel-header -->
+                            <br />
+                        </div><!-- end blog-carousel -->
+                    </div>
+
+                }
+            }
+        </div>
+    </div>
+
+
+</div>

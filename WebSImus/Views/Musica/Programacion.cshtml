@@ -1,0 +1,249 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<WebSImus.Models.EventoDataModels>
+@{
+    ViewBag.Title = "Programación de Conciertos";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Celebra la Música- programación</title>
+    <link rel="icon" href="~/img/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="@Url.Content("~/css/celebra.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/responsiveslides.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/simus_font.css")" rel="stylesheet">
+    @*<link href="@Url.Content("~/css/bootstrap/bootstrap.css")" rel="stylesheet">*@
+
+</head>
+
+<body>
+    <div class="page-content">
+
+        <br />
+        @Html.ValidationSummary(true)
+        @*<div class="banner-container">
+                <div id="wrapper">
+                    <ul class="rslides" id="slider1">
+                        <li><img src="http://celebralamusica.mincultura.gov.co/Bannerinterno/programa.png" alt="Imagén programación"></li>
+
+                    </ul>
+                </div>
+            </div>*@
+
+        <div class="page-content-wrap bg-light">
+
+            <!-- ./page content wrapper -->
+            <!-- page content wrapper -->
+            <div class="page-content-wrap bg-img-3">
+                <!-- page content holder -->
+                <!-- ./page content wrapper -->
+                <!-- page content wrapper -->
+                <div class="page-content-wrap dark-elements">
+                    <div class="row" style="margin-top:60px; ">
+                        @*<div class="col-md-2 col-sm-12 col-xs-12 texto_noticias_titulo" style=" border-bottom:1px dashed #444;"> </div>*@
+                        <div class="col-md-8 col-sm-12 col-xs-12 texto_noticias_titulo">
+
+                            <div class=" col-md-3 col-sm-4 col-xs-4 btn-group">
+
+                                @Html.DropDownList("CodigoDepartamento", (SelectList)ViewBag.departamentos, "Departamento", new { @class = "btn btn-default dropdown-toggle btn-select2" })
+                            </div>
+
+                            <div class=" col-md-3 col-sm-4 col-xs-4 btn-group">
+
+                                @Html.DropDownList("CodigoMunicipio", (SelectList)ViewBag.municipios, "Municipio", new { @class = "btn btn-default dropdown-toggle btn-select2" })
+                            </div>
+
+                            <div class=" col-md-1 col-sm-4 col-xs-4 btn-group">
+
+                                @Html.DropDownList("periodo", (SelectList)ViewBag.listAnos, "Años", new { @class = "btn btn-default dropdown-toggle btn-select2" })
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- page content holder -->
+
+                    <div class="page-content-holder">
+                        <div class="space1">  </div>
+                        <div class="space1">  </div>
+
+                        <div id="formacionTabla">
+                            @Html.Partial("_PartialResultado", Model)
+                        </div>
+
+                        <div id="modalInformacion" class="panel-body">
+                            @Html.Action("_DetalleArtistas", new { Id = "" })
+                        </div>
+
+                    </div>  <!-- end page content holder -->
+                </div>  <!-- end page-content-wrap dark-elements -->
+            </div>  <!-- end ppage-content-wrap bg-img-3 -->
+        </div>
+
+    </div>
+
+</body>
+</html>
+@Scripts.Render("~/Scripts/jquery")
+
+<script src="@Url.Content("~/Scripts/bootstrap/bootstrap.js")"></script>
+
+<script type="text/javascript">
+
+    $(function () {
+        $('#CodigoDepartamento').change(function () {
+            var selectedDep = $(this).val();
+            var city = $('#CodigoMunicipio');
+
+            if (selectedDep != null && selectedDep != '') {
+                $.getJSON('@Url.Action("ObtenerMunicipio")', { departamento: selectedDep }, function (data) {
+                    var items = '';
+                    items = '<option>Municipio </option>';
+                    $.each(data, function (i, municipio) {
+                        items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                    });
+                    city.empty();
+                    city.html(items);
+                    city.click();
+                    CargarDepartamento(selectedDep);
+                });
+
+            }
+
+        })
+
+
+        $('#CodigoMunicipio').change(function () {
+            var selectedDep = $(this).val();
+           
+            if (selectedDep != null && selectedDep != '') {
+               
+                CargarMunicipio(selectedDep);           
+            }
+        })
+
+        $('#periodo').change(function () {
+            var selectedDep = $(this).val();
+
+            if (selectedDep != null && selectedDep != '') {
+
+                CargarPeriodo();
+            }
+        })
+    });
+
+    function ActualizarListado(varId) {
+  
+        $.ajax({
+
+            url: "/Musica/_DetalleArtistas",
+            type: "GET",
+            data: { Id: varId }
+        })
+       .done(function (partialViewResult) {
+           $("#modalInformacion").html(partialViewResult);
+           $("#modal_datosArtistas").modal('show');
+    
+           $('body').removeClass('modal-open');
+           $('.modal-backdrop').remove();
+       });
+
+    }
+    function CargarDepartamento(vardepartamento) {
+        if ($('#periodo').val() == "") {
+            alert("Debe seleccionar un año");
+            return false;
+        }
+        $.ajax({
+
+            url: "/Musica/ProgramacionDepartamento",
+            type: "GET",
+            data: { Id: vardepartamento, periodo: $('#periodo').val() }
+        })
+       .done(function (partialViewResult) {
+           $("#formacionTabla").html(partialViewResult);
+
+       });
+
+
+
+    }
+
+    function CargarMunicipio(varMunicipio) {
+
+        if ($('#periodo').val() == "")
+        {
+            alert("Debe seleccionar un año");
+            return false;
+        }
+        $.ajax({
+
+            url: "/Musica/ProgramacionMunicipio",
+            type: "GET",
+            data: { Id: varMunicipio, periodo:  $('#periodo').val() }
+        })
+       .done(function (partialViewResult) {
+           $("#formacionTabla").html(partialViewResult);
+
+       });
+
+
+
+    }
+
+    function CargarPeriodo() {
+
+        if (($('#CodigoMunicipio').val() == "") || ($('#CodigoDepartamento').val() == "")) {
+            alert("Debe seleccionar un deparamento y/o municipio");
+            return false;
+        }
+
+        if ($('#periodo').val() == "") {
+            alert("Debe seleccionar un año");
+            return false;
+        }
+        $.ajax({
+
+            url: "/Musica/ProgramacionPeriodo",
+            type: "GET",
+            data: { codDepto: $('#CodigoDepartamento').val(), codMun: $('#CodigoMunicipio').val(), periodo: $('#periodo').val() }
+        })
+       .done(function (partialViewResult) {
+           $("#formacionTabla").html(partialViewResult);
+
+       });
+
+
+
+    }
+
+</script>
+
+<script type="text/javascript">
+    //$(function () {
+    $('#myPager').on('click', 'a', function () {
+        $.ajax({
+
+            url: this.href,
+            type: "GET",
+            cache: false,
+        })
+     .done(function (partialViewResult) {
+         //alert("entro aqui");
+         $("#formacionTabla").html(partialViewResult);
+
+     });
+        return false;
+    });
+    //});
+
+</script>
+
+
+
+

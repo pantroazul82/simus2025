@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="keywords" content="SIMUS, Sistema de Información de la Música">
+    <meta name="description" content="Simus · Público."> <!-- META SECCION -->
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> SIMUS - @ViewBag.Title</title>
+    <link rel="icon" href="~/img/favicon.ico" type="image/x-icon" />
+
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/escuelas")
+    @Styles.Render("~/bundles/fontawesome")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" type="text/css" href="~/css/escuelas.css" />
+    <link rel="stylesheet" type="text/css" href="https://mincultura-dot-cdn-components.appspot.com/libs/manualpoint/v1.2/styles/component_map_point.min.css" />
+
+
+    <style type="text/css">
+        .fancybox-inner {
+            overflow: hidden !important;
+        }
+    </style>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-76203017-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</head>
+<body>
+    <!-- START PAGE CONTAINER -->
+    <div class="page-container">
+
+        <!-- START PAGE SIDEBAR -->
+        <div class="page-sidebar">
+            <!-- START X-NAVIGATION -->
+
+            <ul class="x-navigation">
+                <li class="xn-logo">
+                    <a href="~/Inicio/Index">SIMUS</a>
+                    <a href="#" class="x-navigation-control"></a>
+                </li>
+
+                <li class="xn-profile">
+
+                    @{
+                        FormsIdentity formsIdentity = User.Identity as FormsIdentity;
+                        string UserId = "0";
+
+                        if (formsIdentity != null)
+                        {
+                            UserId = formsIdentity.Ticket.UserData.Split('|')[0];
+                        }
+                        WebSImus.Models.UsuarioViewModel user = WebSImus.Translator.TranslatorUsuarioToUsuariodtosim.ObtenerUsuarioBasico(UserId);
+                        string strNombreCompleto = "";
+                        strNombreCompleto = User.Identity.Name;
+
+                    }
+                    @if ((user != null) && (user.esUsuariodeRSS))
+                    {
+                        <a href="#" class="profile-mini">
+                            @if (user.rutafoto != null)
+                            {
+                                <img src="@user.rutafoto" />
+                            }
+                            else
+                            {
+                                <i class="fas fa-user"></i>
+                            }
+                        </a>
+
+                        <div class="profile">
+                            <div class="profile-image">
+                                @if (user.rutafoto != null)
+                                {
+                                    <img src="@user.rutafoto" />
+                                }
+                                else
+                                {
+                                    <div class="default-profile-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                }
+                            </div>
+                            <div class="profile-data">
+                                <div class="profile-data-name">
+                                    @Html.Label(strNombreCompleto)
+                                </div>
+                            </div>
+                            <div class="profile-controls">
+                                @*<a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>
+                                    <a href="pages-messages.html" class="profile-control-right"><span class="fa fa-envelope"></span></a>*@
+                            </div>
+                        </div>
+                    }
+
+                    else
+                    {
+                        if (user != null && user.UsuarioId > 0 && user.imagen != null)
+                        {// Es un usuario creado por registrese o existe ya en simus
+
+
+
+                            <a href="#" class="profile-mini">
+                                <img class="img-responsive" src="@WebSImus.Models.Usuarios.ImageSource(@user.imagen)" alt="@strNombreCompleto" />
+                            </a>
+
+
+                            <div class="profile">
+                                <div class="profile-image">
+                                    <img class="img-responsive" src="@WebSImus.Models.Usuarios.ImageSource(@user.imagen)" alt="@strNombreCompleto" />
+                                </div>
+                                <div class="profile-data">
+                                    @if (!String.IsNullOrEmpty(strNombreCompleto))
+                                    {
+
+                                        <div class="profile-data-name">@Html.Label(strNombreCompleto)</div>
+
+                                    }
+
+                                </div>
+                                <div class="profile-controls">
+                                    @*<a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>
+                                        <a href="pages-messages.html" class="profile-control-right"><span class="fa fa-envelope"></span></a>*@
+                                </div>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <a href="#" class="profile-mini">
+                                <i class="fas fa-user"></i>
+                            </a>
+
+                            <div class="profile">
+                                <div class="profile-image">
+                                    <div class="default-profile-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                </div>
+                                <div class="profile-data">
+                                    @if (!String.IsNullOrEmpty(strNombreCompleto))
+                                    {
+                                        <div class="profile-data-name">@Html.Label(strNombreCompleto)</div>
+                                    }
+                                </div>
+                                <div class="profile-controls">
+                                    @*<a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>
+                                        <a href="pages-messages.html" class="profile-control-right"><span class="fa fa-envelope"></span></a>*@
+                                </div>
+                            </div>
+                        }
+
+
+                    }
+
+
+                </li>
+
+
+
+                @if ((user != null) && user.UsuarioId > 0)
+                {  // ES DE SIMUS
+
+                    if (!user.EsAgente)
+                    {
+                        <li><a href="~/Agente/Agente"><span class="fa-solid fa-chevron-right"></span> <span class="xn-text">Quiero ser agente</span></a></li>
+                    }
+                    else
+                    {
+                        <li><a href="~/Agente/Editar/@user.AgenteId"><span class="fa-solid fa-chevron-right"></span> <span class="xn-text">Modificar Agente</span></a></li>
+                    }
+                    //es de mincultura
+                    if (user.esUsuarioInterno)
+                    {
+                        <li><a href="~/MinculturaPerfil/MinPerfil"><span class="fa-solid fa-chevron-right"></span> <span class="xn-text">Modificar mi perfil</span></a></li>
+                    }
+                    else
+                        if (user.esUsuarioSiMUS)//se registro
+                    {
+                        <li><a href="~/CambioPassIntr/CambioClaveInt"><span class="fa-solid fa-chevron-right"></span> <span class="xn-text">Cambiar clave</span></a></li>
+                        <li><a href="~/SimusPerfil/SimusPerfil"><span class="fa-solid fa-chevron-right"></span> <span class="xn-text">Modificar mi perfil </span></a></li>
+
+                    }
+                    else
+                        if (user.esUsuariodeRSS)//se registro con redessociales
+                    {
+                        <li><a href="~/AuthExternal/LoginSuccess"><span class="fa-solid fa-chevron-right"></span> <span class="xn-text">Modificar mi perfil </span></a></li>
+                    }
+
+
+
+                    @Html.Action("_Menu", "Inicio")
+                }
+                else
+                {     //usuario del ministerio
+                    if (user != null && user.esUsuarioInterno)
+                    {
+                        <li><a href="~/EscuelasMusica/Consulta"><span class="fa-solid fa-chevron-right"></span> <span class="xn-text">Modificar mi perfil </span></a></li>
+                    }
+
+                }
+
+            </ul>
+            <!-- END X-NAVIGATION -->
+        </div>
+
+        <!-- END PAGE SIDEBAR -->
+        <!-- PAGE CONTENT -->
+        <div class="page-content">
+
+
+            <!-- START X-NAVIGATION VERTICAL -->
+            <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+                <!-- TOGGLE NAVIGATION -->
+                @*<li class="xn-icon-button">
+                        <a href="#" class="x-navigation-minimize"><span class="fa-solid fa-bars"></span></a>
+                    </li>*@
+                <!-- END TOGGLE NAVIGATION -->
+                <!-- SEARCH -->
+                @*<li class="xn-search">
+                        <form role="form">
+                            <input type="text" name="search" placeholder="Buscar..." />
+                        </form>
+                    </li>*@
+                <!-- END SEARCH -->
+                <!-- POWER OFF -->
+                <li class="xn-icon-button pull-right last">
+                    <a href="#"><span class="fas fa-right-from-bracket"></span></a>
+                    <ul class="xn-drop-left animated zoomIn">
+                        <li><a href="#" class="mb-control" data-box="#mb-signout"><span class="fas fa-right-from-bracket"></span>Salir</a></li>
+                    </ul>
+                </li>
+                <!-- END POWER OFF -->
+                <!-- END TASKS -->
+            </ul>
+            <!-- END X-NAVIGATION VERTICAL -->
+            <!-- START BREADCRUMB -->
+            @*<ul class="breadcrumb">
+                    <li><a href="#">Miga</a></li>
+                    <li><a href="#">de pan</a></li>
+                </ul>*@
+            <!-- END BREADCRUMB -->
+
+            <div class="page-title">
+                <h2><span class="fa-frontera fa-2x"></span> @ViewBag.Title</h2>
+            </div>
+
+            <!-- PAGE CONTENT WRAPPER -->
+            <!-- PAGE CONTENT WRAPPER -->
+            <div class="page-content-wrap dashboard-container module-transition" id="module-container">
+                <div class="row">
+                    <div class="col-md-12">
+                        @{ Html.RenderPartial("_Alertas"); }
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <!-- END PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTAINER -->
+    <!-- MESSAGE BOX-->
+    <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+        <div class="mb-container">
+            <div class="mb-middle">
+                <div class="mb-title"><span class="fa-salir"></span> <strong>¿Cerrar</strong> sesión?</div>
+                <div class="mb-content">
+                    <p>Al salir perderá los cambios que no ha guardado</p>
+                </div>
+                <div class="mb-footer">
+                    <div class="pull-right">
+                        <a href="~/Cuenta/Logout" class="btn btn-success btn-lg">Aceptar</a>
+                        <button class="btn btn-default btn-lg mb-control-close">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MESSAGE BOX-->
+    <!-- START PRELOADS -->
+    <audio id="audio-alert" src="@Url.Content("~/assets/audio/alert.mp3")" preload="auto"></audio>
+    <audio id="audio-alert" src="@Url.Content("~/assets/audio/fail.mp3")" preload="auto"></audio>
+    <!-- END PRELOADS -->
+    <!-- START SCRIPTS -->
+    <!-- START PLUGINS-->
+    @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/Scripts/bootstrap")
+
+    @RenderSection("scripts", required: false)
+    <!-- END PLUGINS -->
+    <!-- START TEMPLATE-->
+
+    <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+    <script src="@Url.Content("~/Scripts/toDo/actions.js")"></script>
+    <script src="@Url.Content("~/Scripts/toDo/plugins.js")"></script>
+
+    <!-- END SCRIPTS -->
+    <script src="@Url.Content("~/Scripts/ServinfComponents/Libs/Namespace.js")"></script>
+    <script src="https://mincultura-dot-cdn-components.appspot.com/libs/manualpoint/v1.2/scripts/component_map_point.min.js"></script>
+
+
+
+
+</body>
+</html>

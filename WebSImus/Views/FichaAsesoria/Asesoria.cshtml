@@ -1,0 +1,835 @@
+﻿@model SM.LibreriaComun.DTO.FichaAsesoria.AsesoriaEscuelaDTO
+@{
+    ViewBag.Title = ViewBag.NombreEscuela;
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Asesoria", "FichaAsesoria", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal modern-form-container" }))
+{
+    @Html.ValidationSummary(true, "", new { @class = "mf-validation-summary" })
+
+    <nav class="modern-breadcrumb">
+        <span class="breadcrumb-item">@Html.ActionLink("Inicio", "Index", "Inicio", null, new { @class = "breadcrumb-link" })</span>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item">@Html.ActionLink("Escuelas", "Consulta", "EscuelasMusica", null, new { @class = "breadcrumb-link" })</span>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item">@Html.ActionLink("Exportar", "Exportar", "EscuelasMusica", new { Id = Model.EscuelaId }, new { @class = "breadcrumb-link" })</span>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item">@Html.ActionLink("Encuestas", "Formulario", "EscuelasMusica", new { Id = Model.EscuelaId }, new { @class = "breadcrumb-link" })</span>
+    </nav>
+
+    <h2 class="form-title">@ViewBag.NuevoTitulo</h2>
+
+    <div class="mf-mb-6">
+        @Html.Partial("_PasoAPaso")
+    </div>
+
+    @Html.HiddenFor(model => model.EscuelaId)
+
+    <div class="mf-mb-6">
+        @Html.Partial("_AgregarAsesoria", Model.Asesoria)
+    </div>
+
+    <!-- Descripción -->
+    <div class="card mf-mb-6">
+        <div class="mf-section-title">
+            <i class="fas fa-chalkboard-teacher"></i> Descripción de la asesoría pedagógica y musical de la agrupación
+        </div>
+
+        <!-- Técnica -->
+
+        <div class="mf-section-title">
+            <i class="fas fa-tools"></i> Técnica
+        </div>
+
+        <div id="CTécnica">
+            @Html.Action("TablaClasificacion", new { EscuelaId = Model.EscuelaId, tipo = "Técnica", EliminarId = 0 })
+        </div>
+
+
+        <div class="mf-mt-4" id="panelAgregarClasificacion">
+            @Html.Action("_AgregarClasificacion", new { Id = 0, tipo = "", EscuelaId = Model.EscuelaId })
+        </div>
+
+        <div class="mf-section-title">
+            <i class="fas fa-comments"></i> Observaciones Técnica
+        </div>
+
+        <div class="text-right mf-mb-4">
+            <a href="#" id="btnAgregarObser" class="btn btn-success" data-toggle="modal" data-target="#modal_datosObservacion" onclick="CargarModal('Técnica');">
+                <i class="fas fa-plus-circle"></i> Agregar/Editar
+            </a>
+        </div>
+
+
+        <div id="Técnica">
+            @Html.Action("TablaObservacion", new { EscuelaId = Model.EscuelaId, tipo = "Técnica", EliminarId = 0 })
+        </div>
+
+
+        <div class="mf-mt-4" id="panelAgregar">
+            @Html.Action("_AgregarObservacion", new { Id = 0, tipo = "", EscuelaId = Model.EscuelaId })
+        </div>
+
+        <!-- Técnica Instrumental -->
+
+        <div class="mf-section-title">
+            <i class="fas fa-guitar"></i> Técnica Instrumental
+        </div>
+
+
+        <div id="CTécnicaInstrumental">
+            @Html.Action("TablaClasificacion", new { EscuelaId = Model.EscuelaId, tipo = "TécnicaInstrumental", EliminarId = 0 })
+        </div>
+
+
+        <div class="mf-section-title">
+            <i class="fas fa-comments"></i> Observaciones Técnica Instrumental
+        </div>
+
+        <div class="text-right mf-mb-4">
+            <a href="#" id="btnTecnicaInstrumental"
+               class="btn btn-success"
+               data-toggle="modal"
+               data-target="#modal_datosObservacion"
+               onclick="CargarModal('TécnicaInstrumental');">
+                <i class="fas fa-plus-circle"></i> Agregar/Editar
+            </a>
+        </div>
+
+
+        <div id="TécnicaInstrumental">
+            @Html.Action("TablaObservacion", new { EscuelaId = Model.EscuelaId, tipo = "TécnicaInstrumental", EliminarId = 0 })
+        </div>
+
+    </div>
+
+    <!-- Repertorio Musical -->
+
+    <div class="mf-section-title">
+        <i class="fas fa-music"></i> Repertorio Musical
+    </div>
+
+    <div class="text-right mf-mb-4">
+        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modal_datosRepertorio">
+            <i class="fas fa-plus-circle"></i> Agregar
+        </a>
+    </div>
+
+
+    <div id="TablaRepertorio1">
+        @Html.Action("TablaRepertorio", new { EscuelaId = Model.EscuelaId, EliminarId = 0 })
+    </div>
+
+
+    <div class="mf-mt-4" id="panelAgregar2">
+        @Html.Action("_AgregarRepertorio", new { Id = 0, EscuelaId = Model.EscuelaId })
+    </div>
+
+
+    <!-- Evaluación del Repertorio Musical -->
+
+    <div class="mf-section-title">
+        <i class="fas fa-star-half-alt"></i> Evaluación del repertorio musical
+    </div>
+
+    <div id="CEvaluaciónDelRepertorio">
+        @Html.Action("TablaClasificacion", new { EscuelaId = Model.EscuelaId, tipo = "EvaluaciónDelRepertorio", EliminarId = 0 })
+    </div>
+
+
+    <div class="mf-section-title">
+        <i class="fas fa-comments"></i> Observaciones del repertorio musical
+    </div>
+
+    <div class="text-right mf-mb-4">
+        <a href="javascript:void(0);" class="btn btn-success"
+           onclick="CargarModal('EvaluaciónDelRepertorio'); mostrarModalObservaciones(); return false;">
+            <i class="fas fa-plus-circle"></i> Agregar/Editar
+        </a>
+    </div>
+
+    <div id="EvaluaciónDelRepertorio">
+        @Html.Action("TablaObservacion", new { EscuelaId = Model.EscuelaId, tipo = "EvaluaciónDelRepertorio", EliminarId = 0 })
+    </div>
+
+
+    <!-- Comunicación y Liderazgo -->
+
+    <div class="mf-section-title">
+        <i class="fas fa-user-friends"></i> Comunicación y liderazgo del profesor o director de la agrupación hacia los integrantes
+    </div>
+
+    <div id="CComunicaciónYLiderazgo">
+        @Html.Action("TablaClasificacion", new { EscuelaId = Model.EscuelaId, tipo = "ComunicaciónYLiderazgo", EliminarId = 0 })
+    </div>
+
+    <div class="mf-section-title">
+        <i class="fas fa-comments"></i> Observaciones comunicación y liderazgo del profesor o director hacia los integrantes
+    </div>
+
+    <div class="text-right mf-mb-4">
+        <a href="javascript:void(0);" class="btn btn-success"
+           onclick="CargarModal('ComunicaciónYLiderazgo'); mostrarModalObservaciones(); return false;">
+            <i class="fas fa-plus-circle"></i> Agregar/Editar
+        </a>
+    </div>
+
+
+
+    <div id="ComunicaciónYLiderazgo">
+        @Html.Action("TablaObservacion", new { EscuelaId = Model.EscuelaId, tipo = "ComunicaciónYLiderazgo", EliminarId = 0 })
+    </div>
+
+
+    <!-- Observación del desempeño docente -->
+
+    <div class="mf-section-title">
+        <i class="fas fa-chalkboard-teacher"></i> Observación del desempeño del docente
+    </div>
+
+    <div id="MObservaciónDelDesempeñoDelDocente">
+        @Html.Action("TablaMatriz", new { EscuelaId = Model.EscuelaId, tipo = "ObservaciónDelDesempeñoDelDocente", EliminarId = 0 })
+    </div>
+
+    <div class="mf-mt-4" id="panelAgregarMatriz">
+        @Html.Action("_AgregarMatriz", new { Id = 0, tipo = "", EscuelaId = Model.EscuelaId })
+    </div>
+
+    <div class="mf-section-title">
+        <i class="fas fa-comments"></i> Observaciones del desempeño del docente
+    </div>
+
+    <div class="text-right mf-mb-4">
+        <a href="javascript:void(0);" id="btnAgregarDocente" class="btn btn-success"
+           onclick="CargarModal('ObservaciónDelDesempeñoDelDocente'); mostrarModalObservaciones(); return false;"
+           title="Agregar/editar observación y/o recomendaciones">
+            <i class="fas fa-plus-circle"></i> Agregar/Editar
+        </a>
+    </div>
+
+    <div id="ObservaciónDelDesempeñoDelDocente">
+        @Html.Action("TablaObservacion", new { EscuelaId = Model.EscuelaId, tipo = "ObservaciónDelDesempeñoDelDocente", EliminarId = 0 })
+    </div>
+
+    <div class="mf-mt-4" id="panelAgregar">
+        @Html.Action("_AgregarObservacion", new { Id = 0, tipo = "", EscuelaId = Model.EscuelaId })
+    </div>
+
+
+    <!-- Percepción del Proceso Musical -->
+
+    <div class="mf-section-title">
+        <i class="fas fa-brain"></i> Percepción del proceso musical
+    </div>
+
+    <div id="MPercepciónDelProcesoMusical">
+        @Html.Action("TablaMatriz", new { EscuelaId = Model.EscuelaId, tipo = "PercepciónDelProcesoMusical", EliminarId = 0 })
+    </div>
+
+    <div class="mf-section-title">
+        <i class="fas fa-comments"></i> Observaciones percepción del proceso musical
+    </div>
+
+    <div class="text-right mf-mb-4">
+        <a href="javascript:void(0);" id="btnAgregarPercep" class="btn btn-success"
+           onclick="CargarModal('PercepciónDelProcesoMusical'); mostrarModalObservaciones(); return false;"
+           title="Agregar/editar observación y/o recomendaciones">
+            <i class="fas fa-plus-circle"></i> Agregar/Editar
+        </a>
+    </div>
+
+    <div id="PercepciónDelProcesoMusical">
+        @Html.Action("TablaObservacion", new { EscuelaId = Model.EscuelaId, tipo = "PercepciónDelProcesoMusical", EliminarId = 0 })
+    </div>
+
+    <div class="mf-mt-4" id="panelAgregar">
+        @Html.Action("_AgregarObservacion", new { Id = 0, tipo = "", EscuelaId = Model.EscuelaId })
+    </div>
+
+
+    <!-- Instrumentos -->
+
+    <div class="mf-section-title">
+        <i class="fas fa-drum"></i> Instrumentos
+    </div>
+
+    <div class="text-right mf-mb-4">
+        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modal_datosInstrumento">
+            <i class="fas fa-plus-circle"></i> Agregar
+        </a>
+    </div>
+
+    <div id="TablaInstrumento">
+        @Html.Action("TablaInstrumento", new { EscuelaId = Model.EscuelaId, EliminarId = 0 })
+    </div>
+
+    <div class="mf-mt-4" id="panelAgregarInstrumento">
+        @Html.Action("_AgregarInstrumento", new { Id = 0, EscuelaId = Model.EscuelaId })
+    </div>
+
+    <!-- Concepto -->
+    <div class="col-md-12">
+        @Html.Partial("_AgregarConcepto", Model.Concepto)
+    </div>
+
+    <div class="mf-form-footer">
+        @Html.ActionLink("Anterior", "Produccion", "EscuelasMusica", new { Id = Model.EscuelaId }, new { @class = "btn btn-primary" })
+    </div>
+
+    <div class="mf-message-box mf-message-box-success animated fadeIn" id="message-box-success" style="display: none;">
+        <div class="mf-message-box-header">
+            <div class="mf-message-box-title">
+                <i class="fas fa-check-circle"></i> Éxito
+            </div>
+            <button class="mf-message-box-close mb-control-close" onclick="ocultarMensajeExito()" aria-label="Cerrar mensaje">&times;</button>
+        </div>
+        <div class="mf-message-box-content">
+            <p>La información se actualizó con éxito.</p>
+        </div>
+    </div>
+
+
+
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script src="~/Scripts/escuelasvalidate.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        HabilitarDeshabilitarPasos();
+        $("#step7").addClass("active");
+    });
+    $("li").click(function () {
+
+        switch ($(this).data("step")) {
+            case 1:
+                window.location = "@Url.Action("EditarNuevo", "EscuelasMusica", new { id = Model.EscuelaId,  wizard = 1 })";
+                break;
+            case 2:
+                window.location = "@Url.Action("Beneficiarios", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 3:
+                window.location = "@Url.Action("Organizacion", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 4:
+                window.location = "@Url.Action("Formacion", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 5:
+                window.location = "@Url.Action("Infraestructura", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 6:
+                window.location = "@Url.Action("Produccion", "EscuelasMusica",  new { id = Model.EscuelaId })";
+                break;
+            case 61:
+                window.location = "@Url.Action("Produccion", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 7:
+                window.location = "@Url.Action("Asesoria", "FichaAsesoria", new { id = Model.EscuelaId })";
+                break;
+        }
+    });
+
+
+
+    $('#btnActualizar').click(function () {
+
+        var varEscuelaId = '@Model.EscuelaId';
+        var registro = {
+            EscuelaId: varEscuelaId,
+            PracticaColectiva: $("#PracticaColectiva").val(),
+            NombreAgrupacion: $("#NombreAgrupacion").val(),
+            PromedioAnualPresentaciones: $("#PromedioAnualPresentaciones").val(),
+            PromedioMesesPresentaciones: $("#PromedioMesesPresentaciones").val(),
+            AnoValue: $("#AnoValue").val(),
+            NombreDirector: $("#NombreDirector").val(),
+            Basico: $("#Basico").val(),
+            Medio: $("#Medio").val(),
+            Avanzado: $("#Avanzado").val()
+        };
+
+        var url = '@Url.Action("AgregarAsesoria", "FichaAsesoria")';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                EscuelaId: varEscuelaId, model: registro
+            },
+            success: function (data) {
+                if (data) {
+
+
+                    alert("Se actualizo con éxito.");
+                }
+            },
+
+        });
+    });
+
+    $('#btnConcepto').click(function () {
+
+        var varEscuelaId = '@Model.EscuelaId';
+        var registro1 = {
+            EscuelaId: varEscuelaId,
+            AspectoAsesorado: $("#AspectoAsesorado").val(),
+            Recomendacion: $("#Recomendacion").val(),
+            Concepto: $("#Concepto").val(),
+            Mecanismo: $("#Mecanismo").val()
+
+        };
+
+        var url = '@Url.Action("AgregarConcepto", "FichaAsesoria")';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                EscuelaId: varEscuelaId, model: registro1
+            },
+            success: function (data) {
+                if (data) {
+
+                    alert("Se actualizo con éxito.")
+                }
+            },
+
+        });
+    });
+
+
+
+    $('#PromedioAnualPresentaciones').keypress(function () {
+        ValidaSoloNumeros();
+    });
+
+
+    $('#PromedioMesesPresentaciones').keypress(function () {
+        ValidaSoloNumeros();
+    });
+
+
+    //Agregar Instrumentos
+    function InstrumentoAgregar(varID) {
+
+        var varEscuelaId = '@Model.EscuelaId';
+        var VarInstrumento = $("#Instrumento").val();
+
+        if (VarInstrumento == false) {
+            alert("El instrumento es requerido");
+            return;
+        }
+
+        var registro1 = {
+            Id: varID,
+            EscuelaId: varEscuelaId,
+            InstrumentoId: $("#Instrumento").val(),
+            CantidadBuenos: $("#CantidadBuenos").val(),
+            CantidadRegular: $("#CantidadRegular").val(),
+            CantidadMalos: $("#CantidadMalos").val(),
+            CantidadPerdidos: $("#CantidadPerdidos").val(),
+            CantidadMincultura: $("#CantidadMincultura").val(),
+            Descripcion: $("#Descripcion").val()
+
+        };
+
+        var url = '@Url.Action("AgregarInstrumento", "FichaAsesoria")';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                Id: varID, EscuelaId: varEscuelaId, model: registro1
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    ActualizarlistadoInstrumento(0);
+                }
+            },
+
+        });
+    }
+
+
+    function ActualizarlistadoInstrumento(varEliminar) {
+        var varEscuelaId = '@Model.EscuelaId';
+        $("#Instrumento").val("");
+        $("#CantidadBuenos").val("");
+        $("#CantidadRegular").val("");
+        $("#CantidadMalos").val("");
+        $("#CantidadPerdidos").val("");
+        $("#CantidadMincultura").val("");
+        $("#Descripcion").val("");
+        $.ajax({
+
+            url: "/FichaAsesoria/TablaInstrumento",
+            type: "GET",
+            data: { EscuelaId: varEscuelaId, EliminarId: varEliminar }
+        })
+       .done(function (partialViewResult) {
+           $("#TablaInstrumento").html(partialViewResult);
+
+       });
+    }
+
+    function CargarModalInstrumento(Id) {
+        $('#item-to-deletef').val(Id);
+
+    }
+    function EliminarInstrumentos() {
+        var varId = $('#item-to-deletef').val();
+        ActualizarlistadoInstrumento(varId);
+    }
+
+    //Agregar Repertorio Musical
+    function ReperorioAgregar(varID) {
+
+        var varEscuelaId = '@Model.EscuelaId';
+
+        var registro1 = {
+            Id: varID,
+            EscuelaId: varEscuelaId,
+            Arreglista: $("#Arreglista").val(),
+            Compositor: $("#Compositor").val(),
+            Dificultad: $("#Dificultad").val(),
+            Nombre: $("#Nombre").val()
+
+        };
+
+        var url = '@Url.Action("AgregarRepertorio", "FichaAsesoria")';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                Id: varID, EscuelaId: varEscuelaId, model: registro1
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    ActualizarlistadoRepertorio(0);
+                }
+            },
+
+        });
+    }
+
+
+    function ActualizarlistadoRepertorio(varEliminar) {
+        var varEscuelaId = '@Model.EscuelaId';
+        $("#Arreglista").val("");
+        $("#Compositor").val("");
+        $("#Dificultad").val("");
+        $("#Nombre").val("");
+
+        $.ajax({
+
+            url: "/FichaAsesoria/TablaRepertorio",
+            type: "GET",
+            data: { EscuelaId: varEscuelaId, EliminarId: varEliminar }
+        })
+       .done(function (partialViewResult) {
+           $("#TablaRepertorio1").html(partialViewResult);
+
+       });
+    }
+
+    function CargarModalRepertorio(Id) {
+        $('#item-to-deleter').val(Id);
+
+    }
+    function EliminarRepertorios() {
+        var varId = $('#item-to-deleter').val();
+        ActualizarlistadoRepertorio(varId);
+    }
+
+    //Agregar Observaciones
+    function ObservacionAgregar(varID, varTipo) {
+
+        var varEscuelaId = '@Model.EscuelaId';
+
+        var registro1 = {
+            Id: varID,
+            EscuelaId: varEscuelaId,
+            Tipo: varTipo,
+            Observaciones: $("#Observaciones").val(),
+            Recomendaciones: $("#Recomendaciones").val()
+
+        };
+
+        var url = '@Url.Action("AgregarObservacion", "FichaAsesoria")';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                EscuelaId: varEscuelaId, model: registro1
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    ActualizarlistadoObservacion(0, varTipo);
+                }
+            },
+
+        });
+    }
+
+
+    function ActualizarlistadoObservacion(varEliminar, varTipo) {
+        var varEscuelaId = '@Model.EscuelaId';
+        var varnombre = "#" + varTipo;
+        $("#Observaciones").val("");
+        $("#Recomendaciones").val("");
+
+        $.ajax({
+
+            url: "/FichaAsesoria/TablaObservacion",
+            type: "GET",
+            data: { EscuelaId: varEscuelaId, tipo: varTipo, EliminarId: varEliminar }
+        })
+       .done(function (partialViewResult) {
+
+           $(varnombre).html(partialViewResult);
+
+       });
+    }
+
+    function CargarModal(varTipo) {
+        var varEscuelaId = '@Model.EscuelaId';
+        var url = '@Url.Action("_AgregarObservacion", "FichaAsesoria")';
+        varnombre = "#" + varTipo;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: { id: "0", tipo: varTipo, escuelaId: varEscuelaId },
+            success: function (response) {
+
+            },
+            error: function (result) {
+                alert('ERROR ' + result.status + ' ' + result.statusText);
+            }
+        })
+        .done(function (partialViewResult) {
+            $("#panelAgregar").html(partialViewResult);
+            $('#modal_datosObservacion').modal('show');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+
+        });
+
+    }
+
+    //Agregar Clasificación
+    function ClasificacionAgregar(varID) {
+
+        var varEscuelaId = '@Model.EscuelaId';
+        var varTipo = $("#Tipo").val();
+        var registro1 = {
+            Id: varID,
+            EscuelaId: varEscuelaId,
+            Tipo: $("#Tipo").val(),
+            ClasificacionId: $("#ClasificacionId").val(),
+            Clasificacion: $("#Clasificacion").val(),
+            Bueno: $("#Bueno").val(),
+            REGULAR: $("#REGULAR").val(),
+            DEFICIENTE: $("#DEFICIENTE").val(),
+            NOSEREALIZA: $("#NOSEREALIZA").val()
+        };
+
+        var url = '@Url.Action("AgregarClasificacion", "FichaAsesoria")';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                Id: varID, EscuelaId: varEscuelaId, model: registro1
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    ActualizarlistadoClasificacion(0, varTipo);
+                }
+            },
+
+        });
+    }
+
+
+    function ActualizarlistadoClasificacion(varEliminar, varTipo) {
+        var varEscuelaId = '@Model.EscuelaId';
+        var varnombre = "#C" + varTipo;
+        $("#Clasificacion").val("");
+        $("#Bueno").val("");
+        $("#REGULAR").val("");
+        $("#DEFICIENTE").val("");
+        $("#NOSEREALIZA").val("");
+
+        $.ajax({
+
+            url: "/FichaAsesoria/TablaClasificacion",
+            type: "GET",
+            data: { EscuelaId: varEscuelaId, tipo: varTipo, EliminarId: varEliminar }
+        })
+       .done(function (partialViewResult) {
+
+           $(varnombre).html(partialViewResult);
+
+       });
+    }
+
+    function CargarModalClasificacion(varId, varTipo) {
+        var varEscuelaId = '@Model.EscuelaId';
+        var url = '@Url.Action("_AgregarClasificacion", "FichaAsesoria")';
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: { id: varId, escuelaId: varEscuelaId, tipo: varTipo },
+            success: function (response) {
+
+            },
+            error: function (result) {
+                alert('ERROR ' + result.status + ' ' + result.statusText);
+            }
+        })
+        .done(function (partialViewResult) {
+            $("#panelAgregarClasificacion").html(partialViewResult);
+            $('#modal_datosClasificacion').modal('show');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+
+        });
+
+    }
+
+    //Matriz
+    function MatrizAgregar(varID) {
+
+        var varEscuelaId = '@Model.EscuelaId';
+        var varTipo = $("#TipoM").val();
+        var registro1 = {
+            Id: varID,
+            EscuelaId: varEscuelaId,
+            TipoM: $("#TipoM").val(),
+            ClasificacionId: $("#ClasificacionId").val(),
+            Clasificacion: $("#Clasificacion").val(),
+            Fortaleza: $("#Fortaleza").val(),
+            Dificultades: $("#Dificultades").val()
+
+        };
+
+        var url = '@Url.Action("AgregarMatriz", "FichaAsesoria")';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                Id: varID, EscuelaId: varEscuelaId, model: registro1
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    ActualizarlistadoMatriz(0, varTipo);
+                }
+            },
+
+        });
+    }
+    function ActualizarlistadoMatriz(varEliminar, varTipo) {
+        var varEscuelaId = '@Model.EscuelaId';
+        var varnombre = "#M" + varTipo;
+
+        alert(varTipo);
+        $("#Fortaleza").val("");
+        $("#Dificultades").val("");
+
+
+        $.ajax({
+
+            url: "/FichaAsesoria/TablaMatriz",
+            type: "GET",
+            data: { EscuelaId: varEscuelaId, tipo: varTipo, EliminarId: varEliminar }
+        })
+       .done(function (partialViewResult) {
+
+           $(varnombre).html(partialViewResult);
+
+       });
+    }
+
+    function CargarModalMatriz(varId, varTipo) {
+        var varEscuelaId = '@Model.EscuelaId';
+        var url = '@Url.Action("_AgregarMatriz", "FichaAsesoria")';
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: { id: varId, escuelaId: varEscuelaId, tipo: varTipo, },
+            success: function (response) {
+
+            },
+            error: function (result) {
+                alert('ERROR ' + result.status + ' ' + result.statusText);
+            }
+        })
+        .done(function (partialViewResult) {
+            $("#panelAgregarMatriz").html(partialViewResult);
+            $('#modal_datosMatriz').modal('show');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+
+        });
+
+        }
+
+
+        function mostrarMensajeExito() {
+            const box = document.getElementById("message-box-success");
+            if (box) {
+                box.style.display = "block";
+                box.classList.add("fadeIn");
+                setTimeout(() => {
+                    box.style.display = "none";
+                }, 4000); // se oculta automáticamente después de 4s
+            }
+        }
+
+        function ocultarMensajeExito() {
+            const box = document.getElementById("message-box-success");
+            if (box) {
+                box.style.display = "none";
+            }
+        }
+
+
+
+    </script>
+}

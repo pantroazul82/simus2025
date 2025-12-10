@@ -1,0 +1,204 @@
+﻿@model WebSImus.Models.RedesSocialesModel
+
+<div>
+    <h3 class="mf-section-title">
+        <i class="fas fa-share-alt fa-fw"></i> Redes sociales
+    </h3>
+
+    <div class="mf-fields-container">
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.Facebook)" class="mf-label">Perfil en Facebook</label>
+            <div class="mf-input-with-icon">
+                <span class="mf-input-icon"><i class="fab fa-facebook-f"></i></span>
+                @Html.TextBoxFor(model => model.Facebook, new { @class = "w-full px-3 py-2 border rounded", placeholder = "https://www.facebook.com/usuario" })
+            </div>
+            @Html.ValidationMessageFor(model => model.Facebook, "", new { @class = "mf-validation-error" })
+            <p class="mf-helper-text">Ejemplo: https://www.facebook.com/pnmc.ministeriodecultura</p>
+        </div>
+
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.Twitter)" class="mf-label">Perfil en Twitter</label>
+            <div class="mf-input-with-icon">
+                <span class="mf-input-icon"><i class="fab fa-twitter"></i></span>
+                @Html.TextBoxFor(model => model.Twitter, new { @class = "w-full px-3 py-2 border rounded", placeholder = "https://twitter.com/usuario" })
+            </div>
+            @Html.ValidationMessageFor(model => model.Twitter, "", new { @class = "mf-validation-error" })
+            <p class="mf-helper-text">Ejemplo: https://twitter.com/PNMC</p>
+        </div>
+
+        <div class="mf-grid mf-grid-cols-2 mf-gap-6">
+            <div class="mf-field-group">
+                <label for="@Html.IdFor(model => model.GaleriaFlicker)" class="mf-label">Fotogalería en Flickr</label>
+                <div class="mf-input-with-icon">
+                    <span class="mf-input-icon"><i class="fab fa-flickr"></i></span>
+                    @Html.TextBoxFor(model => model.GaleriaFlicker, new { @class = "w-full px-3 py-2 border rounded", placeholder = "https://www.flickr.com/photos/usuario" })
+                </div>
+                @Html.TextBoxFor(model => model.GaleriaId, new { style = "display: none;" })
+                @Html.ValidationMessageFor(model => model.GaleriaFlicker, "", new { @class = "mf-validation-error" })
+                <p class="mf-helper-text">Ejemplo: https://www.flickr.com/photos/PNMC</p>
+            </div>
+            <div class="mf-field-group">
+                <label for="@Html.IdFor(model => model.DescripcionFlicker)" class="mf-label">Describa aquí el contenido de la fotogalería</label>
+                @Html.TextAreaFor(model => model.DescripcionFlicker, new { @class = "w-full px-3 py-2 border rounded", @rows = "3", placeholder = "Breve descripción de la galería..." })
+            </div>
+        </div>
+
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.CanalYoutube)" class="mf-label">Canal de Youtube</label>
+            <div class="mf-input-with-icon">
+                <span class="mf-input-icon"><i class="fab fa-youtube"></i></span>
+                @Html.TextBoxFor(model => model.CanalYoutube, new { @class = "w-full px-3 py-2 border rounded", placeholder = "https://www.youtube.com/c/canal" })
+            </div>
+            @Html.ValidationMessageFor(model => model.CanalYoutube, "", new { @class = "mf-validation-error" })
+            <p class="mf-helper-text">Ejemplo: https://www.youtube.com/PNMC</p>
+        </div>
+    </div>
+
+    <div class="mf-form-footer mf-mb-6">
+        <input type="submit"  name="Redes" value="Guardar" class="btn btn-success" id="btnRedesSociales" />
+    </div>
+
+    <hr class="mf-hr">
+
+    <h3 class="mf-section-title">
+        <i class="fas fa-video fa-fw"></i> Vídeos de la escuela
+    </h3>
+
+    <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-12 mf-gap-6">
+        <div class="md:mf-col-span-5">
+            <div class="mf-video-preview-container">
+                <iframe id="frameYoutube" src="" width="100%" height="240" frameborder="0" style="border:0; border-radius: 0.5rem; display: none;"></iframe>
+                <div id="videoPlaceholder" class="mf-video-placeholder">
+                    <i class="fab fa-youtube"></i>
+                    <span>Vista previa del vídeo</span>
+                </div>
+            </div>
+        </div>
+        <div class="md:mf-col-span-7">
+            <div class="mf-notice-box mf-notice-info mf-mb-4">
+                <p><i class="fas fa-info-circle fa-fw"></i> Para agregar un nuevo vídeo diligencie los siguientes campos y luego click en el botón "Agregar Vídeo".</p>
+            </div>
+
+            <div class="mf-field-group">
+                <label for="@Html.IdFor(model => model.UrlYoutube)" class="mf-label">URL del vídeo en Youtube:</label>
+                @Html.TextBoxFor(model => model.UrlYoutube, new { @class = "w-full px-3 py-2 border rounded", placeholder = "https://www.youtube.com/watch?v=XXXXXXXXXXX" })
+                @Html.ValidationMessageFor(model => model.UrlYoutube, "", new { @class = "mf-validation-error" })
+                <p class="mf-helper-text">Ejemplo: https://www.youtube.com/watch?v=SVwzbaFrTuM</p>
+                @Html.TextBoxFor(model => model.VideoId, new { style = "display: none;" })
+            </div>
+
+            <div class="mf-field-group">
+                <label for="@Html.IdFor(model => model.ClasificacionVideos)" class="mf-label">Clasificación</label>
+                @Html.EnumDropDownListFor(model => model.ClasificacionVideos, "Seleccione un valor", new { @class = "w-full px-3 py-2 border rounded styled-select" })
+                @Html.ValidationMessageFor(model => model.ClasificacionVideos, "", new { @class = "mf-validation-error" })
+            </div>
+
+            <div class="mf-field-group">
+                <label for="@Html.IdFor(model => model.DescripcionVideo)" class="mf-label">Descripción del vídeo</label>
+                @Html.TextAreaFor(model => model.DescripcionVideo, new { @class = "w-full px-3 py-2 border rounded", @rows = "3", placeholder = "Breve descripción del vídeo..." })
+            </div>
+
+            <div class="text-right">
+                <button type="button" id="mySubmit" class="btn btn-success" data-dismiss="modal">
+                    <i class="fas fa-plus fa-fw"></i> Agregar Vídeo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="formacionTabla" class="mf-mt-6">
+        @Html.Action("TablaVideo", new { Id = Model.EscuelaId, EliminarId = 0 })
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+
+    function EliminarVideo() {
+        var varid = $('#item-to-delete').val();
+        var varEscuelaId = '@Model.EscuelaId';
+        Limpiarcampos(varEscuelaId, varid, 1);
+        return false;
+
+    }
+
+    function Limpiarcampos(varID, varEliminar, varRegistro) {
+
+        var varurl = $("#UrlYoutube").val();
+        $('#UrlYoutube').val("");
+        $('#DescripcionVideo').val("");
+        $("#ClasificacionVideos").val("0").change();
+        $.ajax({
+
+            url: "/EscuelasMusica/TablaVideo",
+            type: "GET",
+            data: { Id: varID, EliminarId: varEliminar }
+        })
+       .done(function (partialViewResult) {
+           $("#formacionTabla").html(partialViewResult);
+           if (varEliminar > 0) {
+               $("#modalConfirmarAccion").modal('hide');
+               $('body').removeClass('modal-open');
+               $('.modal-backdrop').remove();
+           }
+           CargarVideoTabla(varurl);
+
+       });
+
+
+        //if (varRegistro == '0') {
+        //    alert("Se agrego el vídeo con éxito");
+        //}
+        //else {
+        //    alert("Se elimino el vídeo con éxito");
+        //}
+    }
+    function CargarModal(Id) {
+        $('#item-to-delete').val(Id);
+
+    }
+
+
+    function CargarVideoNuevo(url) {
+        CargarVideoTabla(url);
+
+    }
+
+
+    function CargarVideoTabla(url) {
+        var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+        var match = url.match(regExp);
+        if (match && match[7].length == 11) {
+            compartirVideo(match[7]);
+            return false;
+        } else {
+
+
+        }
+    }
+
+    /* Vista previa video youtube */
+    function compartirVideo(codigoVideo) {
+        var iframe = $('#frameYoutube');
+        iframe.attr('src', 'https://www.youtube.com/embed/' + codigoVideo);
+        iframe.attr('height', '240');
+        iframe.attr('width', '100%');
+    }
+
+    function compartirGaleria() {
+        var iframe = $('#frameYoutube');
+        iframe.attr('src', 'https://www.flickr.com/photos/115030723@N07/');
+        iframe.attr('height', '240');
+        iframe.attr('width', '100%');
+    }
+    function eliminarVideo() {
+        var iframe = $('#frameYoutube');
+        iframe.attr('src', '');
+        iframe.attr('height', '0');
+        iframe.attr('width', '0');
+        $('#UrlYoutube').get(0).value = "";
+        return false;
+    }
+
+</script>

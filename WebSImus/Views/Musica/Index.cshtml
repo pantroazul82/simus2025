@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Consulta Eventos";
+    Layout = "~/Views/Shared/_LayoutGrillaMusica.cshtml";
+}
+
+<br />
+<br />
+
+<div class="container">
+    <div class="row">
+        <h2>Celebra la Música</h2>
+        <div class="panel-body" id="panelEditar">
+            <hr class="colorgraph">
+            <div class="row">
+                <div class="form-group">
+                    <h3>Bienvenido @ViewBag.NombreUsuario al registro de conciertos Celebra la Música.</h3>
+                </div>
+            </div>
+            <hr style="height: 1px; background: #CCC">
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Pulse el siguiente botón para crear un nuevo concierto.. </label>
+                    <div class="col-md-8">
+
+
+                        @Html.DevExpress().Button(settings =>
+{
+    settings.Name = "ButtonNuevo";
+    settings.UseSubmitBehavior = false;
+    settings.Text = "Nuevo Evento";
+    settings.RouteValues = new { Controller = "Musica", Action = "Evento" };
+}).GetHtml()
+                    </div>
+                </div>
+            </div>
+            <hr style="height: 1px; background: #CCC">
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Pulse el siguiente botón para exportar el listado de conciertos.. </label>
+                    <div class="col-md-8">
+                        @Html.DevExpress().Button(settings =>
+{
+    settings.Name = "ButtonExportar";
+    settings.UseSubmitBehavior = false;
+    settings.Text = "Exportar";
+    settings.RouteValues = new { Controller = "Musica", Action = "ExportTo" };
+}).GetHtml()
+
+                    </div>
+                </div>
+            </div>
+            <hr style="height: 1px; background: #CCC">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="Tabla">
+                        @Html.Action("GridViewPartial")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/globalize/globalize.js")"></script>
+    <script src="@Url.Content("~/Scripts/dx.webappjs.js")"></script>
+
+}
+

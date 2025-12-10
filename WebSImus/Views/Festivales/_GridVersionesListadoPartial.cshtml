@@ -1,0 +1,174 @@
+@model List<WebSImus.Models.FestivalVersionListadoViewModel>
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridVersiones";
+        settings.CallbackRouteValues = new { Controller = "Festivales", Action = "GridVersionesListadoPartial", filtroTexto = ViewBag.FiltroTexto };
+
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.KeyFieldName = "Id";
+
+        settings.SettingsPager.PageSize = 30;
+        settings.SettingsPager.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "10", "30", "50", "100" };
+
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+
+        // Columna de opciones (Ver/Editar según estado)
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Opciones";
+            column.Width = System.Web.UI.WebControls.Unit.Pixel(150);
+            column.SetDataItemTemplateContent(container =>
+            {
+                var item = container.DataItem as WebSImus.Models.FestivalVersionListadoViewModel;
+                if (item != null)
+                {
+                    var keyValue = container.KeyValue;
+                    
+                    // Botón Ver - Siempre disponible
+                    Html.DevExpress().HyperLink(h =>
+                    {
+                        h.Name = "ver_" + keyValue;
+                        h.Properties.Text = "Ver";
+                        h.NavigateUrl = Url.Action("VerVersionDetalle", "Festivales", new { id = keyValue });
+                        h.ControlStyle.CssClass = "btn btn-default btn-xs";
+                        h.Properties.Target = "_self";
+                    }).Render();
+                    ViewContext.Writer.Write("&nbsp;");
+
+                    // Botón Editar - Solo disponible en estados: Incompleto, Solicitud de Aclaraciones, Publicado
+                    var estadosEditables = new[] { "Incompleto", "Solicitud de Aclaraciones", "Publicado" };
+                    var puedeEditar = estadosEditables.Contains(item.Estado);
+
+                    if (puedeEditar)
+                    {
+                        Html.DevExpress().HyperLink(h =>
+                        {
+                            h.Name = "edit_" + keyValue;
+                            h.Properties.Text = "Editar";
+                            h.NavigateUrl = Url.Action("RegistrarVersion", "Festivales", new { id = keyValue });
+                            h.ControlStyle.CssClass = "btn btn-primary btn-xs";
+                            h.Properties.Target = "_self";
+                        }).Render();
+                    }
+                    else
+                    {
+                        Html.DevExpress().HyperLink(h =>
+                        {
+                            h.Name = "edit_disabled_" + keyValue;
+                            h.Properties.Text = "Editar";
+                            h.ControlStyle.CssClass = "btn btn-default btn-xs disabled";
+                            h.Properties.Target = "_self";
+                            h.Properties.ClientSideEvents.Click = "function(s,e){ e.processOnServer=false; return false; }";
+                        }).Render();
+                    }
+                }
+            });
+        });
+
+        settings.Columns.Add(c => 
+        { 
+            c.FieldName = "NombreFestival"; 
+            c.Caption = "Festival"; 
+            c.Width = System.Web.UI.WebControls.Unit.Percentage(18); 
+        });
+
+        settings.Columns.Add(c => 
+        { 
+            c.FieldName = "NombreVersion"; 
+            c.Caption = "Versión"; 
+            c.Width = System.Web.UI.WebControls.Unit.Percentage(15); 
+        });
+
+        settings.Columns.Add(c => 
+        { 
+            c.FieldName = "FechaCreacion"; 
+            c.Caption = "Fecha de Creación"; 
+            c.PropertiesEdit.DisplayFormatString = "dd/MM/yyyy"; 
+            c.Width = System.Web.UI.WebControls.Unit.Percentage(12); 
+        });
+
+        settings.Columns.Add(c => 
+        { 
+            c.FieldName = "FechaSolicitud"; 
+            c.Caption = "Fecha Solicitud"; 
+            c.PropertiesEdit.DisplayFormatString = "dd/MM/yyyy"; 
+            c.Width = System.Web.UI.WebControls.Unit.Percentage(12); 
+        });
+
+        settings.Columns.Add(c => 
+        { 
+            c.FieldName = "FechaSolicitudAclaraciones"; 
+            c.Caption = "Fecha Solicitud Aclaraciones"; 
+            c.PropertiesEdit.DisplayFormatString = "dd/MM/yyyy"; 
+            c.Width = System.Web.UI.WebControls.Unit.Percentage(14); 
+        });
+
+        settings.Columns.Add(c => 
+        { 
+            c.FieldName = "FechaReciboAclaraciones"; 
+            c.Caption = "Fecha Recibo Aclaraciones"; 
+            c.PropertiesEdit.DisplayFormatString = "dd/MM/yyyy"; 
+            c.Width = System.Web.UI.WebControls.Unit.Percentage(14); 
+        });
+
+        // Columna Estado con estilo según valor
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Estado";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(13);
+            column.SetDataItemTemplateContent(container =>
+            {
+                var item = container.DataItem as WebSImus.Models.FestivalVersionListadoViewModel;
+                if (item != null)
+                {
+                    var cssClass = "";
+                    var badgeStyle = "";
+
+                    switch (item.Estado)
+                    {
+                        case "Incompleto":
+                            cssClass = "label label-warning";
+                            badgeStyle = "background-color:#f0ad4e; color:#fff; padding:4px 8px; border-radius:3px; font-size:12px;";
+                            break;
+                        case "Registrado":
+                            cssClass = "label label-info";
+                            badgeStyle = "background-color:#5bc0de; color:#fff; padding:4px 8px; border-radius:3px; font-size:12px;";
+                            break;
+                        case "Solicitud de Aclaraciones":
+                            cssClass = "label label-primary";
+                            badgeStyle = "background-color:#337ab7; color:#fff; padding:4px 8px; border-radius:3px; font-size:12px;";
+                            break;
+                        case "Rechazado":
+                            cssClass = "label label-danger";
+                            badgeStyle = "background-color:#d9534f; color:#fff; padding:4px 8px; border-radius:3px; font-size:12px;";
+                            break;
+                        case "Publicado":
+                            cssClass = "label label-success";
+                            badgeStyle = "background-color:#5cb85c; color:#fff; padding:4px 8px; border-radius:3px; font-size:12px;";
+                            break;
+                        default:
+                            cssClass = "label label-default";
+                            badgeStyle = "background-color:#777; color:#fff; padding:4px 8px; border-radius:3px; font-size:12px;";
+                            break;
+                    }
+
+                    ViewContext.Writer.Write("<span style='" + badgeStyle + "'>" + item.Estado + "</span>");
+                }
+            });
+        });
+    });
+
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

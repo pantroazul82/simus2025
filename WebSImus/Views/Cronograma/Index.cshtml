@@ -1,0 +1,56 @@
+﻿@model SM.LibreriaComun.DTO.EntidadesOperadoras.CronogramaDTO
+
+@{
+    ViewBag.Title = "Consulta Cronograma";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel-heading">
+    <div class="row">
+        <div class="col-md-2">
+            <h3> Actividad </h3>
+        </div>
+        <div class="col-md-5">
+            <h3>  @Html.DisplayFor(model => model.Nombreactividad)</h3>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Cronograma", "Index", "Cronograma")</li>
+        <li>@Html.ActionLink("Ver actividad", "Editar", "Actividad", new { Id = Model.ActividadId }, null)</li>
+    </ul>
+    <div id="datosconvenio" class="panel-body">
+        <div class="col-md-12">
+           
+        </div>
+    </div>
+    <div class="col-md-12">
+        @Html.HiddenFor(model => model.ActividadId)
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.ActionLink(" Exportar", "ExportTo", "Cronograma", new { Id = Model.ActividadId }, new { @class = "btn btn-warning glyphicon glyphicon-export" })
+                    @Html.ActionLink("Nuevo", "Crear", "Cronograma", new { Id = Model.ActividadId }, new { @class = "btn btn-success glyphicon glyphicon-plus-sign" })
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div id="Tabla">
+                        @Html.Action("GridViewPartial", Model.ActividadId)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

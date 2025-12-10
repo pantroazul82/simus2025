@@ -1,0 +1,89 @@
+﻿@model WebSImus.Models.ConsultaModel
+@{
+    ViewBag.Title = "Consulta Convocatorias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Convocatorias", "Consulta", "Convocatoria")</li>
+    </ul>
+    <div class="col-md-12">
+
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.ActionLink(" Exportar", "ExportToPermisos", "Convocatoria", null, new { @class = "btn btn-warning glyphicon glyphicon-export" })
+                    @Html.ActionLink(" Nuevo", "Nuevo", "Convocatoria", null, new { @class = "btn btn-success glyphicon glyphicon-plus-sign" })
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+
+                    <div class="col-md-2">
+                        <label class="check">@Html.RadioButtonFor(m => m.TipoRegistro, 1, new { @class = "iradio_minimal-grey" }) Pendientes</label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="check">@Html.RadioButtonFor(m => m.TipoRegistro, 2, new { @class = "iradio_minimal-grey" }) Activas</label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="check">@Html.RadioButtonFor(m => m.TipoRegistro, 3, new { @class = "iradio_minimal-grey" }) Evaluación</label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="check">@Html.RadioButtonFor(m => m.TipoRegistro, 4, new { @class = "iradio_minimal-grey" }) Rechazadas</label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="check">@Html.RadioButtonFor(m => m.TipoRegistro, 5, new { @class = "iradio_minimal-grey" }) Finalizadas</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div id="Tabla">
+                        @Html.Action("GridViewPartialPermisos")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+  
+    <script type="text/javascript">
+        $(function () {
+            $("input[name*='TipoRegistro']").click(function () {
+                var VarTipo = $("input[name='TipoRegistro']:checked").val();
+                $.ajaxSetup({
+                    cache: false
+                });
+                $.ajax({
+
+                    url: "/Convocatoria/GridViewPartialPermisos",
+                    type: "GET",
+                    data: { Busqueda: VarTipo }
+                })
+               .done(function (partialViewResult) {
+                   $("#Tabla").html(partialViewResult);
+
+               });
+            });
+        });
+    </script>
+}
+
+
+
+

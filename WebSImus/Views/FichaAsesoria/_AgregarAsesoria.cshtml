@@ -1,0 +1,82 @@
+﻿@using MvcCheckBoxList.Model
+@model SM.LibreriaComun.DTO.FichaAsesoria.AsesoriaNuevoDTO
+
+<div class="card mf-mb-6">
+    <div class="mf-modal-header">
+        <h3 class="form-title"><i class="fas fa-music"></i> FICHA DE ASESORÍA</h3>
+    </div>
+    <div class="mf-modal-body">
+        <h4 class="mf-section-title"><i class="fas fa-users-cog"></i> Asesoría Musical y Pedagógica a una Práctica Musical</h4>
+        @Html.HiddenFor(m => m.EscuelaId)
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.PracticaColectiva, "Práctica colectiva a la que pertenece", new { @class = "mf-label" })
+                @Html.TextBoxFor(model => model.PracticaColectiva, new { @class = "form-control modern-input", @maxlength = "255" })
+                @Html.ValidationMessageFor(model => model.PracticaColectiva, "", new { @class = "mf-validation-error" })
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.NombreAgrupacion, "Nombre de la agrupación (si aplica)", new { @class = "mf-label" })
+                @Html.TextBoxFor(model => model.NombreAgrupacion, new { @class = "form-control modern-input", @maxlength = "255" })
+                @Html.ValidationMessageFor(model => model.NombreAgrupacion, "", new { @class = "mf-validation-error" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.NombreDirector, "Nombre del director de la agrupación", new { @class = "mf-label" })
+                @Html.TextBoxFor(model => model.NombreDirector, new { @class = "form-control modern-input", @maxlength = "255" })
+                @Html.ValidationMessageFor(model => model.NombreDirector, "", new { @class = "mf-validation-error" })
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.AnoValue, "Año de conformación", new { @class = "mf-label" })
+                @Html.DropDownListFor(model => model.AnoValue, (SelectList)ViewBag.Anos, "Seleccione", new { @class = "form-control modern-select" })
+                @Html.ValidationMessageFor(model => model.AnoValue, "", new { @class = "mf-validation-error" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.PromedioAnualPresentaciones, "Promedio anual de presentaciones públicas", new { @class = "mf-label" })
+                @Html.TextBoxFor(model => model.PromedioAnualPresentaciones, new { @class = "form-control modern-input", @maxlength = "10" })
+                @Html.ValidationMessageFor(model => model.PromedioAnualPresentaciones, "", new { @class = "mf-validation-error" })
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.PromedioMesesPresentaciones, "Promedio mes de presentaciones", new { @class = "mf-label" })
+                @Html.TextBoxFor(model => model.PromedioMesesPresentaciones, new { @class = "form-control modern-input", @maxlength = "10" })
+                @Html.ValidationMessageFor(model => model.PromedioMesesPresentaciones, "", new { @class = "mf-validation-error" })
+            </div>
+        </div>
+
+        <h4 class="mf-section-title"><i class="fas fa-chart-line"></i> Nivel de Desarrollo</h4>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.Basico, "Básico (en bandas grado 0 a 2)", new { @class = "mf-label" })
+                @Html.DropDownListFor(model => model.Basico, (SelectList)ViewBag.logica, "Seleccione", new { @class = "form-control modern-select" })
+                @Html.ValidationMessageFor(model => model.Basico, "", new { @class = "mf-validation-error" })
+            </div>
+
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.Medio, "Medio (grado 2 a 4)", new { @class = "mf-label" })
+                @Html.DropDownListFor(model => model.Medio, (SelectList)ViewBag.logica, "Seleccione", new { @class = "form-control modern-select" })
+                @Html.ValidationMessageFor(model => model.Medio, "", new { @class = "mf-validation-error" })
+            </div>
+
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.Avanzado, "Avanzado (grado 4 en adelante)", new { @class = "mf-label" })
+                @Html.DropDownListFor(model => model.Avanzado, (SelectList)ViewBag.logica, "Seleccione", new { @class = "form-control modern-select" })
+                @Html.ValidationMessageFor(model => model.Avanzado, "", new { @class = "mf-validation-error" })
+            </div>
+        </div>
+
+        <div class="form-row text-right">
+            <button type="button" id="btnActualizar" class="btn btn-success" title="Actualizar información de Asesoría Musical y Pedagógica a una Práctica Musical">
+                <i class="fas fa-save"></i> Actualizar
+            </button>
+        </div>
+    </div>
+</div>

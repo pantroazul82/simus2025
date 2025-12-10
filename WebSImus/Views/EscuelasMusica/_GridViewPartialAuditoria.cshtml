@@ -1,0 +1,103 @@
+﻿@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridEscuelasAuditoria";
+        settings.CallbackRouteValues = new { Controller = "EscuelasMusica", Action = "GridViewPartialAuditoria" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "EscuelasMusica", Action = "GridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "EscuelasMusica", Action = "GridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "EscuelasMusica", Action = "GridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.Width = System.Web.UI.WebControls.Unit.Percentage(6);
+        // settings.CommandColumn.Caption = "Eliminar";
+
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        settings.KeyFieldName = "Id";
+
+      
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Escuelas";
+            column.Caption = "Escuelas";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(20);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Categoria";
+            column.Caption = "Categoria";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(12);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NombreUsuario";
+            column.Caption = "Usuario";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(12);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "FechaRegistro";
+            column.Caption = "FechaRegistro";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Operacion";
+            column.Caption = "Operacion";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+
+     
+
+
+        settings.SettingsPager.PageSize = 50;
+        settings.SettingsBehavior.FilterRowMode = GridViewFilterRowMode.Auto;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "50", "100" };
+
+        settings.ClientLayout = (sender, e) =>
+{
+    if (e.LayoutMode == ClientLayoutMode.Saving)
+    {
+        Session["$Escuelasprueba"] = e.LayoutData;
+    }
+};
+    });
+
+
+
+
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()
+
+

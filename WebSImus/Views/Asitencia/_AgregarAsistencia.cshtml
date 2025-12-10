@@ -1,0 +1,73 @@
+﻿@model SM.LibreriaComun.DTO.EntidadesOperadoras.AgregarAsistenciaDTO
+
+<div class="modal animated fadeIn" id="modal_datosContenido" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-md">
+            <div class="modal-header">
+                <div class=" fondo_caja_item row">
+                    @Html.HiddenFor(model => model.CronogramaId)
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.ParticipanteId)
+
+                    <div class="col-md-12 titulo_alumnos">
+                        <span><i class="fa fa-musical"></i>Asistencia</span>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>  @Html.DisplayFor(model => model.NombreCompleto)</h3>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Asistió</th>
+                                </tr>
+                            </thead>
+                            @if ((Model != null) && (Model.listadoFechas != null))
+                            {
+                                foreach (var item in Model.listadoFechas)
+                                {
+                                    <tbody>
+                                        <tr>
+                                            <td> @item.FechaAsistenciaNueva.ToString("dd/MM/yyyy")  </td>
+
+                                            <td>
+                                                @Html.CheckBox(item.Id.ToString(), item.boolasistio, new { onclick = string.Format("AgregarAsistencia1('{0},{1} ')", item.ParticipanteIdAsistente, item.FechaAsistenciaNueva.ToString("yyyy-MM-dd")) })
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                }
+                            }
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12 col-sm-6 col-xs-6">
+
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

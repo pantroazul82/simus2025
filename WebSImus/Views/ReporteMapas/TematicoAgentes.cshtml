@@ -1,0 +1,243 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<style type="text/css">
+    #PanelMapa {
+        height: 700px;
+    }
+</style>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-1 col-sm-6 col-xs-6"><img style="padding-top:10px;" src="~/img/iconos/mapas_big.png"></div>
+        <div class="titulo_seccion col-md-11 col-sm-6 col-xs-6">MAPAS</div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span class="fa-solid fa-chevron-right fa-lg" style="text-align: left; padding: 5px;"></span>Agentes</div> 
+</div>
+<div class="col-md-12 well carousel-search">
+    <div class="col-md-6 col-sm-12 titulo_convencion">
+        #de agentes registrados por departamento
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+        <div class="usuarios col-md-15 col-sm-3">
+            <div class="iconos_usuarios circle-limon">
+            </div>
+            <p class="titulo_porcentaje">0 al 100</p>
+
+        </div>
+        <div class="usuarios col-md-15 col-sm-3">
+            <div class="iconos_usuarios circle-vino">
+            </div>
+            <p class="titulo_porcentaje">101 a 200</p>
+
+        </div>
+        <div class="usuarios col-md-15 col-sm-3">
+            <div class="iconos_usuarios circle-cafe">
+            </div>
+            <p class="titulo_porcentaje">201 a 400</p>
+
+        </div>
+
+        <div class="usuarios col-md-15 col-sm-3">
+            <div class="iconos_usuarios circle-blue4">
+            </div>
+            <p class="titulo_porcentaje">401 - 1000</p>
+
+        </div>
+        <div class="usuarios col-md-15 col-sm-3">
+
+        </div>
+
+
+    </div>
+    <div class="row ">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <form action="#" class="form-horizontal">
+                <div class="panel panel-default">
+
+                    <div id="PanelMapa">
+                    </div>
+
+                </div>
+
+                <div id="info_dpto">
+                </div>
+                <div id="modalInformacion" class="panel-body">
+                    @Html.Action("_DatosAgentes", new { CodDepto = "", porcentaje = "" })
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+
+    <script type="text/x-handlebars-template" id="info_dpto-template">
+        <div id="info_dptoprueba">
+            <p>{{department.Nombre}}</p>
+
+            {{#each items}}
+            <p>{{porcentajeAvance}}</p>
+            {{/each}}
+
+
+        </div>
+    </script>
+    <script type="text/javascript">
+
+            $(document).on('ON_COMPLETE_LOAD_COMPONENT', function () {
+                window.componentMaps = new com.servinf[window.spaceName].ComponentMaps('#PanelMapa', {
+                    'module': com.servinf.ComponentMaps.Config.modules.VIEWER_DATA, //Indica que el mapa va a visualizar capas
+                    'request_position': false,  // Realizar la solicitud de la posicion actual del usuario
+                    'search_bar': false,        // Barra de busqueda dentro del mapa
+                    'streetview_panel': false,  // El panel de streetview en un porcentaje de la pantalla. Ej: 50
+                    'map_type': "roadmap",      // Tipo de mapa a iniciar: hybrid, satellite, terrain, roadmap
+                    'map_options': false,
+                    'initial_position': {
+                        'lat': 5.065781,
+                        'lng': -75.507820,
+                        'zoom': 6
+                    },
+                    'details': {                // Especificaciones del vista
+                        '_initialPoint': {
+                            'name': "Casa Museo Casa de Nariño",
+                            'routing': true,
+                            'streetview': false,
+                            'Latitud': 4.599872,
+                            'Longitud': -74.072898,
+                            'templateString': "Este es el punto inicial"
+                        },
+                        'layers': [{            // Capas a mostrar
+                            'id': "agentes_mapa",     // Identificador de la capa, sirve para accederla de manera remota.
+                            'name': "agentes",   // Nombre de la capa
+                            'type': "webservice",           // Tipo de capa (catodb,webservice,cartoviz)
+                            'autoload': true,               // Indica que se cargara de manera automatica la capa al iniciar el mapa
+                            'keyTitle': "nombre",           // Indica el tooltip que llevaran los OVERLAYS (Objetos dibujados en el mapa)
+                            'fitBounds': false,             // Indica que se hara zoom a la capa en donde sea dibujada
+                            'cluster': false,                // True si quieres que clusterize (solo si la capa es de puntos)
+                            'cluster_options': {            // Opciones de cluster
+                                'group_key': "nombre"
+                            },
+                            'heat_map': false,              // True si quieres que realize el mapa de calor (solo si la capa es de puntos)
+                            'heat_map_options': {           // Opciones del Mapa de calor
+                                'max_zoom': 12               // Zoom Maximo a cambiar de Mapa de calor a puntos
+                            },
+      
+                            'thematic_dpto': true,
+                            'thematic_dpto_options': {
+                                'date_dpto': 'cod_Departamento',
+                                'column_thematic': {
+                                    'type': "numeric",
+                                    'column': "porcentajeAvance"
+                                },
+                                'hover': "#F3F3F3",
+                                'line': "F0F8FF",
+                                'show_markers': false,
+                                'opacity': 0.7, // 0.0 - 0.9
+                                'thematic': [{
+                                    'name': "Ambito Nacional",
+                                    'color': "#c7be32",
+                                    'type': "operator",
+                                    'rule': {
+                                        'operator': "range",
+                                        'value': "0:100",
+                                    }
+                                }, {
+                                    'name': "Ambito Nacional",
+                                    'color': "#bf504f",
+                                    'rule': {
+                                        'operator': "range",
+                                        'value': "101:200",
+                                    }
+                                }, {
+                                    'name': "Ambito Nacional",
+                                    'color': "#734e0b",
+                                    'rule': {
+                                        'operator': "range",
+                                        'value': "201:400",
+                                    }
+                                }, {
+                                    'name': "Ambito Nacional",
+                                    'color': "#1B5477",
+                                    'rule': {
+                                        'operator': "range",
+                                        'value': "401:1000",
+                                    }
+
+                                }, {
+                                    'name': "Ambito Nacional",
+                                    'color': "#167b93",
+                                    'rule': {
+                                        'operator': "*",
+                                        'value': "",
+                                    }
+                                }]
+                            },
+
+                            'url': "http://simus.mincultura.gov.co/Api/AgentesGeo/", // Url del servicio (En caso de que sea de tipo 'webservice)
+                            'specifications': {                             // Especificaciones del servicio
+                                'node_list': "agentes"                     // Indica el NODO de responseData sobre cual iterar
+                            },
+                            'template_settings': {                          // Infowindow
+                                'element': "infowin_agentes-template"      // Nodo Plantilla de Handlebars
+                            },
+                            'thematic': [                   // Tematicos (Indicar Iconos, colores, etc..)
+                                 {
+                                     'name': "Agentes persona natual",
+                                     'icon': "http://simus.mincultura.gov.co/img/marcadores/marker_entidad.png",
+                                     'rule': {
+                                         'key': "",
+                                         'operator': "*",
+                                         'value': "",
+                                     }
+                                 },
+                            ]
+                        }]
+                    }
+                });
+
+                $(document).on('ONCLICK_DEPARTMENT_agentes_mapa', function (e) {
+                    var varCodDepto = e.detail.info.department.CodDane;
+                    var varNombre = e.detail.info.department.Nombre;
+                    ActualizarListado(varCodDepto, e.detail.info.items[0].porcentajeAvance, varNombre);
+                })
+
+            });
+
+            function ActualizarListado(varCodDepto, varporcentaje, varNombre) {
+
+                $.ajax({
+
+                    url: "/ReporteMapas/_DatosAgentes",
+                    type: "GET",
+                    data: { CodDepto: varCodDepto, porcentaje: varporcentaje, nombre: varNombre }
+                })
+               .done(function (partialViewResult) {
+                   $("#modalInformacion").html(partialViewResult);
+                   $("#modal_datosagentes").modal('show');
+                   $('body').removeClass('modal-open');
+                   $('.modal-backdrop').remove();
+               });
+
+            }
+
+
+
+    </script>
+}
+
+
+
+
+

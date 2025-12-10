@@ -1,0 +1,57 @@
+﻿@using MvcCheckBoxList.Model
+@model WebSImus.Models.FormacionModelNuevo
+
+
+<div class="modern-form-container">
+    <div class="form-header">
+        <h2 class="form-title">
+            <i class="fas fa-chalkboard-teacher"></i>
+            FORMACIÓN
+        </h2>
+    </div>
+
+    <h3 class="mf-section-title">
+        <i class="fas fa-stream"></i>
+        Procesos de Formación
+    </h3>
+
+    @Html.HiddenFor(m => m.NombreEscuela)
+    @Html.HiddenFor(m => m.EscuelaId)
+
+    <div class="mf-field-group">
+        <label class="mf-label">¿Cuáles son los procesos de formación que imparte la escuela?</label>
+        @Html.TextAreaFor(model => model.ProcesosFormacion, new { @class = "w-full px-3 py-2 border rounded", @rows = "6" })
+        <div class="mf-validation-error">
+            @Html.ValidationMessageFor(model => model.ProcesosFormacion)
+        </div>
+    </div>
+
+    <div class="mf-field-group">
+        <label class="mf-label">¿Realiza la escuela talleres independientes?</label>
+        <div class="mf-radio-group">
+            <label class="mf-radio-label">
+                @Html.RadioButtonFor(m => m.TieneTalleresIndependientes, 1) Si
+            </label>
+            <label class="mf-radio-label">
+                @Html.RadioButtonFor(m => m.TieneTalleresIndependientes, 2) No
+            </label>
+        </div>
+    </div>
+
+    <div class="mf-field-group">
+        <label class="mf-label">¿Posee la escuela programas formulados por escrito?</label>
+        <div class="mf-radio-group">
+            <label class="mf-radio-label">
+                @Html.RadioButtonFor(m => m.TieneProgramasPorEscrito, 1) Si
+            </label>
+            <label class="mf-radio-label">
+                @Html.RadioButtonFor(m => m.TieneProgramasPorEscrito, 2) No
+            </label>
+        </div>
+    </div>
+
+    @*<div class="mf-form-footer">
+        @Html.ActionLink("Anterior", "Organizacion", "EscuelasMusica", new { Id = Model.EscuelaId }, new { @class = "btn border" })
+        <input type="submit" value="Siguiente" name="TabFormacion" class="btn btn-primary" id="btnGuardarFormacion" />
+    </div>*@
+</div>

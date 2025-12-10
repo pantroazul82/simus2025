@@ -1,0 +1,51 @@
+﻿@model SM.LibreriaComun.DTO.EntidadesOperadoras.CronogramaDTO
+
+<div class="panel panel-default">
+    @*<div class="panel-heading">
+        <h2><span class="fa-representante fa-2x"></span> Agentes</h2>
+    </div>*@
+    @Html.HiddenFor(model => model.ActividadId)
+    @Html.HiddenFor(model => model.Id)
+    <div class="panel-body">
+        <div class="row push-down-20">
+            <h3><span class="fa-representante fa-2x"></span>Participantes del cronograma</h3>
+        </div>
+        <div class="row push-down-20">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-info"><i class="fa-question"></i> Para incluir los participantes del cronograma debe haberse registrado como Agente .</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Número de Identificación </label>
+                    <div class="col-md-8">
+                        @Html.Editor("PersonaP", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+
+                    <div class="col-md-6">
+                        <button type="button" id="mysubmitParticipante" class="btn btn-success glyphicon glyphicon-plus-sign" data-dismiss="modal"> Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="TablaAgenteP" class="panel-body">
+        @Html.Action("CargarAgentesParticipantes", new { cronogramaId = Model.Id, EliminarId = 0 })
+    </div>
+</div>
+<script type="text/javascript">
+
+    function EliminarAgenteP(varid) {
+        var varAgenteId = '@Model.Id';
+        ActualizarListadoAgenteP(varAgenteId, varid)
+    }
+
+</script>
+

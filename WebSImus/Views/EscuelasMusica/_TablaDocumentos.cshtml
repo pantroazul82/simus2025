@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.EscuelaDocumentoDTO>
+
+<div class="mf-table-container">
+    @Html.Hidden("item-to-delete-documento", "", new { @id = "item-to-delete-documento" })
+    <table class="mf-table">
+        <thead>
+            <tr>
+                <th style="width: 35%;">Nombre Archivo</th>
+                <th style="width: 20%;">Fecha Registro</th>
+                <th style="width: 30%;">Categoría</th>
+                <th style="width: 15%; text-align: center;">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (SM.LibreriaComun.DTO.EscuelaDocumentoDTO item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.NombreArchivo,
+                                            "Descargar", "Documento",
+                                            new { id = item.DocumentoId },
+                                            new
+                                                 {
+                                                @class = "mf-table-link",@* Aplicando clase para estilo de enlace en tabla *@
+                            title = string.Format("Descargar archivo: {0}\nFecha registro: {1}\nTamaño: {2} bytes", item.NombreArchivo, item.Fecha.ToString("dd/MM/yyyy"), item.TamanoArchivo)
+                            })
+                        </td>
+                        <td>@item.FechaRegistro</td>
+                        <td>@item.Categoria</td>
+                        <td style="text-align: center;">
+                            <a href="#" class="mf-action-icon-btn mf-action-delete"
+                               title="Eliminar documento"
+                               data-id="@item.EscuelaDocumentoId"
+                               onclick="javascript: CargarModalDocumentos('@item.EscuelaDocumentoId'); EliminarDocumento(); return false;">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="mf-table-empty">
+                        No hay documentos para mostrar.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "ReporteBasico";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+<h2>ReporteBasico</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="panel-body" id="panelEditar">
+            <iframe id="iframeReporte" scrolling="no" width="1230" height="1000"></iframe>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        ReportValidator();
+    });
+</script>
+<script>
+    function ReportValidator() {
+        var url = "../Reportes/MaestraReport.aspx";
+        var Myiframe = document.getElementById("iframeReporte");
+
+        if (Myiframe != null) {
+            if (My.src) {
+                Myiframe.src = url;
+            }
+            else if (Myiframe.contentWindow !== null && Myiframe.contentWindow.location != null) {
+                Myiframe.contentWindow = url;
+            }
+            else { Myiframe.setAttribute('src', url); }
+
+        }
+    }
+</script>

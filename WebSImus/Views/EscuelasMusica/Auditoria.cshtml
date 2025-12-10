@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Consulta Escuelas de Música";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Formulario", "EscuelasMusica", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Escuelas", "Consulta", "EscuelasMusica")</li>
+        <li>@Html.ActionLink("Editar", "EditarNuevo", "EscuelasMusica", new { Id = ViewBag.EscuelaId }, null)</li>
+    </ul>
+    <div class="page-content-wrap">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <h3>@ViewBag.NombreEscuela</h3>
+                        <p>@ViewBag.ResenaEscuela</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+
+                <br />
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.ActionLink(" Exportar", "ExportToAuditoria", "EscuelasMusica", new { Id = ViewBag.EscuelaId }, new { @class = "btn btn-warning glyphicon glyphicon-export" })
+                    
+                        </div>
+                    </div>
+                </div>
+                <br />
+            
+
+                <br />
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div id="Tabla">
+                                @Html.Action("GridViewPartialAuditoria", new { Id = ViewBag.EscuelaId })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        </div>
+}

@@ -1,0 +1,53 @@
+﻿@model SM.LibreriaComun.DTO.NivelesFormacionDTO
+
+<div class="modal animated fadeIn" id="modal_datosNiveles" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content card">
+            <div class="mf-modal-header">
+                @Html.HiddenFor(model => model.EscuelaId)
+                @Html.HiddenFor(model => model.FormacionPracticaNuevoId)
+                <h5 class="text-lg">
+                    <i class="fas fa-layer-group"></i> Niveles
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="mf-modal-body">
+                <div class="mf-field-group">
+                    <label class="mf-label" for="NombreNiveles">Nivel</label>
+                    @Html.DropDownListFor(model => model.NombreNiveles, (SelectList)ViewBag.listaNiveles, "Seleccione", new { @class = "w-full px-3 py-2 border rounded styled-select", required = "required" })
+                    @Html.ValidationMessageFor(model => model.NombreNiveles, "", new { @class = "mf-validation-error" })
+                </div>
+
+                <div class="mf-field-group">
+                    <label class="mf-label" for="Cantidadgrupos">Cantidad de Grupos</label>
+                    @Html.TextBoxFor(model => model.Cantidadgrupos, new { @class = "w-full px-3 py-2 border rounded", maxlength = "6", type = "number", required = "required", placeholder = "0"})
+                    @Html.ValidationMessageFor(model => model.Cantidadgrupos, "", new { @class = "mf-validation-error" })
+                </div>
+
+                <div class="mf-field-group">
+                    <label class="mf-label" for="CantidadIntegrantes">Cantidad de Integrantes</label>
+                    @Html.TextBoxFor(model => model.CantidadIntegrantes, new { @class = "w-full px-3 py-2 border rounded", maxlength = "6", type = "number", required = "required", placeholder = "0" })
+                    @Html.ValidationMessageFor(model => model.CantidadIntegrantes, "", new { @class = "mf-validation-error" })
+                </div>
+
+                <div class="mf-field-group">
+                    <label class="mf-label" for="HoraSemanal">Horas/Semanal</label>
+                    @Html.TextBoxFor(model => model.HoraSemanal, new { @class = "w-full px-3 py-2 border rounded", maxlength = "6", type = "number", required = "required", placeholder = "0" })
+                    @Html.ValidationMessageFor(model => model.HoraSemanal, "", new { @class = "mf-validation-error" })
+                </div>
+            </div>
+
+            <div class="mf-modal-footer">
+                <button type="button" id="btnGuardarNiveles" class="btn btn-success" data-dismiss="modal" onclick="NivelAgregar('@Model.FormacionPracticaNuevoId')">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">
+                    <i class="fas fa-times"></i> Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

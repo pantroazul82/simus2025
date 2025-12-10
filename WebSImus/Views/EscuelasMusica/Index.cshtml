@@ -1,0 +1,83 @@
+﻿@model WebSImus.Models.RedesSocialesModel
+
+@{
+    ViewBag.Title = "Escuelas de música";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+
+@using (Html.BeginForm("Index", "EscuelasMusica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="row">
+        <div class="col-md-12">
+            <!-- START WIZARD WITH VALIDATION -->
+            <div class="panel panel-colorful">
+                <div class="panel-body">
+                    @Html.TextBoxFor(model => model.UrlYoutube, new { @class = "form-control text", @maxlength = "100" })
+                    @Html.ValidationMessageFor(model => model.UrlYoutube, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.UrlYoutube, (SelectList)ViewBag.municipios, "Seleccione un valor", new { @class = "styled-select" })
+                </div>
+            </div>
+            <!-- END WIZARD WITH VALIDATION -->
+        </div>
+        <div id="mapa"></div>
+        <div id="ubicacion"></div>
+
+
+        <!-- Se escribe un mapa con la localizacion anterior-->
+        <div id="demo"></div>
+        <div id="mapholder"></div>
+        @*<button onclick="cargarmap()">Cargar mapa</button>*@
+        <div class="panel-footer">
+            <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+
+        </div>
+    </div>
+
+    <!-- MESSAGE BOX-->
+    <div class="message-box message-box-success animated fadeIn" data-sound="alert" id="id_delaAlerta">
+        <div class="mb-container">
+            <div class="mb-middle">
+                <div class="mb-title"><span class="fa fa-exclamation-circle"></span> @ViewBag.TituloAlerta</div>
+                <div class="mb-content">
+                    <p>Texto descriptivo de la alerta</p>
+                </div>
+                <div class="mb-footer">
+                    <div class="pull-right">
+                        <a href="#" class="btn btn-default btn-lg" id="CerrarAlerta">Cerrar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MESSAGE BOX-->
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <!-- Se determina y escribe la localizacion -->
+
+
+    <script type="text/javascript">
+    $(function () {
+
+        if ("@ViewBag.Mensajes" == "OK")
+        {
+           // alert("Entro aqui");
+            $('#id_delaAlerta').show();
+
+        }
+    });
+
+    $("#CerrarAlerta").on("click", function () {
+        $("#id_delaAlerta").css("display", "none");
+        return false;
+    });
+
+    </script>
+
+}

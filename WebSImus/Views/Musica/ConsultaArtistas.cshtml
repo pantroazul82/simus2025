@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Consulta Eventos";
+    Layout = "~/Views/Shared/_LayoutGrillaMusica.cshtml";
+}
+
+<br />
+<br />
+
+<div class="container">
+    <div class="row">
+        <h2>Celebra la Música - Artistas Participantes</h2>
+        <div class="panel-body" id="panelEditar">
+            <hr class="colorgraph">
+
+
+            <hr style="height: 1px; background: #CCC">
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-md-6 control-label">Pulse el siguiente botón para exportar el listado de artistas participantes. </label>
+                    <div class="col-md-6">
+                        @Html.DevExpress().Button(settings =>
+{
+    settings.Name = "ButtonExportar";
+    settings.UseSubmitBehavior = false;
+    settings.Text = "Exportar";
+    settings.RouteValues = new { Controller = "Musica", Action = "ExportToArtistas" };
+}).GetHtml()
+
+                    </div>
+                </div>
+            </div>
+            <hr style="height: 1px; background: #CCC">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="Tabla">
+                        @Html.Action("GridViewArtista")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

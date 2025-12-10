@@ -1,0 +1,49 @@
+﻿@{
+    var tipo = TempData["MensajeTipo"] as string ?? "info";
+    var mensaje = TempData["MensajeSistema"] as string;
+    string icono;
+    switch (tipo)
+    {
+        case "success":
+            icono = "fa-circle-check";
+            break;
+        case "info":
+            icono = "fa-circle-info";
+            break;
+        case "warning":
+            icono = "fa-triangle-exclamation";
+            break;
+        case "error":
+            icono = "fa-circle-exclamation";
+            break;
+        default:
+            icono = "fa-info-circle";
+            break;
+    }
+
+
+}
+
+@if (!string.IsNullOrEmpty(mensaje))
+{
+    <div class="toast-notificacion toast-@tipo" id="toastNotificacion">
+        <i class="fa-solid @icono icono-toast"></i>
+        <span>@Html.Raw(mensaje)</span>
+        <button class="cerrar-toast" onclick="cerrarToast()">&times;</button>
+    </div>
+
+    <script>
+        function cerrarToast() {
+            const toast = document.getElementById("toastNotificacion");
+            if (toast) {
+                toast.classList.add("fade-out");
+                setTimeout(() => toast.remove(), 500);
+            }
+        }
+
+        // Auto cerrar después de 5 segundos
+        setTimeout(() => {
+            cerrarToast();
+        }, 5000);
+    </script>
+}

@@ -1,0 +1,176 @@
+﻿@model WebSImus.Models.EventoDanzaPadreModels
+@using SM.LibreriaComun.DTO;
+@{
+    ViewBag.Title = "Detalle Evento";
+    Layout = "~/Views/Shared/_LayoutCelebra.cshtml";
+}
+
+@section Scripts
+{
+
+    <script src="@Url.Content("~/Scripts/toDo/demo_edit_profile.js")"></script>
+}
+
+<br />
+<br />
+<div class="row">
+    <div class="col-md-3 col-sm-4 col-xs-5">
+
+        <form action="#" class="form-horizontal">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3><span class="fa-representante fa-2x"></span> Nombre</h3>
+                    <p>@Html.DisplayFor(m => m.DatosBasicos.Nombre, new { @class = "panel-title" })</p>
+                    <div class="text-center" id="user_image">
+                        <img src="@Url.Content(ViewBag.ImageData)" class="img-thumbnail" />
+                    </div>
+                </div>
+                <div class="panel-body form-group-separated">
+
+
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="col-md-9 col-sm-8 col-xs-7">
+        <div class="panel panel-default form-horizontal ">
+            <div class="panel-body">
+                <h3><span class="fa fa-pencil"></span> Detalle del evento</h3>
+
+            </div>
+            <div class="panel-body form-group-separated">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Nombre Evento</label>
+                    <div class="col-md-8 col-xs-7 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.DatosBasicos.Nombre)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Lugar</label>
+                    <div class="col-md-8 col-xs-7 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.DatosBasicos.LugarEvento)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Entidad Organizadora</label>
+                    <div class="col-md-8 col-xs-7 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.DatosBasicos.EntidadOrganizadora)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Fecha de inicio del evento</label>
+                    <div class="col-md-8 col-xs-7 col-xs-7 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.DatosBasicos.FechaEvento)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Hora de inicio del evento</label>
+                    <div class="col-md-8 col-xs-7 col-xs-7 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.DatosBasicos.HoraEvento)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Fecha final del evento</label>
+                    <div class="col-md-8 col-xs-7 col-xs-7 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.DatosBasicos.FechaEventoFinal)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Hora final del evento</label>
+                    <div class="col-md-8 col-xs-7 col-xs-7 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.DatosBasicos.HoraEventoFinal)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Departamento</label>
+                    <div class="col-md-8 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.DatosBasicos.Departamento)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Municipio</label>
+                    <div class="col-md-8 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.DatosBasicos.Municipio)
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Área Artística</label>
+                    <div class="col-md-8 col-xs-7  line-height-30">
+                        @Html.DisplayFor(m => m.DatosBasicos.Tipo)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Descripción</label>
+                    <div class="col-md-8 col-xs-7  line-height-30">
+                        @Html.DisplayFor(m => m.DatosBasicos.Descripcion)
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Grupos</h4>
+
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+
+                                <th>Nombres</th>
+                                <th>Contacto</th>
+                                <th>Cantidad Miembros</th>
+                                <th>Enlace</th>
+
+
+                            </tr>
+                        </thead>
+
+                        @if (Model.listGrupos != null)
+                        {
+                            foreach (WebSImus.Models.GrupoPublicoModels item in Model.listGrupos)
+                            {
+                                <tbody>
+                                    <tr>
+
+                                        <td>@item.Nombre</td>
+                                        <td>@item.Contacto</td>
+                                        <td>@item.CantidadMiembros</td>
+                                        <td>@item.Enlace</td>
+
+                                    </tr>
+
+
+
+                                </tbody>
+                            }
+                        }
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+

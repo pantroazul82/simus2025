@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "Vista parcial crear publicaciones";
+    Layout = "~/Views/Shared/_LayoutDiseño.cshtml";
+}
+
+<div class="panel panel-primary form-horizontal">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-star"></span> Tipo publicación: Noticia, convocatoria, clasificado</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Tipo publicación</label>
+                    <div class="col-md-8">
+                        <select class="form-control select">
+                            <option>Seleccione...</option>
+                            <option value="NT">Noticia</option>
+                            <option value="CV">Convocatoria</option>
+                            <option value="CL">Clasificado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Título</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" value="..." />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MAN -->
+    <div class="col-md-12">
+        <div class="panel-body">
+            <div class="push-up-20">
+                <label class="col-md-2 control-label">Cuerpo de la publicación*</label>
+                <div class="col-md-10">
+                    <textarea class="form-control" rows="4"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <label class="col-md-4 control-label"><span class="fa fa-calendar"></span> Fecha de inicio*</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control datepicker" value="2015-08-04">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">Imagen</label>
+                <div class="col-md-8">
+                    <div class="btn btn-success btn-file">
+                        <i class="glyphicon glyphicon-folder-open"></i> &nbsp;Subir archivo… <input multiple="" id="file-simple" type="file">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">Link</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" value="..." />
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-4 control-label"><span class="fa fa-calendar"></span> Fecha finalización*</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control datepicker" value="2015-08-04">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">Tipificación de actores</label>
+                <div class="col-md-8">
+                    <select multiple class="form-control select">
+                        <option>Seleccione...</option>
+                        <option value="AF">A1</option>
+                        <option value="AT">A2</option>
+                        <option value="AZ">A3</option>
+                        <option value="BS">B1</option>
+                        <option value="BH">B2</option>
+                        <option value="GW">G1</option>
+                        <option value="HT">Ha1</option>
+                        <option value="HN">Hi2</option>
+                        <option value="IN">I1</option>
+                        <option value="ID">I2</option>
+                        <option value="IE">I3</option>
+                        <option value="MP">I4</option>
+                        <option value="VN">V1</option>
+                        <option value="YE">Y1</option>
+                        <option value="YU">Y2</option>
+                        <option value="ZM">Z1</option>
+                        <option value="ZW">Z2</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Preferencias géneros musicales</label>
+                <div class="col-md-8">
+                    <select multiple class="form-control select">
+                        <option>Seleccione...</option>
+                        <option value="AF">A1</option>
+                        <option value="AT">A2</option>
+                        <option value="AZ">A3</option>
+                        <option value="BS">B1</option>
+                        <option value="BH">B2</option>
+                        <option value="GW">G1</option>
+                        <option value="HT">Ha1</option>
+                        <option value="HN">Hi2</option>
+                        <option value="IN">I1</option>
+                        <option value="ID">I2</option>
+                        <option value="IE">I3</option>
+                        <option value="MP">I4</option>
+                        <option value="VN">V1</option>
+                        <option value="YE">Y1</option>
+                        <option value="YU">Y2</option>
+                        <option value="ZM">Z1</option>
+                        <option value="ZW">Z2</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="col-md-12 push-up-20 push-down-20">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Descripción</label>
+                <div class="col-md-10">
+                    <textarea class="form-control" rows="5"></textarea>
+                </div>
+            </div>
+        </div>
+</div>
+

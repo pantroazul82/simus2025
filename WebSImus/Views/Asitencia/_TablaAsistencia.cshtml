@@ -1,0 +1,107 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.EntidadesOperadoras.AsistenciaDTO>
+<div class="panel panel-default" id="divasistencia">
+
+    <div class="form-group">
+        <div class="row">
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        @if (Model != null)
+                        {
+                            var registro = Model.FirstOrDefault();
+                            if (registro != null)
+                            {
+                                foreach (var y in registro.Dias)
+                                {
+                                    <th>@y.FechaAsistenciaNueva.ToString("dd/MM/yyyy")</th>
+                                }
+                            }
+                        }
+                        <th>Editar</th>
+
+                    </tr>
+                </thead>
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@item.Nombres</td>
+                                <td>@item.Apellidos</td>
+                                @if (item.Dias != null)
+                                {
+                                    foreach (var x in item.Dias)
+                                    {
+                                        <td>
+                                            @x.asistio
+                                        </td>
+                                    }
+                                }
+
+                                <td><a href="" class="fa-pencil-1" data-toggle="modal" data-target="#modal_datosMatriz" title="Editar la información" onclick="javascript: CargarModalContenido('@item.ParticipanteId');"></a></td>
+                            </tr>
+                        </tbody>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    function AgregarAsistencia1(varId) {
+
+        var vararray = varId.split(',');
+        AgregarAsistencia(vararray[0], vararray[1]);
+
+    }
+
+    function AgregarAsistencia(agenteId, varfecha) {
+
+        var VarCronogramaId = '@Model.FirstOrDefault().CronogramaId';
+     
+        var url = '@Url.Action("AgregarAsistencia", "Asitencia")';
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    Id: VarCronogramaId, agenteId: agenteId, fecha: varfecha
+                },
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        ActualizarlistadoAsistencia1(VarCronogramaId);
+
+                    }
+                },
+
+            });
+        }
+
+    function ActualizarlistadoAsistencia1(VarCronogramaId) {
+            
+            $.ajax({
+
+                url: "/Asitencia/TablaAsistencia",
+                type: "GET",
+                data: { CronogramaId: VarCronogramaId }
+            })
+       .done(function (partialViewResult) {
+
+           $("#divasistencia").html(partialViewResult);
+
+       });
+        }
+
+</script>

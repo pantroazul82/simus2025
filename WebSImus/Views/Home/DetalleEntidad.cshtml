@@ -1,0 +1,137 @@
+﻿@model WebSImus.Models.EntidadDatosModels
+@using SM.LibreriaComun.DTO;
+@{
+    ViewBag.Title = "Detalle Entidad";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2 col-sm-6 col-xs-6"><img style="padding-top:10px; padding-left:30px;" src="~/img/iconos/entidades_big.png"></div>
+        <div class="titulo_seccion col-md-10 col-sm-6 col-xs-6">Entidades</div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span style="text-align: left; padding: 5px;"></span>@Html.DisplayFor(m => m.Nombre)</div>
+</div>
+<div class="col-md-12 well carousel-search" style="margin-top:40px;">
+    <div class="row">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="htab1">
+                <div class=" col-md-1">
+                    <img style="padding-top:10px; padding-left:30px;" class="titulo_ficha this-animate" data-animate="fadeInLeft bounce" src="~/img/iconos/datos_big.png">
+                </div>
+                <div class=" col-md-11">
+                    <h3 class="titulo_ficha this-animate" data-animate="fadeInLeft bounce">Datos de Identificación</h3>
+                </div>
+
+                <div class="page-content-wrap">
+                    <div class="divider"></div>
+                    <!-- page content holder -->
+                    <div class="page-content-holder">
+                        <div class="row">
+                            <div class=" this-animate" data-animate="fadeInRight bounce">
+                                <div class="col-md-8">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <div class="row">
+
+                                                <div class=" col-md-5 col-sm-5 col-xs-12 imagen_ficha">
+                                                    <img style="border-radius: 5px 0px 0px 0px;" class="img-responsive" src="@Url.Content(ViewBag.ImageData)" alt="escuela" />
+                                                    <div class="titulo_negro_ficha2 col-md-12">
+                                                        <div class=" col-md-3 col-sm-2 col-xs-2">  </div>
+                                                        <div class="col-md-12  texto_foto"> Nit: @Html.DisplayFor(m => m.Nit) </div>
+                                                        <div class="col-md-12   texto_foto"> Naturaleza:@Html.DisplayFor(m => m.Naturaleza) </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12 titulo_ficha_item">@Html.DisplayFor(m => m.Nombre)  </div>
+                                                    </div>
+                                                    <div class="col-md-10 parrafo_ficha">@Html.DisplayFor(m => m.Descripcion) </div>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class=" this-animate" data-animate="fadeInDown bounce">
+                                    <div class="col-md-3 redes_ficha">
+                                        <div class="col-md-12 col-sm-3 col-xs-6">
+                                            <div class="col-md-2 fa-mapas fa-3x iconos_ficha"> </div>
+                                            <div class="col-md-10 ubicacion_fichas">@Html.DisplayFor(m => m.Municipio) , @Html.DisplayFor(m => m.Departamento)  </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-3 col-xs-6">
+                                            <div class="col-md-2 fa-celular fa-3x iconos_ficha"> </div>
+                                            <div class="col-md-10 txt_fichas">@Html.DisplayFor(m => m.Telefono)  </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 col-sm-3 col-xs-6">
+                                            <div class="col-md-2 fa-web fa-3x iconos_ficha"> </div>
+                                            <div class="col-md-10  txt_fichas"><a href="@Model.LinkPortafolio" target="_blank">@Html.DisplayFor(m => m.LinkPortafolio)</a></div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-3 col-xs-6">
+                                            <div class="col-md-2 fa-correo fa-3x iconos_ficha"> </div>
+                                            <div class="col-md-10 txt_fichas">@Html.DisplayFor(m => m.CorreoElectronico)  </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-sd-12 col-xs-12" style="margin-top:30px;">
+                                           
+                                            @if (Model.facebook.IsEmpty())
+                                            { <div class="col-md-3 col-sd-3 col-xs-3"> <span class=" fa-face fa-3x red_desab" />  </div>}
+                                            else
+                                            {
+                                                <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.facebook" target="_blank"><span class="fa-face fa-3x iconos_ficha"></span></a></div>}
+                                            @if (Model.youtube.IsEmpty())
+                                            { <div class="col-md-3 col-sd-3 col-xs-3"> <span class=" fa-youtube2 fa-3x red_desab"/></div> }
+                                            else
+                                            {
+                                                <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.youtube" target="_blank"><span class="fa-youtube2 fa-3x iconos_ficha"></span></a></div>
+                                            }
+
+                                            @if (Model.twitter.IsEmpty())
+                                            {  <div class="col-md-3 col-sd-3 col-xs-3 "><span class=" fa-twitter2 fa-3x red_desab" /></div>}
+                                            else
+                                            {
+                                                <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.twitter" target="_blank"><span class="fa-twitter2 fa-3x iconos_ficha"></span></a></div>
+                                            }
+                                            @if (Model.soundcloud.IsEmpty())
+                                            { <div class="col-md-3 col-sd-3 col-xs-3"><span class=" fa-soundcloud2 fa-3x red_desab" /></div> }
+                                            else
+                                            {
+                                                <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.soundcloud" target="_blank"><span class="fa-soundcloud2 fa-3x iconos_ficha"></span></a></div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ./2 -->
+                </div>
+
+            </div>
+           
+        </div>
+
+        <div class="space1"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/plugins/mixitup/jquery.mixitup.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/appear/jquery.appear.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+}

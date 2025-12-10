@@ -1,0 +1,117 @@
+﻿
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridUsuarioReporteConsulta";
+        settings.CallbackRouteValues = new { Controller = "Report", Action = "GridViewConsultaReporte" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Recurso", Action = "GridViewRecursoPaginaAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Recurso", Action = "GridViewRecursoPaginaUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Recurso", Action = "GridViewRecursoPaginaDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+        
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.Width = System.Web.UI.WebControls.Unit.Percentage(6);
+        settings.CommandColumn.Caption = "";
+        
+
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        settings.KeyFieldName = "EscuelaId";
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NombreEscuela";
+            column.Caption = "Escuela";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(20);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Departamento";
+            column.Caption = "Departamento";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(12);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Municipio";
+            column.Caption = "Municipio";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(12);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Estado";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Naturaleza";
+            column.Caption = "Naturaleza";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Tipo";
+            column.Caption = "Tipo";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "FechaCreacion";
+            column.Caption = "Creacion";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "FechaActualizacion";
+            column.Caption = "Actualización";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+      
+       
+        settings.SettingsPager.PageSize = 50;
+        settings.SettingsBehavior.FilterRowMode = GridViewFilterRowMode.Auto;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "50", "100", "200" };
+    });
+
+
+
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

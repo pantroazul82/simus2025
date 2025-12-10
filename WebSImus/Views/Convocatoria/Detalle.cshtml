@@ -1,0 +1,262 @@
+﻿@model WebSImus.Models.ConvocatoriaDetalleModels
+
+@{
+    ViewBag.Title = "Detalle Convocatoria";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+    <li>@Html.ActionLink("Convocatoria", "Index", "Convocatoria")</li>
+</ul>
+<div class="row">
+
+
+    <div class="col-md-9 col-sm-8 col-xs-7">
+        <div class="panel panel-default form-horizontal ">
+            <div class="panel-body">
+                <h3><span class="fa fa-pencil"></span> Detalle Convocatoria</h3>
+
+            </div>
+            <div class="panel-body form-group-separated">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Nombre</label>
+                    <div class="col-md-8 col-xs-7 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.Titulo)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Estado</label>
+                    <div class="col-md-8 col-xs-7 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.NombreEstado)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Tipo actor</label>
+                    <div class="col-md-8 col-xs-7 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.NombreTipo)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Relacionado A:</label>
+                    <div class="col-md-8 col-xs-7 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.RelacionadoA)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Fecha Inicio</label>
+                    <div class="col-md-8 col-xs-7 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.FechaInicio)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Fecha Fin</label>
+                    <div class="col-md-8 col-xs-7 col-xs-7 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.FechaFin)
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Descripción</label>
+                    <div class="col-md-8 col-xs-7 line-height-30">
+                        @Html.DisplayFor(m => m.Descripcion)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Archivo</label>
+                    <div class="col-md-8 col-xs-7 line-height-30">
+                        @if (Model.documentoId > 0)
+                        {
+
+                            @Html.ActionLink("Descargar documento", "Descargar", "Documento", new { Id = Model.documentoId }, new { title = string.Format("Descargar archivo de detalle convocatoria") })
+                        }
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-3 col-sm-4 col-xs-5">
+
+        <form action="#" class="form-horizontal">
+            <div class="panel panel-default">
+
+                <div class="panel-body">
+                    <h3><span class="fa-representante fa-2x"></span> Dirigido A</h3>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Actores</th>
+                                </tr>
+                            </thead>
+
+                            @if (Model.DirigidoASeleccionada != null)
+                            {
+                                foreach (var item in Model.DirigidoASeleccionada)
+                                {
+                                    <tbody>
+                                        <tr>
+                                            <td>@item.Nombre</td>
+
+                                        </tr>
+                                    </tbody>
+                                }
+                            }
+                        </table>
+                    </div>
+                </div>
+
+                @if (Model.EsDotacion == false)
+                {
+                    if (Model.EstadoId == "2")
+                    {
+                        <div class="panel-body">
+                            @*<h3><span class="fa-representante fa-2x"></span> Participar</h3>*@
+                            <a href="#" class="btn btn-success glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#modalParticipacion"> Participar</a>
+                         
+
+                        </div>
+                    }
+                }
+
+            </div>
+        </form>
+
+    </div>
+</div>
+   <!-- MODAL AGREGAR FORMACIÓN -->
+<div id="panelAgregar" class="panel-body">
+    @Html.Action("Participar", new { Id = Model.ConvocatoriaId })
+</div>
+<!-- FIN MODAL -->
+<div class="row">
+    @if ((Model.EstadoId == "2") && (Model.EsDotacion == true))
+    {
+        if (Model.ListadoMunicipiosDotacion.Count > 0)
+        {
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel-body">
+                    <h3>Entidades Seleccionadas</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Entidad</th>
+                                <th>Acción</th>
+
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model.ListadoMunicipiosDotacion)
+                        {
+                        <tbody>
+                            <tr class="warning">
+                                <td>@item.Nombre</td>
+                                <td>@Html.ActionLink("Participar", "Dotacion", "Convocatoria", new { Id = item.Id }, null)</td>
+
+                            </tr>
+
+                        </tbody>
+                        }
+                    </table>
+
+
+                </div>
+
+            </div>
+
+
+        }
+    }
+
+    @if ((Model.EstadoId == "2") && (Model.EsDotacion == true))
+    {
+        if (Model.listadoEntidadesActualizado.Count > 0)
+        {
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel-body">
+                    <h3>Entidades Registradas</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Entidad</th>
+                                <th>Acción</th>
+
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model.listadoEntidadesActualizado)
+                        {
+                            <tbody>
+                                <tr class="warning">
+                                    <td>@item.Nombre</td>
+                                    <td>@Html.ActionLink("Actualizar", "Actualizar", "Convocatoria", new { Id = item.Id }, null)</td>
+
+                                </tr>
+
+                            </tbody>
+                        }
+                    </table>
+
+
+                </div>
+
+            </div>
+        }
+    }
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+<script type="text/javascript">
+    $('#btnParticipar').click(function () {
+        var varTipo = $('#Tipo').val();
+        var varTipoActor = $('#TipoActor').val();
+      
+      
+        if (varTipo == false) {
+            alert("El tipo de actor es obligatorio");
+            return false;
+        }
+
+        if (varTipoActor == false) {
+            alert("El actor es obligatorio");
+            return false;
+        }
+      
+        var url = '@Url.Action("AgregarParticipacion", "Convocatoria")';
+        var varConvocatoriaId = '@Model.ConvocatoriaId';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                Id: varConvocatoriaId, tipoActor: varTipo, actor: varTipoActor, descripcion: $("#Descripcion").val()
+             
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                    .not(':button, :submit, :reset, :hidden')
+                    .val('')
+                    .removeAttr('checked')
+                    .removeAttr('selected');
+                    $("#modalParticipacion").modal('hide');
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+                    alert("La participación quedo registrada exitosamente!!!");
+                }
+            },
+
+        });
+    });
+    </script>
+}

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WebSImus.Models.VideoModel>
+
+<div class="mf-table-container">
+    @Html.Hidden("item-to-delete", "", new { @id = "item-to-delete" }) @* Este ID es usado por CargarModal y EliminarVideo *@
+    <table class="mf-table">
+        <thead>
+            <tr>
+                <th style="width: 20%;">Clasificación</th>
+                <th style="width: 15%;">Fecha</th>
+                <th style="width: 35%;">Descripción</th>
+                <th style="width: 15%; text-align: center;">Reproducir</th>
+                <th style="width: 15%; text-align: center;">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (WebSImus.Models.VideoModel item in Model)
+                {
+                    <tr>
+                        <td>@item.NuevaClasificacion</td>
+                        <td>@item.FechaPublicacion</td>
+                        <td>@item.Desripcion</td> 
+                        <td style="text-align: center;">
+                            <a href="#" class="mf-action-icon-btn mf-action-play"
+                               id="@item.Id" 
+                               title="Reproducir video"
+                               onclick="javascript: CargarVideoNuevo('@item.url'); return false;">
+                                <i class="fas fa-play-circle"></i>
+                            </a>
+                        </td>
+                        <td style="text-align: center;">
+                            <a href="#" class="mf-action-icon-btn mf-action-delete"
+                               title="Eliminar video"
+                               data-id="@item.Id" 
+                               onclick="javascript: CargarModal('@item.Id'); EliminarVideo(); return false;">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="mf-table-empty">
+                        No hay videos para mostrar.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@*
+    El modal con id="modalConfirmarAccion" se ha eliminado de esta vista parcial
+    según la solicitud de no agregar modals de confirmación.
+    La función EliminarVideo en _RedesSociales.cshtml ahora se ejecutará
+    directamente después de CargarModal('@item.Id').
+*@

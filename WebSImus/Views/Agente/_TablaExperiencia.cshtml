@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebSImus.Models.AgenteExperienciaModels>
+<div class="panel-body">
+    <table class="table">
+        @Html.Hidden("item-to-deletex", "", new { @id = "item-to-deletex" })
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Titulo</th>
+                <th>Periodo Inicio</th>
+                <th>Periodo Final</th>
+                <th>Eliminar</th>
+
+            </tr>
+        </thead>
+
+        @if (Model != null)
+        {
+            foreach (WebSImus.Models.AgenteExperienciaModels item in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td>@item.Empresa</td>
+                        <td>@item.Titulo</td>
+                        <td>@item.FechaInicio</td>
+                        <td>@item.FechaFinal</td>
+                        <td><a href="" class="fa-trash-a" data-toggle="modal" data-target="#modalConfirmarExperiencia" data-id="@item.ExperienciaId" onclick="javascript: CargarModalExperiencia('@item.ExperienciaId');"></a></td>
+                    </tr>
+
+
+
+                </tbody>
+            }
+        }
+    </table>
+    <div id="modalConfirmarExperiencia" class="modal modal-vcenter fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Esta a punto de eliminar un elemento de su lista de experiencia. <strong>Tenga en cuenta que esta acción no se puede revertir</strong>.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="myDeleteExp" class="btn btn-danger" data-dismiss="modal" onclick="EliminarExperiencia()">Eliminar</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

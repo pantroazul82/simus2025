@@ -1,0 +1,272 @@
+﻿@model WebSImus.Models.AgentePublicoModels
+@using SM.LibreriaComun.DTO;
+@{
+    ViewBag.Title = "perfil público";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@section Scripts
+{
+
+    <script src="@Url.Content("~/Scripts/toDo/demo_edit_profile.js")"></script>
+}
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+    <li>@Html.ActionLink("Agente", "Index", "Agente")</li>
+</ul>
+<div class="row">
+    <div class="col-md-3 col-sm-4 col-xs-5">
+
+        <form action="#" class="form-horizontal">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3><span class="fa-representante fa-2x"></span> Datos de Identificación</h3>
+                    <p>@Html.DisplayFor(m => m.NombreCompleto, new { @class = "panel-title" })</p>
+                    <div class="text-center" id="user_image">
+                        <img src="@Url.Content(ViewBag.ImageData)" class="img-thumbnail" />
+                    </div>
+                </div>
+                <div class="panel-body form-group-separated">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-5 control-label">Estado</label>
+                            <div class="col-md-9 col-xs-7 col-xs-7 line-height-30">
+                                @Html.DisplayFor(m => m.Estado)
+                            </div>
+                        </div>
+                    </div>
+
+
+                    </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="col-md-9 col-sm-8 col-xs-7">
+
+
+        <div class="panel panel-default form-horizontal">
+            <div class="panel-body">
+                <h3><span class="fa fa-pencil"></span> Perfil</h3>
+
+            </div>
+            <div class="panel-body form-group-separated">
+                
+                    <div class="form-group">
+                        <label class="col-md-4 col-xs-5 control-label">Nombres</label>
+                        <div class="col-md-8 col-xs-7 line-height-30">
+                            @Html.DisplayFor(m => m.Nombres)
+                        </div>
+                    </div>
+                
+               
+                    <div class="form-group">
+                        <label class="col-md-4 col-xs-5 control-label">Apellidos</label>
+                        <div class="col-md-8 col-xs-7 line-height-30">
+                            @Html.DisplayFor(m => m.Apellidos)
+                        </div>
+                    </div>
+
+           
+                    <div class="form-group">
+                        <label class="col-md-4 col-xs-5 control-label">País</label>
+                        <div class="col-md-8 col-xs-7 line-height-30">
+                            @Html.DisplayFor(m => m.Pais)
+                        </div>
+                    </div>
+            
+
+
+            
+                    <div class="form-group">
+                        <label class="col-md-4 col-xs-5 control-label">Departamento</label>
+                        <div class="col-md-8 col-xs-7 line-height-30">
+                            @Html.DisplayFor(m => m.Departamento)
+                        </div>
+                    </div>
+              
+
+             
+                    <div class="form-group">
+                        <label class="col-md-4 col-xs-5 control-label">Municipio</label>
+                        <div class="col-md-8 col-xs-7 line-height-30 ">
+                            @Html.DisplayFor(m => m.Municipio)
+                        </div>
+                    </div>
+            
+
+            
+                    <div class="form-group">
+                        <label class="col-md-4 col-xs-5 control-label">Correo electrónico</label>
+                        <div class="col-md-8 col-xs-7 line-height-30">
+                            @Html.DisplayFor(m => m.CorreoElectronico)
+                        </div>
+                    </div>
+              
+              
+               
+
+            </div>
+        </div>
+
+        <div class="panel panel-default form-horizontal">
+            <div class="panel-body">
+                <h3><span class="fa-question"></span> Caracterización</h3>
+                <p>Datos de registro</p>
+            </div>
+            @*<div class="panel-body form-group-separated">
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Géneros Musicales</label>
+                    <div class="col-md-8 col-xs-7">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Generos</th>
+
+                                </tr>
+                            </thead>
+                            @foreach (EstandarDTO item in Model.)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td>@item.Nombre</td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Profesión u oficio</label>
+                    <div class="col-md-8 col-xs-7">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Profesión</th>
+
+                                </tr>
+                            </thead>
+                            @foreach (EstandarDTO item in Model.OficiosSeleccionada)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td>@item.Nombre</td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+            </div>*@
+
+        </div>
+
+
+        <!-- INICIO GRILLA  -->
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Formación agregada</h4>
+
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Institución</th>
+                                <th>Titulo</th>
+                                <th>Periodo Inicio</th>
+                                <th>Periodo Final</th>
+
+
+                            </tr>
+                        </thead>
+
+                        @if (Model.listFormacion != null)
+                        {
+                            foreach (WebSImus.Models.AgenteExperienciaModels item in Model.listFormacion)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td>@item.Empresa</td>
+                                        <td>@item.Titulo</td>
+                                        <td>@item.FechaInicio</td>
+                                        <td>@item.FechaFinal</td>
+
+                                    </tr>
+
+
+
+                                </tbody>
+                            }
+                        }
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- FIN GRILLA  -->
+        <!-- INICIO GRILLA  -->
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Experiencia agregada</h4>
+
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Empresa</th>
+                                <th>Cargo</th>
+                                <th>Periodo Inicio</th>
+                                <th>Periodo Final</th>
+
+
+                            </tr>
+                        </thead>
+
+                        @if (Model.listFormacion != null)
+                            {
+                                foreach (WebSImus.Models.AgenteExperienciaModels item in Model.listExperiencia)
+                                {
+                            <tbody>
+                                <tr>
+                                    <td>@item.Empresa</td>
+                                    <td>@item.Titulo</td>
+                                    <td>@item.FechaInicio</td>
+                                    <td>@item.FechaFinal</td>
+
+                                </tr>
+
+
+
+                            </tbody>
+                                }
+                            }
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- FIN GRILLA  -->
+</div>

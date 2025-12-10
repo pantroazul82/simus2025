@@ -1,0 +1,142 @@
+﻿@model WebSImus.Models.InfraestructuraModel
+@{
+    ViewBag.Title = @ViewBag.NombreEscuela;
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Infraestructura", "EscuelasMusica", FormMethod.Post, new { enctype = "multipart/form-data", @class = "modern-form-container" }))
+{
+    @Html.ValidationSummary(true)
+
+    <nav class="modern-breadcrumb mb-6">
+        <div class="breadcrumb-item">
+            @Html.ActionLink("Inicio", "Index", "Inicio", null, new { @class = "breadcrumb-link" })
+            <span class="breadcrumb-separator">/</span>
+        </div>
+        <div class="breadcrumb-item">
+            @Html.ActionLink("Escuelas", "Consulta", "EscuelasMusica", null, new { @class = "breadcrumb-link" })
+            <span class="breadcrumb-separator">/</span>
+        </div>
+        <div class="breadcrumb-item">
+            @Html.ActionLink("Exportar", "Exportar", "EscuelasMusica", new { Id = Model.EscuelaId }, new { @class = "breadcrumb-link" })
+            <span class="breadcrumb-separator">/</span>
+        </div>
+        <div class="breadcrumb-item current">
+            @Html.ActionLink("Encuestas", "Formulario", "EscuelasMusica", new { Id = Model.EscuelaId }, new { @class = "breadcrumb-link" })
+        </div>
+    </nav>
+
+    <div class="form-header">
+        <h2 class="form-title">
+            @ViewBag.NuevoTitulo
+        </h2>
+    </div>
+
+    @Html.HiddenFor(model => model.EscuelaId)
+
+    <div class="mf-mb-6">
+        @Html.Partial("_PasoAPaso")
+    </div>
+
+    @Html.Partial("_Infraestructura", Model)
+
+    <!-- Mensaje de éxito modernizado -->
+    <div class="mf-alert mf-alert-success mf-alert-toast animated fadeIn" id="message-box-success" style="display:none">
+        <div class="mf-alert-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="mf-alert-content">
+            <strong>Éxito:</strong> La información se actualizó con éxito.
+        </div>
+    </div>
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script src="~/Scripts/escuelasvalidate.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        HabilitarDeshabilitarPasos();
+        $("#step5").addClass("active");
+    });
+
+    $("li").click(function () {
+
+        switch ($(this).data("step")) {
+            case 1:
+                window.location = "@Url.Action("EditarNuevo", "EscuelasMusica", new { id = Model.EscuelaId,  wizard = 1 })";
+                break;
+            case 2:
+                window.location = "@Url.Action("Beneficiarios", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 3:
+                window.location = "@Url.Action("Organizacion", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 4:
+                window.location = "@Url.Action("Formacion", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 5:
+                window.location = "@Url.Action("Infraestructura", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 6:
+                window.location = "@Url.Action("Produccion", "EscuelasMusica",  new { id = Model.EscuelaId })";
+                break;
+            case 61:
+                window.location = "@Url.Action("Produccion", "EscuelasMusica", new { id = Model.EscuelaId })";
+                break;
+            case 7:
+                window.location = "@Url.Action("Asesoria", "FichaAsesoria", new { id = Model.EscuelaId })";
+                break;
+
+        }
+    });
+    </script>
+    <script type="text/javascript">
+        /* Limita todos los spinner a valores positivos */
+        $(".spinner_default").attr('min', 0.0);
+
+        //Infraestructura
+        var InformacionInfraestructuraArray = ["#CantidadSillas", "#CantidadAtriles", "#CantidadEstanterias", "#CantidadTableros", "#CantidadCuerdasPulsadas", "#CantidadCuerdasSinfonicas", "#CantidadVientosMadera", "#CantidadVientosMetales", "#CantidadPercusionMenor", "#CantidadPercusionSinfonica", "#CantidadOtros", "#CantidadTitulosBibliograficos", "#PorcentajeAdecuacion"];
+        var InformacionInfraestructuraLength = InformacionInfraestructuraArray.length;
+
+        var spinner = $("#PorcentajeAdecuacion").spinner({
+            step: 1,
+            min: 0,
+            max: 100,
+            icons: { down: "ui-icon-custom-down", up: "ui-icon-custom-up" },
+            stop: function (event, ui) {
+                //  pintarInformacionDocentesSpinnerValue(ui.value);
+            }
+        });
+
+        for (var i = 0; i < InformacionInfraestructuraLength; i++) {
+            var spinner = $(InformacionInfraestructuraArray[i]).spinner({
+                step: 1,
+                min: 0,
+                max: 999,
+                icons: { down: "ui-icon-custom-down", up: "ui-icon-custom-up" },
+                stop: function (event, ui) {
+
+                }
+            });
+        }
+
+        for (var i = 0; i < InformacionInfraestructuraLength; i++) {
+            $(InformacionInfraestructuraArray[i]).keypress(function () {
+                ValidaSoloNumeros();
+
+            });
+        }
+
+    </script>
+}
+
+
+
+
+

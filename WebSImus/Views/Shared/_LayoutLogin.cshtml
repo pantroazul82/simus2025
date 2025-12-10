@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIMUS - Login</title>
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
+
+    <link href="@Url.Content("~/css/login.css")" rel="stylesheet">
+
+    @Styles.Render("~/bundles/fontawesome")
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-76203017-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+<body class="page-container-boxed">
+    <div class="login-box animated fadeInDown">
+        <div class="page-content">
+            <div class="page-content-wrap">
+                <div class="row">
+                    <div class="col-md-12">
+                        @{ Html.RenderPartial("_Alertas"); }
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+    <footer class="login-footer">
+        <div class="pull-left">
+           <a href="~/Home/Index">SIMUS</a>
+    </div>
+    <div class="pull-right">
+        <a href="~/Estatico/Acercade">Acerca de</a>
+        <a href="~/Estatico/Politicas">Políticas de privacidad</a>
+        <a href="~/Estatico/Contactenos">Contáctenos</a>
+    </div>
+    </footer>-->
+
+    <footer class="login-footer">
+        <div class="footer-links">
+            <a href="~/Estatico/Acercade">Acerca de</a>
+            <a href="~/Estatico/Politicas">Políticas de privacidad</a>
+            <a href="~/Estatico/Contactenos">Contáctenos</a>
+        </div>
+    </footer>
+
+
+    @Scripts.Render("~/Scripts/jquery")
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        var loginMethods = {
+            openWindow: function (url, name, iWidth, iHeight) {
+                var iTop = (window.screen.availHeight - 30 - iHeight) / 2;
+                var iLeft = (window.screen.availWidth - 10 - iWidth) / 2;
+                window.open(url, name, 'height=' + iHeight + ',innerHeight=' + iHeight + ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft + ',toolbar=no,menubar=no,scrollbars=yes,resizeable=no,location=no,status=no');
+            },
+            authGoogle: function (mode) {
+                loginMethods.openWindow('/AuthExternal/Login/Google?mode=' + mode, '', 680, 520);
+            },
+            handleRedirect: function (url) {
+                window.location = url;
+            }
+        };
+    </script>
+</body>
+</html>

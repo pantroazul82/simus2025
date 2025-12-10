@@ -1,0 +1,373 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<SM.LibreriaComun.DTO.Servicios.ConvocatoriaListDTO>
+@{
+    ViewBag.Title = "Convocatorias SIMUS";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2 col-sm-5 col-xs-5"><img style="padding-top:10px; padding-left:30px;" class="img-responsive" src="~/img/iconos/caja_big.png"></div>
+        <div class="titulo_seccion col-md-10 col-sm-7 col-xs-7">Caja de Herramientas</div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span class="fa-convocatorias fa-lg" style="text-align: left; padding: 5px;"></span>Convocatorias</div>
+</div>
+<div class="col-md-12 well carousel-search" style="margin-top:40px;">
+    <div class="row">
+        <div class="page-content-wrap">
+            <!-- page content holder -->
+            <div class="page-content-holder">
+
+                <div class="space2">
+                    <div>
+
+                        <div class="row">
+                            @if (Model != null)
+                            {
+                                var i = "Azul";
+                                var estilo = "1";
+                                var control = "0";
+                                foreach (var item in Model)
+                                {
+
+                                    if (estilo == "1")
+                                    {
+                                        if (i == "Azul")
+                                        {
+
+                                            <div class=" this-animate" data-animate="fadeInLeft bounce">
+                                                <div class="col-md-6 col-sm-6 col-xs-12 capsula_convo">
+                                                    <div class="modal-content">
+
+                                                        <div class="modal-header">
+                                                            <div class="row">
+
+                                                                <div class=" col-md-6 col-sm-12 col-xs-12 fondo_azul">
+
+                                                                    <div class=" col-md-12 col-sm-12 col-xs-12">
+                                                                        <span>
+                                                                            @item.Titulo
+                                                                        </span>
+                                                                    </div>
+
+                                                                    <div class="titulo_negro_ficha3">
+                                                                        <span>
+                                                                            @item.RelacionadoA
+                                                                        </span>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="col-md-6 col-sm-12 col-xs-12 fondo_gris">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                                                            <span>@item.Descripcion </span>
+                                                                            <br>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="row btn_convocatoria">
+                                                                        <div class="col-md-6 col-sm-6 col-xs-6 fa-documentos">
+
+                                                                            @if (item.DocumentoId > 0)
+                                                                            {
+
+                                                                                <span class="txt_link_morado">
+                                                                                    @Html.ActionLink("Ver documento", "Descargar", "Documento", new { Id = item.DocumentoId }, new { title = string.Format("Descargar archivo descriptivo de la convocatoria") })
+                                                                                </span>
+                                                                            }
+                                                                        </div>
+                                                                    
+                                                                        <div class="col-md-6 col-sm-6 col-xs-6 fa-pencil-1 ">
+                                                                            <a href="~/Cuenta/Login?redirecciona=Convocatoria/Detalle/@item.Id"><span class="txt_link_morado" data-toggle="tooltip" data-placement="top" title="Ingreso al sistema para participar en la convocatoria">Participar</span></a>
+                                                                        </div>
+                                                                        <br>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-12 col-xs-12 fondo_gris2">
+
+                                                                    <div class="col-md-4 col-sm-4 col-xs-4 txt_fecha"> @item.FechaInicio </div>
+                                                                    <div class="col-md-4 col-sm-4 col-xs-4 txt_negro"> Cierre </div>
+                                                                    <div class="col-md-4 col-sm-4 col-xs-4 txt_fecha"> @item.FechaFin </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- .row -->
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                                            control = "0";
+                                                                            i = "Amarillo";
+                                        }
+                                        else
+                                        {
+                                            <div class="row">
+                                                <div class=" this-animate" data-animate="fadeInLeft bounce">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 capsula_convo">
+                                                        <div class="modal-content">
+
+                                                            <div class="modal-header">
+                                                                <div class="row">
+
+                                                                    <div class=" col-md-6 col-sm-12 col-xs-12 fondo_morado">
+
+                                                                        <div class=" col-md-12 col-sm-12 col-xs-12">
+                                                                            <span>
+                                                                                @item.Titulo
+                                                                            </span>
+                                                                        </div>
+
+                                                                        <div class="titulo_negro_ficha3">
+                                                                            <span>
+                                                                                @item.RelacionadoA
+                                                                            </span>
+                                                                        </div>
+
+
+                                                                    </div>
+
+                                                                    <div class="col-md-6 col-sm-12 col-xs-12 fondo_gris">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                                                                <span>@item.Descripcion </span>
+                                                                                <br>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="row btn_convocatoria">
+                                                                            <div class="col-md-6 col-sm-6 col-xs-6 fa-documentos">
+
+                                                                                @if (item.DocumentoId > 0)
+                                                                                {
+
+                                                                                    <span class="txt_link_morado">
+
+                                                                                        @Html.ActionLink("Ver documento", "Descargar", "Documento", new { Id = item.DocumentoId }, new { title = string.Format("Descargar archivo descriptivo de la convocatoria") })
+                                                                                    </span>
+                                                                                }
+                                                                            </div>
+                                                                            <div class="col-md-6 col-sm-6 col-xs-6 fa-pencil-1 ">
+                                                                                <a href="~/Cuenta/Login"><span class="txt_link_morado" data-toggle="tooltip" data-placement="top" title="Ingreso al sistema para participar en la convocatoria">Participar</span></a>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-md-6 col-sm-12 col-xs-12 fondo_gris2">
+
+                                                                        <div class="col-md-4 col-sm-4 col-xs-4 txt_fecha"> @item.FechaInicio </div>
+                                                                        <div class="col-md-4 col-sm-4 col-xs-4 txt_negro"> Cierre </div>
+                                                                        <div class="col-md-4 col-sm-4 col-xs-4 txt_fecha"> @item.FechaFin </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <br />
+
+                                                                                i = "Amarillo";
+                                                                                control = "1";
+                                        }
+
+                                        if (control == "1")
+                                        {
+                                            estilo = "2";
+                                        }
+                                    }
+                                    else if (estilo == "2")
+                                    {
+                                        if (i == "Amarillo")
+                                        {
+
+                                            <div class=" this-animate" data-animate="fadeInLeft bounce">
+                                                <div class="col-md-6 col-sm-6 col-xs-12 capsula_convo">
+                                                    <div class="modal-content">
+
+                                                        <div class="modal-header">
+                                                            <div class="row">
+
+                                                                <div class=" col-md-6 col-sm-12 col-xs-12 fondo_morado">
+
+                                                                    <div class=" col-md-12 col-sm-12 col-xs-12">
+                                                                        <span>
+                                                                            @item.Titulo
+                                                                        </span>
+                                                                    </div>
+
+                                                                    <div class="titulo_negro_ficha3">
+                                                                        <span>
+                                                                            @item.RelacionadoA
+                                                                        </span>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="col-md-6 col-sm-12 col-xs-12 fondo_gris">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                                                            <span>@item.Descripcion </span>
+                                                                            <br>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="row btn_convocatoria">
+                                                                        <div class="col-md-6 col-sm-6 col-xs-6 fa-documentos">
+
+                                                                            @if (item.DocumentoId > 0)
+                                                                            {
+
+                                                                                <span class="txt_link_morado">
+                                                                                    @Html.ActionLink("Ver documento", "Descargar", "Documento", new { Id = item.DocumentoId }, new { title = string.Format("Descargar archivo descriptivo de la convocatoria") })
+                                                                                </span>
+                                                                            }
+                                                                        </div>
+                                                                        <div class="col-md-6 col-sm-6 col-xs-6 fa-pencil-1 ">
+                                                                            <a href="~/Cuenta/Login"><span class="txt_link_morado" data-toggle="tooltip" data-placement="top" title="Ingreso al sistema para participar en la convocatoria">Participar</span></a>
+                                                                        </div>
+                                                                        <br>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-12 col-xs-12 fondo_gris2">
+
+                                                                    <div class="col-md-4 col-sm-4 col-xs-4 txt_fecha"> @item.FechaInicio </div>
+                                                                    <div class="col-md-4 col-sm-4 col-xs-4 txt_negro"> Cierre </div>
+                                                                    <div class="col-md-4 col-sm-4 col-xs-4 txt_fecha"> @item.FechaFin </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- .row -->
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            control = "0";
+                                                                            i = "Azul";
+                                                                            estilo = "2";
+                                        }
+                                        else
+                                        {
+                                            <div class="row">
+                                                <div class=" this-animate" data-animate="fadeInLeft bounce">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 capsula_convo">
+                                                        <div class="modal-content">
+
+                                                            <div class="modal-header">
+                                                                <div class="row">
+
+                                                                    <div class=" col-md-6 col-sm-12 col-xs-12 fondo_azul">
+                                                                        <div class=" col-md-12 col-sm-12 col-xs-12">
+                                                                            <span>
+                                                                                @item.Titulo
+                                                                            </span>
+                                                                        </div>
+
+                                                                        <div class="titulo_negro_ficha3">
+                                                                            <span>
+                                                                                @item.RelacionadoA
+                                                                            </span>
+                                                                        </div>
+
+
+                                                                    </div>
+
+                                                                    <div class="col-md-6 col-sm-12 col-xs-12 fondo_gris">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                                                                <span>@item.Descripcion </span>
+                                                                                <br>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="row btn_convocatoria">
+                                                                            <div class="col-md-6 col-sm-6 col-xs-6 fa-documentos">
+
+                                                                                @if (item.DocumentoId > 0)
+                                                                                {
+
+                                                                                    <span class="txt_link_morado">
+                                                                                        @Html.ActionLink("Ver documento", "Descargar", "Documento", new { Id = item.DocumentoId }, new { title = string.Format("Descargar archivo descriptivo de la convocatoria") })
+                                                                                    </span>
+                                                                                }
+                                                                            </div>
+                                                                            <div class="col-md-6 col-sm-6 col-xs-6 fa-pencil-1 ">
+                                                                                <a href="~/Cuenta/Login"><span class="txt_link_morado" data-toggle="tooltip" data-placement="top" title="Ingreso al sistema para participar en la convocatoria">Participar</span></a>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-md-6 col-sm-12 col-xs-12 fondo_gris2">
+
+                                                                        <div class="col-md-4 col-sm-4 col-xs-4 txt_fecha"> @item.FechaInicio </div>
+                                                                        <div class="col-md-4 col-sm-4 col-xs-4 txt_negro"> Cierre </div>
+                                                                        <div class="col-md-4 col-sm-4 col-xs-4 txt_fecha"> @item.FechaFin </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <br />
+
+                                                                                i = "Azul";
+                                                                                control = "1";
+                                        }
+
+                                        if (control == "1")
+                                        {
+                                            estilo = "1";
+                                        }
+                                    }
+
+                                }
+                            }
+
+                        </div>
+                    </div>
+
+                    <div class="panel-body" id="panelEditar">
+                        <div class="row" style="text-align:center">
+                            @Html.PagedListPager(Model, page => Url.Action("Convocatorias", "Herramientas", new { page = page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayItemSliceAndTotal = true, ItemSliceAndTotalFormat = "Mostrando Registros {0} a {1} de {2}." })
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/plugins/mixitup/jquery.mixitup.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/appear/jquery.appear.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+}

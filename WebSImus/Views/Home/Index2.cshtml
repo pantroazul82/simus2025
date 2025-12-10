@@ -1,0 +1,810 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="keywords" content="SIMUS, Sistema de Información de la Música">
+    <meta name="description" content="Simus · Público."> <!-- META SECCION -->
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Simus - Público</title>
+    <link rel="icon" href="~/img/favicon.ico" type="image/x-icon" />
+
+    @*<link href="@Url.Content("~/css/revolution-slider/extralayers.css")" rel="stylesheet">*@
+    @*<link href="@Url.Content("~/css/revolution-slider/settings.css")" rel="stylesheet">*@
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="@Url.Content("~/css/responsiveslides.css")" rel="stylesheet">
+    @Styles.Render("~/Content/publico")
+
+
+    <script type="text/javascript">
+
+        // external login providers
+        var loginMethods = {
+            openWindow: function (url, name, iWidth, iHeight) {
+                var iTop = (window.screen.availHeight - 30 - iHeight) / 2;
+                var iLeft = (window.screen.availWidth - 10 - iWidth) / 2;
+                window.open(url, name, 'height=' + iHeight + ',innerHeight=' + iHeight + ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft + ',toolbar=no,menubar=no,scrollbars=yes,resizeable=no,location=no,status=no');
+            },
+
+            authFacebook: function (mode) {
+                loginMethods.openWindow('/AuthExternal/Login/Facebook?mode=' + mode, '', 680, 340);
+            },
+
+            authTwitter: function (mode) {
+                loginMethods.openWindow('/AuthExternal/Login/Twitter?mode=' + mode, '', 680, 520);
+            },
+
+            authGoogle: function (mode) {
+                loginMethods.openWindow('/AuthExternal/Login/Google?mode=' + mode, '', 680, 520);
+            },
+
+            authPayPal: function (mode) {
+                loginMethods.openWindow('/AuthExternal/Login/PayPal?mode=' + mode, '', 400, 550);
+            },
+
+            handleRedirect: function (url) {
+                window.location = url;
+            }
+        };
+    </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-76203017-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body>
+    <!-- page container -->
+    <div class="page-container">
+        <div class="row govco">
+            <div class="container-fluid govco2">
+                <div class="clearfix">
+                    <div class="col-md-3 col-sm-3 col-xs-3">
+                        <div class="logovco">
+                            <a href="http://www.gov.co">
+                                <object type="image/svg+xml" data="image.svg">
+                                    <img src="~/img/govco.svg" />
+                                </object>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- end logo -->
+                    <div class="col-md-9 col-sm-9 col-xs-9 hidden-xs" style="float: right;">
+                        <!-- top-bar-right -->
+
+                        <div class="pi-row-block col-md-8 col-sm-12 col-xs-12">
+                            <div class="col-md-4 col-xs-6 col-sm-4" style="text-align: right;">
+                                <a href="http://www.gov.co/servicios-y-tramites/" class="top_gov" target="_blank">
+                                    Servicios y Trámites
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-xs-3 col-sm-3" style="text-align: right;">
+                                <a href="http://www.gov.co/participacion" class="top_gov" target="_blank">
+                                    Participación
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-xs-3 col-sm-3" style="text-align: right;">
+                                <a href="http://www.gov.co/informacion" class="top_gov" target="_blank">
+
+                                    Información
+                                </a>
+                            </div>
+                            <div class="col-md-2 col-xs-1 col-sm-2 hidden-xs" style="float: right; width: 10%; padding-bottom: 5px; vertical-align: middle;">
+                                <a href="http://www.gov.co/informacion">
+                                    <object type="image/svg+xml" data="image.svg">
+                                        <img src="~/img/marcaco.svg" />
+                                    </object>
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- page header -->
+        <div class="page-header">
+            <!-- page header holder -->
+            <div class="page-header-holder">
+
+                <!-- page logo -->
+
+                <section class="equipo_seccion_1">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div style="width: 30%; padding-left: 30px;">
+                                <object type="image/svg+xml" data="image.svg">
+                                    <img src="~/img/simus.svg" />
+                                </object>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <object type="image/svg+xml" data="image.svg" style="float: right;">
+                                <img src="~/img/logo_blue.svg" style="width: 100%;" />
+                            </object>
+
+                        </div>
+                    </div>
+                </section>
+                <!-- ./page header holder -->
+                <!-- nav mobile bars -->
+                <!-- nav mobile bars -->
+
+                <div class="navigation-toggle">
+                    <div class="navigation-toggle-button"><span class="fa fa-bars"></span></div>
+                </div>
+                <!-- ./nav mobile bars -->
+                <!-- navigation -->
+                <div class="row barra_negra">
+
+                    <ul class="navigation">
+
+                        <li>
+                            <a href="#"><span class="fa-agentes  fa-2x icon_top"></span> Actores</a>
+                            <ul>
+                                <li><a href="~/Actores/Agentes"><span class="fa-agentes  fa-2x icon_top"></span> Agentes</a></li>
+                                <li><a href="~/Home/HomeAgrupaciones"><span class="fa-agrupacion  fa-2x icon_top"></span> Agrupaciones</a></li>
+                                <li><a href="~/Actores/Entidad"><span class="fa-entidades  fa-2x icon_top"></span> Entidades</a></li>
+                                <li><a href="~/Actores/Escuelas"> <span class="fa-escuelas fa-2x icon_top"></span> Escuelas</a></li>
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#"><span class="fa-mapas  fa-2x icon_top"></span> Mapas</a>
+                            <ul>
+                                <li><a href="~/ReporteMapas/MapaMusical"> <span class="fa fa-musical fa-2x"></span> Mapa Musical</a></li>
+                                <li><a href="~/ReporteMapas/MapaEscuelas"> <span class="fa fa-escuelas fa-2x"></span> Mapa Escuelas</a></li>
+                                <li><a href="~/ReporteMapas/TematicoEscuelas"> <span class="fa fa-escuelas fa-2x"></span> Mapa Escuelas Temático</a></li>
+                                <li><a href="~/ReporteMapas/MapaCelebra"> <span class="fa-celebra fa-2x"></span>  Mapa Celebra </a></li>
+                                <li><a href="~/ReporteMapas/TematicoCelebra"> <span class="fa-celebra fa-2x"></span>  Mapa Celebra Temático</a></li>
+                                <li><a href="~/ReporteMapas/TematicoAgentes"> <span class="fa-agentes fa-2x"></span> Mapa Agentes Temático</a></li>
+                                <li><a href="~/ReporteMapas/MapaAgrupaciones"> <span class="fa-agrupacion fa-2x"></span>  Mapa Agrupaciones</a></li>
+                                <li><a href="~/ReporteMapas/MapaEntidades"> <span class="fa-entidades fa-2x"></span>  Mapa Entidades</a></li>
+                                <li><a href="~/ReporteMapas/MapaEventos"> <span class="fa-mapas fa-2x"></span> Mapa Eventos</a></li>
+                                <li><a href="~/ReporteMapas/MapaGeneral"> <span class="fa-mapas fa-2x"></span> Mapa General</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="fa-perfil  fa-2x icon_top"></span>Circulación</a>
+                            <ul>
+                                <li><a href="https://asisuenacolombia.wixsite.com/misitio" target="_blank"> <span class="fa fa-perfil fa-2x"></span> Así suena Colombia </a></li>
+                                <li><a href="https://asisuenameta.wixsite.com/misitio" target="_blank"> <span class="fa fa-perfil fa-2x"></span> Así suena Meta</a></li>
+                                <li><a href="https://asisuenacesar.wixsite.com/misitio" target="_blank"> <span class="fa fa-perfil fa-2x"></span>Así suena Cesar</a></li>
+                                <li><a href="http://simr.gov.co/asi-suena-risaralda/index" target="_blank"> <span class="fa-perfil fa-2x"></span>  Así suena Risaralda </a></li>
+                                <li><a href="https://asisuenahuila.wixsite.com/misitio" target="_blank"> <span class="fa-perfil fa-2x"></span> Así suena Huila</a></li>
+                                <li><a href="~/Actores/Escenarios"> <span class="fa-escuelas fa-2x icon_top"></span> Escenarios</a></li>
+                                <li><a href="~/Actores/Eventos"> <span class="fa-escuelas fa-2x icon_top"></span> Eventos Periódicos</a></li>
+                                <li><a href="http://territoriosonoro.org/portafoliomusicaldecolombia/web/index.html" target="_blank"> <span class="fa-perfil fa-2x"></span> Portafolio Musical de Colombia</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="fa-caja  fa-2x icon_top"></span> Caja de Herramientas</a>
+                            <ul>
+                                <li><a href="~/Herramientas/Index"><span class="fa-caja  fa-2x icon_top"></span> Convocatorias Estímulos 2018</a></li>
+                                <li><a href="~/Herramientas/Convocatorias"><span class="fa-convocatorias  fa-2x icon_top"></span> Listado de Convocatorias</a></li>
+                                <li><a href="~/UtilidadHome/HomeCaja"><span class="fa-caja  fa-2x icon_top"></span> Herramientas</a></li>
+                                <li><a href="~/Indicadores/Escuelas"><span class="fa-escuelas  fa-2x icon_top"></span> Estadísticas de Escuelas</a></li>
+                                <li><a href="~/assets/pdf/MusicaCuentaDigital2017.pdf" target="_blank"> <span class="fa-revista fa-2x"></span> La Música Cuenta 2017</a></li>
+                                <li><a href="~/assets/pdf/MusicaCuentaDigital.pdf" target="_blank"> <span class="fa-revista fa-2x"></span> La Música Cuenta 2016</a></li>
+                                <li><a href="https://aulasvirtuales.mincultura.gov.co/" target="_blank"> <span class="fa-revista fa-2x"></span> Aulas Virtuales</a></li>
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a href="#"><span class="fa-convocatorias  fa-2x icon_top"></span> Utilidades</a>
+                            <ul>
+                                <li><a href="~/UtilidadHome/Agenda"><span class="fa-convocatorias  fa-2x icon_top"></span> Agenda Musical</a></li>
+                                <li><a href="~/UtilidadHome/Clasificados"><span class="fa-caja  fa-2x icon_top"></span> Clasificados</a></li>
+                                <li><a href="~/UtilidadHome/Noticias"> <span class="fa-perfil fa-2x"></span> Noticias</a></li>
+                                <li><a href="~/UtilidadHome/Documentos"> <span class="fa-revista fa-2x"></span> Documentos</a></li>
+                                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSewNJvk5nphONNNFP7HiBO34-DTkUX1QkF6vvluGbB1_OO9Fw/viewform?c=0&w=1&includes_info_params=true" target="_blank"> <span class="fa-revista fa-2x"></span> Encuesta</a></li>
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a href="http://territoriosonoro.org/" target="_blank"><span class="fa-caja  fa-2x icon_top"></span> Territorios Sonoros</a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="fa-ayuda  fa-2x icon_top"></span> Ayuda</a>
+                            <ul>
+                                <li><a href="~/Estatico/AcercaDe"> <span class="fa fa-agentes fa-2x"></span> Acerca de</a></li>
+
+                                <li><a href="https://www.youtube.com/watch?v=XHeW4nwGIAE" target="_blank"> <span class="fa-revista fa-2x"></span> Tutorial Escuela de Música</a></li>
+                                <li><a href="https://www.youtube.com/watch?v=8EuUtH3UY5U" target="_blank"> <span class="fa-revista fa-2x"></span> Tutorial Agentes</a></li>
+                                <li><a href="https://www.youtube.com/watch?v=0MFVp1y8f74" target="_blank"> <span class="fa-revista fa-2x"></span> Tutorial Agrupaciones</a></li>
+                                <li><a href="https://www.youtube.com/watch?v=L-aJLj4BGfA" target="_blank"> <span class="fa-revista fa-2x"></span> Tutorial Entidades</a></li>
+                                <li><a href="https://www.youtube.com/watch?v=6IOZPtUSxcw" target="_blank"> <span class="fa-revista fa-2x"></span> Tutorial Utilidades</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+            <!-- ./page header -->
+            <!-- page content -->
+            <div class="page-content" style="z-index:-10;">
+                <!-- page content wrapper -->
+                <div class="page-content-wrap bg-light">
+                    <!-- ./page content wrapper -->
+                    <!-- page content wrapper -->
+                    <div class="page-content-wrap bg-img-1">
+                        <!-- page content holder -->
+                        <div class="page-content-holder">
+                            <div class="row">
+                                <div class="col-md-4 this-animate" data-animate="fadeInLeft">
+                                    <div class="block-heading block-heading-centralized">
+                                        <h4>Acceder al Sistema</h4>
+                                        <a href="~/Cuenta/Login" class="btn btn-primary btn-xl"><span class="fa fa-lock-open"></span> Ingresar</a>
+                                        <a href="~/Cuenta/Registrarse" class="btn btn-primary btn-xl"><span class="fa fa-pencil-1"></span> Registrarse</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 this-animate text-center" data-animate="fadeInRight">
+                                    <div class="block-heading block-heading-centralized">
+                                        <h4>MÚSICA</h4>
+                                        <div class="parrafo" style="font-size:14px;">
+                                            Por su naturaleza simbólica y por ser una de las expresiones culturales presente en todas las comunidades, la Música enriquece la vida cotidiana, posibilita el desarrollo perceptivo, cognitivo y emocional, fortalece valores individuales y colectivos, y se constituye uno de los fundamentos del conocimiento social e histórico.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ./page content holder -->
+                        </div>
+                    </div>
+
+                    <div class="page-content-wrap bg-light">
+
+                        <!-- page content holder -->
+                        <div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
+                            <div class="row six">
+
+                                <div class="col-md-4 col-sm-6 col-xs-6" style="padding-left: 0px;">
+
+                                    <div class="clip-me img-responsive" id="d1">
+                                        <img src="~/img/foto_011.jpg" />
+                                    </div>
+
+                                </div>
+                                <div class="col-md-8 col-sm-6 col-xs-6 ">
+                                    <div class="col-md-12 txt_home1">
+                                        Utilidades
+                                    </div>
+
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-md-3 col-sm-6 col-xs-6">
+                                            <a href="~/UtilidadHome/HomeCaja"><div class="col-md-12 fa-caja fa-2x tamano_icon" style="color:#F19E0E; "></div></a>
+                                            <div class="col-md-12 txt_icon" style="z-index: 2;">Herramientas</div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-6">
+                                            <a href="~/UtilidadHome/Clasificados">
+                                                <div class="col-md-12 fa-clasificados fa-2x tamano_icon " style="color:#018DAE; "></div>
+                                            </a>
+                                            <div class="col-md-12 txt_icon ">clasificados</div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-6">
+                                            <a href="~/UtilidadHome/Noticias">
+                                                <div class="col-md-12 fa-noticias fa-2x tamano_icon " style="color:#D92443;"></div>
+                                            </a>
+                                            <div class="col-md-12 txt_icon">Noticias</div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-6">
+                                            <a href="~/Actores/Eventos">
+                                                <div class="col-md-12 fa-festivales  fa-2x tamano_icon " style="color:#A59925; "></div>
+                                            </a>
+                                            <div class="col-md-12 txt_icon">Eventos periódicos</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-12 col-xs-12 this-animate img-responsive" data-animate="zoomIn">
+                                            <div class=" col-md-6 col-sm-6 col-xs-6  txt_home2 this-animate" data-animate="fadeInLeft" style="top:20px;">
+                                                Mapas
+                                            </div>
+                                            <div class=" col-md-1 col-sm-4 col-xs-4 fa-map fa-4x" style="color:#FEAC16; margin-top:20px;"> </div>
+
+                                            <div class="col-md-12 col-sm-12 col-xs-12 " style="font-size:14px;">
+                                                Consulte la información del SIMUS a través de mapas, esto le permitirá visualizar de forma rápida y mucho más agradable la distribución geográfica de los actores (agentes, agrupaciones, entidades y escuelas de música), así como información del quehacer musical que se produce a nivel nacional y local que puede ser de su interés.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-12 col-xs-12 this-animate img-responsive" data-animate="zoomIn" style="min-height:200px">
+                                            <a href="~/ReporteMapas/MapaMusical">    <img src="~/img/mapa_mus.png" alt="Mapa Musical de Colombia" class="img-responsive" /> </a>
+
+                                        </div>
+
+                                        <div class="col-md-5 col-sm-12 col-xs-12 parrafo_home">
+                                            <div class="row" style="margin-top:60px;">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-6 col-sm-6 col-xs-6 txt_home3">
+                                                        <div class=" col-md-2 col-sm-1 col-xs-1">  <span class="fa-arrow-right-b" style="color: #0189AA; margin-top: 10px;"></span> </div>
+
+                                                        <a href="~/ReporteMapas/MapaEscuelas">
+                                                            <div class="col-md-7 col-sm-6 col-xs-6"> Mapa Escuelas  </div>
+                                                        </a>
+
+                                                        <div class=" col-md-3 col-sm-5 col-xs-3" style="color:#FEAC16; margin-top:0px;"><img src="~/img/iconos/ico_mapa1.png" alt="Smiley face"> </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-sm-6 col-xs-6 txt_home3">
+                                                        <div class=" col-md-2 col-sm-1 col-xs-1">  <span class="fa-arrow-right-b" style="color: #A19525; margin-top: 10px;"></span> </div>
+                                                        <a href="~/ReporteMapas/MapaMusical">
+                                                            <div class="col-md-7 col-sm-6 col-xs-6">  Mapa Musical   </div>
+                                                        </a>
+
+                                                        <div class=" col-md-3 col-sm-5 col-xs-3 " style="color:#FEAC16; margin-top:0px;"><img src="~/img/iconos/ico_mapa2.png" alt="Smiley face"> </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-12 divider"></div>
+                                                <div class="col-md-12" style=" margin-top:20px;">
+
+                                                    <div class="col-md-6 col-sm-6 col-xs-6 txt_home3">
+                                                        <div class="col-md-2 col-sm-1 col-xs-1">  <span class="fa-arrow-right-b" style="color: #FAA816; margin-top: 10px;"></span> </div>
+
+                                                        <a href="~/ReporteMapas/MapaAgrupaciones">
+                                                            <div class="col-md-7 col-sm-6 col-xs-6"> Mapa Agrupaciones </div>
+                                                        </a>
+
+                                                        <div class="col-md-3 col-sm-5 col-xs-3 " style="color:#FEAC16; margin-top:0px;"><img src="~/img/iconos/ico_mapa3.png" alt="Smiley face"> </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-sm-6 col-xs-6 txt_home3">
+                                                        <div class="col-md-2 col-sm-1 col-xs-1">  <span class="fa-arrow-right-b" style="color: #D52443; margin-top: 10px;"></span> </div>
+                                                        <a href="~/ReporteMapas/MapaEventos">
+                                                            <div class="col-md-7 col-sm-6 col-xs-6">
+                                                                Mapa Eventos
+                                                            </div>
+                                                        </a>
+
+                                                        <div class=" col-md-3 col-sm-5 col-xs-3 " style="color:#D52443; margin-top:0px;"><img src="~/img/iconos/ico_mapa4.png" alt="Smiley face"> </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+
+                                <div class="row bg-img-3">
+
+                                    <div class="row">
+                                        <div class="container pasoapaso">
+                                            <div class="row pasoapaso-inner">
+                                                <div class="col-md-9 col-xs-9 col-sm-9 col-centered">
+                                                    <div class="col-md-6 col-xs-6 col-sm-6 progress progress_pasoapaso">
+
+                                                    </div>
+                                                    <div class="col-md-6 col-xs-6 col-sm-6 progress progress_pasoapaso_new">
+
+                                                    </div>
+
+                                                </div>
+                                                <ul class="nav nav-tabs" role="tablist">
+                                                    <li role="presentation">
+                                                        <a href="~/Actores/Escuelas" aria-controls="step1" role="tab" title="Escuelas de música">
+                                                            <span class="round-tab-blue">
+                                                                <i class="fa-escuelas fa-2x" style="color:#fff;"></i>
+                                                            </span>
+                                                        </a>
+                                                        <div class="txt_pasoapaso">Escuelas</div>
+                                                        <div class="contador_azul">@ViewBag.cantEscuelas</div>
+
+
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a href="~/Home/HomeAgrupaciones" aria-controls="step2" role="tab" title="Agrupaciones">
+                                                            <span class="round-tab-yellow">
+                                                                <i class="fa-agrupacion fa-2x " style="color:#fff;"></i>
+                                                            </span>
+                                                        </a>
+                                                        <div class="txt_pasoapaso">Agrupaciones</div>
+                                                        <div class="contador_amarillo">@ViewBag.cantAgrupacion</div>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a href="~/Actores/Agentes" aria-controls="step3" role="tab" title="Agentes">
+                                                            <span class="round-tab-red">
+                                                                <i class="fa-agentes fa-2x" style="color:#fff; margin-top: 30px;"></i>
+                                                            </span>
+                                                        </a>
+
+                                                        <div class="txt_pasoapaso">Agentes</div>
+                                                        <div class="contador_rojo">@ViewBag.cantAgente</div>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a href="~/Actores/Entidad" aria-controls="complete" role="tab" title="Entidades">
+                                                            <span class="round-tab-green">
+                                                                <i class="fa-entidades fa-2x " style="color:#fff;"></i>
+                                                            </span>
+                                                        </a>
+
+
+                                                        <div class="txt_pasoapaso">Entidades</div>
+                                                        <div class="contador_verde">@ViewBag.cantEntidad</div>
+
+                                                    </li>
+
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- ./page content holder -->
+                                </div>
+
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="page-content-wrap bg-light">
+
+                        <div class="page-content-holder padding-v-20">
+
+                            <div class="col-md-6 text-center">
+                                <div class=" col-md-5 col-sm-5 col-xs-5  fa-dash fa-4x" style="color:#018DAE; margin-top: -8px;"> </div>
+                                <div class=" col-md-7 col-sm-7 col-xs-7 txt_blanco_home ">Estadísticas Escuelas </div>
+
+                                <a href="~/Indicadores/Escuelas" alt="Estadísticas de escuelas de música" title="Estadísticas de escuelas de música"><img src="~/img/foto_012.png" class="img-responsive" /></a></br>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6 col-sm-6 col-xs-6"></div>
+                                        <div class="col-md-5 col-sm-5 col-xs-5">	 <br><span style="font-style:italic; font-size: 13px; float: right;">Ver estadísticas</span></br></div><div class="col-md-1 col-sm-1 col-xs-1" style="margin-top: 15px;"><a href="~/Indicadores/Escuelas" alt="Estadísticas de escuelas de música" title="Estadísticas de escuelas de música">	<img src="~/img/iconos/mas_azul.png" alt=""> </a></div>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12  text-center">
+                                <div class="row">
+                                    <div class=" col-md-5 col-sm-5 col-xs-5 fa-convocatorias fa-4x" style="color:#D92443; margin-top: -8px;"> </div>
+                                    <div class=" col-md-5 col-sm-7 col-xs-7 txt_blanco_home2">Agenda Musical</div>
+                                </div>
+                                <div class="row">
+                                    @Html.Action("_DatosAgenda")
+
+                                </div>
+
+
+
+
+                            </div>
+                            <!-- ./page content holder -->
+                        </div>
+                        <!-- ./page content wrapper -->
+                    </div>
+                    <div class="space1">  </div>
+                    <div class="space1">  </div>
+                    <div class="page-content-wrap bg-light">
+                        <!-- page content holder -->
+                        <div class="container-fluid">
+
+                            <div class="row iconos_home">
+                                <div class="col-md-12 this-animate" data-animate="fadeInLeft bounce">
+                                    <div class="usuarios col-md-2 col-sm-6 col-xs-12">
+                                        <div class="iconos_usuarios">
+                                            <a href="http://www.mincultura.gov.co/Sitios/artes/colombiaesunanota/index.aspx" target="_blank"><img src="../img/iconos/campo.png" width="62" height="53" alt="Colombia es una nota" title="Colombia es una nota"></a>
+                                        </div>
+                                        <a href="http://www.mincultura.gov.co/Sitios/artes/colombiaesunanota/index.aspx" target="_blank">
+                                            <p class="titulo_usuarios">COLOMBIA ES UNA NOTA</p>
+                                        </a>
+
+                                    </div>
+                                    <div class="usuarios col-md-2 col-sm-6 col-xs-12">
+                                        <div class="iconos_usuarios">
+                                            <a href="http://bancodecontenidos.mincultura.gov.co/app" target="_blank">
+                                                <img src="../img/iconos/banco.png" width="62" height="53" alt="Banco de contenidos" title="Banco de contenidos">
+                                            </a>
+                                        </div>
+                                        <a href="http://bancodecontenidos.mincultura.gov.co/app" target="_blank">
+                                            <p class="titulo_usuarios">BANCO DE CONTENIDOS</p>
+                                        </a>
+
+                                    </div>
+                                    <div class="usuarios col-md-2 col-sm-6 col-xs-12">
+                                        <div>
+                                            <a href="http://www.territoriosonoro.org/CDM/acontratiempo/" target="_blank"><img src="../img/iconos/revista.png" width="62" height="53" alt="Revista A Contratiempo" title="Revista A Contratiempo"></a>
+                                        </div>
+                                        <a href="http://www.territoriosonoro.org/CDM/acontratiempo/" target="_blank">  <p class="titulo_usuarios">REVISTA A CONTRATIEMPO</p></a>
+
+                                    </div>
+                                    <div class="usuarios col-md-2 col-sm-6 col-xs-12">
+                                        <div>
+                                            <a href="http://celebralamusica.mincultura.gov.co/" target="_blank"><img src="../img/iconos/celebra.png" width="62" height="53" alt="Celebra la Música" title="Celebra la Música"></a>
+                                        </div>
+                                        <a href="http://celebralamusica.mincultura.gov.co/" target="_blank">
+                                            <p class="titulo_usuarios">PORTAL CELEBRA LA MÚSICA</p>
+                                            <p>
+                                        </a>
+                                    </div>
+
+                                    <div class="usuarios col-md-2 col-sm-6 col-xs-12">
+                                        <div>
+                                            <a href="http://www.mincultura.gov.co/proyectoeditorial/Pages/default.aspx" target="_blank"><img src="../img/iconos/editorial.png" width="62" height="53" alt="Proyecto Editorial" title="Proyecto Editorial"></a>
+                                        </div>
+                                        <a href="http://www.mincultura.gov.co/proyectoeditorial/Pages/default.aspx" target="_blank">
+                                            <p class="titulo_usuarios">PROYECTO EDITORIAL</p>
+                                            <p>
+                                        </a>
+                                    </div>
+                                    <div class="usuarios col-md-2 col-sm-6 col-xs-12">
+                                        <div>
+                                            <a href="http://recursos.bibliotecanacional.gov.co/content/cartografias-de-practicas-musicales-en-colombia" target="_blank"><img src="../img/iconos/carto.png" width="62" height="53" alt="Cartografía" title="Cartografía"></a>
+                                        </div>
+                                        <a href="http://recursos.bibliotecanacional.gov.co/content/cartografias-de-practicas-musicales-en-colombia" target="_blank">
+                                            <p class="titulo_usuarios">
+                                                CARTOGRAFÍA MUSICAL DE COLOMBIA
+                                            </p>
+                                        </a>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <!-- ./page content holder -->
+                    </div>
+
+                    <!-- ./page content wrapper -->
+
+                </div>
+                <!-- ./page content -->
+                <!-- page footer -->
+               
+                <!-- ./page footer -->
+
+                <div class="page-footer">
+                    <!-- page footer wrap -->
+                    <div class="page-footer-wrap bg-dark-gray">
+                        <!-- page footer holder -->
+                        <div class="page-footer-holder page-footer-holder-main">
+                            <div class="container">
+                                <!-- quick links -->
+                                <div class="col-md-12">
+                                    <div class="col-md-15 col-sm-3">
+
+
+
+                                        <div class="row mx-auto">
+                                            <div class="col-md-3">
+                                                <object type="image/svg+xml" data="image.svg" style="width: 15%;">
+                                                    <!-- Your fall back here -->
+                                                    <a href="https://www.facebook.com/plandemusica" target="blank"> <img src="~/img/facebook.svg" /> </a>
+</object>
+                                            </div>
+                                            <div class="col-md-3" style="float:left;">
+                                                <object type="image/svg+xml" data="image.svg">
+                                                    <!-- Your fall back here -->
+                                                    <a href="https://soundcloud.com/plan-nacional-de-m-sica" target="blank"><img src="~/img/instagram.svg" /> </a>
+</object>
+                                            </div>
+                                        </div>
+                                        <div class="row mx-auto" style="margin-top:20px;">
+                                            <div class="col-md-3">
+                                                <object type="image/svg+xml" data="image.svg">
+                                                    <!-- Your fall back here -->
+                                                    <a href="https://www.youtube.com/channel/UCWv5Kl8hH6kKqdMkLXVJzZA" target="blank"><img src="~/img/youtube.svg" /> </a>
+                                                </object>
+                                            </div>
+                                            <div class="col-md-3" style="float:left;">
+                                                <object type="image/svg+xml" data="image.svg">
+                                                    <!-- Your fall back here -->
+                                                    <a href="https://twitter.com/Plandemusica?lang=es" target="blank">   <img src="~/img/twitter.svg" /> </a>
+</object>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- ./quick links -->
+                                    <!-- recent tweets -->
+                                    <div class="col-md-15 col-sm-3">
+
+
+
+                                        <h5 class="textBlue">Ministerio de Cultura</h5>
+                                        <div class="list-links">
+                                            Carrera 8 No. 8 - 55 Bogotá D.C., Colombia
+
+                                        </div>
+
+                                    </div>
+                                    <!-- ./recent tweets -->
+                                    <!-- contacts -->
+                                    <div class="col-md-15 col-sm-3">
+                                        <h5 class="textBlue">Teléfono Conmutador</h5>
+                                        <div class="list-with-icon small">
+                                            <div class="linkFooter">
+                                                <span style="color: #40A1F2;"></span>(571) 3424100
+                                            </div>
+                                            <div class="linkFooter">
+                                                <span style="color: #40A1F2;"></span>Línea Gratuita
+                                            </div>
+                                            <div class="linkFooter">
+                                                <span>018000 938081 </span>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-15 col-sm-3">
+                                        <h5 class="textBlue">Correo Institucional</h5>
+
+                                        <div class="list-with-icon">
+                                            <div class="linkFooter">
+
+                                                <a href="mailto:simus@mincultura.gov.co">simus@mincultura.gov.co </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-15 col-sm-3">
+
+                                        <h5 class="textBlue">Horario de Atención</h5>
+                                        <div class="list-with-icon small">
+                                            <div class="linkFooter">
+                                                <span style="color: #40A1F2;"></span>Lunes a Viernes
+                                            </div>
+                                            <div class="linkFooter">
+                                                <span style="color: #40A1F2;"></span>8:00 a.m. a 5:00 p.m
+                                            </div>
+
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                                <!-- ./contacts -->
+                            </div>
+                        </div>
+                        <!-- ./page footer holder -->
+                    </div>
+                    <!-- ./page footer wrap -->
+                    <!-- page footer wrap -->
+                    <div class="page-footer-wrap bg-darken-gray">
+                        <!-- page footer holder -->
+                        <div class="page-footer-holder">
+                            <!-- copyright -->
+                            <div class="copyright">
+                                Sistema de información de la música · Ministerio de Cultura
+                            </div>
+                            <!-- ./copyright -->
+
+                        </div>
+                        <!-- ./page footer holder -->
+                    </div>
+                    <!-- ./page footer wrap -->
+                </div>
+
+            </div>
+       
+
+        <div id="search">
+            <button type="button" class="close">×</button>
+            <form>
+                <input type="search" id="inputsearch" value="" placeholder="Escribe una o varias palabras" />
+                <a href="#" class="btn btn-busqueda" onclick="window.location.href='@Url.Action("Resultado", "Home")' + '?param=' + $('#inputsearch').val()">Buscar</a>
+            </form>
+        </div>
+        <!-- ./page container -->
+        <!-- page scripts -->
+        <!-- START SCRIPTS -->
+        <!-- START PLUGINS-->
+        @Scripts.Render("~/Scripts/jquery")
+        @*@Scripts.Render("~/Scripts/bootstrap")*@
+
+
+        <!-- END PLUGINS -->
+        <!-- START TEMPLATE-->
+        <script src="@Url.Content("~/Scripts/bootstrap/bootstrap.js")"></script>
+        <script src="@Url.Content("~/Scripts/toDo/actions_front-end.js")"></script>
+        @*<script src="@Url.Content("~/Scripts/toDo/slider.js")"></script>*@
+
+        @*<script src="@Url.Content("~/Scripts/plugins/mixitup/jquery.mixitup.js")"></script>*@
+        <script src="@Url.Content("~/Scripts/plugins/appear/jquery.appear.js")"></script>
+
+        @*<script src="@Url.Content("~/Scripts/plugins/revolution-slider/jquery.themepunch.tools.min.js")"></script>*@
+        <script src="@Url.Content("~/Scripts/plugins/revolution-slider/jquery.themepunch.revolution.min.js")"></script>
+
+        <script src="@Url.Content("~/Scripts/Sliders/responsiveslides.js")"></script>
+
+        <!-- END TEMPLATE -->
+        <!-- END SCRIPTS -->
+
+
+    </div>
+</body>
+</html>
+<script>
+    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");
+</script>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.6&appId=123788157987182";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<script>
+
+    $(function () {
+        $("#slider1").responsiveSlides({
+            speed: 800
+        });
+        $("#slider4").responsiveSlides({
+            auto: false,
+            pager: false,
+            nav: true,
+            speed: 500,
+            namespace: "callbacks",
+            before: function () {
+                $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+                $('.events').append("<li>after event fired.</li>");
+            }
+        });
+        $("#slider4").responsiveSlides({
+            auto: false,
+            pager: false,
+            nav: true,
+            speed: 500,
+            namespace: "callbacks",
+            before: function () {
+                $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+                $('.events').append("<li>after event fired.</li>");
+            }
+        });
+
+    });
+</script>  

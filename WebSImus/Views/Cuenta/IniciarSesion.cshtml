@@ -1,0 +1,165 @@
+﻿@model WebSImus.Models.AutenticacionViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<div class="login-container">
+    <div class="logo-login">
+        <a href="~/Home/Index">
+            <img src="~/img/logo_simus.png" alt="Logo SIMUS" />
+        </a>
+    </div>
+
+    @using (Html.BeginForm("IniciarSesion", "Cuenta", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", autocomplete = "off" }))
+    {
+        @Html.ValidationSummary(true, "", new { @class = "validation-message" })
+
+        @Html.HiddenFor(m => m.redirecciona)
+
+        if (!string.IsNullOrEmpty(Model.msg))
+        {
+            <div class="validation-message text-center">
+                <strong>@Model.msg</strong>
+            </div>
+        }
+
+        <div class="form-group input-with-icon">
+            <i class="fas fa-usere"></i>
+            @Html.TextBoxFor(m => m.NombreUsuario, new { @class = "form-control", placeholder = "Correo electrónico" })
+            @Html.ValidationMessageFor(m => m.NombreUsuario, "", new { @class = "validation-message" })
+        </div>
+
+        <div class="form-group input-with-icon">
+            <i class="fas fa-lock"></i>
+            @Html.PasswordFor(m => m.Contrasena, new { @class = "form-control", placeholder = "Contraseña" })
+            @Html.ValidationMessageFor(m => m.Contrasena, "", new { @class = "validation-message" })
+        </div>
+
+        <div class="checkbox-wrapper terminos-condiciones">
+            <label class="custom-checkbox">
+                @Html.CheckBoxFor(m => m.AceptarTerminos, new
+                {
+                    @class = "hidden-checkbox",
+                    id = "chkTerminos"
+                })
+                <span class="fa-regular fa-circle" id="icon-terminos"></span>
+                <span class="label-text">
+                    <a href="~/Cuenta/Terminos"
+                       onclick="window.open(this.href, this.target, 'width=620,height=500'); return false;">
+                        Acepta términos y condiciones
+                    </a>
+                </span>
+            </label>
+        </div>
+        @Html.ValidationMessageFor(m => m.AceptarTerminos, String.Empty, new { @class = "validation-message" })
+
+        <button type="submit" class="btn btn-primary" id="login-button">
+            <span id="login-text">Ingresar</span>
+            <span id="login-spinner" class="spinner"></span>
+        </button>
+
+        <div class="checkbox-wrapper remember-me">
+            <label class="custom-checkbox">
+                @Html.CheckBoxFor(m => m.Recordarme, new
+                {
+                    @class = "hidden-checkbox",
+                    id = "chkRecordarme"
+                })
+                <span class="fa-regular fa-circle" id="icon-recordarme"></span>
+                <span class="label-text">Recordarme</span>
+            </label>
+        </div>
+
+        <div class="text-center">
+            <a href="~/Cuenta/OlvidoContrasena" class="btn-link">¿Olvidó su contraseña?</a>
+            <a href="~/Cuenta/Registrarse" class="btn-link">Regístrese</a>
+        </div>
+
+        <div class="social-login">
+            <div class="subtitulo-login">O ingresa con</div>
+            <button type="button" class="btn-google" onclick="loginMethods.authGoogle()">
+                <img src="~/img/google.png" alt="Google" width="24" height="24" />
+                <span>Google</span>
+            </button>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            const checkbox = $('#chkRecordarme');
+            const icon = $('#icon-recordarme');
+
+            // Inicializar estado
+            toggleIcon(checkbox.prop('checked'));
+
+            // Escuchar cambios
+            checkbox.on('change', function () {
+                toggleIcon(this.checked);
+            });
+
+            function toggleIcon(isChecked) {
+                if (isChecked) {
+                    icon.removeClass('fa-circle').addClass('fa-circle-check');
+                } else {
+                    icon.removeClass('fa-circle-check').addClass('fa-circle');
+                }
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // Recordarme
+            const chkRecordarme = $('#chkRecordarme');
+            const iconRecordarme = $('#icon-recordarme');
+
+            toggleIcon(chkRecordarme.prop('checked'), iconRecordarme);
+            chkRecordarme.on('change', function () {
+                toggleIcon(this.checked, iconRecordarme);
+            });
+
+            // Términos
+            const chkTerminos = $('#chkTerminos');
+            const iconTerminos = $('#icon-terminos');
+
+            toggleIcon(chkTerminos.prop('checked'), iconTerminos);
+            chkTerminos.on('change', function () {
+                toggleIcon(this.checked, iconTerminos);
+            });
+
+            function toggleIcon(isChecked, icon) {
+                if (isChecked) {
+                    icon.removeClass('fa-circle').addClass('fa-circle-check');
+                } else {
+                    icon.removeClass('fa-circle-check').addClass('fa-circle');
+                }
+            }
+        });
+    </script>
+
+
+    <script>
+        function cerrarToast() {
+            var toast = document.getElementById("toastNotificacion");
+            if (toast) {
+                toast.classList.add("fade-out");
+                setTimeout(() => {
+                    toast.style.display = "none";
+                }, 500);
+            }
+        }
+
+        window.onload = function () {
+            var toast = document.getElementById("toastNotificacion");
+            if (toast) {
+                setTimeout(() => {
+                    cerrarToast();
+                }, 5000);
+            }
+        }
+    </script>
+}

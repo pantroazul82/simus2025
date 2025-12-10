@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Consultar Municipios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Escuelas", "ConsultarMunicipios", "EscuelasMusica")</li>
+    </ul>
+    <div class="col-md-12">
+
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.ActionLink(" Exportar", "ExportToPermisos", "EscuelasMusica", null, new { @class = "btn btn-warning glyphicon glyphicon-export" })
+                    @Html.ActionLink(" Nuevo", "Escuelas", "EscuelasMusica", null, new { @class = "btn btn-success glyphicon glyphicon-plus-sign" })
+                </div>
+            </div>
+        </div>
+       
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div id="Tabla">
+                        @Html.Action("GridViewPartialPermisos")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/globalize/globalize.js")"></script>
+    <script src="@Url.Content("~/Scripts/dx.webappjs.js")"></script>
+
+}

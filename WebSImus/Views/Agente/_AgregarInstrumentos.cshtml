@@ -1,0 +1,28 @@
+﻿<div class="panel-body">
+    <div class="row push-down-20">
+        <h3><span class="fa-representante fa-2x"></span> Datos de Ocupación</h3>
+    </div>
+    <div class="row push-down-20">
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Registre los instrumentos para </label>
+                <div class="col-md-9">
+                    @Html.Editor("Instrumentos", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+
+            <div class="form-group">
+
+                <div class="col-md-6">
+                    <button type="button" id="mySubmitInstrument" class="btn btn-success glyphicon glyphicon-plus-sign" data-dismiss="modal"> Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="TablaInstumentos" class="panel-body">
+    @Html.Action("CargarInstrumentos", new { AgenteId = Model.AgenteId, EliminarId = 0 })
+</div>

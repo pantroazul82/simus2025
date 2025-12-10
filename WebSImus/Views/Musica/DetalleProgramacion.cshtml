@@ -1,0 +1,99 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<WebSImus.Models.EventoPadreModels>
+@{
+    ViewBag.Title = "DetalleProgramacion";
+    Layout = "~/Views/Shared/_LayoutCelebra.cshtml";
+}
+
+<br />
+<section>
+    <div class="container">
+        <div class="row">
+            <h2>Programación de Conciertos</h2>
+            <hr class="colorgraph">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <h3>@ViewBag.Departamento / @ViewBag.Municipio </h3>
+                    <h4>@ViewBag.AnoEvento </h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+
+            @foreach (var item in Model)
+            {
+
+
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <div class="" id="user_image">
+                            <img src="@Url.Content(item.DatosBasicos.imageDataURL)" class="img-responsive" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <br />
+                        <h4> <span class="fa fa-institution"></span> Entidad </h4>
+                        @item.DatosBasicos.EntidadOrganizadora
+                    </div>
+
+                    <div class="col-md-12">
+                        <h4> <span class="fa-documentos fa-2x-marker"></span> Lugar </h4>
+                        @item.DatosBasicos.LugarEvento
+                    </div>
+                    <div class="col-md-12">
+                        <h4> <span class="fa fa-clock-o"></span> Fecha </h4>
+                        @item.DatosBasicos.FechaEvento
+                    </div>
+                    <div class="col-md-12">
+                        <h4> <span class="fa fa-clock-o"></span> Hora </h4>
+                        @item.DatosBasicos.HoraEvento
+                    </div>
+                    <br />
+                    <br />
+                    <hr class="colorgraph">
+                    <div class="col-md-12">
+                        <h4> <span class="fa fa-music"></span> Artistas </h4>
+                    </div>
+
+                    @foreach (var datos in item.listArtista)
+                    {
+                        <div class="col-md-12">
+
+                            @datos.Nombre
+                        </div>
+
+                        @*<div class="col-md-12">
+                            <h4> <span class="fa fa-pencil"></span> Reseña </h4>
+                                 @datos.Resena
+                            </div>*@
+                        <hr class="colorgraph">
+                    }
+
+                </div>
+                <div class="col-md-12">
+                    <br />
+                    <hr style="height: 1px; background: #CCC">
+                </div>
+
+            }
+        </div>
+
+
+        <div class="panel-body" id="panelEditar">
+            <div class="row" style="text-align:center">
+                @Html.PagedListPager(Model, page => Url.Action("DetalleProgramacion", "Musica", new { page = page, Ano = ViewBag.AnoEvento, codigo = ViewBag.Codigo }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayItemSliceAndTotal = true, ItemSliceAndTotalFormat = "Mostrando Registros {0} a {1} de {2}." })
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+</section>

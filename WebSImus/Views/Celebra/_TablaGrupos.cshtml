@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebSImus.Models.GrupoPublicoModels>
+    <div class="panel-body">
+        <table class="table">
+            @Html.Hidden("item-to-delete", "", new { @id = "item-to-delete" })
+            <thead>
+                <tr>
+                    @*<th>Id</th>*@
+                    <th>Nombre</th>
+                    <th>Contacto</th>
+                    <th>Teléfono</th>
+                    <th>Cantidad</th>
+                    <th>Eliminar</th>
+
+                </tr>
+            </thead>
+
+            @if (Model != null)
+            {
+                foreach (WebSImus.Models.GrupoPublicoModels item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            @*<td>@item.GrupoId</td>*@
+                            <td>@item.Nombre</td>
+                            <td>@item.Contacto</td>
+                            <td>@item.Telefono</td>
+                            <td>@item.CantidadMiembros</td>
+                            <td><a href="" class="fa-trash-a" data-toggle="modal" data-target="#modalConfirmar" data-id="@item.GrupoId"></a></td>
+                        </tr>
+
+                    </tbody>
+                }
+            }
+        </table>
+        <div id="modalConfirmar" class="modal modal-vcenter fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        Esta a punto de eliminar un elemento de su lista de grupos. <strong>Tenga en cuenta que esta acción no se puede revertir</strong>.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" id="myDelete" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+

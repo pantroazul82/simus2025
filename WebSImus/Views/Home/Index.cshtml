@@ -1,0 +1,555 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="keywords" content="SIMUS, Sistema de Información de la Música">
+    <meta name="description" content="SIMUS | MinCultura"> <!-- META SECCION -->
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SIMUS - Público</title>
+    <link rel="icon" href="~/img/favicon.ico" type="image/x-icon" />
+    <link href="~/css/newstyles.css" rel="stylesheet" />
+    <link href="@Url.Content("~/css/responsiveslides.css")" rel="stylesheet">
+    @Styles.Render("~/Content/publico.css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/plugins")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/fontawesome")
+
+    <!--
+        <script type="text/javascript">
+
+
+            // external login providers
+            var loginMethods = {
+                openWindow: function (url, name, iWidth, iHeight) {
+                    var iTop = (window.screen.availHeight - 30 - iHeight) / 2;
+                    var iLeft = (window.screen.availWidth - 10 - iWidth) / 2;
+                    window.open(url, name, 'height=' + iHeight + ',innerHeight=' + iHeight + ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft + ',toolbar=no,menubar=no,scrollbars=yes,resizeable=no,location=no,status=no');
+                },
+
+                authFacebook: function (mode) {
+                    loginMethods.openWindow('/AuthExternal/Login/Facebook?mode=' + mode, '', 680, 340);
+                },
+
+                authTwitter: function (mode) {
+                    loginMethods.openWindow('/AuthExternal/Login/Twitter?mode=' + mode, '', 680, 520);
+                },
+
+                authGoogle: function (mode) {
+                    loginMethods.openWindow('/AuthExternal/Login/Google?mode=' + mode, '', 680, 520);
+                },
+
+                authPayPal: function (mode) {
+                    loginMethods.openWindow('/AuthExternal/Login/PayPal?mode=' + mode, '', 400, 550);
+                },
+
+                handleRedirect: function (url) {
+                    window.location = url;
+                }
+            };
+        </script>
+
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-76203017-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+    -->
+</head>
+
+<body>
+    <!-- page container -->
+    <div class="page-container">
+        <header class="he_header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-1 col-sm-2 col-4 he_logo">
+                        <a href="https://www.gov.co">
+                            <img src="~/img/logo-gov.svg" alt="logo">
+                        </a>
+                    </div>
+                    <div class="col-lg-11 col-sm-10 col-8 he_menu">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-5">
+                                <p class="screen-lg">Conoce toda la oferta que el estado tiene para tí</p>
+                                <p class="screen-md">¿Sabes que es GOV.CO?</p>
+                                <p class="screen-sm">¿Sabes que es GOV.CO? Conócelo aquí</p>
+                            </div>
+                            <div class="col-lg-6 col-md-7 hidden-xs">
+                                <ul class="nav" style="display: flex; flex-wrap: wrap;">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="https://www.gov.co/ficha-tramites-y-servicios/" target="_blank">Trámites y servicios</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="https://www.gov.co/tu-opinion-cuenta/" target="_blank">Participación</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="https://www.gov.co/entidades/" target="_blank">Entidades</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- page header -->
+        <div class="page-header">
+            <!-- page header holder -->
+            <div class="page-header-holder">
+
+                <!-- page logo -->
+
+                <section class="equipo_seccion_1">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div style="width: 30%; padding-left: 30px;">
+
+                                <a href="~/home/index"><img src=" " /></a>
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+
+
+                            <img src=" " style="width: 300px; float:right" />
+
+
+                        </div>
+                    </div>
+                </section>
+                <!-- ./page header holder -->
+                <!-- nav mobile bars -->
+                <!-- nav mobile bars -->
+
+                <div class="navigation-toggle">
+                    <div class="navigation-toggle-button"><span class="fa fa-bars"></span></div>
+                </div>
+                <!-- ./nav mobile bars -->
+                <!-- navigation -->
+                <div class="row barra_negra">
+
+                    <ul class="navigation">
+
+                        <li>
+                            <a href="#"> Actores</a>
+                            <ul>
+                                <li><a href="~/Actores/Agentes"> Agentes</a></li>
+                                <li><a href="~/Home/HomeAgrupaciones"> Agrupaciones</a></li>
+                                <li><a href="~/Actores/Entidad"> Entidades</a></li>
+                                <li><a href="~/Actores/Escuelas"> Escuelas</a></li>
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#"> Mapas</a>
+                            <ul>
+                                <li><a href="~/ReporteMapas/MapaMusical"> Mapa Musical</a></li>
+                                <li><a href="~/ReporteMapas/MapaEscuelas">  Mapa Escuelas</a></li>
+                                @*<li><a href="~/ReporteMapas/TematicoEscuelas">  Mapa Escuelas Temático</a></li>*@
+                                <li><a href="~/ReporteMapas/MapaCelebra">   Mapa Celebra </a></li>
+                                @*<li><a href="~/ReporteMapas/TematicoCelebra">   Mapa Celebra Temático</a></li>
+                                <li><a href="~/ReporteMapas/TematicoAgentes">  Mapa Agentes Temático</a></li>*@
+                                <li><a href="~/ReporteMapas/MapaAgrupaciones">  Mapa Agrupaciones</a></li>
+                                <li><a href="~/ReporteMapas/MapaEntidades">  Mapa Entidades</a></li>
+                                <li><a href="~/ReporteMapas/MapaEventos">  Mapa Eventos</a></li>
+                                @*<li><a href="~/ReporteMapas/MapaGeneral"> Mapa General</a></li>*@
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Circulación</a>
+                            <ul>
+                                <!--
+                                <li><a href="https://asisuenacolombia.wixsite.com/misitio" target="_blank"> Así suena Colombia </a></li>
+                                <li><a href="https://asisuenameta.wixsite.com/misitio" target="_blank">  Así suena Meta</a></li>
+                                <li><a href="https://asisuenacesar.wixsite.com/misitio" target="_blank"> Así suena Cesar</a></li>
+                                <li><a href="https://asisuenarisaralda.wixsite.com/misitio" target="_blank">   Así suena Risaralda </a></li>
+                                <li><a href="https://asisuenahuila.wixsite.com/misitio" target="_blank"> Así suena Huila</a></li>
+                                -->
+                                <li><a href="~/Actores/Escenarios"> Escenarios</a></li>
+                                <li><a href="~/Actores/Eventos"> Eventos Periódicos</a></li>
+                                <li><a href="http://territoriosonoro.org/portafoliomusicaldecolombia/web/index.html" target="_blank">  Portafolio Musical de Colombia</a></li>
+                                <li><a href="@Url.Action("Index", "Festivales")">Festivales de Música</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"> Caja de Herramientas</a>
+                            <ul>
+                                <li><a href="http://estimulos.mincultura.gov.co/" target="_blank"> Convocatorias Estímulos</a></li>
+                                <li><a href="~/Herramientas/Convocatorias"> Listado de Convocatorias</a></li>
+                                <li><a href="~/UtilidadHome/HomeCaja"> Herramientas</a></li>
+                                <li><a href="~/Indicadores/Escuelas"> Estadísticas de Escuelas</a></li>
+                                <li><a href="~/assets/pdf/MusicaCuentaDigital2019.pdf" target="_blank">  La Música Cuenta 2019</a></li>
+                                <li><a href="~/assets/pdf/MusicaCuentaDigital2018.pdf" target="_blank">  La Música Cuenta 2018</a></li>
+                                <li><a href="~/assets/pdf/MusicaCuentaDigital2017.pdf" target="_blank">  La Música Cuenta 2017</a></li>
+                                <li><a href="~/assets/pdf/MusicaCuentaDigital.pdf" target="_blank">  La Música Cuenta 2016</a></li>
+                                <li><a href="https://formacionvirtual.mincultura.gov.co/" target="_blank"> Formación Virtual</a></li>
+
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a href="#"> Utilidades</a>
+                            <ul>
+                                <li><a href="~/UtilidadHome/Agenda"> Agenda Musical</a></li>
+                                <li><a href="~/UtilidadHome/Clasificados"> Clasificados</a></li>
+                                <li><a href="~/UtilidadHome/Noticias">  Noticias</a></li>
+                                <li><a href="~/UtilidadHome/Documentos">  Documentos</a></li>
+                                <li><a href="https://form.jotform.com/221944542089057" target="_blank">  Encuesta de Percepción</a></li>
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a href="http://territoriosonoro.org/" target="_blank"> Territorios Sonoros</a>
+                        </li>
+                        <li>
+                            <a href="#"> Ayuda</a>
+                            <ul>
+                                <li><a href="~/Estatico/AcercaDe">  Acerca de</a></li>
+
+                                <li><a href="https://www.youtube.com/watch?v=XHeW4nwGIAE" target="_blank">  Tutorial Escuela de Música</a></li>
+                                <li><a href="https://www.youtube.com/watch?v=8EuUtH3UY5U" target="_blank">  Tutorial Agentes</a></li>
+                                <li><a href="https://www.youtube.com/watch?v=0MFVp1y8f74" target="_blank">  Tutorial Agrupaciones</a></li>
+                                <li><a href="https://www.youtube.com/watch?v=L-aJLj4BGfA" target="_blank">  Tutorial Entidades</a></li>
+                                <li><a href="https://www.youtube.com/watch?v=6IOZPtUSxcw" target="_blank">  Tutorial Utilidades</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+            <div class="col-md-4 col-xs-11 col-sm-6 combo_ingreso">
+                <div class="col-md-4 col-xs-4 col-sm-4 ingreso ">
+                    <a href="#search" class="btn btn-busc btn-md"><span class="fa-solid fa-magnifying-glass"></span> Buscar</a>
+                </div>
+                <div class="col-md-8 col-xs-8 col-sm-8" style="text-align: right;">
+                    <a href="~/Cuenta/Login" class="btn btn-primary btn-md"><span class="fa-solid fa-right-to-bracket"></span> Ingresar</a>
+                    <a href="~/Cuenta/Registrarse" class="btn btn-success btn-md"><span class="fa-solid fa-pen-to-square"></span> Registrarse</a>
+                </div>
+
+            </div>
+        </div>
+        <!-- ./page header -->
+        <!-- page content -->
+        <div class="page-content" style="z-index:-10;">
+            <!-- page content wrapper -->
+            <div class="page-content-wrap bg-light">
+                <div class="section">
+                    <h2 class="section-title">Utilidades</h2>
+                    <div class="utilities-container">
+                        <div class="card">
+                            <div class="card-icon">🧰</div>
+                            <div class="card-title">Herramientas</div>
+                            <div class="card-text">Accede a recursos útiles para los actores musicales.</div>
+                            <a href="/UtilidadHome/HomeCaja" class="btn">Explorar</a>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">📢</div>
+                            <div class="card-title">Clasificados</div>
+                            <div class="card-text">Publicaciones y oportunidades para el sector musical</div>
+                            <a href="/UtilidadHome/Clasificados" class="btn">Ver</a>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">📰</div>
+                            <div class="card-title">Noticias</div>
+                            <div class="card-text">Mantente informado sobre las últimas novedades del sector.</div>
+                            <a href="/UtilidadHome/Noticias" class="btn">Leer</a>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">📅</div>
+                            <div class="card-title">Eventos Periódicos</div>
+                            <div class="card-text">Consulta actividades programadas por el Ministerio.</div>
+                            <a href="/Actores/Eventos" class="btn">Ver Agenda</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Mapas</h2>
+                    <div class="mapas-container">
+                        <div class="card">
+                            <div class="card-icon">🗺️</div>
+                            <div class="card-title">Mapa Escuelas</div>
+                            <div class="card-text">Visualiza la distribución geográfica de las escuelas de música.</div>
+                            <a href="/ReporteMapas/MapaEscuelas" class="btn">Ver Mapa</a>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">🎶</div>
+                            <div class="card-title">Mapa Musical</div>
+                            <div class="card-text">Descubre la riqueza musical en el territorio nacional.</div>
+                            <a href="/ReporteMapas/MapaMusical" class="btn">Ver Mapa</a>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">🎤</div>
+                            <div class="card-title">Mapa Agrupaciones</div>
+                            <div class="card-text">Consulta agrupaciones musicales registradas.</div>
+                            <a href="/ReporteMapas/MapaAgrupaciones" class="btn">Ver Mapa</a>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">🎭</div>
+                            <div class="card-title">Mapa Eventos</div>
+                            <div class="card-text">Accede a eventos culturales distribuidos por región.</div>
+                            <a href="/ReporteMapas/MapaEventos" class="btn">Ver Mapa</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Actores</h2>
+                    <div class="actores-container">
+                        <a href="/Actores/Escuelas" class="card card-clickable">
+                            <div class="card-icon">🏫</div>
+                            <div class="card-title">Escuelas</div>
+                            <div class="contador">@ViewBag.cantEscuelas</div>
+                        </a>
+                        <a href="/Home/HomeAgrupaciones" class="card card-clickable">
+                            <div class="card-icon">👥</div>
+                            <div class="card-title">Agrupaciones</div>
+                            <div class="contador">@ViewBag.cantAgrupacion</div>
+                        </a>
+                        <a href="/Actores/Agentes" class="card card-clickable">
+                            <div class="card-icon">🧑‍🎤</div>
+                            <div class="card-title">Agentes</div>
+                            <div class="contador">@ViewBag.cantAgente</div>
+                        </a>
+                        <a href="/Actores/Entidad" class="card card-clickable">
+                            <div class="card-icon">🏛️</div>
+                            <div class="card-title">Entidades</div>
+                            <div class="contador">@ViewBag.cantEntidad</div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Estadísticas y Agenda Musical</h2>
+                    <div class="estadisticas-agenda-container">
+                        <a href="/Indicadores/Escuelas" class="card card-clickable">
+                            <div class="card-icon">📊</div>
+                            <div class="card-title">Estadísticas Escuelas</div>
+                            <div class="card-text">Consulta datos relevantes sobre escuelas de música registradas.</div>
+                        </a>
+                        <div class="card">
+                            <div class="card-icon">📆</div>
+                            <div class="card-title">Agenda Musical</div>
+                            <div class="card-text">
+                                @Html.Action("_DatosAgenda")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Recursos</h2>
+                    <div class="recursos-container">
+                        <a href="http://bancodecontenidos.mincultura.gov.co/app" class="card card-clickable" target="_blank">
+                            <div class="card-icon">📚</div>
+                            <div class="card-title">Banco de Contenidos</div>
+                            <div class="card-text">Consulta y descarga recursos culturales del Ministerio.</div>
+                        </a>
+                        <a href="http://www.mincultura.gov.co/proyectoeditorial/Pages/default.aspx" class="card card-clickable" target="_blank">
+                            <div class="card-icon">📘</div>
+                            <div class="card-title">Proyecto Editorial</div>
+                            <div class="card-text">Accede a publicaciones e investigaciones culturales destacadas.</div>
+                        </a>
+                    </div>
+                </div>
+
+
+
+                <!-- page footer -->
+                <!-- ./page footer -->
+                <!-- page footer -->
+                <div class="page-footer">
+                    <!-- page footer wrap -->
+                    <div class="page-footer-wrap bg-dark-gray">
+                        <!-- page footer holder -->
+                        <div class="page-footer-holder page-footer-holder-main">
+                            <div class="row he_footer">
+                                <div class="col-xl-2 col-lg-3  split screen-lg logos">
+                                    <div class="logo ">
+                                        <a href="https://www.gov.co">
+                                            <img src="~/img/logo-gov.svg" alt="logo">
+                                        </a>
+                                    </div>
+                                    <div class="logo_co" style="margin-top:80px;">
+                                        <a href="https://www.colombia.co">
+                                            <img src="~/img/logo_co_footer.png" alt="logo co">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-5 col-xs-5  split">
+                                    <h4>Ministerio de Cultura</h4>
+                                    <p>
+                                        Dirección: Ministerio de Cultura<br>
+                                        Carrera 8 No. 8 - 55 Bogotá D.C., Colombia<br>
+                                        @*Código Postal: xxxx <br>*@
+                                        Horario de Atención: Lunes a Viernes 8:00 am - 5:00 pm.
+                                    </p>
+                                    <ul class="he_footer_redes">
+                                        <a href="https://www.youtube.com/channel/UCWv5Kl8hH6kKqdMkLXVJzZA" target="blank">
+                                        <li>
+                                            <i class="fa-brands fa-youtube fa-circulo" aria-hidden="true"></i>
+                                        </li>
+                                        <a href="https://www.facebook.com/plandemusica" target="blank">
+                                        <li>
+                                            <i class="fa-brands fa-facebook-f fa-circulo" aria-hidden="true"></i>
+                                        </li>
+                                        </a>
+                                        <a href="https://www.instagram.com/plannacionaldemusica" target="blank">
+                                        <li>
+                                            <i class="fa-brands fa-instagram fa-circulo" aria-hidden="true"></i>
+                                        </li>
+                                        </a>
+                                        <a href="https://x.com/Plandemusica" target="blank">
+                                        <li>
+                                            <i class="fa-brands fa-x-twitter fa-circulo" aria-hidden="true"></i>
+                                        </li>
+                                        </a>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4 col-xs-8 no-split">
+                                    <h4><i class="fa fa-telephone" aria-hidden="true"></i> Contacto</h4>
+                                    <p>
+                                        Teléfono Conmutador: +57(1) 3424100 <br>
+                                        Línea Gratuita: 01-800-0938081 <br>
+                                        @*Linea Anticorrupción : 01-800-xxxxxx <br>*@
+                                        Correo Institucional: simus@mincultura.gov.co <br>
+                                        Correo de notificaciones judiciales: <br>
+                                        notificaciones.simus@mincultura.gov.co <br>
+                                        <a href="#">Política de seguridad de la información</a>
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- ./page footer holder -->
+                    </div>
+
+                </div>
+
+                <div id="search" class="search-modal">
+                    <div class="search-content">
+                        <button type="button" class="close" onclick="cerrarBuscador()">×</button>
+                        <form id="formBusqueda">
+                            <input type="search" id="inputsearch" placeholder="Escribe una o varias palabras..." autocomplete="off" />
+                            <button type="submit" class="btn btn-busqueda">
+                                <i class="fa-solid fa-magnifying-glass"></i>Buscar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <!-- ./page container -->
+                <!-- page scripts -->
+                <!-- START SCRIPTS -->
+                <!-- START PLUGINS-->
+                @Scripts.Render("~/Scripts/jquery")
+                @*@Scripts.Render("~/Scripts/bootstrap")*@
+
+                <!-- END PLUGINS -->
+                <!-- START TEMPLATE-->
+                <script src="@Url.Content("~/Scripts/bootstrap/bootstrap.js")"></script>
+                <script src="@Url.Content("~/Scripts/toDo/actions_front-end.js")"></script>
+                @*<script src="@Url.Content("~/Scripts/toDo/slider.js")"></script>*@
+
+                @*<script src="@Url.Content("~/Scripts/plugins/mixitup/jquery.mixitup.js")"></script>*@
+                <script src="@Url.Content("~/Scripts/plugins/appear/jquery.appear.js")"></script>
+
+                @*<script src="@Url.Content("~/Scripts/plugins/revolution-slider/jquery.themepunch.tools.min.js")"></script>*@
+                <script src="@Url.Content("~/Scripts/plugins/revolution-slider/jquery.themepunch.revolution.min.js")"></script>
+
+                <script src="@Url.Content("~/Scripts/Sliders/responsiveslides.js")"></script>
+
+                <!-- END TEMPLATE -->
+                <!-- END SCRIPTS -->
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<!--
+<script>
+    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");
+</script>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.6&appId=123788157987182";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+-->
+
+<script>
+
+    $(function () {
+        $("#slider1").responsiveSlides({
+            speed: 800
+        });
+        $("#slider4").responsiveSlides({
+            auto: false,
+            pager: false,
+            nav: true,
+            speed: 500,
+            namespace: "callbacks",
+            before: function () {
+                $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+                $('.events').append("<li>after event fired.</li>");
+            }
+        });
+        $("#slider4").responsiveSlides({
+            auto: false,
+            pager: false,
+            nav: true,
+            speed: 500,
+            namespace: "callbacks",
+            before: function () {
+                $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+                $('.events').append("<li>after event fired.</li>");
+            }
+        });
+
+    });
+</script>
+
+<script>
+    function cerrarBuscador() {
+        document.getElementById('search').style.display = 'none';
+    }
+
+    document.getElementById("formBusqueda").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const termino = document.getElementById("inputsearch").value.trim();
+        if (termino !== "") {
+            window.location.href = '@Url.Action("Resultado", "Home")' + '?param=' + encodeURIComponent(termino);
+        }
+    });
+</script>

@@ -1,0 +1,88 @@
+﻿@model IEnumerable<WebSImus.Models.AgentePublicoModels>
+<div class="panel-body">
+    <table class="table">
+        @Html.Hidden("item-to-delete", "", new { @id = "item-to-delete" })
+        <thead>
+            <tr>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Tipo Documento</th>
+                <th>Número</th>
+                <th>Eliminar</th>
+
+            </tr>
+        </thead>
+
+        @if (Model != null)
+        {
+            foreach (WebSImus.Models.AgentePublicoModels item in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td>@item.Nombres</td>
+                        <td>@item.Apellidos</td>
+                        <td>@item.TipoDocumentoDescripcion</td>
+                        <td>@item.NumeroDocumento</td>
+                        <td><a href="" class="fas fa-trash" data-toggle="modal" data-target="#modalConfirmar" data-id="@item.AgenteId" onclick="javascript: CargarModal('@item.AgenteId');"></a></td>
+                    </tr>
+
+
+
+                </tbody>
+            }
+        }
+    </table>
+    <div id="modalConfirmar" class="modal modal-vcenter fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Esta a punto de eliminar un elemento de su lista de integrantes de la agrupación. <strong>Tenga en cuenta que esta acción no se puede revertir</strong>.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="myDelete" class="btn btn-danger" data-dismiss="modal" onclick="EliminarAgente()">Eliminar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function CargarModal(Id) {
+        
+        $('#item-to-delete').val(Id);
+
+    }
+    
+    function EliminarAgente() {
+        var varid = $('#item-to-delete').val();
+         ActualizardatosAgente(varid);
+
+    }
+
+    function ActualizardatosAgente(vaerliminar) {
+        var varAgrupacionId = '3';
+        $('#Empresa').val("");
+        $('#Titulo').val("");
+        $('#Descripcion').val("");
+        $.ajaxSetup({
+            cache: false
+        });
+        $.ajax({
+
+            url: "/Agrupacion/_TablaAgentes",
+            type: "GET",
+            data: { Id: varAgrupacionId, Eliminar: vaerliminar }
+        })
+       .done(function (partialViewResult) {
+           $("#agenteTabla").html(partialViewResult);
+           $('#item-to-delete').val(0);
+
+              
+       });
+
+    }
+ 
+  
+    </script>

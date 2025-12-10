@@ -1,0 +1,603 @@
+﻿@model WebSImus.Models.Escuelas
+
+<div class="modern-step-container">
+    <!-- Sección Información Básica -->
+    <div class="form-section">
+        <h3 class="section-title">
+            <i class="fas fa-music"></i> Información Básica
+        </h3>
+
+        <!-- Subsección Datos de Identificación -->
+        <div class="subsection">
+            <h4 class="subsection-title">
+                <i class="fas fa-pencil-alt"></i> Datos de Identificación
+            </h4>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    @Html.LabelFor(model => model.NombreEscuela, "Nombre de la Escuela *", new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.NombreEscuela, new
+                    {
+                        @class = "form-control modern-input",
+                        @maxlength = "100",
+                        @placeholder = "Ingrese el nombre de la escuela"
+                    })
+                    @Html.ValidationMessageFor(model => model.NombreEscuela, "", new { @class = "validation-error" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.Nit, "NIT", new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Nit, new
+                    {
+                        @class = "form-control modern-input",
+                        @placeholder = "Número de identificación tributaria"
+                    })
+                    @Html.ValidationMessageFor(model => model.Nit, "", new { @class = "validation-error" })
+                </div>
+
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.AnoValue, "Año de inicio de actividades *", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.AnoValue, (SelectList)ViewBag.Anos, "Seleccione un año", new
+                    {
+                        @class = "form-control modern-select"
+                    })
+                    @Html.ValidationMessageFor(model => model.AnoValue, "", new { @class = "validation-error" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.Naturaleza, "Naturaleza *", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.Naturaleza, (SelectList)ViewBag.listNaturaleza, "Seleccione un valor", new
+                    {
+                        @class = "form-control modern-select"
+                    })
+                    @Html.ValidationMessageFor(model => model.Naturaleza, "", new { @class = "validation-error" })
+                </div>
+
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.TipoEscuelas, "Tipo de escuela *", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.TipoEscuelas, (SelectList)ViewBag.listTipoEscuelasMusica, "Seleccione un valor", new
+                    {
+                        @class = "form-control modern-select"
+                    })
+                    @Html.ValidationMessageFor(model => model.TipoEscuelas, "", new { @class = "validation-error" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label class="form-label">Foto de la Escuela</label>
+                    <div class="file-upload-container">
+                        <div class="file-upload-area">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p class="file-upload-text">Haga clic para seleccionar una imagen</p>
+                            <p class="file-upload-hint">Tipos permitidos: .jpg, .png | Tamaño máximo: 1 MB</p>
+                            <input id="imagenPerfil" name="imagenPerfil" type="file" class="file-input" accept=".jpg,.jpeg,.png">
+                            <div id="previewContainer" class="mt-3">
+                                <img id="previewImage" src="#" alt="Vista previa de la imagen" style="max-height: 200px; display: none;" class="img-thumbnail" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    @Html.LabelFor(model => model.Resena, "Reseña de la Escuela *", new { @class = "form-label" })
+                    @Html.TextAreaFor(model => model.Resena, new
+                    {
+                        @class = "form-control modern-textarea",
+                        @rows = "4",
+                        @placeholder = "Describa brevemente la historia y características de la escuela..."
+                    })
+                    @Html.ValidationMessageFor(model => model.Resena, "", new { @class = "validation-error" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección Datos de Ubicación -->
+    <div class="form-section">
+        <h3 class="section-title">
+            <i class="fas fa-map-marker-alt"></i> Datos de Ubicación
+        </h3>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.DepartamentoSelector, "Departamento *", new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.DepartamentoSelector, (SelectList)ViewBag.departamentos, "Seleccione un valor", new
+                {
+                    @class = "form-control modern-select"
+                })
+                @Html.ValidationMessageFor(model => model.DepartamentoSelector, "", new { @class = "validation-error" })
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.MunicipioSelector, "Municipio *", new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.MunicipioSelector, (SelectList)ViewBag.municipios, "Seleccione un valor", new
+                {
+                    @class = "form-control modern-select"
+                })
+                @Html.ValidationMessageFor(model => model.MunicipioSelector, "", new { @class = "validation-error" })
+            </div>
+        </div>
+
+        <div id="panelAgregar" class="validation-panel">
+            @Html.Action("_ValidacionEscuelas")
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label class="form-label">Área</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        @Html.RadioButtonFor(m => m.Area, 5, new { @class = "radio-input" })
+                        <span class="radio-label"><i class="fas fa-tree"></i> Rural</span>
+                    </label>
+                    <label class="radio-option">
+                        @Html.RadioButtonFor(m => m.Area, 4, new { @class = "radio-input" })
+                        <span class="radio-label"><i class="fas fa-building"></i> Urbana</span>
+                    </label>
+                </div>
+                @Html.ValidationMessageFor(model => model.Area, "", new { @class = "validation-error" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-10">
+                @Html.LabelFor(model => model.Direccion, "Dirección *", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Direccion, new
+                {
+                    @class = "form-control modern-input",
+                    @maxlength = "100",
+                    @placeholder = "Ingrese la dirección completa"
+                })
+                @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "validation-error" })
+            </div>
+            <div class="form-group col-md-2">
+                <label class="form-label">&nbsp;</label>
+                <button type="button" id="btnBuscarMapa" class="btn btn-map">
+                    <i class="fas fa-map"></i> Ver Mapa
+                </button>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Latitud, "Latitud", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Latitud, new
+                {
+                    @class = "form-control modern-input",
+                    @readonly = "readonly",
+                    @placeholder = "Se completará automáticamente"
+                })
+                @Html.ValidationMessageFor(model => model.Latitud, "", new { @class = "validation-error" })
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Longitud, "Longitud", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Longitud, new
+                {
+                    @class = "form-control modern-input",
+                    @readonly = "readonly",
+                    @placeholder = "Se completará automáticamente"
+                })
+                @Html.ValidationMessageFor(model => model.Longitud, "", new { @class = "validation-error" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.TelefonoEscuela, "Teléfono *", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.TelefonoEscuela, new
+                {
+                    @class = "form-control modern-input",
+                    @maxlength = "100",
+                    @placeholder = "Número de teléfono principal"
+                })
+                @Html.ValidationMessageFor(model => model.TelefonoEscuela, "", new { @class = "validation-error" })
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Fax, "Fax", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Fax, new
+                {
+                    @class = "form-control modern-input",
+                    @maxlength = "100",
+                    @placeholder = "Número de fax (opcional)"
+                })
+                @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "validation-error" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.CorreoElectronicoEscuela, "Correo electrónico de la Escuela *", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.CorreoElectronicoEscuela, new
+                {
+                    @class = "form-control modern-input",
+                    @maxlength = "100",
+                    @type = "email",
+                    @placeholder = "correoescuela@escuela.com"
+                })
+                @Html.ValidationMessageFor(model => model.CorreoElectronicoEscuela, "", new { @class = "validation-error" })
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.SitioWeb, "Sitio Web", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.SitioWeb, new
+                {
+                    @class = "form-control modern-input",
+                    @maxlength = "100",
+                    @placeholder = "https://www.sitioescuela.com"
+                })
+                @Html.ValidationMessageFor(model => model.SitioWeb, "", new { @class = "validation-error" })
+                <small class="form-hint">Ejemplo: https://www.mincultura.gov.co</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección Datos del Contacto -->
+    <div class="form-section">
+        <h3 class="section-title">
+            <i class="fas fa-user-tie"></i> Datos del Contacto
+        </h3>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.NombreContacto, "Nombre del Contacto *", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.NombreContacto, new
+                {
+                    @class = "form-control modern-input",
+                    @maxlength = "100",
+                    @placeholder = "Nombre completo del contacto"
+                })
+                @Html.ValidationMessageFor(model => model.NombreContacto, "", new { @class = "validation-error" })
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Cargo, "Cargo del Contacto *", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Cargo, new
+                {
+                    @class = "form-control modern-input",
+                    @maxlength = "100",
+                    @placeholder = "Director, Coordinador, etc."
+                })
+                @Html.ValidationMessageFor(model => model.Cargo, "", new { @class = "validation-error" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Telefono, "Teléfonos (Celular y/o Fijo) *", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Telefono, new
+                {
+                    @class = "form-control modern-input",
+                    @maxlength = "100",
+                    @placeholder = "Números de contacto"
+                })
+                @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "validation-error" })
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.CorreoElectronico, "Correo Electrónico *", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.CorreoElectronico, new
+                {
+                    @class = "form-control modern-input",
+                    @maxlength = "100",
+                    @type = "email",
+                    @placeholder = "contacto@correo.com"
+                })
+                @Html.ValidationMessageFor(model => model.CorreoElectronico, "", new { @class = "validation-error" })
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer con botón -->
+    <div class="form-footer">
+        <button type="submit" name="Guardar" value="Guardar" class="btn btn-primary-save" id="btnGuardar">
+            <i class="fas fa-save"></i> Guardar y continuar  </button>
+    </div>
+</div>
+
+<!-- Estilos CSS -->
+<style>
+    .modern-step-container {
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 0;
+    }
+
+    .form-section {
+        margin-bottom: 40px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #ecf0f1;
+    }
+
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+    .section-title {
+        color: #4b3c8c;
+        font-size: 22px;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 600;
+    }
+
+    .subsection {
+        margin-bottom: 30px;
+    }
+
+    .subsection-title {
+        color: #34495e;
+        font-size: 18px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 500;
+        padding-left: 15px;
+        border-left: 3px solid #4b3c8c;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        flex: 1;
+        min-width: 250px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #34495e;
+    }
+
+    .modern-input, .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #e1e5eb;
+        border-radius: 8px;
+        transition: all 0.3s;
+        background-color: #f8f9fa;
+        height: 46px;
+        box-sizing: border-box;
+    }
+
+        .modern-input:focus, .form-control:focus {
+            border-color: #4b3c8c;
+            box-shadow: 0 0 0 3px rgba(75, 60, 140, 0.1);
+            background-color: #fff;
+            outline: none;
+        }
+
+        .modern-input[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+
+    .modern-select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-position: right 12px center;
+        background-repeat: no-repeat;
+        background-size: 16px;
+        padding-right: 40px;
+        cursor: pointer;
+    }
+
+    .modern-textarea {
+        min-height: 100px;
+        resize: vertical;
+        font-family: inherit;
+    }
+
+    /* File Upload */
+    .file-upload-container {
+        margin-top: 8px;
+    }
+
+    .file-upload-area {
+        border: 2px dashed #e1e5eb;
+        border-radius: 8px;
+        padding: 30px;
+        text-align: center;
+        background-color: #f8f9fa;
+        transition: all 0.3s;
+        cursor: pointer;
+        position: relative;
+    }
+
+        .file-upload-area:hover {
+            border-color: #4b3c8c;
+            background-color: rgba(75, 60, 140, 0.05);
+        }
+
+        .file-upload-area i {
+            font-size: 32px;
+            color: #4b3c8c;
+            margin-bottom: 10px;
+        }
+
+    .file-upload-text {
+        font-weight: 500;
+        color: #34495e;
+        margin-bottom: 5px;
+    }
+
+    .file-upload-hint {
+        font-size: 12px;
+        color: #6c757d;
+        margin: 0;
+    }
+
+    .file-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* Radio buttons */
+    .radio-group {
+        display: flex;
+        gap: 30px;
+        padding-top: 10px;
+    }
+
+    .radio-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+    }
+
+    .radio-input {
+        margin: 0;
+    }
+
+    .radio-label {
+        color: #34495e;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    /* Validation */
+    .validation-error {
+        display: block;
+        margin-top: 5px;
+        font-size: 13px;
+        color: #e74c3c;
+    }
+
+    .validation-panel {
+        background: #fff;
+/*        border: 1px solid #e1e5eb;*/
+        border-radius: 8px;
+        padding: 15px;
+        margin: 20px 0;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        text-decoration: none;
+    }
+
+    .btn-map {
+        background-color: #28a745;
+        color: white;
+        width: 100%;
+        justify-content: center;
+    }
+
+        .btn-map:hover {
+            background-color: #218838;
+        }
+
+    .btn-primary-save {
+        background-color: #4b3c8c;
+        color: white;
+        font-size: 18px;
+        padding: 15px 30px;
+    }
+
+        .btn-primary-save:hover {
+            background-color: #281e52;
+        }
+
+    .form-footer {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #ecf0f1;
+    }
+
+    .form-hint {
+        display: block;
+        margin-top: 5px;
+        font-size: 12px;
+        color: #6c757d;
+        font-style: italic;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const uploadArea = document.querySelector(".file-upload-area");
+        const fileInput = document.getElementById("imagenPerfil");
+
+        if (uploadArea && fileInput) {
+            uploadArea.addEventListener("click", function () {
+                fileInput.click();
+            });
+
+            // También manejar el arrastre
+            uploadArea.addEventListener("dragover", function (e) {
+                e.preventDefault();
+                uploadArea.classList.add("dragover");
+            });
+
+            uploadArea.addEventListener("dragleave", function () {
+                uploadArea.classList.remove("dragover");
+            });
+
+            uploadArea.addEventListener("drop", function (e) {
+                e.preventDefault();
+                uploadArea.classList.remove("dragover");
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files;
+                }
+            });
+        }
+    });
+
+
+
+        document.getElementById('imagenPerfil').addEventListener('change', function (event) {
+            const input = event.target;
+            const previewImage = document.getElementById('previewImage');
+            const file = input.files[0];
+
+            if (file && file.type.match('image.*')) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewImage.src = '#';
+                previewImage.style.display = 'none';
+            }
+        });
+</script>

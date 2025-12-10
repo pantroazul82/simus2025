@@ -1,0 +1,83 @@
+﻿@model WebSImus.Models.ConsultaModel
+
+@{
+    ViewBag.Title = "Solicitudes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Solicitudes", "Solicitudes", "Evento")</li>
+    </ul>
+    <div class="col-md-12">
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @*@Html.ActionLink(" Exportar", "ExportToSolicitud", "EscuelasMusica", null, new { @class = "btn btn-warning glyphicon glyphicon-export" })*@
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+
+                    <div class="col-md-2">
+                        <label class="check">@Html.RadioButtonFor(m => m.TipoRegistro, 1, new { @class = "iradio_minimal-grey" }) Pendientes</label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="check">@Html.RadioButtonFor(m => m.TipoRegistro, 2, new { @class = "iradio_minimal-grey" }) Aprobadas</label>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div id="Tabla">
+                        @Html.Action("GridViewSolicitud")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(function () {
+            $("input[name*='TipoRegistro']").click(function () {
+                var VarTipo = $("input[name='TipoRegistro']:checked").val();
+                $.ajaxSetup({
+                    cache: false
+                });
+                $.ajax({
+
+                    url: "/Evento/GridViewSolicitud",
+                    type: "GET",
+                    data: { Busqueda: VarTipo }
+                })
+               .done(function (partialViewResult) {
+                   $("#Tabla").html(partialViewResult);
+
+               });
+            });
+        });
+    </script>
+}
+
+
+
+

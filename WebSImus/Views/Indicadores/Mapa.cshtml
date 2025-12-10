@@ -1,0 +1,345 @@
+﻿@model SM.LibreriaComun.DTO.EscuelasEstadisticasDTO
+
+@{
+    ViewBag.Title = "Estadísticas - Estudiantes";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row align-items-center mb-4">
+        <div class="col-md-8 col-sm-12">
+            <h1 class="titulo-indicador"><i class="fa-solid fa-chart-simple me-2"></i>Estadísticas · <span id="txtStatus1">@Html.Label("Actual")</span></h1>
+        </div>
+        <div class="col-md-4 col-sm-12 text-end">
+            @Html.DropDownListFor(model => model.selectorAno, (SelectList)ViewBag.listAnos, "Año", new { @class = "form-select selector-ano", @id = "selectorAno" })
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-3 col-sm-6">
+            <a href="#" class="stat-card" onclick="RedireccionaEscuelas();return false;">
+                <i class="fa-solid fa-school"></i>
+                <h5>Escuelas</h5>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <a href="#" class="stat-card" onclick="RedireccionaEstudiantes();return false;">
+                <i class="fa-solid fa-user-graduate"></i>
+                <h5>Estudiantes</h5>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <a href="#" class="stat-card" onclick="RedireccionaDocentes();return false;">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <h5>Docentes</h5>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <a href="#" class="stat-card" onclick="RedireccionaMapa();return false;">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <h5>Mapa</h5>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-10 offset-xl-1 col-12">
+            @Html.Partial("_DatosMapa", Model)
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var periodo = '@Model.selectorAno';
+            if (periodo == "1")
+            { $('#txtStatus1').text('Actual'); }
+            else {
+                $('#txtStatus1').text(periodo);
+            }
+
+        }
+        function RedireccionaMapa() {
+            var VarTipo = $('#selectorAno').val();
+            var url = "/Indicadores/Mapa?Id=" + VarTipo;
+            window.location.href = url;
+        }
+        function RedireccionaEstudiantes() {
+            var VarTipo = $('#selectorAno').val();
+            var url = "/Indicadores/Estudiantes?Id=" + VarTipo;
+            window.location.href = url;
+        }
+
+        function RedireccionaDocentes() {
+            var VarTipo = $('#selectorAno').val();
+            var url = "/Indicadores/Docentes?Id=" + VarTipo;
+            window.location.href = url;
+        }
+
+        function RedireccionaEscuelas() {
+            var VarTipo = $('#selectorAno').val();
+            var url = "/Indicadores/Escuelas?Id=" + VarTipo;
+            window.location.href = url;
+        }
+
+        $(document).on('ON_COMPLETE_LOAD_COMPONENT', function () {
+            var periodo = '@Model.selectorAno';
+            var urlHost = "http://" + window.location.host;
+            window.componentMaps = new com.servinf[window.spaceName].ComponentMaps('#PanelMapa', {
+                'module': com.servinf.ComponentMaps.Config.modules.VIEWER_DATA, //Indica que el mapa va a visualizar capas
+                'request_position': false,  // Realizar la solicitud de la posicion actual del usuario
+                'search_bar': false,        // Barra de busqueda dentro del mapa
+                'streetview_panel': false,  // El panel de streetview en un porcentaje de la pantalla. Ej: 50
+                'map_type': "roadmap",      // Tipo de mapa a iniciar: hybrid, satellite, terrain, roadmap
+                'map_options': false,
+                'initial_position': {
+                    'lat': 5.065781,
+                    'lng': -75.507820,
+                    'zoom': 6
+                },
+                'details': {                // Especificaciones del vista
+                    '_initialPoint': {
+                        'name': "Casa Museo Casa de Nariño",
+                        'routing': true,
+                        'streetview': false,
+                        'Latitud': 4.599872,
+                        'Longitud': -74.072898,
+                        'templateString': "Este es el punto inicial"
+                    },
+                    'layers': [{            // Capas a mostrar
+                        'id': "escuelas_mapa",     // Identificador de la capa, sirve para accederla de manera remota.
+                        'name': "escuelas",   // Nombre de la capa
+                        'type': "webservice",           // Tipo de capa (catodb,webservice,cartoviz)
+                        'autoload': true,               // Indica que se cargara de manera automatica la capa al iniciar el mapa
+                        'keyTitle': "nombre",           // Indica el tooltip que llevaran los OVERLAYS (Objetos dibujados en el mapa)
+                        'fitBounds': false,             // Indica que se hara zoom a la capa en donde sea dibujada
+                        'cluster': false,                // True si quieres que clusterize (solo si la capa es de puntos)
+                        'cluster_options': {            // Opciones de cluster
+                            'group_key': "nombre"
+                        },
+                        'heat_map': false,              // True si quieres que realize el mapa de calor (solo si la capa es de puntos)
+                        'heat_map_options': {           // Opciones del Mapa de calor
+                            'max_zoom': 12               // Zoom Maximo a cambiar de Mapa de calor a puntos
+                        },
+
+                        'thematic_dpto': true,
+                        'thematic_dpto_options': {
+                            'date_dpto': 'cod_Departamento',
+                            'column_thematic': {
+                                'type': "numeric",
+                                'column': "porcentajeAvance"
+                            },
+                            'hover': "#F0F8FF",
+                            'line': "F0F8FF",
+                            'show_markers': false,
+                            'opacity': 0.7, // 0.0 - 0.9
+                            'thematic': [{
+                                'name': "Ambito Nacional",
+                                'color': "#c2e8ef",
+                                'type': "operator",
+                                'rule': {
+                                    'operator': "range",
+                                    'value': "0:50",
+                                }
+                            }, {
+                                'name': "Ambito Nacional",
+                                'color': "#2697B2;",
+                                'rule': {
+                                    'operator': "range",
+                                    'value': "51:70",
+                                }
+                            }, {
+                                'name': "Ambito Nacional",
+                                'color': "#9bbb58",
+                                'rule': {
+                                    'operator': "range",
+                                    'value': "71:95",
+                                }
+                            }, {
+                                'name': "Ambito Nacional",
+                                'color': "#24bfaa",
+                                'rule': {
+                                    'operator': "range",
+                                    'value': "96:100",
+                                }
+
+                            }, {
+                                'name': "Ambito Nacional",
+                                'color': "red",
+                                'rule': {
+                                    'operator': "*",
+                                    'value': "",
+                                }
+                            }]
+                        },
+
+                        'url': urlHost + "/Api/IndicadorEscuelas/" + periodo, // Url del servicio (En caso de que sea de tipo 'webservice)
+                        'specifications': {                             // Especificaciones del servicio
+                            'node_list': "escuelas"                     // Indica el NODO de responseData sobre cual iterar
+                        },
+                        'template_settings': {                          // Infowindow
+                            'element': "infowin_agentes-template"      // Nodo Plantilla de Handlebars
+                        },
+                        'thematic': [                   // Tematicos (Indicar Iconos, colores, etc..)
+                             {
+                                 'name': "Agentes persona natual",
+                                 'icon': "http://simus.mincultura.gov.co/img/marcadores/marker_escuela.png",
+                                 'rule': {
+                                     'key': "",
+                                     'operator': "*",
+                                     'value': "",
+                                 }
+                             },
+                        ]
+                    }]
+                }
+            });
+
+            $(document).on('ONCLICK_DEPARTMENT_escuelas_mapa', function (e) {
+                var varCodDepto = e.detail.info.department.CodDane;
+                var varNombre = e.detail.info.department.Nombre;
+                ActualizarListado(varCodDepto, e.detail.info.items[0].porcentajeAvance);
+            })
+
+        });
+
+        function ActualizarListado(varCodDepto, varporcentaje) {
+            var varperiodo = $('#selectorAno').val();
+            $.ajax({
+
+                url: "/Indicadores/_DetalleMapa",
+                type: "GET",
+                data: { CodDepto: varCodDepto,  periodo: varperiodo }
+            })
+           .done(function (partialViewResult) {
+               $("#modalInformacion").html(partialViewResult);
+               $("#modal_datosescuelas").modal('show');
+               $('body').removeClass('modal-open');
+               $('.modal-backdrop').remove();
+           });
+
+        }
+
+        $('#selectorAno').change(function () {
+            var periodo = $('#selectorAno').val();
+            var urlHost = "http://" + window.location.host;
+            window.componentMaps = new com.servinf[window.spaceName].ComponentMaps('#PanelMapa', {
+                'module': com.servinf.ComponentMaps.Config.modules.VIEWER_DATA, //Indica que el mapa va a visualizar capas
+                'request_position': false,  // Realizar la solicitud de la posicion actual del usuario
+                'search_bar': false,        // Barra de busqueda dentro del mapa
+                'streetview_panel': false,  // El panel de streetview en un porcentaje de la pantalla. Ej: 50
+                'map_type': "roadmap",      // Tipo de mapa a iniciar: hybrid, satellite, terrain, roadmap
+                'map_options': false,
+                'initial_position': {
+                    'lat': 5.065781,
+                    'lng': -75.507820,
+                    'zoom': 6
+                },
+                'details': {                // Especificaciones del vista
+                    '_initialPoint': {
+                        'name': "Casa Museo Casa de Nariño",
+                        'routing': true,
+                        'streetview': false,
+                        'Latitud': 4.599872,
+                        'Longitud': -74.072898,
+                        'templateString': "Este es el punto inicial"
+                    },
+                    'layers': [{            // Capas a mostrar
+                        'id': "escuelas_mapa",     // Identificador de la capa, sirve para accederla de manera remota.
+                        'name': "escuelas",   // Nombre de la capa
+                        'type': "webservice",           // Tipo de capa (catodb,webservice,cartoviz)
+                        'autoload': true,               // Indica que se cargara de manera automatica la capa al iniciar el mapa
+                        'keyTitle': "nombre",           // Indica el tooltip que llevaran los OVERLAYS (Objetos dibujados en el mapa)
+                        'fitBounds': false,             // Indica que se hara zoom a la capa en donde sea dibujada
+                        'cluster': false,                // True si quieres que clusterize (solo si la capa es de puntos)
+                        'cluster_options': {            // Opciones de cluster
+                            'group_key': "nombre"
+                        },
+                        'heat_map': false,              // True si quieres que realize el mapa de calor (solo si la capa es de puntos)
+                        'heat_map_options': {           // Opciones del Mapa de calor
+                            'max_zoom': 12               // Zoom Maximo a cambiar de Mapa de calor a puntos
+                        },
+
+                        'thematic_dpto': true,
+                        'thematic_dpto_options': {
+                            'date_dpto': 'cod_Departamento',
+                            'column_thematic': {
+                                'type': "numeric",
+                                'column': "porcentajeAvance"
+                            },
+                            'hover': "#F0F8FF",
+                            'line': "F0F8FF",
+                            'show_markers': false,
+                            'opacity': 0.7, // 0.0 - 0.9
+                            'thematic': [{
+                                'name': "Ambito Nacional",
+                                'color': "#c2e8ef",
+                                'type': "operator",
+                                'rule': {
+                                    'operator': "range",
+                                    'value': "0:50",
+                                }
+                            }, {
+                                'name': "Ambito Nacional",
+                                'color': "#2697B2;",
+                                'rule': {
+                                    'operator': "range",
+                                    'value': "51:70",
+                                }
+                            }, {
+                                'name': "Ambito Nacional",
+                                'color': "#9bbb58",
+                                'rule': {
+                                    'operator': "range",
+                                    'value': "71:95",
+                                }
+                            }, {
+                                'name': "Ambito Nacional",
+                                'color': "#24bfaa",
+                                'rule': {
+                                    'operator': "range",
+                                    'value': "96:100",
+                                }
+
+                            }, {
+                                'name': "Ambito Nacional",
+                                'color': "red",
+                                'rule': {
+                                    'operator': "*",
+                                    'value': "",
+                                }
+                            }]
+                        },
+
+                        'url': urlHost + "/Api/IndicadorEscuelas/" + periodo, // Url del servicio (En caso de que sea de tipo 'webservice)
+                        'specifications': {                             // Especificaciones del servicio
+                            'node_list': "escuelas"                     // Indica el NODO de responseData sobre cual iterar
+                        },
+                        'template_settings': {                          // Infowindow
+                            'element': "infowin_agentes-template"      // Nodo Plantilla de Handlebars
+                        },
+                        'thematic': [                   // Tematicos (Indicar Iconos, colores, etc..)
+                             {
+                                 'name': "Agentes persona natual",
+                                 'icon': "http://simus.mincultura.gov.co/img/marcadores/marker_escuela.png",
+                                 'rule': {
+                                     'key': "",
+                                     'operator': "*",
+                                     'value': "",
+                                 }
+                             },
+                        ]
+                    }]
+                }
+            })
+        });
+
+
+    </script>
+}
+
+

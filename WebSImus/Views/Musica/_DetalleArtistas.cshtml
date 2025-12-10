@@ -1,0 +1,117 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<SM.LibreriaComun.DTO.BasicaDTO>
+
+<div class="modal animated fadeIn" id="modal_datosArtistas" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            </br>
+            <div class="modal-header">
+                <div class="row">
+
+                    <div class="col-md-12 col-sm-6 col-xs-6 titulo_municipio_celebra"> <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:5px;"><span aria-hidden="true">&times;</span></button><span>@ViewBag.nombreEntidad</span> </div>
+
+                    <div class="col-md-8 col-sm-6 col-xs-6 titulo_infowindow"> Artistas participantes</div>
+                </div>
+                </br>
+                </br>
+                <div class="row">
+                    <div class="row">
+
+                    </div>
+                    @if (Model != null)
+                    {
+                        var i = "orange";
+                        foreach (var item in Model)
+                        {
+                            <div class="row">
+                                @if (i == "orange")
+                                {
+                                    <div class="row titulo_grey_ficha">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            @item.text
+                                        </div>
+
+                                    </div>
+                                    i = "azul";
+                                }
+                                else
+                                {
+                                    i = "orange";
+                                    <div class="row titulo_grey2_ficha">
+
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            @item.text
+                                        </div>
+
+                                    </div>
+                                }
+                            </div>
+    @*<div class="space1">  </div>*@
+                        }
+                    }
+
+                </div>
+
+            </div>
+            </br>
+            </br>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="col-md-12 col-sm-9 col-xs-9">
+                            <div id="myPager10" class="pagination">
+                                @Html.PagedListPager(
+        Model,
+        page => Url.Action(
+                              "_DetalleArtistas",
+            new
+            {
+                Id = ViewBag.EventoId,
+                page = page
+
+            }
+        ),
+        new PagedListRenderOptions
+        {
+            LinkToFirstPageFormat = "<<",
+            LinkToPreviousPageFormat = "<",
+            LinkToNextPageFormat = ">",
+            LinkToLastPageFormat = ">>",
+        }
+    )
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <!-- ./page content wrapper -->
+    </div>
+</div>
+<script type="text/javascript">
+    //$(function () {
+    $('#myPager10').on('click', 'a', function () {
+        $.ajax({
+            url: this.href,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#modalInformacion').html(result);
+                $("#modal_datosArtistas").modal('show');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+            }
+        });
+        return false;
+    });
+    //});
+
+</script>

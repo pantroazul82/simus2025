@@ -1,0 +1,376 @@
+﻿@using WebSImus.Helpers
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> SIMUS - @ViewBag.Title</title>
+    <link rel="icon" href="~/img/favicon.ico" type="image/x-icon" />
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="~/img/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+
+    <link rel="stylesheet" type="text/css" href="~/css/escuelas.css" />
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/bundles/fontawesome")
+    @Scripts.Render("~/bundles/jquery")
+
+    @Html.DevExpress().GetStyleSheets(
+        new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.GridView },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.PivotGrid },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Chart },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Report },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Scheduler },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.TreeList },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Spreadsheet },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.RichEdit },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.SpellChecker },
+        new StyleSheet { ExtensionType = ExtensionType.WebDocumentViewer },
+                 new StyleSheet { ExtensionType = ExtensionType.ReportDesigner }
+    )
+    @Scripts.Render("~/bundles/modernizr")
+    @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+        new Script { ExtensionSuite = ExtensionSuite.HtmlEditor },
+        new Script { ExtensionSuite = ExtensionSuite.GridView },
+        new Script { ExtensionSuite = ExtensionSuite.PivotGrid },
+        new Script { ExtensionSuite = ExtensionSuite.Editors },
+        new Script { ExtensionSuite = ExtensionSuite.Chart },
+        new Script { ExtensionSuite = ExtensionSuite.Report },
+        new Script { ExtensionSuite = ExtensionSuite.Scheduler },
+        new Script { ExtensionSuite = ExtensionSuite.TreeList },
+        new Script { ExtensionSuite = ExtensionSuite.Spreadsheet },
+        new Script { ExtensionSuite = ExtensionSuite.RichEdit },
+        new Script { ExtensionSuite = ExtensionSuite.SpellChecker },
+       new Script { ExtensionSuite = ExtensionSuite.All },
+                new Script { ExtensionType = ExtensionType.WebDocumentViewer },
+                              new Script { ExtensionType = ExtensionType.ReportDesigner }
+    )
+</head>
+<body>
+    <!-- START PAGE CONTAINER -->
+    <div class="page-container">
+
+        <!-- START PAGE SIDEBAR -->
+        <div class="page-sidebar">
+
+            <!-- START X-NAVIGATION -->
+
+            <ul class="x-navigation">
+                <li class="xn-logo">
+                    <a href="~/Inicio/Index">SIMUS</a>
+                    <a href="#" class="x-navigation-control"></a>
+                </li>
+
+                <li class="xn-profile">
+
+                    @{
+                        FormsIdentity formsIdentity = User.Identity as FormsIdentity;
+                        string UserId = "0";
+
+                        if (formsIdentity != null)
+                        {
+                            UserId = formsIdentity.Ticket.UserData.Split('|')[0];
+                        }
+                        WebSImus.Models.UsuarioViewModel user = WebSImus.Translator.TranslatorUsuarioToUsuariodtosim.ObtenerUsuarioBasico(UserId);
+                        string strNombreCompleto = "";
+                        strNombreCompleto = User.Identity.Name;
+                    }
+                    @if ((user != null) && (user.esUsuariodeRSS))
+                    {
+
+                        if (@user.rutafoto != null)
+                        {
+                            <a href="#" class="profile-mini">
+                                <img src="@user.rutafoto" />
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="#" class="profile-mini">
+                                <i class="fas fa-user" style="font-size: 1.8rem; color: #fff;"></i>
+                            </a>
+
+                        }
+
+                        <div class="profile">
+                            <div class="profile-image">
+                                @if (user.rutafoto != null)
+                                {
+                                    <img src="@user.rutafoto" />
+                                }
+                                else
+                                {
+                                    <div class="default-profile-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="profile-data">
+                                @if (user != null)
+                                {
+                                    <div class="profile-data-name">@Html.Label(strNombreCompleto)</div>
+
+                                }
+
+                            </div>
+                            <div class="profile-controls">
+                                @*<a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>
+                                    <a href="pages-messages.html" class="profile-control-right"><span class="fa fa-envelope"></span></a>*@
+                            </div>
+                        </div>
+
+
+                    }
+                    else
+                    {
+                        if (user != null && user.UsuarioId > 0 && user.imagen != null)
+                        {// Es un usuario creado por registrese o existe ya en simus
+
+                            <a href="#" class="profile-mini">
+                                <img class="img-responsive" src="@WebSImus.Models.Usuarios.ImageSource(@user.imagen)" alt="@strNombreCompleto" />
+                            </a>
+
+
+                            <div class="profile">
+                                <div class="profile-image">
+                                    <img class="img-responsive" src="@WebSImus.Models.Usuarios.ImageSource(@user.imagen)" alt="@strNombreCompleto" />
+                                </div>
+                                <div class="profile-data">
+                                    @if (user != null)
+                                    {
+                                        <div class="profile-data-name">@Html.Label(strNombreCompleto)</div>
+
+                                    }
+
+                                </div>
+                                <div class="profile-controls">
+                                    @*<a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>
+                                        <a href="pages-messages.html" class="profile-control-right"><span class="fa fa-envelope"></span></a>*@
+                                </div>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <a href="#" class="profile-mini">
+                                <i class="fas fa-user"></i>
+                            </a>
+
+                            <div class="profile">
+                                <div class="profile-image">
+                                    <div class="default-profile-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                </div>
+                                <div class="profile-data">
+                                    @if (!String.IsNullOrEmpty(strNombreCompleto))
+                                    {
+                                        <div class="profile-data-name">@Html.Label(strNombreCompleto)</div>
+                                    }
+                                </div>
+                                <div class="profile-controls">
+                                    @*<a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>
+                                        <a href="pages-messages.html" class="profile-control-right"><span class="fa fa-envelope"></span></a>*@
+                                </div>
+                            </div>
+                        }
+
+
+                    }
+
+
+                </li>
+
+
+
+
+
+                @if ((user != null) && user.UsuarioId > 0)
+                {  // ES DE SIMUS
+
+                    if (!user.EsAgente)
+                    {
+                        <li><a href="~/Agente/Agente"><span class="fa-solid fa-chevron-right"></span> <span class="xn-text">Quiero ser agente</span></a></li>
+                    }
+                    else
+                    {
+                        <li><a href="~/Agente/Editar/@user.AgenteId"><span class="fa-solid fa-chevron-right"></span> <span class="xn-text">Modificar Agente</span></a></li>
+                    }
+                    //es de mincultura
+                    if (user.esUsuarioInterno)
+                    {
+                        <li><a href="~/MinculturaPerfil/MinPerfil"><span class="fa-solid fa-chevron-right"></span> <span class="xn-text">Modificar mi perfil</span></a></li>
+                    }
+                    else
+                        if (user.esUsuarioSiMUS)//se registro
+                    {
+                        <li><a href="~/CambioPassIntr/CambioClaveInt"><span class="fa-solid fa-chevron-right"></span> <span class="xn-text">Cambiar clave</span></a></li>
+                        <li><a href="~/SimusPerfil/SimusPerfil"><span class="fa-solid fa-chevron-right"></span> <span class="xn-text">Modificar mi perfil </span></a></li>
+
+                    }
+                    else
+                            if (user.esUsuariodeRSS)//se registro con redessociales
+                    {
+                        <li><a href="~/AuthExternal/LoginSuccess"><span class="fa-solid fa-chevron-right"></span> <span class="xn-text">Modificar mi perfil </span></a></li>
+                    }
+
+
+
+                    @Html.Action("_Menu", "Inicio")
+                }
+                else
+                {     //usuario del ministerio
+                    if (user != null && user.esUsuarioInterno)
+                    {
+                        <li><a href="~/EscuelasMusica/Consulta"><span class="fa-solid fa-chevron-right"></span> <span class="xn-text">Modificar mi perfil </span></a></li>
+                    }
+
+                }
+
+            </ul>
+            <!-- END X-NAVIGATION -->
+        </div>
+
+        <!-- END PAGE SIDEBAR -->
+        <!-- PAGE CONTENT -->
+        <div class="page-content">
+
+            <!-- START X-NAVIGATION VERTICAL -->
+            <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+                <!-- TOGGLE NAVIGATION -->
+                @*<li class="xn-icon-button">
+                        <a href="#" class="x-navigation-minimize"><span class="fa-solid fa-bars"></span></a>
+                    </li>*@
+                <!-- END TOGGLE NAVIGATION -->
+                <!-- SEARCH -->
+                @*<li class="xn-search">
+                        <form role="form">
+                            <input type="text" name="search" placeholder="Buscar..." />
+                        </form>
+                    </li>*@
+                <!-- END SEARCH -->
+                <!-- POWER OFF -->
+                <li class="xn-icon-button pull-right last">
+                    <a href="#"><span class="fas fa-right-from-bracket"></span></a>
+                    <ul class="xn-drop-left animated zoomIn">
+                        <li><a href="#" class="mb-control" data-box="#mb-signout"><span class="fas fa-right-from-bracket"></span> Salir</a></li>
+                    </ul>
+                </li>
+                <!-- END POWER OFF -->
+                <!-- END TASKS -->
+            </ul>
+            <!-- END X-NAVIGATION VERTICAL -->
+            <!-- START BREADCRUMB -->
+            @*<ul class="breadcrumb">
+                    <li><a href="#">Miga</a></li>
+                    <li><a href="#">de pan</a></li>
+                </ul>*@
+            <!-- END BREADCRUMB -->
+
+            <div class="page-title">
+                <h2><span class="fa-frontera fa-2x"></span> @ViewBag.Title</h2>
+            </div>
+
+            <!-- PAGE CONTENT WRAPPER -->
+            <!-- PAGE CONTENT WRAPPER -->
+            <div class="page-content-wrap dashboard-container">
+                <div class="row">
+                    <div class="col-md-12">
+                        @{ Html.RenderPartial("_Alertas"); }
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <!-- END PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTAINER -->
+    <!-- MESSAGE BOX-->
+    <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+        <div class="mb-container">
+            <div class="mb-middle">
+                <div class="mb-title"><span class="fas fa-right-from-bracket"></span> <strong>¿Cerrar</strong> sesión?</div>
+                <div class="mb-content">
+                    <p>Al salir perderá los cambios que no ha guardado</p>
+                </div>
+                <div class="mb-footer">
+                    <div class="pull-right">
+                        <a href="/" class="btn btn-success btn-lg">Aceptar</a>
+                        <button class="btn btn-default btn-lg mb-control-close">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (TempData[Alert.TempDataKey] != null)
+    {
+        var alerts = (List<Alert>)TempData[Alert.TempDataKey];
+        foreach (var alert in alerts)
+        {
+            <div class="toast-notificacion @alert.AlertStyle">
+                <span class="icono-toast"><i class="fas fa-info-circle"></i></span>
+                <span>@Html.Raw(alert.Message)</span>
+                <button class="cerrar-toast" onclick="this.parentElement.classList.add('fade-out'); setTimeout(() => this.parentElement.remove(), 500);">&times;</button>
+            </div>
+        }
+    }
+
+
+
+    <!-- END MESSAGE BOX-->
+    <!-- START PRELOADS -->
+    <audio id="audio-alert" src="@Url.Content("~/assets/audio/alert.mp3")" preload="auto"></audio>
+    <audio id="audio-fail" src="@Url.Content("~/assets/audio/fail.mp3")" preload="auto"></audio>
+    <!-- END PRELOADS -->
+    <!-- START SCRIPTS -->
+    <!-- START PLUGINS -->
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+    <!-- END PLUGINS -->
+    <!-- START TEMPLATE -->
+    <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+    <script src="@Url.Content("~/Scripts/toDo/actions.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap/bootstrap.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap/bootstrap-select.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap/bootstrap-datepicker.js")"></script>
+    <script src="@Url.Content("~/Scripts/toDo/plugins.js")"></script>
+
+    @RenderSection("scripts", required: false)
+
+    <!-- END SCRIPTS -->
+    <script>
+        // Solución mínima garantizada
+        $(document).ready(function () {
+            // Habilitar todos los enlaces del menú
+            $('.x-navigation a').off('click').on('click', function (e) {
+                // Permitir el comportamiento normal del enlace
+                return true;
+            });
+
+            // Botón de minimizar
+            $('.x-navigation-minimize').click(function (e) {
+                e.preventDefault();
+                $('.page-sidebar, .page-content').toggleClass('collapsed');
+            });
+        });
+    </script>
+
+</body>
+</html>

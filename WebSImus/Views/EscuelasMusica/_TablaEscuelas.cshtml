@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.EscuelaSolicitudDTO>
+<div class="panel panel-default">
+    <div class="form-group">
+        <div class="row">
+            <table class="table">
+                @Html.Hidden("item-to-deletef", "", new { @id = "item-to-deletef" })
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Dirección</th>
+                        <th>Contacto</th>
+                        <th>Usuario Actual</th>
+                        <th>Correo</th>
+                        <th>Acción</th>
+
+                    </tr>
+                </thead>
+
+                @if (Model != null)
+                {
+                    foreach (SM.LibreriaComun.DTO.EscuelaSolicitudDTO item in Model)
+                    {
+                        <tbody>
+                            <tr>
+
+                                <td>@item.NombreEscuela</td>
+                                <td>@item.Direccion</td>
+                                <td>@item.Contacto</td>
+                                <td>@item.NombreUsuario</td>
+                                <td>@item.Correo</td>
+                               <td><a href="" aria-hidden="true" id="@item.EscuelaId" onclick="javascript: SolicitarPermisos('@item.EscuelaId'); return false;"> Asignar</a></td>
+
+                            </tr>
+
+
+
+                        </tbody>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+
+</div>
+
+

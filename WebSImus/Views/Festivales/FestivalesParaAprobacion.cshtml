@@ -1,0 +1,48 @@
+@model WebSImus.Models.FestivalesAprobacionViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Festivales para Aprobaci&oacute;n";
+}
+<div class="container-fluid" style="padding:10px;">
+    <h3><i class="fa fa-check-circle"></i> Festivales para Aprobaci&oacute;n</h3>
+
+    <div class="row" style="margin-bottom:10px;">
+        <div class="col-sm-8 col-md-9">
+            <p style="margin:8px 0; color:#666;">
+                <i class="fa fa-info-circle"></i> 
+                Listado de festivales con versiones completas pendientes de aprobaci&oacute;n. 
+                Utilice los filtros en cada columna de la tabla para buscar y filtrar registros.
+            </p>
+        </div>
+        <div class="col-sm-4 col-md-3 text-right">
+            <a class="btn btn-default" href="@Url.Action("Listado","Festivales")">
+                <i class="fa fa-arrow-left"></i> Volver al Listado
+            </a>
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom:15px;">
+        <div class="col-md-12" style="border:1px dashed #f0ad4e; padding:15px; background:#fffdf5;">
+            <p style="margin-bottom:8px; font-weight:bold; color:#8a6d3b;">
+                <i class="fa fa-exclamation-triangle"></i> Zona de Administraci&oacute;n
+            </p>
+            <p style="margin:0; color:#666;">
+                Esta secci&oacute;n muestra los festivales que han completado su registro y enviado solicitud de aprobaci&oacute;n. 
+                Puede revisar los datos de cada festival haciendo clic en el bot&oacute;n &quot;Ver Detalle&quot; y proceder con la aprobaci&oacute;n o solicitar aclaraciones.
+            </p>
+        </div>
+    </div>
+
+    <div id="TablaAprobacion">
+        @Html.Action("GridFestivalesAprobacionPartial", new { filtroTexto = Model.FiltroTexto })
+    </div>
+</div>
+
+@section Scripts {
+<script type="text/javascript">
+    // Función para recargar la grilla
+    function recargarGrilla() {
+        $('#TablaAprobacion').load('@Url.Action("GridFestivalesAprobacionPartial", "Festivales")');
+    }
+</script>
+}

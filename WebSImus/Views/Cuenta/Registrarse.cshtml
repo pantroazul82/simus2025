@@ -1,0 +1,332 @@
+﻿@model WebSImus.Models.Usuarios
+@{
+    ViewBag.Title = "Registro - SIMUS";
+    Layout = "~/Views/Shared/_LayoutEstatico.cshtml";
+}
+@Styles.Render("~/css/registro.css")
+@Styles.Render("~/bundles/fontawesome")
+
+
+@using (Html.BeginForm("Guardar", "Cuenta", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-registration" }))
+{
+    <div class="registration-container">
+        @Html.Partial("_AlertaMensaje")
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            foreach (var key in ViewData.ModelState.Keys)
+            {
+                var errors = ViewData.ModelState[key].Errors;
+                foreach (var error in errors)
+                {
+                    <div class="toast-notificacion toast-error" id="toastError">
+                        <i class="fa-solid fa-circle-exclamation icono-toast"></i>
+                        <span class="mensaje">@Html.Raw(error.ErrorMessage)</span>
+                        <button class="cerrar-toast" onclick="this.parentElement.classList.add('fade-out')">×</button>
+                    </div>
+                }
+            }
+
+            <script>
+                setTimeout(() => {
+                    document.querySelectorAll('.toast-notificacion').forEach(el => el.classList.add('fade-out'));
+                }, 5000);
+            </script>
+        }
+
+
+
+
+        <div class="registration-card">
+            <div class="registration-body">
+                <!-- Personal Information Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2>Datos Personales</h2>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Primer Nombre *</label>
+                            @Html.TextBoxFor(m => m.primerNombre, new { @class = "form-input", placeholder = "Ingrese su primer nombre", maxlength = "50" })
+                            @Html.ValidationMessageFor(m => m.primerNombre, "", new { @class = "error-message" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Segundo Nombre</label>
+                            @Html.TextBoxFor(m => m.segundoNombre, new { @class = "form-input", placeholder = "Ingrese su segundo nombre", maxlength = "50" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Primer Apellido *</label>
+                            @Html.TextBoxFor(m => m.primerApellido, new { @class = "form-input", placeholder = "Ingrese su primer apellido", maxlength = "50" })
+                            @Html.ValidationMessageFor(m => m.primerApellido, "", new { @class = "error-message" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Segundo Apellido</label>
+                            @Html.TextBoxFor(m => m.segundoApellido, new { @class = "form-input", placeholder = "Ingrese su segundo apellido", maxlength = "50" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Fecha de Nacimiento</label>
+                            @Html.TextBoxFor(m => m.fechaNacimiento, new
+                            {
+                                @class = "form-input",
+                                type = "date"
+                            })
+                            @Html.ValidationMessageFor(m => m.fechaNacimiento, "", new { @class = "error-message" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tipo de Documento *</label>
+                            @Html.DropDownListFor(m => m.tipoDocumento, (SelectList)ViewBag.listTipoDocumento, "Seleccione el tipo de documento", new { @class = "form-select" })
+                            @Html.ValidationMessageFor(m => m.tipoDocumento, "", new { @class = "error-message" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Número Documento *</label>
+                            @Html.TextBoxFor(m => m.numeroDocumento, new { @class = "form-input", placeholder = "Ingrese su número de documento", maxlength = "50" })
+                            @Html.ValidationMessageFor(m => m.numeroDocumento, "", new { @class = "error-message" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Sexo</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    @Html.RadioButtonFor(m => m.sexo, "Femenino") <i class="fa-solid fa-venus"></i> Femenino
+                                </label>
+                                <label class="radio-label">
+                                    @Html.RadioButtonFor(m => m.sexo, "Masculino") <i class="fa-solid fa-mars"></i> Masculino
+                                </label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.sexo, "", new { @class = "error-message" })
+                        </div>
+
+                        <div class="form-group file-upload-wrapper left-aligned-upload">
+                            <label>Foto de perfil</label>
+                            <div class="file-upload-area">
+                                <p class="file-info">Formatos permitidos: .jpg y .png (máx. 1 MB)</p>
+                                <input id="imagenPerfil" name="imagenPerfil" type="file" class="file-input" accept=".jpg,.png">
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <!-- Authentication Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2>Datos de Autenticación</h2>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Correo electrónico *</label>
+                            @Html.TextBoxFor(m => m.usuario, new { @class = "form-input", type = "email", placeholder = "correo@ejemplo.com", maxlength = "100" })
+                            @Html.ValidationMessageFor(m => m.usuario, "", new { @class = "error-message" })
+                            @Html.HiddenFor(m => m.Id)
+                        </div>
+
+                        <div class="form-group">
+                            <label>Contraseña *</label>
+                            <div class="input-password-wrapper">
+                                @Html.PasswordFor(m => m.contrasena, new
+                                {
+                                    @class = "form-input password-toggle",
+                                    placeholder = "Ingrese su contraseña",
+                                    maxlength = "50",
+                                    autocomplete = "new-password"
+                                })
+                                <span class="toggle-password" onclick="togglePassword(this)">
+                                    <i class="fas fa-eye"></i>
+                                </span>
+
+                            </div>
+                            <p class="password-requirements">Mínimo 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial</p>
+                            @Html.ValidationMessageFor(m => m.contrasena, "", new { @class = "error-message" })
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Confirmar contraseña *</label>
+                            <div class="input-password-wrapper">
+                                @Html.PasswordFor(m => m.confcontrasena, new
+                                {
+                                    @class = "form-input password-toggle",
+                                    placeholder = "Confirme su contraseña",
+                                    maxlength = "50",
+                                    autocomplete = "new-password"
+                                })
+                                <span class="toggle-password" onclick="togglePassword(this)">
+                                    <i class="fas fa-eye"></i>
+                                </span>
+
+
+                            </div>
+                            @Html.ValidationMessageFor(m => m.confcontrasena, "", new { @class = "error-message" })
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Location Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2>Datos de Ubicación</h2>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>País *</label>
+                            @Html.DropDownListFor(m => m.pais, (SelectList)ViewBag.listPaises, "Seleccione un país", new { @class = "form-select" })
+                            @Html.ValidationMessageFor(m => m.pais, "", new { @class = "error-message" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Departamento</label>
+                            @Html.DropDownListFor(m => m.departamento, (SelectList)ViewBag.listDpto, "Seleccione un departamento", new { @class = "form-select" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Municipio</label>
+                            @Html.DropDownListFor(m => m.municipio, (SelectList)ViewBag.listMun, "Seleccione un municipio", new { @class = "form-select" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="terms-section">
+                    <label class="terms-label">
+                        @Html.CheckBoxFor(m => m.aceptaCondiciones, new { @class = "terms-checkbox" })
+                        <span>Acepto los <a href="~/Cuenta/Terminos" target="_blank" class="terms-link">términos y condiciones</a></span>
+                    </label>
+                    @Html.ValidationMessageFor(m => m.aceptaCondiciones, "", new { @class = "error-message" })
+                </div>
+            </div>
+
+            <div class="registration-footer">
+                <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Regresar
+                </a>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/jqueryval")
+    @Scripts.Render("~/Scripts/bootstrap")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script>
+        function togglePassword(el) {
+            const input = el.parentElement.querySelector('input');
+            const icon = el.querySelector('i');
+
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = "password";
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            // Datepicker initialization
+            var today = new Date("01/31/1910");
+            $('#fechaNacimiento').datepicker({
+                startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+                endDate: 'd',
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true
+            });
+
+            // File input initialization
+            $('#imagenPerfil').fileinput({
+                showUpload: false,
+                showCaption: false,
+                language: 'es',
+                browseClass: "btn btn-primary fileinput-browse",
+                removeClass: "btn btn-primary fileinput-remove",
+                browseLabel: "Buscar ...",
+                removeLabel: "Remover",
+                overwriteInitial: true,
+                maxFileSize: 1024,
+                allowedFileExtensions: ['jpg', 'png'],
+                previewClass: 'file-preview-custom',
+                layoutTemplates: {
+                    footer: '',
+                    caption: ''
+                }
+            });
+
+            // Clear default date if it's 1970-01-01
+            if ($('#fechaNacimiento').val() == "1970-01-01") {
+                $('#fechaNacimiento').val('');
+            }
+
+            // Department change handler
+            $('#departamento').change(function() {
+                var selectedDep = $(this).val();
+                var city = $('#municipio');
+
+                if (selectedDep) {
+                    $.getJSON('@Url.Action("obtenerMunicipio")', { coddpto: selectedDep })
+                        .done(function(data) {
+                            var items = ['<option value="">Seleccione un municipio</option>'];
+                            $.each(data, function(i, item) {
+                                items.push(`<option value="${item.value}">${item.text}</option>`);
+                            });
+                            city.html(items.join(''));
+                        })
+                        .fail(function() {
+                            city.html('<option value="">Error al cargar municipios</option>');
+                        });
+                } else {
+                    city.html('<option value="">Seleccione un municipio</option>');
+                }
+            });
+
+            // Country change handler
+            $('#pais').change(function() {
+                var selectedCountry = $(this).val();
+                var department = $('#departamento');
+                var city = $('#municipio');
+
+                if (selectedCountry) {
+                    $.getJSON('@Url.Action("obtenerDepartamento")', { codpais: selectedCountry })
+                        .done(function(data) {
+                            var items = ['<option value="">Seleccione un departamento</option>'];
+                            $.each(data, function(i, item) {
+                                items.push(`<option value="${item.value}">${item.text}</option>`);
+                            });
+                            department.html(items.join(''));
+                            city.html('<option value="">Seleccione un municipio</option>');
+                        })
+                        .fail(function() {
+                            department.html('<option value="">Error al cargar departamentos</option>');
+                            city.html('<option value="">Seleccione un municipio</option>');
+                        });
+                } else {
+                    department.html('<option value="">Seleccione un departamento</option>');
+                    city.html('<option value="">Seleccione un municipio</option>');
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,1222 @@
+﻿@model WebSImus.Models.EscuelasPadre
+@{
+    ViewBag.Title = "FichaEscuela";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+<style type="text/css">
+    #PanelMapa {
+        height: 300px;
+    }
+
+    #htab2 {
+        display: block;
+    }
+
+    
+</style>
+<div class="row">
+    <!-- ficha escuela -->
+    <div class="col-md-12">
+        <div class="col-md-2 col-sm-5 col-xs-5"><img style="padding-top:10px; padding-left:30px;" class="img-responsive" src="~/img/iconos/escuelas_big.png"></div>
+        <div class="titulo_seccion col-md-10 col-sm-7 col-xs-7">ESCUELAS</div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span class="fa-escuelas fa-lg" style="text-align: left; padding: 5px;"></span> @Html.DisplayFor(m => m.Escuelas.NombreEscuela)</div>
+</div>
+
+<div class="col-md-12 well carousel-search" style="margin-top:40px;">
+    <div class="row">
+
+        <a href="#" class="nav-tabs-dropdown btn btn-block btn-primary">Ficha escuelas</a>
+        <ul style="padding-left:30px;" id="nav-tabs-wrapper" class="nav nav-tabs nav-tabs-horizontal">
+            <li id="list1" class="active"><a href="#htab1" data-toggle="tab">Información básica</a></li>
+            <li id="list2"><a href="#htab2" data-toggle="tab">Participación (Alumnos)</a></li>
+            <li id="list3"><a href="#htab3" data-toggle="tab">Docentes</a></li>
+            <li id="list4"><a href="#htab4" data-toggle="tab">Infraestructura y dotación</a></li>
+            <li id="list5"><a href="#htab5" data-toggle="tab">Formación</a></li>
+            <li id="list6"><a href="#htab6" data-toggle="tab">Producción</a></li>
+
+        </ul>
+        <div class="tab-content">
+
+            <div role="tabpanel" class="tab-pane fade in active" id="htab1">
+                <h3 class="titulo_ficha this-animate" data-animate="fadeInLeft bounce">Información básica </h3>
+
+                <div class="divider"></div>
+                <div class="page-content-wrap">
+                    <div class="divider"></div>
+
+                    <!-- page content holder -->
+                    <div class="page-content-holder">
+
+                        <div class="row">
+                            <div class=" this-animate" data-animate="fadeInRight bounce">
+                                <div class="col-md-8">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <div class="row">
+
+                                                <div class=" col-md-5 col-sm-5 col-xs-12 imagen_ficha">
+                                                    <img style="border-radius: 5px 0px 0px 0px;" src="@Url.Content(ViewBag.ImageData)" class="img-responsive" alt="escuela" />
+                                                    <div class="titulo_negro_ficha col-md-12">
+
+                                                        <div class=" col-md-3 col-sm-2 col-xs-2 fa-escuelas fa-2x">  </div>
+                                                        <div class="col-md-9   texto_foto"> @Html.DisplayFor(m => m.Institucionalidad.NombreDirector) </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                                    <div class="col-md-12 titulo_ficha_item">  @Html.DisplayFor(m => m.Escuelas.NombreEscuela)  </div>
+                                                    <div class="col-md-10 parrafo_ficha">@Html.DisplayFor(m => m.Escuelas.Resena)</div>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class=" this-animate" data-animate="fadeInDown bounce">
+                                    <div class="col-md-3 redes_ficha">
+
+                                        <div class="col-md-12 col-sm-3 col-xs-6">
+                                            <div class="col-md-2 fa-mapas fa-3x iconos_ficha"> </div>
+                                            <div class="col-md-10 ubicacion_fichas">@Html.DisplayFor(m => m.Escuelas.Direccion) @Html.DisplayFor(m => m.Escuelas.ZonaGeografica) </div>
+                                            @Html.HiddenFor(model => model.Escuelas.Latitud)
+                                            @Html.HiddenFor(model => model.Escuelas.Longitud)
+                                        </div>
+                                        <div class="col-md-12 col-sm-3 col-xs-6">
+                                            <div class="col-md-2 fa-celular fa-3x iconos_ficha"> </div>
+                                            <div class="col-md-10 txt_fichas">@Html.DisplayFor(m => m.Escuelas.Telefono) </div>
+                                        </div>
+
+                                        @if (!Model.Escuelas.SitioWeb.IsEmpty())
+                                        {
+                                        <div class="col-md-12 col-sm-3 col-xs-6">
+                                            <div class="col-md-2 fa-web fa-3x iconos_ficha"> </div>
+                                            <div class="col-md-10  txt_fichas"><a href="@Model.Escuelas.SitioWeb" target="_blank"> @Model.Escuelas.SitioWeb</a></div>
+                                        </div>
+                                        }
+                                        <div class="col-md-12 col-sm-3 col-xs-6">
+                                            <div class="col-md-2 fa-correo fa-3x iconos_ficha"> </div>
+                                            <div class="col-md-10 txt_fichas">@Html.DisplayFor(m => m.Escuelas.CorreoElectronicoEscuela) </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-sd-12 col-xs-12" style="margin-top:30px;">
+                                            @if (Model.RedesSociales.Facebook.IsEmpty())
+                                            { <div class="col-md-3 col-sd-3 col-xs-3 fa-face fa-3x red_desab"></div>}
+                                            else
+                                            {
+                                            <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.RedesSociales.Facebook" target="_blank"><span class="fa-face fa-3x iconos_ficha"></span></a></div>}
+                                            @if (Model.RedesSociales.CanalYoutube.IsEmpty())
+                                            { <div class="col-md-3 col-sd-3 col-xs-3 fa-youtube2 fa-3x red_desab"></div> }
+                                            else
+                                            {
+                                            <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.RedesSociales.CanalYoutube" target="_blank"><span class="fa-youtube2 fa-3x iconos_ficha"></span></a></div>
+                                            }
+
+                                            @if (Model.RedesSociales.Twitter.IsEmpty())
+                                            {  <div class="col-md-3 col-sd-3 col-xs-3 fa-twitter2 fa-3x red_desab"></div>}
+                                            else
+                                            {
+                                            <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.RedesSociales.Twitter" target="_blank"><span class="fa-twitter2 fa-3x iconos_ficha"></span></a></div>
+                                            }
+                                            @if (Model.RedesSociales.GaleriaFlicker.IsEmpty())
+                                            { <div class="col-md-3 col-sd-3 col-xs-3 fa-flickr2 fa-3x red_desab"></div> }
+                                            else
+                                            {
+                                            <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.RedesSociales.GaleriaFlicker" target="_blank"><span class="fa-flickr2 fa-3x iconos_ficha"></span></a></div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row" style=" text-align:center;">
+                            <div class="col-md-12 col-sd-12 col-xs-12" style="margin-top:20px;">
+
+                                <div class="col-md-12 titulo_ficha">Ubicación </div>
+                            </div>
+
+                            <div class="col-md-12 col-sd-12 col-xs-12 ubicacion_fichas" style="margin-top:30px;">
+                                <div id="PanelMapa" class="col-md-12">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Inicia vídeos -->
+
+                        <div class="row" style=" text-align:center;">
+                            @if (Model.listadoVideo != null)
+                            {
+                            <div class="col-md-12 col-sd-12 col-xs-12" style="margin-top:20px;">
+
+                                <div class="col-md-12 titulo_ficha">Videos </div>
+                            </div>
+                            <div class="col-md-10 this-animate" data-animate="fadeInRight bounce">
+
+                                <div id="carousel-example-generic" class="carousel slide">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+
+                                        @for (int i = 0; i < Model.listadoVideo.Count(); i = i + 1)
+                                            {
+                                                if (i == 0)
+                                                {
+                                        <li data-target="#carousel-example-generic" data-slide-to=@i class="active"></li>
+                                                }
+                                                else
+                                                {
+                                        <li data-target="#carousel-example-generic" data-slide-to=@i></li>
+                                                }
+
+                                            }
+
+                                    </ol>
+
+
+
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner">
+                                        @{int tem = 0;
+                                            foreach (WebSImus.Models.VideoModel item in Model.listadoVideo)
+                                            {
+                                                if (tem == 0)
+                                                {
+                                        <div class="item active">
+                                            <div class="titulo_video">  @item.NuevaClasificacion </div>
+                                            <div class="vid">
+                                                <iframe width="560" height="315" src=@item.url allowfullscreen=""></iframe>
+
+                                            </div><!--./vid -->
+                                        </div>
+                                                }
+                                                else
+                                                {
+                                        <div class="item">
+                                            <div class="titulo_video"> @item.NuevaClasificacion </div>
+                                            <div class="vid">
+                                                <iframe width="560" height="315" src=@item.url allowfullscreen=""></iframe>
+
+                                            </div>
+                                        </div>
+                                                }
+                                                tem = 1;
+                                            }
+
+                                        }
+                                    </div>
+                                </div>
+
+                            </div>
+                            }
+                        </div>
+                        <!-- fin vídeos -->
+                    </div>
+
+                    <!-- ./2 -->
+                </div>
+
+            </div>
+            <div role="tabpanel" class="tab-pane fadeIn" id="htab2">
+                <div class=" col-md-1  col-sm-2  col-xs-12">
+                    <img class="this-animate icon_ficha" data-animate="fadeInLeft bounce" src="~/img/iconos/alumnos_big.png">
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+                <div class=" col-md-11 col-sm-10 col-xs-10">
+                    <h3 class="titulo_ficha this-animate" data-animate="fadeInLeft bounce">Participación (Alumnos)</h3>
+                </div>
+
+                <div class="page-content-wrap ">
+                    <div class="divider"></div>
+
+                    <!-- page content holder -->
+                    <div class="page-content-holder">
+
+                        <div class="row">
+                            <div class=" this-animate" data-animate="fadeInRight bounce">
+                                <div class="col-md-4">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="row">
+                                                <div class=" col-md-12 titulo_alumnos">Alumnos por rango de edad </div>
+                                                <div class="row">
+
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-body padding-0">
+                                                            <div class="panel-body padding-0">
+                                                                <div class="chart-holder" id="dashboard-donut-edad" style="height: 200px;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ./fin box 1 -->
+                                <div class="col-md-4">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="row">
+                                                <div class=" col-md-12 titulo_alumnos2">Alumnos por etnia </div>
+                                                <div class="row">
+
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-body padding-0">
+                                                            <div class="panel-body padding-0">
+                                                                <div class="chart-holder" id="dashboard-donut-etnia" style="height: 200px;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ./fin box 2 -->
+                                <div class="col-md-4">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="row">
+                                                <div class=" col-md-12 titulo_alumnos">Alumnos por sexo</div>
+                                                <div class="row">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-body padding-0">
+                                                            <div class="panel-body padding-0">
+                                                                <div class="chart-holder" id="dashboard-donut-sexo" style="height: 200px;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ./fin box 3-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6" style="margin-top:20px;">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <div class="row">
+                                                        <div class=" col-md-12 titulo_alumnos2">Alumnos por área</div>
+                                                        <div class="row">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-body padding-0">
+                                                                    <div class="panel-body padding-0">
+                                                                        <div class="chart-holder" id="dashboard-donut-ubicacion" style="height: 200px;"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6" style="margin-top:20px;">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <div class="row">
+                                                        <div class=" col-md-12 titulo_alumnos">Alumnos por otras condiciones</div>
+                                                        <div class="row">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-body padding-0">
+                                                                    <div class="panel-body padding-0">
+                                                                        <div class="chart-holder" id="dashboard-donut-condiciones" style="height: 200px;"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./page content holder -->
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane fade" id="htab3">
+                <div class=" col-md-1">
+                    <img class=" icon_ficha this-animate" data-animate="fadeInLeft bounce" src="~/img/iconos/docentes_big.png">
+                </div>
+                <div class=" col-md-11">
+
+                    <h3 class="titulo_ficha this-animate" data-animate="fadeInLeft bounce">Información de los docentes</h3>
+                </div>
+
+                <div class="page-content-wrap ">
+                    <div class="divider"></div>
+
+                    <!-- page content holder -->
+                    <div class="page-content-holder">
+
+                        <div class="row">
+                            <div class=" this-animate" data-animate="fadeInRight bounce">
+
+
+                                <div class="col-md-6">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="row">
+                                                <div class=" col-md-12 titulo_alumnos">Docentes según su tipo de vinculación</div>
+                                                <div class="row">
+
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-3 parrafo_ficha">  <span class="numero_ficha col-md-12">@Html.DisplayFor(m => m.Institucionalidad.Voluntarios) </span>Voluntarios</div>
+                                                        <div class="col-md-3 parrafo_ficha">  <span class="numero_ficha col-md-12 ">@Html.DisplayFor(m => m.Institucionalidad.ContratoLaboral) </span>Contrato laboral (Nómina)</div>
+                                                        <div class="col-md-3 parrafo_ficha">
+                                                            <span class="numero_ficha col-md-12">@Html.DisplayFor(m => m.Institucionalidad.ContratoHonorario)</span>Contrato por honorarios
+                                                        </div>
+                                                        <div class="col-md-3 parrafo_ficha">  <span class="numero_ficha col-md-12">@Html.DisplayFor(m => m.Institucionalidad.OrdenPrestacionServicios) </span>Orden de prestación de servicios</div>
+                                                    </div>
+
+                                                </div>
+                                                <div class=" col-md-12 tabla_gris">Total Docentes @Html.DisplayFor(m => m.Institucionalidad.TotalDocentesVinculados)</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <div class="row">
+
+                                                <div class=" col-md-12 titulo_alumnos2">
+                                                    Docentes de acuerdo a su último nivel educativo
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_gris">
+
+                                                        <div class="col-md-8 col-sm-8 col-xs-8 txt_fichas">
+                                                            Primaria
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Institucionalidad.Primaria)
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_blanca">
+
+                                                        <div class="col-md-8 col-sm-8 col-xs-8 txt_fichas">
+                                                            Secundaria
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Institucionalidad.Secundaria)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_gris">
+
+                                                        <div class="col-md-8 col-sm-8 col-xs-8 txt_fichas">
+                                                            Técnico – tecnólogo
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Institucionalidad.Tecnico)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_blanca">
+
+                                                        <div class="col-md-8 col-sm-8 col-xs-8 txt_fichas">
+                                                            Universitaria sin título
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Institucionalidad.UniversitariaSinTitulo)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_gris">
+
+                                                        <div class="col-md-8 col-sm-8 col-xs-8 txt_fichas">
+                                                            Pregrado en Música
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Institucionalidad.PregradoMusica)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_blanca">
+
+                                                        <div class="col-md-8 col-sm-8 col-xs-8 txt_fichas">
+                                                            Pregado en otra área
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Institucionalidad.PregradoOtrasAreas)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_gris">
+
+                                                        <div class="col-md-8 col-sm-8 col-xs-8 txt_fichas">
+                                                            Postgrado
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Institucionalidad.PostGrado)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_blanca">
+
+                                                        <div class="col-md-8 col-sm-8 col-xs-8 txt_fichas">
+                                                            Total docentes
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Institucionalidad.TotalDocentesNivelEducativo)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ./2 -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./2 -->
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="htab4">
+                <div class=" col-md-1">
+                    <img class=" this-animate icon_ficha" data-animate="fadeInLeft bounce" src="~/img/iconos/infra_big.png">
+                </div>
+                <div class=" col-md-11">
+
+                    <h3 class="titulo_ficha this-animate" data-animate="fadeInLeft bounce">Infraestructura y dotación</h3>
+                </div>
+                <div class="page-content-wrap ">
+                    <div class="divider"></div>
+
+                    <!-- page content holder -->
+                    <div class="page-content-holder">
+
+                        <div class="row">
+                            <div class=" this-animate" data-animate="fadeInRight bounce">
+
+                                <div class="col-md-6">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="row">
+                                                <div class=" col-md-12 titulo_alumnos">Infraestructura </div>
+                                                <div class="col-md-10 ">
+                                                    <div class="col-md-12 col-sd-3 col-xs-3" style="margin-top:20px;">
+                                                        <div class="col-md-2 fa-mapas fa-3x iconos_ficha"> </div>
+                                                        <div class="col-md-10 " style="margin-top:10px;">@Html.DisplayFor(m => m.Infraestructura.Sede)</div>
+                                                    </div>
+                                                    <div class="col-md-12 col-sd-3 col-xs-3">
+                                                        <div class="col-md-2 fa-mapas fa-3x iconos_ficha"> </div>
+                                                        <div class="col-md-10" style="margin-top:10px;"> La escuela  <span class="txt_morado">@Html.DisplayFor(m => m.Infraestructura.TieneInternet) </span>tiene acceso a internet </div>
+                                                    </div>
+                                                    <div class="col-md-12 col-sd-3 col-xs-3">
+                                                        <div class="col-md-2 fa-mapas fa-3x iconos_ficha"> </div>
+                                                        <div class="col-md-10" style="margin-top:10px;">La sede  <span class="txt_morado">@Html.DisplayFor(m => m.Infraestructura.AdecuacionAcustica) </span> está adecuada acústicamente </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-md-12">
+                                                    <div class="col-md-3 parrafo_ficha">
+                                                        <span class="numero_ficha col-md-12">@Html.DisplayFor(m => m.Infraestructura.CantidadSillas) </span>
+                                                        Sillas
+                                                    </div>
+                                                    <div class="col-md-3 parrafo_ficha">  <span class="numero_ficha col-md-12 ">@Html.DisplayFor(m => m.Infraestructura.CantidadAtriles) </span>Atriles</div>
+                                                    <div class="col-md-3 parrafo_ficha">
+                                                        <span class="numero_ficha col-md-12">@Html.DisplayFor(m => m.Infraestructura.CantidadTableros)</span>Tableros
+                                                        acrílico
+                                                    </div>
+                                                    <div class="col-md-3 parrafo_ficha">  <span class="numero_ficha col-md-12">@Html.DisplayFor(m => m.Infraestructura.CantidadEstanterias) </span>Estantería</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="row">
+                                                <div class=" col-md-12 titulo_alumnos3">Dotación Instrumental </div>
+                                                <div class="row">
+
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-3 parrafo_ficha">
+                                                            <span class="numero_ficha col-md-12">@Html.DisplayFor(m => m.Infraestructura.CantidadCuerdasPulsadas) </span>
+                                                            Cuerdas
+                                                            pulsadas
+                                                        </div>
+                                                        <div class="col-md-3 parrafo_ficha">
+                                                            <span class="numero_ficha col-md-12 ">@Html.DisplayFor(m => m.Infraestructura.CantidadCuerdasSinfonicas) </span>Cuerdas
+                                                            sinfónicas
+                                                        </div>
+                                                        <div class="col-md-3 parrafo_ficha">
+                                                            <span class="numero_ficha col-md-12">@Html.DisplayFor(m => m.Infraestructura.CantidadVientosMadera)</span> Vientos maderas
+                                                        </div>
+                                                        <div class="col-md-3 parrafo_ficha">  <span class="numero_ficha col-md-12">@Html.DisplayFor(m => m.Infraestructura.CantidadVientosMetales) </span>Vientos metales</div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-md-12">
+                                                    <div class="col-md-3 parrafo_ficha">
+                                                        <span class="numero_ficha col-md-12">@Html.DisplayFor(m => m.Infraestructura.CantidadPercusionMenor) </span>
+                                                        Percusión menor
+                                                    </div>
+                                                    <div class="col-md-3 parrafo_ficha">
+                                                        <span class="numero_ficha col-md-12 ">@Html.DisplayFor(m => m.Infraestructura.CantidadPercusionSinfonica) </span>Percusión sinfónica
+                                                    </div>
+                                                    <div class="col-md-3 parrafo_ficha">
+                                                        <span class="numero_ficha col-md-12">@Html.DisplayFor(m => m.Infraestructura.CantidadOtros)</span>Otros
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade in" id="htab6">
+                <div class=" col-md-1">
+                    <img class="icon_ficha this-animate" data-animate="fadeInLeft bounce" src="~/img/iconos/produccion.png">
+                </div>
+                <div class=" col-md-11">
+
+                    <h3 class="titulo_ficha this-animate" data-animate="fadeInLeft bounce">Producción</h3>
+                </div>
+
+                <div class="page-content-wrap">
+                    <div class="divider"></div>
+
+                    <!-- page content holder -->
+                    <div class="page-content-holder">
+
+                        <div class="row">
+                            <div class=" this-animate" data-animate="fadeInRight bounce">
+
+
+                                <div class="col-md-6">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="row">
+                                                <div class=" col-md-12 titulo_alumnos3">Giras y presentaciones durante el último año</div>
+                                                <div class="row">
+
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-4 parrafo_ficha">  <span class="numero_ficha col-md-12">@Html.DisplayFor(m => m.Produccion.CantidadGirasNacionales) </span>Giras Nacionales</div>
+                                                        <div class="col-md-4 parrafo_ficha">  <span class="numero_ficha col-md-12 ">@Html.DisplayFor(m => m.Produccion.CantidadGirasInternacionales) </span>Giras Internacionales</div>
+                                                        <div class="col-md-4 parrafo_ficha">
+                                                            <span class="numero_ficha col-md-12">@Html.DisplayFor(m => m.Produccion.CantidadConciertos)</span> Presentaciones o conciertos
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <div class="row">
+
+                                                <div class=" col-md-12 titulo_alumnos2">
+                                                    Productos musicales o pedagógicos elaborados durante el último año
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_gris">
+
+                                                        <div class="col-md-8 col-sm-8 col-xs-8 txt_fichas">
+                                                            Discos
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Produccion.CantidadDiscos)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_blanca">
+
+                                                        <div class="col-md-8 col-sm-8 col-xs-8 txt_fichas">
+                                                            Repertorios
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Produccion.CantidadRepertorios)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_gris">
+
+                                                        <div class="col-md-8 col-sm-8 col-xs-8 txt_fichas">
+                                                            Material divulgativo
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Produccion.CantidadMaterialDivulgativo)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_blanca">
+
+                                                        <div class="col-md-8 col-sm-8 col-xs-8 txt_fichas">
+                                                            Material pedagógico
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Produccion.CantidadMaterialPedagogico)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_gris">
+
+                                                        <div class="col-md-8 col-sm-8 col-xs-8 txt_fichas">
+                                                            Agrupaciones artísticas
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Produccion.CantidadAgrupaciones)
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ./2 -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./2 -->
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade in" id="htab5">
+                <div class=" col-md-2">
+                    <img class="icon_ficha this-animate" data-animate="fadeInLeft bounce" src="~/img/iconos/formacion_big.png">
+                </div>
+                <div class=" col-md-10">
+
+                    <h3 class="titulo_ficha this-animate" data-animate="fadeInLeft bounce">Formación</h3>
+
+
+                </div>
+                <div class="page-content-wrap ">
+                    <div class="divider"></div>
+
+                    <!-- page content holder -->
+                    <div class="page-content-holder">
+
+                        <div class="row">
+                            <div class=" this-animate" data-animate="fadeInRight bounce">
+
+
+                                <div class="col-md-6">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <div class="row">
+
+                                                <div class=" col-md-12 titulo_alumnos">Educación por Niveles </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_linea ">
+
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3 col-xs-4 txt_morado">
+                                                            Población
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3 col-xs-4 txt_morado">
+                                                            Duración (meses)
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3 col-xs-4 txt_morado">
+                                                            Intensidad (Horas Semanales)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_blanca ">
+
+                                                        <div class="col-md-3 col-sm-3 col-xs-4 txt_morado">
+                                                            Inicio
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Formacion.PoblacionInicio)
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Formacion.DuracionInicio)
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Formacion.HorasInicio)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_gris">
+                                                        <div class="col-md-3 col-sm-3 col-xs-4 txt_morado">
+                                                            Básico
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Formacion.PoblacionBasico)
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Formacion.DuracionBasico)
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Formacion.HorasBasico)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_blanca ">
+
+                                                        <div class="col-md-3 col-sm-3 col-xs-4 txt_morado">
+                                                            Medio
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Formacion.PoblacionMedio)
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Formacion.DuracionMedio)
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Formacion.HorasMedio)
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <div class="row">
+
+                                                <div class=" col-md-12 titulo_alumnos2">Educación Informal</div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_linea ">
+
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3 col-xs-4 txt_morado">
+                                                            Población
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3 col-xs-4 txt_morado">
+                                                            Duración (meses)
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3 col-xs-4 txt_morado">
+                                                            Intensidad (Horas Semanales)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_blanca ">
+
+                                                        <div class="col-md-3 col-sm-3 col-xs-4 txt_morado">
+                                                            Cursos o talleres
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Formacion.PoblacionCursos)
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Formacion.DuracionCursos)
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Formacion.HorasCursos)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tabla_gris">
+
+                                                        <div class="col-md-3 col-sm-3 col-xs-4 txt_morado">
+                                                            Pedagogias Tradicionales
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Formacion.PoblacionPedagogias)
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Formacion.DuracionPedagogias)
+                                                        </div>
+                                                        <div class="col-md-3 col-sm-3 col-xs-4">
+                                                            @Html.DisplayFor(m => m.Formacion.HorasPedagogias)
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <!-- ./2 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="space1"></div>
+        <!-- ./page content wrapper -->
+        <!-- page content wrapper -->
+        <!-- ./page content wrapper -->
+        <!-- ./page content wrapper -->
+        <!-- page content wrapper -->
+
+        <div class="space1">  </div>
+
+
+
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/plugins/mixitup/jquery.mixitup.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/appear/jquery.appear.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+    @*<script src="@Url.Content("~/Scripts/toDo/actions.js")"></script>
+        <script src="@Url.Content("~/Scripts/toDo/plugins.js")"></script>*@
+
+    <script src="~/Scripts/plugins/morris/raphael.js"></script>
+    <script src="~/Scripts/plugins/morris/morris.js"></script>
+    <script src="~/Scripts/plugins/rickshaw/d3.js"></script>
+
+    <script type="text/javascript">
+
+        var varLatitud = '@Model.Escuelas.Latitud';
+        var varLongitud = '@Model.Escuelas.Longitud';
+        var nuevoLongitud = varLongitud.replace(",", ".");
+        var nuevolatitud = varLatitud.replace(",", ".");
+
+        $(document).on('ON_COMPLETE_LOAD_COMPONENT', function () {
+            window.componentMaps = new com.servinf[window.spaceName].ComponentMaps('#PanelMapa', {
+                'module': com.servinf.ComponentMaps.Config.modules.VIEWER_DATA, //Indica que el mapa va a visualizar capas
+                'request_position': false,  // Realizar la solicitud de la posicion actual del usuario
+                'search_bar': false,        // Barra de busqueda dentro del mapa
+                'streetview_panel': false,  // El panel de streetview en un porcentaje de la pantalla. Ej: 50
+                'map_type': "roadmap",      // Tipo de mapa a iniciar: hybrid, satellite, terrain, roadmap
+                'map_options': false,
+
+                'details': {                // Especificaciones del vista
+                    'initialPoint': {
+                        'name': '@Model.Escuelas.Direccion' + ' - ' + '@Model.Escuelas.ZonaGeografica',
+                        'routing': false,
+                        'streetview': false,
+                        'Latitud': nuevolatitud,
+                        'Longitud': nuevoLongitud,
+                        'icon': "http://simus.mincultura.gov.co/img/marcadores/marker_escuela.png",
+                        'templateString': '@Model.Escuelas.NombreEscuela'
+                    }
+
+                }
+            });
+        });
+
+
+        $(document).ready(function () {
+            Morris.Donut({
+                element: 'dashboard-donut-edad',
+                data: $.parseJSON(GraphAlumnosRangoEdad()),
+                resize: true
+            });
+        });
+
+        $(document).ready(function () {
+            Morris.Donut({
+                element: 'dashboard-donut-etnia',
+                data: $.parseJSON(GrapEtnias()),
+                resize: true
+            });
+        });
+
+        $(document).ready(function () {
+            Morris.Donut({
+                element: 'dashboard-donut-sexo',
+                data: $.parseJSON(GrapAlumnosSexo()),
+                resize: true
+            });
+        });
+
+        $(document).ready(function () {
+            Morris.Donut({
+                element: 'dashboard-donut-ubicacion',
+                data: $.parseJSON(GrapAlumnosUbicacion()),
+                resize: true
+            });
+        });
+
+        $(document).ready(function () {
+            Morris.Donut({
+                element: 'dashboard-donut-condiciones',
+                data: $.parseJSON(GrapAlumnosCondiciones()),
+                resize: true
+            });
+
+        });
+
+
+        $("#list2").on("click", function () {
+            $("#list1").removeClass('active');
+            $("#list3").removeClass('active');
+            $("#list4").removeClass('active');
+            $("#list5").removeClass('active');
+            $("#list6").removeClass('active');
+            $("#list2").removeClass('hide');
+            $("#list2").addClass('active');
+            $("#htab1").removeClass('active');
+            $("#htab2").addClass('active');
+            $('#htab2').css('display', 'block');
+        });
+
+        $("#list3").on("click", function () {
+
+            $('#htab2').css('display', 'none');
+        });
+        $("#list4").on("click", function () {
+          
+            $('#htab2').css('display', 'none');
+        });
+        $("#list5").on("click", function () {
+
+            $('#htab2').css('display', 'none');
+        });
+        $("#list6").on("click", function () {
+
+            $('#htab2').css('display', 'none');
+        });
+        function GraphAlumnosRangoEdad() {
+            var varEscuelaId = '@Model.Escuelas.EscuelaId';
+
+            var data = "";
+            $.ajax({
+                type: 'POST',
+                url: '/Home/GetAlumnosRangoEdad/' + varEscuelaId,
+                dataType: 'json',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                data: {},
+                success: function (result) {
+
+                    data = result;
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+
+            return data;
+        }
+
+        function GrapEtnias() {
+            var varEscuelaId = '@Model.Escuelas.EscuelaId';
+
+            var data = "";
+            $.ajax({
+                type: 'POST',
+                url: '/Home/GetAlumnosEtnia/' + varEscuelaId,
+                dataType: 'json',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                data: {},
+                success: function (result) {
+
+                    data = result;
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+
+            return data;
+        }
+
+        function GrapAlumnosSexo() {
+            var varEscuelaId = '@Model.Escuelas.EscuelaId';
+
+            var data = "";
+            $.ajax({
+                type: 'POST',
+                url: '/Home/GetAlumnosSexo/' + varEscuelaId,
+                dataType: 'json',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                data: {},
+                success: function (result) {
+
+                    data = result;
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+
+            return data;
+        }
+
+        function GrapAlumnosUbicacion() {
+            var varEscuelaId = '@Model.Escuelas.EscuelaId';
+
+            var data = "";
+            $.ajax({
+                type: 'POST',
+                url: '/Home/GetAlumnosUbicacion/' + varEscuelaId,
+                dataType: 'json',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                data: {},
+                success: function (result) {
+
+                    data = result;
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+
+            return data;
+        }
+
+        function GrapAlumnosCondiciones() {
+            var varEscuelaId = '@Model.Escuelas.EscuelaId';
+
+            var data = "";
+            $.ajax({
+                type: 'POST',
+                url: '/Home/GetAlumnosCondicionesEspeciales/' + varEscuelaId,
+                dataType: 'json',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                data: {},
+                success: function (result) {
+
+                    data = result;
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+
+            return data;
+        }
+        Morris.Donut.prototype.resizeHandler = function () {
+            this.timeoutId = null;
+            if (this.el && this.el.width() > 0 && this.el.height() > 0) {
+                this.raphael.setSize(this.el.width(), this.el.height());
+                return this.redraw();
+            }
+            else return null;
+        };
+        Morris.Donut.prototype.setData = function (data) {
+            var row;
+            this.data = data;
+            this.values = (function () {
+                var _i, _len, _ref, _results;
+                _ref = this.data;
+                _results = [];
+                for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                    row = _ref[_i];
+                    _results.push(parseFloat(row.value));
+                }
+                return _results;
+            }).call(this);
+            if (this.el && this.el.width() > 0 && this.el.height() > 0) {
+                return this.redraw();
+            }
+            else return null;
+        };
+        $('#mySubmitServ').click(function () {
+
+            Morris.Donut({
+                element: 'dashboard-donut-9',
+                colors: ["#33414E", "#F26C4F", "#9CC4E4", "#3A89C9"],
+                data: $.parseJSON(GraphAlumnosRangoEdad()),
+                resize: true
+            });
+        });
+
+        //$("document").ready(function () {
+        //    setTimeout(function () {
+        //        $("'#mySubmitServ").trigger('click');
+        //    }, 3);
+        //});
+
+    </script>
+}

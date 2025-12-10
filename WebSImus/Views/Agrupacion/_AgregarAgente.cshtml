@@ -1,0 +1,70 @@
+﻿@model IEnumerable<WebSImus.Models.AgentePublicoModels>
+
+<div id="modalAgregarAgente12" class="modal modal-vcenter fade" tabindex="-1" role="dialog" aria-labelledby="Confirmar" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&nbsp;×</button>
+                <ul class="nav nav-pills pull-right">
+                    @*<li class="active">
+                        <a href="#buscar" data-toggle="pill">Agentes</a>
+                    </li>*@
+                    @*<li><a href="#tipo" data-toggle="pill">Por tipo</a></li>
+                        <li><a href="#fecha" data-toggle="pill">Por año</a></li>*@
+                </ul>
+                <h4>Agregar Agente</h4>
+            </div>
+
+            <div class="row-fluid">
+                <div class="tab-content" style="max-height: 400px; overflow-y: auto; overflow-x:hidden;">
+                    <div class="tab-pane active" id="buscar">
+                        <form class="form-inline">
+                            <input type="text" class="form-control col-md-10" id="Busqueda" name="Busqueda" placeholder="Nombres, apellidos, número documento">
+                            <button type="submit" class="btn btn-success pull-right">Buscar</button>
+                        </form>
+                        <div class="clearfix"></div>
+                        <hr />
+                        <table id="tableRecurso" class="cart_table table table-hover">
+                            <thead style="text-align:center;">
+                                <tr>
+
+                                    <th>Id</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>Seleccionar</th>
+                                </tr>
+                            </thead>
+
+                            @if (Model != null)
+                            {
+                                foreach (WebSImus.Models.AgentePublicoModels item in Model)
+                                {
+
+                                    <tbody>
+                                        <tr>
+                                            <td id="email">@item.AgenteId</td>
+                                        <td>@item.Nombres</td>
+                                        <td>@item.Apellidos</td>
+                                        <td class="td-actions">
+                                            <input type="checkbox" name="ckCheck" id='@("ckCheck" + @item.AgenteId)' />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                }
+                            }
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="panel-footer" style="margin-bottom:-14px;">
+            <button type="button" id="btnAgregar" class="btn btn-danger" data-dismiss="modal">Agregar</button>
+           
+            <!--<span class="glyphicon glyphicon-remove"></span>-->
+            <button style="float: right;" type="button" class="btn btn-default btn-close" data-dismiss="modal">Cancelar</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Vista parcial formularios dinámicos agregar";
+    Layout = "~/Views/Shared/_LayoutDiseño.cshtml";
+}
+
+<div class="panel panel-primary">
+    <div class="col-md-12">
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Nombre*</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" value="..." />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+            <div class="push-up-20">
+                <label class="col-md-2 control-label">Descripción</label>
+                <div class="col-md-9">
+                    <textarea class="form-control" rows="5"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="push-up-20">
+                    <label class="col-md-4 control-label">Estado</label>
+                    <div class="col-md-4">
+                        <label class="check">
+                            <input type="radio" class="iradio" name="iradio" checked="checked" /> Activo
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="check">
+                            <input type="radio" class="iradio" name="iradio" checked="checked" /> Inactivo
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">El usuario que registro la escuela puede:</label>
+                    <div class="col-md-8">
+                        <select class="form-control select">
+                            <option>Seleccione...</option>
+                            <option>Consultar el formulario</option>
+                            <option>Consultar y editar el formulario</option>
+                            <option>Ninguna de las anteriores</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer text-center">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-success">Guardar</button>
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-default">Cancelar</button>
+        </div>
+    </div> 
+</div>   

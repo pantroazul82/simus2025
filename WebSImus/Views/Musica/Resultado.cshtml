@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Consulta Eventos";
+    Layout = "~/Views/Shared/_LayoutGrillaMusica.cshtml";
+}
+
+<br />
+<br />
+
+<div class="container">
+    <div class="row">
+        <h2>Celebra la Música - Residencia artística y participación en concierto Coro Infantil y Juvenil de Colombia</h2>
+        <div class="panel-body" id="panelEditar">
+            <hr class="colorgraph">
+
+
+            <hr style="height: 1px; background: #CCC">
+         
+            <hr style="height: 1px; background: #CCC">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="Tabla">
+                        @Html.Action("GridViewResultado")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

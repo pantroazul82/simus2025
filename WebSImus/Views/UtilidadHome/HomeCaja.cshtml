@@ -1,0 +1,225 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.Servicios.HerramientaDTO>
+@{
+    ViewBag.Title = "HomeCaja";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12 d-flex align-items-center">
+            <div class="col-md-2 col-sm-4 col-xs-4">
+                @*<img class="img-responsive" src="~/img/iconos/caja_big.png" alt="Caja de herramientas">*@
+            </div>
+            <div class="col-md-10 col-sm-8 col-xs-8 titulo_seccion">
+                Caja de Herramientas
+            </div>
+        </div>
+    </div>
+
+    <div class="row caja-herramientas-wrapper">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="item-herramienta">
+                <a href="#" onclick="Filtrar('136'); return false;">
+                    <img src="~/img/iconos/formacion.png" alt="Formación">
+                    <div class="txt_cajadeh">Formación</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="item-herramienta">
+                <a href="#" onclick="Filtrar('137'); return false;">
+                    <img src="~/img/iconos/creacion.png" alt="Creación">
+                    <div class="txt_cajadeh">Creación</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="item-herramienta">
+                <a href="#" onclick="Filtrar('138'); return false;">
+                    <img src="~/img/iconos/disco.png" alt="Producción">
+                    <div class="txt_cajadeh">Producción</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="item-herramienta">
+                <a href="#" onclick="Filtrar('139'); return false;">
+                    <img src="~/img/iconos/informacion.png" alt="Información">
+                    <div class="txt_cajadeh">Información</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="item-herramienta">
+                <a href="#" onclick="Filtrar('140'); return false;">
+                    <img src="~/img/iconos/difusion.png" alt="Difusión">
+                    <div class="txt_cajadeh">Difusión</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="item-herramienta">
+                <a href="#" onclick="Filtrar('141'); return false;">
+                    <img src="~/img/iconos/distribucion.png" alt="Distribución">
+                    <div class="txt_cajadeh">Distribución</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="item-herramienta">
+                <a href="#" onclick="Filtrar('142'); return false;">
+                    <img src="~/img/iconos/audiencias.png" alt="Audiencias">
+                    <div class="txt_cajadeh">Audiencias</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="item-herramienta">
+                <a href="#" onclick="Filtrar('143'); return false;">
+                    <img src="~/img/iconos/gestion.png" alt="Gestión">
+                    <div class="txt_cajadeh">Gestión</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12 text-left">
+            <a href="#" onclick="Filtrar('0'); return false;" class="btn btn-link">
+                <i class="fas fa-database"></i> Cargar Todos Los Registros
+            </a>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="page-content-wrap">
+            <div class="page-content-holder">
+                <div id="TablaServicio">
+                    @Html.Partial("_DatosListadoCaja", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalInformacion" class="panel-body">
+        @Html.Action("_DatosHerramienta", new { id = "0" })
+    </div>
+</div>
+
+<style>
+    /* Modernización General */
+    .titulo_seccion {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #4b3c8c;
+        padding: 10px 0;
+    }
+
+    .subtitulo_seccion {
+        font-size: 1.2rem;
+        color: #6c757d;
+        margin-bottom: 20px;
+    }
+
+    /* Contenedor Principal */
+    .caja-herramientas-wrapper {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 30px 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        margin-top: 30px;
+    }
+
+    /* Estilo para cada ítem */
+    .item-herramienta {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 16px;
+        padding: 20px 10px;
+        margin-bottom: 20px;
+        background-color: #f8f9fa;
+/*        height: 100%;*/
+    }
+
+        .item-herramienta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+        }
+
+        /* Icono */
+        .item-herramienta img {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 10px;
+        }
+
+    /* Texto */
+    .txt_cajadeh {
+        font-size: 1.5rem;
+        color: #333;
+        font-weight: 600;
+        margin-top: 8px;
+        text-align: center;
+    }
+
+    /* Carrusel (sin fondo y con mejor spacing) */
+    .carousel-control {
+        background: none !important;
+        font-size: 2rem;
+        color: #4b3c8c !important;
+        top: 45%;
+        transform: translateY(-50%);
+    }
+
+        .carousel-control.left {
+            left: -40px;
+        }
+
+        .carousel-control.right {
+            right: -40px;
+        }
+</style>
+
+@section Scripts {
+
+
+    <script type="text/javascript">
+
+        function Filtrar(CategoriaId) {
+            $.ajax({
+
+                url: "/UtilidadHome/_DatosListadoCaja",
+                type: "GET",
+                data: { id: CategoriaId }
+            })
+                .done(function (partialViewResult) {
+
+                    $("#TablaServicio").html(partialViewResult);
+
+                });
+        }
+
+        function CargarDetalle(varcodigo) {
+
+            $.ajax({
+
+                url: "/UtilidadHome/_DatosHerramienta",
+                type: "GET",
+                data: { id: varcodigo }
+            })
+                .done(function (partialViewResult) {
+                    $("#modalInformacion").html(partialViewResult);
+                    $("#modal_datosherramientas").modal('show');
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+                });
+
+        }
+    </script>
+}
+

@@ -1,0 +1,43 @@
+﻿@model SM.LibreriaComun.DTO.EstandarDTO
+
+<div class="mf-subsection">
+    <p class="mf-notice-box">
+        <i class="fas fa-info-circle"></i>
+        Es requerido agregar uno o más géneros musicales por práctica musical.
+    </p>
+
+    <div class="mf-grid">
+        <div class="md:mf-col-span-10">
+            <div class="mf-field-group">
+                <label class="mf-label" for="generos@Model.Id">Géneros Musicales</label>
+                @Html.Editor("generos" + Model.Id, new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "w-full px-3 py-2 border rounded generos"
+                    }
+                })
+            </div>
+        </div>
+
+        <div class="md:mf-col-span-2 flex items-end">
+            <button type="button"
+                    id="btnAgregarPracticaGeneros"
+                    class="btn btn-warning w-full"
+                    onclick="GeneroAgregar('@Model.Id')"
+                    title="Agregar géneros musicales.">
+                <i class="fas fa-plus"></i> Agregar
+            </button>
+        </div>
+    </div>
+
+    <div id="@Model.Id" class="mf-mt-4">
+        @Html.Action("Cargargeneros", new { FormacionPracticaId = Model.Id, EliminarId = 0 })
+    </div>
+</div>
+
+<script type="text/javascript">
+    function EliminarGeneros(varFormacionPracticaId, varid) {
+        ActualizarListadoGenero(varFormacionPracticaId, varid);
+    }
+</script>

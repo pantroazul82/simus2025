@@ -1,0 +1,37 @@
+﻿@model SM.LibreriaComun.DTO.FichaAsesoria.ObservacionNuevoDTO
+
+<div class="modal animated fadeIn" id="modal_datosObservacion" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content card">
+            <div class="mf-modal-header">
+                @Html.HiddenFor(model => model.EscuelaId)
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.Tipo)
+
+                <h5 class="form-title">
+                    <i class="fas fa-comment-alt"></i> Observaciones y Recomendaciones
+                </h5>
+            </div>
+            <div class="mf-modal-body">
+                <div class="mf-field-group">
+                    <label class="mf-label">Observaciones</label>
+                    @Html.TextAreaFor(model => model.Observaciones, new { @class = "w-full px-3 py-2 border rounded", @rows = "6" })
+                    @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "mf-validation-error" })
+                </div>
+                <div class="mf-field-group">
+                    <label class="mf-label">Recomendaciones</label>
+                    @Html.TextAreaFor(model => model.Recomendaciones, new { @class = "w-full px-3 py-2 border rounded", @rows = "6" })
+                    @Html.ValidationMessageFor(model => model.Recomendaciones, "", new { @class = "mf-validation-error" })
+                </div>
+            </div>
+            <div class="mf-modal-footer">
+                <button type="button" id="btnGuardarObservacion" class="btn btn-success" data-dismiss="modal" onclick="ObservacionAgregar('@Model.Id', '@Model.Tipo')">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">
+                    <i class="fas fa-times"></i> Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

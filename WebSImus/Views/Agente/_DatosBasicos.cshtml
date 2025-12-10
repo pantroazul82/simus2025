@@ -1,0 +1,212 @@
+﻿@model WebSImus.Models.AgenteModel
+@using MvcCheckBoxList.Model
+<div class="panel panel-default">
+    <div class="row">
+        <div class="col-md-4 push-up-20">
+            <div class="form-group">
+                <div class="" id="user_image">
+                    <img src="@Url.Content(ViewBag.ImageData)" class="img-thumbnail" />
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="col-md-8 push-up-20">
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">* Tipo documento</label>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.TipoDocumento, (SelectList)ViewBag.listTipoDocumento, "Seleccione el tipo documento", new { @class = "form-control select" })
+                    @Html.ValidationMessageFor(model => model.TipoDocumento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">* Número documento</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.NumeroDocumento, new { @class = "form-control text", @maxlength = "20" })
+                    @Html.ValidationMessageFor(model => model.NumeroDocumento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">* Primer nombre</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.PrimerNombre, new { @class = "form-control text", @maxlength = "50" })
+                    @Html.ValidationMessageFor(model => model.PrimerNombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Segundo nombre</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.SegundoNombre, new { @class = "form-control text", @maxlength = "50" })
+                    @Html.ValidationMessageFor(model => model.SegundoNombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">* Primer apellido</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.PrimerApellido, new { @class = "form-control text", @maxlength = "50" })
+                    @Html.ValidationMessageFor(model => model.PrimerApellido, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Segundo apellido</label>
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.SegundoApellido, new { htmlAttributes = new { @class = "form-control" } })  
+                    @Html.ValidationMessageFor(model => model.SegundoApellido, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Fecha de nacimiento</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control datepicker", @Value = Model.FechaNacimiento.ToString("yyyy-MM-dd") })
+                    @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 push-up-20">
+        </div>
+        <div class="col-md-8 push-up-20">
+
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">* País</label>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.CodigoPais, (SelectList)ViewBag.listPaises, "Seleccione un país", new { @class = "styled-select" })
+                    @Html.ValidationMessageFor(model => model.CodigoPais, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Departamento</label>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.CodigoDepartamento, (SelectList)ViewBag.listDepartamentos, "Seleccione un departamento", new { @class = "styled-select" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Municipio</label>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.CodigoMunicipio, (SelectList)ViewBag.listMunicipio, "Seleccione un municipio", new { @class = "styled-select" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">* Dirección</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Direccion, new { @class = "form-control text", @maxlength = "200" })
+                    @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label"> Teléfono</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control text", @maxlength = "50" })
+                    @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">* Correo Electrónico</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.CorreoElectronico, new { @class = "form-control text", @maxlength = "50" })
+                    @Html.ValidationMessageFor(model => model.CorreoElectronico, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Subir foto</label>
+
+                <div class="col-md-9">
+                    <p>Tipos de archivo permitidos: .jpg y .png de tamaño máximo 1 Mb</p>
+                    <input onclick="resizePanel()" id="imagenPerfil" name="imagenPerfil" type="file">
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Link Portafolio</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.linkPortafolio, new { @class = "form-control text", @maxlength = "200" })
+                    @Html.ValidationMessageFor(model => model.linkPortafolio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">Sexo</label>
+                <div class="col-md-4">
+                    <label class="check">
+                        @Html.RadioButtonFor(m => m.Sexo, "Femenino", Model.Sexo != null && Model.Sexo == "F" ? new { Checked = "checked" } : null)<span class="fa fa-femenino"></span> Femenino
+
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    <label class="check">
+                        @Html.RadioButtonFor(m => m.Sexo, "Masculino", Model.Sexo != null && Model.Sexo == "M" ? new { Checked = "checked" } : null)<span class="fa fa-masculino"></span> Masculino
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-colorful push-up-20">
+        <div class="panel-heading">
+            <h4 class="panel-title text-info"><span class="glyphicon glyphicon-globe"></span> Caracterización Musical</h4>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6 push-up-20">
+                <div class="form-group">
+                    <label class="control-label">Generos Musicales</label>
+                    <div class="col-md-12">
+                        @{
+                                var htmlListInfo = new HtmlListInfo(HtmlTag.vertical_columns, 2);
+
+                            @Html.CheckBoxListFor(model => model.GenerosPublicado,
+                                              model => model.GeneroData,
+                                              entity => entity.Id,
+                                              entity => entity.Nombre,
+                                              model => model.GenerosSeleccionada, htmlListInfo);
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 push-up-20">
+                <div class="form-group">
+                    <label class="control-label">Oficios y/o profesiones</label>
+                    <div class="col-md-12">
+                        @{
+                            var htmlListInfo1 = new HtmlListInfo(HtmlTag.vertical_columns, 1);
+
+                            @Html.CheckBoxListFor(model => model.OficiosPublicado,
+                                              model => model.OficiosData,
+                                              entity => entity.Id,
+                                              entity => entity.Nombre,
+                                                       model => model.OficiosSeleccionada, htmlListInfo1);
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    @*<div class="panel panel-colorful push-up-20">
+        <div class="panel-heading">
+            <h4 class="panel-title text-info"><span class="glyphicon glyphicon-globe"></span> Mapamundi</h4>
+            <div class="pull-right" style="width: 200px;">
+                <input type="text" class="form-control" placeholder="Select country" id="vector_world_map_value" />
+            </div>
+        </div>
+        <div class="panel-body panel-body-map">
+            <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="300px" src="https://maps.google.com/maps?hl=en&q=caparrapi&ie=UTF8&t=roadmap&z=15&iwloc=B&output=embed">
+                <div><small><a href="http://embedgooglemaps.com">by embedgooglemaps.com</a></small></div>
+                <div><small><a href="http://www.embedgooglemaps.com">embed google map</a></small></div>
+            </iframe>
+        </div>
+    </div>*@
+
+  
+</div>

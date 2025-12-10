@@ -1,0 +1,405 @@
+﻿@model WebSImus.Models.AgentePublicoModels
+@using SM.LibreriaComun.DTO;
+@{
+    ViewBag.Title = "perfil público";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+
+<div class="row">
+    <!-- ficha escuela -->
+    <div class="col-md-12">
+        <div class="col-md-2 col-sm-6 col-xs-6"><img style="padding-top:10px; padding-left:30px;" src="~/img/iconos/agentes_big.png"></div>
+        <div class="titulo_seccion col-md-10 col-sm-6 col-xs-6">AGENTES</div>
+    </div>
+</div>
+<div class="row">
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span class="fa-solid fa-chevron-right fa-lg" style="text-align: left; padding: 5px;"></span>@Html.DisplayFor(m => m.NombreCompleto) </div>
+</div>
+<div class="col-md-12 well carousel-search" style="margin-top:40px;">
+
+    <div class="row">
+        <a href="#" class="nav-tabs-dropdown btn btn-block btn-primary">Ficha Agentes</a>
+        <ul style="padding-left:30px;" id="nav-tabs-wrapper" class="nav nav-tabs nav-tabs-horizontal">
+            <li class="active"><a href="#htab1" data-toggle="tab">Perfil</a></li>
+            <li><a href="#htab2" data-toggle="tab">Caracterización</a></li>
+            <li><a href="#htab3" data-toggle="tab">Formación y Experiencia</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="htab1">
+                <div class=" col-md-1">
+                    <img style="padding-top:10px; padding-left:30px;" class="titulo_ficha this-animate" data-animate="fadeInLeft bounce" src="~/img/iconos/perfil_big.png">
+                </div>
+                <div class=" col-md-11">
+                    <h3 class="titulo_ficha this-animate" data-animate="fadeInLeft bounce">Perfil</h3>
+                </div>
+
+                <div class="divider"></div>
+                <div class="page-content-wrap">
+                    <div class="divider"></div>
+                    <!-- page content holder -->
+                    <div class="page-content-holder">
+                        <div class="row">
+                            <div class=" this-animate" data-animate="fadeInLeft bounce">
+                                <div class="col-md-7">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="row">
+                                                <div class=" col-md-5 imagen_ficha">
+                                                    <img style="border-radius: 5px 0px 0px 0px;" src="@Url.Content(ViewBag.ImageData)" class="img-responsive" alt="agente" />
+                                                    <div class="titulo_negro_ficha2 col-md-12">
+
+                                                        <div class="col-md-12" style="margin-top:13px;">
+                                                            @if (Model.facebook.IsEmpty())
+                                                            { <div class="col-md-3 col-sd-3 col-xs-3"> <span class=" fa-face fa-2x red_desab" />  </div>}
+                                                            else
+                                                            {
+                                                                <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.facebook" target="_blank"><span class="fa-face fa-2x sociales_ficha"></span></a></div>}
+
+                                                            @if (Model.youtube.IsEmpty())
+                                                            { <div class="col-md-3 col-sd-3 col-xs-3"> <span class=" fa-youtube2 fa-2x red_desab" /></div> }
+                                                            else
+                                                            {
+                                                                <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.youtube" target="_blank"><span class="fa-youtube2 fa-2x sociales_ficha"></span></a></div>
+                                                            }
+
+                                                            @if (Model.soundcloud.IsEmpty())
+                                                            { <div class="col-md-3 col-sd-3 col-xs-3"> <span class=" fa-soundcloud2 fa-3x red_desab" /></div>}
+                                                            else
+                                                            {
+                                                                <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.soundcloud" target="_blank"><span class="fa-soundcloud2  fa-2x  sociales_ficha"></span></a></div>
+                                                            }
+                                                            @if (Model.twitter.IsEmpty())
+                                                            {  <div class="col-md-3 col-sd-3 col-xs-3 "><span class=" fa-twitter2 fa-3x red_desab" /></div>}
+                                                            else
+                                                            {
+                                                                <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.twitter" target="_blank"><span class="fa-twitter2  fa-2x sociales_ficha"></span></a></div>
+                                                            }
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-7 ">
+                                                    <div class="col-md-12 titulo_ficha_item">@Html.DisplayFor(m => m.NombreCompleto)  </div>
+                                                    <div class="col-md-10 parrafo_ficha">@Html.DisplayFor(m => m.descripcion)</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class=" this-animate" data-animate="fadeInDown bounce">
+                                    <div class="col-md-3 redes_ficha">
+
+                                        <div class="col-md-12 col-sm-3 col-xs-6">
+                                            <div class="col-md-2 fa-mapas fa-3x iconos_ficha"> </div>
+                                            <div class="col-md-10 ubicacion_fichas">@Html.DisplayFor(m => m.Municipio), @Html.DisplayFor(m => m.Departamento) </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-3 col-xs-6">
+                                            <div class="col-md-2 fa-web fa-3x iconos_ficha"> </div>
+                                            <div class="col-md-10  txt_fichas"><a href="@Model.linkPortafolio" target="_blank">@Html.DisplayFor(m => m.linkPortafolio)</a></div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ./2 -->
+                    </div>
+
+                </div>
+            </div>
+                <div role="tabpanel" class="tab-pane fade" id="htab2">
+                    <div class=" col-md-1">
+                        <img style="padding-top:10px; padding-left:30px;" class="titulo_ficha this-animate" data-animate="fadeInLeft bounce" src="~/img/iconos/caracterizacion_big.png">
+                    </div>
+                    <div class=" col-md-11">
+                        <h3 class="titulo_ficha this-animate" data-animate="fadeInLeft bounce">Caracterización</h3>
+                    </div>
+                    <div class="page-content-wrap ">
+                        <div class="divider"></div>
+
+                        <!-- page content holder -->
+                        <div class="page-content-holder">
+
+                            <div class="row">
+                                <div class=" this-animate" data-animate="fadeInLeft bounce">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-6" style="margin-top:20px;">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <div class="row">
+                                                            <div class=" col-md-12 titulo_alumnos2">Profesión u Oficio</div>
+                                                            <div class="col-md-12 ">
+                                                                @foreach (var oficio in Model.listOficios)
+                                                                {
+                                                                <div class="col-md-10 titulo_ficha2">@oficio.Atributo </div>
+                                                                }
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6" style="margin-top:20px;">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <div class="row">
+                                                            <div class=" col-md-12 titulo_alumnos">Servicios</div>
+                                                            <div class="col-md-12 ">
+                                                                @foreach (var servicio in Model.listServicio)
+                                                                {
+                                                                <div class="col-md-10 titulo_ficha2">@servicio.Nombre </div>
+                                                                }
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-6" style="margin-top:20px;">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <div class="row">
+                                                            <div class=" col-md-12 titulo_alumnos2">Intereses</div>
+                                                            <div class="col-md-12 ">
+                                                                @foreach (var interes in Model.listIntereses)
+                                                                {
+                                                                <div class="col-md-10 titulo_ficha2">@interes.Nombre </div>
+                                                                }
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ./page content holder -->
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade in" id="htab3">
+                    <div class=" col-md-1">
+                        <img style="padding-top:10px; padding-left:30px;" class="titulo_ficha this-animate" data-animate="fadeInLeft bounce" src="~/img/iconos/docentes_big.png">
+                    </div>
+                    <div class=" col-md-11">
+
+                        <h3 class="titulo_ficha this-animate" data-animate="fadeInLeft bounce">Formación y Experiencia</h3>
+                    </div>
+
+                    <div class="page-content-wrap">
+                        <div class="divider"></div>
+
+                        <!-- page content holder -->
+                        <div class="page-content-holder">
+
+                            <div class="row">
+                                <div class=" this-animate" data-animate="fadeInLeft bounce">
+                                    <div class="col-md-6">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div class="row">
+                                                    <div class=" col-md-12 titulo_alumnos">Formación Agregada</div>
+                                                    <div class="row">
+
+
+                                                        <div class="row">
+                                                            <div class="col-md-12 tabla_gris">
+
+                                                                <div class="col-md-3 col-sm-3 col-xs-3 txt_fichas">
+                                                                    Institución
+                                                                </div>
+                                                                <div class="col-md-3 col-sm-3 col-xs-3 txt_fichas">
+                                                                    Título
+                                                                </div>
+                                                                <div class="col-md-3 col-sm-3 col-xs-3 txt_fichas">
+                                                                    Periodo de Inicio
+                                                                </div>
+                                                                <div class="col-md-3 col-sm-3 col-xs-3 txt_fichas">
+                                                                    Periodo Final
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        @if (Model.listFormacion != null)
+                                                        {
+                                                            var i = "Blanca";
+                                                            foreach (var formacion in Model.listFormacion)
+                                                            {
+                                                        <div class="row">
+                                                            @if (i == "Blanca")
+                                                                    {
+                                                                    <div class="col-md-12 tabla_blanca">
+
+                                                                        <div class="col-md-3 col-sm-3 col-xs-3 ">
+                                                                            @formacion.Empresa
+                                                                        </div>
+                                                                        <div class="col-md-3 col-sm-3 col-xs-3">
+                                                                            @formacion.Titulo
+                                                                        </div>
+                                                                        <div class="col-md-3 col-sm-3 col-xs-3">
+                                                                            @formacion.FechaInicio
+                                                                        </div>
+                                                                        <div class="col-md-3 col-sm-3 col-xs-3">
+                                                                            @formacion.FechaFinal
+                                                                        </div>
+                                                                    </div>
+                                                                        i = "Gris";
+                                                                    }
+                                                                    else
+                                                                    { <div class="col-md-12 tabla_gris">
+
+                                                                        <div class="col-md-3 col-sm-3 col-xs-3 ">
+                                                                            @formacion.Empresa
+                                                                        </div>
+                                                                        <div class="col-md-3 col-sm-3 col-xs-3">
+                                                                            @formacion.Titulo
+                                                                        </div>
+                                                                        <div class="col-md-3 col-sm-3 col-xs-3">
+                                                                            @formacion.FechaInicio
+                                                                        </div>
+                                                                        <div class="col-md-3 col-sm-3 col-xs-3">
+                                                                            @formacion.FechaFinal
+                                                                        </div>
+                                                                    </div>
+                                                                        i = "Blanca";
+                                                                    }
+                                                        </div>
+
+                                                            }
+                                                        }
+
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="space1">  </div>
+                                    <div class="col-md-6">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <div class="row">
+                                                    <div class=" col-md-12 titulo_alumnos2">
+                                                        Experiencia Agregada
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 tabla_gris">
+
+                                                            <div class="col-md-3 col-sm-3 col-xs-3 txt_fichas">
+                                                                Nombre
+                                                            </div>
+                                                            <div class="col-md-3 col-sm-3 col-xs-3 txt_fichas">
+                                                                Título
+                                                            </div>
+                                                            <div class="col-md-3 col-sm-3 col-xs-3 txt_fichas">
+                                                                Periodo de Inicio
+                                                            </div>
+                                                            <div class="col-md-3 col-sm-3 col-xs-3 txt_fichas">
+                                                                Periodo Final
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+
+                                                    @if (Model.listExperiencia != null)
+                                                    {
+                                                        var i = "Blanca";
+                                                        foreach (var exp in Model.listExperiencia)
+                                                        {
+                                                    <div class="row">
+                                                        @if (i == "Blanca")
+                                                                {
+                                                                <div class="col-md-12 tabla_blanca">
+
+                                                                    <div class="col-md-3 col-sm-3 col-xs-3 ">
+                                                                        @exp.Empresa
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                                                        @exp.Titulo
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                                                        @exp.FechaInicio
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                                                        @exp.FechaFinal
+                                                                    </div>
+                                                                </div>
+                                                                    i = "Gris";
+                                                                }
+                                                                else
+                                                                { <div class="col-md-12 tabla_gris">
+
+                                                                    <div class="col-md-3 col-sm-3 col-xs-3 ">
+                                                                        @exp.Empresa
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                                                        @exp.Titulo
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                                                        @exp.FechaInicio
+                                                                    </div>
+                                                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                                                        @exp.FechaFinal
+                                                                    </div>
+                                                                </div>
+                                                                    i = "Blanca";
+                                                                }
+                                                    </div>
+
+                                                        }
+                                                    }
+
+
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- ./2 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="space1">  </div>
+            </div>
+        </div>
+    </div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/plugins/mixitup/jquery.mixitup.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/appear/jquery.appear.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+  
+
+ 
+}
+

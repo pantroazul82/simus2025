@@ -1,0 +1,206 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<SM.LibreriaComun.DTO.Servicios.UtilidadHomeDataDTO>
+@{
+    ViewBag.Title = "Clasificados SIMUS";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2 col-sm-5 col-xs-5"><img style="padding-top:10px; padding-left:30px;" class="img-responsive" src="~/img/iconos/clasificados.png"></div>
+        <div class="titulo_seccion col-md-10 col-sm-7 col-xs-7">Clasificados</div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span class="fa-convocatorias fa-lg" style="text-align: left; padding: 5px;"></span>Clasificados</div>
+</div>
+<div class="col-md-12 well carousel-search" style="margin-top:40px;">
+    <div class="row">
+        <div class="page-content-wrap">
+            <!-- page content holder -->
+            <div class="page-content-holder">
+
+
+                <div class="row">
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        if (Model.Count <= 2)
+                        {
+                            <div class="row">
+                                @foreach (var item in Model)
+                                {
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class=" col-md-4 col-sm-4 col-xs-4 ">
+                                        @if (!String.IsNullOrEmpty(item.rutaFoto))
+                                        {
+                                        <img class="img-responsive" src=@item.rutaFoto />
+                                        }
+                                        else
+                                        {
+                                        <img class="img-responsive" src="@WebSImus.Models.Usuarios.CreateImageThumbnail(@item.Imagen, 440, 748)" />
+                                        }
+
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-xs-8">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <div class="row">
+
+                                                    <div class="col-md-12 col-sm-12 col-xs-12 titulo_clasificado_item">@item.Titulo</div>
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                                            <br><span style="font-style:normal; font-size: 12px;">@item.Ubicacion</span><br />
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                                            <br><span style="font-style:normal; font-size: 12px;">@item.FechaInicio</span><br />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12 col-xs-12 parrafo_ficha">
+                                                            @item.Descripcion
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-6 col-xs-12 ">
+                                                            <span class="fa-celular fa-2x" style="color: #63045E"></span>  <span style="font-style:italic; font-size: 12px;">@item.Telefono</span>
+                                                        </div>
+                                                        <div class="col-md-12 col-sm-6 col-xs-12">
+                                                            <span class="fa-correo fa-2x" style="color: #63045E"></span>  <span style="font-style:italic; font-size: 12px;">@item.Email</span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                }
+                            </div>
+                        }
+
+
+                        if (Model.Count >= 3)
+                        {
+                            var filas = 2;
+                            if (Model.Count > 4 && Model.Count <= 6)
+                            {
+                                filas = 3;
+                            }
+                            if (Model.Count > 6)
+                            {
+                                filas = 4;
+                            }
+                            var total = Model.Count;
+                            var inicio = 0;
+                            for (int j = 1; j <= filas; j++)
+                            {
+
+                                if (j == 1)
+                                {
+                                    total = 1;
+                                    inicio = 0;
+                                }
+                                else
+                                {
+                                    inicio = inicio + 2;
+                                    total = total + 2;
+                                    if (total > Model.Count - 1)
+                                    {
+                                        total = Model.Count - 1;
+                                    }
+                                }
+
+
+                                <div class="row">
+                                    @for (int i = inicio; i <= total; i++)
+                                    {
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class=" col-md-4 col-sm-4 col-xs-4 ">
+                                            @if (!String.IsNullOrEmpty(Model[i].rutaFoto))
+                                                {
+                                                <img class="img-responsive" src=@Model[i].rutaFoto />
+                                                }
+                                                else
+                                                {
+                                                <img class="img-responsive" src="@WebSImus.Models.Usuarios.CreateImageThumbnail(@Model[i].Imagen, 800, 1200)" />
+                                                }
+
+                                        </div>
+                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                            <div class="modal-content">
+
+                                                <div class="modal-header">
+                                                    <div class="row">
+
+                                                        <div class="col-md-12 col-sm-12 col-xs-12 titulo_clasificado_item">@Model[i].Titulo</div>
+                                                        <div class="row">
+                                                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                                                <br><span style="font-style:normal; font-size: 12px;">@Model[i].Ubicacion</span><br />
+                                                            </div>
+                                                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                                                <br><span style="font-style:normal; font-size: 12px;">@Model[i].FechaInicio</span><br />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 col-sm-12 col-xs-12 parrafo_ficha">
+                                                                @Model[i].Descripcion
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 col-sm-6 col-xs-12 ">
+                                                                <span class="fa-celular fa-2x" style="color: #63045E"></span>  <span style="font-style:italic; font-size: 12px;">@Model[i].Telefono</span>
+                                                            </div>
+                                                            <div class="col-md-12 col-sm-6 col-xs-12">
+                                                                <span class="fa-correo fa-2x" style="color: #63045E"></span>  <span style="font-style:italic; font-size: 12px;">@Model[i].Email</span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    }
+                                </div>
+                                <br />
+                            }
+                        }
+                    }
+
+                </div>
+
+
+                <div class="panel-body" id="panelEditar">
+                    <div class="row" style="text-align:center">
+                        @Html.PagedListPager(Model, page => Url.Action("Clasificados", "UtilidadHome", new { page = page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayItemSliceAndTotal = true, ItemSliceAndTotalFormat = "Mostrando Registros {0} a {1} de {2}." })
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/plugins/mixitup/jquery.mixitup.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/appear/jquery.appear.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+}

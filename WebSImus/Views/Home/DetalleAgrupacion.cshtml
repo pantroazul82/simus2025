@@ -1,0 +1,237 @@
+﻿@model WebSImus.Models.AgrupacionDataModels
+@using SM.LibreriaComun.DTO;
+@{
+    ViewBag.Title = "Detalle Agrupación";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+
+<div class="row">
+    <!-- ficha escuela -->
+    <div class="col-md-12">
+        <div class="col-md-2 col-sm-5 col-xs-5"><img style="padding-top:10px; padding-left:30px;" class="img-responsive" src="~/img/iconos/agrupaciones_big.png"></div>
+        <div class="titulo_seccion col-md-10 col-sm-7 col-xs-7"><a href="~/Home/HomeAgrupaciones"><span class="titulo_seccion"> Agrupaciones </span></a></div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span style="text-align: left; padding: 5px;"></span>@Html.DisplayFor(m => m.Nombre)</div>
+</div>
+<div class="col-md-12 well carousel-search" style="margin-top:40px;">
+    <div class="row">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="htab1">
+                <h3 class="titulo_ficha this-animate" data-animate="fadeInLeft bounce">Información básica </h3>
+                <div class="divider"></div>
+                <div class="page-content-wrap">
+                    <div class="divider"></div>
+                    <!-- page content holder -->
+                    <div class="page-content-holder">
+
+                        <div class="row">
+                            <div class=" this-animate" data-animate="fadeInRight bounce">
+                                <div class="col-md-8">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <div class="row">
+
+                                                <div class=" col-md-6 col-sm-6 col-xs-12 imagen_ficha">
+                                                    <img style="border-radius: 5px 0px 0px 0px;" class="img-responsive" src="@Url.Content(ViewBag.ImageData)" alt="escuela" />
+                                                    <div class="titulo_negro_ficha2 col-md-12">
+
+                                                        <div class="col-md-12" style="margin-top:13px;">
+                                                            @if (Model.facebook.IsEmpty())
+                                                            { <div class="col-md-3 col-sd-3 col-xs-3"> <span class=" fa-face fa-2x red_desab" />  </div>}
+                                                            else
+                                                            {
+                                                                <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.facebook" target="_blank"><span class="fa-face fa-2x sociales_ficha"></span></a></div>}
+
+                                                            @if (Model.youtube.IsEmpty())
+                                                            { <div class="col-md-3 col-sd-3 col-xs-3"> <span class=" fa-youtube2 fa-2x red_desab" /></div> }
+                                                            else
+                                                            {
+                                                                <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.youtube" target="_blank"><span class="fa-youtube2 fa-2x sociales_ficha"></span></a></div>
+                                                            }
+
+                                                            @if (Model.soundcloud.IsEmpty())
+                                                            {  <div class="col-md-3 col-sd-3 col-xs-3"><span class=" fa-soundcloud2 fa-2x red_desab" /></div> }
+                                                            else
+                                                            {
+                                                                <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.soundcloud" target="_blank"><span class="fa-soundcloud2  fa-2x  sociales_ficha"></span></a></div>
+                                                            }
+                                                            @if (Model.twitter.IsEmpty())
+                                                            {  <div class="col-md-3 col-sd-3 col-xs-3 "><span class=" fa-twitter2 fa-2x red_desab" /></div>}
+                                                            else
+                                                            {
+                                                                <div class="col-md-3 col-sd-3 col-xs-3"><a href="@Model.twitter" target="_blank"><span class="fa-twitter2  fa-2x sociales_ficha"></span></a></div>
+                                                            }
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12 col-xs-12 titulo_ficha_item"> @Html.DisplayFor(m => m.Nombre) </div>
+                                                        <div class="col-md-12 col-sm-12 col-xs-12"> @Html.DisplayFor(m => m.TipoAgrupacion)  </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-10 parrafo_ficha">
+                                                            @Html.DisplayFor(m => m.Descripcion)
+                                                        </div>
+                                                        <div class="row">
+
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                <div class="col-md-2 col-sm-2 col-xs-2  fa-editorial fa-2x">  </div> <span class="txt_morado" style="margin-top: 5px;"> </span>
+                                                                @if (Model.documentoId > 0)
+                                                                {
+
+                                                                    @Html.ActionLink("Descargar Portafolio", "Descargar", "Documento", new { Id = Model.documentoId }, new { title = string.Format("Descargar archivo de portafolio") })
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+
+
+                                            <!-- .row -->
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class=" this-animate" data-animate="fadeInDown bounce">
+                                    <div class="col-md-3 redes_ficha">
+
+                                        <div class="col-md-12 col-sm-3 col-xs-6">
+                                            <div class="col-md-2 fa-mapas fa-3x iconos_ficha"> </div>
+                                            <div class="col-md-10 ubicacion_fichas">@Html.DisplayFor(m => m.Municipio), @Html.DisplayFor(m => m.Departamento) </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-3 col-xs-6">
+                                            <div class="col-md-2 fa-celular fa-3x iconos_ficha"> </div>
+                                            <div class="col-md-10 txt_fichas">@Html.DisplayFor(m => m.Telefono) </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 col-sm-3 col-xs-6">
+                                            <div class="col-md-2 fa-web fa-3x iconos_ficha"> </div>
+                                            <div class="col-md-10  txt_fichas"><a href="@Model.LinkPortafolio" target="_blank">@Html.DisplayFor(m => m.LinkPortafolio)</a></div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-3 col-xs-6">
+                                            <div class="col-md-2 fa-correo fa-3x iconos_ficha"> </div>
+                                            <div class="col-md-10 txt_fichas">@Html.DisplayFor(m => m.CorreoElectronico) </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="space1">     </div>
+                        <div class="row this-animate" data-animate="fadeInLeft bounce">
+
+                            <div class="col-md-6 col-sm-6 col-xs-12" style="padding-bottom: 20px;">
+                                @if (Model.listAgentes.Count > 0)
+                                {
+                                    <div class="row titulo_negro_ficha2">
+                                        <div class="col-md-2 col-sm-2 col-xs-2 fa-agrupacion fa-2x"> </div>
+                                        <div class="col-md-10 col-sm-10 col-xs-10 titulo_ficha_item2"> Integrantes</div>
+
+                                    </div>
+                                }
+                                <div class="row">
+                                    @if (Model.listAgentes != null)
+                                    {
+                                        var i = "Gris";
+                                        foreach (var item in Model.listAgentes)
+                                        {
+                                            if (i == "Gris")
+                                            {
+                                                <div class="col-md-12 col-sd-12 col-xs-12 tabla_gris" data-animate="fadeInRight bounce">
+                                                    · @item.NombreCompleto
+                                                </div>
+                                                i = "Blanca";
+                                            }
+                                            else
+                                            {
+                                                <div class="col-md-12 col-sd-12 col-xs-12 tabla_blanca" data-animate="fadeInRight bounce">
+                                                    · @item.NombreCompleto
+                                                </div>
+                                                i = "Gris";
+                                            }
+                                        }
+
+                                    }
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @if (Model.listgeneros.Count > 0)
+                                {
+                                    <div class="row titulo_negro_ficha2">
+                                        <div class="col-md-2 col-sm-2 col-xs-2 fa-perfil fa-2x"> </div>
+                                        <div class="col-md-10 col-sm-10 col-xs-10 titulo_ficha_item2"> Género Musical</div>
+
+                                    </div>
+                                }
+                                <div class="row">
+                                    @if (Model.listgeneros != null)
+                                    {
+                                        var i = "Gris";
+                                        foreach (var item in Model.listgeneros)
+                                        {
+                                            if (i == "Gris")
+                                            {
+                                                <div class="col-md-12 col-sd-12 col-xs-12 tabla_gris" data-animate="fadeInRight bounce">
+                                                    · @item.Nombre
+                                                </div>
+                                                i = "Blanca";
+                                            }
+                                            else
+                                            {
+                                                <div class="col-md-12 col-sd-12 col-xs-12 tabla_blanca" data-animate="fadeInRight bounce">
+                                                    · @item.Nombre
+                                                </div>
+                                                i = "Gris";
+                                            }
+                                        }
+
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class=" this-animate" data-animate="fadeInRight bounce">
+                            <div class="col-md-4 col-sd-12 col-xs-12" style="margin-top:20px;">
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div><!--.col -->
+            </div>
+
+        </div>
+
+        <div class="space1">  </div>
+    </div>
+    </div>
+    @section Scripts {
+        <script src="@Url.Content("~/Scripts/plugins/mixitup/jquery.mixitup.js")"></script>
+        <script src="@Url.Content("~/Scripts/plugins/appear/jquery.appear.js")"></script>
+        <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+    }

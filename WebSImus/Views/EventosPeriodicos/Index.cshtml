@@ -1,0 +1,81 @@
+﻿@model WebSImus.Models.ConsultaModel
+
+@{
+    ViewBag.Title = "Consulta Eventos Periodicos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Eventos Periódicos", "Index", "EventosPeriodicos")</li>
+    </ul>
+    <div class="col-md-12">
+
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.ActionLink(" Exportar", "ExportTo", "EventosPeriodicos", null, new { @class = "btn btn-warning glyphicon glyphicon-export" })
+                    @Html.ActionLink(" Nuevo", "Crear", "EventosPeriodicos", null, new { @class = "btn btn-success glyphicon glyphicon-plus-sign" })
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+
+                    <div class="col-md-3">
+                        <label class="check">@Html.RadioButtonFor(m => m.TipoRegistro, 1, new { @class = "iradio_minimal-grey" }) Mis Eventos Periódicos</label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="check">@Html.RadioButtonFor(m => m.TipoRegistro, 2, new { @class = "iradio_minimal-grey" }) Eventos Periódicos</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div id="Tabla">
+                        @Html.Action("GridViewPartial")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+    $(function () {
+        $("input[name*='TipoRegistro']").click(function () {
+            var VarTipo = $("input[name='TipoRegistro']:checked").val();
+            $.ajaxSetup({
+                cache: false
+            });
+            $.ajax({
+
+                url: "/EventosPeriodicos/GridViewPartial",
+                type: "GET",
+                data: { Busqueda: VarTipo }
+            })
+           .done(function (partialViewResult) {
+               $("#Tabla").html(partialViewResult);
+
+           });
+        });
+    });
+    </script>
+
+}

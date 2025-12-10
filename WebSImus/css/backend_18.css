@@ -1,0 +1,839 @@
+.dashboard-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    box-sizing: border-box;
+    padding-bottom: 2rem;
+}
+
+
+ul.main-menu > li a {
+    display: block;
+    position: relative;
+    padding: 13px 0 13px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #555;
+    border-top: 1px solid #8f91b0;
+    text-decoration: none;
+}
+ul.main-menu > li a {
+    display: block;
+    position: relative;
+    padding: 13px 0 13px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #000;
+    border-top: 1px solid #8f91b0;
+    text-decoration: none;
+}
+.left-sidebar {
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    width: 230px;
+    padding-right: 0;
+    padding-left: 0;
+    left: 0;
+    position: absolute;
+    float: none;
+    z-index: 999;
+    background-color: #555;
+}
+
+.top-bar .notifications .dropdown-menu {
+    top: 34px;
+    width: 350px;
+}
+ul.main-menu {
+    padding-left: 0;
+    list-style-type: none;
+    padding-top: 12px;
+}
+.top-bar .logged-user .dropdown-menu {
+    left: 15px;
+    top: 50px;
+    padding: 0;
+}
+.toggle-sidebar-collapse {
+    color: #fff;
+    font-size: 22px;
+    margin-right: 15px;
+    line-height: 51px;
+}
+.top-bar .logged-user .btn {
+    padding: 8px;
+    border: none;
+    font-size: 1.5em;
+    font-weight: 700;
+    text-decoration: none;
+    color: #fff;
+}
+.top-bar {
+    padding: 0px 0;
+    background-color: #555;
+}
+.top-bar .logo {
+    position: relative;
+    top: 8px;
+}
+
+.fondo{
+  
+	background-color: #2357A6!important;
+	color:#fff;
+   
+}
+.clip-me {
+    clip-path: polygon(6% 100%, 13% 0%, 57% 0%, 50% 100%);
+    position: relative;
+	left:-150px;
+	
+}
+.clip-me2 {
+    clip-path: polygon(6% 100%, 13% 0%, 57% 0%, 50% 100%);
+    position: relative;
+	left:-12px;
+	
+}
+
+.logo_blanco {
+  width: 60%;
+
+}
+.page-error .number {
+    display: inline-block;
+    vertical-align: middle;
+    float: left;
+    text-align: right;
+    font-size: 4em;
+    margin-right: 5px;
+	color: #0D197E;
+}
+
+
+
+/*	
+*	################################################################################
+*	
+*	pasoapaso
+*	---------------------------------------------------------------------
+*
+*	Version		1.0
+*	Author		Jorge Molano
+*	
+*	Override theme style or create your new styles. Direct change to main.css
+*	is not recommended to avoid problems when theme updates arrived in the future
+*	
+*	################################################################################
+*/
+.green{
+   color: #66CC17;
+   
+}
+.naranja{
+   color: #FF5100;
+   
+}
+.easy-pie-chart .percent {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 110px;
+    font-size: 25px;
+    z-index: 2;
+}
+.content-wrapper {
+    background-color: #fff;
+    border-left: 1px solid #e4e4e4;
+}
+.titulo_forms {
+    background-color: rgba(29,75,101,.95);
+    color: #FFF;
+    padding: 10px 16px;
+    height: 57px;
+	font-family: 'Exo 2', sans-serif;;
+}
+
+.progress_pasoapaso {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #048BFF;
+	  height: 5px;
+	width: 88%;
+	left: 69px;
+	  top: 40%;
+	position: absolute;
+}
+.progress_pasoapaso2 {
+    height: 4px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 84%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 6%;
+    z-index: 1;
+    }
+.progress_pasoapaso3 {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #048BFF;
+	  height: 5px;
+	width: 63%;
+	left: 172px;
+	  top: 33%;
+	position: absolute;
+}
+.barra_pasoapaso {
+    float: left;
+    width: 0;
+    height: 5px;
+    font-size: 12px;
+    color: #ffffff;
+    text-align: center;
+    background-color: #66CC17;
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    -webkit-transition: width 0.6s ease;
+    transition: width 0.6s ease;
+	
+	
+}
+
+/*	
+*	################################################################################
+*	
+*	pasoapaso2
+*	---------------------------------------------------------------------
+	
+*	################################################################################
+*/
+.pasoapaso2 {
+    margin: 40px auto;
+   
+}
+
+    .pasoapaso2 .nav-tabs {
+        position: relative;
+        margin: -60px auto;
+        margin-bottom: 0;
+        border-bottom-color: #e0e0e0;
+    }
+
+    .pasoapaso2 > div.pasoapaso2-inner {
+        position: relative;
+        width:85%;
+    }
+.pasoapaso3 {
+    margin: 40px auto;
+   
+}
+
+    .pasoapaso3 .nav-tabs {
+        position: relative;
+        margin: -60px auto;
+        margin-bottom: 0;
+        border-bottom-color: #e0e0e0;
+    }
+
+    .pasoapaso3 > div.pasoapaso2-inner {
+        position: relative;
+    }
+
+.connecting-line {
+    height: 5px;
+    background: #048BFF;
+    position: absolute;
+    width: 80%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 43%;
+    z-index: 1;
+}
+
+.connecting-line2 {
+    height: 5px;
+    background: #048BFF;
+    position: absolute;
+    width: 85%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 37%;
+    z-index: 1;
+}
+
+.pasoapaso2 .nav-tabs > li {
+    width: 14.28%;
+}
+.pasoapaso2 li.active:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 1;
+    margin: 0 auto;
+    bottom: -12px;
+    border: 10px solid transparent;
+    border-bottom-color: #048BFF;
+}
+
+.pasoapaso2 .nav-tabs > li.active > a, .pasoapaso .nav-tabs > li.active > a:hover, .pasoapaso .nav-tabs > li.active > a:focus {
+    color: #555555;
+    cursor: default;
+    border: 0;
+    border-bottom-color: transparent;
+}
+.pasoapaso2 li.active span.round-tab {
+    background: #fff;
+    border: 2px solid #048BFF;
+    
+}
+.pasoapaso2 li.active span.round-tab i{
+    color: #048BFF;
+}
+.pasoapaso3 .nav-tabs > li.active > a, .pasoapaso .nav-tabs > li.active > a:hover, .pasoapaso .nav-tabs > li.active > a:focus {
+    color: #555555;
+    cursor: default;
+    border: 0;
+    border-bottom-color: transparent;
+}
+.pasoapaso3 li.active span.round-tab {
+    background: #fff;
+    border: 2px solid #048BFF;
+    
+}
+.pasoapaso3 li.active span.round-tab i{
+    color: #048BFF;
+}
+
+/*	
+*	################################################################################
+*	
+*	pasoapaso2 exito
+*	---------------------------------------------------------------------
+	
+*	################################################################################
+*/
+
+.pasoapaso2 .nav-tabs > li.exito > a, .pasoapaso .nav-tabs > li.exito > a:hover, .pasoapaso .nav-tabs > li.exito > a:focus {
+    color: #555555;
+    cursor: default;
+    border: 0;
+    border-bottom-color: transparent;
+}
+.pasoapaso2 li.exito span.round-tab {
+    background: #fff;
+    border: 2px solid #A19525;
+    
+}
+.pasoapaso2 li.exito span.round-tab i{
+    color: #66CC17;
+}
+.pasoapaso3 .nav-tabs > li.exito > a, .pasoapaso .nav-tabs > li.exito > a:hover, .pasoapaso .nav-tabs > li.exito > a:focus {
+    color: #555555;
+    cursor: default;
+    border: 0;
+    border-bottom-color: transparent;
+}
+.pasoapaso3 li.exito span.round-tab {
+    background: #fff;
+    border: 2px solid #A19525;
+    
+}
+.pasoapaso3 li.exito span.round-tab i{
+    color: #66CC17;
+}
+
+/*	
+*	################################################################################
+*	
+*	pasoapaso2 fin exito
+*	---------------------------------------------------------------------
+	
+*	################################################################################
+*/
+.pasoapaso2 li:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 0;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 5px solid transparent;
+    border-bottom-color: #5bc0de;
+    transition: 0.1s ease-in-out;
+}
+
+.pasoapaso2 li.active:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 1;
+    margin: 0 auto;
+    bottom: -34px;
+    border: 10px solid transparent;
+    border-bottom-color: #048BFF;
+}
+
+.pasoapaso2 .nav-tabs > li a {
+    width: 50px;
+    height: 50px;
+    margin: 20px auto;
+    border-radius: 100%;
+    padding: 0;
+}
+
+    .pasoapaso2 .nav-tabs > li a:hover {
+        background: transparent;
+    }
+
+.pasoapaso2 .tab-pane {
+    position: relative;
+    padding-top: 50px;
+}
+
+.pasoapaso2 h3 {
+    margin-top: 0;
+}
+.pasoapaso3 li:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 0;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 5px solid transparent;
+    border-bottom-color: #5bc0de;
+    transition: 0.1s ease-in-out;
+}
+
+.pasoapaso3 li.active:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 1;
+    margin: 0 auto;
+    bottom: -34px;
+    border: 10px solid transparent;
+    border-bottom-color: #048BFF;
+}
+
+.pasoapaso3 .nav-tabs > li a {
+    width: 50px;
+    height: 50px;
+    margin: 20px auto;
+    border-radius: 100%;
+    padding: 0;
+}
+
+    .pasoapaso3 .nav-tabs > li a:hover {
+        background: transparent;
+    }
+
+.pasoapaso3 .tab-pane {
+    position: relative;
+    padding-top: 50px;
+}
+
+.pasoapaso3 h3 {
+    margin-top: 0;
+}
+/*	
+*	################################################################################
+*	
+*	fin pasoapaso2
+*	---------------------------------------------------------------------
+	
+*	################################################################################
+*/
+
+
+.txt_pasoapaso {
+   
+	text-align: center; 
+	margin-top: -20px; 
+	color: #0F155C;
+	font-size: 12px;
+   
+}
+.pasoapaso {
+    margin: 40px auto;
+   
+}
+
+    .pasoapaso .nav-tabs {
+        position: relative;
+       
+        margin-bottom: 0;
+        border-bottom: none !important;
+    }
+
+    .pasoapaso > div.pasoapaso-inner {
+        position: relative;
+    }
+
+.pasoapaso .nav-tabs > li.active > a, .pasoapaso .nav-tabs > li.active > a:hover, .pasoapaso .nav-tabs > li.active > a:focus {
+    color: #555555;
+    cursor: default;
+    border: 0;
+    border-bottom-color: transparent;
+}
+
+span.round-tab {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    display: inline-block;
+    border-radius: 100px;
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    font-size: 25px;
+}
+
+span.round-tab i{
+    color:#555555;
+}
+.pasoapaso li.active span.round-tab {
+    background: #fff;
+    border: 2px solid #33414e;
+    
+}
+.pasoapaso li.active span.round-tab i{
+    color: #33414e;
+}
+
+span.round-tab:hover {
+    color: #333;
+    border: 2px solid #333;
+}
+
+.pasoapaso .nav-tabs > li {
+    width: 14.28%;
+}
+.pasoapaso3 .nav-tabs > li {
+    width: 33.33%;
+}
+/*  
+*   ################################################################################
+
+.pasoapaso li.active:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 1;
+    margin: 0 auto;
+    bottom: -17px;
+    border: 10px solid transparent;
+    border-bottom-color: #969696;
+}
+*   ################################################################################
+*/
+.pasoapaso li:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 0;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 5px solid transparent;
+    border-bottom-color: #5bc0de;
+    transition: 0.1s ease-in-out;
+}
+
+
+
+.pasoapaso .nav-tabs > li a {
+    width: 50px;
+    height: 50px;
+    margin: 20px auto;
+    border-radius: 100%;
+    padding: 0;
+}
+
+    .pasoapaso .nav-tabs > li a:hover {
+        background: transparent;
+    }
+
+.pasoapaso .tab-pane {
+    position: relative;
+    padding-top: 50px;
+}
+
+.pasoapaso h3 {
+    margin-top: 0;
+}
+.step1 .row {
+    margin-bottom:10px;
+}
+.step_21 {
+    border :1px solid #eee;
+    border-radius:5px;
+    padding:10px;
+}
+.step33 {
+    border:1px solid #ccc;
+    border-radius:5px;
+    padding-left:10px;
+    margin-bottom:10px;
+}
+.dropselectsec {
+    width: 68%;
+    padding: 6px 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #333;
+    margin-left: 10px;
+    outline: none;
+    font-weight: normal;
+}
+.dropselectsec1 {
+    width: 74%;
+    padding: 6px 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #333;
+    margin-left: 10px;
+    outline: none;
+    font-weight: normal;
+}
+.mar_ned {
+    margin-bottom:10px;
+}
+.wdth {
+    width:25%;
+}
+.birthdrop {
+    padding: 6px 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #333;
+    margin-left: 10px;
+    width: 16%;
+    outline: 0;
+    font-weight: normal;
+}
+
+
+/* according menu */
+
+
+@media( max-width : 585px ) 
+	
+
+{
+.progress_pasoapaso3 {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #048BFF;
+    height: 3px;
+    width: 67%;
+    left: 62px;
+    top: 33%;
+    position: absolute;
+}
+	.clip-me {
+    clip-path: polygon(6% 100%, 13% 0%, 57% 0%, 50% 100%);
+    position: relative;
+	left:0px;
+		visibility: hidden;
+	
+}
+	.top-bar .top-bar-right .btn-link {
+    margin: -47px 3px;
+    color: #ddd;
+}
+	.progress_pasoapaso {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #048BFF;
+	  height: 3px;
+	width: 85%;
+	left: 20px;
+	  top: 32%;
+	position: absolute;
+}
+		.progress_pasoapaso2 {
+       height: 4px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 84%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 50%;
+    z-index: 1;
+}
+
+.barra_pasoapaso {
+    float: left;
+    width: 0;
+    height: 5px;
+    font-size: 12px;
+    color: #ffffff;
+    text-align: center;
+    background-color: #66CC17;
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    -webkit-transition: width 0.6s ease;
+    transition: width 0.6s ease;
+	
+	
+}
+	.connecting-line2 {
+    height:3px;
+    background: #048BFF;
+    position: absolute;
+    width: 85%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 30%;
+    z-index: 1;
+}
+	
+	
+	.connecting-line {
+    height: 2px;
+    background: #048BFF;
+    position: absolute;
+    width: 76%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 38%;
+    z-index: 1;
+}
+.pasoapaso2 .nav-tabs > li a {
+    width: 25px;
+    height: 25px;
+    margin: 20px auto;
+    border-radius: 50%;
+    padding: 0;
+}
+	.pasoapaso3 .nav-tabs > li a {
+    width: 25px;
+    height: 25px;
+    margin: 20px auto;
+    border-radius: 50%;
+    padding: 0;
+}
+	.txt_pasoapaso {
+   
+	text-align: center; 
+	margin-top: -20px; 
+	color: #0F155C;
+	font-size: 8px;
+   
+}
+
+    .pasoapaso {
+        width: 90%;
+        height: auto !important;
+    }
+
+    span.round-tab {
+        font-size: 10px;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+    }
+
+    .pasoapaso .nav-tabs > li a {
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+    }
+
+    .pasoapaso li.active:after {
+        content: " ";
+        position: absolute;
+        left: 35%;
+    }
+}
+
+@media only screen  and (min-width : 1224px) {
+
+
+.progress_pasoapaso3 {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #048BFF;
+	 height: 5px;
+	width: 66%;
+	margin-left: 10px;
+	top: 9px;
+	position: relative;
+}
+}
+.titulo_alumnos {
+    border-radius: 0;
+    background-color: #ffbd04;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: left;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    font-style: italic;
+    font-size: 18px;
+    padding: 10px;
+    max-height: 60px;
+}
+
+.titulo_alumnos2 {
+    border-radius: 0;
+    background-color: #4c2c54;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: left;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    font-style: italic;
+    font-size: 18px;
+    padding: 10px;
+    max-height: 60px;
+}
+
+.titulo_alumnos3 {
+    border-radius: 0;
+    background-color: #28b6dc;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: left;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    font-style: italic;
+    font-size: 18px;
+    padding: 10px;
+    max-height: 60px;
+}
+
+

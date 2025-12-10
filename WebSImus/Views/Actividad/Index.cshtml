@@ -1,0 +1,46 @@
+﻿@model SM.LibreriaComun.DTO.EntidadesOperadoras.ActividadDTO
+
+@{
+    ViewBag.Title = "Consulta Actividad";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Actividad", "Index", "Actividad")</li>
+        <li>@Html.ActionLink("Ver convenio", "Editar", "Convenio", new { Id = Model.ConvenioId }, null)</li>
+    </ul>
+    <div id="datosconvenio" class="panel-body">
+        <div class="col-md-12">
+            @Html.Action("DatosConvenio", new { Id = Model.ConvenioId })
+        </div>
+    </div>
+    <div class="col-md-12">
+        @Html.HiddenFor(model => model.ConvenioId)
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.ActionLink(" Exportar", "ExportTo", "Actividad", new { Id = Model.ConvenioId }, new { @class = "btn btn-warning glyphicon glyphicon-export" })
+                    @Html.ActionLink("Nuevo", "Crear", "Actividad", new { Id = Model.ConvenioId }, new { @class = "btn btn-success glyphicon glyphicon-plus-sign" })
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div id="Tabla">
+                        @Html.Action("GridViewPartial", Model.ConvenioId)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

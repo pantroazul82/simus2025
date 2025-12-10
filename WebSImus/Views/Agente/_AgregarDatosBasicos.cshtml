@@ -1,0 +1,522 @@
+﻿@model WebSImus.Models.AgenteModel
+
+<div class="modern-agent-form">
+    <!-- Encabezado -->
+    <div class="form-header">
+        <h2 class="form-title">
+            <i class="fas fa-user-plus"></i> Complete la Información
+        </h2>
+        <p class="form-subtitle">Básica del Agente</p>
+    </div>
+
+    <!-- Sección Foto y Reseña -->
+    <div class="form-section photo-section">
+        <div class="agent-photo-container">
+            <div class="photo-preview">
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </div>
+
+        <div class="agent-description">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Descripcion, "Reseña del Agente", new { @class = "form-label" })
+                @Html.TextAreaFor(model => model.Descripcion, new
+                {
+                    @class = "form-control description-box",
+                    rows = "5",
+                    placeholder = "Describa al agente en 200-300 caracteres...",
+                    maxlength = "300"
+                })
+                <div class="char-counter"><span id="descCounter">0</span>/300 caracteres</div>
+                @Html.ValidationMessageFor(model => model.Descripcion)
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección Datos de Identificación -->
+    <div class="form-section">
+        <h3 class="section-title">
+            <i class="fas fa-id-card"></i> Datos de Identificación
+        </h3>
+
+        @Html.HiddenFor(model => model.AgenteId)
+        @Html.HiddenFor(model => model.imagen)
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.TipoDocumento, "Tipo de documento", new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.TipoDocumento, (SelectList)ViewBag.listTipoDocumento, "Seleccione el tipo documento", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TipoDocumento)
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.NumeroDocumento, "Número de documento", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.NumeroDocumento, new
+                {
+                    @class = "form-control modern-input",
+                    placeholder = "Ingrese el número de documento",
+                    maxlength = "20",
+                    required = "required"
+                })
+                @Html.ValidationMessageFor(model => model.NumeroDocumento)
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.PrimerNombre, "Primer nombre", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.PrimerNombre, new
+                {
+                    @class = "form-control modern-input",
+                    placeholder = "Primer nombre",
+                    maxlength = "50",
+                    required = "required"
+                })
+                @Html.ValidationMessageFor(model => model.PrimerNombre)
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.SegundoNombre, "Segundo nombre", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.SegundoNombre, new
+                {
+                    @class = "form-control modern-input",
+                    placeholder = "Segundo nombre",
+                    maxlength = "50"
+                })
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.PrimerApellido, "Primer apellido", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.PrimerApellido, new
+                {
+                    @class = "form-control modern-input",
+                    placeholder = "Primer apellido",
+                    maxlength = "50",
+                    required = "required"
+                })
+                @Html.ValidationMessageFor(model => model.PrimerApellido)
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.SegundoApellido, "Segundo apellido", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.SegundoApellido, new
+                {
+                    @class = "form-control modern-input",
+                    placeholder = "Segundo apellido",
+                    maxlength = "50"
+                })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.NombreArtistico, "Nombre artístico", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.NombreArtistico, new
+                {
+                    @class = "form-control modern-input",
+                    placeholder = "Nombre artístico (si aplica)",
+                    maxlength = "100"
+                })
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.FechaNacimiento, "Fecha de nacimiento", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.FechaNacimiento, "{0:yyyy-MM-dd}", new
+                {
+                    @class = "form-control modern-input",
+                    placeholder = "AAAA-MM-DD",
+                    required = "required"
+                })
+                @Html.ValidationMessageFor(model => model.FechaNacimiento)
+            </div>
+
+            <div class="form-group col-md-3">
+                <label class="form-label">Sexo</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        @Html.RadioButtonFor(m => m.Sexo, "Femenino", new { @class = "radio-input" })
+                        <span class="radio-label"><i class="fas fa-venus"></i> Femenino</span>
+                    </label>
+                    <label class="radio-option">
+                        @Html.RadioButtonFor(m => m.Sexo, "Masculino", new { @class = "radio-input" })
+                        <span class="radio-label"><i class="fas fa-mars"></i> Masculino</span>
+                    </label>
+                </div>
+                @Html.ValidationMessageFor(model => model.Sexo)
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección Datos de Ubicación -->
+    <div class="form-section">
+        <h3 class="section-title">
+            <i class="fas fa-map-marker-alt"></i> Datos de Ubicación
+        </h3>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.CodigoDepartamento, "Departamento", new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.CodigoDepartamento, (SelectList)ViewBag.listDepartamentos, "Seleccione un departamento", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CodigoDepartamento, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.CodigoMunicipio, "Municipio", new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.CodigoMunicipio, (SelectList)ViewBag.listMunicipio, "Seleccione un municipio", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CodigoMunicipio, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.Area, "Área", new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.Area, (SelectList)ViewBag.listArea, "Seleccione un área", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Area)
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Direccion, "Dirección", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Direccion, new
+                {
+                    @class = "form-control modern-input",
+                    placeholder = "Dirección completa",
+                    maxlength = "200"
+                })
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.Telefono, "Teléfono", new { @class = "form-label" })
+                <div class="input-with-prefix">
+                    <span class="input-prefix">+57</span>
+                    @Html.TextBoxFor(model => model.Telefono, new
+                    {
+                        @class = "form-control",
+                        placeholder = "Número de teléfono",
+                        maxlength = "10",
+                    })
+                </div>
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.CorreoElectronico, "Correo electrónico", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.CorreoElectronico, new
+                {
+                    @class = "form-control modern-input",
+                    placeholder = "correo@ejemplo.com",
+                    maxlength = "100",
+                    type = "email",
+                    required = "required"
+                })
+                @Html.ValidationMessageFor(model => model.CorreoElectronico)
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                @Html.LabelFor(model => model.linkPortafolio, "Enlace a portafolio", new { @class = "form-label" })
+                <div class="input-with-icon">
+                    @Html.TextBoxFor(model => model.linkPortafolio, new
+                    {
+                        @class = "form-control modern-input",
+                        placeholder = "https://mi-portafolio.com",
+                        maxlength = "200",
+                        type = "url"
+                    })
+                    <i class="fas fa-link input-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie de formulario -->
+    <div class="form-footer">
+        <button type="button" class="btn btn-secondary-cancelar" onclick="window.history.back()">
+            <i class="fas fa-times"></i> Cancelar
+        </button>
+        <button type="submit" class="btn btn-rimary-crear" id="btnGuardar">
+            <i class="fas fa-save"></i> Guardar Agente
+        </button>
+    </div>
+</div>
+
+<!-- Estilos CSS modernos con colores específicos -->
+<style>
+    body {
+        font-size: 16px;
+    }
+    :root {
+        --primary-color: #4b3c8c;
+        --secondary-color: #281e52;
+        --white-color: #ffffff;
+        --light-gray: #f5f5f5;
+        --border-color: #ddd;
+        --text-color: #333;
+        --text-light: #777;
+        --select-arrow-color: #4b3c8c;
+        --select-arrow-hover: #281e52;
+        --select-arrow-size: 14px;
+    }
+
+    .modern-agent-form {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px;
+        background: var(--white-color);
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-header {
+        margin-bottom: 30px;
+        text-align: center;
+        color: var(--secondary-color);
+    }
+
+    .form-title {
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 5px;
+        font-size: 28px;
+    }
+
+    .form-subtitle {
+        color: var(--text-light);
+        font-size: 20px;
+    }
+
+    .form-section {
+        margin-bottom: 40px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .photo-section {
+        display: flex;
+        align-items: flex-start;
+        gap: 30px;
+    }
+
+    .agent-photo-container {
+        flex: 0 0 180px;
+    }
+
+    .photo-preview {
+        width: 180px;
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background-color: var(--light-gray);
+        border: 1px solid var(--border-color);
+        color: var(--primary-color);
+        font-size: 80px;
+    }
+
+    .agent-description {
+        flex: 1;
+    }
+
+    .description-box {
+        font-size: 14px;
+        height: 200px;
+        resize: none;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        transition: border-color 0.3s, box-shadow 0.3s;
+        padding: 12px;
+    }
+
+        .description-box:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(75, 60, 140, 0.1);
+            outline: none;
+        }
+
+    .section-title {
+        color: var(--primary-color);
+        font-size: 20px;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--secondary-color);
+    }
+
+    .modern-input, .form-control {
+        font-size: 14px;
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        transition: all 0.3s;
+        background-color: var(--light-gray);
+        height: 46px;
+        box-sizing: border-box;
+    }
+
+        .modern-input:focus, .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(75, 60, 140, 0.1);
+            background-color: var(--white-color);
+            outline: none;
+        }
+
+    select.form-control {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: none;
+        padding-right: 35px;
+        cursor: pointer;
+        position: relative;
+        transition: border-color 0.3s ease;
+    }
+
+        select.form-control:hover {
+            border-color: var(--select-arrow-hover);
+        }
+
+        select.form-control::after {
+            content: "\f078"; /* fa-chevron-down en FA6 */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--select-arrow-color);
+            font-size: var(--select-arrow-size);
+            transition: color 0.3s ease;
+        }
+
+        select.form-control:hover::after {
+            color: var(--select-arrow-hover);
+        }
+    .radio-group {
+        display: flex;
+        gap: 20px;
+        padding-top: 10px;
+    }
+
+    .radio-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+    }
+
+    .radio-input {
+        margin: 0;
+    }
+
+    .radio-label {
+        color: var(--text-color);
+    }
+
+    .input-with-icon {
+        position: relative;
+    }
+
+    .input-icon {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-light);
+    }
+
+    .input-with-prefix {
+        display: flex;
+        height: 46px;
+    }
+
+    .input-prefix {
+        padding: 0 10px;
+        background-color: var(--light-gray);
+        border: 1px solid var(--border-color);
+        border-right: none;
+        border-radius: 8px 0 0 8px;
+        color: var(--text-light);
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .input-with-prefix .form-control {
+        border-radius: 0 8px 8px 0;
+        flex: 1;
+    }
+
+    .char-counter {
+        text-align: right;
+        font-size: 12px;
+        color: var(--text-light);
+        margin-top: 5px;
+    }
+
+    .field-validation-error {
+        display: block;
+        margin-top: 5px;
+        font-size: 13px;
+        color: #e74c3c;
+    }
+
+    .form-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .btn-secondary-cancelar {
+        background-color: var(--light-gray);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+    }
+
+        .btn-secondary-cancelar:hover {
+            background-color: #e0e0e0;
+        }
+
+    .btn-rimary-crear {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+    }
+
+        .btn-rimary-crear:hover {
+            background-color: var(--secondary-color);
+        }
+</style>

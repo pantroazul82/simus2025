@@ -1,0 +1,2676 @@
+@model WebSImus.Models.FestivalVersionRegistroViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Formulario de registro de Versiones";
+}
+
+<!-- Forzar codificación UTF-8 para caracteres especiales -->
+<meta charset="utf-8" />
+
+<div class="modern-profile-form">
+    <div class="form-header">
+        <h2 class="form-title"><i class="fas fa-calendar-alt"></i> Formulario de registro de Versiones</h2>
+    </div>
+
+    @if (TempData["Msg"] != null)
+    {
+        <div class="alert alert-success">@TempData["Msg"]</div>
+    }
+    @Html.ValidationSummary(false, "", new { @class = "alert alert-error text-warning" })
+
+    @using (Html.BeginForm("RegistrarVersion", "Festivales", FormMethod.Post, new { @id = "frmRegistrarVersion", @class = "form-horizontal", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.FestivalId)
+        @Html.HiddenFor(m => m.EsEdicion)
+        @Html.HiddenFor(m => m.SeccionActiva)
+        @Html.HiddenFor(m => m.LocalizacionesTemporalesJson, new { @id = "LocalizacionesTemporalesJson" })
+
+        <!-- Acordeón -->
+        <div class="panel-group" id="accordionVersiones" role="tablist" aria-multiselectable="false">
+
+            <!-- Sección: Generalidades -->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingGeneralidades" style="background-color:#e8f5f4; border-bottom:2px solid #2c9c94;">
+                    <h4 class="panel-title" style="margin:0;">
+                        <a role="button" data-toggle="collapse" data-parent="#accordionVersiones" href="#collapseGeneralidades" aria-expanded="true" aria-controls="collapseGeneralidades" style="display:block; padding:10px; text-decoration:none; color:#2c9c94; font-weight:bold;">
+                            <i class="fas fa-info-circle"></i> Generalidades
+                            <span class="pull-right"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseGeneralidades" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingGeneralidades" style="height: auto;">
+                    <div class="panel-body" style="padding:20px;">
+                        <p class="text-muted" style="margin-bottom:15px;">En esta secci&oacute;n se diligencia la informaci&oacute;n b&aacute;sica sobre el festival.</p>
+
+                        <!-- Versión del festival -->
+                        <div class="form-section">
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Versi&oacute;n del festival <span class="text-danger">*</span></label>
+                                    @Html.DropDownListFor(m => m.VersionNumero,
+                                        new SelectList(Enumerable.Range(1, 5).Select(i => new { Value = i, Text = i.ToString() }), "Value", "Text", Model.VersionNumero),
+                                        "",
+                                        new { @class = "form-control modern-input" })
+                                </div>
+                            </div>
+
+                            <!-- Nombre de la versión -->
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Nombre de la versi&oacute;n <span class="text-danger">*</span></label>
+                                    @Html.TextBoxFor(m => m.NombreVersion, new { @class = "form-control modern-input", placeholder = "Nombre de la versi\u00F3n" })
+                                </div>
+                            </div>
+
+                            <!-- Descripción -->
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Descripci&oacute;n <span class="text-danger">*</span></label>
+                                    @Html.TextAreaFor(m => m.Descripcion, 5, 10, new { @class = "form-control modern-input", placeholder = "Breve presentaci\u00F3n del evento", style = "height:auto;" })
+                                    <small class="text-muted">Nota: Breve presentaci&oacute;n del evento</small>
+                                </div>
+                            </div>
+
+                            <!-- Material multimedia -->
+                            <h4 class="section-subtitle" style="margin-top:20px; margin-bottom:10px; color:#2c9c94;">Material multimedia:</h4>
+                            <p class="text-muted" style="font-size:13px;">En este espacio podr&aacute; adjuntar archivos multimedia .PDF, .JPG, .PNG</p>
+
+                            @Html.HiddenFor(m => m.UrlPrograma)
+                            @Html.HiddenFor(m => m.UrlAfiche)
+                            @Html.HiddenFor(m => m.UrlLogo)
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered" style="margin-bottom:20px;">
+                                    <thead style="background-color:#2c9c94; color:#fff;">
+                                        <tr>
+                                            <th style="width:25%;">Evidencia</th>
+                                            <th style="width:40%; text-align:center;">Opciones</th>
+                                            <th style="width:35%; text-align:center;">Archivo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="vertical-align:middle; font-weight:bold;">Programa</td>
+                                            <td style="text-align:center; vertical-align:middle;">
+                                                <label class="btn btn-primary btn-sm" style="margin-right:5px; margin-bottom:0; cursor:pointer;">
+                                                    <i class="fas fa-upload"></i> Subir
+                                                    <input type="file" name="ArchivoPrograma" id="ArchivoPrograma" style="display:none;" accept=".pdf,.jpg,.jpeg,.png" class="archivo-input" data-tipo="Programa" />
+                                                </label>
+                                                <button type="button" class="btn btn-danger btn-sm btn-eliminar-archivo" data-tipo="Programa" style="@(string.IsNullOrWhiteSpace(Model.UrlPrograma) ? "display:none;" : "")">Eliminar</button>
+                                            </td>
+                                            <td style="text-align:center; vertical-align:middle;" id="preview-Programa">
+                                                @if (!string.IsNullOrWhiteSpace(Model.UrlPrograma))
+                                                {
+                                                    <a href="@Url.Content(Model.UrlPrograma)" target="_blank" class="text-primary">
+                                                        <i class="fas fa-file"></i> Ver archivo
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">Sin archivo</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="vertical-align:middle; font-weight:bold;">Afiche <span class="text-danger">*</span></td>
+                                            <td style="text-align:center; vertical-align:middle;">
+                                                <label class="btn btn-primary btn-sm" style="margin-right:5px; margin-bottom:0; cursor:pointer;">
+                                                    <i class="fas fa-upload"></i> Subir
+                                                    <input type="file" name="ArchivoAfiche" id="ArchivoAfiche" style="display:none;" accept=".jpg,.jpeg,.png" class="archivo-input" data-tipo="Afiche" />
+                                                </label>
+                                                <button type="button" class="btn btn-danger btn-sm btn-eliminar-archivo" data-tipo="Afiche" style="@(string.IsNullOrWhiteSpace(Model.UrlAfiche) ? "display:none;" : "")">Eliminar</button>
+                                            </td>
+                                            <td style="text-align:center; vertical-align:middle;" id="preview-Afiche">
+                                                @if (!string.IsNullOrWhiteSpace(Model.UrlAfiche))
+                                                {
+                                                    <a href="@Url.Content(Model.UrlAfiche)" target="_blank" class="text-primary">
+                                                        <i class="fas fa-file"></i> Ver archivo
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">Sin archivo</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="vertical-align:middle; font-weight:bold;">Logo</td>
+                                            <td style="text-align:center; vertical-align:middle;">
+                                                <label class="btn btn-primary btn-sm" style="margin-right:5px; margin-bottom:0; cursor:pointer;">
+                                                    <i class="fas fa-upload"></i> Subir
+                                                    <input type="file" name="ArchivoLogo" id="ArchivoLogo" style="display:none;" accept=".jpg,.jpeg,.png" class="archivo-input" data-tipo="Logo" />
+                                                </label>
+                                                <button type="button" class="btn btn-danger btn-sm btn-eliminar-archivo" data-tipo="Logo" style="@(string.IsNullOrWhiteSpace(Model.UrlLogo) ? "display:none;" : "")">Eliminar</button>
+                                            </td>
+                                            <td style="text-align:center; vertical-align:middle;" id="preview-Logo">
+                                                @if (!string.IsNullOrWhiteSpace(Model.UrlLogo))
+                                                {
+                                                    <a href="@Url.Content(Model.UrlLogo)" target="_blank" class="text-primary">
+                                                        <i class="fas fa-file"></i> Ver archivo
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">Sin archivo</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Tipo de ingreso (dinámico desde BD) -->
+                            <h4 class="section-subtitle" style="margin-top:20px; margin-bottom:10px; color:#2c9c94;">Tipo de ingreso:</h4>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    @if (Model.TiposIngreso != null && Model.TiposIngreso.Any())
+                                    {
+                                        for (int i = 0; i < Model.TiposIngreso.Count; i++)
+                                        {
+                                            <div class="checkbox">
+                                                <label>
+                                                    @Html.HiddenFor(m => m.TiposIngreso[i].Id)
+                                                    @Html.HiddenFor(m => m.TiposIngreso[i].Nombre)
+                                                    @Html.CheckBoxFor(m => m.TiposIngreso[i].Selected)
+                                                    @Model.TiposIngreso[i].Nombre
+                                                </label>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="text-muted">No hay tipos de ingreso configurados.</div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Territorio Sonoro -->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTerritorio" style="background-color:#e8f5f4; border-bottom:2px solid #2c9c94;">
+                    <h4 class="panel-title" style="margin:0;">
+                        <a role="button" data-toggle="collapse" data-parent="#accordionVersiones" href="#collapseTerritorio" aria-expanded="false" aria-controls="collapseTerritorio" class="collapsed" style="display:block; padding:10px; text-decoration:none; color:#2c9c94; font-weight:bold;">
+                            <i class="fas fa-map-marker-alt"></i> Territorios sonoros
+                            <span class="pull-right"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTerritorio" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTerritorio">
+                    <div class="panel-body" style="padding:20px;">
+                        <p class="text-muted" style="margin-bottom:15px;">
+                            Los Territorios Sonoros (TS) son espacios simb&oacute;licos construidos a partir de la identidad y pr&aacute;cticas de las comunidades, donde los sonidos y la m&uacute;sica desempe&ntilde;an un papel central.
+                        </p>
+
+                        <p style="margin-bottom:10px;">
+                            Relacione las expresiones socio-musicales del evento con alg&uacute;n TS.
+                        </p>
+
+                        <p style="margin-bottom:15px;">
+                            Recuerde que:
+                        </p>
+
+                        <ul style="margin-bottom:15px; padding-left:25px;">
+                            <li>Los TS no dependen del lugar en que se realiza el evento.</li>
+                            <li>Los nombres de los TS pueden hacer &eacute;nfasis en alg&uacute;n &aacute;mbito musical, pero se extienden a otras expresiones afines o relacionadas.</li>
+                            <li>Puede escoger varias opciones (si as&iacute; lo considera, de no ser necesario, seleccione N/A.</li>
+                        </ul>
+
+                        <h4 class="section-subtitle" style="margin-top:20px; margin-bottom:15px; color:#2c9c94;">Territorios sonoros:</h4>
+
+                        @{
+                            var listaTS = Model.TerritoriosSonoros ?? new List<WebSImus.Models.TerritorioSonoroSeleccionItem>();
+                            var mitad = (int)Math.Ceiling((listaTS.Count) / 2.0);
+                            var col1 = listaTS.Take(mitad).ToList();
+                            var col2 = listaTS.Skip(mitad).ToList();
+                        }
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                @foreach (var item in col1)
+                                {
+                                    <div class="checkbox">
+                                        <label style="font-weight:normal;">
+                                            <input type="checkbox"
+                                                   name="TerritoriosSeleccionados"
+                                                   value="@item.Id"
+                                                   class="ts-option"
+                                                   id="ts_@item.Id"
+                                                   data-ninguna="@(item.EsNinguna ? "true" : "false")"
+                                                   @(item.Selected ? "checked=\"checked\"" : null) />
+                                            <span>@Html.Raw(System.Web.HttpUtility.HtmlEncode(item.Nombre))</span>
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @foreach (var item in col2)
+                                {
+                                    <div class="checkbox">
+                                        <label style="font-weight:normal;">
+                                            <input type="checkbox"
+                                                   name="TerritoriosSeleccionados"
+                                                   value="@item.Id"
+                                                   class="ts-option"
+                                                   id="ts_@item.Id"
+                                                   data-ninguna="@(item.EsNinguna ? "true" : "false")"
+                                                   @(item.Selected ? "checked=\"checked\"" : null) />
+                                            <span>@Html.Raw(System.Web.HttpUtility.HtmlEncode(item.Nombre))</span>
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Campo de prácticas musicales -->
+                        <div class="form-row" style="margin-top:20px;">
+                            <div class="form-group col-md-12">
+                                <label class="form-label">&#191;Qu&#233; pr&#225;cticas musicales congrega? (Se habilita al seleccionar N/A)</label>
+                                @Html.TextBoxFor(m => m.PracticasMusicalesTS, new { @class = "form-control modern-input", placeholder = "\u00BFQu\u00E9 pr\u00E1cticas musicales congrega?" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Localización -->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingLocalizacion" style="background-color:#e8f5f4; border-bottom:2px solid #2c9c94;">
+                    <h4 class="panel-title" style="margin:0;">
+                        <a role="button" data-toggle="collapse" data-parent="#accordionVersiones" href="#collapseLocalizacion" aria-expanded="false" aria-controls="collapseLocalizacion" class="collapsed" style="display:block; padding:10px; text-decoration:none; color:#2c9c94; font-weight:bold;">
+                            <i class="fas fa-map"></i> Localizaci&oacute;n
+                            <span class="pull-right"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseLocalizacion" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLocalizacion">
+                    <div class="panel-body" style="padding:20px;">
+                        <p class="text-muted" style="margin-bottom:15px;">En esta secci&oacute;n se diligencia la informaci&oacute;n sobre el lugar en el que se desarrolla la versi&oacute;n del festival.</p>
+
+                        <!-- Botón para agregar localización -->
+                        <div style="margin-bottom:15px; text-align:right;">
+                            <button type="button" class="btn btn-primary" id="btnAgregarLocalizacion" style="background-color:#2c9c94; border-color:#2c9c94;">
+                                <i class="fas fa-plus"></i> Agregar localizaci&oacute;n
+                            </button>
+                        </div>
+
+                        <!-- Grilla de localizaciones -->
+                        <div id="gridLocalizacionesContainer">
+                            @if (Model.Id > 0)
+                            {
+                                @Html.Action("GridLocalizacionesPartial", new { versionId = Model.Id })
+                            }
+                            else
+                            {
+                                <div id="tablaLocalizacionesTemporalesContainer" style="display:none; margin-top:15px;">
+                                    <table class="table table-bordered table-striped">
+                                        <thead style="background-color:#2c9c94; color:#fff;">
+                                            <tr>
+                                                <th>Departamento</th>
+                                                <th>Municipio</th>
+                                                <th>Zona</th>
+                                                <th style="text-align:center;">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyLocalizacionesTemporales"></tbody>
+                                    </table>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Tiempo -->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTiempo" style="background-color:#e8f5f4; border-bottom:2px solid #2c9c94;">
+                    <h4 class="panel-title" style="margin:0;">
+                        <a role="button" data-toggle="collapse" data-parent="#accordionVersiones" href="#collapseTiempo" aria-expanded="false" aria-controls="collapseTiempo" class="collapsed" style="display:block; padding:10px; text-decoration:none; color:#2c9c94; font-weight:bold;">
+                            <i class="fas fa-clock"></i> Tiempo
+                            <span class="pull-right"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTiempo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTiempo">
+                    <div class="panel-body" style="padding:20px;">
+                        <p class="text-muted" style="margin-bottom:15px;">En esta secci&oacute;n se diligencia informaci&oacute;n sobre la duraci&oacute;n y fecha de realizaci&oacute;n del festival.</p>
+
+                        <div class="form-section">
+                            <!-- Fila con Fecha inicio y Fecha fin -->
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Fecha inicio <span class="text-danger">*</span></label>
+                                    @Html.TextBoxFor(m => m.FechaInicio, "{0:yyyy-MM-dd}", new { @class = "form-control modern-input datepicker", placeholder = "yyyy-mm-dd", @id = "fechaInicio", autocomplete = "off" })
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Fecha fin <span class="text-danger">*</span></label>
+                                    @Html.TextBoxFor(m => m.FechaFin, "{0:yyyy-MM-dd}", new { @class = "form-control modern-input datepicker", placeholder = "yyyy-mm-dd", @id = "fechaFin", autocomplete = "off" })
+                                </div>
+                            </div>
+                            <!-- Fila con Mes de realización y Duración del evento -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Mes de realizaci&oacute;n <span class="text-danger">*</span></label>
+                                    @Html.DropDownListFor(m => m.MesRealizacion,
+                                        new SelectList(new List<SelectListItem>
+                                        {
+                                            new SelectListItem { Value = "1", Text = "Enero" },
+                                            new SelectListItem { Value = "2", Text = "Febrero" },
+                                            new SelectListItem { Value = "3", Text = "Marzo" },
+                                            new SelectListItem { Value = "4", Text = "Abril" },
+                                            new SelectListItem { Value = "5", Text = "Mayo" },
+                                            new SelectListItem { Value = "6", Text = "Junio" },
+                                            new SelectListItem { Value = "7", Text = "Julio" },
+                                            new SelectListItem { Value = "8", Text = "Agosto" },
+                                            new SelectListItem { Value = "9", Text = "Septiembre" },
+                                            new SelectListItem { Value = "10", Text = "Octubre" },
+                                            new SelectListItem { Value = "11", Text = "Noviembre" },
+                                            new SelectListItem { Value = "12", Text = "Diciembre" }
+                                        }, "Value", "Text"),
+                                        "",
+                                        new { @class = "form-control modern-input select", @id = "mesRealizacion", data_container = "body", data_width = "100%", data_live_search = "false", @disabled = "disabled" })
+                                    @Html.HiddenFor(m => m.MesRealizacion, new { @id = "hdnMesRealizacion" })
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Duraci&oacute;n del evento en d&iacute;as <span class="text-danger">*</span></label>
+                                    @Html.TextBoxFor(m => m.DuracionDias, new { @class = "form-control modern-input", placeholder = "000", @type = "number", @min = "1", @id = "duracionDias", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Caracterización -->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingCaracterizacion" style="background-color:#e8f5f4; border-bottom:2px solid #2c9c94;">
+                    <h4 class="panel-title" style="margin:0;">
+                        <a role="button" data-toggle="collapse" data-parent="#accordionVersiones" href="#collapseCaracterizacion" aria-expanded="false" aria-controls="collapseCaracterizacion" class="collapsed" style="display:block; padding:10px; text-decoration:none; color:#2c9c94; font-weight:bold;">
+                            <i class="fas fa-list"></i> Caracterizaci&oacute;n
+                            <span class="pull-right"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseCaracterizacion" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCaracterizacion">
+                    <div class="panel-body" style="padding:20px;">
+                        <p class="text-muted" style="margin-bottom:15px;">En esta secci&oacute;n se diligencia informaci&oacute;n sobre las caracter&iacute;sticas del festival.</p>
+
+                        <div class="form-row">
+                            <!-- Columna izquierda -->
+                            <div class="form-group col-md-6">
+                                <!-- Tipología -->
+                                <div class="form-group">
+                                    <label class="form-label">Tipolog&iacute;a <span class="text-danger">*</span></label>
+                                    <small class="text-muted" style="display:block; margin-bottom:5px;">Nota: tipo de evento.</small>
+                                    @Html.DropDownListFor(m => m.IdTipologia,
+                                        new SelectList(ViewBag.Tipologias ?? new List<SM.Datos.DTO.Festivales.TipologiaDTO>(), "Id", "Nombre"),
+                                        "Seleccione...",
+                                        new { @id = "tipologiaSelect", @class = "form-control modern-input" })
+                                </div>
+
+                                <!-- Modalidad de participación -->
+                                <div class="form-group">
+                                    <label class="form-label">Modalidad de participaci&oacute;n <span class="text-danger">*</span></label>
+                                    <small class="text-muted" style="display:block; margin-bottom:10px;">Nota: Forma en la que los participantes adquirieron un espacio en el evento.</small>
+                                    @if (Model.ModalidadesParticipacion != null && Model.ModalidadesParticipacion.Any())
+                                    {
+                                        for (int i = 0; i < Model.ModalidadesParticipacion.Count; i++)
+                                        {
+                                            var modalidad = Model.ModalidadesParticipacion[i];
+                                            <div class="checkbox">
+                                                <label>
+                                                    @Html.CheckBoxFor(m => m.ModalidadesParticipacion[i].Selected, new { @id = "mod_" + modalidad.Id.ToString(), @class = "chk-modalidad", data_id = modalidad.Id })
+                                                    @Html.HiddenFor(m => m.ModalidadesParticipacion[i].Id)
+                                                    @Html.HiddenFor(m => m.ModalidadesParticipacion[i].Nombre)
+                                                    @modalidad.Nombre
+                                                </label>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted"><em>No hay modalidades disponibles</em></p>
+                                    }
+                                </div>
+
+                                <!-- Expresiones artísticas o culturales -->
+                                <div class="form-group">
+                                    <label class="form-label">&iquest;Qu&eacute; expresiones art&iacute;sticas o culturales congrega el evento? <span class="text-danger">*</span></label>
+                                    @if (Model.ExpresionesArtisticas != null && Model.ExpresionesArtisticas.Any())
+                                    {
+                                        for (int i = 0; i < Model.ExpresionesArtisticas.Count; i++)
+                                        {
+                                            var expresion = Model.ExpresionesArtisticas[i];
+                                            <div class="checkbox">
+                                                <label>
+                                                    @Html.CheckBoxFor(m => m.ExpresionesArtisticas[i].Selected, new { @id = "exp_" + expresion.Id.ToString(), @class = "chk-expresion", data_id = expresion.Id })
+                                                    @Html.HiddenFor(m => m.ExpresionesArtisticas[i].Id)
+                                                    @Html.HiddenFor(m => m.ExpresionesArtisticas[i].Nombre)
+                                                    @expresion.Nombre
+                                                </label>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted"><em>No hay expresiones art&iacute;sticas disponibles</em></p>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Columna derecha -->
+                            <div class="form-group col-md-6">
+                                <!-- ¿Qué tipo de evento es? -->
+                                <div class="form-group">
+                                    <label class="form-label">&#191;Qu&#233; tipo de evento es?</label>
+                                    @Html.TextBoxFor(m => m.OtraTipologia, new { @id = "tipoEventoOtro", @class = "form-control modern-input", placeholder = "Escriba el tipo de evento", disabled = "disabled" })
+                                </div>
+
+                                <!-- ¿Qué modalidades posee? -->
+                                <div class="form-group">
+                                    <label class="form-label">&#191;Qu&#233; modalidades posee?</label>
+                                    @Html.TextBoxFor(m => m.OtraModalidadParticipacion, new { @id = "modalidadesOtra", @class = "form-control modern-input", placeholder = "Escriba las modalidades", disabled = "disabled" })
+                                </div>
+
+                                <!-- ¿Qué otra expresión artística? -->
+                                <div class="form-group">
+                                    <label class="form-label">&#191;Qu&#233; otra expresi&#243;n art&#237;stica?</label>
+                                    @Html.TextBoxFor(m => m.OtraExpresionArtistica, new { @id = "expresionOtra", @class = "form-control modern-input", placeholder = "Escriba la expresi\u00F3n art\u00EDstica", disabled = "disabled" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Financiación -->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFinanciacion" style="background-color:#e8f5f4; border-bottom:2px solid #2c9c94;">
+                    <h4 class="panel-title" style="margin:0;">
+                        <a role="button" data-toggle="collapse" data-parent="#accordionVersiones" href="#collapseFinanciacion" aria-expanded="false" aria-controls="collapseFinanciacion" class="collapsed" style="display:block; padding:10px; text-decoration:none; color:#2c9c94; font-weight:bold;">
+                            <i class="fas fa-dollar-sign"></i> Financiaci&oacute;n
+                            <span class="pull-right"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFinanciacion" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFinanciacion">
+                    <div class="panel-body" style="padding:20px;">
+                        <p class="text-muted">En esta secci&oacute;n se diligencia informaci&oacute;n sobre las fuentes de financiaci&oacute;n del festival.</p>
+
+                        <div class="form-section">
+                            <!-- Fila 1: Principal y Secundaria -->
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Principal fuente de financiaci&oacute;n <span class="text-danger">*</span></label>
+                                    <select name="FuenteFinanciacionPrincipal" id="fuentePrincipal" class="form-control modern-input">
+                                        <option value="">Seleccione...</option>
+                                        @if (ViewBag.FuentesFinanciacion != null)
+                                        {
+                                            foreach (var fuente in (List<SM.Datos.DTO.Festivales.FuenteFinanciacionDTO>)ViewBag.FuentesFinanciacion)
+                                            {
+                                                var isSelected = Model != null && Model.FuenteFinanciacionPrincipal.HasValue && Model.FuenteFinanciacionPrincipal.Value == fuente.Id;
+                                                <option value="@fuente.Id" @(isSelected ? "selected=\"selected\"" : "")>@fuente.Nombre</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Fuente de financiaci&oacute;n secundaria <span class="text-danger">*</span></label>
+                                    <select name="FuenteFinanciacionSecundaria" id="fuenteSecundaria" class="form-control modern-input">
+                                        <option value="">Seleccione...</option>
+                                        @if (ViewBag.FuentesFinanciacion != null)
+                                        {
+                                            foreach (var fuente in (List<SM.Datos.DTO.Festivales.FuenteFinanciacionDTO>)ViewBag.FuentesFinanciacion)
+                                            {
+                                                var isSelected = Model != null && Model.FuenteFinanciacionSecundaria.HasValue && Model.FuenteFinanciacionSecundaria.Value == fuente.Id;
+                                                <option value="@fuente.Id" @(isSelected ? "selected=\"selected\"" : "")>@fuente.Nombre</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Fila 2: Campos de "Otra" fuente (separados para Principal y Secundaria) -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">&#191;Qu&#233; otra fuente de financiaci&#243;n principal?</label>
+                                    <input type="text" name="OtraFuenteFinanciacionPrimaria" id="fuenteOtraPrincipal" class="form-control modern-input" placeholder="Especifique la fuente principal" value="@(Model != null ? Model.OtraFuenteFinanciacionPrimaria : "")" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">&#191;Qu&#233; otra fuente de financiaci&#243;n secundaria?</label>
+                                    <input type="text" name="OtraFuenteFinanciacionSecundaria" id="fuenteOtraSecundaria" class="form-control modern-input" placeholder="Especifique la fuente secundaria" value="@(Model != null ? Model.OtraFuenteFinanciacionSecundaria : "")" />
+                                </div>
+                            </div>
+
+                            <!-- Fila 3: Uso de estampilla Procultura -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Uso de estampilla Procultura <span class="text-danger">*</span></label>
+                                    <div style="margin-top:6px;">
+                                        <label class="radio-inline" style="margin-right:15px;">
+                                            <input type="radio" name="UsaEstampillaProcultura" id="estampillaSi" value="true" @(Model != null && Model.UsaEstampillaProcultura == true ? "checked=\"checked\"" : "") /> S&iacute;
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="UsaEstampillaProcultura" id="estampillaNo" value="false" @(Model != null && Model.UsaEstampillaProcultura == false ? "checked=\"checked\"" : "") /> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Contacto -->
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingContacto" style="background-color:#e8f5f4; border-bottom:2px solid #2c9c94;">
+                    <h4 class="panel-title" style="margin:0;">
+                        <a role="button" data-toggle="collapse" data-parent="#accordionVersiones" href="#collapseContacto" aria-expanded="false" aria-controls="collapseContacto" class="collapsed" style="display:block; padding:10px; text-decoration:none; color:#2c9c94; font-weight:bold;">
+                            <i class="fas fa-address-book"></i> Contacto
+                            <span class="pull-right"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseContacto" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingContacto">
+                    <div class="panel-body" style="padding:20px;">
+                        <p class="text-muted" style="margin-bottom:15px;">En esta secci&oacute;n se diligencia informaci&oacute;n sobre los datos de contacto de los organizadores del festival.</p>
+
+                        <div class="form-section">
+                            <!-- Directoria -->
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Directoria <span class="text-danger">*</span></label>
+                                    @Html.TextBoxFor(m => m.Directoria, new { @class = "form-control modern-input", placeholder = "Directoria" })
+                                </div>
+                            </div>
+
+                            <!-- ¿Pertenece a una organización o colectivo? -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">&#191;Pertenece a una organizaci&#243;n o colectivo?</label>
+                                    <div style="margin-top:6px;">
+                                        <label class="radio-inline" style="margin-right:15px;">
+                                            <input type="radio" name="PerteneceOrganizacion" id="perteneceOrgSi" value="true" /> S&iacute;
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="PerteneceOrganizacion" id="perteneceOrgNo" value="false" /> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Nombre de la organización -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Nombre de la organizaci&oacute;n</label>
+                                    <input type="text" id="nombreOrganizacion" name="NombreOrganizacion" value="@Model.NombreOrganizacion" class="form-control modern-input" placeholder="Nombre de la organizaci&oacute;n" disabled />
+                                </div>
+                            </div>
+
+                            <!-- Tipo de organizador -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Tipo de organizador <span class="text-danger">*</span></label>
+                                    <select id="tipoOrganizadorSelect" name="TipoOrganizador" class="form-control modern-input">
+                                        <option value="">Combo</option>
+                                        <option value="Público">P&uacute;blico</option>
+                                        <option value="Privado">Privado</option>
+                                        <option value="Mixto">Mixto</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">&#191;Qu&#233; otro tipo de organizador?</label>
+                                    <input type="text" id="otroTipoOrganizador" name="OtroTipoOrganizador" value="@Model.OtroTipoOrganizador" class="form-control modern-input" placeholder="&#191;Qu&#233; otro tipo de organizador?" disabled />
+                                    <small class="text-muted">Nota: Personas o organizaciones que pertenecen al grupo gestor del festival</small>
+                                </div>
+                            </div>
+
+                            <!-- Correo electrónico de contacto -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Correo electr&oacute;nico de contacto <span class="text-danger">*</span></label>
+                                    <!-- Se elimina la validaci&oacute;n de formato de email cambiando el tipo a text -->
+                                    <input type="text" name="CorreoContacto" value="@Model.CorreoContacto" class="form-control modern-input" placeholder="ejemplo@ejemplo.com" />
+                                    <small class="text-muted">ejemplo@ejemplo.com</small>
+                                </div>
+                            </div>
+
+                            <!-- Redes sociales y enlaces -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-3">
+                                    <label class="form-label">Instagram</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" style="background-color:#f5f5f5; border:1px solid #ddd; border-right:none; padding:6px 10px; font-size:12px; color:#666;">instagram.com/</span>
+                                        <input type="text" name="Instagram" value="@Model.Instagram" class="form-control modern-input" placeholder="nombre_usuario" style="border-left:none;" />
+                                    </div>
+                                    <small class="text-muted">Ingrese solo el nombre de usuario</small>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label">Facebook</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" style="background-color:#f5f5f5; border:1px solid #ddd; border-right:none; padding:6px 10px; font-size:12px; color:#666;">facebook.com/</span>
+                                        <input type="text" name="Facebook" value="@Model.Facebook" class="form-control modern-input" placeholder="nombre_usuario" style="border-left:none;" />
+                                    </div>
+                                    <small class="text-muted">Ingrese solo el nombre de usuario</small>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label">P&aacute;gina WEB</label>
+                                    <input type="text" name="PaginaWeb" value="@Model.PaginaWeb" class="form-control modern-input" placeholder="P&aacute;gina WEB" />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label">Otro enlace</label>
+                                    <input type="text" name="OtroEnlace" value="@Model.OtroEnlace" class="form-control modern-input" placeholder="Otro enlace" />
+                                </div>
+                            </div>
+
+                            <!-- Teléfono celular -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Tel&eacute;fono celular:</label>
+                                    <input type="tel" name="TelefonoCelular" value="@Model.TelefonoCelular" class="form-control modern-input" placeholder="Ejemplo: 6041234567" />
+                                    <small class="text-muted">Nota: El n&#250;mero de tel&#233;fono (Ej: agregar el indicativo de la ciudad + n&#250;mero de tel&#233;fono. Ejemplo 6041234567.</small>
+                                </div>
+                            </div>
+
+                            <!-- Entidades aliadas -->
+                            <div class="form-row" style="margin-top:20px;">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Entidades aliadas</label>
+                                    <div style="margin-top:6px;">
+                                        <label class="radio-inline" style="margin-right:15px;">
+                                            <input type="radio" name="TieneEntidadesAliadas" id="entidadesAliadasSi" value="true" /> S&iacute;
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="TieneEntidadesAliadas" id="entidadesAliadasNo" value="false" /> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Formulario de entidades aliadas (oculto inicialmente) -->
+                            <div id="seccionEntidadesAliadas" style="display:none; margin-top:15px; padding:15px; border:1px solid #ddd; border-radius:4px; background-color:#f9f9f9;">
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label">Nombre <span class="text-danger">*</span></label>
+                                        <input type="text" id="nombreEntidadAliada" class="form-control modern-input" placeholder="Nombre" />
+                                    </div>
+                                </div>
+
+                                <div class="form-row" style="margin-top:10px;">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label">Naturaleza</label>
+                                        <select id="naturalezaEntidadAliada" class="form-control modern-input">
+                                            <option value="">Seleccione...</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-row" style="margin-top:10px;">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label">Correo electr&oacute;nico</label>
+                                        <!-- Se elimina la validaci&oacute;n de formato de email cambiando el tipo a text -->
+                                        <input type="text" id="correoEntidadAliada" class="form-control modern-input" placeholder="ejemplo@ejemplo.com" />
+                                        <small class="text-muted">ejemplo@ejemplo.com</small>
+                                    </div>
+                                </div>
+
+                                <div class="form-row" style="margin-top:15px;">
+                                    <div class="form-group col-md-12 text-right">
+                                        <button type="button" class="btn btn-success" id="btnAgregarEntidadAliada">
+                                            <i class="fas fa-plus"></i> Agregar entidad aliada
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Tabla de entidades aliadas -->
+                                <div class="form-row" style="margin-top:15px;">
+                                    <div class="form-group col-md-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover" id="tablaEntidadesAliadas">
+                                                <thead style="background-color:#2c9c94; color:#fff;">
+                                                    <tr>
+                                                        <th style="width:40%;">Nombre</th>
+                                                        <th style="width:25%;">Naturaleza</th>
+                                                        <th style="width:25%;">Correo</th>
+                                                        <th style="width:10%; text-align:center;">Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbodyEntidadesAliadas">
+                                                    <!-- Se llenar&aacute; din&aacute;micamente -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Observaciones -->
+                            <div class="form-row" style="margin-top:20px;">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Observaciones:</label>
+                                    @Html.TextAreaFor(m => m.ObservacionesContacto, 5, 10, new { @class = "form-control modern-input", placeholder = "Observaciones", style = "height:auto;" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Botones de navegación -->
+        <div class="form-row" style="margin-top:25px;">
+            <div class="col-md-12 text-right">
+                <button type="submit" name="accion" value="Guardar" class="btn btn-primary">Guardar</button>
+                <button type
+                ="button" id="btnEnviarSolicitud" class="btn btn-success">Enviar Solicitud de Registro</button>
+                <button type="submit" name="accion" value="Cancelar" class="btn btn-default">Cancelar</button>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Modal para agregar/editar localización -->
+<div class="modal fade" id="modalLocalizacion" tabindex="-1" role="dialog" aria-labelledby="modalLocalizacionLabel" aria-hidden="true" 
+     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; overflow:auto; z-index:1050;">
+    <div class="modal-dialog modal-lg" style="position:relative; width:auto; max-width:900px; margin:30px auto; z-index:1051;">
+        <div class="modal-content" style="position:relative; background-color:#fff; border:1px solid rgba(0,0,0,.2); border-radius:6px; box-shadow:0 5px 15px rgba(0,0,0,.5); outline:0;">
+            <div class="modal-header" style="background-color:#2c9c94; color:#fff; padding:15px; border-bottom:1px solid #e5e5e5; border-radius:5px 5px 0 0;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar" style="color:#fff; opacity:1; float:right; font-size:21px; font-weight:700; line-height:1; text-shadow:none; background:transparent; border:0; cursor:pointer;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modalLocalizacionLabel" style="margin:0; line-height:1.42857143;">
+                    <i class="fas fa-map-marker-alt"></i> Formulario de localizaci&oacute;n
+                </h4>
+            </div>
+            <div class="modal-body" style="padding:25px; position:relative;">
+                <form id="formLocalizacion" onsubmit="return false;">
+                    <input type="hidden" id="localizacionId" value="" />
+
+                    <!-- Departamento -->
+                    <div class="form-group">
+                        <label for="departamentoSelect" class="form-label">
+                            Departamento <span class="text-danger">*</span>
+                        </label>
+                        <select id="departamentoSelect" class="form-control modern-input" required>
+                            <option value="">Combo</option>
+                        </select>
+                    </div>
+
+                    <!-- Municipio -->
+                    <div class="form-group">
+                        <label for="municipioSelect" class="form-label">
+                            Municipio <span class="text-danger">*</span>
+                        </label>
+                        <select id="municipioSelect" class="form-control modern-input" required disabled>
+                            <option value="">Combo</option>
+                        </select>
+                    </div>
+
+                    <!-- Zona -->
+                    <div class="form-group">
+                        <label for="zonaSelect" class="form-label">
+                            Zona <span class="text-danger">*</span>
+                        </label>
+                        <select id="zonaSelect" class="form-control modern-input" required>
+                            <option value="">Seleccione...</option>
+                        </select>
+                    </div>
+
+                    <!-- Titulación colectiva -->
+                    <div class="form-group" id="grupoTitulacionColectiva" style="display:none;">
+                        <label for="titulacionInput" class="form-label">
+                            Titulaci&oacute;n colectiva
+                        </label>
+                        <input type="text" id="titulacionInput" class="form-control modern-input" placeholder="Titulaci&oacute;n colectiva" disabled />
+                    </div>
+
+                    <!-- Zona con titulación colectiva -->
+                    <div class="form-group">
+                        <label for="zonaTitulacionSelect" class="form-label">
+                            Zona con titulaci&oacute;n colectiva <span class="text-danger">*</span>
+                        </label>
+                        <select id="zonaTitulacionSelect" class="form-control modern-input" required>
+                            <option value="">Seleccione...</option>
+                        </select>
+                    </div>
+
+                    <!-- Región OCAD -->
+                    <div class="form-group" id="divRegionOCAD">
+                        <label class="form-label">Regi&oacute;n OCAD <span class="text-danger">*</span></label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="chkCaribe" disabled />
+                                        Caribe
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="chkCentroOriente" disabled />
+                                        Centro Oriente
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="chkCentroSur" disabled />
+                                        Centro Sur
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="chkEjeCafetero" disabled />
+                                        Eje Cafetero
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="chkLlanos" disabled />
+                                        Llanos
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="chkPacifico" disabled />
+                                        Pac&iacute;fico
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardarLocalizacion" style="background-color:#2c9c94; border-color:#2c9c94;">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .modern-profile-form {
+        background: #fff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        margin-bottom: 30px;
+    }
+
+    .form-header {
+        border-bottom: 2px solid #2c9c94;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+
+    .form-title {
+        color: #2c9c94;
+        font-size: 24px;
+        margin: 0;
+    }
+
+    .form-section {
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        color: #2c9c94;
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .section-subtitle {
+        color: #2c9c94;
+        font-size: 16px;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -7.5px;
+        margin-right: -7.5px;
+    }
+
+    .form-group {
+        padding-left: 7.5px;
+        padding-right: 7.5px;
+        margin-bottom: 15px;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .modern-input {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 8px 12px;
+        transition: border-color 0.3s;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: 38px;
+    }
+
+    select.modern-input {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        padding-right: 30px;
+    }
+
+    .modern-input:focus {
+        border-color: #2c9c94;
+        box-shadow: 0 0 0 0.2rem rgba(44, 156, 148, 0.25);
+    }
+
+    .panel-default > .panel-heading {
+        background-color: #f5f5f5;
+        border-color: #ddd;
+    }
+
+    .panel-default {
+        border-color: #ddd;
+        margin-bottom: 10px;
+    }
+
+    .input-group {
+        display: flex;
+        width: 100%;
+    }
+
+    .input-group .input-group-addon {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        border-radius: 4px 0 0 4px;
+    }
+
+    .input-group .form-control {
+        flex: 1;
+        border-radius: 0 4px 4px 0;
+    }
+
+</style>
+
+@section scripts {
+<script type="text/javascript">
+(function () {
+    console.log('Script de RegistrarVersion cargado');
+    
+    // Guarda contra el error de tooltip que bloquea plugins.js
+    if (typeof jQuery !== 'undefined' && jQuery.fn && !jQuery.fn.tooltip) {
+        jQuery.fn.tooltip = function() { return this; };
+    }
+    if (typeof jQuery !== 'undefined' && jQuery.fn && !jQuery.fn.popover) {
+        jQuery.fn.popover = function() { return this; };
+    }
+
+    // Esperar a que jQuery esté disponible (puede tardar si DXR carga antes)
+    var checkjQuery = setInterval(function () {
+        if (typeof jQuery === 'undefined') return;
+        clearInterval(checkjQuery);
+        console.log('jQuery disponible, iniciando...');
+        initAccordion();
+        initLocalizacion();
+        initMaterialMultimedia();
+        initContacto();
+        initValidacionEnvio();
+    }, 50);
+
+    function initMaterialMultimedia() {
+        var $ = jQuery;
+
+        // Mostrar nombre de archivo seleccionado con preview clickeable
+        $('.archivo-input').on('change', function() {
+            var input = this;
+            var tipo = $(input).data('tipo');
+            var previewCell = $('#preview-' + tipo);
+            var btnEliminar = $('.btn-eliminar-archivo[data-tipo="' + tipo + '"]');
+
+            if (input.files && input.files[0]) {
+                var file = input.files[0];
+                var nombreArchivo = file.name;
+                
+                // Crear URL temporal para previsualizar el archivo
+                var urlTemp = URL.createObjectURL(file);
+                
+                // Crear enlace clickeable para ver el archivo
+                var linkHtml = '<a href="' + urlTemp + '" target="_blank" class="text-success">' +
+                               '<i class="fas fa-file"></i> ' + nombreArchivo + ' (nuevo)</a>';
+                
+                previewCell.html(linkHtml);
+                btnEliminar.show();
+            }
+        });
+
+        // Eliminar archivo
+        $('.btn-eliminar-archivo').on('click', function() {
+            var tipo = $(this).data('tipo');
+            var input = $('input[data-tipo="' + tipo + '"]');
+            var previewCell = $('#preview-' + tipo);
+            var hiddenUrl = $('#Url' + tipo);
+
+            // Limpiar input file
+            input.val('');
+            // Limpiar URL hidden
+            hiddenUrl.val('');
+            // Actualizar preview
+            previewCell.html('<span class="text-muted">Sin archivo</span>');
+            // Ocultar botón eliminar
+            $(this).hide();
+        });
+    }
+
+    function initAccordion() {
+        var $ = jQuery;
+
+        // Funciones utilitarias para mostrar/ocultar sin depender de Bootstrap
+        function showPanel(el) {
+            el.classList.add('show', 'in');
+            el.style.display = 'block';
+            el.style.height = 'auto';
+            el.setAttribute('aria-expanded', 'true');
+        }
+        function hidePanel(el) {
+            el.classList.remove('show', 'in');
+            el.style.display = 'none';
+            el.style.height = '0';
+            el.setAttribute('aria-expanded', 'false');
+        }
+
+        // Inicialización: forzar Generalidades visible por defecto
+        var allPanels = document.querySelectorAll('.panel-collapse');
+        allPanels.forEach(function (panel) { hidePanel(panel); });
+
+        var generalidadesPanel = document.getElementById('collapseGeneralidades');
+        if (generalidadesPanel) {
+            showPanel(generalidadesPanel);
+        }
+
+        // Click SOLO en los encabezados (no en los controles dentro del body)
+        document.querySelectorAll('.panel-heading a').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                // Solo interceptar si el clic fue directamente en el enlace o sus hijos inmediatos (iconos)
+                var target = e.target;
+                var isHeadingClick = (target === link || target.tagName === 'I' || target.tagName === 'SPAN');
+                
+                if (!isHeadingClick) return; // Dejar pasar clics en otros elementos
+
+                e.preventDefault();
+                e.stopPropagation();
+
+                var href = link.getAttribute('href');
+                if (!href || href.charAt(0) !== '#') return;
+
+                var targetPanel = document.querySelector(href);
+                if (!targetPanel) return;
+
+                // Cerrar todas las demás
+                allPanels.forEach(function (panel) {
+                    if (panel !== targetPanel) hidePanel(panel);
+                });
+
+                // Toggle del objetivo
+                if (targetPanel.classList.contains('show') || targetPanel.classList.contains('in')) {
+                    hidePanel(targetPanel);
+                } else {
+                    showPanel(targetPanel);
+                }
+            });
+        });
+
+        // Importante: evitar que clics dentro del panel-body cierren el acordeón
+        document.querySelectorAll('.panel-body').forEach(function(body) {
+            body.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+
+        // Lógica para Territorios Sonoros
+        initTerritoriosSonoros();
+        
+        // Lógica para la sección Tiempo
+        initTiempo();
+
+        // Lógica para la sección Caracterización
+        initCaracterizacion();
+
+        // Lógica para la sección Financiación
+        initFinanciacion();
+
+        // Lógica para la sección Contacto
+        initContacto();
+    }
+
+    function initTiempo() {
+        var $ = jQuery;
+        
+        var mesSelect = $('#mesRealizacion');
+        var hdnMes = $('#hdnMesRealizacion');
+        var duracionInput = $('#duracionDias');
+        var fechaInicioInput = $('#fechaInicio');
+        var fechaFinInput = $('#fechaFin');
+        
+        // Variable para evitar loops infinitos en cálculos
+        var calculando = false;
+        
+        // Función para parsear fecha en formato yyyy-mm-dd
+        function parsearFecha(fechaStr) {
+            if (!fechaStr || fechaStr.trim() === '') return null;
+            var partes = fechaStr.split('-');
+            if (partes.length !== 3) return null;
+            var anio = parseInt(partes[0], 10);
+            var mes = parseInt(partes[1], 10) - 1; // Los meses en JS van de 0-11
+            var dia = parseInt(partes[2], 10);
+            if (isNaN(dia) || isNaN(mes) || isNaN(anio)) return null;
+            return new Date(anio, mes, dia);
+        }
+        
+        // Función para formatear fecha como yyyy-mm-dd
+        function formatearFecha(fecha) {
+            if (!fecha) return '';
+            var anio = fecha.getFullYear();
+            var mes = ('0' + (fecha.getMonth() + 1)).slice(-2);
+            var dia = ('0' + fecha.getDate()).slice(-2);
+            return anio + '-' + mes + '-' + dia;
+        }
+        
+        // Función para calcular diferencia en días entre dos fechas
+        function calcularDiferenciaDias(fecha1, fecha2) {
+            var unDia = 24 * 60 * 60 * 1000; // milisegundos en un día
+            return Math.round((fecha2 - fecha1) / unDia) + 1; // +1 para incluir ambos días
+        }
+        
+        // Calcular mes y duración cuando cambian las fechas
+        function calcularDesdeFechas() {
+            if (calculando) return;
+            calculando = true;
+            
+            var fechaInicioStr = fechaInicioInput.val();
+            var fechaFinStr = fechaFinInput.val();
+            
+            if (!fechaInicioStr || !fechaFinStr) {
+                calculando = false;
+                return;
+            }
+            
+            var fechaInicio = parsearFecha(fechaInicioStr);
+            var fechaFin = parsearFecha(fechaFinStr);
+            
+            if (!fechaInicio || !fechaFin) {
+                calculando = false;
+                return;
+            }
+
+            // Validar que fecha fin no sea menor que fecha inicio
+            if (fechaFin < fechaInicio) {
+                alert('La fecha de cierre no puede ser menor a la fecha de inicio.');
+                fechaFinInput.val(''); // Limpiar fecha fin
+                duracionInput.val('');
+                calculando = false;
+                return;
+            }
+            
+            // Calcular duración
+            var duracion = calcularDiferenciaDias(fechaInicio, fechaFin);
+            duracionInput.val(duracion);
+            
+            // Calcular mes (usar el mes de la fecha de inicio)
+            var mes = fechaInicio.getMonth() + 1; // +1 porque getMonth() retorna 0-11
+            var mesStr = mes.toString();
+            
+            // Actualizar combo de mes respetando bootstrap-select
+            if (mesSelect.hasClass('select') && typeof mesSelect.selectpicker === 'function') {
+                mesSelect.selectpicker('val', mesStr);
+                mesSelect.selectpicker('refresh');
+            } else {
+                mesSelect.val(mesStr);
+            }
+            
+            // Actualizar hidden field
+            if (hdnMes.length) {
+                hdnMes.val(mesStr);
+            }
+            
+            calculando = false;
+        }
+        
+        // Eventos para cambios en fechas (calculan mes y duración)
+        fechaInicioInput.on('change changeDate', calcularDesdeFechas);
+        fechaFinInput.on('change changeDate', calcularDesdeFechas);
+        
+        // Inicializar hidden si ya hay valor
+        if (mesSelect.val() && hdnMes.length && !hdnMes.val()) {
+            hdnMes.val(mesSelect.val());
+        }
+    }
+
+    function initTerritoriosSonoros() {
+        var $ = jQuery;
+        var campoPracticas = $('#PracticasMusicalesTS');
+        var $ninguna = $('.ts-option[data-ninguna="true"]');
+        var $otros = $('.ts-option').not('[data-ninguna="true"]');
+
+        function actualizarEstadoCampo() {
+            if ($ninguna.length === 0) {
+                // Si no existe la opción "Ninguna" en el catálogo, mantener el campo habilitado siempre
+                campoPracticas.prop('disabled', false);
+                return;
+            }
+            if ($ninguna.is(':checked')) {
+                // Si "Ninguna" está marcada, habilitar el campo de prácticas
+                campoPracticas.prop('disabled', false);
+                // Desmarcar todos los demás
+                $otros.prop('checked', false);
+            } else {
+                // Deshabilitar y limpiar el campo
+                campoPracticas.prop('disabled', true).val('');
+            }
+        }
+
+        if ($ninguna.length) {
+            $ninguna.on('change', actualizarEstadoCampo);
+        }
+        $otros.on('change', function () {
+            if ($(this).is(':checked') && $ninguna.length) {
+                $ninguna.prop('checked', false);
+                actualizarEstadoCampo();
+            }
+        });
+
+        actualizarEstadoCampo();
+    }
+
+    // ============================================
+    // FUNCIONALIDAD DE CARACTERIZACIÓN
+    // ============================================
+    function initCaracterizacion() {
+        var $ = jQuery;
+
+        var tipologia = $('#tipologiaSelect');
+        var tipoEventoOtro = $('#tipoEventoOtro');
+
+        // Detectar checkbox "Otra" en modalidades buscando por texto del label
+        var modOtra = $('.chk-modalidad').filter(function() {
+            var labelText = $(this).closest('label').text().trim().toLowerCase();
+            return labelText === 'otra' || labelText.indexOf('otra') >= 0;
+        });
+        var modalidadesOtra = $('#modalidadesOtra');
+
+        // Detectar checkboxes en expresiones
+        var expOtra = $('.chk-expresion').filter(function() {
+            var labelText = $(this).closest('label').text().trim().toLowerCase();
+            return labelText === 'otra' || labelText.indexOf('otra') >= 0;
+        });
+        var expNinguna = $('.chk-expresion').filter(function() {
+            var labelText = $(this).closest('label').text().trim().toLowerCase();
+            return labelText === 'ninguna' || labelText === 'ninguno';
+        });
+        var expInputs = $('.chk-expresion');
+        var expresionOtra = $('#expresionOtra');
+
+        function actualizarTipologia() {
+            // Buscar el texto de la opción seleccionada
+            var textoSeleccionado = tipologia.find('option:selected').text().trim().toLowerCase();
+            var esOtra = (textoSeleccionado === 'otra' || textoSeleccionado.indexOf('otra') >= 0);
+            tipoEventoOtro.prop('disabled', !esOtra);
+            if (!esOtra) tipoEventoOtro.val('');
+        }
+
+        function actualizarModalidades() {
+            var habilitar = modOtra.is(':checked');
+            modalidadesOtra.prop('disabled', !habilitar);
+            if (!habilitar) modalidadesOtra.val('');
+        }
+
+        function actualizarEstadoExpresiones() {
+            var habilitarOtra = expOtra.is(':checked');
+            expresionOtra.prop('disabled', !habilitarOtra);
+            if (!habilitarOtra) expresionOtra.val('');
+        }
+
+        // Eventos
+        tipologia.on('change', actualizarTipologia);
+        modOtra.on('change', actualizarModalidades);
+        
+        // Lógica para Expresiones Artísticas (tipo Territorios Sonoros)
+        expNinguna.on('change', function() {
+            if ($(this).is(':checked')) {
+                // Si selecciona Ninguna, desmarcar las demás pero NO bloquearlas
+                expInputs.not(expNinguna).prop('checked', false);
+            }
+            actualizarEstadoExpresiones();
+        });
+
+        expInputs.not(expNinguna).on('change', function() {
+            if ($(this).is(':checked')) {
+                // Si selecciona otra opción, desmarcar Ninguna
+                expNinguna.prop('checked', false);
+            }
+            actualizarEstadoExpresiones();
+        });
+
+        // Estado inicial
+        actualizarTipologia();
+        actualizarModalidades();
+        
+        // Validar estado inicial de expresiones
+        if (expNinguna.is(':checked')) {
+            expInputs.not(expNinguna).prop('checked', false);
+        }
+        actualizarEstadoExpresiones();
+    }    // ============================================
+    // FUNCIONALIDAD DE FINANCIACIÓN
+    // ============================================
+    function initFinanciacion() {
+        var $ = jQuery;
+        var selPrincipal = $('#fuentePrincipal');
+        var selSecundaria = $('#fuenteSecundaria');
+        var txtOtraPrincipal = $('#fuenteOtraPrincipal');
+        var txtOtraSecundaria = $('#fuenteOtraSecundaria');
+
+        function actualizarOtraPrincipal() {
+            // La opción "Otra" debe tener un texto específico que se pueda identificar
+            var textoSeleccionado = selPrincipal.find('option:selected').text().toLowerCase();
+            var esOtra = textoSeleccionado.indexOf('otra') >= 0;
+            txtOtraPrincipal.prop('disabled', !esOtra);
+            if (!esOtra) txtOtraPrincipal.val('');
+        }
+
+        function actualizarOtraSecundaria() {
+            var textoSeleccionado = selSecundaria.find('option:selected').text().toLowerCase();
+            var esOtra = textoSeleccionado.indexOf('otra') >= 0;
+            txtOtraSecundaria.prop('disabled', !esOtra);
+            if (!esOtra) txtOtraSecundaria.val('');
+        }
+
+        selPrincipal.on('change', actualizarOtraPrincipal);
+        selSecundaria.on('change', actualizarOtraSecundaria);
+
+        // Estado inicial
+        actualizarOtraPrincipal();
+        actualizarOtraSecundaria();
+    }
+
+    // ============================================
+    // FUNCIONALIDAD DE CONTACTO
+    // ============================================
+    function initContacto() {
+        var $ = jQuery;
+        
+        // Referencias a los controles
+        var radioPerteneceOrgSi = $('#perteneceOrgSi');
+        var radioPerteneceOrgNo = $('#perteneceOrgNo');
+        var nombreOrganizacion = $('#nombreOrganizacion');
+        
+        var tipoOrganizadorSelect = $('#tipoOrganizadorSelect');
+        var otroTipoOrganizador = $('#otroTipoOrganizador');
+        
+        var radioEntidadesAliadasSi = $('#entidadesAliadasSi');
+        var radioEntidadesAliadasNo = $('#entidadesAliadasNo');
+        var seccionEntidadesAliadas = $('#seccionEntidadesAliadas');
+
+        // Array para almacenar entidades aliadas
+        var entidadesAliadas = [];
+
+        // Cargar catálogos
+        cargarTiposOrganizador();
+        cargarNaturalezasEntidad();
+
+        // Función para habilitar/deshabilitar "Nombre de la organización"
+        function actualizarNombreOrganizacion() {
+            var habilitar = radioPerteneceOrgSi.is(':checked');
+            nombreOrganizacion.prop('disabled', !habilitar);
+            if (!habilitar) {
+                nombreOrganizacion.val('');
+            }
+        }
+
+        // Función para habilitar/deshabilitar "¿Qué otro tipo de organizador?"
+        function actualizarOtroTipoOrganizador() {
+            var esOtro = (tipoOrganizadorSelect.val() === 'Otro');
+            otroTipoOrganizador.prop('disabled', !esOtro);
+            if (!esOtro) {
+                otroTipoOrganizador.val('');
+            }
+        }
+
+        // Función para mostrar/ocultar sección de entidades aliadas
+        function actualizarSeccionEntidadesAliadas() {
+            if (radioEntidadesAliadasSi.is(':checked')) {
+                seccionEntidadesAliadas.slideDown(300);
+            } else {
+                seccionEntidadesAliadas.slideUp(300);
+                // Limpiar la lista cuando se oculta
+                entidadesAliadas = [];
+                actualizarTablaEntidadesAliadas();
+            }
+        }
+
+        // Cargar tipos de organizador desde la base de datos
+        function cargarTiposOrganizador() {
+            console.log('cargarTiposOrganizador() ejecutándose...');
+            $.ajax({
+                url: '@Url.Action("ObtenerTiposOrganizador", "Festivales")',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log('Tipos de organizador recibidos:', data);
+                    var html = '<option value="">Seleccione...</option>';
+                    $.each(data, function(i, item) {
+                        html += '<option value="' + item.Value + '">' + item.Text + '</option>';
+                    });
+                    html += '<option value="Otro">Otro</option>';
+                    tipoOrganizadorSelect.html(html);
+                    console.log('Opciones cargadas en tipoOrganizadorSelect');
+                    
+                    // IMPORTANTE: Establecer valor en modo edición después de cargar las opciones
+                    @if (Model.EsEdicion && !string.IsNullOrEmpty(Model.TipoOrganizador))
+                    {
+                        <text>
+                        var tipoOrgValor = '@Model.TipoOrganizador';
+                        console.log('Intentando establecer tipo organizador:', tipoOrgValor);
+                        
+                        // Intentar primero por valor exacto
+                        tipoOrganizadorSelect.val(tipoOrgValor);
+                        
+                        // Si no funcionó, buscar por texto
+                        if (!tipoOrganizadorSelect.val()) {
+                            tipoOrganizadorSelect.find('option').each(function() {
+                                if ($(this).text().trim().toLowerCase() === tipoOrgValor.trim().toLowerCase()) {
+                                    $(this).prop('selected', true);
+                                    console.log('Seleccionado por texto:', $(this).text());
+                                }
+                            });
+                        }
+                        
+                        actualizarOtroTipoOrganizador();
+                        console.log('Valor final seleccionado:', tipoOrganizadorSelect.val());
+                        </text>
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al cargar tipos de organizador:', error);
+                }
+            });
+        }
+
+        // Cargar naturalezas de entidad desde la base de datos
+        function cargarNaturalezasEntidad() {
+            $.ajax({
+                url: '@Url.Action("ObtenerNaturalezasEntidad", "Festivales")',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    var html = '<option value="">Seleccione...</option>';
+                    $.each(data, function(i, item) {
+                        html += '<option value="' + item.Value + '">' + item.Text + '</option>';
+                    });
+                    $('#naturalezaEntidadAliada').html(html);
+                },
+                error: function() {
+                    console.error('Error al cargar naturalezas de entidad');
+                }
+            });
+        }
+
+        // Agregar entidad aliada a la lista
+        $('#btnAgregarEntidadAliada').on('click', function() {
+            var nombre = $('#nombreEntidadAliada').val().trim();
+            var naturalezaId = $('#naturalezaEntidadAliada').val();
+            var naturalezaTexto = $('#naturalezaEntidadAliada option:selected').text();
+            var correo = $('#correoEntidadAliada').val().trim();
+
+            // Validación
+            if (!nombre) {
+                alert('El nombre de la entidad es obligatorio');
+                return;
+            }
+
+            // Agregar a la lista
+            var entidad = {
+                id: Date.now(), // ID temporal
+                nombre: nombre,
+                naturalezaId: naturalezaId,
+                naturalezaTexto: naturalezaTexto,
+                correo: correo
+            };
+
+            entidadesAliadas.push(entidad);
+            actualizarTablaEntidadesAliadas();
+
+            // Limpiar formulario
+            $('#nombreEntidadAliada').val('');
+            $('#naturalezaEntidadAliada').val('');
+            $('#correoEntidadAliada').val('');
+        });
+
+        // Actualizar tabla de entidades aliadas
+        function actualizarTablaEntidadesAliadas() {
+            var tbody = $('#tbodyEntidadesAliadas');
+            tbody.empty();
+
+            if (entidadesAliadas.length === 0) {
+                tbody.append('<tr><td colspan="4" style="text-align:center; color:#999;">No hay entidades aliadas registradas</td></tr>');
+            } else {
+                $.each(entidadesAliadas, function(i, entidad) {
+                    var row = '<tr>' +
+                        '<td>' + entidad.nombre + '</td>' +
+                        '<td>' + entidad.naturalezaTexto + '</td>' +
+                        '<td>' + entidad.correo + '</td>' +
+                        '<td style="text-align:center;">' +
+                        '<button type="button" class="btn btn-danger btn-xs btn-eliminar-entidad" data-id="' + entidad.id + '">' +
+                        '<i class="fas fa-trash"></i>' +
+                        '</button>' +
+                        '</td>' +
+                        '</tr>';
+                    tbody.append(row);
+                });
+
+                // Eventos para eliminar
+                $('.btn-eliminar-entidad').off('click').on('click', function() {
+                    var id = $(this).data('id');
+                    if (confirm('¿Est&aacute; seguro de eliminar esta entidad aliada?')) {
+                        entidadesAliadas = entidadesAliadas.filter(function(e) { return e.id !== id; });
+                        actualizarTablaEntidadesAliadas();
+                    }
+                });
+            }
+        }
+
+        // Eventos para "Pertenece a organización"
+        radioPerteneceOrgSi.on('change', actualizarNombreOrganizacion);
+        radioPerteneceOrgNo.on('change', actualizarNombreOrganizacion);
+
+        // Evento para "Tipo de organizador"
+        tipoOrganizadorSelect.on('change', actualizarOtroTipoOrganizador);
+
+        // Eventos para "Entidades aliadas"
+        radioEntidadesAliadasSi.on('change', actualizarSeccionEntidadesAliadas);
+        radioEntidadesAliadasNo.on('change', actualizarSeccionEntidadesAliadas);
+
+        @if (Model.EsEdicion)
+        {
+            <text>
+            // Cargar valores existentes del modelo (modo edición)
+            </text>
+            
+            // Establecer radio "Pertenece a organización"
+            if (Model.PerteneceOrganizacion.HasValue)
+            {
+                if (Model.PerteneceOrganizacion.Value)
+                {
+                    <text>
+                    radioPerteneceOrgSi.prop('checked', true);
+                    </text>
+                }
+                else
+                {
+                    <text>
+                    radioPerteneceOrgNo.prop('checked', true);
+                    </text>
+                }
+            }
+
+            // Establecer radio "Tiene entidades aliadas"
+            if (Model.TieneEntidadesAliadas.HasValue)
+            {
+                if (Model.TieneEntidadesAliadas.Value)
+                {
+                    <text>
+                    radioEntidadesAliadasSi.prop('checked', true);
+                    </text>
+                }
+                else
+                {
+                    <text>
+                    radioEntidadesAliadasNo.prop('checked', true);
+                    </text>
+                }
+            }
+
+            if (Model.EntidadesAliadas != null && Model.EntidadesAliadas.Any())
+            {
+                <text>
+                // Cargar entidades aliadas existentes
+                entidadesAliadas = @Html.Raw(Json.Encode(Model.EntidadesAliadas.Select(e => new {
+                    id = e.Id,
+                    nombre = e.Nombre,
+                    naturaleza = e.Naturaleza,
+                    correo = e.CorreoElectronico
+                })));
+                actualizarTablaEntidadesAliadas();
+                </text>
+            }
+        }
+
+        // Estado inicial
+        actualizarNombreOrganizacion();
+        actualizarOtroTipoOrganizador();
+        actualizarSeccionEntidadesAliadas();
+    }
+
+    // ============================================
+    // FUNCIONALIDAD DE LOCALIZACIÓN
+    // ============================================
+    function initLocalizacion() {
+        var $ = jQuery;
+        
+        console.log('===== INICIO initLocalizacion =====');
+        console.log('jQuery versión:', $.fn.jquery);
+        
+        // Verificar que el modal exista
+        var modalEl = document.getElementById('modalLocalizacion');
+        console.log('Modal encontrado en DOM:', modalEl !== null);
+        
+        // Verificar que el botón exista
+        var botonEl = document.getElementById('btnAgregarLocalizacion');
+        console.log('Botón encontrado en DOM:', botonEl !== null);
+        
+        if (!modalEl) {
+            console.error('ERROR: No se encuentra el modal #modalLocalizacion en el DOM');
+            return;
+        }
+        
+        if (!botonEl) {
+            console.error('ERROR: No se encuentra el botón #btnAgregarLocalizacion en el DOM');
+            return;
+        }
+        
+        var localizacionesTemporales = [];
+
+        // Mapeo de departamentos a regiones OCAD
+        var departamentosPorRegion = {
+            'Caribe': ['08', '13', '20', '23', '44', '47', '70'], // Atlántico, Bolívar, Cesar, Córdoba, La Guajira, Magdalena, Sucre
+            'CentroOriente': ['15', '25', '54', '68'], // Boyacá, Cundinamarca, Norte de Santander, Santander
+            'CentroSur': ['18', '41', '50', '52', '73'], // Caquetá, Huila, Meta, Nariño, Tolima
+            'EjeCafetero': ['05', '17', '63', '66'], // Antioquia, Caldas, Quindío, Risaralda
+            'Llanos': ['81', '85', '86', '91', '95', '97', '99'], // Arauca, Casanare, Putumayo, Amazonas, Guainía, Guaviare, Vichada
+            'Pacifico': ['19', '27', '76'] // Cauca, Chocó, Valle del Cauca
+        };
+
+        console.log('initLocalizacion ejecutándose...');
+
+        // ===== FUNCIONES PARA MODAL =====
+        function abrirModal() {
+            console.log('Ejecutando abrirModal()');
+            var modal = document.getElementById('modalLocalizacion');
+            
+            if (!modal) {
+                console.error('Modal no encontrado en abrirModal()');
+                alert('Error: No se encuentra el modal en el DOM');
+                return;
+            }
+            
+            // Mostrar el modal con estilos forzados
+            modal.style.display = 'block';
+            modal.style.opacity = '1';
+            modal.style.visibility = 'visible';
+            modal.style.zIndex = '1050';
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.overflow = 'auto';
+            modal.classList.add('in');
+            modal.setAttribute('aria-hidden', 'false');
+            
+            // Agregar backdrop
+            var existingBackdrop = document.getElementById('modalBackdrop');
+            if (existingBackdrop) {
+                existingBackdrop.parentNode.removeChild(existingBackdrop);
+            }
+            
+            var backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop fade in';
+            backdrop.id = 'modalBackdrop';
+            backdrop.style.cssText = 'position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1040; background-color: #000; opacity: 0.5;';
+            document.body.appendChild(backdrop);
+            document.body.classList.add('modal-open');
+            document.body.style.overflow = 'hidden';
+            
+            console.log('Modal abierto correctamente');
+            console.log('Modal display:', modal.style.display);
+            console.log('Modal z-index:', modal.style.zIndex);
+        }
+
+        function cerrarModal() {
+            console.log('Ejecutando cerrarModal()');
+            var modal = document.getElementById('modalLocalizacion');
+            
+            if (modal) {
+                modal.style.display = 'none';
+                modal.style.opacity = '0';
+                modal.style.visibility = 'hidden';
+                modal.classList.remove('in');
+                modal.setAttribute('aria-hidden', 'true');
+            }
+            
+            // Remover backdrop
+            var backdrop = document.getElementById('modalBackdrop');
+            if (backdrop && backdrop.parentNode) {
+                backdrop.parentNode.removeChild(backdrop);
+            }
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            
+            // Limpiar formulario
+            limpiarFormulario();
+            
+            console.log('Modal cerrado correctamente');
+        }
+
+        // ===== CARGAR DATOS =====
+        // Cargar departamentos y zonas al iniciar
+        cargarDepartamentos();
+        cargarZonas();
+        cargarZonasTitulacionColectiva();
+
+        // ===== EVENTOS =====
+        // Evento change del combo de zonas
+        var zonaSelect = document.getElementById('zonaSelect');
+        if (zonaSelect) {
+            zonaSelect.onchange = function() {
+                var zonaId = this.value;
+                console.log('Zona seleccionada:', zonaId);
+                verificarZonaRural(zonaId);
+            };
+        }
+        
+        // Evento click del botón agregar (JavaScript puro)
+        var btnAgregar = document.getElementById('btnAgregarLocalizacion');
+        if (btnAgregar) {
+            btnAgregar.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('===== CLICK EN BOTÓN AGREGAR =====');
+                
+                localizacionEditando = null;
+                limpiarFormulario();
+                
+                var titulo = document.getElementById('modalLocalizacionLabel');
+                if (titulo) {
+                    titulo.innerHTML = '<i class="fas fa-map-marker-alt"></i> Formulario de localizaci&oacute;n';
+                }
+                
+                abrirModal();
+            };
+            console.log('Event listener agregado al botón agregar');
+        } else {
+            console.error('No se pudo agregar event listener - botón agregar no encontrado');
+        }
+
+        // Eventos para cerrar el modal
+        var botonesCerrar = document.querySelectorAll('#modalLocalizacion .close, #modalLocalizacion [data-dismiss="modal"]');
+        console.log('Botones de cerrar encontrados:', botonesCerrar.length);
+        
+        for (var i = 0; i < botonesCerrar.length; i++) {
+            botonesCerrar[i].onclick = function(e) {
+                e.preventDefault();
+                console.log('Click en botón cerrar');
+                cerrarModal();
+            };
+        }
+
+        // Evento change del departamento
+        var deptSelect = document.getElementById('departamentoSelect');
+        if (deptSelect) {
+            deptSelect.onchange = function() {
+                var codigoDepartamento = this.value;
+                var munSelect = document.getElementById('municipioSelect');
+                
+                if (munSelect) {
+                    munSelect.disabled = true;
+                    munSelect.innerHTML = '<option value="">Cargando...</option>';
+                }
+                
+                if (codigoDepartamento) {
+                    cargarMunicipios(codigoDepartamento);
+                    actualizarRegionOCAD(codigoDepartamento);
+                } else {
+                    if (munSelect) {
+                        munSelect.innerHTML = '<option value="">Seleccione...</option>';
+                    }
+                    limpiarRegionesOCAD();
+                }
+            };
+        }
+
+        // Evento click del botón guardar
+        var btnGuardar = document.getElementById('btnGuardarLocalizacion');
+        if (btnGuardar) {
+            btnGuardar.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log('===== CLICK EN BOTÓN GUARDAR =====');
+                
+                if (validarFormulario()) {
+                    var versionId = @(Model.Id > 0 ? Model.Id : 0);
+                    
+                    if (versionId === 0) {
+                        // Guardar temporalmente
+                        var nuevaLoc = {
+                            id: Date.now(), // ID temporal
+                            departamentoId: $('#departamentoSelect').val(),
+                            departamentoNombre: $('#departamentoSelect option:selected').text(),
+                            municipioId: $('#municipioSelect').val(),
+                            municipioNombre: $('#municipioSelect option:selected').text(),
+                            zonaId: parseInt($('#zonaSelect').val()),
+                            zonaNombre: $('#zonaSelect option:selected').text(),
+                            zonaTitulacionId: $('#zonaTitulacionSelect').val() ? parseInt($('#zonaTitulacionSelect').val()) : null,
+                            titulacionColectiva: $('#titulacionInput').val()
+                        };
+
+                        localizacionesTemporales.push(nuevaLoc);
+                        actualizarTablaTemporales();
+                        cerrarModal();
+                        limpiarFormulario();
+                        
+                        // Ocultar alerta y mostrar tabla
+                        $('#alertSinVersion').hide();
+                        $('#tablaLocalizacionesTemporalesContainer').show();
+                        
+                        return;
+                    }
+
+                    var idEdicion = (localizacionEditando && localizacionEditando.id) ? parseInt(localizacionEditando.id) : null;
+                    console.log('Preparando envío. Modo edición ID:', idEdicion);
+                    var datos = {
+                        versionId: versionId,
+                        localizacionId: idEdicion,
+                        municipioId: $('#municipioSelect').val(),
+                        zonaId: parseInt($('#zonaSelect').val()),
+                        zonaTitulacionId: $('#zonaTitulacionSelect').val() ? parseInt($('#zonaTitulacionSelect').val()) : null
+                    };
+
+                    console.log('Payload a guardar:', datos);
+
+                    $.ajax({
+                        url: '@Url.Action("GuardarLocalizacion", "Festivales")',
+                        type: 'POST',
+                        data: datos,
+                        success: function(response) {
+                            if (response.success) {
+                                // Salir de modo edición y limpiar estado
+                                localizacionEditando = null;
+                                cerrarModal();
+                                limpiarFormulario();
+                                cargarGrillaLocalizaciones();
+                            } else {
+                                alertHtml('Error: ' + response.message);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error al guardar:', error);
+                            alertHtml('Error al guardar la localizaci&oacute;n');
+                        }
+                    });
+                }
+            };
+        }
+
+        function actualizarTablaTemporales() {
+            var tbody = $('#tbodyLocalizacionesTemporales');
+            tbody.empty();
+            
+            // Actualizar hidden input
+            $('#LocalizacionesTemporalesJson').val(JSON.stringify(localizacionesTemporales));
+            
+            $.each(localizacionesTemporales, function(i, loc) {
+                var row = '<tr>' +
+                    '<td>' + loc.departamentoNombre + '</td>' +
+                    '<td>' + loc.municipioNombre + '</td>' +
+                    '<td>' + loc.zonaNombre + '</td>' +
+                    '<td style="text-align:center;">' +
+                    '<button type="button" class="btn btn-danger btn-xs btn-eliminar-temp" data-id="' + loc.id + '">' +
+                    '<i class="fas fa-trash"></i>' +
+                    '</button>' +
+                    '</td>' +
+                    '</tr>';
+                tbody.append(row);
+            });
+            
+            $('.btn-eliminar-temp').on('click', function() {
+                var id = $(this).data('id');
+                localizacionesTemporales = localizacionesTemporales.filter(function(l) { return l.id !== id; });
+                actualizarTablaTemporales();
+                
+                if (localizacionesTemporales.length === 0) {
+                    $('#alertSinVersion').show();
+                    $('#tablaLocalizacionesTemporalesContainer').hide();
+                }
+            });
+        }
+
+        console.log('===== FIN initLocalizacion =====');
+
+        // ===== FUNCIONES AUXILIARES =====
+        function cargarGrillaLocalizaciones() {
+            var versionId = @(Model.Id > 0 ? Model.Id : 0);
+            if (versionId > 0) {
+                $('#gridLocalizacionesContainer').load('@Url.Action("GridLocalizacionesPartial", "Festivales")?versionId=' + versionId);
+            }
+        }
+
+        function cargarDepartamentos() {
+            console.log('Cargando departamentos...');
+            
+            $.ajax({
+                url: '@Url.Action("ObtenerDepartamento", "Festivales")',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log('Departamentos recibidos:', data);
+                    var html = '<option value="">Seleccione...</option>';
+                    $.each(data, function(i, item) {
+                        html += '<option value="' + item.value + '">' + item.text + '</option>';
+                    });
+                    $('#departamentoSelect').html(html);
+                    console.log('Departamentos cargados correctamente');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al cargar departamentos:', error);
+                    alertHtml('Error al cargar los departamentos');
+                }
+            });
+        }
+
+        function cargarZonas() {
+            console.log('Cargando zonas...');
+            
+            $.ajax({
+                url: '@Url.Action("ObtenerZonas", "Festivales")',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log('Zonas recibidas:', data);
+                    var html = '<option value="">Seleccione...</option>';
+                    $.each(data, function(i, item) {
+                        html += '<option value="' + item.value + '">' + item.text + '</option>';
+                    });
+                    $('#zonaSelect').html(html);
+                    console.log('Zonas cargadas correctamente');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al cargar zonas:', error);
+                    alertHtml('Error al cargar las zonas');
+                }
+            });
+        }
+
+        function cargarZonasTitulacionColectiva(done) {
+            console.log('Cargando zonas de titulaci&oacute;n colectiva...');
+            
+            $.ajax({
+                url: '@Url.Action("ObtenerZonasTitulacionColectiva", "Festivales")',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log('Zonas de titulaci&oacute;n colectiva recibidas:', data);
+                    var html = '<option value="">Seleccione...</option>';
+                    $.each(data, function(i, item) {
+                        html += '<option value="' + item.value + '">' + item.text + '</option>';
+                    });
+                    $('#zonaTitulacionSelect').html(html);
+                    console.log('Zonas de titulaci&oacute;n colectiva cargadas correctamente');
+                    if (typeof done === 'function') { try { done(); } catch(e) { console.warn('done() lanzo excepcion al cargar zonas de titulacion colectiva:', e); } }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al cargar zonas de titulaci&oacute;n colectiva:', error);
+                    alertHtml('Error al cargar las zonas de titulaci&oacute;n colectiva');
+                }
+            });
+        }
+
+        function verificarZonaRural(zonaId) {
+            if (!zonaId) {
+                // Ocultar y deshabilitar solo el campo de titulación colectiva (input de texto)
+                $('#grupoTitulacionColectiva').hide();
+                $('#titulacionInput').prop('disabled', true).val('');
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("ObtenerZonaEsRural", "Festivales")',
+                type: 'GET',
+                data: { zonaId: zonaId },
+                dataType: 'json',
+                success: function(response) {
+                    console.log('Zona es rural:', response.esRural);
+                    
+                    if (response.esRural) {
+                        // Mostrar y habilitar solo el campo de titulación colectiva (input de texto)
+                        $('#grupoTitulacionColectiva').show();
+                        $('#titulacionInput').prop('disabled', false);
+                    } else {
+                        // Ocultar y deshabilitar solo el campo de titulación colectiva (input de texto)
+                        $('#grupoTitulacionColectiva').hide();
+                        $('#titulacionInput').prop('disabled', true).val('');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al verificar si zona es rural:', error);
+                }
+            });
+        }
+
+        function cargarMunicipios(codigoDepartamento) {
+            console.log('Cargando municipios para departamento:', codigoDepartamento);
+            
+            if (!codigoDepartamento) {
+                $('#municipioSelect').html('<option value="">Seleccione...</option>').prop('disabled', true);
+                return;
+            }
+            
+            $.ajax({
+                url: '@Url.Action("ObtenerMunicipio", "Festivales")',
+                type: 'GET',
+                data: { departamento: codigoDepartamento },
+                dataType: 'json',
+                success: function(data) {
+                    console.log('Municipios recibidos:', data);
+                    var html = '<option value="">Seleccione...</option>';
+                    $.each(data, function(i, item) {
+                        html += '<option value="' + item.value + '">' + item.text + '</option>';
+                    });
+                    $('#municipioSelect').html(html).prop('disabled', false);
+                    console.log('Municipios cargados correctamente');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al cargar municipios:', error);
+                    alertHtml('Error al cargar los municipios');
+                    $('#municipioSelect').html('<option value="">Seleccione...</option>').prop('disabled', true);
+                }
+            });
+        }
+
+        function actualizarRegionOCAD(codigoDepartamento) {
+            limpiarRegionesOCAD();
+            
+            // Si es Bogotá (11), ocultar la sección de Región OCAD
+            if (codigoDepartamento === '11') {
+                $('#divRegionOCAD').hide();
+                return;
+            } else {
+                $('#divRegionOCAD').show();
+            }
+            
+            // Buscar en qu&#233; regi&#243;n est&#225; el departamento
+            for (var region in departamentosPorRegion) {
+                if (departamentosPorRegion[region].indexOf(codigoDepartamento) >= 0) {
+                    var checkboxId = '#chk' + region.replace(' ', '');
+                    $(checkboxId).prop('checked', true);
+                    break;
+                }
+            }
+        }
+
+        function limpiarRegionesOCAD() {
+            $('#chkCaribe, #chkCentroOriente, #chkCentroSur, #chkEjeCafetero, #chkLlanos, #chkPacifico').prop('checked', false);
+        }
+
+        function validarFormulario() {
+            console.log('Validando formulario...');
+            
+            // Validaci&#243;n simple por ahora
+            if (!$('#departamentoSelect').val()) {
+                alertHtml('Debe seleccionar un departamento');
+                return false;
+            }
+            
+            if (!$('#zonaSelect').val()) {
+                alertHtml('Debe seleccionar la zona');
+                return false;
+            }
+            
+            console.log('Formulario v&#225;lido');
+            return true;
+        }
+
+        function limpiarFormulario() {
+            $('#formLocalizacion')[0].reset();
+            $('#localizacionId').val('');
+            $('#municipioSelect').prop('disabled', true).html('<option value="">Combo</option>');
+            limpiarRegionesOCAD();
+            $('#divRegionOCAD').show();
+        }
+
+    /* 
+    // Por ahora no cargar la tabla
+    function actualizarTabla() {
+        var tbody = $('#tbodyLocalizaciones');
+        tbody.empty();
+
+            if (localizaciones.length === 0) {
+                tbody.append('<tr id="noDataRow"><td colspan="5" style="text-align:center; color:#999; font-style:italic;">No hay localizaciones registradas</td></tr>');
+            } else {
+                $.each(localizaciones, function(i, loc) {
+                    var regiones = [];
+                    if (loc.regionCaribe) regiones.push('Caribe');
+                    if (loc.regionCentroOriente) regiones.push('Centro Oriente');
+                    if (loc.regionCentroSur) regiones.push('Centro Sur');
+                    if (loc.regionEjeCafetero) regiones.push('Eje Cafetero');
+                    if (loc.regionLlanos) regiones.push('Llanos');
+                    if (loc.regionPacifico) regiones.push('Pac&#237;fico');
+                    var regionesText = regiones.join(', ');
+
+                    var row = '<tr>' +
+                        '<td style="text-align:center;">' +
+                        '<button type="button" class="btn btn-default btn-xs btn-editar-loc" data-id="' + loc.id + '" style="margin-right:5px;" title="Editar">' +
+                        '<i class="fas fa-edit"></i>' +
+                        '</button>' +
+                        '<button type="button" class="btn btn-danger btn-xs btn-eliminar-loc" data-id="' + loc.id + '" title="Eliminar">' +
+                        '<i class="fas fa-trash"></i>' +
+                        '</button>' +
+                        '</td>' +
+                        '<td>' + loc.departamentoNombre + '</td>' +
+                        '<td>' + loc.municipioNombre + '</td>' +
+                        '<td>' + loc.zona + '</td>' +
+                        '<td>' + regionesText + '</td>' +
+                        '</tr>';
+                    tbody.append(row);
+                });
+
+                // Eventos para editar y eliminar
+                $('.btn-editar-loc').off('click').on('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var id = parseInt($(this).data('id'));
+                    editarLocalizacion(id);
+                });
+
+                $('.btn-eliminar-loc').off('click').on('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var id = parseInt($(this).data('id'));
+                    eliminarLocalizacion(id);
+                });
+            }
+        }
+
+        function editarLocalizacion(id) {
+            var loc = localizaciones.find(function(l) { return parseInt(l.id) === parseInt(id); });
+            if (!loc) return;
+
+            localizacionEditando = loc;
+            $('#modalLocalizacionLabel').html('<i class="fas fa-edit"></i> Editar localizaci&#243;n');
+            
+            // Cargar valores
+            $('#localizacionId').val(loc.id);
+            $('#departamentoSelect').val(loc.departamento).trigger('change');
+            
+            // Esperar a que carguen los municipios
+            setTimeout(function() {
+                $('#municipioSelect').val(loc.municipio);
+            }, 500);
+
+            $('#zonaSelect').val(loc.zona);
+            
+            // Verificar si la zona es rural para mostrar campos de titulación
+            if (loc.zona) {
+                verificarZonaRural(loc.zona);
+                // Esperar a que se habiliten los campos antes de llenarlos
+                setTimeout(function() {
+                    $('#titulacionInput').val(loc.titulacionColectiva);
+                    $('#zonaTitulacionSelect').val(loc.zonaTitulacionColectiva);
+                }, 300);
+            }
+            
+            
+            $('#chkCaribe').prop('checked', loc.regionCaribe);
+            $('#chkCentroOriente').prop('checked', loc.regionCentroOriente);
+            $('#chkCentroSur').prop('checked', loc.regionCentroSur);
+            $('#chkEjeCafetero').prop('checked', loc.regionEjeCafetero);
+            $('#chkLlanos').prop('checked', loc.regionLlanos);
+            $('#chkPacifico').prop('checked', loc.regionPacifico);
+
+            $('#modalLocalizacion').modal('show');
+        }
+
+        function eliminarLocalizacion(id) {
+            if (confirm('&#191;Est&#225; seguro de eliminar esta localizaci&#243;n?')) {
+                localizaciones = localizaciones.filter(function(l) { return l.id !== id; });
+                actualizarTabla();
+            }
+        }
+        */
+    } // Fin de initLocalizacion
+
+})(); // Fin del IIFE principal
+
+// ===== FUNCIONES GLOBALES PARA LA GRILLA =====
+// Estas funciones deben estar fuera del IIFE para que puedan ser llamadas desde la grilla DevExpress
+
+// Variable global para almacenar la localización que se está editando
+var localizacionEditando = null;
+
+// Utilidades para mensajes con entidades HTML
+function decodeHtml(html) {
+    try {
+        var div = document.createElement('div');
+        div.innerHTML = html;
+        var text = div.textContent || div.innerText || '';
+        return text || html;
+    } catch (e) { return html; }
+}
+function alertHtml(html) { alert(decodeHtml(html)); }
+function confirmHtml(html) { return confirm(decodeHtml(html)); }
+
+function abrirModal() {
+    console.log('Ejecutando abrirModal()');
+    var modal = document.getElementById('modalLocalizacion');
+    
+    if (!modal) {
+        console.error('Modal no encontrado en abrirModal()');
+    alertHtml('Error: No se encuentra el modal en el DOM');
+        return;
+    }
+    
+    // Mostrar el modal con estilos forzados
+    modal.style.display = 'block';
+    modal.style.opacity = '1';
+    modal.style.visibility = 'visible';
+    modal.style.zIndex = '1050';
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.overflow = 'auto';
+    modal.classList.add('in');
+    modal.setAttribute('aria-hidden', 'false');
+    
+    // Agregar backdrop
+    var existingBackdrop = document.getElementById('modalBackdrop');
+    if (existingBackdrop) {
+        existingBackdrop.parentNode.removeChild(existingBackdrop);
+    }
+    
+    var backdrop = document.createElement('div');
+    backdrop.className = 'modal-backdrop fade in';
+    backdrop.id = 'modalBackdrop';
+    backdrop.style.cssText = 'position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1040; background-color: #000; opacity: 0.5;';
+    document.body.appendChild(backdrop);
+    document.body.classList.add('modal-open');
+    document.body.style.overflow = 'hidden';
+    
+    console.log('Modal abierto correctamente');
+}
+
+function cargarMunicipios(codigoDepartamento) {
+    console.log('Cargando municipios para departamento:', codigoDepartamento);
+    
+    if (!codigoDepartamento) {
+        $('#municipioSelect').html('<option value="">Seleccione...</option>').prop('disabled', true);
+        return;
+    }
+    
+    $.ajax({
+        url: '@Url.Action("ObtenerMunicipio", "Festivales")',
+        type: 'GET',
+        data: { departamento: codigoDepartamento },
+        dataType: 'json',
+        success: function(data) {
+            console.log('Municipios recibidos:', data);
+            var html = '<option value="">Seleccione...</option>';
+            $.each(data, function(i, item) {
+                html += '<option value="' + item.value + '">' + item.text + '</option>';
+            });
+            $('#municipioSelect').html(html).prop('disabled', false);
+            console.log('Municipios cargados correctamente');
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al cargar municipios:', error);
+            alertHtml('Error al cargar los municipios');
+            $('#municipioSelect').html('<option value="">Seleccione...</option>').prop('disabled', true);
+        }
+    });
+}
+
+function verificarZonaRural(zonaId) {
+    if (!zonaId) {
+        $('#grupoTitulacionColectiva').hide();
+        $('#titulacionInput').prop('disabled', true).val('');
+        return;
+    }
+
+    $.ajax({
+        url: '@Url.Action("ObtenerZonaEsRural", "Festivales")',
+        type: 'GET',
+        data: { zonaId: zonaId },
+        dataType: 'json',
+        success: function(response) {
+            console.log('Zona es rural:', response.esRural);
+            
+            if (response.esRural) {
+                $('#grupoTitulacionColectiva').show();
+                $('#titulacionInput').prop('disabled', false);
+            } else {
+                $('#grupoTitulacionColectiva').hide();
+                $('#titulacionInput').prop('disabled', true).val('');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al verificar si zona es rural:', error);
+        }
+    });
+}
+
+function editarLocalizacionDB(id) {
+    console.log('Editando localización con ID (click):', id);
+    var idNum = parseInt(id);
+    if (isNaN(idNum)) { console.error('ID inválido para edición:', id); return; }
+    $.ajax({
+        url: '@Url.Action("ObtenerLocalizaciones", "Festivales")',
+        type: 'GET',
+        data: { versionId: @(Model.Id) },
+        success: function(localizaciones) {
+            console.log('Localizaciones obtenidas (edición):', localizaciones);
+            var loc = localizaciones.find(function(l) { return parseInt(l.id) === idNum; });
+            if (!loc) {
+                console.warn('No se encontró coincidencia exacta para ID:', idNum);
+                return alertHtml('No se pudo cargar la localizaci&oacute;n para editar.');
+            }
+            localizacionEditando = loc;
+            console.log('Objeto en edición:', localizacionEditando);
+
+            // Llenar formulario base
+            $('#departamentoSelect').val(loc.departamentoId);
+            
+            // Si es Bogotá (11), ocultar la sección de Región OCAD
+            if (loc.departamentoId === '11') {
+                $('#divRegionOCAD').hide();
+            } else {
+                $('#divRegionOCAD').show();
+            }
+
+            cargarMunicipios(loc.departamentoId);
+            
+            // Municipio después de cargar lista
+            setTimeout(function() {
+                $('#municipioSelect').val(loc.municipioId);
+                console.log('Municipio establecido:', loc.municipioId);
+            }, 350);
+
+            // Zona y verificación rural
+            $('#zonaSelect').val(loc.zonaId);
+            verificarZonaRural(loc.zonaId);
+
+            // Zona titulación colectiva: asegurar opciones disponibles antes de asignar
+            var aplicarZonaTitulacion = function() {
+                if (loc.zonaTitulacionId) {
+                    var valStr = loc.zonaTitulacionId.toString();
+                    var intento = 0;
+                    var maxIntentos = 10;
+                    var asignar = function() {
+                        intento++;
+                        if ($('#zonaTitulacionSelect option[value="' + valStr + '"]').length > 0) {
+                            $('#zonaTitulacionSelect').val(valStr);
+                            console.log('Zona Titulación aplicada (intento ' + intento + '):', valStr);
+                        } else if (intento < maxIntentos) {
+                            setTimeout(asignar, 100);
+                        } else {
+                            console.warn('No se pudo asignar zona titulacion colectiva tras reintentos. Valor:', valStr);
+                        }
+                    };
+                    asignar();
+                } else {
+                    console.log('Registro sin zonaTitulacionId definida.');
+                }
+            };
+            // Si el select está vacío (solo opción Seleccione...), recargar y luego aplicar
+            if ($('#zonaTitulacionSelect option').length <= 1) {
+                cargarZonasTitulacionColectiva(aplicarZonaTitulacion);
+            } else {
+                aplicarZonaTitulacion();
+            }
+
+            // Título modal
+            $('#modalLocalizacionLabel').html('<i class="fas fa-map-marker-alt"></i> Editar localizaci&oacute;n');
+            abrirModal();
+            console.log('Modal mostrado en modo edición');
+        },
+        error: function(xhr, status, error) {
+            console.error('Error AJAX edición:', status, error);
+            alertHtml('Error al cargar la localizaci&oacute;n');
+        }
+    });
+}
+
+function eliminarLocalizacionDB(id) {
+    console.log('Solicitando eliminar localización con ID:', id);
+    if (!confirmHtml('¿Est&aacute; seguro de eliminar esta localizaci&oacute;n?')) {
+        console.log('Eliminación cancelada por el usuario');
+        return;
+    }
+    console.log('Confirmación recibida, eliminando...');
+    $.ajax({
+        url: '@Url.Action("EliminarLocalizacion", "Festivales")',
+        type: 'POST',
+        data: { localizacionId: id },
+        success: function(response) {
+            console.log('Respuesta de eliminación:', response);
+            if (response.success) {
+                alertHtml('Localizaci&oacute;n eliminada correctamente');
+                cargarGrillaLocalizaciones();
+            } else {
+                alertHtml('Error: ' + response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al eliminar la localización:', error);
+            alertHtml('Error al eliminar la localizaci&oacute;n');
+        }
+    });
+}
+
+function cargarGrillaLocalizaciones() {
+    var versionId = @(Model.Id > 0 ? Model.Id : 0);
+    if (versionId > 0) {
+        console.log('Recargando grilla de localizaciones para versión:', versionId);
+        $('#gridLocalizacionesContainer').load('@Url.Action("GridLocalizacionesPartial", "Festivales")?versionId=' + versionId, function(response, status, xhr) {
+            if (status === "error") {
+                console.error('Error al recargar la grilla:', xhr.status, xhr.statusText);
+            } else {
+                console.log('Grilla recargada exitosamente');
+            }
+        });
+    }
+}
+
+// ==========================================================================
+// VALIDACIÓN PARA ENVIAR SOLICITUD DE REGISTRO
+// ==========================================================================
+
+// Variable global para almacenar el archivo del afiche seleccionado
+var _archivoAficheSeleccionado = null;
+
+/**
+ * Inicializa la validación del botón Enviar Solicitud
+ */
+function initValidacionEnvio() {
+    var $ = jQuery;
+    console.log('initValidacionEnvio() ejecutándose...');
+    
+    // Escuchar cambios en el input del afiche para guardar referencia
+    var inputAfiche = document.getElementById('ArchivoAfiche');
+    if (inputAfiche) {
+        inputAfiche.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                _archivoAficheSeleccionado = this.files[0];
+                console.log('Archivo de afiche seleccionado:', _archivoAficheSeleccionado.name);
+            } else {
+                _archivoAficheSeleccionado = null;
+                console.log('Archivo de afiche deseleccionado');
+            }
+        });
+        console.log('Event listener de cambio de afiche registrado');
+    } else {
+        console.error('No se encontró el input #ArchivoAfiche');
+    }
+
+    // Registrar evento del botón Enviar Solicitud
+    $('#btnEnviarSolicitud').off('click').on('click', function(e) {
+        e.preventDefault();
+        
+        console.log('=== VALIDANDO FORMULARIO PARA ENVIAR SOLICITUD ===');
+        
+        var resultado = validarFormularioCompleto();
+        
+        if (!resultado.valido) {
+            var mensaje = 'Por favor complete los siguientes campos obligatorios:\n\n';
+            
+            resultado.camposFaltantes.forEach(function(campo) {
+                mensaje += '• ' + campo + '\n';
+            });
+            
+            alert(mensaje);
+            console.log('Validación fallida. Campos faltantes:', resultado.camposFaltantes);
+            return false;
+        }
+        
+        console.log('Validación exitosa. Enviando solicitud...');
+        
+        var form = $('#frmRegistrarVersion');
+        var inputAccion = $('<input>')
+            .attr('type', 'hidden')
+            .attr('name', 'accion')
+            .val('EnviarSolicitud');
+        
+        form.append(inputAccion);
+        form.submit();
+    });
+    
+    console.log('Event listener de btnEnviarSolicitud registrado');
+}
+
+/**
+ * Valida todos los campos obligatorios del formulario de registro de versión
+ */
+function validarFormularioCompleto() {
+    var $ = jQuery;
+    var camposFaltantes = [];
+    
+    // SECCIÓN: GENERALIDADES
+    var versionNumero = $('#VersionNumero').val();
+    if (!versionNumero || versionNumero === '') {
+        camposFaltantes.push('Versión del festival');
+    }
+    
+    var nombreVersion = $('input[name="NombreVersion"]').val();
+    if (!nombreVersion || nombreVersion.trim() === '') {
+        camposFaltantes.push('Nombre de la versión');
+    }
+    
+    var descripcion = $('textarea[name="Descripcion"]').val();
+    if (!descripcion || descripcion.trim() === '') {
+        camposFaltantes.push('Descripción');
+    }
+    
+    // Afiche (obligatorio) - VALIDACIÓN DESHABILITADA TEMPORALMENTE
+    // var urlAfiche = $('input[name="UrlAfiche"]').val();
+    // var tieneUrlPrevia = urlAfiche && urlAfiche.trim() !== '';
+    // var inputAficheActual = document.getElementById('ArchivoAfiche');
+    // var tieneArchivoEnInput = inputAficheActual && inputAficheActual.files && inputAficheActual.files.length > 0;
+    // var tieneArchivoNuevo = (_archivoAficheSeleccionado !== null) || tieneArchivoEnInput;
+    // if (!tieneUrlPrevia && !tieneArchivoNuevo) {
+    //     camposFaltantes.push('Afiche (debe subir un archivo)');
+    // }
+
+    // Fecha inicio
+    var fechaInicio = $('#fechaInicio').val();
+    if (!fechaInicio || fechaInicio.trim() === '') {
+        camposFaltantes.push('Fecha inicio');
+    }
+
+    // Fecha fin
+    var fechaFin = $('#fechaFin').val();
+    if (!fechaFin || fechaFin.trim() === '') {
+        camposFaltantes.push('Fecha fin');
+    }
+    
+    // Mes de realización
+    var mesRealizacion = $('#mesRealizacion').val();
+    if (!mesRealizacion || mesRealizacion === '') {
+        camposFaltantes.push('Mes de realización');
+    }
+    
+    // Duración del evento en días
+    var duracionDias = $('#duracionDias').val();
+    if (!duracionDias || duracionDias.trim() === '' || parseInt(duracionDias) < 1) {
+        camposFaltantes.push('Duración del evento en días');
+    }
+    
+    // SECCIÓN: CARACTERIZACIÓN
+    var tipologia = $('#tipologiaSelect').val();
+    if (!tipologia || tipologia === '') {
+        camposFaltantes.push('Tipología');
+    }
+    
+    var modalidadesSeleccionadas = $('.chk-modalidad:checked').length;
+    if (modalidadesSeleccionadas === 0) {
+        camposFaltantes.push('Modalidad de participación (debe seleccionar al menos una)');
+    }
+    
+    var expresionesSeleccionadas = $('.chk-expresion:checked').length;
+    if (expresionesSeleccionadas === 0) {
+        camposFaltantes.push('Expresiones artísticas (debe seleccionar al menos una)');
+    }
+    
+    // SECCIÓN: FINANCIACIÓN
+    var fuentePrincipal = $('#fuentePrincipal').val();
+    if (!fuentePrincipal || fuentePrincipal === '') {
+        camposFaltantes.push('Principal fuente de financiación');
+    }
+    
+    var fuenteSecundaria = $('#fuenteSecundaria').val();
+    if (!fuenteSecundaria || fuenteSecundaria === '') {
+        camposFaltantes.push('Fuente de financiación secundaria');
+    }
+    
+    var estampillaSeleccionada = $('input[name="UsaEstampillaProcultura"]:checked').length;
+    if (estampillaSeleccionada === 0) {
+        camposFaltantes.push('Uso de estampilla Procultura');
+    }
+    
+    // SECCIÓN: CONTACTO
+    var directoria = $('input[name="Directoria"]').val();
+    if (!directoria || directoria.trim() === '') {
+        camposFaltantes.push('Directoria');
+    }
+    
+    var tipoOrganizador = $('#tipoOrganizadorSelect').val();
+    if (!tipoOrganizador || tipoOrganizador === '') {
+        camposFaltantes.push('Tipo de organizador');
+    }
+    
+    var correoContacto = $('input[name="CorreoContacto"]').val();
+    if (!correoContacto || correoContacto.trim() === '') {
+        camposFaltantes.push('Correo electrónico de contacto');
+    }
+    
+    return {
+        valido: camposFaltantes.length === 0,
+        camposFaltantes: camposFaltantes
+    };
+}
+</script>
+}
+

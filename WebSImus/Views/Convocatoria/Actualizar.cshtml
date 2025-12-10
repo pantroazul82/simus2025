@@ -1,0 +1,249 @@
+﻿@model WebSImus.Models.DotacionPadreModel
+@{
+    ViewBag.Title = "Convocatoria Dotación";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Actualizar", "Convocatoria", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+     <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Convocatoria", "Index", "Convocatoria")</li>
+    </ul>
+            <!-- END BREADCRUMB -->
+     <!-- START DEFAULT WIZARD -->
+    <div class="panel panel-colorful" id="panelEditar">
+        <div class="panel-body">
+            <h3>@ViewBag.NuevoTitulo</h3>
+            <h3>@ViewBag.Escuela</h3>
+            <blockquote class="blockquote-success">
+                <p class="text-danger ">Los campos marcados con asterisco (*) son obligatorios</p>
+            </blockquote>
+            <div class="wizard" id="wizardEditarA">
+                @Html.HiddenFor(model => model.DatosBasicos.ConvocatoriaId)
+                @Html.HiddenFor(model => model.DatosBasicos.EntidadId)
+                @Html.HiddenFor(model => model.DatosBasicos.EscuelaId)
+                @Html.HiddenFor(model => model.DatosBasicos.Id)
+                <ul>
+                    <li>
+                        <a href="#step-1">
+                            <span class="stepNumber">1</span>
+                            <span class="stepDesc">Registrarse <br /><small>Datos básicos</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-2">
+                            <span class="stepNumber">2</span>
+                            <span class="stepDesc">Instrumentos <br /><small>Confinanciación </small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-3">
+                            <span class="stepNumber">3</span>
+                            <span class="stepDesc">Documentos<br /><small>subir los documentos </small></span>
+                        </a>
+                    </li>
+
+
+                </ul>
+                <div id="step-1">
+                    @Html.Partial("_DatosDotacion", Model.DatosBasicos)
+                </div>
+                <div id="step-2">
+                    <div class="row">
+                        @Html.Partial("_AgregarInstrumentos", Model.Instrumentos)
+                    </div>
+                </div>
+                <div id="step-3">
+                    <div class="row">
+                        @Html.Partial("_AgregarDocumentos", Model.Documentos)
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="panelAgregar" class="panel-body">
+        @Html.Action("_ValidacionEscuelas")
+    </div>
+    <!-- END DEFAULT WIZARD -->
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/smartwizard/jquery.smartWizard-2.0.js")"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            if('@Model.NombreEscuela' =='')
+            {
+
+                ValidarEscuelaMusica();
+
+            }
+
+        });
+
+        $('#wizardEditarA').smartWizard({
+            selected: 0,
+            enablePagination: false,
+            enableFinishButton: false,
+            enableAllSteps: true,
+        });
+        $('#DocumentoEscuela').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: false,
+            maxFileSize: 2048,
+            allowedFileExtensions: ['pdf'],
+        });
+
+        function ValidaSoloNumeros() {
+            console.log("ValidaSoloNumeros");
+            if ((event.keyCode < 48) || (event.keyCode > 57))
+                event.returnValue = false;
+        }
+
+        $('#Cantidad').keypress(function () {
+            ValidaSoloNumeros();
+        });
+        $(function () {
+
+            $('#encabezado').css("background-size", "cover");
+            $('#encabezado').css("background-position", "0 50%");
+
+            $(window).resize(function () { // Remover alto del panel cuando la ventana cambie de tamaño
+                $('.stepContainer').css("height", "");
+            });
+        });
+
+
+        function ValidarEscuelaMusica() {
+
+            $.ajax({
+
+                url: "/Convocatoria/_ValidacionEscuelas",
+                type: "GET",
+                data: { Id: '@Model.DatosBasicos.EntidadId' }
+            })
+           .done(function (partialViewResult) {
+               $("#panelAgregar").html(partialViewResult);
+
+               $('#modalValidacionEscuelas').modal({ show: true });
+
+
+           });
+
+        }
+
+
+        $('#btnDocumentoEscuela').click(function () {
+
+            var varcategoria = $("#Categoria").val();
+            var varEscuelaId = '@Model.DatosBasicos.Id';
+            var fileUpload = $("#DocumentoEscuela").get(0);
+            var files = fileUpload.files;
+
+            // Create FormData object
+            var fileData = new FormData();
+
+            // Looping over all files and add it to FormData object
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+
+            // Adding one more key to FormData object
+            fileData.append('username', 'Manas');
+
+
+            if (varcategoria == '') {
+                alert("La categoria es obligatoria");
+                return;
+            }
+
+            var url = '@Url.Action("AgregarDocumento", "Convocatoria")';
+            var varEscuelaId = '@Model.DatosBasicos.Id';
+            $.ajax({
+                url: '/Convocatoria/AgregarDocumento?id=' + varEscuelaId + '&cat=' + varcategoria,
+                type: 'POST',
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        ActualizarListadoDocumentos(varEscuelaId, 0);
+
+
+                    }
+                },
+
+            });
+
+
+        });
+
+        $('#btnAgregarInstrumento').click(function () {
+
+            var varInstrumento = $("#Instrumentos").val();
+            var varprioridad = $("#Prioridad").val();
+            var varDotacionId = '@Model.DatosBasicos.Id';
+            var varCantidad = $("#Cantidad").val();
+
+            if (varInstrumento == '') {
+                alert("El instrumento es obligatorio");
+                return;
+            }
+
+            if (varprioridad == '') {
+                alert("La prioridad es obligatoria");
+                return;
+            }
+
+            if (varCantidad == '') {
+                alert("La cantidad es obligatoria");
+                return;
+            }
+
+            var url = '@Url.Action("AgregarInstrumento", "Convocatoria")';
+   
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    id: varDotacionId, instrumento: varInstrumento, prioridad: varprioridad, cantidad: varCantidad
+                },
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        ActualizarListadoInstrumentos(varDotacionId, 0);
+                    }
+                },
+
+            });
+
+
+        });
+
+    </script>
+}
+
+

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.EstandarDTO>
+
+<div class="mf-subsection">
+    @Html.Hidden("item-to-delete", "", new { @id = "item-to-delete" })
+
+    @if (Model != null)
+    {
+        <div class="mf-grid md:mf-grid-cols-3 mf-gap-4">
+            @foreach (var item in Model)
+            {
+                <div class="card">
+                    <div class="mf-section-title">
+                        <i class="fas fa-music"></i> @item.Nombre
+
+                        <a href="javascript:void(0);"
+                           class="mf-action-icon-btn mf-action-delete"
+                           data-toggle="modal"
+                           data-id="@item.Id"
+                           onclick="EliminarGeneros('@item.FormacionId', '@item.Id');"
+                           title="Eliminar género musical">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Celebra</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="~/img/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" href="~/img/favicon.ico" type="image/x-icon" />
+
+    @Styles.Render("~/Content/musica")
+
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="@Url.Content("~/css/simus_font.css")" rel="stylesheet">
+</head>
+<body>
+    <div class="page-content-wrap">
+        <div class="row">
+            <div class="col-md-12">
+                @{ Html.RenderPartial("_Alertas"); }
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/Scripts/bootstrap")
+
+    @RenderSection("scripts", required: false)
+    <!-- END PLUGINS -->
+    <!-- START TEMPLATE-->
+
+    <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+    <script src="@Url.Content("~/Scripts/toDo/actions.js")"></script>
+    <script src="@Url.Content("~/Scripts/toDo/plugins.js")"></script>
+</body>
+</html>

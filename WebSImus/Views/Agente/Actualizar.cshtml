@@ -1,0 +1,671 @@
+﻿@model WebSImus.Models.AgentePadreModel
+@{
+    ViewBag.Title = @ViewBag.Nombre;
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Actualizar", "Agente", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Agente", "Index", "Agente")</li>
+        <li>@Html.ActionLink("Certificado", "CertificadoPdf", "Certificacion", new { Id = Model.DatosBasicos.AgenteId, Modulo = "Agentes" }, null)</li>
+    </ul>
+    <!-- START DEFAULT WIZARD -->
+    <div class="panel panel-colorful">
+        <div class="row push-down-20">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.ActionLink(" Certificado", "CertificadoPdf", "Certificacion", new { Id = Model.DatosBasicos.AgenteId, Modulo = "Agentes" }, new { @class = "btn btn-warning glyphicon glyphicon-link" })
+
+                    @Html.ActionLink(" Histórico", "Index", "Certificacion", new { Id = Model.DatosBasicos.AgenteId, Modulo = "Agentes" }, new { @class = "btn btn-success glyphicon glyphicon-user" })
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <h3>@ViewBag.NuevoTitulo</h3>
+            <blockquote class="blockquote-success">
+                <p class="text-danger ">Los campos marcados con asterisco (*) son obligatorios</p>
+            </blockquote>
+            <div class="wizard" id="wizardEditarA">
+
+                <ul>
+                    <li>
+                        <a href="#step-1">
+                            <span class="stepNumber">1</span>
+                            <span class="stepDesc">Registrarse <br /><small>Datos básicos</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-2">
+                            <span class="stepNumber">2</span>
+                            <span class="stepDesc">Perfil <br /><small>Estudios/Experiencias/Ocupación </small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-3">
+                            <span class="stepNumber">3</span>
+                            <span class="stepDesc">Oferta<br /><small>Servicios/Productos</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-4">
+                            <span class="stepNumber">4</span>
+                            <span class="stepDesc">Redes<br /><small>Sociales</small></span>
+                        </a>
+                    </li>
+                </ul>
+                <div id="step-1">
+                    @Html.Partial("_AgregarDatosBasicos", Model.DatosBasicos)
+                </div>
+                <div id="step-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.Partial("_DatosPerfil", Model.DatosBasicos)
+                        </div>
+                    </div>
+                </div>
+                <div id="step-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.Partial("_DatosServicios", Model.DatosBasicos)
+                        </div>
+                    </div>
+                </div>
+                <div id="step-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                      
+                            @Html.Action("_DatosRedes", "RedSocial", new { Id = @Model.DatosBasicos.AgenteId, Tipo = "Agente" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END DEFAULT WIZARD -->
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/smartwizard/jquery.smartWizard-2.0.js")"></script>
+<script src="~/Scripts/escuelasvalidate.js"></script>
+ <script type="text/javascript">
+    $(function () {
+        $('#encabezado').css("background-size", "cover");
+        $('#encabezado').css("background-position", "0 50%");
+        $('#CodigoPais').attr('data-live-search', true)
+
+
+        $(window).resize(function () { // Remover alto del panel cuando la ventana cambie de tamaño
+            $('.stepContainer').css("height", "");
+        });
+    });
+
+    $('#NumeroDocumento').keypress(function () {
+
+        ValidaSoloNumeros();
+    });
+   $('#wizardEditarA').smartWizard({
+        selected: 0,
+        enablePagination: false,
+        enableFinishButton: false,
+        enableAllSteps: true,
+    });
+
+
+
+    $(document).ready(function () {
+        $("#Ocupacion").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Agente/CargarLista",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            //alert(item.text);
+                            return { label: item.Nombre, value: item.Nombre };
+                        }))
+
+                    }
+
+                })
+            },
+            messages: {
+                //noResults: "", results: ""
+
+            }
+
+        });
+
+        //Desde aquí autocompletar para instrumentos
+        $(".instrumento").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Agente/CargarListaInstrumentos",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Nombre, value: item.Nombre };
+                        }))
+
+                    }
+
+                })
+            },
+            messages: {
+                //noResults: "", results: ""
+
+            }
+
+        });
+
+        //Desde aquí autocompletar para servicios o productos
+        $("#Servicio").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Agente/CargarListaServicio",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Nombre, value: item.Nombre };
+                        }))
+
+                    }
+
+                })
+            },
+            messages: {
+                //noResults: "", results: ""
+
+            }
+
+        });
+
+        $("#Interes").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Agente/CargarListaInteres",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Nombre, value: item.Nombre };
+                        }))
+
+                    }
+
+                })
+            },
+            messages: {
+                //noResults: "", results: ""
+
+            }
+
+        });
+    })
+
+    $('#imagenPerfil').fileinput({
+        showUpload: false,
+        language: 'es',
+        overwriteInitial: true,
+        maxFileSize: 1024,
+        allowedFileExtensions: ['jpg', 'png'],
+    });
+
+    var today = new Date("01/31/1910");
+    $('#FechaNacimiento').datepicker({
+        startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+        endDate: 'd',
+        format: 'yyyy-mm-dd'
+    })
+
+    function resizePanel() {
+
+        var h = $("#panelEditar").height();
+        $('#panelEditar').css("height", h + (h * 0.2));
+    };
+
+    $(function () {
+        if ($('#FechaNacimiento').val() == "0001-01-01")
+        { $('#FechaNacimiento').val(''); }
+        $('#CodigoDepartamento').change(function () {
+            var selectedDep = $(this).val();
+            var city = $('#CodigoMunicipio');
+            var varmunicipio = $('#CodigoMunicipio');
+            if (selectedDep != null && selectedDep != '') {
+
+                $.getJSON('@Url.Action("ObtenerMunicipio")', { departamento: selectedDep }, function (data) {
+                    var items = '';
+                    items = '<option>Seleccione un municipio </option>';
+                    $.each(data, function (i, municipio) {
+                        items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                    });
+                    city.empty();
+                    city.html(items);
+                    city.click();
+
+
+                });
+
+            }
+
+        })
+
+        // por país
+        $('#CodigoPais').change(function () {
+            var selectedDep = $(this).val();
+            var city = $('#CodigoDepartamento');
+
+            if (selectedDep != null && selectedDep != '') {
+                var varmunicipio = $('#CodigoMunicipio');
+                $.getJSON('@Url.Action("ObtenerDepartamento")', { codigopais: selectedDep }, function (data) {
+                    var items = '';
+                    items = '<option>Seleccione un departamento </option>';
+                    $.each(data, function (i, departamento) {
+                        items += "<option value='" + departamento.value + "'>" + departamento.text + "</option>";
+
+                    });
+                    city.empty();
+                    city.html(items);
+                    city.click();
+                    varmunicipio.empty();
+
+                });
+
+            }
+
+        })
+    });
+
+    $('#mySubmitOcupac').click(function () {
+        var varOcupacion = $("#Ocupacion").val();
+
+        if (varOcupacion == '') {
+            alert("Es obligatorio escribir una ocupación");
+            return;
+        }
+
+        var url = '@Url.Action("AgregarOcupacion", "Agente")';
+        var varAgenteId = '@Model.DatosBasicos.AgenteId';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    atributo: $('#Ocupacion').val(), agenteId: varAgenteId
+                },
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        ActualizarListado(varAgenteId, 0);
+                        //location.reload();
+                       
+                    }
+                },
+
+            });
+        });
+
+
+        $('#mySubmitServ').click(function () {
+            var varServicio = $("#Servicio").val();
+
+            if (varServicio == '') {
+                alert("Es obligatorio escribir un servicio");
+                return;
+            }
+
+            var url = '@Url.Action("AgregarServicio", "Agente")';
+        var varAgenteId = '@Model.DatosBasicos.AgenteId';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                atributo: $('#Servicio').val(), agenteId: varAgenteId
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    ActualizarListadoServicio(varAgenteId, 0);
+                }
+            },
+
+        });
+    });
+
+    $('#mySubmitInter').click(function () {
+        var varInteres = $("#Interes").val();
+
+        if (varInteres == '') {
+            alert("Es obligatorio escribir un interés");
+            return;
+        }
+
+        var url = '@Url.Action("AgregarInteres", "Agente")';
+        var varAgenteId = '@Model.DatosBasicos.AgenteId';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                atributo: $('#Interes').val(), agenteId: varAgenteId
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    ActualizarListadoInteres(varAgenteId, 0);
+                }
+            },
+
+        });
+    });
+    function ActualizarListadoServicio(VarAgenteId, varEliminar) {
+
+        $('#Servicio').val("");
+        $.ajax({
+
+            url: "/Agente/CargarServicio",
+            type: "GET",
+            data: { AgenteId: VarAgenteId, EliminarId: varEliminar }
+        })
+       .done(function (partialViewResult) {
+           $("#TablaServicio").html(partialViewResult);
+
+       });
+    }
+
+    function ActualizarListadoInteres(VarAgenteId, varEliminar) {
+
+        $('#Interes').val("");
+        $.ajax({
+
+            url: "/Agente/CargarInteres",
+            type: "GET",
+            data: { AgenteId: VarAgenteId, EliminarId: varEliminar }
+        })
+       .done(function (partialViewResult) {
+           $("#TablaInteres").html(partialViewResult);
+
+       });
+    }
+    function ActualizarListado(VarAgenteId, varEliminar) {
+
+        $('#Ocupacion').val("");
+        $.ajax({
+
+            url: "/Agente/CargarOcupacion",
+            type: "GET",
+            data: { AgenteId: VarAgenteId, EliminarId: varEliminar }
+        })
+       .done(function (partialViewResult) {
+           $("#TablaOcupacion").html(partialViewResult);
+
+       });
+
+    }
+
+
+    
+
+    //Estudios y experiencia
+    //Agregar Formación
+    $('#mySubmit').click(function () {
+        var varprueba = $("#Empresa").valid();
+        var varmesInicio = $('#MesInicio').val();
+        var varanoInicio = $('#AnoInicio').val();
+        var varmesFin = $('#MesFin').val();
+        var varanoFin = $('#AnoFin').val();
+
+
+        if (varprueba == false) {
+            alert("La institución es obligatoria");
+            return;
+        }
+
+
+        if ($('#Titulo').valid() == false) {
+            alert("El título es obligatorio");
+            return;
+        }
+
+        if ($('#MesInicio').val() == "") {
+            alert("El mes inicio es obligatorio");
+            return;
+        }
+
+        if ($('#AnoInicio').val() == "") {
+            alert("El año inicio es obligatorio");
+            return;
+        }
+
+        if ($('#MesFin').val() == "") {
+            alert("El mes fin es obligatorio");
+            return;
+        }
+
+        if ($('#AnoFin').val() == "") {
+            alert("El año fin es obligatorio");
+            return;
+        }
+
+        var dateInicio = new Date(varanoInicio, varmesInicio, 01); //Year, Month, Date
+        var datefin = new Date(varanoFin, varmesFin, 01);
+        if (datefin < dateInicio) {
+            alert("El periodo final debe ser mayor o igual al periodo inicial");
+            return;
+        }
+
+        var url = '@Url.Action("AgregarFormacion", "Agente")';
+        var varagenteId = '@Model.DatosBasicos.AgenteId';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                id: 0, empresa: $('#Empresa').val(), titulo: $('#Titulo').val(), mesinicio: $('#MesInicio').val(),
+                anoinicio: $('#AnoInicio').val(), mesfin: $('#MesFin').val(), anofin: $('#AnoFin').val(),
+                trabajoactual: 'false', descripcion: $('#Descripcion').val(), agenteId: varagenteId
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    actualizarFormacion(0);
+                }
+            },
+
+        });
+    });
+
+    function actualizarFormacion(vaerliminar) {
+        var varagenteId = '@Model.DatosBasicos.AgenteId';
+        $('#Empresa').val("");
+        $('#Titulo').val("");
+        $('#Descripcion').val("");
+        $("#MesInicio").val("").change();
+        $("#AnoInicio").val("").change();
+        $("#MesFin").val("").change();
+        $("#AnoFin").val("").change();
+        $.ajax({
+
+            url: "/Agente/_TablaFormacion",
+            type: "GET",
+            data: { Id: varagenteId, Eliminar: vaerliminar }
+        })
+       .done(function (partialViewResult) {
+           $("#formacionTabla").html(partialViewResult);
+           $('#item-to-deletef').val(0);
+
+           if (vaerliminar > 0) {
+               $("#modalConfirmarFormacion").modal('hide');
+               $('body').removeClass('modal-open');
+               $('.modal-backdrop').remove();
+           }
+
+       });
+
+    }
+
+    //Agregar Experiencia
+    $('#mySubmitExp').click(function () {
+
+        var varprueba = $("#EmpresaExp").valid();
+        var varmesInicio = $('#MesInicioExp').val();
+        var varanoInicio = $('#AnoInicioExp').val();
+        var varmesFin = $('#MesFinExp').val();
+        var varanoFin = $('#AnoFinExp').val();
+
+        if (varprueba == false) {
+            alert("La empresa es obligatoria");
+            return;
+        }
+
+        if ($('#TituloExp').valid() == false) {
+            alert("El título es obligatorio");
+            return;
+        }
+
+        if ($('#MesInicioExp').val() == "") {
+            alert("El mes inicio es obligatorio");
+            return;
+        }
+
+        if ($('#AnoInicioExp').val() == "") {
+            alert("El año inicio es obligatorio");
+            return;
+        }
+
+        if ($('#MesFinExp').val() == "") {
+            alert("El mes fin es obligatorio");
+            return;
+        }
+
+        if ($('#AnoFinExp').val() == "") {
+            alert("El año fin es obligatorio");
+            return;
+        }
+
+        var dateInicio = new Date(varanoInicio, varmesInicio, 01); //Year, Month, Date
+        var datefin = new Date(varanoFin, varmesFin, 01);
+        if (datefin < dateInicio) {
+            alert("El periodo final debe ser mayor o igual al periodo inicial");
+            return;
+        }
+
+        var url = '@Url.Action("AgregarExperiencia", "Agente")';
+        var varagenteId = '@Model.DatosBasicos.AgenteId';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                id: 0, empresa: $('#EmpresaExp').val(), titulo: $('#TituloExp').val(), mesinicio: $('#MesInicioExp').val(),
+                anoinicio: $('#AnoInicioExp').val(), mesfin: $('#MesFinExp').val(), anofin: $('#AnoFinExp').val(),
+                trabajoactual: 'false', descripcion: $('#DescripcionExp').val(), agenteId: varagenteId
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    actualizarExperiencia(0);
+                }
+            },
+
+        });
+    });
+
+    function actualizarExperiencia(vaerliminar) {
+        var varagenteId = '@Model.DatosBasicos.AgenteId';
+
+        $('#EmpresaExp').val("");
+        $('#TituloExp').val("");
+        $('#DescripcionExp').val("");
+        $("#MesInicioExp").val("").change();
+        $("#AnoInicioExp").val("").change();
+        $("#MesFinExp").val("").change();
+        $("#AnoFinExp").val("").change();
+
+        $.ajax({
+
+            url: "/Agente/_TablaExperiencia",
+            type: "GET",
+            data: { Id: varagenteId, Eliminar: vaerliminar }
+        })
+       .done(function (partialViewResult) {
+           $("#experienciaTabla").html(partialViewResult);
+           $('#item-to-deletex').val(0);
+
+           if (vaerliminar > 0) {
+               $("#modalConfirmarExperiencia").modal('hide');
+               $('body').removeClass('modal-open');
+               $('.modal-backdrop').remove();
+           }
+
+       });
+    }
+
+
+    </script>
+
+<script type="text/javascript">
+    $('#btnAgrergarRedes').click(function () {
+        var varRegistroId = '@Model.DatosBasicos.AgenteId'
+        var varTipo = "Agente";
+        var url = '@Url.Action("Guardar", "RedSocial")';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                facebook: $('#Facebook').val(), twitter: $('#Twitter').val(), instagram: $('#Instagram').val(), flick: $('#Flick').val(),
+                youtube: $('#Youtube').val(), sound: $('#Sound').val(), sound: $('#Sound').val(), registroId: varRegistroId, tipo: varTipo
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    ActualizarListado(varAgenteId, 0);
+                    //location.reload();
+
+                }
+            },
+
+        });
+    });
+
+</script>
+}
+

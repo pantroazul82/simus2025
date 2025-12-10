@@ -1,0 +1,181 @@
+﻿@model WebSImus.Models.AgrupacionModels
+@{
+    ViewBag.Title = "Agrupación";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Agrupacion", "Agrupacion", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+  
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Agrupación", "Index", "Agrupacion")</li>
+    </ul>
+     @*if (@Model.msg != null)
+        {
+            <div class="login-subtitle"><strong>@Model.msg </strong></div>
+        }*@
+    <div class="panel panel-primary form-horizontal">
+        @Html.ValidationSummary(true)
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-star"></span> Datos básicos y ubicación</h3>
+        </div>
+        <div class="panel-body" id="panelEditar">
+            @Html.Partial("_datosBasicos", Model)
+            <div class="panel-footer">
+                <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script type="text/javascript">
+        var pagecontentwrapHeight = $(".page-content-wrap").height();
+        $('#panelEditar').css("height", pagecontentwrapHeight);
+
+        $('#imagenPerfil').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 1024,
+            allowedFileExtensions: ['jpg', 'png'],
+        });
+
+
+        $(window).on('resize', function () {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_panelbodyHeight);
+            $('#panelEditar').css("min-height", pagecontentwrapHeight + 350);
+        });
+
+        function resizePanel() {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_pagecontentwrapHeight);
+        };
+
+        
+
+        $(function () {
+            //document.getElementById("PrimerNombre").disabled = true;
+            //document.getElementById("SegundoNombre").disabled = true;
+            //document.getElementById("PrimerApellido").disabled = true;
+            //document.getElementById("SegundoApellido").disabled = true;
+            $('#CodigoDepartamento').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#CodigoMunicipio');
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerMunicipio")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un municipio </option>';
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+                        //city.removeAttr('disabled');
+
+                    });
+
+                }
+
+            })
+
+            // por país
+            $('#CodigoPais').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#CodigoDepartamento');
+                var varmunicipio = $('#CodigoMunicipio');
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerDepartamento")', { codigopais: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un departamento </option>';
+                        $.each(data, function (i, departamento) {
+                            items += "<option value='" + departamento.value + "'>" + departamento.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+                        varmunicipio.empty();
+
+                    });
+
+                }
+
+            })
+
+            // Por Número documento
+            $('#NumeroDocumento').change(function () {
+                var selectedDep = $(this).val();
+                var vartipo = $('#TipoDocumento').val();
+
+                //alert(selectedDep);
+                if (vartipo == "") {
+                    alert("Seleccione el tipo documento");
+                    return;
+                }
+             
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerAgente")', { tipodocumento: vartipo, numero: selectedDep }, function (data) {
+                   
+                     
+                        if (data.PrimerNombre == null) {
+                            alert("No existe un agente con el número y tipo documento");
+                            return;
+                        }
+                        $('#PrimerNombre').val(data.PrimerNombre);
+                        $('#PrimerApellido').val(data.PrimerApellido);
+                        $('#SegundoNombre').val(data.SegundoNombre);
+                        $('#SegundoApellido').val(data.SegundoApellido);
+
+                    });
+
+                }
+
+            })
+
+            $('#TipoDocumento').change(function () {
+                var selectedDep = $('#NumeroDocumento').val();
+                var vartipo = $('#TipoDocumento').val();
+                if (vartipo == "") {
+                    alert("Seleccione el tipo documento");
+                    return;
+                }
+              
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerAgente")', { tipodocumento: vartipo, numero: selectedDep }, function (data) {
+
+                        if (data.PrimerNombre == null)
+                        {
+                            alert("No existe un agente con el número y tipo documento");
+                            return;
+                        }
+                        $('#PrimerNombre').val(data.PrimerNombre);
+                        $('#PrimerApellido').val(data.PrimerApellido);
+                        $('#SegundoNombre').val(data.SegundoNombre);
+                        $('#SegundoApellido').val(data.SegundoApellido);
+
+                    });
+
+                }
+
+            })
+        });
+    </script>
+}

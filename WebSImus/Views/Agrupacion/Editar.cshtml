@@ -1,0 +1,346 @@
+﻿@model WebSImus.Models.AgrupacionNuevoModels
+@{
+    ViewBag.Title = "Editar Agrupación";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Editar", "Agrupacion", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+     <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Agrupación", "Index", "Agrupacion")</li>
+        <li>@Html.ActionLink("Certificado", "CertificadoPdf", "Certificacion", new { Id = Model.AgrupacionId, Modulo = "Agrupaciones" }, null)</li>
+    </ul>
+            <!-- END BREADCRUMB -->
+     <!-- START DEFAULT WIZARD -->
+    <div class="panel panel-colorful" id="panelEditar">
+        <div class="row push-down-20">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.ActionLink(" Certificado", "CertificadoPdf", "Certificacion", new { Id = Model.AgrupacionId, Modulo = "Agrupaciones" }, new { @class = "btn btn-warning glyphicon glyphicon-link" })
+
+                    @Html.ActionLink(" Histórico", "Index", "Certificacion", new { Id = Model.AgrupacionId, Modulo = "Agrupaciones" }, new { @class = "btn btn-success glyphicon glyphicon-user" })
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+
+            @*<blockquote class="blockquote-success">
+                <p class="text-danger ">Los campos marcados con asterisco (*) son obligatorios</p>
+            </blockquote>*@
+            <div class="wizard" id="wizardEditarA">
+
+                <ul>
+                    <li>
+                        <a href="#step-1">
+                            <span class="stepNumber">1</span>
+                            <span class="stepDesc">Datos <br /><small>Básicos</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-2">
+                            <span class="stepNumber">2</span>
+                            <span class="stepDesc">Integrantes <br /><small>Miembros </small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-3">
+                            <span class="stepNumber">3</span>
+                            <span class="stepDesc">Generos<br /><small>Musicales</small></span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#step-4">
+                            <span class="stepNumber">4</span>
+                            <span class="stepDesc">Redes<br /><small>Sociales</small></span>
+                        </a>
+                    </li>
+
+                </ul>
+                <div id="step-1">
+                    @Html.Partial("_AgregarDatosBasicos", Model)
+                </div>
+                <div id="step-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.Partial("_DatosIntegrantes", Model)
+                        </div>
+                    </div>
+                </div>
+                <div id="step-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.Partial("_DatosGeneros", Model)
+                        </div>
+                    </div>
+                </div>
+                <div id="step-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.Action("_DatosRedes", "RedSocial", new { Id = @Model.AgrupacionId, Tipo = "Agrupacion" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END DEFAULT WIZARD -->
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/smartwizard/jquery.smartWizard-2.0.js")"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            $('#encabezado').css("background-size", "cover");
+            $('#encabezado').css("background-position", "0 50%");
+
+            $(window).resize(function () { // Remover alto del panel cuando la ventana cambie de tamaño
+                $('.stepContainer').css("height", "");
+            });
+        });
+
+        $('#wizardEditarA').smartWizard({
+            selected: 0,
+            enablePagination: false,
+            enableFinishButton: false,
+            enableAllSteps: true,
+        });
+
+
+        $('#imagenPerfil').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 1024,
+            allowedFileExtensions: ['jpg', 'png'],
+        });
+
+        $('#DocumentoEPK').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 2048,
+            allowedFileExtensions: ['pdf'],
+        });
+
+        function resizePanel() {
+
+            var h = $("#panelEditar").height();
+            $('#panelEditar').css("height", h + (h * 0.2));
+        };
+
+        $(function () {
+
+            $('#CodigoDepartamento').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#CodigoMunicipio');
+                var varmunicipio = $('#CodigoMunicipio');
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerMunicipio", "Agente")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un municipio </option>';
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+
+                    });
+
+                }
+
+            })
+
+
+        });
+
+        $("#Persona").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Agrupacion/CargarListaPersona",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Nombre, value: item.Nombre };
+                        }))
+
+                    }
+
+                })
+            },
+            messages: {
+                //noResults: "", results: ""
+
+            }
+
+        });
+
+
+        $('#mySubmitServ').click(function () {
+            var varServicio = $("#Persona").val();
+
+            if (varServicio == '') {
+                alert("Es obligatorio escribir un nombre");
+                return;
+            }
+
+            var url = '@Url.Action("AgregarPersona", "Agrupacion")';
+            var varagrupacionId = '@Model.AgrupacionId';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    atributo: $('#Persona').val(), agrupacionId: varagrupacionId
+                },
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        ActualizarListadoAgente(varagrupacionId, 0);
+                    }
+                },
+
+            });
+        });
+
+        function ActualizarListadoAgente(varAgrupacionId, varEliminar) {
+
+            $('#Persona').val("");
+            $.ajax({
+
+                url: "/Agrupacion/CargarAgentes",
+                type: "GET",
+                data: { agrupacionId: varAgrupacionId, EliminarId: varEliminar }
+            })
+           .done(function (partialViewResult) {
+               $("#TablaAgente").html(partialViewResult);
+
+           });
+        }
+
+        $("#generos").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Agrupacion/CargarListaGenero",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Nombre, value: item.Nombre };
+                        }))
+
+                    }
+
+                })
+            },
+            messages: {
+                //noResults: "", results: ""
+
+            }
+
+        });
+
+        $('#mySubmitGeneros').click(function () {
+            var varServicio = $("#generos").val();
+
+            if (varServicio == '') {
+                alert("Es obligatorio escribir un genero");
+                return;
+            }
+
+            var url = '@Url.Action("AgregarGeneros", "Agrupacion")';
+            var varagrupacionId = '@Model.AgrupacionId';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    atributo: $('#generos').val(), agrupacionId: varagrupacionId
+                },
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        ActualizarListadoGenero(varagrupacionId, 0);
+                    }
+                },
+
+            });
+        });
+
+        function ActualizarListadoGenero(varAgrupacionId, varEliminar) {
+
+            $('#generos').val("");
+            $.ajax({
+
+                url: "/Agrupacion/Cargargeneros",
+                type: "GET",
+                data: { agrupacionId: varAgrupacionId, EliminarId: varEliminar }
+            })
+           .done(function (partialViewResult) {
+               $("#TablaGeneros").html(partialViewResult);
+
+           });
+        }
+
+    </script>
+
+<script type="text/javascript">
+    $('#btnAgrergarRedes').click(function () {
+        var varRegistroId = '@Model.AgrupacionId'
+        var varTipo = "Agrupacion";
+        var url = '@Url.Action("Guardar", "RedSocial")';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                facebook: $('#Facebook').val(), twitter: $('#Twitter').val(), instagram: $('#Instagram').val(), flick: $('#Flick').val(),
+                youtube: $('#Youtube').val(), sound: $('#Sound').val(), registroId: varRegistroId, tipo: varTipo
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    ActualizarListado(varAgenteId, 0);
+                    //location.reload();
+
+                }
+            },
+
+        });
+    });
+
+</script>
+
+}
+
+

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.EntidadesOperadoras.ContenidoDTO>
+<div class="panel panel-default">
+
+    <div class="form-group">
+        <div class="row">
+            <table class="table">
+                @Html.Hidden("item-to-deletem", "", new { @id = "item-to-deletem" })
+                <thead>
+                    <tr>                      
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Editar</th>
+
+                    </tr>
+                </thead>
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>                       
+                                <td>@item.NombreContenido</td>
+                                <td>@item.DescripcionContenido</td>
+
+                                <td><a href="" class="fa-pencil-1" data-toggle="modal" data-target="#modal_datosMatriz" title="Editar la información" onclick="javascript: CargarModalContenido('@item.Id');"></a></td>
+                            </tr>
+                        </tbody>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+    <div id="modalConfirmarMatriz" class="modal modal-vcenter fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Esta a punto de eliminar un elemento de su lista de contenido. <strong>Tenga en cuenta que esta acción no se puede revertir</strong>.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="myDeleteForma" class="btn btn-danger" data-dismiss="modal" onclick="EliminarContenido()">Eliminar</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,60 @@
+﻿@model SM.LibreriaComun.DTO.FichaAsesoria.InstrumentoNuevoDTO
+
+<div class="modal animated fadeIn" id="modal_datosInstrumento" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content card">
+            <div class="mf-modal-header">
+                @Html.HiddenFor(model => model.EscuelaId)
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="form-title">
+                    <i class="fas fa-music"></i> Instrumentos
+                </div>
+            </div>
+
+            <div class="mf-modal-body">
+                <div class="mf-field-group">
+                    <label class="mf-label">Instrumento</label>
+                    @Html.DropDownListFor(model => model.Instrumento, (SelectList)ViewBag.listaInstrumento, "Seleccione", new { @class = "styled-select w-full px-3 py-2 border rounded", required = "required" })
+                    @Html.ValidationMessageFor(model => model.Instrumento, "", new { @class = "mf-validation-error" })
+                </div>
+
+                @foreach (var campo in new[] {
+                    new { Nombre = "CantidadBuenos", Label = "Cantidad Buenos" },
+                    new { Nombre = "CantidadRegular", Label = "Cantidad Regular" },
+                    new { Nombre = "CantidadMalos", Label = "Cantidad Malos" },
+                    new { Nombre = "CantidadPerdidos", Label = "Cantidad Perdidos" },
+                    new { Nombre = "CantidadMincultura", Label = "Cantidad Mincultura" }
+                })
+                {
+                    <div class="mf-field-group">
+                        <label class="mf-label" for="@campo.Nombre">@campo.Label</label>
+                        @Html.TextBox(campo.Nombre, ViewData.Model.GetType().GetProperty(campo.Nombre).GetValue(Model, null), new
+                        {
+                            @class = "w-full px-3 py-2 border rounded",
+                            type = "number",
+                            maxlength = "6",
+                            required = "required"
+                        })
+                        @Html.ValidationMessage(campo.Nombre, "", new { @class = "mf-validation-error" })
+                    </div>
+                }
+
+                <div class="mf-field-group">
+                    <label class="mf-label" for="Descripcion">Descripción</label>
+                    @Html.TextAreaFor(model => model.Descripcion, new { @class = "w-full px-3 py-2 border rounded", rows = "5" })
+                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "mf-validation-error" })
+                </div>
+            </div>
+
+            <div class="mf-modal-footer">
+                <button type="button" id="btnGuardarNiveles" class="btn btn-success" data-dismiss="modal" onclick="InstrumentoAgregar('@Model.Id')">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">
+                    <i class="fas fa-times"></i> Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

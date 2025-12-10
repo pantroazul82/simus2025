@@ -1,0 +1,107 @@
+﻿@model  WebSImus.Models.UtilidadHomeModels
+@{
+    ViewBag.Title = "Noticias SIMUS";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2 col-sm-5 col-xs-5"><img style="padding-top:10px; padding-left:30px;" class="img-responsive" src="~/img/iconos/noticias.png"></div>
+        <div class="titulo_seccion col-md-10 col-sm-7 col-xs-7">Noticias</div>
+
+    </div>
+</div>
+
+<div class="col-md-12 well carousel-search" style="margin-top:40px;">
+    <div class="row">
+        <div class="tab-content">
+            <div class="page-content-wrap">
+                <div class="row">
+                    <div class="col-md-8 col-sd-8 col-xs-12">
+                        <div class="col-md-12 col-sd-8 col-xs-12">
+                            <div class="col-md-12 titulo_news">
+                                @Model.Titulo
+                            </div>
+                            <div class="col-md-10 fecha_noticia">@Model.FechaInicio </div>
+                            <div class="col-md-10 linea_morada"> </div>
+                            <div class="col-md-12 ubica_noticia">@Model.Ubicacion </div>
+                        </div>
+                        <div class="col-md-12 col-sd-8 col-xs-12 ubicacion_fichas" style="margin-top:30px;">
+
+                            @if (!String.IsNullOrEmpty(Model.rutaFoto))
+                            {
+                                <img style="padding-top:10px;" class="img-responsive" src="@Model.rutaFoto" />
+                            }
+                            else
+                            {
+                                <img style="padding-top:10px;" class="img-responsive" src="@WebSImus.Models.Usuarios.CreateImageThumbnail(@Model.Imagen)" />
+                            }
+                        </div>
+                        <div class="col-md-12 col-sd-8 col-xs-12  texto_noticias">
+                            <p text-align="justify">
+                                @Model.Descripcion
+                            </p>
+                            <br />
+                            <span>
+                                Informó
+                            </span>
+                            <br />
+                            <span>@Model.NombreActor</span>
+                            <br />
+                            <span>@Model.Email</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sd-12 col-xs-12 caja_gris">
+                        <div class="row">
+                            <div class="col-md-12 caja_morada">Últimas Noticias</div>
+
+                        </div>
+                        <div class="row">
+
+                            @foreach (var item in Model.listadoNoticias)
+                            {
+                                <div class="col-md-12 fecha_mini ">@item.FechaInicio </div>
+                                <a href="@Url.Action("Detalle", "UtilidadHome", new { id = item.UtilidadId })">
+                                      <div class="col-md-12 noticia_mini">@item.Titulo</div>
+                                </a>
+                                <div class="row">
+                                    <div class="col-md-4 col-sd-12 col-xs-12 ubicacion_fichas">
+                                        @if (!String.IsNullOrEmpty(item.rutaFoto))
+                                        {
+
+                                            <img style="padding-top:10px;" class="img-responsive" src="@item.rutaFoto" />
+                                        }
+                                        else
+                                        {
+                                            <img style="padding-top:10px;" class="img-responsive" src="@WebSImus.Models.Usuarios.CreateImageThumbnail(@item.Imagen)" />
+                                        }
+                                    </div>
+                                    <div class="col-md-8 texto_noticias">
+                                        @item.Descripcion
+                                    </div>
+                                </div>
+
+                            }
+
+                        </div>
+
+                        @*<div class="row fa-3x">
+                            <div class="col-md-6 fa-play fa-flip-horizontal">    </div>
+                            <div class="col-md-6 fa-play">
+                            </div>
+
+                        </div>*@
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/plugins/mixitup/jquery.mixitup.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/appear/jquery.appear.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+}

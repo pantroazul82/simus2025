@@ -1,0 +1,372 @@
+﻿@model SM.LibreriaComun.DTO.DocentesEstadisticasDTO
+
+@{
+    ViewBag.Title = "Estadísticas - Estudiantes";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row align-items-center mb-4">
+        <div class="col-md-8 col-sm-12">
+            <h1 class="titulo-indicador"><i class="fa-solid fa-chart-simple me-2"></i>Estadísticas · <span id="txtStatus1">@Html.Label("Actual")</span></h1>
+        </div>
+        <div class="col-md-4 col-sm-12 text-end">
+            @Html.DropDownListFor(model => model.selectorAno, (SelectList)ViewBag.listAnos, "Año", new { @class = "form-select selector-ano", @id = "selectorAno" })
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-3 col-sm-6">
+            <a href="#" class="stat-card" onclick="RedireccionaEscuelas();return false;">
+                <i class="fa-solid fa-school"></i>
+                <h5>Escuelas</h5>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <a href="#" class="stat-card" onclick="RedireccionaEstudiantes();return false;">
+                <i class="fa-solid fa-user-graduate"></i>
+                <h5>Estudiantes</h5>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <a href="#" class="stat-card" onclick="RedireccionaDocentes();return false;">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <h5>Docentes</h5>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <a href="#" class="stat-card" onclick="RedireccionaMapa();return false;">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <h5>Mapa</h5>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-10 offset-xl-1 col-12">
+            @Html.Partial("_DatosDocentes")
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/Canvas/canvasjs.js")"></script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var periodo = '@Model.selectorAno';
+            if (periodo == "1")
+            { $('#txtStatus1').text('Actual'); }
+            else {
+                $('#txtStatus1').text(periodo);
+            }
+            CargarDocentes(periodo);
+            CargarProduccion(periodo);
+        }
+        function RedireccionaMapa() {
+            var VarTipo = $('#selectorAno').val();
+            var url = "/Indicadores/Mapa?Id=" + VarTipo;
+            window.location.href = url;
+        }
+        function RedireccionaEstudiantes() {
+            var VarTipo = $('#selectorAno').val();
+            var url = "/Indicadores/Estudiantes?Id=" + VarTipo;
+            window.location.href = url;
+        }
+
+        function RedireccionaDocentes() {
+            var VarTipo = $('#selectorAno').val();
+            var url = "/Indicadores/Docentes?Id=" + VarTipo;
+            window.location.href = url;
+        }
+
+        function RedireccionaEscuelas() {
+            var VarTipo = $('#selectorAno').val();
+            var url = "/Indicadores/Escuelas?Id=" + VarTipo;
+            window.location.href = url;
+        }
+
+        $('#selectorAno').change(function () {
+            var VarTipo = $('#selectorAno').val();
+            $.ajaxSetup({
+                cache: false
+            });
+            $.ajax({
+
+                url: "/Indicadores/Docentes",
+                type: "GET",
+                data: { Id: VarTipo, modal:"1" },
+                dataType: 'html', //dataType - html
+                success: function (result) {
+                    //Create a Div around the Partial View and fill the result
+                    $('#partialViewContainerDiv').html(result);
+                    CargarDocentes(VarTipo);
+                    CargarProduccion(VarTipo);
+                    if (VarTipo == "1")
+                    { $('#txtStatus1').text('Actual'); }
+                    else {
+                        $('#txtStatus1').text(VarTipo);
+                    }
+
+                }
+            })
+        });
+        function CargarDocentes(periodo) {
+            var chart = new CanvasJS.Chart("docenteContainer", {
+                animationEnabled: true,
+                exportFileName: "Nivel educativo docentes Chart",
+                exportEnabled: true,
+                theme: "theme2",
+                title: {
+                    text: ""
+                },
+                axisX: {
+                    titleFontColor: "black",
+                    labelFontColor: "black",
+                    labelFontFamily: "Droid-Sans, sans-serif",
+                    labelFontSize: "16",
+                    labelFontWeight: "Bold"
+
+                },
+                axisY: {
+                    title: "Cantidad de docentes",
+                    titleFontColor: "black",
+                    titleFontSize: "18",
+                    titleFontFamily: "Droid-Sans, sans-serif",
+                    lineColor: "#4C2C54",
+                    labelFontFamily: "Droid-Sans, sans-serif",
+                    labelFontColor: "#4C2C54",
+                    tickColor: "#4F81BC",
+                    labelFontSize: "14",
+                    interlacedColor: "#e6e6e6",
+                    gridColor: "#e3e3e3",
+
+                },
+                toolTip: {
+                    shared: true,
+                    content: toolTipFormatter
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemclick: toggleDataSeries,
+                    verticalAlign: "bottom",
+                    horizontalAlign: "center",
+                    fontSize: 20,
+                    fontFamily: "Droid-Sans, sans-serif",
+                    fontColor: "black"
+                },
+                data: [{
+                    type: "stackedBar",
+                    name: "Pública",
+                    showInLegend: "true",
+                    dataPoints: $.parseJSON(GraficaNivelEducativoDocentes(periodo, "PUBLICA"))
+                },
+                {
+                    type: "stackedBar",
+                    name: "Privada",
+                    showInLegend: "true",
+
+                    dataPoints: $.parseJSON(GraficaNivelEducativoDocentes(periodo, "PRIVADA"))
+                },
+                {
+                    type: "stackedBar",
+                    name: "Mixta",
+                    showInLegend: "true",
+                    dataPoints: $.parseJSON(GraficaNivelEducativoDocentes(periodo, "MIXTA"))
+                }]
+
+
+            });
+            chart.render();
+        }
+
+        function CargarProduccion(periodo) {
+            var chart = new CanvasJS.Chart("producionContainer", {
+                animationEnabled: true,
+                exportFileName: "Producción Chart",
+                exportEnabled: true,
+                theme: "theme2",
+                title: {
+                    text: ""
+                },
+                axisX: {
+                    titleFontColor: "black",
+                    labelFontColor: "black",
+                    labelFontFamily: "Droid-Sans, sans-serif",
+                    labelFontSize: "16",
+                    labelFontWeight: "Bold"
+
+
+                },
+                axisX2: {
+                    title: "Millions of Barrels/day",
+                    titleFontColor: "#C0504E",
+                    lineColor: "#C0504E",
+                    labelFontColor: "#C0504E",
+                    tickColor: "#C0504E"
+                },
+                axisY: {
+                    title: "Cantidad de giras",
+                    titleFontColor: "black",
+                    titleFontSize: "18",
+                    titleFontFamily: "Droid-Sans, sans-serif",
+                    lineColor: "#4C2C54",
+                    labelFontFamily: "Droid-Sans, sans-serif",
+                    labelFontColor: "#4C2C54",
+                    tickColor: "#4F81BC",
+                    labelFontSize: "14",
+                    interlacedColor: "#e6e6e6",
+                    gridColor: "#e3e3e3",
+                    interval: 2000,
+                },
+
+
+                toolTip: {
+                    shared: true,
+                    content: toolTipFormatter
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemclick: toggleDataSeries,
+                    verticalAlign: "bottom",
+                    horizontalAlign: "center",
+                    fontSize: 20,
+                    fontFamily: "Droid-Sans, sans-serif",
+                    fontColor: "black"
+                },
+                data: [{
+                    type: "stackedBar",
+                    name: "Pública",
+
+                    showInLegend: "true",
+                    dataPoints: $.parseJSON(Graficaproduccion(periodo, "PUBLICA"))
+                },
+                {
+                    type: "stackedBar",
+                    name: "Privada",
+                    showInLegend: "true",
+
+                    dataPoints: $.parseJSON(Graficaproduccion(periodo, "PRIVADA"))
+                },
+                {
+                    type: "stackedBar",
+                    name: "Mixta",
+                    showInLegend: "true",
+                    dataPoints: $.parseJSON(Graficaproduccion(periodo, "MIXTA"))
+                }]
+
+
+            });
+            chart.render();
+        }
+        function GraficaNivelEducativoDocentes(valorAno, varSi) {
+            var resultado = "";
+            var url = '@Url.Action("ObtenerEscuelasPorNivelEducativoDocentes", "Indicadores")';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'json',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ Id: valorAno, si: varSi }),
+                success: function (result) {
+
+                    resultado = result;
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+
+            return resultado;
+        }
+
+        function Graficaproduccion(valorAno, varSi) {
+            var resultado = "";
+            var url = '@Url.Action("ObtenerEscuelasPorProduccion", "Indicadores")';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'json',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ Id: valorAno, si: varSi }),
+                success: function (result) {
+
+                    resultado = result;
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+
+            return resultado;
+        }
+        function toolTipFormatter(e) {
+            var str = "";
+            var total = 0;
+            var str3;
+            var str2;
+            for (var i = 0; i < e.entries.length; i++) {
+                var str1 = "<span style= \"color:" + e.entries[i].dataSeries.color + "\">" + e.entries[i].dataSeries.name + "</span>: <strong>" + e.entries[i].dataPoint.y + "</strong> <br/>";
+                total = e.entries[i].dataPoint.y + total;
+                str = str.concat(str1);
+            }
+            str2 = "<strong>" + e.entries[0].dataPoint.label + "</strong> <br/>";
+            str3 = "<span style = \"color:Tomato\">Total: </span><strong>" + total + "</strong><br/>";
+            return (str2.concat(str)).concat(str3);
+        }
+        function toggleDataSeries(e) {
+            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            }
+            else {
+                e.dataSeries.visible = true;
+            }
+            chart.render();
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('#hNivel').click(function () {
+                $('html, body').animate({
+                    scrollTop: 500
+                },
+                    1500);
+                return false;
+            });
+
+            $('#hCirculacion').click(function () {
+                $('html, body').animate({
+                    scrollTop: 1000
+                },
+                    1500);
+                return false;
+            });
+            $('#hDocentes').click(function () {
+                $('html, body').animate({
+                    scrollTop: 1500
+                },
+                    1500);
+                return false;
+            });
+
+
+            $('.arriba').click(function () {
+                $('html, body').animate({
+                    scrollTop: '0px'
+                },
+                    1500);
+                return false;
+            });
+        });
+    </script>
+
+}
+
+

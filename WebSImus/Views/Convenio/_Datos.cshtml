@@ -1,0 +1,113 @@
+﻿@model SM.LibreriaComun.DTO.EntidadesOperadoras.ConvenioDTO
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Convenios</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.EntidadId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.EntidadId, (SelectList)ViewBag.listEntidades, "Seleccione", new { @class = "styled-select" })
+                @Html.ValidationMessageFor(model => model.EntidadId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Objeto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Objeto, new { @class = "form-control text", @rows = "5", @cols = "50" })
+                @Html.ValidationMessageFor(model => model.Objeto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      
+        <div class="form-group">
+            @Html.LabelFor(model => model.Coord_AgenteId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Coord_AgenteId, (SelectList)ViewBag.listAgente, "Seleccione", new { @class = "styled-select" })
+                @Html.ValidationMessageFor(model => model.Coord_AgenteId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Periodo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Periodo, (SelectList)ViewBag.listAnos, "Seleccione", new { @class = "styled-select" })
+                @Html.ValidationMessageFor(model => model.Periodo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.FechaInicio, new { @class = "form-control datepicker", @maxlength = "10" })
+                @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.FechaFin, new { @class = "form-control datepicker", @maxlength = "10" })
+                @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EstadoId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.EstadoId, (SelectList)ViewBag.listEstado, "Seleccione", new { @class = "styled-select" })
+                @Html.ValidationMessageFor(model => model.EstadoId, "", new { @class = "text-danger" })
+
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">Subir documento</label>
+            <div class="col-md-9">
+
+                @Html.TextBoxFor(model => model.DocumentoEPK, new { @class = "form-control", type = "file", onclick = "resizePanel()" })
+                @Html.ValidationMessageFor(model => model.DocumentoEPK, "", new { @class = "text-danger" })
+                <p class="text-info"><i class="fa-question"></i> Tipos de archivos permitidos: .pdf  de tamaño máximo 2 Mb.</p>
+                @if (Model.documentoArchivo != null && Model.documentoArchivo.Count > 0)
+                {
+
+                    foreach (var item in Model.documentoArchivo)
+                    {
+                        <br />
+                        @Html.ActionLink(item.NombreArchivo, "Descargar", "Documento", new { id = item.DocumentoId }, new { title = string.Format("Descargar archivo: {0}\nFecha registro: {1}\nTamaño: {2} bytes", item.NombreArchivo, item.FechaRegistro.ToString("dd/MM/yyyy"), item.TamanoArchivo) })
+                    }
+
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control text", @rows = "5", @cols = "50" })
+                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
+    </div>
+}

@@ -1,0 +1,296 @@
+﻿@model WebSImus.Models.Usuarios
+@{
+    ViewBag.Title = "Modificar rol del usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .modern-profile-form {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-header {
+        margin-bottom: 30px;
+        text-align: center;
+        color: #4b3c8c;
+    }
+
+    .form-title {
+        color: #4b3c8c;
+        font-weight: 600;
+        margin-bottom: 5px;
+        font-size: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .form-section {
+        margin-bottom: 40px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #ecf0f1;
+    }
+
+    .section-title {
+        color: #4b3c8c;
+        font-size: 20px;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #34495e;
+    }
+
+    .modern-input,
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #e1e5eb;
+        border-radius: 8px;
+        transition: all 0.3s;
+        background-color: #f8f9fa;
+        height: 46px;
+        box-sizing: border-box;
+    }
+
+    .modern-input:focus,
+    .form-control:focus {
+        border-color: #4b3c8c;
+        box-shadow: 0 0 0 3px rgba(75, 60, 140, 0.1);
+        background-color: #fff;
+        outline: none;
+    }
+
+    .modern-select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: none;
+        padding-right: 35px;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .validation-error {
+        display: block;
+        margin-top: 5px;
+        font-size: 13px;
+        color: #e74c3c;
+    }
+
+    .form-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        text-decoration: none;
+    }
+
+    .btn-secondary-cancel {
+        background-color: #ecf0f1;
+        color: #34495e;
+        border: 1px solid #d5dbdb;
+    }
+
+    .btn-secondary-cancel:hover {
+        background-color: #e0e0e0;
+    }
+
+    .btn-primary-save {
+        background-color: #4b3c8c;
+        color: white;
+    }
+
+    .btn-primary-save:hover {
+        background-color: #281e52;
+    }
+    .d-flex {
+        display: flex;
+    }
+
+    .gap-2 {
+        gap: 10px;
+    }
+</style>
+
+
+@using (Html.BeginForm("Accion", "UsuarioRol", FormMethod.Post, new { id = "submitForm" }))
+{
+    @Html.ValidationSummary(false, "", new { @class = "alerta-modern" })
+    <div class="modern-profile-form">
+        <div class="form-header">
+            <h2 class="form-title">
+                <i class="fas fa-user-shield"></i> Modificar Rol del Usuario
+            </h2>
+        </div>
+
+        <div class="form-body">
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.contrasena)
+            @Html.HiddenFor(model => model.confcontrasena)
+            @Html.HiddenFor(model => model.fechaNacimiento)
+            @Html.HiddenFor(model => model.tipoDocumento)
+            @Html.HiddenFor(model => model.pais)
+
+            <div class="form-section">
+                <h3 class="section-title">
+                    <i class="fas fa-id-card"></i> Información del Usuario
+                </h3>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        @Html.Label("Tipo de documento", new { @class = "form-label" })
+                        @Html.DropDownListFor(model => model.tipoDocumento, (SelectList)ViewBag.listTipoDocumento, new { @disabled = "disabled", @class = "form-control modern-select" })
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.Label("Número de documento", new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.numeroDocumento, new { @readonly = "readonly", @class = "form-control modern-input", maxlength = "50" })
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        @Html.Label("Correo electrónico", new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.usuario, new { @readonly = "readonly", @class = "form-control modern-input" })
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.Label("Primer nombre", new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.primerNombre, new { @readonly = "readonly", @class = "form-control modern-input", maxlength = "50" })
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        @Html.Label("Segundo nombre", new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.segundoNombre, new { @readonly = "readonly", @class = "form-control modern-input", maxlength = "50" })
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.Label("Primer apellido", new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.primerApellido, new { @readonly = "readonly", @class = "form-control modern-input", maxlength = "50" })
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        @Html.Label("Segundo apellido", new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.segundoApellido, new { @readonly = "readonly", @class = "form-control modern-input", maxlength = "50" })
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.Label("Origen del usuario", new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.tipoRedSocial, new { @readonly = "readonly", @class = "form-control modern-input", maxlength = "50" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3 class="section-title">
+                    <i class="fas fa-user-tag"></i> Rol y Ubicación
+                </h3>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        @Html.Label("Rol asociado", new { @class = "form-label" })
+                        <div style="border: 1px solid #e1e5eb; border-radius: 8px; padding: 15px; background-color: #f8f9fa;">
+                            @Html.CheckBoxListFor(model => model.IdRol, model => model.AvailableRols, model => model.id, model => model.nombre, model => model.esescogido, MvcCheckBoxList.Model.Position.Vertical)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        @Html.Label("Departamento", new { @class = "form-label" })
+                        @Html.DropDownListFor(model => model.departamento, (SelectList)ViewBag.listDpto, new { @class = "form-control modern-select departamento" })
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.Label("Municipio", new { @class = "form-label" })
+                        <div class="d-flex gap-2">
+                            @Html.DropDownListFor(model => model.municipio, (SelectList)ViewBag.listMun, new { @class = "form-control modern-select municipio" })
+                            <input type="submit" value="Agregar" name="command" class="btn btn-primary-save" id="btnagregar" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-12">
+                        @Html.Action("GridViewUsuarioCiudad")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-footer">
+            <a href="@Url.Action("ConsultaUsuarioRol", "UsuarioRol")" class="btn btn-secondary-cancel">
+                <i class="fas fa-arrow-left"></i> Regresar
+            </a>
+            <button type="submit" name="command" value="Guardar" class="btn btn-primary-save">
+                <i class="fas fa-save"></i> Guardar Cambios
+            </button>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script>
+        $(document).ready(function () {
+            $('.departamento').change(function () {
+                var codDepartamento = $(this).val();
+                $.ajax({
+                    url: '/UsuarioRol/ConsultarMunicipiosPorDepartamento',
+                    type: 'GET',
+                    data: { codDepartamento: codDepartamento },
+                    success: function (data) {
+                        var $municipio = $('.municipio');
+                        $municipio.empty();
+                        $municipio.append($('<option>').val('').text('Seleccione un municipio'));
+                        $.each(data, function (i, municipio) {
+                            $municipio.append($('<option>').val(municipio.value).text(municipio.text));
+                        });
+                    },
+                    error: function () {
+                        alert('Error al cargar municipios.');
+                    }
+                });
+            });
+        });
+    </script>
+}

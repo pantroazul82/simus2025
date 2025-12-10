@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Reporte General";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.ActionLink(" Exportar", "ExportarExcel", "Report", null, new { @class = "btn btn-warning glyphicon glyphicon-export" })
+                  
+                </div>
+            </div>
+        </div>
+        <br />
+
+  
+        <div style="overflow-x: scroll; ">
+
+
+            @Html.Action("GridViewConsultaReporte")
+        </div>
+        <div class="panel-footer">
+
+            <div class="btn btn-default pull-left">
+                <i class="fa fa-arrow-circle-o-left"></i>@Html.ActionLink("Regresar", "Index", "Inicio")
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/globalize/globalize.js")"></script>
+    <script src="@Url.Content("~/Scripts/dx.webappjs.js")"></script>
+
+}

@@ -1,0 +1,325 @@
+﻿@model WebSImus.Models.FormacionPadre
+@{
+    ViewBag.Title = @ViewBag.NombreEscuela;
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Formacion", "EscuelasMusica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true, "", new { @class = "mf-validation-summary" })
+
+    <nav class="modern-breadcrumb">
+        <span class="breadcrumb-item">@Html.ActionLink("Inicio", "Index", "Inicio", null, new { @class = "breadcrumb-link" })</span>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item">@Html.ActionLink("Escuelas", "Consulta", "EscuelasMusica", null, new { @class = "breadcrumb-link" })</span>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item">@Html.ActionLink("Exportar", "Exportar", "EscuelasMusica", new { Id = Model.EscuelaId }, new { @class = "breadcrumb-link" })</span>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item current">@Html.ActionLink("Encuestas", "Formulario", "EscuelasMusica", new { Id = Model.EscuelaId }, new { @class = "breadcrumb-link" })</span>
+    </nav>
+
+    <div class="modern-form-container">
+        <div class="form-header">
+            <h2 class="form-title">
+                @ViewBag.NuevoTitulo
+            </h2>
+        </div>
+
+        @Html.HiddenFor(model => model.EscuelaId)
+
+        @Html.Partial("_PasoAPaso")
+
+        <div class="mf-mt-6">
+            @Html.Partial("_FormacionNuevo", Model.basico)
+        </div>
+
+        <hr class="mf-hr" />
+
+        <div class="mf-section-title">
+            <i class="fas fa-music"></i> Prácticas Musicales
+        </div>
+
+        <p class="mf-notice-box">
+            <i class="fas fa-info-circle"></i>
+            Es requerido agregar una o más prácticas musicales que desarrolla la escuela.
+        </p>
+
+        <div class="mf-grid ">
+            <div class="md:mf-col-span-10">
+                <div class="mf-field-group">
+                    <label class="mf-label" for="practicaMusical">Práctica</label>
+                    @Html.DropDownListFor(model => model.practicaMusical, (SelectList)ViewBag.listPractica, "Seleccione", new { @class = "w-full px-3 py-2 border rounded" })
+                    @Html.ValidationMessageFor(model => model.practicaMusical, "", new { @class = "mf-validation-error" })
+                </div>
+            </div>
+
+            <div class="md:mf-col-span-2 flex items-end">
+                <button type="button" id="btnAgregarPractica" class="btn btn-success w-full" data-dismiss="modal">
+                    <i class="fas fa-plus"></i> Agregar
+                </button>
+            </div>
+        </div>
+
+
+
+        <div id="TablaPractica" class="mf-mt-4">
+            @Html.Action("CargarPractica", new { EscuelaId = Model.EscuelaId, EliminarId = 0 })
+        </div>
+
+        <div class="mf-form-footer">
+            @Html.ActionLink("Anterior", "Organizacion", "EscuelasMusica", new { Id = Model.EscuelaId }, new { @class = "btn border" })
+            <input type="submit" value="Siguiente" name="TabFormacion" class="btn btn-success py-2 px-4" id="btnGuardarFormacion" />
+        </div>
+    </div>
+
+    <div class="mf-message-box mf-message-box-success" id="message-box-success">
+        <div class="mf-message-box-header">
+            <span class="mf-message-box-title">
+                <i class="fas fa-check-circle"></i> Éxito
+            </span>
+            <button class="mf-message-box-close mb-control-close">&times;</button>
+        </div>
+        <div class="mf-message-box-content">
+            <p>La información se actualizó con éxito.</p>
+        </div>
+    </div>
+
+    
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script src="~/Scripts/escuelasvalidate.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            HabilitarDeshabilitarPasos();
+            $("#step4").addClass("active");
+        });
+        $("li").click(function () {
+
+            switch ($(this).data("step")) {
+                case 1:
+                    window.location = "@Url.Action("EditarNuevo", "EscuelasMusica", new { id = Model.EscuelaId,  wizard = 1 })";
+                    break;
+                case 2:
+                    window.location = "@Url.Action("Beneficiarios", "EscuelasMusica", new { id = Model.EscuelaId })";
+                    break;
+                case 3:
+                    window.location = "@Url.Action("Organizacion", "EscuelasMusica", new { id = Model.EscuelaId })";
+                    break;
+                case 4:
+                    window.location = "@Url.Action("Formacion", "EscuelasMusica", new { id = Model.EscuelaId })";
+                    break;
+                case 5:
+                    window.location = "@Url.Action("Infraestructura", "EscuelasMusica", new { id = Model.EscuelaId })";
+                    break;
+                case 6:
+                    window.location = "@Url.Action("Produccion", "EscuelasMusica",  new { id = Model.EscuelaId })";
+                    break;
+                case 61:
+                    window.location = "@Url.Action("Produccion", "EscuelasMusica", new { id = Model.EscuelaId })";
+                    break;
+                case 7:
+                    window.location = "@Url.Action("Asesoria", "FichaAsesoria", new { id = Model.EscuelaId })";
+                    break;
+
+            }
+        });
+
+        $(".generos").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Agrupacion/CargarListaGenero",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Nombre, value: item.Nombre };
+                        }))
+
+                    }
+
+                })
+            },
+            messages: {
+                //noResults: "", results: ""
+
+            }
+
+        });
+
+
+
+        function GeneroAgregar(varFormacionPracticaId) {
+            var varServicio = $("#generos" + varFormacionPracticaId).val();
+
+            varnombre = "#" + varFormacionPracticaId;
+            if (varServicio == '') {
+                alert("Es obligatorio escribir un genero");
+                return;
+            }
+
+            var url = '@Url.Action("AgregarGeneros", "EscuelasMusica")';
+            var varEscuelaId = '@Model.EscuelaId';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    atributo: varServicio, formacionId: varFormacionPracticaId
+                },
+                success: function (data) {
+                    //alert("1");
+                    $(varnombre).html(data);
+                    $('.generos').val("");
+                }
+
+
+            })
+             .done(function (partialViewResult) {
+                 //alert("2");
+                 //$(varnombre).html(partialViewResult);
+
+             });
+
+            return false;
+        }
+
+        $('#btnAgregarPractica').click(function () {
+            var varPractica = $("#practicaMusical").val();
+
+            if (varPractica == '' || varPractica == null) {
+                alert("Es obligatorio seleccionar una práctica musical");
+                return;
+            }
+
+            var url = '@Url.Action("AgregarPractica", "EscuelasMusica")';
+            var varEscuelaId = '@Model.EscuelaId';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    EscuelaId: varEscuelaId, PracticaId: varPractica
+                },
+                success: function (data) {
+                    if (data) {
+
+                        location.reload();
+                        //ActualizarPracticas(varEscuelaId, 0);
+                        alert("Se agrego con éxito la práctica musical.")
+                    }
+                },
+
+            });
+        });
+
+        function ActualizarPracticas(varEscuelaId, varEliminar) {
+
+            $('#practicaMusical').val("");
+            $.ajax({
+
+                url: "/EscuelasMusica/CargarPractica",
+                type: "GET",
+                data: { EscuelaId: varEscuelaId, EliminarId: varEliminar }
+            })
+           .done(function (partialViewResult) {
+               $("#TablaPractica").html(partialViewResult);
+
+           });
+        }
+        function ActualizarListadoGenero(varFormacionPracticaId, varEliminar) {
+            varnombre = "#" + varFormacionPracticaId;
+            $('.generos').val("");
+            $.ajax({
+
+                url: "/EscuelasMusica/Cargargeneros",
+                type: "GET",
+                data: { FormacionPracticaId: varFormacionPracticaId, EliminarId: varEliminar }
+            })
+           .done(function (partialViewResult) {
+               $(varnombre).html(partialViewResult);
+
+           });
+        }
+
+        //Cargar la modal para agregar niveles
+
+        function CargarDetalle(varcodigo) {
+            varEscuelaId = '@Model.EscuelaId';
+            $.ajax({
+
+                url: "/EscuelasMusica/_AgregarNiveles",
+                type: "GET",
+                data: { id: varcodigo, escuelaId: varEscuelaId }
+            })
+           .done(function (partialViewResult) {
+               $("#modalInformacion").html(partialViewResult);
+               $("#modal_datosNiveles").modal('show');
+               $('body').removeClass('modal-open');
+               $('.modal-backdrop').remove();
+           });
+
+        }
+
+        //Agregar niveles de educación
+
+        function NivelAgregar(varFormacionPracticaId) {
+            varEscuelaId = '@Model.EscuelaId';
+            var varNivel = $("#NombreNiveles").val();
+
+            if (varNivel == false) {
+                alert("El nivel es rquerido");
+                return;
+            }
+
+            var url = '@Url.Action("AgregarNiveles", "EscuelasMusica")';
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    EscuelaId: varEscuelaId, FormacionId: varFormacionPracticaId, Nivel: varNivel, Grupo: $('#Cantidadgrupos').val(),
+                    Integrantes: $('#CantidadIntegrantes').val(), Horas: $('#HoraSemanal').val()
+                },
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        ActualizarListadoNivel(varFormacionPracticaId, 0);
+                    }
+                },
+
+            });
+        }
+
+
+        function ActualizarListadoNivel(varFormacionPracticaId, varEliminar) {
+            varnombre = "#Nivel" + varFormacionPracticaId;
+            $('#NombreNiveles').val("");
+            $('#Cantidadgrupos').val("");
+            $('#CantidadIntegrantes').val("");
+            $('#HoraSemanal').val("");
+            $.ajax({
+
+                url: "/EscuelasMusica/CargarNivel",
+                type: "GET",
+                data: { FormacionPracticaId: varFormacionPracticaId, EliminarId: varEliminar }
+            })
+           .done(function (partialViewResult) {
+               $(varnombre).html(partialViewResult);
+
+           });
+        }
+    </script>
+}
+
+
+

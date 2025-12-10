@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Pagina no encontrada";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+<div class="error-container">
+    <div class="error-code">404</div>
+    <div class="error-text">página no encontrada</div>
+    <div class="error-subtext">Al parecer la página a la que intenta acceder no existe.</div>
+    <div class="error-actions">
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-info btn-block btn-lg" onclick="document.location.href = '/';">Ir a página de inicio</button>
+            </div>
+        </div>
+    </div>
+</div>   

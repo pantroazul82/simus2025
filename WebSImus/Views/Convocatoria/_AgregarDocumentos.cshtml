@@ -1,0 +1,82 @@
+﻿@model WebSImus.Models.DotacionDocumentoModels
+<div class="panel panel-default">
+
+    <div class="panel-body">
+        <h2><i class="fa-file-pdf fa-2x"></i> Documentos</h2>
+        <br />
+        <div class="row push-down-20">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-md-3 control-label"> Categoria</label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.Categoria, (SelectList)ViewBag.listCategoria, "Seleccione la categoria", new { @class = "form-control select" })
+                        @Html.ValidationMessageFor(model => model.Categoria, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Subir documento</label>
+                    <div class="col-md-9">
+
+                        @Html.TextBoxFor(model => model.DocumentoEscuela, new { @class = "form-control", type = "file", onclick = "resizePanel()" })
+                        @Html.ValidationMessageFor(model => model.DocumentoEscuela, "", new { @class = "text-danger" })
+                        <p class="text-info"><i class="fa-question"></i> Tipos de archivos permitidos: .pdf de tamaño máximo 2 Mb.</p>
+                        @Html.HiddenFor(model => model.DotacionDocumentoId)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button type="button" id="btnDocumentoEscuela" class="btn btn-success  pull-left" data-dismiss="modal">Agregar</button>
+            </div>
+        </div>
+        <div class="row push-down-20">
+            <h3><span class="fa-clasificados fa-2x"></span> Listado</h3>
+            @Html.HiddenFor(model => model.DotacionId)
+        </div>
+        <div id="TablaDocumento" class="panel-body">
+            @Html.Action("TablaDocumentos", new { Id = Model.DotacionId, EliminarId = 0 })
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    function CargarModalDocumentos(Id) {
+        $('#item-to-delete-documento').val(Id);
+
+    }
+
+
+    function EliminarDocumento() {
+        var varid = $('#item-to-delete-documento').val();
+        // alert(varid);
+        var varEscuelaId = '@Model.DotacionId';
+        ActualizarListadoDocumentos(varEscuelaId, varid);
+        return false;
+    }
+
+    function ActualizarListadoDocumentos(varID, varEliminar) {
+
+        $("#Categoria").val("").change();
+        $("#DocumentoEscuela").val("").change();
+        $.ajax({
+
+            url: "/Convocatoria/TablaDocumentos",
+            type: "GET",
+            data: { Id: varID, EliminarId: varEliminar }
+        })
+       .done(function (partialViewResult) {
+           $("#TablaDocumento").html(partialViewResult);
+           $('#item-to-delete-documento').val(0);
+           if (varEliminar > 0) {
+               $("#modalConfirmarDocumentos").modal('hide');
+               $('body').removeClass('modal-open');
+               $('.modal-backdrop').remove();
+           }
+       });
+
+    }
+
+</script>

@@ -1,0 +1,149 @@
+﻿@model WebSImus.Models.ConvocatoriaModels
+@{
+    ViewBag.Title = "Convocatoria";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Editar", "Convocatoria", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Convocatoria", "Index", "Convocatoria")</li>
+    </ul>
+    @*if (@Model.msg != null)
+        {
+            <div class="login-subtitle"><strong>@Model.msg </strong></div>
+        }*@
+    <div class="panel panel-primary form-horizontal">
+        @Html.ValidationSummary(true)
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-star"></span> Datos Convocatoria</h3>
+        </div>
+        <div class="row push-down-20">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.ActionLink(" Ficha", "Detalle", "Convocatoria", new { Id = Model.ConvocatoriaId }, new { @class = "btn btn-warning glyphicon glyphicon-link" })
+
+                    @Html.ActionLink(" Participantes", "Participacion", "Convocatoria", new { Id = Model.ConvocatoriaId }, new { @class = "btn btn-success glyphicon glyphicon-user" })
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" id="panelEditar">
+            @Html.Partial("_DatosBasicosEditar", Model)
+            <div class="panel-footer">
+                <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script type="text/javascript">
+
+        var pagecontentwrapHeight = $(".page-content-wrap").height();
+        $('#panelEditar').css("height", pagecontentwrapHeight);
+
+        $('#Documento').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: false,
+            maxFileSize: 2048,
+            allowedFileExtensions: ['pdf'],
+        });
+
+        $('#FechaInicio').datepicker({
+            minDate: 0,
+            maxDate: "+60D",
+            numberOfMonths: 2,
+            format: 'yyyy-mm-dd',
+            onSelect: function (selected) {
+                $("#FechaFin").datepicker("option", "minDate", selected)
+            }
+        })
+
+        $('#FechaFin').datepicker({
+
+            format: 'yyyy-mm-dd',
+            minDate: 0,
+            maxDate: "+60D",
+            numberOfMonths: 2,
+            onSelect: function (selected) {
+                $("#FechaInicio").datepicker("option", "maxDate", selected)
+            }
+        })
+
+
+        $(window).on('resize', function () {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_panelbodyHeight);
+            $('#panelEditar').css("min-height", pagecontentwrapHeight + 350);
+        });
+
+        function resizePanel() {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_pagecontentwrapHeight);
+        };
+
+        $(function () {
+            $('#FechaInicio').select(function () {
+                var from = $("#FechaInicio").val();
+                var to = $("#FechaFin").val();
+
+                if (Date.parse(from) > Date.parse(to)) {
+                    $("#FechaFin").val('');
+                    alert("La fecha final no puede ser menor a la inicial");
+                }
+
+            })
+        });
+
+        $(function () {
+            $('#FechaFin').select(function () {
+               var from = $("#FechaInicio").val();
+                var to = $("#FechaFin").val();
+
+                if (Date.parse(from) > Date.parse(to)) {
+                    $("#FechaFin").val('');
+                    alert("La fecha final no puede ser menor a la inicial");
+                }
+
+            })
+        });
+        $(function () {
+            $('#Tipo').change(function () {
+                var selected = $(this).val();
+                var city = $('#TipoActor');
+
+                if (selected != null && selected != '') {
+
+                    $.getJSON('@Url.Action("GetActor")', { tipo: selected }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un actor </option>';
+
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                }
+
+            })
+        });
+    </script>
+}
+
+

@@ -1,0 +1,209 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.EscuelaSolicitudDTO>
+
+
+<div class="modal animated fadeIn" id="modalValidacionEscuelas" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="smallModalHead">Escuelas de Música Registradas en el municipio @ViewBag.NombreMunicipio</h4>
+                <p class="text-info"><i class="fa fa-question-circle"></i> Si la escuela que va a registrar aparece en el listado siguiente y usted no es el usuario que administra la información, por favor solicite el acceso dando clic en Solicitar, de lo contrario dé clic en Actualizar.</p>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12 table-responsive">
+                        <table class="table">
+                            @Html.Hidden("item-to-delete", "", new { @id = "item-to-delete" })
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Dirección</th>
+                                    <th>Contacto</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    foreach (SM.LibreriaComun.DTO.EscuelaSolicitudDTO item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.NombreEscuela</td>
+                                            <td>@item.Direccion</td>
+                                            <td>@item.Contacto</td>
+                                            @if (item.UsuarioEscuelaId != item.UsuarioActualId)
+                                            {
+                                                <td>
+                                                    <a href="" class="btn btn-success" id="@item.EscuelaId" onclick="javascript: SolicitarPermisos('@item.EscuelaId'); return false;">
+                                                        <i class="fas fa-user-plus"></i> Solicitar
+                                                    </a>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <a href="~/EscuelasMusica/Editar/@item.EscuelaId" class="btn btn-success" id="@item.EscuelaId">
+                                                        <i class="fas fa-edit"></i> Actualizar
+                                                    </a>
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    #modalValidacionEscuelas .modal-dialog {
+        max-width: 700px;
+        margin-top: 10vh;
+    }
+
+    #modalValidacionEscuelas .modal-content {
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        border: none;
+    }
+
+    #modalValidacionEscuelas .modal-header {
+        background-color: #f9f9fb;
+        padding: 20px 25px;
+        border-bottom: 1px solid #e1e5eb;
+    }
+
+        #modalValidacionEscuelas .modal-header h4 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4b3c8c;
+            margin-bottom: 10px;
+        }
+
+        #modalValidacionEscuelas .modal-header p.text-info {
+            font-size: 14px;
+            color: #555;
+            margin: 0;
+        }
+
+    #modalValidacionEscuelas .table-responsive {
+        padding: 20px 25px;
+    }
+
+    #modalValidacionEscuelas .table th {
+        background-color: #f1f1f1;
+        color: #333;
+        padding: 10px;
+        font-weight: 600;
+    }
+
+    #modalValidacionEscuelas .table td {
+        padding: 10px;
+        vertical-align: middle;
+    }
+
+    #modalValidacionEscuelas .btn {
+        border-radius: 8px;
+        padding: 8px 18px;
+        font-size: 14px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    #modalValidacionEscuelas .btn-success {
+        background-color: #28a745;
+        color: #fff;
+    }
+
+        #modalValidacionEscuelas .btn-success:hover {
+            background-color: #218838;
+        }
+
+    #modalValidacionEscuelas .btn-danger {
+        background-color: #dc3545;
+        color: white;
+        margin: 15px;
+    }
+
+        #modalValidacionEscuelas .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+    #modalValidacionEscuelas .modal-footer {
+        border-top: 1px solid #e1e5eb;
+        padding: 15px 25px;
+        text-align: right;
+    }
+
+
+    .modal-header h4 {
+        color: #4b3c8c;
+        font-weight: 600;
+    }
+
+    .modal-header p.text-info {
+        margin-top: 5px;
+        font-size: 14px;
+        color: #6c757d;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        margin-top: 15px;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        background-color: #fff;
+        border-collapse: collapse;
+    }
+
+        .table th {
+            background-color: #f1f1f1;
+            font-weight: 600;
+            text-align: left;
+            padding: 12px;
+        }
+
+        .table td {
+            padding: 12px;
+            vertical-align: middle;
+            border-top: 1px solid #dee2e6;
+        }
+
+    .btn {
+        border-radius: 5px;
+        padding: 6px 12px;
+        font-size: 14px;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+    }
+</style>

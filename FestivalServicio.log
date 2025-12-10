@@ -1,0 +1,1579 @@
+[2025-10-28 21:14:03] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-28 21:14:04] ObtenerPorUsuarioId - ERROR: An error occurred while executing the command definition. See the inner exception for details.
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass41_0.<GetResults>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__31_0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en SM.Datos.Servicios.FestivalServicio.ObtenerPorUsuarioId(Int32 usuarioId)
+[2025-10-28 21:14:05] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-28 21:14:05] ObtenerPorUsuarioId - ERROR: An error occurred while executing the command definition. See the inner exception for details.
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass41_0.<GetResults>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__31_0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en SM.Datos.Servicios.FestivalServicio.ObtenerPorUsuarioId(Int32 usuarioId)
+[2025-10-28 21:17:34] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-28 21:17:34] ObtenerPorUsuarioId - Ejecutando consulta SQL...
+[2025-10-28 21:17:34] ObtenerPorUsuarioId - ERROR: An error occurred while executing the command definition. See the inner exception for details.
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass41_0.<GetResults>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__31_0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en SM.Datos.Servicios.FestivalServicio.ObtenerPorUsuarioId(Int32 usuarioId)
+[2025-10-28 21:17:34] INNER EXCEPTION: Invalid object name 'dbo.ART_MUS_FESTIVALES'.
+   en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.Reader(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+[2025-10-28 21:17:36] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-28 21:17:36] ObtenerPorUsuarioId - Ejecutando consulta SQL...
+[2025-10-28 21:17:36] ObtenerPorUsuarioId - ERROR: An error occurred while executing the command definition. See the inner exception for details.
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass41_0.<GetResults>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__31_0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en SM.Datos.Servicios.FestivalServicio.ObtenerPorUsuarioId(Int32 usuarioId)
+[2025-10-28 21:17:36] INNER EXCEPTION: Invalid object name 'dbo.ART_MUS_FESTIVALES'.
+   en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.Reader(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+[2025-10-28 21:46:10] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-28 21:46:10] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-28 21:46:10] ObtenerPorUsuarioId - ERROR: Invalid object name 'ART_MUS_FESTIVALES'.
+   en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.Reader(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQueryInternal[TElement](String commandText, String entitySetName, ExecutionOptions executionOptions, Object[] parameters)
+   en System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass186_0`1.<ExecuteStoreQueryReliably>b__1()
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass186_0`1.<ExecuteStoreQueryReliably>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQueryReliably[TElement](String commandText, String entitySetName, ExecutionOptions executionOptions, Object[] parameters)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQuery[TElement](String commandText, ExecutionOptions executionOptions, Object[] parameters)
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en SM.Datos.Servicios.FestivalServicio.ObtenerPorUsuarioId(Int32 usuarioId)
+[2025-10-28 21:46:11] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-28 21:46:11] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-28 21:46:11] ObtenerPorUsuarioId - ERROR: Invalid object name 'ART_MUS_FESTIVALES'.
+   en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.Reader(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQueryInternal[TElement](String commandText, String entitySetName, ExecutionOptions executionOptions, Object[] parameters)
+   en System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass186_0`1.<ExecuteStoreQueryReliably>b__1()
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass186_0`1.<ExecuteStoreQueryReliably>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQueryReliably[TElement](String commandText, String entitySetName, ExecutionOptions executionOptions, Object[] parameters)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQuery[TElement](String commandText, ExecutionOptions executionOptions, Object[] parameters)
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en SM.Datos.Servicios.FestivalServicio.ObtenerPorUsuarioId(Int32 usuarioId)
+[2025-10-28 21:51:01] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-28 21:51:01] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-28 21:51:01] ObtenerPorUsuarioId - Registros encontrados: 6
+[2025-10-28 21:51:01] ObtenerPorUsuarioId - DTOs generados: 6
+[2025-10-28 21:51:02] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-28 21:51:02] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-28 21:51:03] ObtenerPorUsuarioId - Registros encontrados: 6
+[2025-10-28 21:51:03] ObtenerPorUsuarioId - DTOs generados: 6
+[2025-10-29 15:57:19] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-10-29 15:57:19] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 15:57:34] ObtenerPorUsuarioId - ERROR: The underlying provider failed on Open.
+   en System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   en System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass186_0`1.<ExecuteStoreQueryReliably>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQueryReliably[TElement](String commandText, String entitySetName, ExecutionOptions executionOptions, Object[] parameters)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQuery[TElement](String commandText, ExecutionOptions executionOptions, Object[] parameters)
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en SM.Datos.Servicios.FestivalServicio.ObtenerPorUsuarioId(Int32 usuarioId)
+[2025-10-29 15:57:34] INNER EXCEPTION: Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: TCP Provider, error: 0 - Tiempo de espera de la operación de espera agotado.)
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext](TTarget target, Action`2 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.Open(DbConnection connection, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<>c__DisplayClass2_0.<Execute>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+[2025-10-29 15:57:34] INNER EXCEPTION: Tiempo de espera de la operación de espera agotado
+
+[2025-10-29 15:57:34] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-10-29 15:57:34] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 15:57:34] ObtenerPorUsuarioId - ERROR: The underlying provider failed on Open.
+   en System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   en System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass186_0`1.<ExecuteStoreQueryReliably>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQueryReliably[TElement](String commandText, String entitySetName, ExecutionOptions executionOptions, Object[] parameters)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQuery[TElement](String commandText, ExecutionOptions executionOptions, Object[] parameters)
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en SM.Datos.Servicios.FestivalServicio.ObtenerPorUsuarioId(Int32 usuarioId)
+[2025-10-29 15:57:34] INNER EXCEPTION: Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: TCP Provider, error: 0 - Tiempo de espera de la operación de espera agotado.)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext](TTarget target, Action`2 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.Open(DbConnection connection, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<>c__DisplayClass2_0.<Execute>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+[2025-10-29 15:57:34] INNER EXCEPTION: Tiempo de espera de la operación de espera agotado
+
+[2025-10-29 16:04:40] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:04:40] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:04:40] ObtenerPorUsuarioId - Registros encontrados: 6
+[2025-10-29 16:04:40] ObtenerPorUsuarioId - DTOs generados: 6
+[2025-10-29 16:04:40] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:04:40] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:04:40] ObtenerPorUsuarioId - Registros encontrados: 6
+[2025-10-29 16:04:41] ObtenerPorUsuarioId - DTOs generados: 6
+[2025-10-29 16:05:19] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:05:19] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:05:19] ObtenerPorUsuarioId - Registros encontrados: 6
+[2025-10-29 16:05:22] ObtenerPorUsuarioId - DTOs generados: 6
+[2025-10-29 16:05:22] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:05:22] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:05:22] ObtenerPorUsuarioId - Registros encontrados: 6
+[2025-10-29 16:05:23] ObtenerPorUsuarioId - DTOs generados: 6
+[2025-10-29 16:14:54] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:14:54] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:14:55] ObtenerPorUsuarioId - Registros encontrados: 6
+[2025-10-29 16:14:56] ObtenerPorUsuarioId - DTOs generados: 6
+[2025-10-29 16:14:57] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:14:57] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:15:00] ObtenerPorUsuarioId - Registros encontrados: 6
+[2025-10-29 16:15:00] ObtenerPorUsuarioId - DTOs generados: 6
+[2025-10-29 16:21:11] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:21:11] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:21:12] ObtenerPorUsuarioId - Registros encontrados: 6
+[2025-10-29 16:21:13] ObtenerPorUsuarioId - DTOs generados: 6
+[2025-10-29 16:21:14] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:21:14] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:21:14] ObtenerPorUsuarioId - Registros encontrados: 6
+[2025-10-29 16:21:14] ObtenerPorUsuarioId - DTOs generados: 6
+[2025-10-29 16:21:43] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:21:43] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:21:46] ObtenerPorUsuarioId - Registros encontrados: 6
+[2025-10-29 16:21:46] ObtenerPorUsuarioId - DTOs generados: 6
+[2025-10-29 16:21:46] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:21:46] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:21:46] ObtenerPorUsuarioId - Registros encontrados: 6
+[2025-10-29 16:21:46] ObtenerPorUsuarioId - DTOs generados: 6
+[2025-10-29 16:42:49] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:42:49] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:42:49] ObtenerPorUsuarioId - Registros encontrados: 6
+[2025-10-29 16:42:49] ObtenerPorUsuarioId - DTOs generados: 6
+[2025-10-29 16:42:51] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:42:51] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:42:51] ObtenerPorUsuarioId - Registros encontrados: 6
+[2025-10-29 16:42:51] ObtenerPorUsuarioId - DTOs generados: 6
+[2025-10-29 16:50:04] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:50:04] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:50:04] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 16:50:05] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 16:53:35] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-10-29 16:53:35] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:53:36] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-10-29 16:53:36] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-10-29 16:55:57] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-10-29 16:55:57] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:55:58] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-10-29 16:55:58] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-10-29 16:56:35] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:56:35] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:56:35] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 16:56:36] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 16:56:52] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:56:52] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:56:52] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 16:56:52] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 16:56:58] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 16:56:58] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 16:56:58] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 16:56:58] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:00:15] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:00:15] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:00:15] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:00:15] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:00:21] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:00:21] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:00:21] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:00:22] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:00:38] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:00:38] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:00:38] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:00:38] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:00:44] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:00:44] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:00:44] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:00:44] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:01:12] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:01:12] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:01:12] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:01:12] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:01:20] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:01:20] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:01:20] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:01:21] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:01:44] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:01:44] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:01:44] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:01:45] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:02:05] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:02:05] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:02:05] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:02:05] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:03:50] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:03:50] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:03:50] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:03:51] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:03:57] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:03:57] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:03:59] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:03:59] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:05:24] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:05:24] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:05:24] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:05:25] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:05:31] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:05:31] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:05:31] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:05:31] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:06:51] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:06:51] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:06:52] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:06:52] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:06:53] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:06:53] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:06:53] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:06:53] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:06:57] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:06:57] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:06:57] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:06:58] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:07:11] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:07:11] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:07:11] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:07:12] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:08:38] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:08:38] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:08:38] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:08:39] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:08:47] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:08:47] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:08:47] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:08:47] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:44:29] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-10-29 17:44:29] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:44:29] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-10-29 17:44:29] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-10-29 17:45:09] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-10-29 17:45:10] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:45:11] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-10-29 17:45:11] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-10-29 17:47:34] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:47:34] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:47:34] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:47:34] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:47:54] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:47:54] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:47:54] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:47:54] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 17:48:00] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 17:48:00] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 17:48:00] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 17:48:01] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 18:00:35] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 18:00:35] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 18:00:35] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 18:00:36] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 18:01:49] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 18:01:49] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 18:01:49] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 18:01:50] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 18:16:33] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 18:16:33] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 18:16:33] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 18:16:35] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 18:17:53] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 18:17:53] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 18:17:53] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 18:17:56] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 18:30:44] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 18:30:44] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 18:30:44] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 18:30:45] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-29 18:31:11] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-29 18:31:11] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-29 18:31:11] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-29 18:31:12] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-30 12:11:32] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-30 12:11:32] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-30 12:11:32] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-30 12:11:32] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-30 12:25:05] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-30 12:25:05] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-30 12:25:05] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-30 12:25:05] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-30 12:27:47] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-30 12:27:47] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-30 12:27:47] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-30 12:27:47] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-30 12:41:09] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-30 12:41:09] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-30 12:41:09] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-30 12:41:10] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-30 12:43:38] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-30 12:43:38] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-30 12:43:38] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-30 12:43:40] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-30 12:44:12] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-30 12:44:12] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-30 12:44:13] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-30 12:44:13] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-30 12:44:39] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-30 12:44:39] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-30 12:44:39] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-30 12:44:39] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-30 12:47:56] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-30 12:47:56] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-30 12:47:56] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-30 12:47:56] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-30 12:48:15] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-30 12:48:15] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-30 12:48:15] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-30 12:48:15] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-30 13:07:25] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-30 13:07:25] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-30 13:07:26] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-30 13:07:27] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-30 13:20:30] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-30 13:20:30] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-30 13:20:30] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-30 13:20:30] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-30 15:46:30] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-30 15:46:30] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-30 15:46:31] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-30 15:46:31] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-30 18:31:16] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-30 18:31:16] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-30 18:31:16] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-30 18:31:18] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-31 17:28:50] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-10-31 17:28:50] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-31 17:29:06] ObtenerPorUsuarioId - ERROR: The underlying provider failed on Open.
+   en System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   en System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass186_0`1.<ExecuteStoreQueryReliably>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQueryReliably[TElement](String commandText, String entitySetName, ExecutionOptions executionOptions, Object[] parameters)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreQuery[TElement](String commandText, ExecutionOptions executionOptions, Object[] parameters)
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en SM.Datos.Servicios.FestivalServicio.ObtenerPorUsuarioId(Int32 usuarioId)
+[2025-10-31 17:29:06] INNER EXCEPTION: Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: TCP Provider, error: 0 - Tiempo de espera de la operación de espera agotado.)
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext](TTarget target, Action`2 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.Open(DbConnection connection, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<>c__DisplayClass2_0.<Execute>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+[2025-10-31 17:29:06] INNER EXCEPTION: Tiempo de espera de la operación de espera agotado
+
+[2025-10-31 17:34:59] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-31 17:34:59] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-31 17:35:00] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-31 17:35:00] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-10-31 17:36:48] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-10-31 17:36:48] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-10-31 17:36:48] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-10-31 17:36:50] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 14:35:22] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 14:35:22] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 14:35:22] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 14:35:23] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 14:37:32] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 14:37:32] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 14:37:35] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 14:37:36] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 14:50:23] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 14:50:23] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 14:50:23] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 14:50:24] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 15:00:56] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 15:00:56] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 15:00:56] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 15:00:56] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 17:21:00] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 17:21:00] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 17:21:00] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 17:21:01] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 17:29:01] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 17:29:01] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 17:29:02] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 17:29:02] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 17:31:09] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 17:31:09] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 17:31:09] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 17:31:09] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 17:33:27] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 17:33:27] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 17:33:28] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 17:33:29] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 17:33:41] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 17:33:41] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 17:33:41] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 17:33:42] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 17:33:43] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 17:33:43] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 17:33:43] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 17:33:43] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 17:52:27] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 17:52:27] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 17:52:27] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 17:52:27] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 18:00:24] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 18:00:24] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 18:00:24] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 18:00:25] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 18:06:14] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 18:06:14] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 18:06:14] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 18:06:15] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 18:11:21] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 18:11:21] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 18:11:21] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 18:11:21] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 18:18:17] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 18:18:17] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 18:18:17] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 18:18:17] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 18:26:18] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 18:26:18] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 18:26:18] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 18:26:19] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 18:52:14] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 18:52:14] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 18:52:14] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 18:52:14] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 19:21:46] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 19:21:46] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 19:21:46] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 19:21:46] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 19:39:48] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 19:39:48] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 19:39:48] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 19:39:48] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-04 20:11:12] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-04 20:11:12] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-04 20:11:12] ObtenerPorUsuarioId - Registros encontrados: 8
+[2025-11-04 20:11:12] ObtenerPorUsuarioId - DTOs generados: 8
+[2025-11-05 11:22:20] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-05 11:22:20] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-05 11:22:20] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-05 11:22:20] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-05 11:43:07] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-05 11:43:07] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-05 11:43:07] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-05 11:43:07] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-05 12:52:43] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-05 12:52:43] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-05 12:52:43] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-05 12:52:44] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-05 12:56:30] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-05 12:56:30] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-05 12:56:30] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-05 12:56:31] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-05 13:05:00] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-05 13:05:00] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-05 13:05:00] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-05 13:05:00] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-05 18:23:43] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-05 18:23:43] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-05 18:23:43] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-05 18:23:43] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-05 18:28:06] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-05 18:28:06] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-05 18:28:06] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-05 18:28:06] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-05 18:36:31] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-05 18:36:31] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-05 18:36:31] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-05 18:36:31] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-05 18:44:30] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-05 18:44:30] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-05 18:44:30] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-05 18:44:30] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-05 20:47:44] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-05 20:47:44] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-05 20:47:44] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-05 20:47:44] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-05 21:10:36] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-05 21:10:36] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-05 21:10:36] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-05 21:10:37] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-05 21:16:19] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-05 21:16:19] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-05 21:16:19] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-05 21:16:19] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-05 21:18:16] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-05 21:18:16] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-05 21:18:16] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-05 21:18:16] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-05 21:27:30] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-05 21:27:30] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-05 21:27:30] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-05 21:27:30] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-09 16:40:21] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-09 16:40:21] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-09 16:40:21] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-09 16:40:22] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-09 16:49:17] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-09 16:49:17] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-09 16:49:17] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-09 16:49:18] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-09 17:21:02] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-09 17:21:02] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-09 17:21:02] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-09 17:21:03] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-09 17:36:49] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-09 17:36:49] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-09 17:36:49] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-09 17:36:51] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-09 20:56:12] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-09 20:56:12] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-09 20:56:12] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-09 20:56:13] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-09 20:58:50] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-09 20:58:50] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-09 20:58:50] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-09 20:58:51] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-09 21:02:40] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-09 21:02:40] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-09 21:02:40] ObtenerPorUsuarioId - Registros encontrados: 9
+[2025-11-09 21:02:41] ObtenerPorUsuarioId - DTOs generados: 9
+[2025-11-10 14:19:25] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-10 14:19:25] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 14:19:25] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-10 14:19:26] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-10 14:24:22] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-10 14:24:22] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 14:24:22] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-10 14:24:23] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-10 14:24:39] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-10 14:24:39] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 14:24:39] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-10 14:24:41] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-10 14:30:03] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-10 14:30:03] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 14:30:03] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-10 14:30:04] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-10 14:34:43] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-10 14:34:43] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 14:34:43] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-10 14:34:44] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-10 14:39:34] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-10 14:39:34] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 14:39:34] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-10 14:39:36] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-10 14:47:58] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-10 14:47:58] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 14:47:58] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-10 14:47:58] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-10 14:54:36] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-10 14:54:36] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 14:54:36] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-10 14:54:37] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-10 15:01:25] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-10 15:01:25] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 15:01:25] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-10 15:01:26] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-10 15:17:44] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-10 15:17:44] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 15:17:45] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-10 15:17:47] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-10 15:18:01] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-10 15:18:01] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 15:18:01] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-10 15:18:02] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-10 16:16:13] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-10 16:16:13] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 16:16:13] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-10 16:16:14] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-10 16:24:25] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-10 16:24:25] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 16:24:25] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-10 16:24:26] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-10 16:26:03] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-11-10 16:26:03] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 16:26:03] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-11-10 16:26:03] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-11-10 17:38:07] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-10 17:38:07] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 17:38:07] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-10 17:38:08] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-10 17:53:54] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-10 17:53:54] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-10 17:53:54] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-10 17:53:55] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-11 15:01:18] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-11 15:01:18] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-11 15:01:18] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-11 15:01:18] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-11 17:45:54] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-11 17:45:54] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-11 17:45:54] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-11 17:45:56] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-11 18:05:42] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-11 18:05:42] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-11 18:05:42] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-11 18:05:43] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-11 18:06:25] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-11 18:06:25] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-11 18:06:25] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-11 18:06:26] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-11 18:11:39] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-11 18:11:39] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-11 18:11:39] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-11 18:11:40] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-11 19:28:32] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-11 19:28:32] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-11 19:28:32] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-11 19:28:33] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-11 19:34:25] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-11 19:34:25] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-11 19:34:25] ObtenerPorUsuarioId - Registros encontrados: 10
+[2025-11-11 19:34:26] ObtenerPorUsuarioId - DTOs generados: 10
+[2025-11-11 19:36:11] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-11 19:36:11] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-11 19:36:11] ObtenerPorUsuarioId - Registros encontrados: 11
+[2025-11-11 19:36:12] ObtenerPorUsuarioId - DTOs generados: 11
+[2025-11-11 20:43:27] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-11 20:43:27] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-11 20:43:27] ObtenerPorUsuarioId - Registros encontrados: 11
+[2025-11-11 20:43:28] ObtenerPorUsuarioId - DTOs generados: 11
+[2025-11-11 20:44:54] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-11 20:44:54] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-11 20:44:54] ObtenerPorUsuarioId - Registros encontrados: 12
+[2025-11-11 20:44:56] ObtenerPorUsuarioId - DTOs generados: 12
+[2025-11-11 20:48:00] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-11 20:48:00] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-11 20:48:00] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-11 20:48:01] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 18:08:59] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 18:08:59] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:08:59] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 18:08:59] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 18:16:57] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 18:16:57] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:16:58] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 18:16:59] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 18:19:29] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 18:19:29] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:19:30] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 18:19:33] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 18:19:36] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 18:19:36] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:19:36] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 18:19:43] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 18:19:58] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 18:19:58] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:19:58] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 18:20:05] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 18:21:05] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 18:21:05] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:21:05] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 18:21:07] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 18:23:29] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 18:23:29] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:23:29] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 18:23:29] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 18:26:10] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 18:26:10] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:26:12] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 18:26:14] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 18:32:57] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-11-12 18:32:57] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:32:57] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-11-12 18:32:57] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-11-12 18:33:02] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-11-12 18:33:02] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:33:02] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-11-12 18:33:02] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-11-12 18:35:52] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 18:35:52] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:35:52] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 18:35:53] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 18:37:08] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 18:37:08] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:37:08] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 18:37:10] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 18:43:44] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 18:43:44] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:43:44] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 18:43:44] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 18:45:15] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 18:45:15] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:45:15] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 18:45:16] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 18:46:33] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 18:46:33] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:46:33] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 18:46:39] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 18:47:03] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 18:47:03] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:47:03] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 18:47:18] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 18:51:47] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 18:51:47] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 18:51:47] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 18:51:49] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 19:09:05] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 19:09:05] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 19:09:05] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 19:09:09] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-12 19:25:26] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-12 19:25:26] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-12 19:25:26] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-12 19:25:27] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-14 17:28:34] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-14 17:28:34] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-14 17:28:35] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-14 17:28:35] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-18 17:44:24] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 17:44:24] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 17:44:24] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-18 17:44:25] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-18 17:53:17] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 17:53:17] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 17:53:17] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-18 17:53:21] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-18 17:55:08] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 17:55:08] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 17:55:08] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-18 17:55:09] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-18 17:55:15] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 17:55:15] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 17:55:15] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-18 17:55:16] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-18 17:55:31] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 17:55:31] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 17:55:31] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-18 17:55:33] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-18 17:55:41] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 17:55:41] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 17:55:41] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-18 17:55:42] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-18 17:57:46] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 17:57:46] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 17:57:46] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-18 17:57:48] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-18 18:09:14] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 18:09:14] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 18:09:14] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-18 18:09:14] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-18 18:11:56] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 18:11:56] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 18:11:56] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-18 18:11:56] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-18 18:12:25] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 18:12:25] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 18:12:25] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-18 18:12:25] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-18 18:12:48] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 18:12:48] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 18:12:48] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-18 18:12:48] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-18 18:16:24] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 18:16:24] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 18:16:24] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-18 18:16:24] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-18 18:25:33] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 18:25:33] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 18:25:33] ObtenerPorUsuarioId - Registros encontrados: 14
+[2025-11-18 18:25:33] ObtenerPorUsuarioId - DTOs generados: 14
+[2025-11-18 18:29:07] Agregar - Iniciando creación de festival. Usuario: pnmc.informacion@gmail.com, UsuarioId: 30476
+[2025-11-18 18:29:07] Agregar - Datos: Nombre=festival carlos 11, NumeroVersiones=1, FechaUltimaVersion=18/11/2025 12:00:00 a. m.
+[2025-11-18 18:29:07] Agregar - Entidad creada, llamando a AgregarInterno...
+[2025-11-18 18:29:07] AgregarInterno - Iniciando. Nombre: festival carlos 11, UsuarioId: 30476
+[2025-11-18 18:29:07] AgregarInterno - Agregando entidad al contexto...
+[2025-11-18 18:29:07] AgregarInterno - Llamando a SaveChanges()...
+[2025-11-18 18:29:07] AgregarInterno - SaveChanges completado. Cambios guardados: 1
+[2025-11-18 18:29:07] AgregarInterno - ID generado: 214
+[2025-11-18 18:29:07] AgregarInterno - Creando auditoría...
+[2025-11-18 18:29:07] AgregarInterno - Auditoría creada exitosamente
+[2025-11-18 18:29:07] AgregarInterno - Retornando ID: 214
+[2025-11-18 18:29:07] Agregar - Festival creado con ID: 214
+[2025-11-18 18:29:07] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 18:29:07] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 18:29:07] ObtenerPorUsuarioId - Registros encontrados: 15
+[2025-11-18 18:29:08] ObtenerPorUsuarioId - DTOs generados: 15
+[2025-11-18 18:33:10] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 18:33:10] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 18:33:10] ObtenerPorUsuarioId - Registros encontrados: 15
+[2025-11-18 18:33:10] ObtenerPorUsuarioId - DTOs generados: 15
+[2025-11-18 19:33:56] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 19:33:56] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 19:33:56] ObtenerPorUsuarioId - Registros encontrados: 15
+[2025-11-18 19:33:56] ObtenerPorUsuarioId - DTOs generados: 15
+[2025-11-18 19:39:41] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 19:39:41] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 19:39:41] ObtenerPorUsuarioId - Registros encontrados: 15
+[2025-11-18 19:39:41] ObtenerPorUsuarioId - DTOs generados: 15
+[2025-11-18 19:42:07] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 19:42:07] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 19:42:08] ObtenerPorUsuarioId - Registros encontrados: 15
+[2025-11-18 19:42:09] ObtenerPorUsuarioId - DTOs generados: 15
+[2025-11-18 19:51:34] Agregar - Iniciando creación de festival. Usuario: pnmc.informacion@gmail.com, UsuarioId: 30476
+[2025-11-18 19:51:34] Agregar - Datos: Nombre=otra prueba2, NumeroVersiones=1, FechaUltimaVersion=18/11/2025 12:00:00 a. m.
+[2025-11-18 19:51:34] Agregar - Entidad creada, llamando a AgregarInterno...
+[2025-11-18 19:51:34] AgregarInterno - Iniciando. Nombre: otra prueba2, UsuarioId: 30476
+[2025-11-18 19:51:34] AgregarInterno - Agregando entidad al contexto...
+[2025-11-18 19:51:34] AgregarInterno - Llamando a SaveChanges()...
+[2025-11-18 19:51:34] AgregarInterno - SaveChanges completado. Cambios guardados: 1
+[2025-11-18 19:51:34] AgregarInterno - ID generado: 215
+[2025-11-18 19:51:34] AgregarInterno - Creando auditoría...
+[2025-11-18 19:51:34] AgregarInterno - Auditoría creada exitosamente
+[2025-11-18 19:51:34] AgregarInterno - Retornando ID: 215
+[2025-11-18 19:51:34] Agregar - Festival creado con ID: 215
+[2025-11-18 19:51:35] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 19:51:35] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 19:51:35] ObtenerPorUsuarioId - Registros encontrados: 16
+[2025-11-18 19:51:35] ObtenerPorUsuarioId - DTOs generados: 16
+[2025-11-18 19:53:43] Agregar - Iniciando creación de festival. Usuario: pnmc.informacion@gmail.com, UsuarioId: 30476
+[2025-11-18 19:53:43] Agregar - Datos: Nombre=otra prueba3, NumeroVersiones=1, FechaUltimaVersion=18/11/2025 12:00:00 a. m.
+[2025-11-18 19:53:43] Agregar - Entidad creada, llamando a AgregarInterno...
+[2025-11-18 19:53:43] AgregarInterno - Iniciando. Nombre: otra prueba3, UsuarioId: 30476
+[2025-11-18 19:53:43] AgregarInterno - Agregando entidad al contexto...
+[2025-11-18 19:53:43] AgregarInterno - Llamando a SaveChanges()...
+[2025-11-18 19:53:43] AgregarInterno - SaveChanges completado. Cambios guardados: 1
+[2025-11-18 19:53:43] AgregarInterno - ID generado: 216
+[2025-11-18 19:53:43] AgregarInterno - Creando auditoría...
+[2025-11-18 19:53:43] AgregarInterno - Auditoría creada exitosamente
+[2025-11-18 19:53:43] AgregarInterno - Retornando ID: 216
+[2025-11-18 19:53:43] Agregar - Festival creado con ID: 216
+[2025-11-18 19:53:43] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 19:53:43] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 19:53:43] ObtenerPorUsuarioId - Registros encontrados: 17
+[2025-11-18 19:53:43] ObtenerPorUsuarioId - DTOs generados: 17
+[2025-11-18 19:53:55] Agregar - Iniciando creación de festival. Usuario: pnmc.informacion@gmail.com, UsuarioId: 30476
+[2025-11-18 19:53:55] Agregar - Datos: Nombre=otra prueba4, NumeroVersiones=1, FechaUltimaVersion=18/11/2025 12:00:00 a. m.
+[2025-11-18 19:53:55] Agregar - Entidad creada, llamando a AgregarInterno...
+[2025-11-18 19:53:55] AgregarInterno - Iniciando. Nombre: otra prueba4, UsuarioId: 30476
+[2025-11-18 19:53:55] AgregarInterno - Agregando entidad al contexto...
+[2025-11-18 19:53:55] AgregarInterno - Llamando a SaveChanges()...
+[2025-11-18 19:53:55] AgregarInterno - SaveChanges completado. Cambios guardados: 1
+[2025-11-18 19:53:55] AgregarInterno - ID generado: 217
+[2025-11-18 19:53:55] AgregarInterno - Creando auditoría...
+[2025-11-18 19:53:55] AgregarInterno - Auditoría creada exitosamente
+[2025-11-18 19:53:55] AgregarInterno - Retornando ID: 217
+[2025-11-18 19:53:55] Agregar - Festival creado con ID: 217
+[2025-11-18 19:54:05] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 19:54:05] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 19:54:05] ObtenerPorUsuarioId - Registros encontrados: 18
+[2025-11-18 19:54:06] ObtenerPorUsuarioId - DTOs generados: 18
+[2025-11-18 19:55:17] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 19:55:17] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 19:55:17] ObtenerPorUsuarioId - Registros encontrados: 18
+[2025-11-18 19:55:17] ObtenerPorUsuarioId - DTOs generados: 18
+[2025-11-18 19:55:27] Agregar - Iniciando creación de festival. Usuario: pnmc.informacion@gmail.com, UsuarioId: 30476
+[2025-11-18 19:55:27] Agregar - Datos: Nombre=otra prueba5, NumeroVersiones=1, FechaUltimaVersion=18/11/2025 12:00:00 a. m.
+[2025-11-18 19:55:27] Agregar - Entidad creada, llamando a AgregarInterno...
+[2025-11-18 19:55:27] AgregarInterno - Iniciando. Nombre: otra prueba5, UsuarioId: 30476
+[2025-11-18 19:55:27] AgregarInterno - Agregando entidad al contexto...
+[2025-11-18 19:55:27] AgregarInterno - Llamando a SaveChanges()...
+[2025-11-18 19:55:27] AgregarInterno - SaveChanges completado. Cambios guardados: 1
+[2025-11-18 19:55:27] AgregarInterno - ID generado: 218
+[2025-11-18 19:55:27] AgregarInterno - Creando auditoría...
+[2025-11-18 19:55:27] AgregarInterno - Auditoría creada exitosamente
+[2025-11-18 19:55:27] AgregarInterno - Retornando ID: 218
+[2025-11-18 19:55:27] Agregar - Festival creado con ID: 218
+[2025-11-18 19:55:27] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 19:55:27] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 19:55:27] ObtenerPorUsuarioId - Registros encontrados: 19
+[2025-11-18 19:55:28] ObtenerPorUsuarioId - DTOs generados: 19
+[2025-11-18 19:55:44] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 19:55:44] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 19:55:44] ObtenerPorUsuarioId - Registros encontrados: 19
+[2025-11-18 19:55:45] ObtenerPorUsuarioId - DTOs generados: 19
+[2025-11-18 19:55:46] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 19:55:46] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 19:55:46] ObtenerPorUsuarioId - Registros encontrados: 19
+[2025-11-18 19:55:46] ObtenerPorUsuarioId - DTOs generados: 19
+[2025-11-18 19:56:25] Agregar - Iniciando creación de festival. Usuario: pnmc.informacion@gmail.com, UsuarioId: 30476
+[2025-11-18 19:56:25] Agregar - Datos: Nombre=festival carlos 17, NumeroVersiones=1, FechaUltimaVersion=18/11/2025 12:00:00 a. m.
+[2025-11-18 19:56:25] Agregar - Entidad creada, llamando a AgregarInterno...
+[2025-11-18 19:56:25] AgregarInterno - Iniciando. Nombre: festival carlos 17, UsuarioId: 30476
+[2025-11-18 19:56:25] AgregarInterno - Agregando entidad al contexto...
+[2025-11-18 19:56:25] AgregarInterno - Llamando a SaveChanges()...
+[2025-11-18 19:56:25] AgregarInterno - SaveChanges completado. Cambios guardados: 1
+[2025-11-18 19:56:25] AgregarInterno - ID generado: 219
+[2025-11-18 19:56:25] AgregarInterno - Creando auditoría...
+[2025-11-18 19:56:25] AgregarInterno - Auditoría creada exitosamente
+[2025-11-18 19:56:25] AgregarInterno - Retornando ID: 219
+[2025-11-18 19:56:25] Agregar - Festival creado con ID: 219
+[2025-11-18 19:56:25] Agregar - Iniciando creación de festival. Usuario: pnmc.informacion@gmail.com, UsuarioId: 30476
+[2025-11-18 19:56:25] Agregar - Datos: Nombre=festival carlos 17, NumeroVersiones=1, FechaUltimaVersion=18/11/2025 12:00:00 a. m.
+[2025-11-18 19:56:25] Agregar - Entidad creada, llamando a AgregarInterno...
+[2025-11-18 19:56:25] AgregarInterno - Iniciando. Nombre: festival carlos 17, UsuarioId: 30476
+[2025-11-18 19:56:25] AgregarInterno - Agregando entidad al contexto...
+[2025-11-18 19:56:25] AgregarInterno - Llamando a SaveChanges()...
+[2025-11-18 19:56:25] AgregarInterno - SaveChanges completado. Cambios guardados: 1
+[2025-11-18 19:56:25] AgregarInterno - ID generado: 220
+[2025-11-18 19:56:25] AgregarInterno - Creando auditoría...
+[2025-11-18 19:56:25] AgregarInterno - Auditoría creada exitosamente
+[2025-11-18 19:56:25] AgregarInterno - Retornando ID: 220
+[2025-11-18 19:56:25] Agregar - Festival creado con ID: 220
+[2025-11-18 19:56:33] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 19:56:33] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 19:56:33] ObtenerPorUsuarioId - Registros encontrados: 21
+[2025-11-18 19:56:33] ObtenerPorUsuarioId - DTOs generados: 21
+[2025-11-18 19:56:53] Agregar - Iniciando creación de festival. Usuario: pnmc.informacion@gmail.com, UsuarioId: 30476
+[2025-11-18 19:56:53] Agregar - Datos: Nombre=festival carlos 20, NumeroVersiones=1, FechaUltimaVersion=18/11/2025 12:00:00 a. m.
+[2025-11-18 19:56:53] Agregar - Entidad creada, llamando a AgregarInterno...
+[2025-11-18 19:56:53] AgregarInterno - Iniciando. Nombre: festival carlos 20, UsuarioId: 30476
+[2025-11-18 19:56:53] AgregarInterno - Agregando entidad al contexto...
+[2025-11-18 19:56:53] AgregarInterno - Llamando a SaveChanges()...
+[2025-11-18 19:56:53] AgregarInterno - SaveChanges completado. Cambios guardados: 1
+[2025-11-18 19:56:53] AgregarInterno - ID generado: 221
+[2025-11-18 19:56:53] AgregarInterno - Creando auditoría...
+[2025-11-18 19:56:53] AgregarInterno - Auditoría creada exitosamente
+[2025-11-18 19:56:53] AgregarInterno - Retornando ID: 221
+[2025-11-18 19:56:53] Agregar - Festival creado con ID: 221
+[2025-11-18 20:00:02] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 20:00:02] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 20:00:02] ObtenerPorUsuarioId - Registros encontrados: 22
+[2025-11-18 20:00:02] ObtenerPorUsuarioId - DTOs generados: 22
+[2025-11-18 20:06:24] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 20:06:24] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 20:06:24] ObtenerPorUsuarioId - Registros encontrados: 22
+[2025-11-18 20:06:25] ObtenerPorUsuarioId - DTOs generados: 22
+[2025-11-18 20:08:12] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 20:08:12] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 20:08:12] ObtenerPorUsuarioId - Registros encontrados: 22
+[2025-11-18 20:08:12] ObtenerPorUsuarioId - DTOs generados: 22
+[2025-11-18 20:18:22] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 20:18:22] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 20:18:22] ObtenerPorUsuarioId - Registros encontrados: 22
+[2025-11-18 20:18:23] ObtenerPorUsuarioId - DTOs generados: 22
+[2025-11-18 20:19:49] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 20:19:49] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 20:19:49] ObtenerPorUsuarioId - Registros encontrados: 22
+[2025-11-18 20:19:50] ObtenerPorUsuarioId - DTOs generados: 22
+[2025-11-18 21:41:01] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 21:41:01] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 21:41:01] ObtenerPorUsuarioId - Registros encontrados: 22
+[2025-11-18 21:41:02] ObtenerPorUsuarioId - DTOs generados: 22
+[2025-11-18 21:42:22] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 21:42:22] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 21:42:22] ObtenerPorUsuarioId - Registros encontrados: 22
+[2025-11-18 21:42:23] ObtenerPorUsuarioId - DTOs generados: 22
+[2025-11-18 21:42:50] Agregar - Iniciando creación de festival. Usuario: pnmc.informacion@gmail.com, UsuarioId: 30476
+[2025-11-18 21:42:50] Agregar - Datos: Nombre=otra prueba6, NumeroVersiones=1, FechaUltimaVersion=18/11/2025 12:00:00 a. m.
+[2025-11-18 21:42:50] Agregar - Entidad creada, llamando a AgregarInterno...
+[2025-11-18 21:42:50] AgregarInterno - Iniciando. Nombre: otra prueba6, UsuarioId: 30476
+[2025-11-18 21:42:50] AgregarInterno - Agregando entidad al contexto...
+[2025-11-18 21:42:50] AgregarInterno - Llamando a SaveChanges()...
+[2025-11-18 21:42:50] AgregarInterno - SaveChanges completado. Cambios guardados: 1
+[2025-11-18 21:42:50] AgregarInterno - ID generado: 222
+[2025-11-18 21:42:50] AgregarInterno - Creando auditoría...
+[2025-11-18 21:42:50] AgregarInterno - Auditoría creada exitosamente
+[2025-11-18 21:42:50] AgregarInterno - Retornando ID: 222
+[2025-11-18 21:42:50] Agregar - Festival creado con ID: 222
+[2025-11-18 21:45:23] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-18 21:45:23] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-18 21:45:23] ObtenerPorUsuarioId - Registros encontrados: 23
+[2025-11-18 21:45:23] ObtenerPorUsuarioId - DTOs generados: 23
+[2025-11-19 10:22:03] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:22:03] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:22:03] ObtenerPorUsuarioId - Registros encontrados: 23
+[2025-11-19 10:22:05] ObtenerPorUsuarioId - DTOs generados: 23
+[2025-11-19 10:22:43] Agregar - Iniciando creación de festival. Usuario: pnmc.informacion@gmail.com, UsuarioId: 30476
+[2025-11-19 10:22:43] Agregar - Datos: Nombre=otra prueba7, NumeroVersiones=1, FechaUltimaVersion=19/11/2025 12:00:00 a. m.
+[2025-11-19 10:22:43] Agregar - Entidad creada, llamando a AgregarInterno...
+[2025-11-19 10:22:43] AgregarInterno - Iniciando. Nombre: otra prueba7, UsuarioId: 30476
+[2025-11-19 10:22:43] AgregarInterno - Agregando entidad al contexto...
+[2025-11-19 10:22:43] AgregarInterno - Llamando a SaveChanges()...
+[2025-11-19 10:22:43] AgregarInterno - SaveChanges completado. Cambios guardados: 1
+[2025-11-19 10:22:43] AgregarInterno - ID generado: 223
+[2025-11-19 10:22:43] AgregarInterno - Creando auditoría...
+[2025-11-19 10:22:43] AgregarInterno - Auditoría creada exitosamente
+[2025-11-19 10:22:43] AgregarInterno - Retornando ID: 223
+[2025-11-19 10:22:43] Agregar - Festival creado con ID: 223
+[2025-11-19 10:24:08] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:24:08] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:24:08] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:24:09] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 10:36:27] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:36:27] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:36:27] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:36:28] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 10:38:36] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:38:36] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:38:36] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:38:37] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 10:42:41] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:42:41] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:42:43] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:42:43] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 10:42:56] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:42:56] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:42:56] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:42:57] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 10:45:22] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:45:22] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:45:22] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:45:23] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 10:45:34] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:45:34] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:45:34] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:45:35] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 10:47:03] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:47:03] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:47:03] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:47:05] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 10:47:10] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:47:10] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:47:10] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:47:11] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 10:50:54] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:50:54] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:50:55] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:50:57] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 10:51:02] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:51:02] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:51:02] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:51:06] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 10:53:43] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:53:43] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:53:43] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:53:44] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 10:54:18] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:54:18] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:54:18] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:54:21] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 10:56:22] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:56:22] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:56:22] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:56:24] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 10:56:40] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:56:40] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:56:40] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:56:41] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 10:59:26] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 10:59:26] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 10:59:26] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 10:59:27] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:01:05] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:01:05] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:01:05] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:01:06] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:03:29] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:03:29] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:03:29] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:03:30] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:03:43] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:03:43] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:03:43] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:03:44] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:04:00] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:04:00] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:04:00] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:04:01] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:04:06] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:04:06] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:04:06] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:04:07] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:07:03] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:07:03] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:07:03] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:07:05] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:07:14] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:07:14] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:07:14] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:07:15] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:09:43] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:09:43] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:09:43] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:09:44] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:10:10] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:10:10] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:10:10] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:10:10] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:11:34] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:11:34] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:11:34] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:11:36] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:11:40] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:11:40] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:11:40] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:11:41] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:15:59] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-11-19 11:16:00] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:16:00] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-11-19 11:16:00] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-11-19 11:17:30] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:17:30] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:17:30] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:17:31] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:17:52] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:17:52] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:17:52] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:17:53] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:21:56] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:21:56] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:21:56] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:21:57] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:22:00] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:22:00] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:22:01] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:22:02] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:22:09] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:22:09] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:22:10] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:22:12] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:22:15] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:22:15] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:22:15] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:22:16] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:25:57] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:25:57] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:25:57] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:25:58] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:26:06] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:26:06] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:26:06] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:26:07] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:33:22] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:33:22] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:33:22] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:33:22] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:36:16] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:36:16] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:36:16] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:36:18] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:39:54] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:39:54] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:39:55] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:39:57] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:43:01] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:43:01] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:43:01] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:43:02] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 11:43:12] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 11:43:12] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 11:43:12] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 11:43:13] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 12:05:11] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 12:05:11] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 12:05:11] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 12:05:13] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 12:05:42] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 12:05:42] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 12:05:42] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 12:05:44] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 12:22:32] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 12:22:32] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 12:22:34] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 12:22:37] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 12:23:03] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 12:23:03] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 12:23:03] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 12:23:05] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 12:23:06] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 12:23:06] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 12:23:06] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 12:23:07] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 12:23:08] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 12:23:08] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 12:23:08] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 12:23:09] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 12:23:10] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 12:23:10] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 12:23:10] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 12:23:11] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 12:23:12] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 12:23:12] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 12:23:12] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 12:23:13] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 13:12:09] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-11-19 13:12:09] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 13:12:10] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-11-19 13:12:10] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-11-19 13:12:11] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-11-19 13:12:11] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 13:12:11] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-11-19 13:12:11] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-11-19 13:12:13] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-11-19 13:12:13] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 13:12:13] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-11-19 13:12:13] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-11-19 13:14:17] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 13:14:17] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 13:14:17] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 13:14:18] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 13:14:34] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 13:14:34] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 13:14:34] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 13:14:34] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 13:14:35] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 13:14:35] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 13:14:35] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 13:14:37] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 13:14:38] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 13:14:38] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 13:14:38] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 13:14:39] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 13:14:41] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 13:14:41] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 13:14:41] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 13:14:42] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 13:14:43] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 13:14:43] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 13:14:43] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 13:14:44] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-19 13:14:46] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-19 13:14:46] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-19 13:14:46] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-19 13:14:47] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-26 15:53:33] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-26 15:53:33] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-26 15:53:33] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-26 15:53:35] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-26 17:38:07] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-11-26 17:38:07] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-26 17:38:08] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-11-26 17:38:08] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-11-26 17:43:15] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-26 17:43:15] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-26 17:43:15] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-26 17:43:16] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-26 17:52:22] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-26 17:52:22] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-26 17:52:22] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-26 17:52:26] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-26 18:19:36] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-26 18:19:36] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-26 18:19:36] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-26 18:19:37] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-27 17:20:09] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-27 17:20:09] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-27 17:20:10] ObtenerPorUsuarioId - Registros encontrados: 24
+[2025-11-27 17:20:12] ObtenerPorUsuarioId - DTOs generados: 24
+[2025-11-27 17:38:22] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-27 17:38:22] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-27 17:38:22] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-11-27 17:38:29] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-11-27 17:57:45] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-11-27 17:57:45] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-11-27 17:57:45] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-11-27 17:57:49] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:32:28] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:32:28] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:32:28] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:32:31] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:32:52] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:32:52] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:32:52] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:32:55] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:32:57] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:32:57] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:32:57] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:33:00] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:33:04] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:33:04] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:33:04] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:33:08] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:33:09] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:33:09] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:33:09] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:33:12] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:33:25] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:33:25] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:33:25] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:33:29] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:34:06] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:34:06] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:34:06] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:34:09] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:34:45] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:34:45] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:34:45] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:34:49] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:34:53] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:34:53] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:34:53] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:34:57] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:35:31] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:35:31] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:35:31] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:35:34] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:35:36] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:35:36] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:35:36] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:35:40] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:35:41] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:35:41] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:35:41] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:35:44] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:36:48] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:36:48] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:36:48] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:36:51] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:37:40] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:37:40] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:37:40] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:37:43] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:37:46] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:37:46] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:37:46] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:37:49] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-01 12:39:11] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-01 12:39:11] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-01 12:39:11] ObtenerPorUsuarioId - Registros encontrados: 26
+[2025-12-01 12:39:14] ObtenerPorUsuarioId - DTOs generados: 26
+[2025-12-02 11:42:25] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-02 11:42:25] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-02 11:42:26] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-02 11:42:28] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-02 13:24:58] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30284
+[2025-12-02 13:24:58] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-02 13:24:59] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-12-02 13:24:59] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-12-02 13:25:33] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30284
+[2025-12-02 13:25:33] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-02 13:25:33] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-12-02 13:25:33] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-12-02 13:26:03] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30284
+[2025-12-02 13:26:03] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-02 13:26:03] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-12-02 13:26:03] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-12-02 13:28:40] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-02 13:28:40] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-02 13:28:40] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-02 13:28:43] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-02 16:54:54] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30284
+[2025-12-02 16:54:54] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-02 16:54:54] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-12-02 16:54:54] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-12-02 16:59:18] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-02 16:59:18] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-02 16:59:18] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-02 16:59:21] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-02 17:15:04] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-02 17:15:04] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-02 17:15:04] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-02 17:15:07] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-02 17:53:38] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 0
+[2025-12-02 17:53:38] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-02 17:53:38] ObtenerPorUsuarioId - Registros encontrados: 0
+[2025-12-02 17:53:38] ObtenerPorUsuarioId - DTOs generados: 0
+[2025-12-02 17:54:13] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-02 17:54:13] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-02 17:54:13] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-02 17:54:16] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-02 18:18:50] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-02 18:18:50] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-02 18:18:50] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-02 18:18:55] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-02 18:20:03] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-02 18:20:03] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-02 18:20:03] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-02 18:20:08] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-02 18:21:57] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-02 18:21:57] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-02 18:21:57] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-02 18:21:59] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-02 18:26:12] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-02 18:26:12] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-02 18:26:12] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-02 18:26:16] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-02 21:18:53] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-02 21:18:53] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-02 21:18:53] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-02 21:18:56] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 12:10:25] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 12:10:25] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 12:10:25] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 12:10:28] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 14:21:56] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 14:21:56] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 14:21:56] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 14:21:59] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 14:49:59] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 14:49:59] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 14:49:59] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 14:50:03] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 15:02:05] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 15:02:05] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 15:02:05] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 15:02:09] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 15:07:02] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 15:07:02] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 15:07:02] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 15:07:05] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 15:07:06] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 15:07:06] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 15:07:07] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 15:07:11] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 15:08:30] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 15:08:30] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 15:08:30] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 15:08:33] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 15:13:44] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 15:13:44] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 15:13:44] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 15:13:50] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 15:14:28] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 15:14:28] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 15:14:28] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 15:14:33] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 17:10:50] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 17:10:50] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 17:10:50] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 17:10:54] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 17:11:34] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 17:11:34] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 17:11:35] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 17:11:38] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 17:29:39] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 17:29:39] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 17:29:40] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 17:29:44] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 17:30:04] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 17:30:04] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 17:30:04] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 17:30:10] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 17:30:13] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 17:30:13] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 17:30:13] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 17:30:19] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 17:37:39] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 17:37:39] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 17:37:39] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 17:37:46] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 17:38:15] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 17:38:15] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 17:38:16] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 17:38:32] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 18:31:01] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 18:31:01] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 18:31:01] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 18:31:05] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-03 18:31:46] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-03 18:31:46] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-03 18:31:46] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-03 18:31:49] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-04 11:01:30] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-04 11:01:30] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-04 11:01:31] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-04 11:01:34] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-09 14:19:12] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-09 14:19:12] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-09 14:19:12] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-09 14:19:16] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-09 17:42:41] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-09 17:42:41] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-09 17:42:43] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-09 17:42:46] ObtenerPorUsuarioId - DTOs generados: 28
+[2025-12-09 18:28:04] ObtenerPorUsuarioId - Consultando festivales para usuarioId: 30476
+[2025-12-09 18:28:04] ObtenerPorUsuarioId - Ejecutando consulta SQL directa...
+[2025-12-09 18:28:05] ObtenerPorUsuarioId - Registros encontrados: 28
+[2025-12-09 18:28:08] ObtenerPorUsuarioId - DTOs generados: 28

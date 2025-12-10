@@ -1,0 +1,120 @@
+﻿@model WebSImus.Models.HerramientaModel
+
+<div class="panel panel-default">
+
+    <div class="panel-body">
+        @Html.HiddenFor(model => model.Id)
+
+    
+     
+        @*<div class="row push-down-20">
+            <h3><span class="fa-file-pdf fa-2x"></span> Responsable</h3>
+        </div>*@
+        <div class="row push-down-20">
+
+            <div class="row">
+                <div class=" col-md-6">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">* Nombre</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control text", @maxlength = "1000" })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">* Tipo de herramienta </label>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.TipoId, (SelectList)ViewBag.listTipoHerramienta, "Seleccione el tipo", new { @class = "styled-select" })
+                            @Html.ValidationMessageFor(model => model.TipoId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">* Estado </label>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.EstadoId, (SelectList)ViewBag.listEstado, "Seleccione el estado", new { @class = "styled-select" })
+                            @Html.ValidationMessageFor(model => model.EstadoId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-6">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"> Link/enlace</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.UrlArchivo, new { @class = "form-control text", @maxlength = "1000" })
+                            @Html.ValidationMessageFor(model => model.UrlArchivo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Vídeo de youtube</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.UrlVideo, new { @class = "form-control text", @maxlength = "1000" })
+                            @Html.ValidationMessageFor(model => model.UrlVideo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+
+           
+
+        </div>
+   
+
+        <div class="row push-down-20">
+            <h3><span class="fa fa-book"></span> Reseña</h3>
+        </div>
+        <div class="row push-down-20">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">* Descripción</label>
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control text", @rows = "15", @cols = "50" })
+                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Subir documento</label>
+                    <div class="col-md-9">
+
+                        @Html.TextBoxFor(model => model.Documento, new { @class = "form-control", type = "file", onclick = "resizePanel()" })
+                        @Html.ValidationMessageFor(model => model.Documento, "", new { @class = "text-danger" })
+                        <p class="text-info"><i class="fa-question"></i> Tipos de archivos permitidos: .pdf  de tamaño máximo 2 Mb.</p>
+                        @if (Model.documentoArchivo != null && Model.documentoArchivo.Count > 0)
+                        {
+
+                            foreach (var item in Model.documentoArchivo)
+                            {
+                                <br />
+                                @Html.ActionLink(item.NombreArchivo, "Descargar", "Documento", new { id = item.DocumentoId }, new { title = string.Format("Descargar archivo: {0}\nFecha registro: {1}\nTamaño: {2} bytes", item.NombreArchivo, item.FechaRegistro.ToString("dd/MM/yyyy"), item.TamanoArchivo) })
+                            }
+
+                        }
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">* Autores</label>
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.Autores, new { @class = "form-control text", @rows = "15", @cols = "50" })
+                        @Html.ValidationMessageFor(model => model.Autores, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+
+     
+    </div>
+
+</div>
+<div class="panel-footer">
+    <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+
+</div>
+

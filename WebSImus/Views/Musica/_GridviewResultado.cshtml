@@ -1,0 +1,79 @@
+﻿
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridResultado";
+        settings.Theme = "Office2010Silver";
+        settings.CallbackRouteValues = new { Controller = "Musica", Action = "GridViewResultado" };
+
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.Width = System.Web.UI.WebControls.Unit.Percentage(6);
+     
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        settings.KeyFieldName = "Id";
+
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Departamento";
+            column.Caption = "Departamento";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(20);
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Municipio";
+            column.Caption = "Municipio";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(20);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NombreParticipante";
+            column.Caption = "Nombre";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(40);
+
+        });
+
+
+
+        //settings.Columns.Add(column =>
+        //{
+        //    column.FieldName = "Edad";
+        //    column.Caption = "Edad";
+        //    column.Width = System.Web.UI.WebControls.Unit.Percentage(20);
+
+        //});
+
+        settings.SettingsPager.PageSize = 100;
+        settings.SettingsBehavior.FilterRowMode = GridViewFilterRowMode.Auto;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "100", "200" };
+    });
+
+
+
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

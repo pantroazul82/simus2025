@@ -1,0 +1,121 @@
+﻿@model WebSImus.Models.EventoModels
+@Html.HiddenFor(model => model.Nombre, new { @class = "form-control text", @maxlength = "255", @readonly = true })
+@Html.HiddenFor(model => model.FechaEvento, new { @class = "form-control text", @readonly = true })
+<div class="row">
+    <div class="row">
+        <div class="form-group">
+
+            @Html.HiddenFor(model => model.Tipo)
+
+            <h3>Ubicación</h3>
+            <div class="col-md-4">
+                <label class="col-md-12">Departamento * </label>
+                <div class="col-md-12">
+                    @Html.DropDownListFor(model => model.CodigoDepartamento, (SelectList)ViewBag.listDepartamentos, "Seleccione un departamento", new { @class = "styled-select" })
+                    @Html.ValidationMessageFor(model => model.CodigoDepartamento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="col-md-12">Municipio *</label>
+                <div class="col-md-12">
+                    @Html.DropDownListFor(model => model.CodigoMunicipio, (SelectList)ViewBag.listMunicipio, "Seleccione un municipio", new { @class = "styled-select" })
+                    @Html.ValidationMessageFor(model => model.CodigoMunicipio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="col-md-12">Lugar del concierto *</label>
+                <div class="col-md-12">
+                    @Html.TextBoxFor(model => model.LugarEvento, new { @class = "form-control text", @maxlength = "500" })
+                    @Html.ValidationMessageFor(model => model.LugarEvento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr style="height: 1px; background: #CCC">
+    <div class="row">
+        <div class="form-group">
+            <h3>Organiza</h3>
+            <div class="col-md-4">
+                <label class="col-md-12">Entidad organizadora *</label>
+                <div class="col-md-12">
+                    @Html.TextBoxFor(model => model.EntidadOrganizadora, new { @class = "form-control text", @maxlength = "500" })
+                    @Html.ValidationMessageFor(model => model.EntidadOrganizadora, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="col-md-12">Teléfono de la entidad *</label>
+                <div class="col-md-12">
+                    @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control text" })
+                    @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="col-md-12">Correo electrónico de la entidad</label>
+                <div class="col-md-12">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control text" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr style="height: 1px; background: #CCC">
+    <div class="row">
+        <div class="form-group">
+            <h3>Concierto</h3>
+           
+            <div class="col-md-4">
+                <label class="col-md-12">Hora del concierto *</label>
+                <div class="col-md-12">
+                    @Html.TextBoxFor(model => model.HoraEvento, new { @class = "form-control icon-time" })
+                    @Html.ValidationMessageFor(model => model.HoraEvento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+    <hr style="height: 1px; background: #CCC">
+    <div class="row">
+        <div class="form-group">
+            <h3>Acerca del concierto</h3>
+          
+            <div class="col-md-4">
+                <label class="col-md-12">Subir foto *</label>
+                <div class="col-md-12">
+                    <h6>Tipos de archivo permitidos: .jpg y .png de tamaño máximo 1 Mb</h6>
+                    <h6>Recomendamos subir fotografía referente a la actividad musical en el municipio</h6>
+                    <input onclick="resizePanel()" id="imagenPerfil" name="imagenPerfil" type="file">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="col-md-12">Descripción</label>
+                <div class="col-md-12">
+                    @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control text", @rows = "10", @cols = "50" })
+                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="" id="user_image">
+                    <img src="@Url.Content(ViewBag.ImageData)" class="img-responsive" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr style="height: 1px; background: #CCC">
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+                    <div class="btn btn-default pull-left">
+                        <i class="fa fa-arrow-circle-o-left"></i>@Html.ActionLink("Regresar", "Index", "Musica")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

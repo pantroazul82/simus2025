@@ -1,0 +1,92 @@
+@model IEnumerable<WebSImus.Models.FestivalVersionListadoItemViewModel>
+@{
+    bool tieneRol8 = ViewBag.TieneRol8 ?? false;
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridVersiones";
+    settings.CallbackRouteValues = new { Controller = "Festivales", Action = "GridVersionesPartial", festivalId = ViewBag.FestivalId, filtroTexto = ViewBag.FiltroTextoVersion };
+
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.KeyFieldName = "Id";
+
+        settings.SettingsPager.PageSize = 30;
+        settings.SettingsPager.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "10", "30", "50", "100" };
+
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+
+        // Columna de opciones (Ver/Editar/Revisar) con reglas por estado
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Opciones";
+            column.Width = System.Web.UI.WebControls.Unit.Pixel(200);
+            column.SetDataItemTemplateContent(container =>
+            {
+                var keyValue = container.KeyValue;
+                var estado = DataBinder.Eval(container.DataItem, "Estado") as string;
+                
+                // Bot&oacute;n Ver (siempre visible)
+                Html.DevExpress().HyperLink(h =>
+                {
+                    h.Name = "verv_" + keyValue;
+                    h.Properties.Text = "Ver";
+                    h.NavigateUrl = Url.Action("RegistrarVersion", "Festivales", new { id = keyValue });
+                    h.ControlStyle.CssClass = "btn btn-default btn-xs";
+                    h.Properties.Target = "_self";
+                }).Render();
+                ViewContext.Writer.Write("&nbsp;");
+                
+                // Bot&oacute;n Editar (solo si el estado lo permite)
+                var puedeEditar = string.Equals(estado, "Incompleto", StringComparison.OrdinalIgnoreCase)
+                                   || string.Equals(estado, "Solicitud de Aclaraciones", StringComparison.OrdinalIgnoreCase);
+                if (puedeEditar)
+                {
+                    Html.DevExpress().HyperLink(h =>
+                    {
+                        h.Name = "editv_" + keyValue;
+                        h.Properties.Text = "Editar";
+                        h.NavigateUrl = Url.Action("RegistrarVersion", "Festivales", new { id = keyValue });
+                        h.ControlStyle.CssClass = "btn btn-default btn-xs";
+                        h.Properties.Target = "_self";
+                    }).Render();
+                }
+                else
+                {
+                    // Mostrar deshabilitado visualmente
+                    ViewContext.Writer.Write("<span class='btn btn-default btn-xs disabled' style='pointer-events:none;opacity:.6;'>Editar</span>");
+                }
+                
+                ViewContext.Writer.Write("&nbsp;");
+                
+                // Bot&oacute;n Revisar (solo si el rol es 8 y el estado es Registrado o Solicitud de Aclaraciones)
+                var puedeRevisar = tieneRol8 && (string.Equals(estado, "Registrado", StringComparison.OrdinalIgnoreCase)
+                                   || string.Equals(estado, "Solicitud de Aclaraciones", StringComparison.OrdinalIgnoreCase));
+                if (puedeRevisar)
+                {
+                    Html.DevExpress().HyperLink(h =>
+                    {
+                        h.Name = "revisar_" + keyValue;
+                        h.Properties.Text = "Revisar";
+                        h.NavigateUrl = Url.Action("RevisarVersion", "Festivales", new { id = keyValue });
+                        h.ControlStyle.CssClass = "btn btn-info btn-xs";
+                        h.Properties.Target = "_self";
+                    }).Render();
+                }
+            });
+        });
+
+    // Mostrar número de versión (VERSION_FESTIVAL)
+    settings.Columns.Add(c => { c.FieldName = "NumeroVersion"; c.Caption = "Versi&oacute;n"; c.Width = System.Web.UI.WebControls.Unit.Percentage(12); });
+    // Mostrar nombre de la versión (si existe)
+    settings.Columns.Add(c => { c.FieldName = "NombreVersion"; c.Caption = "Nombre versi&oacute;n"; c.Width = System.Web.UI.WebControls.Unit.Percentage(28); });
+        settings.Columns.Add(c => { c.FieldName = "FechaCreacion"; c.Caption = "Fecha de Creación"; c.PropertiesEdit.DisplayFormatString = "dd/MM/yyyy"; c.Width = System.Web.UI.WebControls.Unit.Percentage(15); });
+        settings.Columns.Add(c => { c.FieldName = "FechaSolicitud"; c.Caption = "Fecha Solicitud"; c.PropertiesEdit.DisplayFormatString = "dd/MM/yyyy"; c.Width = System.Web.UI.WebControls.Unit.Percentage(15); });
+        settings.Columns.Add(c => { c.FieldName = "Estado"; c.Caption = "Estado"; c.Width = System.Web.UI.WebControls.Unit.Percentage(15); });
+    });
+}
+@grid.Bind(Model).GetHtml()

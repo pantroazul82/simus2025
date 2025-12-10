@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.EventoDataDTO>
+<div class="modal animated fadeIn" id="modalValidacionConciertos" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="smallModalHead">Conciertos Registrados En El municipio @ViewBag.NombreMunicipio</h4>
+                <p class="text-info"><i class="fa-question"></i> Si el concierto que va a registrar aparece en el listado siguiente y usted no es el usuario que administra la información, por favor solicite el acceso dando clic en Solicitar, de lo contrario de clic en actualizar. </p>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <table class="table">
+                        @Html.Hidden("item-to-delete", "", new { @id = "item-to-delete" })
+                        <thead>
+                            <tr>
+                                <th>Entidad</th>
+                                <th>Lugar</th>
+                                <th>Hora</th>
+                                <th>Acción</th>
+
+                            </tr>
+                        </thead>
+
+                        @if (Model != null)
+                        {
+                            foreach (SM.LibreriaComun.DTO.EventoDataDTO item in Model)
+                            {
+                                <tbody>
+                                    <tr>
+
+                                        <td>@item.EntidadOrganizadora</td>
+                                        <td>@item.LugarEvento</td>
+                                        <td>@item.FechaEvento.ToString("HH:mm tt") </td>
+
+                                        @if (item.UsuarioId != item.UsuarioActualId)
+                                        {
+                                            <td><a href="" class="btn btn-success glyphicon glyphicon-plus-sign" aria-hidden="true" id="@item.EventoId" onclick="javascript: SolicitarPermisos('@item.EventoId'); return false;"> Solicitar</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td><a href="~/Musica/Editar/@item.EventoId" class="btn btn-success glyphicon glyphicon-plus-sign" aria-hidden="true" id="@item.EventoId"> Actualizar</a></td>
+                                        }
+                                    </tr>
+                                </tbody>
+                            }
+                        }
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

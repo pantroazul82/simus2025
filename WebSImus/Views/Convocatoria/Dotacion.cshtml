@@ -1,0 +1,130 @@
+﻿@model WebSImus.Models.DotacionPadreModel
+@{
+    ViewBag.Title = "Convocatoria Dotación";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Dotacion", "Convocatoria", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+     <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Agente", "Index", "Agente")</li>
+    </ul>
+            <!-- END BREADCRUMB -->
+     <!-- START DEFAULT WIZARD -->
+    <div class="panel panel-colorful" id="panelEditar">
+        <div class="panel-body">
+            <h3>@ViewBag.NuevoTitulo</h3>
+            <h3>@ViewBag.Escuela</h3>
+            <blockquote class="blockquote-success">
+                <p class="text-danger ">Los campos marcados con asterisco (*) son obligatorios</p>
+            </blockquote>
+            <div class="wizard" id="wizardEscuelas">
+                @Html.HiddenFor(model => model.DatosBasicos.ConvocatoriaId)
+                @Html.HiddenFor(model => model.DatosBasicos.EntidadId)
+                @Html.HiddenFor(model => model.DatosBasicos.EscuelaId)
+                <ul>
+                    <li>
+                        <a href="#step-1">
+                            <span class="stepNumber">1</span>
+                            <span class="stepDesc">Registrarse <br /><small>Datos básicos</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-2">
+                            <span class="stepNumber">2</span>
+                            <span class="stepDesc">Instrumentos <br /><small>ingresar </small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-3">
+                            <span class="stepNumber">3</span>
+                            <span class="stepDesc">Documentos<br /><small>subir los documentos </small></span>
+                        </a>
+                    </li>
+
+
+                </ul>
+                <div id="step-1">
+                    @Html.Partial("_DatosDotacion", Model.DatosBasicos)
+                </div>
+                <div id="step-2">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                        </div>
+                    </div>
+                </div>
+                <div id="step-3">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="panelAgregar" class="panel-body">
+        @Html.Action("_ValidacionEscuelas")
+    </div>
+    <!-- END DEFAULT WIZARD -->
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/smartwizard/jquery.smartWizard-2.0.js")"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+                      
+            if('@Model.NombreEscuela' =='')
+            {
+             
+                ValidarEscuelaMusica();
+
+            }
+
+        });
+
+        $(function () {
+           
+            $('#encabezado').css("background-size", "cover");
+            $('#encabezado').css("background-position", "0 50%");
+
+            $(window).resize(function () { // Remover alto del panel cuando la ventana cambie de tamaño
+                $('.stepContainer').css("height", "");
+            });
+        });
+
+     
+        function ValidarEscuelaMusica() {
+
+            $.ajax({
+
+                url: "/Convocatoria/_ValidacionEscuelas",
+                type: "GET",
+                data: { Id: '@Model.DatosBasicos.EntidadId' }
+            })
+           .done(function (partialViewResult) {
+               $("#panelAgregar").html(partialViewResult);
+
+               $('#modalValidacionEscuelas').modal({ show: true });
+
+
+           });
+
+        }
+
+    </script>
+}

@@ -1,0 +1,294 @@
+﻿
+@{
+    ViewBag.Title = "Editar perfil público";
+    Layout = "~/Views/Shared/_LayoutDiseño.cshtml";
+}
+
+@section Scripts 
+{
+@Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/toDo/demo_edit_profile.js")"></script>
+}
+
+<div class="row">
+    <div class="col-md-3 col-sm-4 col-xs-5">
+
+        <form action="#" class="form-horizontal">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3><span class="fa-representante fa-2x"></span> Datos de Identificación</h3>
+                    <p>Nombre de la escuela, perfil o entidad</p>
+                    <div class="text-center" id="user_image">
+                        <img src="~/assets/images/users/avatar.jpg" class="img-thumbnail" />
+                    </div>
+                </div>
+                <div class="panel-body form-group-separated">
+
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-5 control-label">Estado</label>
+                        <div class="col-md-9 col-xs-7">
+                            <input type="text" value="Inactivo" class="form-control" disabled />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-5 control-label">Nit</label>
+                        <div class="col-md-9 col-xs-7">
+                            <input type="text" value="63456335462" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-5 control-label">Desde</label>
+                        <div class="col-md-9 col-xs-7">
+                            1960 inició actividades
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-5 control-label">Nombre del Contacto</label>
+                        <div class="col-md-9 col-xs-7">
+                            José Barros
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-5 control-label">Cargo del Contacto</label>
+                        <div class="col-md-9 col-xs-7">
+                            José Barros
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-5 control-label">Tel&eacute;fonos (Celular y/o Fijo)</label>
+                        <div class="col-md-9 col-xs-7">
+                            57 1 345 654
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-5 control-label">Correo electrónico</label>
+                        <div class="col-md-9 col-xs-7">
+                            mail&#64;dominio.com
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+
+
+    </div>
+    <div class="col-md-6 col-sm-8 col-xs-7">
+
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3><span class="fa fa-pencil"></span> Perfil o reseña (según caso)</h3>
+                    <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</p>
+                </div>
+                <div class="panel-body form-group-separated">
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-5 control-label">Nombres</label>
+                        <div class="col-md-9 col-xs-7">
+                            <input type="text" value="José Benito" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-5 control-label">Apellidos</label>
+                        <div class="col-md-9 col-xs-7">
+                            <input type="text" value="Barros Palomino" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-5 control-label">Municipio, departamento</label>
+                        <div class="col-md-4 col-xs-4">
+                            <input type="text" class="form-control valid" value="El Banco">
+                        </div>
+						<div class="col-md-5 col-xs-5">
+                            <input type="text" class="form-control valid" value="Magdalena">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-5 control-label">Acerca de</label>
+                        <div class="col-md-9 col-xs-7">
+                            <textarea class="form-control" rows="15">El maestro José Benito Barros Palomino fue uno de los más destacados y prolíficos creadores literarios y musicales en toda la historia de la música popular y regional de Colombia. Una de sus obras más famosas ha sido "La Piragua", que ha sido ampliamente interpretada por artistas de la talla de La Sonora Matancera, La Billo's Caracas Boys, Carlos Vives, Tito Cortés, Charlie Figueroa, Bovea y sus Vallenatos y La Dimensión Latina.</br>El maestro José Benito Barros Palomino fue uno de los más destacados y prolíficos creadores literarios y musicales en toda la historia de la música popular y regional de Colombia.</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-5 control-label">Correo electrónico</label>
+                        <div class="col-md-9 col-xs-7">
+                            <input type="text" value="jose.barros@dominio.com" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 col-xs-5">
+                            <button class="btn btn-primary btn-rounded pull-right">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-default form-horizontal">
+            <div class="panel-body">
+                <h3><span class="fa-question"></span> Información</h3>
+                <p>Datos de registro</p>
+            </div>
+            <div class="panel-body form-group-separated">
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">&Aacute;rea</label>
+                    <div class="col-md-8 col-xs-7 line-height-30">Rural</div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">Direcci&oacute;n</label>
+                    <div class="col-md-8 col-xs-7 line-height-30">Avedida tal # 6 78</div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label"><span class="fa fa-phone"></span> </label>
+                    <div class="col-md-8 col-xs-7 line-height-30">57 3 764 983</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 col-xs-5 control-label">xxx</label>
+                    <div class="col-md-8 col-xs-7 line-height-30">xxx</div>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3><span class="fa fa-cog"></span> Privacidad</h3>
+                <p>Configuración de privacidad</p>
+            </div>
+            <div class="panel-body form-horizontal form-group-separated">
+                <div class="form-group">
+                    <label class="col-md-6 col-xs-6 control-label">Notificaciones</label>
+                    <div class="col-md-6 col-xs-6">
+                        <label class="switch">
+                            <input type="checkbox" checked value="1" />
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <span>Encienda esta opción para activar el envío de alertas y notificaciones hacia su correo electrónico</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-6 col-xs-6 control-label">Publicar contacto</label>
+                    <div class="col-md-6 col-xs-6">
+                        <label class="switch">
+                            <input type="checkbox" checked value="1" />
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <span>Encienda esta opción para hacer pública su información de contacto</span>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+
+    <div class="col-md-6 col-sm-8 col-xs-7">
+        <!-- INICIO GRILLA  -->
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Formación agregada</h4>
+                <ul class="panel-controls">
+                    <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                    <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+
+                </ul>
+            </div>
+
+
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table datatable table-striped">
+
+                        <thead>
+                            <tr>
+                                <th>Tipo formación</th>
+                                <th>Fecha inicio</th>
+                                <th>Fecha fin</th>
+                                <th>Nombre de la institución</th>
+                                <th>Título</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                                <td><a href="#">Link</a></td>
+                            </tr>
+
+                            <p> &nbsp;</p>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- FIN GRILLA  -->
+ 
+    </div>
+
+
+   

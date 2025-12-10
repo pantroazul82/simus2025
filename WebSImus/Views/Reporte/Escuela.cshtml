@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Reporte Operatividad Escuelas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Convenios", "Index", "Convenio")</li>
+    </ul>
+    <div class="col-md-12">
+
+        <br />
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.ActionLink(" Exportar", "ExportToEntidadXEscuela", "Reporte", new { }, new { @class = "btn btn-warning glyphicon glyphicon-export" })
+
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div id="Tabla">
+                        @Html.Action("GridViewPartialEscuela")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

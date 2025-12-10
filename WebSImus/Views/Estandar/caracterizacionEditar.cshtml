@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewBag.Title = "Factores de categorización";
+    Layout = "~/Views/Shared/_LayoutDiseño.cshtml";
+}
+
+<div class="panel panel-colorful">
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <div id="sliding_menu">
+                    <ul>
+                        <li>
+                            <a href="#" onClick="datosFomularioescuelas()">Institucionalidad</a>
+                            <ul>
+                                <li><a href="#" onClick="datosFomularioescuelas()">Escuela creada legalmente</a></li>
+                                <li>
+                                    <a href="#" onClick="datosFomularioescuelas()">Tipo de vinculación docentes</a>
+                                    <ul>
+                                        <li><a href="#" onClick="datosFomularioescuelas()">Voluntarios</a></li>
+                                        <li><a href="#" onClick="datosFomularioescuelas()">Prestación de servicios</a></li>
+                                        <li><a href="#" onClick="datosFomularioescuelas()">Honorarios</a></li>
+                                        <li><a href="#" onclick="datosFomularioescuelas()">Laboral nomina</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="datosFomularioescuelas()">Tipo de vinculación administrativa</a>
+                                    <ul>
+                                        <li><a href="#" onclick="datosFomularioescuelas()">Voluntarios</a></li>
+                                        <li><a href="#" onclick="datosFomularioescuelas()">Prestación de servicios</a></li>
+                                        <li><a href="#" onclick="datosFomularioescuelas()">Honorarios</a></li>
+                                        <li><a href="#" onclick="datosFomularioescuelas()">Laboral nomina</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="progress progress-small progress-bar progress-bar-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"></li>
+                        <li>
+                            <a href="#" onclick="datosFomularioescuelas()">Infraestructura y dotación</a>
+                            <ul>
+                                <li>
+                                    <a href="#" onclick="datosFomularioescuelas()"> Asignación y adecuación de sede para la escuela [20%]</a>
+                                    <ul>
+                                        <li><a href="#" onclick="datosFomularioescuelas()">Sede asignada soporte escrito</a></li>
+                                        <li><a href="#" onclick="datosFomularioescuelas()">Sede equipada</a></li>
+                                        <li><a href="#" onclick="datosFomularioescuelas()">Sede adecuada acústicamente (insonorización y aislamiento)</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="progress progress-small progress-bar progress-bar-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></li>
+                        <li>
+                            <a href="#" onclick="datosFomularioescuelas()">Participación</a>
+                            <ul>
+                                <li>
+                                    <a href="#" onclick="datosFomularioescuelas()">Asignación y adecuación de sede para la escuela</a>
+                                    <ul>
+                                        <li><a href="#" onclick="datosFomularioescuelas()">Sede asignada soporte escrito</a></li>
+                                        <li><a href="#" onclick="datosFomularioescuelas()">Sede equipada</a></li>
+                                        <li><a href="#" onclick="datosFomularioescuelas()">Sede adecuada acústicamente (insonorización y aislamiento)</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="progress progress-small progress-bar progress-bar-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 67%;"></li>
+                        <li>
+                            <a href="#" onclick="datosFomularioescuelas()">Participación</a>
+                            <ul>
+                                <li>
+                                    <a href="#" onclick="datosFomularioescuelas()">nivel 2</a>
+                                    <ul>
+                                        <li><a href="#" onclick="datosFomularioescuelas()">nivel 3</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="progress progress-small progress-bar progress-bar-default" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 27%;"></li>
+                        <li>
+                            <a href="#" onclick="datosFomularioescuelas()">Formación</a>
+                            <ul>
+                                <li>
+                                    <a href="#" onclick="datosFomularioescuelas()">nivel 2</a>
+                                    <ul>
+                                        <li><a href="#" onclick="datosFomularioescuelas()">nivel 3</a></li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="progress progress-small progress-bar progress-bar-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 17%;"></li>
+                    </ul>
+                </div>
+                <span class="help-block">Para editar haga clic en el factor de categorización</span>
+            </div>
+            <div class="col-md-6">
+                <!-- START PANEL WITH CONTROL CLASSES -->
+                <div class="panel panel-danger">
+                    <div class="panel-heading" id="headerFormulario">
+                        <h3 class="panel-title">Título del formulario</h3>
+                        <ul class="panel-controls">
+                            <li><a href="#" onClick="datosFomularioescuelas()" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="panel-body" id="bodyFormulario">
+                        <p>En este panel se cargan los contenidos del formulario de manera <code>dinámica</code></p>
+                        <!-- Agregar campos: Factor padre, Descripción, Porcentaje, Tipo de dato de retorno -->
+
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-danger pull-right">Guardar</button>
+                    </div>
+                </div>
+                <!-- END PANEL WITH CONTROL CLASSES -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $(function () {
+            $('#sliding_menu').menu();
+
+        });
+        function datosFomularioescuelas() {        
+            document.getElementById("bodyFormulario").innerHTML = "<p>Acá se imprime una <code>partial view</code> con el contenido del formulario</p>";
+
+        /* Ejemplo enviar evento: Puede eliminarse desde acá */
+                $('#bodyFormulario').toggleState(function (el) {
+                    el.animate({
+                        backgroundColor: "#99ccff"
+                    }, 1000);
+                }, function (el) {
+                    el.animate({
+                        backgroundColor: "#ccff99"
+                    }, 1000);
+                });
+        }
+
+        $.fn.toggleState = function (even, odd) {
+            this.toggled = this.data('toggled') || false;
+
+            if (!this.toggled) {
+                if (typeof even === 'function') {
+                    even(this);
+                }
+            } else {
+                if (typeof odd === 'function') {
+                    odd(this);
+                }
+            }
+
+            this.data({ toggled: !this.toggled });
+
+        /* Ejemplo enviar evento: Puede eliminarse hasta acá */
+        };
+    </script>
+
+}    

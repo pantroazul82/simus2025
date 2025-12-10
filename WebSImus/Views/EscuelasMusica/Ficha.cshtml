@@ -1,0 +1,320 @@
+﻿@model WebSImus.Models.EscuelasPadre
+@{
+    ViewBag.Title = @ViewBag.NombreEscuela;
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+<div class="row">
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Escuelas", "Consulta", "EscuelasMusica")</li>
+    </ul>
+    <div class="col-md-9">
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title"> @Html.DisplayFor(m => m.Escuelas.NombreEscuela, new { @class = "panel-title" })</h3>
+                <button type="button" id="btnBuscarMapa" data-toggle="tooltip" data-placement="top" title="Ver mapa ubicación" class="btn btn-info btn-rounded pull-right">
+                    <span class="fa-documentos fa-2x-marker"></span> @Html.DisplayFor(m => m.Escuelas.ZonaGeografica)
+                </button>
+
+                @Html.HiddenFor(model => model.Escuelas.Latitud)
+                @Html.HiddenFor(model => model.Escuelas.Longitud)
+            </div>
+            <div class="panel-body posts">
+                <div class="post-item">
+                    <div class="post-text">
+                        <h4><strong>Director:</strong> @Html.DisplayFor(m => m.Institucionalidad.NombreDirector)</h4>
+                        <img src="@Url.Content(ViewBag.ImageData)" class="img-text post-image" />
+                        <h4>Reseña:</h4>
+                        <p>@Html.DisplayFor(m => m.Escuelas.Resena)</p>
+                    </div>
+                    <h4 class="push-down-20">Información de contacto</h4>
+
+                    <div class="panel-body list-group">
+                        <div class="list-group-item"><span class="fa fa-envelope-o"></span> <strong>Correo:</strong> @Html.DisplayFor(m => m.Escuelas.CorreoElectronicoEscuela)</div>
+                        <div class="list-group-item">
+                            <span class="fa-documentos fa-2x-marker"></span> <strong>Dirección:</strong> @Html.DisplayFor(m => m.Escuelas.Direccion)
+                            <button type="button" id="btnVerMapa" data-toggle="tooltip" data-placement="top" title="Ver mapa ubicación" class="btn btn-info btn-rounded pull-right">
+                                <span class="fa-documentos fa-2x-marker"></span> Ver ubicación
+                            </button>
+                        </div>
+                    
+                        <a href="#" class="list-group-item"><span class="fa fa-phone"></span> <strong>Teléfono:</strong> @Html.DisplayFor(m => m.Escuelas.Telefono)</a>
+                        <div class="list-group-item"><span class="fa fa-globe"></span> <strong>Sitio Web:</strong> @Html.DisplayFor(m => m.Escuelas.SitioWeb)</div>
+                        <div class="list-group-item"><span class="fa fa-facebook"></span>@Html.DisplayFor(m => m.RedesSociales.Facebook)</div>
+                        <div class="list-group-item"><span class="fa fa-twitter"></span> @Html.DisplayFor(m => m.RedesSociales.Twitter) </div>
+                        <div class="list-group-item"><span class="fa fa-youtube"></span> @Html.DisplayFor(m => m.RedesSociales.CanalYoutube)</div>
+                        <div class="list-group-item"><span class="fa fa-flickr"></span> @Html.DisplayFor(m => m.RedesSociales.GaleriaFlicker)</div>
+                    </div>
+                    <p>&nbsp;</p>
+                    <h4 class="push-down-20">Representante</h4>
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <div class="timeline-item-icon"><span class="fa-representante fa-2x"></span></div>
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">@Html.DisplayFor(m => m.Escuelas.NombreContacto)</h4>
+                                <p>
+                                    DIRECTOR<br />
+                                    @Html.DisplayFor(m => m.Escuelas.ZonaGeografica)
+                                </p>
+                                <p class="text-muted">Correo electrónico: @Html.DisplayFor(m => m.Escuelas.CorreoElectronicoEscuela)</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title">Participación</h3>
+
+            </div>
+            <div class="panel-body panel-body-pricing">
+
+                <div class="list-group-item">
+                    <h5><strong>Alumnos por rangos de edades</strong></h5>
+                    <p><span class="fa-clasificados fa-2x"></span> Primera infancia (Menores de 6 años): @Html.DisplayFor(m => m.Participacion.CantidadPrimeraInfancia)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Entre 6 y 11 años: @Html.DisplayFor(m => m.Participacion.CantidaEntre6y11)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Entre 12 y 18 años: @Html.DisplayFor(m => m.Participacion.CantidaEntre12y18)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Entre 19 y 26 años: @Html.DisplayFor(m => m.Participacion.CantidaEntre19y26)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Entre 27 y 60 año: @Html.DisplayFor(m => m.Participacion.CantidaEntre27y60)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Mayores de 60 años: @Html.DisplayFor(m => m.Participacion.CantidadMayores60)</p>
+                    <h5 class="text-danger"><span class="fa-clasificados fa-2x"></span> Total de alumnos: @Html.DisplayFor(m => m.Participacion.TotalAlumnosEdad)</h5>
+                </div>
+                <div class="list-group-item">
+                    <h5><strong>Alumnos por sexo</strong></h5>
+                    <p><span class="fa-clasificados fa-2x"></span> Hombres: @Html.DisplayFor(m => m.Participacion.CantidadHombres)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Mujeres: @Html.DisplayFor(m => m.Participacion.CantidadMujeres)</p>
+                    <h5 class="text-danger"><span class="fa-clasificados fa-2x"></span> Total de alumnos: @Html.DisplayFor(m => m.Participacion.TotalAlumnosSexo)</h5>
+                </div>
+                <div class="list-group-item">
+                    <h5><strong>Alumnos de acuerdo a su etnia</strong></h5>
+                    <p><span class="fa-clasificados fa-2x"></span> Indígenas: @Html.DisplayFor(m => m.Participacion.CantidadIndigenas)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Afrocolombiana: @Html.DisplayFor(m => m.Participacion.CantidadAfrocolombiana)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Rom: @Html.DisplayFor(m => m.Participacion.CantidadRom)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Raizales: @Html.DisplayFor(m => m.Participacion.CantidadRaizales)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Otros: @Html.DisplayFor(m => m.Participacion.CantidadEtniaOtros)</p>
+                    <h5 class="text-danger"><span class="fa-clasificados fa-2x"></span> Total de alumnos: @Html.DisplayFor(m => m.Participacion.TotalAlumnosEtnia)</h5>
+                </div>
+                <div class="list-group-item">
+                    <h5><strong>Alumnos por área</strong></h5>
+                    <p><span class="fa-clasificados fa-2x"></span> Rural: @Html.DisplayFor(m => m.Participacion.CantidadRural)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Urbana: @Html.DisplayFor(m => m.Participacion.CantidadUrbana)</p>
+                    <h5 class="text-danger"><span class="fa-clasificados fa-2x"></span> Total de alumnos: @Html.DisplayFor(m => m.Participacion.TotalAlumnosArea)</h5>
+                </div>
+                <div class="list-group-item">
+                    <h5><strong>Alumnos por otras condiciones</strong></h5>
+                    <p><span class="fa-clasificados fa-2x"></span> Discapacitados: @Html.DisplayFor(m => m.Participacion.CantidadDicapacitados)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Desplazados: @Html.DisplayFor(m => m.Participacion.CantidadDesplazados)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Red Unidos: @Html.DisplayFor(m => m.Participacion.CantidadRedUnidos)</p>
+                    <h5 class="text-danger"><span class="fa-clasificados fa-2x"></span> Total de alumnos: @Html.DisplayFor(m => m.Participacion.TotalAlumnosEspeciales)</h5>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">Formación</h3>
+            </div>
+
+            <div class="panel-body">
+                <h3>Educación por Niveles</h3>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Población</th>
+                            <th>Duración (Meses)</th>
+                            <th>Intensidad (Horas semanales)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="warning">
+                            <td>Inicio</td>
+                            <td>@Html.DisplayFor(m => m.Formacion.PoblacionInicio)</td>
+                            <td>@Html.DisplayFor(m => m.Formacion.DuracionInicio)</td>
+                            <td>@Html.DisplayFor(m => m.Formacion.HorasInicio)</td>
+                        </tr>
+                        <tr class="info">
+                            <td>Básico</td>
+                            <td>@Html.DisplayFor(m => m.Formacion.PoblacionBasico)</td>
+                            <td>@Html.DisplayFor(m => m.Formacion.DuracionBasico)</td>
+                            <td>@Html.DisplayFor(m => m.Formacion.HorasBasico)</td>
+                        </tr>
+                        <tr class="success">
+                            <td>Medio</td>
+                            <td>@Html.DisplayFor(m => m.Formacion.PoblacionMedio)</td>
+                            <td>@Html.DisplayFor(m => m.Formacion.DuracionMedio)</td>
+                            <td>@Html.DisplayFor(m => m.Formacion.HorasMedio)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h3>Educación Informal</h3>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Población</th>
+                            <th>Duración (Meses)</th>
+                            <th>Intensidad (Horas semanales)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="warning">
+                            <td>Cursos o talleres</td>
+                            <td>@Html.DisplayFor(m => m.Formacion.PoblacionCursos)</td>
+                            <td>@Html.DisplayFor(m => m.Formacion.DuracionCursos)</td>
+                            <td>@Html.DisplayFor(m => m.Formacion.HorasCursos)</td>
+                        </tr>
+                        <tr class="info">
+                            <td>Pedagogías Tradicionales</td>
+                            <td>@Html.DisplayFor(m => m.Formacion.PoblacionPedagogias)</td>
+                            <td>@Html.DisplayFor(m => m.Formacion.DuracionPedagogias)</td>
+                            <td>@Html.DisplayFor(m => m.Formacion.HorasPedagogias)</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title">Producción</h3>
+            </div>
+            <div class="panel-body panel-body-pricing">
+
+                <div class="list-group-item">
+                    <h5><strong>Giras y presentaciones durante el último año</strong></h5>
+                    <p><span class="fa-clasificados fa-2x"></span> Giras Nacionales: @Html.DisplayFor(m => m.Produccion.CantidadGirasNacionales)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Giras Internacionales: @Html.DisplayFor(m => m.Produccion.CantidadGirasInternacionales)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Presentaciones o conciertos: @Html.DisplayFor(m => m.Produccion.CantidadConciertos)</p>
+
+                </div>
+
+                <div class="list-group-item">
+                    <h5><strong>Productos musicales o pedagógicos elaborados durante el último año</strong></h5>
+                    <p><span class="fa-clasificados fa-2x"></span> Discos: @Html.DisplayFor(m => m.Produccion.CantidadDiscos)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Repertorios: @Html.DisplayFor(m => m.Produccion.CantidadRepertorios)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Material Divulgativo: @Html.DisplayFor(m => m.Produccion.CantidadMaterialDivulgativo)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Material pedagógico: @Html.DisplayFor(m => m.Produccion.CantidadMaterialPedagogico)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Agrupaciones artísticas: @Html.DisplayFor(m => m.Produccion.CantidadAgrupaciones)</p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-md-3">
+        @*<button class="btn btn-lg btn-info btn-block push-down-10"><span class="fa fa-picture-o"></span> Graficar datos</button>*@
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title">Información de los docentes</h3>
+
+            </div>
+            <div class="panel-body panel-body-pricing">
+                <div class="list-group-item">
+                    <h5><strong>Docentes según su tipo de vinculación</strong></h5>
+                    <p><span class="fa-clasificados fa-2x"></span> Voluntarios: @Html.DisplayFor(m => m.Institucionalidad.Voluntarios)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Contrato laboral (Nómina): @Html.DisplayFor(m => m.Institucionalidad.ContratoLaboral)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Contrato por honorarios: @Html.DisplayFor(m => m.Institucionalidad.ContratoHonorario)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Orden de prestación de servicios: @Html.DisplayFor(m => m.Institucionalidad.OrdenPrestacionServicios)</p>
+                    <h5 class="text-danger"><span class="fa-clasificados fa-2x"></span> Total docentes : @Html.DisplayFor(m => m.Institucionalidad.TotalDocentesVinculados)</h5>
+                </div>
+                <div class="list-group-item">
+                    <h5><strong>Docentes de acuerdo a su último nivel educativo</strong></h5>
+                    <p><span class="fa-clasificados fa-2x"></span> Primaria: @Html.DisplayFor(m => m.Institucionalidad.Primaria)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Secundaria: @Html.DisplayFor(m => m.Institucionalidad.Secundaria)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Técnico – tecnólogo: @Html.DisplayFor(m => m.Institucionalidad.Tecnico)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Universitaria sin título: @Html.DisplayFor(m => m.Institucionalidad.UniversitariaSinTitulo)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Pregrado en Música: @Html.DisplayFor(m => m.Institucionalidad.PregradoMusica)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Pregado en otra área: @Html.DisplayFor(m => m.Institucionalidad.PregradoOtrasAreas)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Postgrado: @Html.DisplayFor(m => m.Institucionalidad.PostGrado)</p>
+                    <h5 class="text-danger"><span class="fa-clasificados fa-2x"></span> Total docentes : @Html.DisplayFor(m => m.Institucionalidad.TotalDocentesNivelEducativo)</h5>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">Infraestructura y dotación</h3>
+            </div>
+            <div class="panel-body panel-body-pricing">
+                <div class="list-group-item">
+                    <h5><strong>Infraestructura</strong></h5>
+                    <p><span class="fa-documentos fa-2x-marker"></span> @Html.DisplayFor(m => m.Infraestructura.Sede) </p>
+                    <p><span class="fa-clasificados fa-2x"></span> La escuela <span class="label label-success label-form">si</span> tiene acceso a internet</p>
+                    <p><span class="fa-clasificados fa-2x"></span> La sede <span class="label label-danger label-form">no</span> está adecuada acústicamente</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Sillas: @Html.DisplayFor(m => m.Infraestructura.CantidadSillas)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Atriles: @Html.DisplayFor(m => m.Infraestructura.CantidadAtriles)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Tableros acrílico: @Html.DisplayFor(m => m.Infraestructura.CantidadTableros)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Estantería: @Html.DisplayFor(m => m.Infraestructura.CantidadEstanterias)</p>
+                </div>
+                <div class="list-group-item">
+                    <h5><strong>Dotación instrumental</strong></h5>
+                    <p><span class="fa-clasificados fa-2x"></span> Cuerdas pulsadas: @Html.DisplayFor(m => m.Infraestructura.CantidadCuerdasPulsadas)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Cuerdas sinfónicas: @Html.DisplayFor(m => m.Infraestructura.CantidadCuerdasSinfonicas)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Vientos maderas: @Html.DisplayFor(m => m.Infraestructura.CantidadVientosMadera)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Vientos metales: @Html.DisplayFor(m => m.Infraestructura.CantidadVientosMetales)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Percusión menor: @Html.DisplayFor(m => m.Infraestructura.CantidadPercusionMenor)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Percusión sinfónica: @Html.DisplayFor(m => m.Infraestructura.CantidadPercusionSinfonica)</p>
+                    <p><span class="fa-clasificados fa-2x"></span> Otros: @Html.DisplayFor(m => m.Infraestructura.CantidadOtros)</p>
+                    <h5 class="text-danger"><span class="fa-clasificados fa-2x"></span> Total docentes : @Html.DisplayFor(m => m.Infraestructura.TotalInstrumentos)</h5>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script type="text/javascript">
+
+        //$(document).ready(function () {
+        //    $('[data-toggle="tooltip"]').tooltip();
+        //});
+        $(function () {
+
+            $("#btnBuscarMapa").click(function () {
+                dialogMap.show({
+                    coord_separator: ",",
+                    initial: { // Inidica llos parametros de entrada del componente en funcion de selector de JQuery
+                        'latitude': "#Escuelas_Latitud",
+                        'longitude': "#Escuelas_Longitud"
+                    },
+                    target: { // Nodos(Inputs) objetivo en el cual se va a volcar la informacion
+
+                    },
+                    onComplete: function () { },
+                    onAccept: function (self, marker) {
+
+                    }
+                });
+            });
+            $("#btnVerMapa").click(function () {
+                dialogMap.show({
+                    coord_separator: ",",
+                    initial: { // Inidica llos parametros de entrada del componente en funcion de selector de JQuery
+                        'latitude': "#Escuelas_Latitud",
+                        'longitude': "#Escuelas_Longitud"
+                    },
+                    target: { // Nodos(Inputs) objetivo en el cual se va a volcar la informacion
+
+                    },
+                    onComplete: function () { },
+                    onAccept: function (self, marker) {
+
+                    }
+                });
+            });
+        });
+    </script>
+}

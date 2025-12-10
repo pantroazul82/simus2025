@@ -1,0 +1,279 @@
+﻿@model WebSImus.Models.UtilidadPadreModels
+@{
+    ViewBag.Title = "Nueva utilidad";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Nuevo", "Utilidad", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Utilidad", "Index", "Utilidad")</li>
+    </ul>
+
+    <div class="panel panel-primary form-horizontal">
+        @Html.ValidationSummary(true)
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-star"></span> Datos Utilidad</h3>
+        </div>
+        <div class="panel-body" id="panelEditar">
+            @Html.Partial("_DatosBasicos", Model)
+           
+        </div>
+    </div>
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script type="text/javascript">
+
+        $("#PanelOtraCiudad").hide();
+        $("#PanelNacional").hide();
+        CargarModal();
+        var pagecontentwrapHeight = $(".page-content-wrap").height();
+        $('#panelEditar').css("height", pagecontentwrapHeight);
+
+        $('#Documento').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: false,
+            maxFileSize: 2048,
+            allowedFileExtensions: ['pdf'],
+        });
+
+        $('#HoraInicio').timepicker({
+            template: false,
+            showInputs: false,
+            minuteStep: 5
+        });
+        $('#HoraFin').timepicker({
+            template: false,
+            showInputs: false,
+            minuteStep: 5
+        });
+        $('#imagenPerfil').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 1024,
+            allowedFileExtensions: ['jpg', 'png'],
+        });
+
+        $('#FechaInicio').datepicker({
+            minDate: 0,
+            maxDate: "+60D",
+            numberOfMonths: 2,
+            format: 'yyyy-mm-dd',
+            onSelect: function (selected) {
+                $("#FechaFin").datepicker("option", "minDate", selected)
+            }
+        })
+
+        $('#FechaFin').datepicker({
+
+            format: 'yyyy-mm-dd',
+            minDate: 0,
+            maxDate: "+60D",
+            numberOfMonths: 2,
+            onSelect: function (selected) {
+                $("#FechaInicio").datepicker("option", "maxDate", selected)
+            }
+        })
+
+
+        $(window).on('resize', function () {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_panelbodyHeight);
+            $('#panelEditar').css("min-height", pagecontentwrapHeight + 350);
+        });
+
+        function resizePanel() {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_pagecontentwrapHeight);
+        };
+
+        $(function () {
+            $('#FechaInicio').select(function () {
+                var from = $("#FechaInicio").val();
+                var to = $("#FechaFin").val();
+
+                if (Date.parse(from) > Date.parse(to)) {
+                    $("#FechaFin").val('');
+                    alert("La fecha final no puede ser menor a la inicial");
+                }
+
+            })
+        });
+
+        $(function () {
+            $('#FechaFin').select(function () {
+                var from = $("#FechaInicio").val();
+                var to = $("#FechaFin").val();
+
+                if (Date.parse(from) > Date.parse(to)) {
+                    $("#FechaFin").val('');
+                    alert("La fecha final no puede ser menor a la inicial");
+                }
+
+            })
+        });
+        $(function () {
+            $('#Tipo').change(function () {
+                var selected = $(this).val();
+                var city = $('#TipoActor');
+
+                if (selected != null && selected != '') {
+
+                    $.getJSON('@Url.Action("GetActor","Convocatoria")', { tipo: selected }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un actor </option>';
+
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                }
+
+            })
+        });
+
+        $(function () {
+            $('#Tipoutilidad').change(function () {
+                var selected = $(this).val();
+                var city = $('#TipoEvento');
+
+                if (selected != null && selected != '') {
+
+                    $.getJSON('@Url.Action("GetEvento","Utilidad")', { tipo: selected }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione la clasificación </option>';
+
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                }
+
+            })
+        });
+
+        $(function () {
+        // Evento cuando cambia el país
+            $('#CodigoPais').change(function () {
+                var selectedPais = $(this).val();
+                var departamentoDropdown = $('#CodigoDepartamento');
+                var municipioDropdown = $('#CodigoMunicipio');
+
+                if (selectedPais != null && selectedPais !== '') {
+                    validarUbicacion(selectedPais);
+                    $.getJSON('@Url.Action("ObtenerDepartamento", "Agente")', { codigopais: selectedPais }, function (data) {
+                        var options = '<option value="">Seleccione un departamento</option>';
+                        $.each(data, function (i, departamento) {
+                            options += '<option value="' + departamento.value + '">' + departamento.text + '</option>';
+                        });
+                        departamentoDropdown.html(options);
+                        municipioDropdown.empty();
+                        municipioDropdown.append('<option value="">Seleccione un municipio</option>');
+                    });
+                }
+            });
+
+            // Evento cuando cambia el departamento
+            $('#CodigoDepartamento').change(function () {
+                var selectedDep = $(this).val();
+                var municipioDropdown = $('#CodigoMunicipio');
+
+                if (selectedDep != null && selectedDep !== '') {
+                    $.getJSON('@Url.Action("ObtenerMunicipio", "Agente")', { departamento: selectedDep }, function (data) {
+                        var options = '<option value="">Seleccione un municipio</option>';
+                        $.each(data, function (i, municipio) {
+                            options += '<option value="' + municipio.value + '">' + municipio.text + '</option>';
+                        });
+                        municipioDropdown.html(options);
+                    });
+                }
+            });
+        });
+
+        function validarUbicacion(varcodPais) {
+            if (varcodPais == "52") {
+                $("#PanelOtraCiudad").hide();
+                $("#PanelNacional").show();
+            }
+            else {
+                $("#PanelNacional").hide();
+                $("#PanelOtraCiudad").show();
+            }
+        }
+        $(function () {
+            $("#btnBuscarMapa").click(function () {
+                $('#Latitud').val("");
+                $('#Longitud').val("");
+                dialogMap.show({
+                    coord_separator: ".",
+                    initial: { // Inidica llos parametros de entrada del componente en funcion de selector de JQuery
+                        'address': "#Direccion",
+                        'municipality': "#CodigoMunicipio",
+                        'department': "#CodigoDepartamento",
+                        'latitude': "#Latitud",
+                        'longitude': "#Longitud"
+                    },
+                    target: { // Nodos(Inputs) objetivo en el cual se va a volcar la informacion
+                        "Latitud": "marker.getPosition().lat()",
+                        "Longitud": "marker.getPosition().lng()",
+                        "Direccion": "marker.info.address",
+                    },
+                    onComplete: function () { },
+                    onAccept: function (self, marker) {
+
+                    }
+                });
+            });
+
+
+
+        });
+
+
+        function CargarModal() {
+
+            $.ajax({
+
+                url: "/Utilidad/_AceptarTerminos",
+                type: "GET",
+                data: {}
+            })
+           .done(function (partialViewResult) {
+               $("#panelAgregar").html(partialViewResult);
+
+               $('#modalValidacionEscuelas').modal({ show: true });
+
+
+           });
+
+        }
+        function SolicitarPermisos() {
+
+            window.location.href = '/Utilidad/Index';
+        }
+
+    </script>
+}

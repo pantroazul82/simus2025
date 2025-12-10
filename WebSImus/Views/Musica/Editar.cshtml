@@ -1,0 +1,191 @@
+﻿@model WebSImus.Models.EventoPadreModels
+@{
+    ViewBag.Title = "Evento";
+    Layout = "~/Views/Shared/_LayoutCelebra.cshtml";
+}
+
+@using (Html.BeginForm("Editar", "Musica", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    <br />
+    <br />
+    @Html.ValidationSummary(true)
+
+    <div class="container">
+        <h2>Celebra la música 24 de noviembre de 2019</h2>
+        <div class="panel-body" id="panelEditar">
+            <hr class="colorgraph">
+            @Html.Partial("_datosbasicosCelebra", Model.DatosBasicos)
+          
+            <h3>No olvide incluir los artistas en el link Agregar artista</h3>
+            <hr class="colorgraph">
+
+           
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="col-md-12">
+                          
+                            <div class="btn btn-default pull-left">
+                                <i class="fa-musical fa-2x"></i>@Html.ActionLink("Agregar artista", "Artista", "Musica", new {@class = "btn btn-warning", Id = Model.DatosBasicos.Id }, null)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+          
+             
+                <div class="panel-heading">
+                    <h3>Listado de artistas</h3>
+
+                </div>
+                <div id="agenteTabla" class="panel-body">
+                    @Html.Partial("_TablaGrupos", Model.listArtista)
+                </div>
+          
+
+
+        </div>
+    </div>
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script type="text/javascript">
+
+        $('#HoraEvento').timepicker({
+            template: false,
+            showInputs: false,
+            minuteStep: 5
+        });
+        var pagecontentwrapHeight = $(".page-content-wrap").height();
+        $('#panelEditar').css("height", pagecontentwrapHeight);
+
+        $('#imagenPerfil').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 1024,
+            allowedFileExtensions: ['jpg', 'png'],
+        });
+
+
+        $(window).on('resize', function () {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_panelbodyHeight);
+            $('#panelEditar').css("min-height", pagecontentwrapHeight + 350);
+        });
+
+        function resizePanel() {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_pagecontentwrapHeight);
+        };
+
+
+
+        $(function () {
+            $('#CodigoDepartamento').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#CodigoMunicipio');
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerMunicipio", "Entidad")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un municipio </option>';
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                }
+
+            })
+
+            // por país
+            $('#CodigoPais').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#CodigoDepartamento');
+                var varmunicipio = $('#CodigoMunicipio');
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerDepartamento")', { codigopais: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un departamento </option>';
+                        $.each(data, function (i, departamento) {
+                            items += "<option value='" + departamento.value + "'>" + departamento.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+                        varmunicipio.empty();
+
+                    });
+
+                }
+
+            })
+        });
+
+
+    </script>
+
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('.delete').click(function (e) {
+                e.preventDefault();
+
+                //Update the item to delete id so our model knows which one to delete
+                var id = $(this).data('id');
+                $('#item-to-delete').val(id);
+
+            });
+            $('#myDelete').click(function () {
+
+                var varid = $('#item-to-delete').val();
+
+                actualizartabla(varid);
+            });
+
+            function actualizartabla(vaerliminar) {
+                var varEventoId = '@Model.DatosBasicos.Id';
+
+                $.ajaxSetup({
+                    cache: false
+                });
+                $.ajax({
+
+                    url: "/Musica/_TablaGrupo",
+                    type: "GET",
+                    data: { Id: varEventoId, Eliminar: vaerliminar }
+                })
+               .done(function (partialViewResult) {
+                   $("#agenteTabla").html(partialViewResult);
+                   $('#item-to-delete').val(0);
+
+                   if (vaerliminar > 0) {
+                       $('#modalConfirmar').modal('hide');
+                       location.reload();
+                   }
+               });
+
+            }
+        });
+    </script>
+}
+

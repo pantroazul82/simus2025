@@ -1,0 +1,48 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.RecursoDTO>
+
+@foreach (var item in Model.Where(x => x.rec_id_padre == 0))
+{
+    <li class="xn-openable">
+
+        <a href="@item.rec_ruta"><span class="@String.Format("{0}", item.rec_estilo)"></span> <span class="xn-text">@item.rec_titulo</span></a>
+
+
+        @foreach (var child in @item.opciones)
+        {
+            <ul>
+                <li>
+                    @{
+            string url = string.Empty;
+            if (!child.rec_ruta.Contains("http"))
+            {
+                url = "http://" + HttpContext.Current.Request.Url.Authority + "/" + @child.rec_ruta;
+            }
+            else
+            {
+                url = @child.rec_ruta;
+            }
+
+            <a href="@url"><span class="@String.Format("{0}", @child.rec_estilo)"></span> <span class="xn-text">@child.rec_titulo</span></a>
+                    }
+                </li>
+            </ul>
+        }
+
+
+    </li>
+
+
+}
+
+@* Entrada estática para Festivales (Listado) *@
+<li class="xn-openable">
+    <a href="#"><span class="xn-text">Festivales</span></a>
+    <ul>
+        <li>
+            <a href="@Url.Action("Listado", "Festivales")"><span class="xn-text">Listado de Festivales</span></a>
+        </li>
+        <li>
+            <a href="@Url.Action("Reportes", "Festivales")"><span class="xn-text">Reportes</span></a>
+        </li>
+    </ul>
+</li>

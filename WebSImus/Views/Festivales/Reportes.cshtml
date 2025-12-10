@@ -1,0 +1,381 @@
+@model WebSImus.Models.FestivalReporteFiltroViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Gestion de Festivales - Reportes";
+}
+
+<div class="container-fluid" style="padding:10px;">
+    <h3>Gesti&oacute;n de Festivales</h3>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Consulta de Festivales Musicales Registrados</div>
+        <div class="panel-body">
+            @using (Html.BeginForm("Reportes", "Festivales", FormMethod.Get, new { @class = "form-horizontal", id = "formFiltros" }))
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="checkbox" style="margin-left:10px;">
+                            <label>
+                                @Html.CheckBoxFor(m => m.Vigente) Vigente
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 1: Organización -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Organizaci&oacute;n</label>
+                            <div class="col-sm-10">@Html.TextBoxFor(m => m.Organizacion, new { @class = "form-control", placeholder = "Organizaci&oacute;n" })</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 2: Nombre del festival -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Nombre del festival</label>
+                            <div class="col-sm-10">@Html.TextBoxFor(m => m.NombreFestival, new { @class = "form-control", placeholder = "Nombre del festival" })</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 3: Nombre de la versión -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Nombre de la versi&oacute;n</label>
+                            <div class="col-sm-10">@Html.TextBoxFor(m => m.NombreVersion, new { @class = "form-control", placeholder = "Nombre de la versi&oacute;n" })</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 4: Fecha Inicial y Hasta -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Fecha Inicial</label>
+                            <div class="col-sm-8">@Html.TextBoxFor(m => m.FechaInicial, new { @class = "form-control datepicker", placeholder = "Fecha Inicial" })</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Hasta</label>
+                            <div class="col-sm-8">@Html.TextBoxFor(m => m.FechaFinal, new { @class = "form-control datepicker", placeholder = "Hasta" })</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 5: Departamento y Municipio -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Departamento</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownList("Departamento", (IEnumerable<SelectListItem>)ViewBag.Departamentos, "-- TODOS --", new { @class = "form-control", id = "ddlDepartamento" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Municipio</label>
+                            <div class="col-sm-8">
+                                <select id="ddlMunicipio" name="Municipio" class="form-control">
+                                    <option value="">-- TODOS --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 6: Territorio Sonoro -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Territorio Sonoro</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownList("TerritorioSonoroId", (IEnumerable<SelectListItem>)ViewBag.TerritoriosSonoros, "-- TODOS --", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 7: Tipología -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Tipolog&iacute;a</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownList("TipologiaId", (IEnumerable<SelectListItem>)ViewBag.Tipologias, "-- TODOS --", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 8: Modalidad de participación -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Modalidad de participaci&oacute;n</label>
+                            <div class="col-sm-10">@Html.TextBoxFor(m => m.ModalidadParticipacion, new { @class = "form-control", placeholder = "Modalidad de participaci&oacute;n" })</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 9: Expresiones artísticas o culturales -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Expresiones art&iacute;sticas o culturales</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownList("ExpresionesArtisticasId", (IEnumerable<SelectListItem>)ViewBag.ExpresionesArtisticas, "-- TODOS --", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 10: Principal fuente de financiación -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Principal fuente de financiaci&oacute;n</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownList("FuenteFinanciacionPrincipalId", (IEnumerable<SelectListItem>)ViewBag.FuentesFinanciacion, "-- TODOS --", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 11: Fuente de financiación secundaria -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Fuente de financiaci&oacute;n secundaria</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownList("FuenteFinanciacionSecundariaId", (IEnumerable<SelectListItem>)ViewBag.FuentesFinanciacion, "-- TODOS --", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 12: ¿Fuente de financiación secundaria? -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">&iquest;Fuente de financiaci&oacute;n secundaria?</label>
+                            <div class="col-sm-10">
+                                <label class="radio-inline">@Html.RadioButtonFor(m => m.TieneFinanciacionSecundaria, true) SI</label>
+                                <label class="radio-inline">@Html.RadioButtonFor(m => m.TieneFinanciacionSecundaria, false) NO</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 13: Organizador y Tipo de organizador -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Organizador</label>
+                            <div class="col-sm-8">@Html.TextBoxFor(m => m.Organizador, new { @class = "form-control", placeholder = "Organizador" })</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Tipo de organizador</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownList("TipoOrganizadorId", (IEnumerable<SelectListItem>)ViewBag.TiposOrganizador, "-- TODOS --", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:15px;">
+                    <div class="col-md-12">
+                        <div class="pull-left">
+                            <button type="button" class="btn btn-primary" onclick="recargarGrilla()">Filtrar</button>
+                        </div>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-primary" onclick="descargarReporte(false)">Generar Reporte</button>
+                            <button type="button" class="btn btn-primary" onclick="descargarReporte(true)">Generar Reporte Detallado</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div id="Tabla">
+        <div id="loadingIndicator" style="display:none; text-align:center; padding:20px;">
+            <i class="fa fa-spinner fa-spin fa-3x"></i>
+            <p>Cargando datos...</p>
+        </div>
+        @{ Html.RenderAction("GridReportesPartial", new {
+                Vigente = Model.Vigente,
+                Organizacion = Model.Organizacion,
+                NombreFestival = Model.NombreFestival,
+                NombreVersion = Model.NombreVersion,
+                FechaInicial = Model.FechaInicial,
+                FechaFinal = Model.FechaFinal,
+                Departamento = Model.Departamento,
+                Municipio = Model.Municipio,
+                TerritorioSonoroId = Model.TerritorioSonoroId,
+                TipologiaId = Model.TipologiaId,
+                ModalidadParticipacion = Model.ModalidadParticipacion,
+                ExpresionesArtisticasId = Model.ExpresionesArtisticasId,
+                FuenteFinanciacionPrincipalId = Model.FuenteFinanciacionPrincipalId,
+                FuenteFinanciacionSecundariaId = Model.FuenteFinanciacionSecundariaId,
+                TieneFinanciacionSecundaria = Model.TieneFinanciacionSecundaria,
+                Organizador = Model.Organizador,
+                TipoOrganizadorId = Model.TipoOrganizadorId
+            }); }
+    </div>
+</div>
+
+@section scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Inicializar datepicker para los campos de fecha
+        $('.datepicker').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '-100:+10'
+        }).on('change', function(){
+            // Normalizar fecha a formato dd/MM/yyyy antes de enviar
+            var val = $(this).val();
+            if(val){
+                // validar patrón simple
+                var parts = val.split('/');
+                if(parts.length === 3){
+                    var d = parts[0], m = parts[1], y = parts[2];
+                    if(d.length===1) d='0'+d;
+                    if(m.length===1) m='0'+m;
+                    $(this).val(d + '/' + m + '/' + y);
+                }
+            }
+            // No recargar automáticamente, solo normalizar la fecha
+        });
+
+        // Cargar municipios cuando se selecciona un departamento
+        $('#ddlDepartamento').change(function () {
+            var codigoDepartamento = $(this).val();
+            var $ddlMunicipio = $('#ddlMunicipio');
+            
+            // Limpiar el dropdown de municipios
+            $ddlMunicipio.empty();
+            $ddlMunicipio.append('<option value="">-- TODOS --</option>');
+            
+            if (codigoDepartamento) {
+                $.ajax({
+                    url: '@Url.Action("ObtenerMunicipios", "Festivales")',
+                    type: 'GET',
+                    data: { codigoDepartamento: codigoDepartamento },
+                    success: function (data) {
+                        $.each(data, function (i, item) {
+                            $ddlMunicipio.append($('<option></option>').val(item.codigo).html(item.nombre));
+                        });
+                    },
+                    error: function () {
+                        console.error('Error al cargar los municipios');
+                    }
+                });
+            }
+        });
+
+        // Función para recargar la grilla con los filtros actuales (expuesta globalmente para uso del botón)
+        window.recargarGrilla = function() {
+            console.log('Recargando grilla con filtros...');
+            var formData = $('#formFiltros').serialize();
+            console.log('Datos del formulario:', formData);
+            
+            // Mostrar indicador de carga
+            $('#Tabla').html('<div style="text-align:center; padding:40px;"><i class="fa fa-spinner fa-spin fa-3x text-primary"></i><p style="margin-top:15px; font-size:16px;">Cargando datos...</p></div>');
+            
+            $.ajax({
+                url: '@Url.Action("GridReportesPartialAjax", "Festivales")',
+                type: 'POST',
+                data: formData,
+                success: function(data) {
+                    console.log('Grilla actualizada exitosamente');
+                    $('#Tabla').html(data);
+                },
+                error: function(xhr) {
+                    console.error('Error al cargar los datos', xhr.status, xhr.responseText);
+                    $('#Tabla').html('<div class="alert alert-danger" style="margin:20px;"><strong>Error:</strong> No se pudieron cargar los datos. Por favor, intente nuevamente.</div>');
+                }
+            });
+        };
+
+        // Función para descargar el reporte Excel usando POST
+        window.descargarReporte = function(detallado) {
+            // Crear un formulario temporal para enviar por POST
+            var $form = $('<form>', {
+                'method': 'POST',
+                'action': '@Url.Action("DescargarReporte", "Festivales")'
+            });
+            
+            // Agregar todos los campos del formulario de filtros
+            $('#formFiltros').find('input, select').each(function() {
+                var $input = $(this);
+                var name = $input.attr('name');
+                var value = $input.val();
+                var type = $input.attr('type');
+                
+                if (name) {
+                    if (type === 'checkbox') {
+                        // Para checkboxes, enviar true/false
+                        $form.append($('<input>', {
+                            'type': 'hidden',
+                            'name': name,
+                            'value': $input.is(':checked')
+                        }));
+                    } else if (type === 'radio') {
+                        // Para radio buttons, solo enviar el seleccionado
+                        if ($input.is(':checked')) {
+                            $form.append($('<input>', {
+                                'type': 'hidden',
+                                'name': name,
+                                'value': value
+                            }));
+                        }
+                    } else {
+                        // Para otros campos, enviar el valor
+                        if (value) {
+                            $form.append($('<input>', {
+                                'type': 'hidden',
+                                'name': name,
+                                'value': value
+                            }));
+                        }
+                    }
+                }
+            });
+            // Flag de reporte detallado
+            $form.append($('<input>', { 'type': 'hidden', 'name': 'detallado', 'value': !!detallado }));
+            
+            // Agregar el formulario al body, enviarlo y eliminarlo
+            $form.appendTo('body').submit().remove();
+        };
+
+        // Si hay un departamento preseleccionado, cargar sus municipios
+        @if (!string.IsNullOrEmpty(Model.Departamento))
+        {
+            <text>
+            var deptoSeleccionado = '@Model.Departamento';
+            var municipioSeleccionado = '@Model.Municipio';
+            
+            $('#ddlDepartamento').val(deptoSeleccionado).trigger('change');
+            
+            // Esperar a que se carguen los municipios y seleccionar el correcto
+            setTimeout(function() {
+                if (municipioSeleccionado) {
+                    $('#ddlMunicipio').val(municipioSeleccionado);
+                }
+            }, 500);
+            </text>
+        }
+    });
+</script>
+}

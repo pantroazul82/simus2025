@@ -1,0 +1,455 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<style type="text/css">
+    #PanelMapa {
+        height: 700px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-1 col-sm-6 col-xs-6"><img style="padding-top:10px;" src="~/img/iconos/mapas_big.png"></div>
+        <div class="titulo_seccion col-md-11 col-sm-6 col-xs-6">MAPAS</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span class="fa-carto fa-lg" style="text-align: left; padding: 5px;"></span>Mapa General</div>
+</div>
+
+<div class="col-md-12 well carousel-search">
+    <div class="col-md-12 col-sm-12">
+
+        <div class="usuarios col-md-4 col-sm-4 col-xs-4">
+            <div class="iconos_usuarios fa-brands fa-bluesky fa-2x">
+            </div>
+            <p class="titulo_porcentaje">Escuelas de Música</p>
+
+        </div>
+
+        <div class="usuarios col-md-4 col-sm-4 col-xs-4">
+            <div class="iconos_usuarios fa-brands fa-bluesky fa-2x">
+            </div>
+            <p class="titulo_porcentaje">Entidades</p>
+
+        </div>
+
+        <div class="usuarios col-md-4 col-sm-4 col-xs-4">
+            <div class="iconos_usuarios fa-brands fa-bluesky fa-2x">
+            </div>
+            <p class="titulo_porcentaje">Agrupacion</p>
+
+        </div>
+
+
+    </div>
+    <div class=" col-md-6 ">
+
+        <form>
+            <div class="hidden-sm" style="padding-top:20px; ">
+                <div class="btn-group">
+                    @Html.DropDownList("DepartamentoSelector", (SelectList)ViewBag.departamentos, "Departamento", new { @class = "btn btn-default dropdown-toggle btn-select" })
+                </div>
+
+                <div class="btn-group">
+                    @Html.DropDownList("MunicipioSelector", (SelectList)ViewBag.municipios, "Municipio", new { @class = "btn btn-default dropdown-toggle btn-select2" })
+
+                </div>
+                <div class="btn-group">
+                    <button type="button" id="btnSearch" class="btn btn-primary">Volver a cargar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <form action="#" class="form-horizontal">
+                <div class="panel panel-default">
+
+                    <div id="PanelMapa" class="col-md-12">
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+        <!-- FIN GRILLA  -->
+
+    </div>
+</div>
+
+@section Scripts {
+ <script type="text/x-handlebars-template" id="infowin_agrupaciones-template">
+        <div id="infowin_agrupacion">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="modal-header">
+                    @*<div class="img-responsive">
+                            <img src="../img/entidades.jpg" class="img-responsive" alt="entidades" />
+                        </div>*@
+
+                </div>
+                <div class="titulo_agrupacion">
+                    <div class="row">
+                        <div class="col-md-12"> {{nombre}} </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="social-bar">
+                        <div class="row">
+                            <div class="fa-mapas fa-2x col-md-2"></div> <div class="col-md-10 social-txt"> {{direccion}} ,{{municipio}}, {{departamento}}    </div>
+                        </div>
+                     
+                        <div class="row">
+                            <div class="fa-celular fa-2x col-md-2"></div> <div class="col-md-10 social-txt"> {{telefono}} </div>
+                        </div>
+                        <div class="row">
+                            <div class="fa-correo fa-2x col-md-2"></div> <div class="col-md-10 social-txt">{{correoElectronico}}  </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3 ">
+                                <a href="{{ver_Mas}}" class="btn vermas_morado" target="_blank">Ver Mas</a>                         
+                        </div>
+                        <div class="col-md-offset-7">
+
+                            <button type="button" class="btn btn-default" onclick="streetView('{{geometry.LATITUD}}', '{{geometry.LONGITUD}}')">Ver StreetView</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </script>
+
+<script type="text/x-handlebars-template" id="infowin_entidades-template">
+    <div id="infowin_entidades">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="modal-header">
+                @*<div class="img-responsive">
+                        <img src="../img/entidades.jpg" class="img-responsive" alt="entidades" />
+                    </div>*@
+
+            </div>
+            <div class="titulo_entidad">
+                <div class="row">
+                    <div class="col-md-12"> {{nombre}} </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="social-bar">
+                    <div class="row">
+                        <div class="fa-mapas fa-2x col-md-2"></div> <div class="col-md-10 social-txt"> {{direccion}}, {{municipio}}, {{departamento}}    </div>
+                    </div>
+                   
+                    <div class="row">
+                        <div class="fa-celular fa-2x col-md-2"></div> <div class="col-md-10 social-txt"> {{telefono}} </div>
+                    </div>
+                    <div class="row">
+                        <div class="fa-correo fa-2x col-md-2"></div> <div class="col-md-10 social-txt">{{correoElectronico}}  </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-3 ">
+
+                        <a href="{{ver_Mas}}" class="btn vermas_amarillo" target="_blank">Ver Mas</a>
+
+                    </div>
+                    <div class="col-md-offset-7">
+
+                        <button type="button" class="btn btn-default" onclick="streetView('{{geometry.LATITUD}}', '{{geometry.LONGITUD}}')">Ver StreetView</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</script>
+
+<script type="text/x-handlebars-template" id="infowin_escuelas-template">
+    <div id="infowin_escuelas">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            
+            <div class="titulo_director">
+                <div class="row">
+                    <div class="col-md-12">
+                        {{nombre}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 titulo_escuela">
+                    <div class="col-md-2 fa-escuelas fa-2x">  </div>
+                    <div class="col-md-10 "> {{tipoEscuela}} </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="social-bar">
+                    <div class="row">
+                        <div class="fa-mapas fa-2x col-md-2"></div> <div class="col-md-10 social-txt"> {{direccion}},{{municipio}}, {{departamento}}    </div>
+                    </div>
+                
+                    <div class="row">
+                        <div class="fa-celular fa-2x col-md-2"></div> <div class="col-md-10 social-txt"> {{telefono}} </div>
+                    </div>
+                    <div class="row">
+                        <div class="fa-correo fa-2x col-md-2"></div> <div class="col-md-10 social-txt">{{correoElectronico}}  </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        {{#if urlFacebook}}
+                        <div class="col-md-4 col-sm-4 col-xs-4"><a href={{urlFacebook}} target="_blank"><span class="fa-face fa-2x"></span></a> </div>
+                        {{/if}}
+                        {{#if urlTwitter}}
+                        <div class="col-md-4 col-sm-4 col-xs-4"><a href={{urlTwitter}} target="_blank"><span class="fa-twitter2 fa-2x"></span></a></div>
+                        {{/if}}
+                        {{#if urlYoutube}}
+                        <div class="col-md-4 col-sm-4 col-xs-4"><a href={{urlYoutube}} target="_blank"><span class="fa-youtube2 fa-2x"></span></a></div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-3 ">
+                        <a href="{{ver_Mas}}" class="btn vermas" target="_blank">Ver Mas</a>
+                    </div>
+                    <div class="col-md-offset-7">
+                        <button type="button" class="btn btn-default" onclick="streetView('{{geometry.LATITUD}}', '{{geometry.LONGITUD}}')">Ver StreetView</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</script>
+<script type="text/javascript">
+
+        $(document).on('ON_COMPLETE_LOAD_COMPONENT', function () {
+            window.componentMaps = new com.servinf[window.spaceName].ComponentMaps('#PanelMapa', {
+                'module': com.servinf.ComponentMaps.Config.modules.VIEWER_DATA, //Indica que el mapa va a visualizar capas
+                'request_position': false,  // Realizar la solicitud de la posicion actual del usuario
+                'search_bar': false,        // Barra de busqueda dentro del mapa
+                'streetview_panel': false,  // El panel de streetview en un porcentaje de la pantalla. Ej: 50
+                'map_type': "roadmap",      // Tipo de mapa a iniciar: hybrid, satellite, terrain, roadmap
+                'map_options': false,
+                'initial_position': {
+                    'lat': 5.065781,
+                    'lng': -75.507820,
+                    'zoom': 6
+                },
+                'details': {                // Especificaciones del vista
+                    '_initialPoint': {
+                        'name': "Casa Museo Casa de Nariño",
+                        'routing': true,
+                        'streetview': false,
+                        'Latitud': 4.599872,
+                        'Longitud': -74.072898,
+                        'templateString': "Este es el punto inicial"
+                    },
+                    'layers': [{            // Capas a mostrar
+                        'id': "agrupaciones_mapa",     // Identificador de la capa, sirve para accederla de manera remota.
+                        'name': "agrupaciones",   // Nombre de la capa
+                        'type': "webservice",           // Tipo de capa (catodb,webservice,cartoviz)
+                        'autoload': true,               // Indica que se cargara de manera automatica la capa al iniciar el mapa
+                        'keyTitle': "nombre",           // Indica el tooltip que llevaran los OVERLAYS (Objetos dibujados en el mapa)
+                        'fitBounds': false,             // Indica que se hara zoom a la capa en donde sea dibujada
+                        'cluster': true,                // True si quieres que clusterize (solo si la capa es de puntos)
+                        'cluster_options': {            // Opciones de cluster
+                            'group_key': "nombre"
+
+                        },
+                        'heat_map': false,              // True si quieres que realize el mapa de calor (solo si la capa es de puntos)
+                        'heat_map_options': {           // Opciones del Mapa de calor
+                            'max_zoom': 7               // Zoom Maximo a cambiar de Mapa de calor a puntos
+                        },
+                        'url': "/Api/AgrupacionesGeo/", // Url del servicio (En caso de que sea de tipo 'webservice)
+                        'specifications': {                             // Especificaciones del servicio
+                            'node_list': "agrupaciones"                     // Indica el NODO de responseData sobre cual iterar
+                        },
+                        'template_settings': {                          // Infowindow
+                            'element': "infowin_agrupaciones-template"      // Nodo Plantilla de Handlebars
+                        },
+                        'methods': {
+                            'onFetchData': function (data) {
+                                console.log(data);
+                            }
+                        },
+                        'thematic': [                   // Tematicos (Indicar Iconos, colores, etc..)
+                             {
+                                 'name': "entidades_simus",
+                                 'icon': "@Url.Content("~/img/marcadores/marker_agrupacion.png")",
+                                 'rule': {
+                                     'key': "",
+                                     'operator': "*",
+                                     'value': "",
+                                 }
+
+                             }
+                        ]
+                    }, {            // Capas a mostrar
+                        'id': "entidades_mapa",     // Identificador de la capa, sirve para accederla de manera remota.
+                        'name': "Entidades",   // Nombre de la capa
+                        'type': "webservice",           // Tipo de capa (catodb,webservice,cartoviz)
+                        'autoload': true,               // Indica que se cargara de manera automatica la capa al iniciar el mapa
+                        'keyTitle': "nombre",           // Indica el tooltip que llevaran los OVERLAYS (Objetos dibujados en el mapa)
+                        'fitBounds': false,             // Indica que se hara zoom a la capa en donde sea dibujada
+                        'cluster': true,                // True si quieres que clusterize (solo si la capa es de puntos)
+                        'cluster_options': {            // Opciones de cluster
+                            'group_key': "nombre"
+                        },
+                        'heat_map': false,              // True si quieres que realize el mapa de calor (solo si la capa es de puntos)
+                        'heat_map_options': {           // Opciones del Mapa de calor
+                            'max_zoom': 7               // Zoom Maximo a cambiar de Mapa de calor a puntos
+                        },
+                        'url': "/Api/EntidadesGeo/", // Url del servicio (En caso de que sea de tipo 'webservice)
+                        'specifications': {                             // Especificaciones del servicio
+                            'node_list': "entidades"                     // Indica el NODO de responseData sobre cual iterar
+                        },
+                        'template_settings': {                          // Infowindow
+                            'element': "infowin_entidades-template"      // Nodo Plantilla de Handlebars
+                        },
+                        'methods': {
+                            'onFetchData': function (data) {
+                                console.log(data);
+                            }
+                        },
+                        'thematic': [                   // Tematicos (Indicar Iconos, colores, etc..)
+                             {
+                                 'name': "entidades_simus",
+                                 'icon': "@Url.Content("~/img/marcadores/marker_entidad.png")",
+                                 'rule': {
+                                     'key': "",
+                                     'operator': "*",
+                                     'value': "",
+                                 }
+
+                             }
+                        ]
+                    },
+                    {            // Capas a mostrar
+                        'id': "escuelas_mapa",     // Identificador de la capa, sirve para accederla de manera remota.
+                        'name': "Escuelas de Música",   // Nombre de la capa
+                        'type': "webservice",           // Tipo de capa (catodb,webservice,cartoviz)
+                        'autoload': true,               // Indica que se cargara de manera automatica la capa al iniciar el mapa
+                        'keyTitle': "nombre",           // Indica el tooltip que llevaran los OVERLAYS (Objetos dibujados en el mapa)
+                        'fitBounds': false,             // Indica que se hara zoom a la capa en donde sea dibujada
+                        'cluster': true,                // True si quieres que clusterize (solo si la capa es de puntos)
+                        'cluster_options': {            // Opciones de cluster
+                            'group_key': "nombre"
+                        },
+                        'heat_map': false,              // True si quieres que realize el mapa de calor (solo si la capa es de puntos)
+                        'heat_map_options': {           // Opciones del Mapa de calor
+                            'max_zoom': 7               // Zoom Maximo a cambiar de Mapa de calor a puntos
+                        },
+                        'url': "/Api/EscuelasGeo/", // Url del servicio (En caso de que sea de tipo 'webservice)
+                        'specifications': {                             // Especificaciones del servicio
+                            'node_list': "escuelas"                     // Indica el NODO de responseData sobre cual iterar
+                        },
+                        'template_settings': {                          // Infowindow
+                            'element': "infowin_escuelas-template"      // Nodo Plantilla de Handlebars
+                        },
+                        'thematic': [                   // Tematicos (Indicar Iconos, colores, etc..)
+                             {
+                                 'name': "ESCUELAS MUNICIPAL",
+                                 'icon': "@Url.Content("~/img/marcadores/marker_concierto.png")",
+                                 'rule': {
+                                     'key': "",
+                                     'operator': "*",
+                                     'value': "",
+                                 }
+                             }
+                        ]
+                    }]
+                }
+            });
+        });
+
+
+
+        $(function () {
+
+            $('#DepartamentoSelector').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#MunicipioSelector');
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("GetMunicipio")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+
+                        items = '<option>Seleccione un valor </option>';
+
+                        $.each(data, function (i, municipio) {
+                            //alert(municipio.value);
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                    var filter = [{ 'key': 'cod_Departamento', 'operator': 'equals', value: selectedDep }];
+                    componentMaps.getLayers()['agrupaciones_mapa', 'entidades_mapa', 'escuelas_mapa'].filter(filter, function (result) {
+                        console.log(result);
+                        if (result.length === 0) {
+                            alert("No existe datos");
+                        }
+                    })
+
+                }
+
+            })
+
+            $('#MunicipioSelector').change(function () {
+                var cod = $(this).val();
+                var filter = [{ 'key': 'cod_Municipio', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['agrupaciones_mapa', 'entidades_mapa', 'escuelas_mapa'].filter(filter, function (result) {
+                    console.log(result);
+                    if (result.length === 0) {
+                        alert("No existe datos");
+                    }
+                })
+
+            })
+
+        });
+
+        $('#btnSearch').click(function () {
+            componentMaps.getLayers()['agrupaciones_mapa', 'entidades_mapa', 'escuelas_mapa'].filter()
+            $("#DepartamentoSelector").val("").change();
+            ActualizarMunicipios();
+        });
+
+
+        function ActualizarMunicipios() {
+            var city = $('#MunicipioSelector')
+            var items = '';
+            items = '<option>Municipios </option>';
+            city.empty();
+            city.html(items);
+            city.click();
+
+        }
+</script>
+}

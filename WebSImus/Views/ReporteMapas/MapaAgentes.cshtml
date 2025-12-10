@@ -1,0 +1,182 @@
+﻿@{
+    ViewBag.Title = "Mapas Agentes";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<style type="text/css">
+    #PanelMapa {
+        height: 600px;
+    }
+</style>
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+    <li>@Html.ActionLink("Agente", "ConsultaAgentes", "Home")</li>
+</ul>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+
+        <form action="#" class="form-horizontal">
+            <div class="panel panel-default">
+                <h3><span class="fa-representante fa-2x"></span> Agentes</h3>
+
+                <div id="PanelMapa">
+                </div>
+
+            </div>
+
+            <div id="info_dpto">
+            </div>
+        </form>
+
+    </div>
+    <!-- FIN GRILLA  -->
+
+</div>
+
+@section Scripts {
+    <script type="text/x-handlebars-template" id="infowin_agentes-template">
+        <div id="infowin_agentes">
+            <h3>{{nombre}}</h3>
+            <p>{{departamento}}</p>
+            <p>{{municipio}}</p>
+            <a href="{{ver_Mas}}" target="_blank">Ver Mas</a>
+            <button type="button" onclick="streetView('{{geometry.LATITUD}}', '{{geometry.LONGITUD}}')">Ver StreetView</button>
+            @*<button onclick="carRouting('{{geometry.LATITUD}}', '{{geometry.LONGITUD}}')">Ver StreetView</button>*@
+        </div>
+
+    </script>
+    <script type="text/x-handlebars-template" id="info_dpto-template">
+        <div id="info_dptoprueba">
+            <p>{{count}}</p>
+            <p>{{department.Nombre}}</p>
+            {{#each items}}
+            <p>{{municipio}}</p>
+            {{/each}}
+
+
+        </div>
+    </script>
+    <script type="text/javascript">
+
+        $(document).on('ON_COMPLETE_LOAD_COMPONENT', function () {
+            window.componentMaps = new com.servinf[window.spaceName].ComponentMaps('#PanelMapa', {
+                'module': com.servinf.ComponentMaps.Config.modules.VIEWER_DATA, //Indica que el mapa va a visualizar capas
+                'request_position': false,  // Realizar la solicitud de la posicion actual del usuario
+                'search_bar': false,        // Barra de busqueda dentro del mapa
+                'streetview_panel': false,  // El panel de streetview en un porcentaje de la pantalla. Ej: 50
+                'map_type': "roadmap",      // Tipo de mapa a iniciar: hybrid, satellite, terrain, roadmap
+                'map_options': false,
+                'details': {                // Especificaciones del vista
+                    '_initialPoint': {
+                        'name': "Casa Museo Casa de Nariño",
+                        'routing': true,
+                        'streetview': false,
+                        'Latitud': 4.599872,
+                        'Longitud': -74.072898,
+                        'templateString': "Este es el punto inicial"
+                    },
+                    'layers': [{            // Capas a mostrar
+                        'id': "agentes_mapa",     // Identificador de la capa, sirve para accederla de manera remota.
+                        'name': "agentes",   // Nombre de la capa
+                        'type': "webservice",           // Tipo de capa (catodb,webservice,cartoviz)
+                        'autoload': true,               // Indica que se cargara de manera automatica la capa al iniciar el mapa
+                        'keyTitle': "nombre",           // Indica el tooltip que llevaran los OVERLAYS (Objetos dibujados en el mapa)
+                        'fitBounds': false,             // Indica que se hara zoom a la capa en donde sea dibujada
+                        'cluster': true,                // True si quieres que clusterize (solo si la capa es de puntos)
+                        'cluster_options': {            // Opciones de cluster
+                            'group_key': "nombre"
+                        },
+                        'heat_map': false,              // True si quieres que realize el mapa de calor (solo si la capa es de puntos)
+                        'heat_map_options': {           // Opciones del Mapa de calor
+                            'max_zoom': 12               // Zoom Maximo a cambiar de Mapa de calor a puntos
+                        },
+                        'hover': "#FFFFFF",
+                        'thematic_dpto': false,
+                        'thematic_dpto_options': {
+                            'date_dpto': 'cod_Departamento',
+                            'column_thematic': {
+                                'type': "count"
+                            },
+
+                            'show_markers': false,
+                            'opacity': 0.3, // 0.0 - 0.9
+                            'thematic': [{
+                                'name': "Ambito Nacional",
+                                'color': "#FFD981",
+                                'type': "operator",
+                                'rule': {
+                                    'operator': "lt",
+                                    'value': 40,
+                                }
+                            }, {
+                                'name': "Ambito Nacional",
+                                'color': "#25527A",
+                                'rule': {
+                                    'operator': "range",
+                                    'value': "41:80",
+                                }
+                            }, {
+                                'name': "Ambito Nacional",
+                                'color': "#60E4C2",
+                                'rule': {
+                                    'operator': "range",
+                                    'value': "81:120",
+                                }
+                            }, {
+                                'name': "Ambito Nacional",
+                                'color': "#DA4165",
+                                'rule': {
+                                    'operator': "*",
+                                    'value': "",
+                                }
+                            }]
+                        },
+
+                        'url': "http://localhost:28950/Api/TradicionalGeo/", // Url del servicio (En caso de que sea de tipo 'webservice)
+                        'specifications': {                             // Especificaciones del servicio
+                            'node_list': "municipios"                     // Indica el NODO de responseData sobre cual iterar
+                        },
+                        'template_settings': {                          // Infowindow
+                            'element': "infowin_agentes-template"      // Nodo Plantilla de Handlebars
+                        },
+                        'thematic': [                   // Tematicos (Indicar Iconos, colores, etc..)
+                             {
+                                 'name': "Agentes persona natual",
+                                 'icon': "http://simus.mincultura.gov.co/img/marcadores/conservatorio_2.png",
+                                 'rule': {
+                                     'key': "",
+                                     'operator': "*",
+                                     'value': "",
+                                 }
+                             },
+                        ]
+                    }]
+                }
+            });
+
+            $(document).on('ONCLICK_DEPARTMENT_agentes_mapa', function (e) {
+               var info = e.detail.info;
+           
+                var template = $("#info_dpto-template").html();
+                template = Handlebars.compile(template);
+                var html = template(info);
+                $("#info_dpto").html(html);
+            })
+
+        });
+        /**
+            // Invocamos el metodo filter
+            // Recibe un arreglo de reglas
+            // Operadores lt,gt,equals,contains
+            componentMaps.getLayers()['escuelas_de_musica'].filter([
+                {'key':'cod_Departamento', 'operator':'equals', value: '05'},
+                {'key':'cod_Municipio', 'operator':'equals', value: '05686'}
+             ], function(result){console.log(result);})
+        **/
+    </script>
+}
+
+
+
+

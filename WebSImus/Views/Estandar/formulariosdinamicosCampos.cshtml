@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "Vista parcial formularios dinámicos Campos";
+    Layout = "~/Views/Shared/_LayoutDiseño.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="col-md-12">
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Nombre*</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" value="..." />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+                    <div class="push-up-20">
+                        <label class="col-md-2 control-label">Descripción</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="push-up-20">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Tipo de dato</label>
+                            <div class="col-md-8">
+                                <select class="form-control select">
+                                    <option>Seleccione...</option>
+                                    <option>Texto simple</option>
+                                    <option>Texto grande</option>
+                                    <option>Numérico</option>
+                                    <option>Lista única respuesta</option>
+                                    <option>Lista múltiple respuesta</option>
+                                    <option>Archivo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="push-up-20">
+                            <label class="col-md-4 control-label">Es obligatorio</label>
+                            <div class="col-md-4">
+                                <label class="check">
+                                    <input type="radio" class="iradio" name="iradio" checked="checked" /> Si
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="check">
+                                    <input type="radio" class="iradio" name="iradio" checked="checked" /> No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="push-up-20">
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Secciones</label>
+                                <div class="col-md-8">
+                                    <select class="form-control select">
+                                        <option>Seleccione...</option>
+                                        <option>sin Sección</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer text-center">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-success">Guardar</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-default">Cancelar</button>
+                </div>
+            </div> 
+        </div>
+        
+    </div>
+</div>
+

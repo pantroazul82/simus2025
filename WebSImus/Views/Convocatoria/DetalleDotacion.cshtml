@@ -1,0 +1,121 @@
+﻿@model WebSImus.Models.DotacionPadreModel
+@{
+    ViewBag.Title = "Convocatoria Dotación";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Actualizar", "Convocatoria", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+     <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Convocatoria", "Index", "Convocatoria")</li>
+    </ul>
+            <!-- END BREADCRUMB -->
+     <!-- START DEFAULT WIZARD -->
+    <div class="panel panel-colorful" id="panelEditar">
+        <div class="panel-body">
+            <h3>@ViewBag.NuevoTitulo</h3>
+            <h3>@ViewBag.Escuela</h3>
+       
+            <div class="wizard" id="wizardEditarA">
+                @Html.HiddenFor(model => model.DatosBasicos.ConvocatoriaId)
+                @Html.HiddenFor(model => model.DatosBasicos.EntidadId)
+                @Html.HiddenFor(model => model.DatosBasicos.EscuelaId)
+                @Html.HiddenFor(model => model.DatosBasicos.Id)
+                <ul>
+                    <li>
+                        <a href="#step-1">
+                            <span class="stepNumber">1</span>
+                            <span class="stepDesc">Registrarse <br /><small>Datos básicos</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-2">
+                            <span class="stepNumber">2</span>
+                            <span class="stepDesc">Instrumentos <br /><small>Confinanciación </small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-3">
+                            <span class="stepNumber">3</span>
+                            <span class="stepDesc">Documentos<br /><small>subir los documentos </small></span>
+                        </a>
+                    </li>
+
+
+                </ul>
+                <div id="step-1">
+                    @Html.Partial("_DetalleDotacion", Model.DatosBasicos)
+                </div>
+                <div id="step-2">
+                    <div class="row">
+                        <div id="TablaInstumento" class="panel-body">
+                            @Html.Action("TablaInstrumento", new { Id = Model.DatosBasicos.Id, EliminarId = 0 })
+                        </div>
+                    </div>
+                </div>
+                <div id="step-3">
+                    <div class="row">
+                        <div id="TablaDocumento" class="panel-body">
+                            @Html.Action("TablaDocumentos", new { Id = Model.DatosBasicos.Id, EliminarId = 0 })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="panelAgregar" class="panel-body">
+        @Html.Action("_ValidacionEscuelas")
+    </div>
+    <!-- END DEFAULT WIZARD -->
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+ 
+    <script src="@Url.Content("~/Scripts/plugins/smartwizard/jquery.smartWizard-2.0.js")"></script>
+
+    <script type="text/javascript">
+
+      
+        $('#wizardEditarA').smartWizard({
+            selected: 0,
+            enablePagination: false,
+            enableFinishButton: false,
+            enableAllSteps: true,
+        });
+        
+        $(function () {
+
+            $('#encabezado').css("background-size", "cover");
+            $('#encabezado').css("background-position", "0 50%");
+
+            $(window).resize(function () { // Remover alto del panel cuando la ventana cambie de tamaño
+                $('.stepContainer').css("height", "");
+            });
+        });
+
+        function EliminarDocumento() {
+           
+            alert("No se encuentra autorizado para eliminar documentos");
+            return false;
+        }
+        
+        function EliminarInstrumento() {
+            alert("No se encuentra autorizado para eliminar instrumentos");
+            return false;
+        }
+
+    </script>
+}
+
+
+
+

@@ -1,0 +1,115 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<SM.LibreriaComun.DTO.GEO.ConciertosPorMunicipioDTO>
+
+<div class="modal fade" id="modal_datosconciertos" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- CABECERA -->
+            <div class="modal-header bg-primary text-white">
+                <div class="row">
+                    <div class="col-md-8 col-sm-8 col-xs-8 d-flex align-items-center">
+                        <img src="~/img/iconos/conciertos_window.png" style="height: 30px; margin-right: 10px;" />
+                        <strong style="font-size: 18px;">@ViewBag.NombreDepto</strong>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-4 text-right">
+                        <h4 class="modal-title">Conciertos</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESUMEN -->
+            <div class="modal-body">
+                <div class="row text-center tabla_resumen" style="margin-bottom: 15px;">
+                    <div class="col-md-3"><strong>% Departamento</strong><br />@ViewBag.porcentaje</div>
+                    <div class="col-md-3"><strong># Total Mun.</strong><br />@ViewBag.CantidadMun</div>
+                    <div class="col-md-3"><strong># Mun. con Conciertos</strong><br />@ViewBag.CantidadMunConciertos</div>
+                    <div class="col-md-3"><strong># Total Conciertos</strong><br />@ViewBag.CantidadConciertos</div>
+                </div>
+
+                <!-- ENCABEZADO DE LA TABLA -->
+                <div class="row cabeza_modal bg-light text-dark font-weight-bold" style="padding: 10px 0; border-bottom: 1px solid #ddd;">
+                    <div class="col-md-4 col-sm-4 col-xs-4">Municipio</div>
+                    <div class="col-md-4 col-sm-4 col-xs-4"># Conciertos</div>
+                    <div class="col-md-4 col-sm-4 col-xs-4">Enlace</div>
+                </div>
+
+                <!-- FILAS -->
+                @if (Model != null)
+                {
+                    var i = 0;
+                    foreach (var item in Model)
+                    {
+                        var rowClass = (i % 2 == 0) ? "tabla_gris" : "tabla_blanca";
+                        <div class="row @rowClass" style="padding: 8px 0;">
+                            <div class="col-md-4 col-sm-4 col-xs-4">@item.NombreMunicipio</div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">@item.cantidad</div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <a href="@item.ver_Mas" target="_blank" class="btn btn-sm btn-link">Ver más</a>
+                            </div>
+                        </div>
+                        i++;
+                    }
+                }
+            </div>
+
+            <!-- FOOTER -->
+            <div class="modal-footer">
+                <div class="row w-100">
+                    <div class="col-md-12 text-center">
+                        <div id="myPager" class="pagination">
+                            @Html.PagedListPager(
+                                Model,
+                                page => Url.Action(
+                                    "_DatosConciertos",
+                                    new
+                                    {
+                                        CodDepto = ViewBag.CodDepto,
+                                        porcentaje = ViewBag.porcentaje,
+                                        nombre = ViewBag.NombreDepto,
+                                        page = page,
+                                        filtroAno = ViewBag.FiltroAno
+                                    }
+                                ),
+                                new PagedListRenderOptions
+                                {
+                                    LinkToFirstPageFormat = "<<",
+                                    LinkToPreviousPageFormat = "<",
+                                    LinkToNextPageFormat = ">",
+                                    LinkToLastPageFormat = ">>"
+                                }
+                            )
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center" style="margin-top: 10px;">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    //$(function () {
+    $('#myPager').on('click', 'a', function () {
+        $.ajax({
+            url: this.href,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#modalInformacion').html(result);
+                $("#modal_datosconciertos").modal('show');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+            }
+        });
+        return false;
+    });
+    //});
+
+</script>
+

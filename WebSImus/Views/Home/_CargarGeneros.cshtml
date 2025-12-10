@@ -1,0 +1,21 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.EstandarDTO>
+
+<div class="row">
+
+    @if (Model != null)
+    {
+        foreach (SM.LibreriaComun.DTO.EstandarDTO item in Model)
+        {
+            <div class="col-md-4">
+
+               <span><i class="fa fa-musical"></i> @(item.Nombre)</span>
+
+            </div>
+
+        }
+    }
+</div>
+
+
+
+

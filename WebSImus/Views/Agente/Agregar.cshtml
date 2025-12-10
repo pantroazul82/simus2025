@@ -1,0 +1,178 @@
+﻿@model WebSImus.Models.AgentePadreModel
+@{
+    ViewBag.Title = "Agregar nuevo agente";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Agregar", "Agente", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+   
+     <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Agente", "Index", "Agente")</li>
+    </ul>
+            <!-- END BREADCRUMB -->
+     <!-- START DEFAULT WIZARD -->
+    <div class="panel panel-colorful" id="panelEditar">
+        <div class="panel-body">
+            <h3>@ViewBag.NuevoTitulo</h3>
+            @*<blockquote class="blockquote-success">
+                <p class="text-danger ">Los campos marcados con asterisco (*) son obligatorios</p>
+            </blockquote>*@
+            @Html.ValidationSummary(true,  "", new { @style = "color:#DC143C;" })
+            @Html.AntiForgeryToken()
+            <div class="wizard" id="wizardEscuelas">
+
+                <ul>
+                    <li>
+                        <a href="#step-1">
+                            <span class="stepNumber">1</span>
+                            <span class="stepDesc">Registrarse <br /><small>Datos básicos</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-2">
+                            <span class="stepNumber">2</span>
+                            <span class="stepDesc">Perfil <br /><small>Estudios/Experiencias/Ocupación </small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-3">
+                            <span class="stepNumber">3</span>
+                            <span class="stepDesc">Oferta<br /><small>Servicios/Productos</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-3">
+                            <span class="stepNumber">3</span>
+                            <span class="stepDesc">Redes<br /><small>Sociales</small></span>
+                        </a>
+                    </li>
+
+                </ul>
+                <div id="step-1">
+                    @Html.Partial("_AgregarDatosBasicos", Model.DatosBasicos)
+                </div>
+                <div id="step-2">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                        </div>
+                    </div>
+                </div>
+                <div id="step-3">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END DEFAULT WIZARD -->
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/smartwizard/jquery.smartWizard-2.0.js")"></script>
+<script src="~/Scripts/escuelasvalidate.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $('#encabezado').css("background-size", "cover");
+            $('#encabezado').css("background-position", "0 50%");
+          
+            $(window).resize(function () { // Remover alto del panel cuando la ventana cambie de tamaño
+                $('.stepContainer').css("height", "");
+            });
+        });
+
+        $('#wizardEditarA').smartWizard({
+            selected: 0,
+            enablePagination: false,
+            enableFinishButton: false,
+            enableAllSteps: true,
+        });
+   
+
+        $('#imagenPerfil').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 1024,
+            allowedFileExtensions: ['jpg', 'png'],
+        });
+        var today = new Date("01/31/1910");
+        $('#FechaNacimiento').datepicker({
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+            endDate: 'd',
+            format: 'yyyy-mm-dd'
+        })
+
+        $('#NumeroDocumento').keypress(function () {
+     
+            ValidaSoloNumeros();
+        });
+
+        $(function () {
+            if ($('#FechaNacimiento').val() == "0001-01-01")
+            { $('#FechaNacimiento').val(''); }
+            $('#CodigoDepartamento').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#CodigoMunicipio');
+                var varmunicipio = $('#CodigoMunicipio');
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerMunicipio")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un municipio </option>';
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+
+                    });
+
+                }
+
+            })
+
+            // por país
+            $('#CodigoPais').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#CodigoDepartamento');
+
+                if (selectedDep != null && selectedDep != '') {
+                    var varmunicipio = $('#CodigoMunicipio');
+                    $.getJSON('@Url.Action("ObtenerDepartamento")', { codigopais: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un departamento </option>';
+                        $.each(data, function (i, departamento) {
+                            items += "<option value='" + departamento.value + "'>" + departamento.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+                        varmunicipio.empty();
+
+                    });
+
+                }
+
+            })
+        });
+    </script>
+}

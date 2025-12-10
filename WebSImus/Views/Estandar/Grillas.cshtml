@@ -1,0 +1,943 @@
+﻿
+@{
+    ViewBag.Title = "Grillas";
+    Layout = "~/Views/Shared/_LayoutDiseño.cshtml";
+}
+
+@section Scripts 
+{
+	<script type="text/javascript">
+
+	</script>
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- START DEFAULT DATATABLE -->
+       <div class="panel panel-default">           
+            <div class="panel-heading">
+                <h3 class="panel-title">Listado de escuelas</h3>
+                <ul class="panel-controls">
+                    <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                    <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped datatable">
+                        <thead>
+                            <tr>
+                                <th>Departamento</th>
+                                <th>Municipio</th>
+                                <th>Nombre</th>
+                                <th>Dirección</th>
+                                <th>Teléfono</th>
+                                <th>Categoría</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>SANTANDER</td>
+                                <td>EL CARMEN DE CHUCURÍ</td>
+                                <td>JOSEYN SOLANO CARREÑO</td>
+                                <td>PALACIO MUNICIPAL</td>
+                                <td>3123559060</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>ATLÁNTICO</td>
+                                <td>PIOJÓ</td>
+                                <td>DURBIS JIMENEZ</td>
+                                <td>CASA  DE LA CULTURA</td>
+                                <td>3991336</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>NORTE DE SANTANDER</td>
+                                <td>EL TARRA</td>
+                                <td>Gerseynee Enrique Bernal Camacho</td>
+                                <td>Calle 12 karr 6 B/San Rafael</td>
+                                <td>5 113103</td>
+                                <td>Fortalecido</td>
+                            </tr>
+                            <tr>
+                                <td>LA GUAJIRA</td>
+                                <td>URIBIA</td>
+                                <td>Daisy Padilla</td>
+                                <td>Centro Cultural Glicerio Pana</td>
+                                <td>7177255</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>ANTIOQUIA</td>
+                                <td>ANGELÓPOLIS</td>
+                                <td>CAMILO ESTEBAN BUSTAMANTE GONZÁLEZ</td>
+                                <td>Calle 10 N° 9-61</td>
+                                <td>(034) 8421902</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>TOLIMA</td>
+                                <td>MURILLO</td>
+                                <td>leonardo augusto rico ayala</td>
+                                <td>Cra 8 #3-85 Segundo Piso Palacio Municipal - Parque Principal Murillo Tolima.</td>
+                                <td>(057) (8) 2 53 20 65 - 2 53 21 05 -</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>ARBELÁEZ</td>
+                                <td>Martha Catalina Rozo Ballén</td>
+                                <td>Calle 4 No. 6 Esquina -  Casa de la Cultura</td>
+                                <td>(091) 8686028 - 30</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>LA GUAJIRA</td>
+                                <td>URUMITA</td>
+                                <td>Yimmy Cepeda Caraballo</td>
+                                <td>calle 14 A # 9A - 25 barrio el  prado - plaza principal</td>
+                                <td>(095) 7778040 ext 107</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>NORTE DE SANTANDER</td>
+                                <td>HERRÁN</td>
+                                <td>LEONEL ARMANDO CONTRERAS OCHOA</td>
+                                <td>CARRERA 3 Nº 6 - 26</td>
+                                <td>(097) 5 86 0032 - 586 0005</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>SANTANDER</td>
+                                <td>EL GUACAMAYO</td>
+                                <td>Wuilson Guerrero Ramón</td>
+                                <td>Centro</td>
+                                <td>(097) 78003513- 78003511</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>TOLIMA</td>
+                                <td>VENADILLO</td>
+                                <td>Carlos Orlando Ortiz Agudelo</td>
+                                <td>Carrera 5 con Calle 2 Esquina Barrio Lorenzo Urueña</td>
+                                <td>(098) 2 841 737</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>TOLIMA</td>
+                                <td>IBAGUÉ</td>
+                                <td>Nidia Constanza Colmenares Echeverry</td>
+                                <td>Calle 41 N° 4B-08 Macarena Parte Alta</td>
+                                <td>(098) 2788780</td>
+                                <td>Fortalecido</td>
+                            </tr>
+                            <tr>
+                                <td>PUTUMAYO</td>
+                                <td>COLÓN</td>
+                                <td>Juan David Chamorro Jaramillo</td>
+                                <td>Centro Cultural de Colón Putumayo - Barrio Centro</td>
+                                <td>(098)4251825</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>VIOTÁ</td>
+                                <td>Carlos Eduardo Monroy Otalora</td>
+                                <td>Calle 1 No. 2-76</td>
+                                <td>(1) 252660</td>
+                                <td>Semillero</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>EL ROSAL</td>
+                                <td>Julio César Díaz</td>
+                                <td>Calle 10 No, 9-06 Esquina</td>
+                                <td>(1) 8240422</td>
+                                <td>Fortalecido</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>VERGARA</td>
+                                <td>Armando Vásquez</td>
+                                <td>Casa de la Cultura de Vergara</td>
+                                <td>(1) 8459109</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>FOSCA</td>
+                                <td>Milton Barbosa</td>
+                                <td>Casa de la Cultura Municipal</td>
+                                <td>(1) 8490001</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>MANTA</td>
+                                <td>Yimi Cobos</td>
+                                <td>Escuela Almeidas</td>
+                                <td>(1) 8567780</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>CUCUNUBÁ</td>
+                                <td>Marta Isabel Gómez</td>
+                                <td>Carrera 4 No. 4 Esquina</td>
+                                <td>(1) 8580024</td>
+                                <td>Semillero</td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>OBANDO</td>
+                                <td>LUIS FERNANDO ORTIZ MURGUEITIO</td>
+                                <td>CALLE 2 NUMERO 2-03 BARRIO CENTRO</td>
+                                <td>(2) 205-3283</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>ZARZAL</td>
+                                <td>Juan Harvei Rondon Cerquera</td>
+                                <td>Calle 5 No. 6A-15</td>
+                                <td>(2) 220 66 90</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>VIJES</td>
+                                <td>Carolina Garcia</td>
+                                <td>Carrera 4 con calle 8 esquina barrio Robledo</td>
+                                <td>(2) 2520435</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>JAMUNDÍ</td>
+                                <td>Gloria Mercedez Mora Escobar</td>
+                                <td>Calle 30 # 24-00 Esquina</td>
+                                <td>(2) 2712726</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>ATLÁNTICO</td>
+                                <td>PIOJÓ</td>
+                                <td>DURBIS JIMENEZ</td>
+                                <td>CASA  DE LA CULTURA</td>
+                                <td>3991336</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>NORTE DE SANTANDER</td>
+                                <td>EL TARRA</td>
+                                <td>Gerseynee Enrique Bernal Camacho</td>
+                                <td>Calle 12 karr 6 B/San Rafael</td>
+                                <td>5 113103</td>
+                                <td>Fortalecido</td>
+                            </tr>
+                            <tr>
+                                <td>LA GUAJIRA</td>
+                                <td>URIBIA</td>
+                                <td>Daisy Padilla</td>
+                                <td>Centro Cultural Glicerio Pana</td>
+                                <td>7177255</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>ANTIOQUIA</td>
+                                <td>ANGELÓPOLIS</td>
+                                <td>CAMILO ESTEBAN BUSTAMANTE GONZÁLEZ</td>
+                                <td>Calle 10 N° 9-61</td>
+                                <td>(034) 8421902</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>TOLIMA</td>
+                                <td>MURILLO</td>
+                                <td>leonardo augusto rico ayala</td>
+                                <td>Cra 8 #3-85 Segundo Piso Palacio Municipal - Parque Principal Murillo Tolima.</td>
+                                <td>(057) (8) 2 53 20 65 - 2 53 21 05 -</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>ARBELÁEZ</td>
+                                <td>Martha Catalina Rozo Ballén</td>
+                                <td>Calle 4 No. 6 Esquina -  Casa de la Cultura</td>
+                                <td>(091) 8686028 - 30</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>LA GUAJIRA</td>
+                                <td>URUMITA</td>
+                                <td>Yimmy Cepeda Caraballo</td>
+                                <td>calle 14 A # 9A - 25 barrio el  prado - plaza principal</td>
+                                <td>(095) 7778040 ext 107</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>NORTE DE SANTANDER</td>
+                                <td>HERRÁN</td>
+                                <td>LEONEL ARMANDO CONTRERAS OCHOA</td>
+                                <td>CARRERA 3 Nº 6 - 26</td>
+                                <td>(097) 5 86 0032 - 586 0005</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>SANTANDER</td>
+                                <td>EL GUACAMAYO</td>
+                                <td>Wuilson Guerrero Ramón</td>
+                                <td>Centro</td>
+                                <td>(097) 78003513- 78003511</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>TOLIMA</td>
+                                <td>VENADILLO</td>
+                                <td>Carlos Orlando Ortiz Agudelo</td>
+                                <td>Carrera 5 con Calle 2 Esquina Barrio Lorenzo Urueña</td>
+                                <td>(098) 2 841 737</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>TOLIMA</td>
+                                <td>IBAGUÉ</td>
+                                <td>Nidia Constanza Colmenares Echeverry</td>
+                                <td>Calle 41 N° 4B-08 Macarena Parte Alta</td>
+                                <td>(098) 2788780</td>
+                                <td>Fortalecido</td>
+                            </tr>
+                            <tr>
+                                <td>PUTUMAYO</td>
+                                <td>COLÓN</td>
+                                <td>Juan David Chamorro Jaramillo</td>
+                                <td>Centro Cultural de Colón Putumayo - Barrio Centro</td>
+                                <td>(098)4251825</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>VIOTÁ</td>
+                                <td>Carlos Eduardo Monroy Otalora</td>
+                                <td>Calle 1 No. 2-76</td>
+                                <td>(1) 252660</td>
+                                <td>Semillero</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>EL ROSAL</td>
+                                <td>Julio César Díaz</td>
+                                <td>Calle 10 No, 9-06 Esquina</td>
+                                <td>(1) 8240422</td>
+                                <td>Fortalecido</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>VERGARA</td>
+                                <td>Armando Vásquez</td>
+                                <td>Casa de la Cultura de Vergara</td>
+                                <td>(1) 8459109</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>FOSCA</td>
+                                <td>Milton Barbosa</td>
+                                <td>Casa de la Cultura Municipal</td>
+                                <td>(1) 8490001</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>MANTA</td>
+                                <td>Yimi Cobos</td>
+                                <td>Escuela Almeidas</td>
+                                <td>(1) 8567780</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>CUCUNUBÁ</td>
+                                <td>Marta Isabel Gómez</td>
+                                <td>Carrera 4 No. 4 Esquina</td>
+                                <td>(1) 8580024</td>
+                                <td>Semillero</td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>OBANDO</td>
+                                <td>LUIS FERNANDO ORTIZ MURGUEITIO</td>
+                                <td>CALLE 2 NUMERO 2-03 BARRIO CENTRO</td>
+                                <td>(2) 205-3283</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>ZARZAL</td>
+                                <td>Juan Harvei Rondon Cerquera</td>
+                                <td>Calle 5 No. 6A-15</td>
+                                <td>(2) 220 66 90</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>VIJES</td>
+                                <td>Carolina Garcia</td>
+                                <td>Carrera 4 con calle 8 esquina barrio Robledo</td>
+                                <td>(2) 2520435</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>JAMUNDÍ</td>
+                                <td>Gloria Mercedez Mora Escobar</td>
+                                <td>Calle 30 # 24-00 Esquina</td>
+                                <td>(2) 2712726</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>ATLÁNTICO</td>
+                                <td>PIOJÓ</td>
+                                <td>DURBIS JIMENEZ</td>
+                                <td>CASA  DE LA CULTURA</td>
+                                <td>3991336</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>NORTE DE SANTANDER</td>
+                                <td>EL TARRA</td>
+                                <td>Gerseynee Enrique Bernal Camacho</td>
+                                <td>Calle 12 karr 6 B/San Rafael</td>
+                                <td>5 113103</td>
+                                <td>Fortalecido</td>
+                            </tr>
+                            <tr>
+                                <td>LA GUAJIRA</td>
+                                <td>URIBIA</td>
+                                <td>Daisy Padilla</td>
+                                <td>Centro Cultural Glicerio Pana</td>
+                                <td>7177255</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>ANTIOQUIA</td>
+                                <td>ANGELÓPOLIS</td>
+                                <td>CAMILO ESTEBAN BUSTAMANTE GONZÁLEZ</td>
+                                <td>Calle 10 N° 9-61</td>
+                                <td>(034) 8421902</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>TOLIMA</td>
+                                <td>MURILLO</td>
+                                <td>leonardo augusto rico ayala</td>
+                                <td>Cra 8 #3-85 Segundo Piso Palacio Municipal - Parque Principal Murillo Tolima.</td>
+                                <td>(057) (8) 2 53 20 65 - 2 53 21 05 -</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>ARBELÁEZ</td>
+                                <td>Martha Catalina Rozo Ballén</td>
+                                <td>Calle 4 No. 6 Esquina -  Casa de la Cultura</td>
+                                <td>(091) 8686028 - 30</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>LA GUAJIRA</td>
+                                <td>URUMITA</td>
+                                <td>Yimmy Cepeda Caraballo</td>
+                                <td>calle 14 A # 9A - 25 barrio el  prado - plaza principal</td>
+                                <td>(095) 7778040 ext 107</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>NORTE DE SANTANDER</td>
+                                <td>HERRÁN</td>
+                                <td>LEONEL ARMANDO CONTRERAS OCHOA</td>
+                                <td>CARRERA 3 Nº 6 - 26</td>
+                                <td>(097) 5 86 0032 - 586 0005</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>SANTANDER</td>
+                                <td>EL GUACAMAYO</td>
+                                <td>Wuilson Guerrero Ramón</td>
+                                <td>Centro</td>
+                                <td>(097) 78003513- 78003511</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>TOLIMA</td>
+                                <td>VENADILLO</td>
+                                <td>Carlos Orlando Ortiz Agudelo</td>
+                                <td>Carrera 5 con Calle 2 Esquina Barrio Lorenzo Urueña</td>
+                                <td>(098) 2 841 737</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>TOLIMA</td>
+                                <td>IBAGUÉ</td>
+                                <td>Nidia Constanza Colmenares Echeverry</td>
+                                <td>Calle 41 N° 4B-08 Macarena Parte Alta</td>
+                                <td>(098) 2788780</td>
+                                <td>Fortalecido</td>
+                            </tr>
+                            <tr>
+                                <td>PUTUMAYO</td>
+                                <td>COLÓN</td>
+                                <td>Juan David Chamorro Jaramillo</td>
+                                <td>Centro Cultural de Colón Putumayo - Barrio Centro</td>
+                                <td>(098)4251825</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>VIOTÁ</td>
+                                <td>Carlos Eduardo Monroy Otalora</td>
+                                <td>Calle 1 No. 2-76</td>
+                                <td>(1) 252660</td>
+                                <td>Semillero</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>EL ROSAL</td>
+                                <td>Julio César Díaz</td>
+                                <td>Calle 10 No, 9-06 Esquina</td>
+                                <td>(1) 8240422</td>
+                                <td>Fortalecido</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>VERGARA</td>
+                                <td>Armando Vásquez</td>
+                                <td>Casa de la Cultura de Vergara</td>
+                                <td>(1) 8459109</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>FOSCA</td>
+                                <td>Milton Barbosa</td>
+                                <td>Casa de la Cultura Municipal</td>
+                                <td>(1) 8490001</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>MANTA</td>
+                                <td>Yimi Cobos</td>
+                                <td>Escuela Almeidas</td>
+                                <td>(1) 8567780</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>CUCUNUBÁ</td>
+                                <td>Marta Isabel Gómez</td>
+                                <td>Carrera 4 No. 4 Esquina</td>
+                                <td>(1) 8580024</td>
+                                <td>Semillero</td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>OBANDO</td>
+                                <td>LUIS FERNANDO ORTIZ MURGUEITIO</td>
+                                <td>CALLE 2 NUMERO 2-03 BARRIO CENTRO</td>
+                                <td>(2) 205-3283</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>ZARZAL</td>
+                                <td>Juan Harvei Rondon Cerquera</td>
+                                <td>Calle 5 No. 6A-15</td>
+                                <td>(2) 220 66 90</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>VIJES</td>
+                                <td>Carolina Garcia</td>
+                                <td>Carrera 4 con calle 8 esquina barrio Robledo</td>
+                                <td>(2) 2520435</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>JAMUNDÍ</td>
+                                <td>Gloria Mercedez Mora Escobar</td>
+                                <td>Calle 30 # 24-00 Esquina</td>
+                                <td>(2) 2712726</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>ATLÁNTICO</td>
+                                <td>PIOJÓ</td>
+                                <td>DURBIS JIMENEZ</td>
+                                <td>CASA  DE LA CULTURA</td>
+                                <td>3991336</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>NORTE DE SANTANDER</td>
+                                <td>EL TARRA</td>
+                                <td>Gerseynee Enrique Bernal Camacho</td>
+                                <td>Calle 12 karr 6 B/San Rafael</td>
+                                <td>5 113103</td>
+                                <td>Fortalecido</td>
+                            </tr>
+                            <tr>
+                                <td>LA GUAJIRA</td>
+                                <td>URIBIA</td>
+                                <td>Daisy Padilla</td>
+                                <td>Centro Cultural Glicerio Pana</td>
+                                <td>7177255</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>ANTIOQUIA</td>
+                                <td>ANGELÓPOLIS</td>
+                                <td>CAMILO ESTEBAN BUSTAMANTE GONZÁLEZ</td>
+                                <td>Calle 10 N° 9-61</td>
+                                <td>(034) 8421902</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>TOLIMA</td>
+                                <td>MURILLO</td>
+                                <td>leonardo augusto rico ayala</td>
+                                <td>Cra 8 #3-85 Segundo Piso Palacio Municipal - Parque Principal Murillo Tolima.</td>
+                                <td>(057) (8) 2 53 20 65 - 2 53 21 05 -</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>ARBELÁEZ</td>
+                                <td>Martha Catalina Rozo Ballén</td>
+                                <td>Calle 4 No. 6 Esquina -  Casa de la Cultura</td>
+                                <td>(091) 8686028 - 30</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>LA GUAJIRA</td>
+                                <td>URUMITA</td>
+                                <td>Yimmy Cepeda Caraballo</td>
+                                <td>calle 14 A # 9A - 25 barrio el  prado - plaza principal</td>
+                                <td>(095) 7778040 ext 107</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>NORTE DE SANTANDER</td>
+                                <td>HERRÁN</td>
+                                <td>LEONEL ARMANDO CONTRERAS OCHOA</td>
+                                <td>CARRERA 3 Nº 6 - 26</td>
+                                <td>(097) 5 86 0032 - 586 0005</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>SANTANDER</td>
+                                <td>EL GUACAMAYO</td>
+                                <td>Wuilson Guerrero Ramón</td>
+                                <td>Centro</td>
+                                <td>(097) 78003513- 78003511</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>TOLIMA</td>
+                                <td>VENADILLO</td>
+                                <td>Carlos Orlando Ortiz Agudelo</td>
+                                <td>Carrera 5 con Calle 2 Esquina Barrio Lorenzo Urueña</td>
+                                <td>(098) 2 841 737</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>TOLIMA</td>
+                                <td>IBAGUÉ</td>
+                                <td>Nidia Constanza Colmenares Echeverry</td>
+                                <td>Calle 41 N° 4B-08 Macarena Parte Alta</td>
+                                <td>(098) 2788780</td>
+                                <td>Fortalecido</td>
+                            </tr>
+                            <tr>
+                                <td>PUTUMAYO</td>
+                                <td>COLÓN</td>
+                                <td>Juan David Chamorro Jaramillo</td>
+                                <td>Centro Cultural de Colón Putumayo - Barrio Centro</td>
+                                <td>(098)4251825</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>VIOTÁ</td>
+                                <td>Carlos Eduardo Monroy Otalora</td>
+                                <td>Calle 1 No. 2-76</td>
+                                <td>(1) 252660</td>
+                                <td>Semillero</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>EL ROSAL</td>
+                                <td>Julio César Díaz</td>
+                                <td>Calle 10 No, 9-06 Esquina</td>
+                                <td>(1) 8240422</td>
+                                <td>Fortalecido</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>VERGARA</td>
+                                <td>Armando Vásquez</td>
+                                <td>Casa de la Cultura de Vergara</td>
+                                <td>(1) 8459109</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>FOSCA</td>
+                                <td>Milton Barbosa</td>
+                                <td>Casa de la Cultura Municipal</td>
+                                <td>(1) 8490001</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>MANTA</td>
+                                <td>Yimi Cobos</td>
+                                <td>Escuela Almeidas</td>
+                                <td>(1) 8567780</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>CUCUNUBÁ</td>
+                                <td>Marta Isabel Gómez</td>
+                                <td>Carrera 4 No. 4 Esquina</td>
+                                <td>(1) 8580024</td>
+                                <td>Semillero</td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>OBANDO</td>
+                                <td>LUIS FERNANDO ORTIZ MURGUEITIO</td>
+                                <td>CALLE 2 NUMERO 2-03 BARRIO CENTRO</td>
+                                <td>(2) 205-3283</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>ZARZAL</td>
+                                <td>Juan Harvei Rondon Cerquera</td>
+                                <td>Calle 5 No. 6A-15</td>
+                                <td>(2) 220 66 90</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>VIJES</td>
+                                <td>Carolina Garcia</td>
+                                <td>Carrera 4 con calle 8 esquina barrio Robledo</td>
+                                <td>(2) 2520435</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>JAMUNDÍ</td>
+                                <td>Gloria Mercedez Mora Escobar</td>
+                                <td>Calle 30 # 24-00 Esquina</td>
+                                <td>(2) 2712726</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>ATLÁNTICO</td>
+                                <td>PIOJÓ</td>
+                                <td>DURBIS JIMENEZ</td>
+                                <td>CASA  DE LA CULTURA</td>
+                                <td>3991336</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>NORTE DE SANTANDER</td>
+                                <td>EL TARRA</td>
+                                <td>Gerseynee Enrique Bernal Camacho</td>
+                                <td>Calle 12 karr 6 B/San Rafael</td>
+                                <td>5 113103</td>
+                                <td>Fortalecido</td>
+                            </tr>
+                            <tr>
+                                <td>LA GUAJIRA</td>
+                                <td>URIBIA</td>
+                                <td>Daisy Padilla</td>
+                                <td>Centro Cultural Glicerio Pana</td>
+                                <td>7177255</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>ANTIOQUIA</td>
+                                <td>ANGELÓPOLIS</td>
+                                <td>CAMILO ESTEBAN BUSTAMANTE GONZÁLEZ</td>
+                                <td>Calle 10 N° 9-61</td>
+                                <td>(034) 8421902</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>TOLIMA</td>
+                                <td>MURILLO</td>
+                                <td>leonardo augusto rico ayala</td>
+                                <td>Cra 8 #3-85 Segundo Piso Palacio Municipal - Parque Principal Murillo Tolima.</td>
+                                <td>(057) (8) 2 53 20 65 - 2 53 21 05 -</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>ARBELÁEZ</td>
+                                <td>Martha Catalina Rozo Ballén</td>
+                                <td>Calle 4 No. 6 Esquina -  Casa de la Cultura</td>
+                                <td>(091) 8686028 - 30</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>LA GUAJIRA</td>
+                                <td>URUMITA</td>
+                                <td>Yimmy Cepeda Caraballo</td>
+                                <td>calle 14 A # 9A - 25 barrio el  prado - plaza principal</td>
+                                <td>(095) 7778040 ext 107</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>NORTE DE SANTANDER</td>
+                                <td>HERRÁN</td>
+                                <td>LEONEL ARMANDO CONTRERAS OCHOA</td>
+                                <td>CARRERA 3 Nº 6 - 26</td>
+                                <td>(097) 5 86 0032 - 586 0005</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>SANTANDER</td>
+                                <td>EL GUACAMAYO</td>
+                                <td>Wuilson Guerrero Ramón</td>
+                                <td>Centro</td>
+                                <td>(097) 78003513- 78003511</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>TOLIMA</td>
+                                <td>VENADILLO</td>
+                                <td>Carlos Orlando Ortiz Agudelo</td>
+                                <td>Carrera 5 con Calle 2 Esquina Barrio Lorenzo Urueña</td>
+                                <td>(098) 2 841 737</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>TOLIMA</td>
+                                <td>IBAGUÉ</td>
+                                <td>Nidia Constanza Colmenares Echeverry</td>
+                                <td>Calle 41 N° 4B-08 Macarena Parte Alta</td>
+                                <td>(098) 2788780</td>
+                                <td>Fortalecido</td>
+                            </tr>
+                            <tr>
+                                <td>PUTUMAYO</td>
+                                <td>COLÓN</td>
+                                <td>Juan David Chamorro Jaramillo</td>
+                                <td>Centro Cultural de Colón Putumayo - Barrio Centro</td>
+                                <td>(098)4251825</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>VIOTÁ</td>
+                                <td>Carlos Eduardo Monroy Otalora</td>
+                                <td>Calle 1 No. 2-76</td>
+                                <td>(1) 252660</td>
+                                <td>Semillero</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>EL ROSAL</td>
+                                <td>Julio César Díaz</td>
+                                <td>Calle 10 No, 9-06 Esquina</td>
+                                <td>(1) 8240422</td>
+                                <td>Fortalecido</td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>VERGARA</td>
+                                <td>Armando Vásquez</td>
+                                <td>Casa de la Cultura de Vergara</td>
+                                <td>(1) 8459109</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>FOSCA</td>
+                                <td>Milton Barbosa</td>
+                                <td>Casa de la Cultura Municipal</td>
+                                <td>(1) 8490001</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>MANTA</td>
+                                <td>Yimi Cobos</td>
+                                <td>Escuela Almeidas</td>
+                                <td>(1) 8567780</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>CUNDINAMARCA</td>
+                                <td>CUCUNUBÁ</td>
+                                <td>Marta Isabel Gómez</td>
+                                <td>Carrera 4 No. 4 Esquina</td>
+                                <td>(1) 8580024</td>
+                                <td>Semillero</td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>OBANDO</td>
+                                <td>LUIS FERNANDO ORTIZ MURGUEITIO</td>
+                                <td>CALLE 2 NUMERO 2-03 BARRIO CENTRO</td>
+                                <td>(2) 205-3283</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>ZARZAL</td>
+                                <td>Juan Harvei Rondon Cerquera</td>
+                                <td>Calle 5 No. 6A-15</td>
+                                <td>(2) 220 66 90</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>VIJES</td>
+                                <td>Carolina Garcia</td>
+                                <td>Carrera 4 con calle 8 esquina barrio Robledo</td>
+                                <td>(2) 2520435</td>
+                                <td>Inicial</td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>JAMUNDÍ</td>
+                                <td>Gloria Mercedez Mora Escobar</td>
+                                <td>Calle 30 # 24-00 Esquina</td>
+                                <td>(2) 2712726</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>VALLE DEL CAUCA</td>
+                                <td>PALMIRA</td>
+                                <td>Gloria Mercedez Mora Escobar</td>
+                                <td>Calle 30 # 24-00 Esquina</td>
+                                <td>(2) 2712726</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- END DEFAULT DATATABLE -->
+    </div>
+</div> 

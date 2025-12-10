@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.EntidadesOperadoras.DotacionDTO>
+<div class="panel panel-default">
+
+    <div class="form-group">
+        <div class="row">
+            <table class="table">
+                @Html.Hidden("item-to-deleted", "", new { @id = "item-to-deleted" })
+                <thead>
+                    <tr>                      
+                        <th>Tipo</th>
+                        <th>Elemento</th>
+                        <th>Formato</th>
+                        <th>Marca</th>
+                        <th>Referencia</th>
+                        <th>Serial</th>
+                        <th>Editar</th>
+
+                    </tr>
+                </thead>
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>                       
+                                <td>@item.Tipo</td>
+                                <td>@item.Elemento</td>
+                                <td>@item.Formato</td>
+                                <td>@item.Marca</td>
+                                <td>@item.Referencia</td>
+                                <td>@item.Serial</td>
+
+                                <td><a href="" class="fa-pencil-1" data-toggle="modal" data-target="#modal_datosMatriz" title="Editar la información" onclick="javascript: CargarModalDotacion('@item.Id');"></a></td>
+                            </tr>
+                        </tbody>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+    <div id="modalConfirmarDotacion" class="modal modal-vcenter fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Esta a punto de eliminar un elemento de su lista de elemento a dotar. <strong>Tenga en cuenta que esta acción no se puede revertir</strong>.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="myDeleteForma" class="btn btn-danger" data-dismiss="modal" onclick="EliminarDotacion()">Eliminar</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

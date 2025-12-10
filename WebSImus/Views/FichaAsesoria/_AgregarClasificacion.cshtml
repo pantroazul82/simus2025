@@ -1,0 +1,54 @@
+﻿@model SM.LibreriaComun.DTO.FichaAsesoria.ClasificacionNuevoDTO
+
+<div class="modal animated fadeIn mf-modal" id="modal_datosClasificacion" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="mf-modal-header">
+                @Html.HiddenFor(model => model.EscuelaId)
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.Tipo)
+                @Html.HiddenFor(model => model.ClasificacionId)
+
+                <div class="form-title text-lg font-semibold flex justify-between items-center">
+                    <span><i class="fas fa-music mr-2"></i>@Html.DisplayFor(model => model.Tipo)</span>
+                </div>
+            </div>
+
+            <div class="mf-modal-body">
+                <div class="mf-field-group">
+                    <label class="mf-label">Clasificación</label>
+                    <div>@Html.DisplayFor(model => model.Clasificacion)</div>
+                </div>
+
+                <div class="mf-field-group">
+                    <label class="mf-label">Bueno</label>
+                    @Html.DropDownListFor(model => model.Bueno, (SelectList)ViewBag.logica, "Seleccione", new { @class = "styled-select w-full" })
+                    @Html.ValidationMessageFor(model => model.Bueno, "", new { @class = "mf-validation-error" })
+                </div>
+
+                <div class="mf-field-group">
+                    <label class="mf-label">Regular</label>
+                    @Html.DropDownListFor(model => model.REGULAR, (SelectList)ViewBag.logica, "Seleccione", new { @class = "styled-select w-full" })
+                    @Html.ValidationMessageFor(model => model.REGULAR, "", new { @class = "mf-validation-error" })
+                </div>
+
+                <div class="mf-field-group">
+                    <label class="mf-label">Deficiente</label>
+                    @Html.DropDownListFor(model => model.DEFICIENTE, (SelectList)ViewBag.logica, "Seleccione", new { @class = "styled-select w-full" })
+                    @Html.ValidationMessageFor(model => model.DEFICIENTE, "", new { @class = "mf-validation-error" })
+                </div>
+
+                <div class="mf-field-group">
+                    <label class="mf-label">No Se Realiza</label>
+                    @Html.DropDownListFor(model => model.NOSEREALIZA, (SelectList)ViewBag.logica, "Seleccione", new { @class = "styled-select w-full" })
+                    @Html.ValidationMessageFor(model => model.NOSEREALIZA, "", new { @class = "mf-validation-error" })
+                </div>
+            </div>
+
+            <div class="mf-modal-footer text-right">
+                <button type="button" id="btnGuardarClasificacion" class="btn btn-success" data-dismiss="modal" onclick="ClasificacionAgregar('@Model.Id')">Guardar</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

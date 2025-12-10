@@ -1,0 +1,79 @@
+﻿@model SM.LibreriaComun.DTO.EntidadesOperadoras.ActividadDTO
+    @{
+        ViewBag.Title = "Nuevo actividad";
+        Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+    }
+
+    @using (Html.BeginForm("Crear", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+    {
+
+        <ul class="breadcrumb">
+            <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+            <li>@Html.ActionLink("Actividad", "Index", "Actividad")</li>
+            <li>@Html.ActionLink("Ver convenio", "Editar", "Convenio", new { Id = Model.ConvenioId }, null)</li>
+        </ul>
+    @*<div id="datosconvenio" class="panel-body">
+        <div class="col-md-12">
+            @Html.Action("DatosConvenio", new { Id = Model.ConvenioId })
+        </div>
+    </div>*@
+        <div class="panel panel-primary form-horizontal">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.ConvenioId)
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-star"></span> Datos Actividad</h3>
+            </div>
+            <div class="panel-body" id="panelEditar">
+                @Html.Partial("_Datos", Model)
+                <div class="panel-footer">
+                    <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+
+                </div>
+            </div>
+        </div>
+
+    }
+    @section Scripts {
+
+        @Scripts.Render("~/Scripts/jqueryval")
+        <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+        <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+        <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+        <script type="text/javascript">
+
+
+            function ValidaSoloNumeros() {
+                console.log("ValidaSoloNumeros");
+                if ((event.keyCode < 48) || (event.keyCode > 57))
+                    event.returnValue = false;
+            }
+
+            $('#DocumentoEPK').fileinput({
+                showUpload: false,
+                language: 'es',
+                overwriteInitial: true,
+                maxFileSize: 2048,
+                allowedFileExtensions: ['pdf'],
+            });
+
+            function resizePanel() {
+
+                var h = $("#panelEditar").height();
+                $('#panelEditar').css("height", h + (h * 0.2));
+            };
+
+            $('#ValorEjecutado').keypress(function () {
+                ValidaSoloNumeros();
+            });
+
+            $('#ValorProgramado').keypress(function () {
+                ValidaSoloNumeros();
+            });
+
+            $('#NumeroDias').keypress(function () {
+                ValidaSoloNumeros();
+            });
+        </script>
+    }
+

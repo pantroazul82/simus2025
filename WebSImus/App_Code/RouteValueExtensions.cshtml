@@ -1,0 +1,13 @@
+@functions {
+    // Convierte Request.QueryString a objeto anónimo compatible con Url.Action
+    public static System.Web.Routing.RouteValueDictionary ToRouteValueDictionary(System.Collections.Specialized.NameValueCollection nvc)
+    {
+        var dict = new System.Web.Routing.RouteValueDictionary();
+        if (nvc == null) return dict;
+        foreach (string key in nvc.AllKeys)
+        {
+            dict[key] = nvc[key];
+        }
+        return dict;
+    }
+}

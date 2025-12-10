@@ -1,0 +1,60 @@
+﻿@model WebSImus.Models.Usuarios
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutDiseño.cshtml";
+}
+
+<div class="login-body">
+    @using (Html.BeginForm("Login", "Cuenta", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        // @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, String.Empty, new { @style = "color: #FFF;" })
+        <div class="login-title"><strong>Acceder a sistema </strong></div>
+        <form action="index.html" class="form-horizontal" method="post">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="text-info"><i class="fa-representante fa-2x"></i> *Usuario</div>
+                    @Html.TextBoxFor(m => m.usuario, new { style = "width:320px", @class = "form-control", @maxlength = "100", autocomplete = "off" })
+                    @Html.ValidationMessageFor(m => m.usuario, String.Empty, new { @style = "color: #FFF;" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="text-info"><i class="fa fa-unlock-alt"></i> *Contraseña</div>
+                    @Html.PasswordFor(m => m.contrasena, new { style = "width:320px", @class = "form-control" })
+                    <br />
+                    @Html.ValidationMessageFor(m => m.contrasena, String.Empty, new { @style = "color: #FFF;" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <a href="~/Cuenta/OlvidoContrasena" class="btn btn-link btn-block">¿Olvidó su contraseña?</a>
+                </div>
+                <div class="col-md-6">
+                    <input type="submit" value="Ingresar" class="btn btn-info btn-block" />
+                </div>
+            </div>
+            <div class="login-or">ó</div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <button class="btn btn-info btn-block btn-facebook"><span class="fa fa-facebook"></span> Facebook</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-info btn-block btn-google"><span class="fa fa-google-plus"></span> Google</button>
+                </div>
+            </div>
+            <div class="login-subtitle">
+                ¿Aún no tiene una cuenta en SIMUS? <a href="~/Cuenta/Registrarse"> Puede crearla aquí</a>
+            </div>
+
+            @*<div class="col-md-4">
+                    <section id="socialLoginForm">
+                        @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+                    </section>
+                </div>*@
+        </form>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

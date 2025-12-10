@@ -1,0 +1,183 @@
+﻿@model IEnumerable<WebSImus.Models.FormularioModels>
+@using MvcCheckBoxList.Model
+
+@{
+    ViewBag.Title = "Formulario";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+
+@using (Html.BeginForm("Formulario", "EscuelasMusica", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Escuelas", "Consulta", "EscuelasMusica")</li>
+        <li>@Html.ActionLink("Editar", "EditarNuevo", "EscuelasMusica", new { Id = ViewBag.EscuelaId }, null)</li>
+    </ul>
+    <div class="page-content-wrap">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <h3>@ViewBag.NombreEscuela</h3>
+                        <p>@ViewBag.ResenaEscuela</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-9">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="tocify-content">
+
+                            @foreach (WebSImus.Models.FormularioModels item in Model)
+                            {
+                                <h2>@item.Nombre</h2>
+                                <p>
+                                    @item.Descripcion
+                                </p>
+                                foreach (SM.LibreriaComun.DTO.FormularioSeccionesDTO seccion in item.listSecciones)
+                                {
+                                    <h3>@seccion.FSC_NOMBRE</h3>
+                                    <div class="form-horizontal">
+                                        @foreach (WebSImus.Models.FormularioCamposModels campo in item.listCampos)
+                                        {
+                                            if (campo.FSC_NOMBRE == seccion.FSC_NOMBRE)
+                                            {
+                                                if (campo.FCO_TIPODATO == "S")
+                                                {
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label">@campo.FCO_NOMBRE</label>
+                                                        <div class="col-md-8">
+
+                                                            @Html.TextBox(campo.FCO_NOMBRE, campo.FCO_DESCRIPCION, new { @class = "form-control text" })
+
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else if (campo.FCO_TIPODATO == "T")
+                                                {
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label">@campo.FCO_NOMBRE</label>
+                                                        <div class="col-md-8">
+
+                                                            @Html.TextArea(campo.FCO_NOMBRE, campo.FCO_DESCRIPCION, new { @class = "form-control text", @rows = "5", @cols = "50" })
+
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else if (campo.FCO_TIPODATO == "N")
+                                                {
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label">@campo.FCO_NOMBRE</label>
+                                                        <div class="col-md-8">
+
+                                                            @Html.TextBox(campo.FCO_NOMBRE, campo.FCO_DESCRIPCION, new { @class = "form-control text" })
+
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                                else if (campo.FCO_TIPODATO == "L")
+                                                {
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label">@campo.FCO_NOMBRE</label>
+                                                        <div class="col-md-8">
+
+
+                                                            @Html.DropDownList(campo.FCO_NOMBRE, (SelectList)campo.ColeccionDatos, "Seleccione un valor", new { @class = "form-control select" })
+
+
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else if (campo.FCO_TIPODATO == "M")
+                                                {
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label">@campo.FCO_NOMBRE</label>
+                                                        <div class="col-md-8">
+
+                                                            @foreach (SM.LibreriaComun.DTO.EstandarDTO x in campo.listadoData)
+                                                            {
+                                                                <p>
+                                                                    @if (x.EsSeleccionado)
+                                                                    {
+                                                                        @Html.CheckBox(x.Nombre, new { @checked = "checked" })
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @Html.CheckBox(x.Nombre)
+                                                                    }
+                                                                    @x.Nombre
+                                                                </p>
+
+                                                            }
+
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                                else if (campo.FCO_TIPODATO == "A")
+                                                {
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label">@campo.FCO_NOMBRE</label>
+                                                        <div class="col-md-8">                                                       
+                                                                <p>Tamaño máximo 1 Mb</p>
+                                                                <input id="imagenPerfil" name="imagenPerfil" type="file">
+                                                         
+
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                        }
+                                    </div>
+                                }
+
+                                <div class="panel-footer">
+                                    <input type="submit" value="@item.Perfiles" name="Guardar" class="btn btn-primary pull-right" id="btn+@item.ForID" />
+
+                                </div>
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" style="position: relative;">
+                <div id="tocify"></div>
+            </div>
+        </div>
+
+
+
+    </div>
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/scrolltotop/scrolltopcontrol.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/tocify/jquery.tocify.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            var toc = $("#tocify").tocify({ context: ".tocify-content", showEffect: "fadeIn", extendPage: false, selectors: "h2, h3, h4" });
+        });
+
+        $('#imagenPerfil').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 1024,
+          });
+    </script>
+}

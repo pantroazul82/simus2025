@@ -1,0 +1,291 @@
+﻿@model WebSImus.Models.EventoDanzaPadreModels
+@{
+    ViewBag.Title = "Evento";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("CambiarEstado", "EventoDanza", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+    <div class="panel panel-primary form-horizontal">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-star"></span> Datos básicos</h3>
+        </div>
+        <div class="panel-body" id="panelEditar">
+            @Html.ValidationSummary(true)
+            @Html.Partial("_datosbasicosEstado", Model.DatosBasicos)
+            <div class="panel-footer">
+                <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+                <div class="btn btn-default pull-left">
+                    <i class="fa fa-arrow-circle-o-left"></i>@Html.ActionLink("Regresar", "Consulta", "EventoDanza")
+                </div>
+            </div>
+
+            <div class="row push-up-20">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><span class="fa fa-book"></span> Grupos</h3>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 col-xs-12">
+                                <a href="#" class="btn btn-danger btn-block btn-rounded" data-toggle="modal" data-target="#modal_agregarGrupo">Agregar</a>
+                            </div>
+                        </div>
+                        <!-- MODAL AGREGAR AGENTE -->
+                        <div id="panelAgregar" class="panel-body">
+                            @Html.Action("_AgregarGrupo")
+                        </div>
+                        <!-- FIN MODAL -->
+                        <!-- INICIO GRILLA  -->
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Listado Grupos</h4>
+
+                            </div>
+                            <div id="agenteTabla" class="panel-body">
+                                @Html.Partial("_TablaGrupos", Model.listGrupos)
+                            </div>
+                        </div>
+                        <!-- FIN GRILLA  -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script type="text/javascript">
+      var varinicionacional = $("input[name='Nacional']:checked").val();
+      if (varinicionacional == "1")
+          $("#PanelNacional").hide();
+      else if (varinicionacional == "2")
+          $("#PanelNacional").show();
+
+        $('#HoraEvento').timepicker({
+            template: false,
+            showInputs: false,
+            minuteStep: 5
+        });
+
+        $('#HoraEventoFinal').timepicker({
+            template: false,
+            showInputs: false,
+            minuteStep: 5
+        });
+
+        var pagecontentwrapHeight = $(".page-content-wrap").height();
+        $('#panelEditar').css("height", pagecontentwrapHeight);
+
+        $('#imagenPerfil').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 1024,
+            allowedFileExtensions: ['jpg', 'png'],
+        });
+
+        $('#ArchivoAgenda').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 1024,
+            allowedFileExtensions: ['pdf'],
+        });
+
+
+
+        $(window).on('resize', function () {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_panelbodyHeight);
+            $('#panelEditar').css("min-height", pagecontentwrapHeight + 350);
+        });
+
+        function resizePanel() {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 380;
+            $('#panelEditar').css("height", new_pagecontentwrapHeight);
+        };
+
+        $(function validarNacional() {
+            $("input[name*='Nacional']").click(function () {
+                var varNacional = $("input[name='Nacional']:checked").val();
+                if (varNacional == "1")
+                    $("#PanelNacional").hide();
+                else if (varNacional == "2")
+                    $("#PanelNacional").show();
+
+            });
+        });
+
+        $(function () {
+            $('#CodigoDepartamento').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#CodigoMunicipio');
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerMunicipio", "Entidad")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un municipio </option>';
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                }
+
+            })
+
+            // por país
+            $('#CodigoPais').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#CodigoDepartamento');
+                var varmunicipio = $('#CodigoMunicipio');
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerDepartamento")', { codigopais: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un departamento </option>';
+                        $.each(data, function (i, departamento) {
+                            items += "<option value='" + departamento.value + "'>" + departamento.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+                        varmunicipio.empty();
+
+                    });
+
+                }
+
+            })
+        });
+    </script>
+
+    <script type="text/javascript">
+
+    $(function () {
+
+        $('#mySubmit').click(function () {
+
+            vartelefono = $("#Telefono").val();
+            if ($('#NombreGrupo').valid() == false) {
+                alert("El nombre es obligatorio");
+                return false;
+            }
+
+            if ($('#Contacto').val() == "") {
+                alert("El contacto es obligatorio");
+                return false;
+            }
+
+            if (vartelefono == "") {
+                vartelefono = '@Model.DatosBasicos.Telefono';
+            }
+
+
+            if ($('#CantidadMiembros').val() == "") {
+                alert("El cantidad de miembros es obligatoria");
+                return false;
+            }
+
+            if ($('#Resena').val() == "") {
+                alert("La reseña es obligatoria");
+                return false;
+            }
+
+            var url = '@Url.Action("AgregarGrupo", "EventoDanza")';
+            var varEventoId = '@Model.DatosBasicos.Id';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    id: 0, nombre: $('#NombreGrupo').val(), contacto: $('#Contacto').val(), enlace: $('#Enlace').val(),
+                    telefono: vartelefono, orden: $('#Orden').val(), cantidad: $('#CantidadMiembros').val(),
+                    resena: $('#Resena').val(), eventoId: varEventoId
+                },
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        actualizartabla(0);
+                    }
+                },
+
+            });
+        });
+
+
+
+
+        $('.delete').click(function (e) {
+            e.preventDefault();
+
+            //Update the item to delete id so our model knows which one to delete
+            var id = $(this).data('id');
+            $('#item-to-delete').val(id);
+
+        });
+        $('#myDelete').click(function () {
+
+            var varid = $('#item-to-delete').val();
+
+            actualizartabla(varid);
+        });
+
+        function actualizartabla(vaerliminar) {
+            var varEventoId = '@Model.DatosBasicos.Id';
+            $('#NombreGrupo').val("");
+            $('#CantidadMiembros').val("");
+            $('#Contacto').val("");
+            $("#Telefono").val("");
+            $('#Resena').val("");
+            $('#Orden').val("");
+            $('#Enlace').val("");
+            $.ajaxSetup({
+                cache: false
+            });
+            $.ajax({
+
+                url: "/EventoDanza/_TablaGrupo",
+                type: "GET",
+                data: { Id: varEventoId, Eliminar: vaerliminar }
+            })
+           .done(function (partialViewResult) {
+               $("#agenteTabla").html(partialViewResult);
+               $('#item-to-delete').val(0);
+
+               if (vaerliminar > 0) {
+                   $('#modalConfirmar').modal('hide');
+                   location.reload();
+               }
+           });
+
+        }
+    });
+    </script>
+
+}
+
+
+
+

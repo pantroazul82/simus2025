@@ -1,0 +1,55 @@
+﻿@model WebSImus.Models.ParicipacionModels
+<div class="modal animated fadeIn" id="modalParticipacion" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="smallModalHead">Participar en la convocatoria</h4>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10">
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">* Tipo de actor </label>
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(model => model.Tipo, (SelectList)ViewBag.listCategoria, "Seleccione la categoria", new { @class = "styled-select" })
+                                @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    </br>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">* Actor asociado</label>
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(model => model.TipoActor, (SelectList)ViewBag.listActores, "Seleccione el actor", new { @class = "styled-select" })
+                                @Html.ValidationMessageFor(model => model.TipoActor, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    </br>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"> Descripción</label>
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control text", @rows = "5", @cols = "50" })
+                                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+              
+                  
+                </div>
+            </div>
+           
+            <div class="modal-footer">
+                <button type="button" id="btnParticipar" class="btn btn-danger" data-dismiss="modal">Guardar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+            </div>
+        </div>
+    </div>
+
+</div>

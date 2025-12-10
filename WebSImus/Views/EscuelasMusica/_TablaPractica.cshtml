@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.EstandarDTO>
+
+<div class="mf-subsection">
+    <div class="mf-fields-container">
+        @Html.Hidden("item-to-delete", "", new { @id = "item-to-delete" })
+
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <div class="card">
+                    <div class="mf-section-title">
+                        <i class="fas fa-music"></i> @item.Nombre
+                        @*<a href="#" class="mf-action-icon-btn mf-action-delete" title="Eliminar Práctica" onclick="EliminarPractica('@item.Id'); return false;"><i class="fas fa-trash-alt"></i></a>*@
+                    </div>
+
+                    <div class="mf-subsection">
+                        @Html.Partial("_DatosGeneros", item)
+                    </div>
+
+                    <div class="mf-subsection">
+                        <p class="mf-notice-box">
+                            <i class="fas fa-info-circle"></i>
+                            Es requerido agregar la educación por niveles.
+                        </p>
+
+                        <button type="button"
+                                class="btn btn-success"
+                                data-toggle="modal"
+                                data-target="#modal_datosNiveles"
+                                title="Agregar información de la educación por niveles."
+                                onclick="CargarDetalle('@item.Id');">
+                            <i class="fas fa-plus"></i> Agregar Niveles
+                        </button>
+
+                        <div id="@item.clase" class="mf-mt-4">
+                            @Html.Action("CargarNivel", new { FormacionPracticaId = item.Id, EliminarId = 0 })
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="mf-mt-4">
+        <div id="modalInformacion">
+            @Html.Action("_AgregarNiveles", new { id = "", escuelaId = "" })
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    //function EliminarPractica(varPracticaId, varid) {
+    //    ActualizarListadoPracticas(varPracticaId, varid);
+    //}
+
+    function EliminarNivel(varFormacionPracticaId, varid) {
+        ActualizarListadoNivel(varFormacionPracticaId, varid);
+    }
+</script>

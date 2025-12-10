@@ -1,0 +1,41 @@
+﻿@model WebSImus.Models.ConsultaModel
+@{
+    ViewBag.Title = "Mis Participaciones En Convocatorias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Convocatorias", "Consulta", "Convocatoria")</li>
+    </ul>
+    <div class="col-md-12">
+
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+
+                    @*@Html.ActionLink(" Exportar", "ExportToParticipacion", "Convocatoria", new { Id = Model.Id }, new { @class = "btn btn-warning glyphicon glyphicon-export" })
+    @Html.ActionLink(" Regresar", (string)ViewBag.Regresar, "Convocatoria", new { Id = Model.Id }, new { @class = "btn btn-success glyphicon glyphicon-backward" })*@
+                </div>
+            </div>
+        </div>
+        <br />
+
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div id="Tabla">
+                        @Html.Action("GridViewPartialMisParticipacion", "Convocatoria", new { Id = Model.Id })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

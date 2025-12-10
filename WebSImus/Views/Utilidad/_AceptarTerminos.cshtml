@@ -1,0 +1,49 @@
+﻿
+@model IEnumerable<SM.LibreriaComun.DTO.EscuelaSolicitudDTO>
+<div class="modal animated fadeIn" id="modalValidacionEscuelas" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+             
+                <h4 class="modal-title" id="smallModalHead">Derechos de autor</h4>
+                <p class="text-info"><img src="~/img/logo-terminos.png" width="550" height="100" /> </p>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <p align="justify">
+                                Esta sección del Sistema de Información de la Música -SIMUS permite incluir información y contenidos tanto producidos por los usuarios como originados en informaciones, datos, marcas, contenidos, obras protegidas por el Derecho de Autor y demás bienes de propiedad intelectual, respecto de los cuales el Usuario que hace la publicación, ostenta la calidad de titular o derechohabiente.
+                            </p>
+
+                            <p align="justify">
+                                El Sistema de Información de la Música SIMUS, da apertura e invita al sector musical a compartir y crear espacios abiertos para el intercambio de contenidos e información. Es un lugar en el que se puede compartir documentos, anuncios clasificados, invitar y difundir eventos, crear y divulgar noticias y difundir convocatorias, entre otras posibilidades del espacio creado dado que como usuario registrado dispone de atribuciones para incluir contenido. El Usuario que hace uso de este recurso puede publicar información producida por él o compilada o generada por terceros. Si es producida por el usuario como propietario del contenido y de la información que publica en el Sistema, puede controlar si lo comparte o no. Sin embargo, al tratarse de contenidos que no son de su propiedad, asegúrese de que goza de los privilegios de derecho bien sea como titular o que dispone de la formalidad jurídica mediante contratos de sesiones de derecho o autorizaciones de uso, que lo autorizan para hacerlo antes de compartir su contenido en el SIMUS.
+                            </p>
+                            <p align="justify">
+                                Al utilizar este espacio el Usuario es totalmente responsable y asume todos los riesgos que devienen de hacerlo sin tener en cuenta esta formalidad sobre los derechos de autor, las marcas comerciales y otros derechos de propiedad intelectual.
+
+                            </p>
+                            <p align="justify">
+                                La advertencia aquí publicada sobre el uso indebido del recurso que se ha dispuesto para su beneficio en el SIMUS le informa sobre la prohibición y le invita a abstenerse de publicar contenidos que no cuenten con autorización expresa del autor o autores para el uso, goce o disposición, y en general cualquier tipo de reproducción, distribución, puesta a disposición, comunicación, divulgación o transformación a través de cualquier medio y por cualquier procedimiento, conocido o por conocer.
+
+                            </p>
+                            <p align="justify">
+                                Cualquier persona que use, goce o disponga de las informaciones, datos, marcas, contenidos, obras protegidas por el Derecho de Autor y demás bienes de propiedad intelectual que constituyen esta página web, sin la autorización previa y expresa del Autor, se hará acreedora de las penas, sanciones, multas e indemnizaciones consagradas en la Ley para este tipo de actuaciones. El Ministerio de Cultura no es responsable solidario sobre el uso indebido de los recursos disponibles para su beneficio.
+
+                            </p>
+                        </div>
+                    </div>
+                
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                    <a href="" class="btn btn-danger" onclick="javascript: SolicitarPermisos(); return false;"> No, gracias</a>
+
+                </div>
+            </div>
+    </div>
+
+</div>

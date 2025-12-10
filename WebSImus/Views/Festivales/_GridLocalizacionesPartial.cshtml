@@ -1,0 +1,64 @@
+@model IEnumerable<WebSImus.Models.LocalizacionGridViewModel>
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridLocalizaciones";
+        settings.CallbackRouteValues = new { Controller = "Festivales", Action = "GridLocalizacionesPartial", versionId = ViewBag.VersionId };
+        
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.KeyFieldName = "Id";
+        
+        settings.Settings.ShowFilterRow = false;
+        settings.Settings.ShowGroupPanel = false;
+        settings.SettingsPager.PageSize = 10;
+        settings.SettingsPager.Visible = true;
+        
+        settings.Columns.Add(c => 
+        { 
+            c.FieldName = "DepartamentoNombre"; 
+            c.Caption = "Departamento"; 
+            c.Width = System.Web.UI.WebControls.Unit.Percentage(20); 
+        });
+        
+        settings.Columns.Add(c => 
+        { 
+            c.FieldName = "MunicipioNombre"; 
+            c.Caption = "Municipio"; 
+            c.Width = System.Web.UI.WebControls.Unit.Percentage(20); 
+        });
+        
+        settings.Columns.Add(c => 
+        { 
+            c.FieldName = "ZonaNombre"; 
+            c.Caption = "Zona"; 
+            c.Width = System.Web.UI.WebControls.Unit.Percentage(20); 
+        });
+        
+        settings.Columns.Add(c => 
+        { 
+            c.FieldName = "ZonaTitulacionNombre"; 
+            c.Caption = "Zona Titulaci&oacute;n Colectiva"; 
+            c.Width = System.Web.UI.WebControls.Unit.Percentage(30); 
+        });
+        
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Opciones";
+            column.Width = System.Web.UI.WebControls.Unit.Pixel(120);
+            column.SetDataItemTemplateContent(container =>
+            {
+                var id = container.KeyValue;
+                ViewContext.Writer.Write(
+                    "<button type='button' class='btn btn-xs btn-default' title='Editar' style='margin-right:5px;' onclick=\"editarLocalizacionDB(" + id + "); return false;\">"
+                    + "<i class='fas fa-edit'></i> Editar" +
+                    "</button>"
+                    + "<button type='button' class='btn btn-xs btn-danger' title='Eliminar' onclick=\"eliminarLocalizacionDB(" + id + "); return false;\">"
+                    + "<i class='fas fa-trash'></i> Eliminar" +
+                    "</button>"
+                );
+            });
+        });
+    });
+}
+
+@grid.Bind(Model).GetHtml()

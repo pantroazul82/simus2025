@@ -1,0 +1,89 @@
+﻿@model WebSImus.Models.RecursoModel
+@{
+    ViewBag.Title = "Modificar Pagina";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("ActualizarPagina", "Recurso", FormMethod.Post, new { id = "submitForm" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Datos básicos de la pagina</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        @Html.ValidationSummary(false, "", new { @class = "alert alert-error text-warning" })
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">*Codigo</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.codigo, new { @readonly = "readonly", @class = "form-control text", @maxlength = "30" })
+                                        @Html.HiddenFor(model => model.id, new { @class = "form-control text", @maxlength = "30" })
+                                        @Html.HiddenFor(model => model.idPadre, new { @class = "form-control text", @maxlength = "30" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">*Nombre</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.nombre, new { @class = "form-control text", @maxlength = "30" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">*Titulo</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.titulo, new { @class = "form-control text", @maxlength = "30" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">*Estilo</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.estilo, new { @class = "form-control text", @maxlength = "30" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">*Url</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.url, new { @class = "form-control text", @maxlength = "70" })
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="panel-footer">
+                    <input type="submit" value="Guardar" name="command" class="btn btn-primary pull-right" id="btnGuardar" />
+                    <div class="btn btn-default pull-left">
+                        <i class="fa fa-arrow-circle-o-left"></i>@Html.ActionLink("Regresar", "ConsultaRecurso", "Recurso")
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+}

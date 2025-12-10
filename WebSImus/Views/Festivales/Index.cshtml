@@ -1,0 +1,157 @@
+﻿@model WebSImus.Models.BusquedaFestivalesViewModel
+@{
+    Layout = null;
+    ViewBag.Title = "Buscar Festivales";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Festivales de Música</title>
+    <link rel="stylesheet" href="~/css/festivales.css" />
+</head>
+<body>
+    <div class="festivales-container">
+        <header class="encabezado-modern">
+            <h1>🎶 Encuentra Festivales de Música en Colombia</h1>
+            <p>Filtra por fecha, género, ubicación o tipo de acceso (gratuito o de pago).</p>
+            <div style="margin-top: 15px;">
+                <a href="@Url.Action("MapaPublico", "Festivales")" target="_blank" class="btn btn-mapa-festivales">
+                    <i class="fas fa-map-marked-alt"></i> Ver mapa de festivales
+                </a>
+            </div>
+        </header>
+
+        <form method="get" class="buscador-grid">
+            <div class="campo">
+                <label for="fechaInicio">📅 Inicio</label>
+                <input type="date" id="fechaInicio" name="fechaInicio"
+                       value="@(Model.FechaInicio.HasValue ? Model.FechaInicio.Value.ToString("yyyy-MM-dd") : "")" />
+            </div>
+
+            <div class="campo">
+                <label for="fechaFin">🏁 Fin</label>
+                <input type="date" id="fechaFin" name="fechaFin"
+                       value="@(Model.FechaFin.HasValue ? Model.FechaFin.Value.ToString("yyyy-MM-dd") : "")" />
+            </div>
+
+            <div class="campo">
+                <label for="departamentoSeleccionado">📍 Departamento</label>
+                <select name="departamentoSeleccionado" id="departamentoSeleccionado">
+                    <option value="">Todos</option>
+                    <option value="Cesar" @(Model.DepartamentoSeleccionado == "Cesar" ? "selected" : "")>Cesar</option>
+                    <option value="Cundinamarca" @(Model.DepartamentoSeleccionado == "Cundinamarca" ? "selected" : "")>Cundinamarca</option>
+                    <option value="Valle del Cauca" @(Model.DepartamentoSeleccionado == "Valle del Cauca" ? "selected" : "")>Valle del Cauca</option>
+                    <option value="Bolívar" @(Model.DepartamentoSeleccionado == "Bolívar" ? "selected" : "")>Bolívar</option>
+                    <option value="Huila" @(Model.DepartamentoSeleccionado == "Huila" ? "selected" : "")>Huila</option>
+                    <option value="Nariño" @(Model.DepartamentoSeleccionado == "Nariño" ? "selected" : "")>Nariño</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="textoBusqueda">🔍 Buscar</label>
+                <input type="text" id="textoBusqueda" name="textoBusqueda"
+                       placeholder="Nombre o ciudad..." value="@Model.TextoBusqueda" />
+            </div>
+
+            <div class="campo">
+                <label for="generoSeleccionado">🎵 Género</label>
+                <select name="generoSeleccionado" id="generoSeleccionado">
+                    <option value="">Todos</option>
+                    <option value="Rock" @(Model.GeneroSeleccionado == "Rock" ? "selected" : "")>Rock</option>
+                    <option value="Vallenato" @(Model.GeneroSeleccionado == "Vallenato" ? "selected" : "")>Vallenato</option>
+                    <option value="Jazz" @(Model.GeneroSeleccionado == "Jazz" ? "selected" : "")>Jazz</option>
+                    <option value="Folclor" @(Model.GeneroSeleccionado == "Folclor" ? "selected" : "")>Folclor</option>
+                    <option value="Alternativo" @(Model.GeneroSeleccionado == "Alternativo" ? "selected" : "")>Alternativo</option>
+                    <option value="Pacífico" @(Model.GeneroSeleccionado == "Pacífico" ? "selected" : "")>Pacífico</option>
+                    <option value="Tradicional" @(Model.GeneroSeleccionado == "Tradicional" ? "selected" : "")>Tradicional</option>
+                    <option value="Andino" @(Model.GeneroSeleccionado == "Andino" ? "selected" : "")>Andino</option>
+                </select>
+            </div>
+
+            <div class="campo campo-check">
+                <label>
+                    <input type="checkbox" name="soloGratis" @(Model.SoloGratis == true ? "checked" : "") />
+                    Solo gratuitos
+                </label>
+            </div>
+
+            <div class="campo">
+                <button type="submit" class="btn-buscar">🔎 Buscar</button>
+            </div>
+        </form>
+
+        <div class="festival-grid">
+            @foreach (var f in Model.Resultados)
+            {
+                var top = 0;
+                var left = 0;
+
+                switch (f.Ciudad.ToLowerInvariant())
+                {
+                    case "bogotá": top = 55; left = 62; break;
+                    case "valledupar": top = 45; left = 75; break;
+                    case "cali": top = 60; left = 40; break;
+                    case "neiva": top = 70; left = 70; break;
+                    case "pasto": top = 65; left = 35; break;
+                    case "san basilio de palenque": top = 52; left = 65; break;
+                    case "mompox": top = 53; left = 64; break;
+                    default: top = 58; left = 60; break;
+                }
+
+                <div class="festival-card"
+                     onclick="abrirModal('@f.Nombre', '@f.Ciudad', @top, @left)">
+                    <img src="@f.ImagenUrl" alt="@f.Nombre" />
+                    <div class="contenido">
+                        <h3>@f.Nombre</h3>
+                        <p>@f.Ciudad, @f.Departamento</p>
+                        <p><strong>@f.Fecha.ToString("dd MMM yyyy")</strong></p>
+                        <p>@f.GeneroMusical</p>
+                        <p>@(f.EsGratis ? "Gratuito" : "De pago")</p>
+                    </div>
+                </div>
+            }
+
+            <div id="modalMapa" class="modal">
+                <div class="modal-contenido">
+                    <span class="cerrar" onclick="cerrarModal()">&times;</span>
+                    <h2 id="tituloModal"></h2>
+                    <div class="mapa-modal">
+                        <img src="~/img/mapa.png" alt="Mapa de Colombia" />
+                        <div id="marcador-modal" class="marcador"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        function abrirModal(nombre, ciudad, top, left) {
+            const modal = document.getElementById('modalMapa');
+            const titulo = document.getElementById('tituloModal');
+            const marcador = document.getElementById('marcador-modal');
+
+            titulo.innerText = nombre + " - " + ciudad;
+
+            marcador.style.top = top + "%";
+            marcador.style.left = left + "%";
+            marcador.style.display = "block";
+
+            modal.style.display = "block";
+        }
+
+        function cerrarModal() {
+            const modal = document.getElementById('modalMapa');
+            modal.style.display = "none";
+        }
+    </script>
+
+
+
+
+
+</body>
+</html>

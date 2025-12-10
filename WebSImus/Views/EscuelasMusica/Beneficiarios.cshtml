@@ -1,0 +1,112 @@
+﻿@model WebSImus.Models.ParticipacionModel
+@{
+    ViewBag.Title = ViewBag.NombreEscuela;
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+
+
+@using (Html.BeginForm("Beneficiarios", "EscuelasMusica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true, "", new { @class = "mf-validation-summary" })
+
+    <nav aria-label="breadcrumb">
+        <ol class="modern-breadcrumb">
+            <li class="breadcrumb-item">@Html.ActionLink("Inicio", "Index", "Inicio", null, new { @class = "breadcrumb-link" })</li>
+            <li class="breadcrumb-item">@Html.ActionLink("Escuelas", "Consulta", "EscuelasMusica", null, new { @class = "breadcrumb-link" })</li>
+            <li class="breadcrumb-item">@Html.ActionLink("Exportar", "Exportar", "EscuelasMusica", new { Id = Model.EscuelaId }, new { @class = "breadcrumb-link" })</li>
+            <li class="breadcrumb-item">@Html.ActionLink("Encuestas", "Formulario", "EscuelasMusica", new { Id = Model.EscuelaId }, new { @class = "breadcrumb-link" })</li>
+            <li class="breadcrumb-item current" aria-current="page">
+                <span class="breadcrumb-link">Beneficiarios</span>
+            </li>
+        </ol>
+    </nav>
+
+    <div class="modern-form-container">
+        <div class="form-header">
+            <h2 class="form-title">
+                @ViewBag.NuevoTitulo
+            </h2>
+        </div>
+
+        <div class="mb-6">
+            @Html.Partial("_PasoAPaso")
+        </div>
+
+        @Html.HiddenFor(model => model.EscuelaId)
+
+        @Html.Partial("_Participacion", Model)
+
+    </div>
+
+    <div class="mf-alert mf-alert-success mf-alert-toast animated fadeIn" id="message-box-success" style="display:none;">
+        <<div class="mf-alert-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="mf-alert-content">
+            <h5 class="mf-alert-title">Éxito</h5>
+            <p>La información se actualizó con éxito.</p>
+        </div>
+        <button type="button" class="mf-alert-close mb-control-close" aria-label="Cerrar" onclick="$(this).closest('.mf-alert').fadeOut()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script src="~/Scripts/escuelasvalidate.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // HabilitarDeshabilitarPasos();
+            // La lógica de _PasoAPaso debería manejar la clase 'active' o 'current'
+            // basado en la URL o un parámetro del modelo si es necesario.
+
+            var InformacionParticipacionArray = ["#CantidadCupos", "#CantidadPrimeraInfancia", "#CantidaEntre6y11", "#CantidaEntre12y18", "#CantidaEntre19y26", "#CantidaEntre27y60", "#CantidadMayores60", "#CantidadIndigenas", "#CantidadAfrocolombiana", "#CantidadRom", "#CantidadRaizales", "#CantidadEtniaOtros", "#CantidadHombres", "#CantidadMujeres", "#CantidadRural", "#CantidadUrbana", "#CantidadDicapacitados", "#CantidadRedUnidos", "#CantidadDesplazados", "#NumeroIntegrantes"];
+
+            $(InformacionParticipacionArray.join(', ')).attr('min', 0);
+
+            // No se inicializa .spinner() ya que usamos input type="number" nativos.
+
+            $(InformacionParticipacionArray.join(', ')).keypress(function () {
+                ValidaSoloNumeros(); // Mantener si es necesario para validación adicional
+            });
+
+            $(".paso-tabs > li").off('click').on('click', function () {
+                var step = $(this).data("step");
+                var currentEscuelaId = @Model.EscuelaId;
+                var baseUrl = "@Url.Action("ActionName", "EscuelasMusica")".replace("ActionName", ""); // Obtiene /Controlador/
+                var action = "";
+                var controller = "EscuelasMusica";
+                var params = { id: currentEscuelaId };
+
+                switch (step) {
+                    case 1: action = "EditarNuevo"; params.wizard = 1; break;
+                    case 2: action = "Beneficiarios"; break;
+                    case 3: action = "Organizacion"; break;
+                    case 4: action = "Formacion"; break;
+                    case 5: action = "Infraestructura"; break;
+                    case 6: case 61: action = "Produccion"; break;
+                    case 7:
+                        controller = "FichaAsesoria"; // Cambia el controlador
+                        action = "Asesoria";
+                        break;
+                    default: return;
+                }
+
+                var finalUrl = "/" + controller + "/" + action;
+                var queryString = $.param(params); // jQuery para construir query string
+                if (queryString) {
+                    finalUrl += "?" + queryString;
+                }
+                window.location = finalUrl;
+            });
+        });
+    </script>
+}

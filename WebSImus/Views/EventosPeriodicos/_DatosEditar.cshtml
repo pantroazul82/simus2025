@@ -1,0 +1,196 @@
+﻿@model SM.LibreriaComun.DTO.Circulacion.EventoPeriodicoNuevoDTO
+@using MvcCheckBoxList.Model
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2><span class="fa-representante fa-2x"></span> Información Básica</h2>
+    </div>
+
+    <div class="panel-body">
+        <div class="row push-down-20">
+            <h3><span class="fa-representante fa-2x"></span> Datos Básicos</h3>
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.EstadoId)
+            @Html.HiddenFor(model => model.EsAdmin)
+        </div>
+        <div class="row push-down-20">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">* Nombre </label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control text", @maxlength = "200" })
+                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">* Descripción</label>
+                    <div class="col-md-9">
+
+                        @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control text", @rows = "10", @cols = "50", @maxlength = "2000" })
+                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">* Estado</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.NombreEstado, new { @class = "form-control text", @maxlength = "200", @readonly = true })
+                        @Html.ValidationMessageFor(model => model.NombreEstado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">* Tipo</label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.TipoEventoId, (SelectList)ViewBag.listClasificacion, "Seleccione", new { @class = "styled-select" })
+                        @Html.ValidationMessageFor(model => model.TipoEventoId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">* Versión </label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.Version, new { @class = "form-control text", @maxlength = "20" })
+                        @Html.ValidationMessageFor(model => model.Version, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row push-down-20">
+            <h3><span class="fa-file-pdf fa-2x"></span> Responsable</h3>
+        </div>
+        <div class="row push-down-20">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">* Tipo de actor </label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.Tipo, (SelectList)ViewBag.listCategoria, "Seleccione", new { @class = "styled-select" })
+                        @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">* Actor asociado</label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.ActorId, (SelectList)ViewBag.listActores, "Seleccione", new { @class = "styled-select" })
+                        @Html.ValidationMessageFor(model => model.ActorId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row push-down-20">
+            <h3><span class="fa-documentos fa-2x"></span> Datos de Ubicación</h3>
+        </div>
+        <div class="row push-down-20">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">* Departamento</label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.CodDepartamento, (SelectList)ViewBag.listDepartamentos, "Seleccione", new { @class = "styled-select" })
+                        @Html.ValidationMessageFor(model => model.CodDepartamento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">* Municipio</label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.codMunicipio, (SelectList)ViewBag.listMunicipio, "Seleccione", new { @class = "styled-select" })
+                        @Html.ValidationMessageFor(model => model.codMunicipio, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">* Lugar</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.lugar, new { @class = "form-control text", @maxlength = "200" })
+                        @Html.ValidationMessageFor(model => model.lugar, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="row push-down-20">
+            <h3><span class="fa-documentos fa-2x"></span> Datos de Contacto</h3>
+        </div>
+        <div class="row push-down-20">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"> Pagina Web</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.PaginaWeb, new { @class = "form-control text", @maxlength = "200" })
+                        @Html.ValidationMessageFor(model => model.PaginaWeb, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"> Url Vídeo Youtube</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.UrlVideoYoutube, new { @class = "form-control text", @maxlength = "200" })
+                        @Html.ValidationMessageFor(model => model.UrlVideoYoutube, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"> * Teléfono</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control text", @maxlength = "50" })
+                        @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">* Correo Electrónico</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.CorreoElectronico, new { @class = "form-control text", @maxlength = "100" })
+                        @Html.ValidationMessageFor(model => model.CorreoElectronico, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+        <div class="row push-down-20">
+            <h3><span class="fa-documentos fa-2x"></span> Activar</h3>
+        </div>
+        <div class="row push-down-20">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-md-3 control-label"> ¿Activar registro?</label>
+                    <div class="col-md-9">
+                        @Html.CheckBoxFor(m => m.EsActivo, new { @checked = "checked" })
+                        @Html.ValidationMessageFor(model => model.EsActivo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+
+    </div>
+</div>
+
+

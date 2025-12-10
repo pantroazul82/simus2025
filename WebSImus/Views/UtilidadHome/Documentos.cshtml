@@ -1,0 +1,71 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<WebSImus.Models.UtilidadHomeModels>
+@{
+    ViewBag.Title = "Documentos SIMUS";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<div class="modern-form-container">
+    <div class="form-header">
+        <h1 class="form-title">
+            <i class="fas fa-file-alt"></i> Documentos
+        </h1>
+    </div>
+
+    <div class="mf-table-container">
+        <table class="mf-table">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Tipo</th>
+                    <th>Responsable</th>
+                    <th>Descripción</th>
+                    <th>Descarga</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Titulo</td>
+                            <td>@item.Clasificacion</td>
+                            <td>@item.NombreActor</td>
+                            <td>@item.Descripcion</td>
+                            <td>
+                                @if (item.documentoArchivo != null && item.documentoArchivo.Count > 0)
+                                {
+                                    foreach (var registro in item.documentoArchivo)
+                                    {
+                                        <a href="@Url.Action("Descargar", "Documento", new { id = registro.DocumentoId })" class="mf-action-icon-btn" title="Descargar">
+                                            <i class="fas fa-download"></i>
+                                        </a>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mf-form-footer">
+        @Html.PagedListPager(Model, page => Url.Action("Documentos", "UtilidadHome", new { page = page }),
+            new PagedListRenderOptions()
+            {
+                Display = PagedListDisplayMode.IfNeeded,
+                DisplayItemSliceAndTotal = true,
+                ItemSliceAndTotalFormat = "Mostrando Registros {0} a {1} de {2}."
+            })
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/plugins/mixitup/jquery.mixitup.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/appear/jquery.appear.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+}
+

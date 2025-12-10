@@ -1,0 +1,97 @@
+﻿@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridArtista";
+        settings.Theme = "Office2010Silver";
+        settings.CallbackRouteValues = new { Controller = "Musica", Action = "GridViewArtista" };
+
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.Width = System.Web.UI.WebControls.Unit.Percentage(6);
+        //settings.CommandColumn.Caption = "Eliminar";
+
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        settings.KeyFieldName = "Id";
+
+       
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NombreDepartamento";
+            column.Caption = "Departamento";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NombreMunicipio";
+            column.Caption = "Municipio";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(12);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EntidadOrganizadora";
+            column.Caption = "Entidad";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(24);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "LugarEvento";
+            column.Caption = "Lugar";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(22);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Nombre";
+            column.Caption = "Artista";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(22);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CantidadMiembros";
+            column.Caption = "Cantidad miembros";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+
+        });
+
+      
+        settings.SettingsPager.PageSize = 30;
+        settings.SettingsBehavior.FilterRowMode = GridViewFilterRowMode.Auto;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "20", "30", "50" };
+    });
+
+
+
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()
+
+
+

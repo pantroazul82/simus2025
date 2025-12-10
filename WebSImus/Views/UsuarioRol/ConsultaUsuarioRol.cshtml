@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Consulta Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+
+    <div class="col-md-12">
+
+
+        @Html.Action("GridViewConsultaUsuarioRol")
+        <div class="btn btn-default pull-left">
+            <i class="fa fa-arrow-circle-o-left"></i>@Html.ActionLink("Regresar", "Index", "Inicio")
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/globalize/globalize.js")"></script>
+    <script src="@Url.Content("~/Scripts/dx.webappjs.js")"></script>
+
+}
+

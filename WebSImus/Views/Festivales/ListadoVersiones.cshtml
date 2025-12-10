@@ -1,0 +1,200 @@
+@model WebSImus.Models.VersionesListadoPaginaViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Festival Versiones";
+}
+
+<div class="container-fluid" style="padding:10px;">
+    <h3>Festival Versiones</h3>
+
+    <!-- Barra de búsqueda y botón Crear Registro -->
+    <div class="row" style="margin-bottom:10px;">
+        <div class="col-sm-4 col-md-3">
+            <form method="get" class="form-inline" action="@Url.Action("ListadoVersiones")">
+                <div class="input-group" style="width:100%;">
+                    <input type="text" name="filtroTexto" value="@Model.FiltroTexto" class="form-control" placeholder="Buscar por palabras clave" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-8 col-md-9 text-right">
+            <a class="btn btn-primary" href="@Url.Action("RegistrarVersion", "Festivales")">
+                <i class="fa fa-plus"></i> Crear Registro
+            </a>
+        </div>
+    </div>
+
+    <!-- Recuadro de descripción del propósito del registro -->
+    <div class="row" style="margin-bottom:15px;">
+        <div class="col-md-12" style="border:2px solid #2c9c94; padding:20px; background:#f0f9f8; border-radius:5px;">
+            <h4 style="margin-top:0; margin-bottom:12px; color:#2c9c94; font-weight:bold;">
+                <i class="fas fa-info-circle"></i> Propósito del Registro de Versiones
+            </h4>
+            <p style="margin-bottom:10px; text-align:justify; line-height:1.6;">
+                Este módulo tiene el propósito de registrar y gestionar las diferentes versiones de festivales musicales realizadas en el país. 
+                Cada versión representa una edición específica del festival, con información detallada sobre su desarrollo, ubicación, 
+                características artísticas, financiación y datos de contacto.
+            </p>
+            <p style="margin-bottom:10px; text-align:justify; line-height:1.6;">
+                La información registrada permitirá:
+            </p>
+            <ul style="padding-left:25px; margin-bottom:10px; line-height:1.8;">
+                <li>Consolidar un historial completo de cada festival y sus versiones.</li>
+                <li>Facilitar la consulta y análisis de información sobre eventos culturales musicales.</li>
+                <li>Generar estadísticas y reportes que apoyen la formulación de políticas públicas culturales.</li>
+                <li>Promover la visibilidad de los festivales ante la ciudadanía y otras entidades del estado.</li>
+                <li>Establecer canales de comunicación entre organizadores, artistas y el sector cultural.</li>
+            </ul>
+            <div style="background:#fff; border-left:4px solid #2c9c94; padding:12px; margin-top:15px;">
+                <p style="margin:0; font-weight:600; color:#333;">
+                    <i class="fas fa-lightbulb" style="color:#f0ad4e;"></i> 
+                    Los registros pueden guardarse en estado <strong>Incompleto</strong> y completarse posteriormente. 
+                    Una vez enviados para validación, pasarán a estado <strong>Registrado</strong>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de registros -->
+    <div id="TablaVersiones">
+        @{ Html.RenderAction("GridVersionesListadoPartial", new { filtroTexto = Model.FiltroTexto }); }
+    </div>
+
+    <!-- Información adicional sobre comportamiento de estados -->
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color:#f5f5f5;">
+                    <h4 class="panel-title" style="margin:0;">
+                        <i class="fas fa-question-circle" style="color:#2c9c94;"></i> Comportamiento de Estados
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered table-hover" style="margin-bottom:0;">
+                                <thead style="background-color:#2c9c94; color:#fff;">
+                                    <tr>
+                                        <th style="width:20%;">Estado</th>
+                                        <th style="width:50%;">Descripción</th>
+                                        <th style="width:30%;">Acciones Disponibles</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <span class="label label-warning" style="font-size:13px;">Incompleto</span>
+                                        </td>
+                                        <td>Registro guardado pero no enviado para validación.</td>
+                                        <td>
+                                            <i class="fa fa-check text-success"></i> Ver<br />
+                                            <i class="fa fa-check text-success"></i> Editar
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="label label-info" style="font-size:13px;">Registrado</span>
+                                        </td>
+                                        <td>Enviado para validación. En proceso de revisión.</td>
+                                        <td>
+                                            <i class="fa fa-check text-success"></i> Ver<br />
+                                            <i class="fa fa-times text-danger"></i> Editar (No disponible)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="label label-primary" style="font-size:13px;">Solicitud de Aclaraciones</span>
+                                        </td>
+                                        <td>Devuelto al usuario para corrección o ampliación de información.</td>
+                                        <td>
+                                            <i class="fa fa-check text-success"></i> Ver<br />
+                                            <i class="fa fa-check text-success"></i> Editar
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="label label-danger" style="font-size:13px;">Rechazado</span>
+                                        </td>
+                                        <td>No aprobado tras revisión. No cumple con los criterios establecidos.</td>
+                                        <td>
+                                            <i class="fa fa-check text-success"></i> Ver<br />
+                                            <i class="fa fa-times text-danger"></i> Editar (No disponible)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="label label-success" style="font-size:13px;">Publicado</span>
+                                        </td>
+                                        <td>Validado y disponible públicamente en la plataforma.</td>
+                                        <td>
+                                            <i class="fa fa-check text-success"></i> Ver<br />
+                                            <i class="fa fa-check text-success"></i> Editar
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top:15px;">
+                        <div class="col-md-12">
+                            <div style="background:#fcf8e3; border:1px solid #faebcc; padding:12px; border-radius:4px;">
+                                <p style="margin:0; color:#8a6d3b; font-size:14px;">
+                                    <i class="fas fa-exclamation-triangle" style="color:#f0ad4e;"></i>
+                                    <strong>Nota:</strong> Los registros en estado <strong>Incompleto</strong>, <strong>Solicitud de Aclaraciones</strong> 
+                                    y <strong>Publicado</strong> pueden ser editados. Una vez se complete la información y se envíe, 
+                                    el registro pasará a estado <strong>Registrado</strong> y no podrá ser modificado hasta que reciba retroalimentación.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Estilos adicionales para mejorar la presentación */
+    .container-fluid h3 {
+        color: #2c9c94;
+        border-bottom: 2px solid #2c9c94;
+        padding-bottom: 8px;
+        margin-bottom: 20px;
+    }
+
+    .btn-primary {
+        background-color: #2c9c94;
+        border-color: #2c9c94;
+    }
+
+    .btn-primary:hover {
+        background-color: #238a7f;
+        border-color: #238a7f;
+    }
+
+    .label {
+        padding: 4px 8px;
+        border-radius: 3px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .panel-default > .panel-heading {
+        background-color: #f5f5f5;
+    }
+
+    .table-bordered > thead > tr > th {
+        border: 1px solid #ddd;
+        vertical-align: middle;
+    }
+
+    .table-bordered > tbody > tr > td {
+        border: 1px solid #ddd;
+        vertical-align: middle;
+    }
+</style>

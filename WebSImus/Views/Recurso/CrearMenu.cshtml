@@ -1,0 +1,146 @@
+﻿@model WebSImus.Models.RecursoModel
+@{
+    ViewBag.Title = "Crear Menu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Accion", "Recurso", FormMethod.Post, new { id = "submitForm" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Datos básicos del menu</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        @Html.ValidationSummary(false, "", new { @class = "alert alert-error text-warning" })
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">*Codigo menu</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.codigo, new { @class = "form-control text", @maxlength = "20" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">*Nombre</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.nombre, new { @class = "form-control text", @maxlength = "20" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">*Titulo</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.titulo, new { @class = "form-control text", @maxlength = "20" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">*Estilo</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.estilo, new { @class = "form-control text", @maxlength = "20" })
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="panel panel-danger">
+
+                                <div class="panel-heading">
+                                    @{
+    if (ViewBag.lstpagina == null)
+    {
+        <h3 class="panel-title">no se han encontrado Paginas, por favor valide</h3>
+    }
+    else
+    {
+        <h3 class="panel-title">Paginas del menu</h3>
+    }
+                                    }
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-md-6">
+                                    <label class="col-md-3 control-label">Paginas </label>
+                                    <div class="col-md-8">
+                                        @if (ViewBag.lstpagina != null)
+                                        {
+                                            @Html.DropDownListFor(m => Model.idPagina, (SelectList)ViewBag.lstpagina, new { @name = "lstPagina", @id = "lstPagina", @class = "form-control select" })
+
+                                        }
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="btn btn-default pull-right">
+                                        @if (ViewBag.lstpagina != null)
+                                        {
+                                            <i class="fa fa-adn"></i><input type="submit" value="Agregar" name="command" class="btn btn-primary pull-right" id="btnagregar" />
+
+                                        }
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+
+
+
+
+                                @Html.Action("GridViewRecursoPagina")
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="panel-footer">
+                    @if (ViewBag.lstpagina != null)
+                    {
+                        <input type="submit" value="Guardar" name="command" class="btn btn-primary pull-right" id="btnGuardar" />
+
+                    }
+                    <div class="btn btn-default pull-left">
+                        <i class="fa fa-arrow-circle-o-left"></i>@Html.ActionLink("Regresar", "ConsultaRecurso", "Recurso")
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script type="text/javascript">
+        $('.lnkAdd').on('click', function () {
+
+            var url = '@Url.Action("GridViewRecursoAdd", "Recurso", new { idpagina = "----",mdl=@Model })';
+            url = url.replace("----", $('#lstPagina').val());
+
+            window.location = url;
+        });
+
+    </script>
+}
+

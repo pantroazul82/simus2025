@@ -1,0 +1,80 @@
+﻿@model WebSImus.Models.ConsultaModel
+
+@{
+    ViewBag.Title = "Consulta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+  
+    <div class="col-md-12">
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.ActionLink(" Exportar", "ExportToPermisos", "Evento", null, new { @class = "btn btn-warning glyphicon glyphicon-export" })
+                    @Html.ActionLink(" Nuevo", "Evento", "Evento", null, new { @class = "btn btn-success glyphicon glyphicon-plus-sign" })
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+
+
+            <div class="col-md-12">
+                <div class="form-group">
+
+                    @Html.DropDownListFor(model => model.selectorAno, (SelectList)ViewBag.listAnos, "Seleccione un valor", new { @class = "styled-select" })
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div id="Tabla">
+                        @Html.Action("GridViewPartialPermisos", new { Busqueda = Model.selectorAno })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")"></script>
+<script src="@Url.Content("~/Scripts/dx.webappjs.js")"></script>
+
+    <script type="text/javascript">
+    $(function () {
+
+        $('#selectorAno').change(function () {
+            var VarTipo = $('#selectorAno').val();
+            $.ajaxSetup({
+                cache: false
+            });
+            $.ajax({
+
+                url: "/Evento/GridViewPartialPermisos",
+                type: "GET",
+                data: { Busqueda: VarTipo }
+            })
+           .done(function (partialViewResult) {
+               $("#Tabla").html(partialViewResult);
+
+           });
+        });
+    });
+</script>
+
+
+
+}
+
+
+
+
+

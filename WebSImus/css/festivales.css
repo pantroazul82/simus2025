@@ -1,0 +1,304 @@
+﻿@font-face {
+    font-family: 'Nunito Sans';
+    src: url('/fonts/Nunito_Sans/NunitoSans-VariableFont.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+}
+
+.festivales-container {
+    padding: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* === ENCABEZADO === */
+.encabezado-modern {
+    background-color: #281e52;
+    color: white;
+    padding: 40px 30px;
+    border-radius: 16px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+    .encabezado-modern h1 {
+        margin: 0;
+        font-size: 2.4rem;
+    }
+
+    .encabezado-modern p {
+        margin: 10px 0 0;
+        font-size: 1rem;
+    }
+
+/* === FORMULARIO GRID === */
+.buscador-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    background-color: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+    margin-bottom: 40px;
+}
+
+    .buscador-grid .campo {
+        display: flex;
+        flex-direction: column;
+    }
+
+        .buscador-grid .campo label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #281e52;
+        }
+
+    .buscador-grid input[type="text"],
+    .buscador-grid input[type="date"],
+    .buscador-grid select {
+        padding: 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        transition: border 0.3s ease;
+    }
+
+        .buscador-grid input:focus,
+        .buscador-grid select:focus {
+            border-color: #281e52;
+            outline: none;
+        }
+
+    .buscador-grid .campo-check {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-top: 25px;
+    }
+
+.btn-buscar {
+    background-color: #281e52;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 8px;
+}
+
+    .btn-buscar:hover {
+        background-color: #3e2e75;
+    }
+
+/* === TARJETAS DE FESTIVALES === */
+.festival-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.festival-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+    .festival-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .festival-card img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        background-color: #f1f1f1;
+    }
+
+    .festival-card .contenido {
+        padding: 15px;
+    }
+
+    .festival-card h3 {
+        margin-top: 0;
+        font-size: 1.2rem;
+        color: #281e52;
+    }
+
+    .festival-card p {
+        margin: 4px 0;
+        font-size: 0.95rem;
+        color: #444;
+    }
+
+/* === RESPONSIVO === */
+@media (max-width: 600px) {
+    .encabezado-modern h1 {
+        font-size: 1.7rem;
+    }
+
+    .encabezado-modern p {
+        font-size: 0.95rem;
+    }
+
+    .btn-buscar {
+        width: 100%;
+    }
+}
+
+
+.mapa-colombia {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 30px auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+    .mapa-colombia img {
+        width: 100%;
+        display: block;
+    }
+
+.marcador {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #281e52;
+    border: 2px solid white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    transition: transform 0.2s ease;
+}
+
+    .marcador::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 6px;
+        height: 6px;
+        background-color: white;
+        border-radius: 50%;
+    }
+
+.tooltip-festival {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    font-size: 0.9rem;
+    min-width: 200px;
+    z-index: 11;
+    transform: translate(-50%, -130%);
+    pointer-events: none;
+}
+
+/* === MODAL === */
+.modal {
+    display: none; /* oculto inicialmente */
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-contenido {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.cerrar {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    .cerrar:hover {
+        color: #000;
+    }
+
+/* === Mapa dentro del Modal === */
+.mapa-modal {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 400px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+    .mapa-modal img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.marcador {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #281e52;
+    border: 2px solid white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    cursor: pointer;
+}
+
+/* === BOTÓN MAPA DE FESTIVALES === */
+.btn-mapa-festivales {
+    display: inline-block;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white !important;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    border: none;
+    cursor: pointer;
+}
+
+    .btn-mapa-festivales:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        color: white !important;
+        text-decoration: none;
+    }
+
+    .btn-mapa-festivales i {
+        margin-right: 8px;
+    }

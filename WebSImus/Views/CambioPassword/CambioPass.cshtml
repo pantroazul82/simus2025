@@ -1,0 +1,50 @@
+﻿@model WebSImus.Models.RestablecerModel
+@{
+    ViewBag.Title = "CambioPassword";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@Styles.Render("~/bundles/fontawesome")
+@using (Html.BeginForm("Restablecer", "CambioPassword", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    // @Html.AntiForgeryToken()
+
+    <div class="login-body">
+
+        <div class="login-title"><strong>Cambiar contraseña </strong></div>
+
+        <div class="form-group">
+
+            <label class="col-md-100 control-label text-info">correo electronico</label>
+            <div class="col-md-12">
+                @Html.TextBoxFor(m => m.correo, new { @readonly = "readonly", @class = "form-control text" })
+
+
+            </div>
+
+        </div>
+        <div class="form-group">
+
+            <label class="col-md-100 control-label text-info">*Contrasena</label>
+            <div class="col-md-12">
+                @Html.PasswordFor(s => s.contrasena, new { @class = "form-control text", @maxlength = "20" })
+                @Html.ValidationMessageFor(model => model.contrasena)
+
+            </div>
+
+        </div>
+        <div class="form-group">
+
+            <label class="col-md-100 control-label text-info">*Confirmar contraseña</label>
+            <div class="col-md-12">
+                @Html.PasswordFor(s => s.confcontrasena, new { @class = "form-control text", @maxlength = "20" })
+                @Html.ValidationMessageFor(model => model.confcontrasena)
+            </div>
+
+        </div>
+        <div class="col-md-12">
+            <input type="submit" value="Guardar" class="btn btn-info btn-block" />
+        </div>
+    </div>
+}
+
+

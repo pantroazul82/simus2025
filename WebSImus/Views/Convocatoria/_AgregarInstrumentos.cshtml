@@ -1,0 +1,101 @@
+﻿@model WebSImus.Models.InstrumentoModels
+<div class="panel panel-default">
+
+    <div class="panel-body">
+        <h2><i class="fa-file-pdf fa-2x"></i> Agregar Instrumentos</h2>
+        <br />
+        <div class="row push-down-20">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-md-3 control-label"> Instrumentos</label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.Instrumentos, (SelectList)ViewBag.listInstrumento, "Seleccione el instrumentos", new { @class = "form-control select" })
+                        @Html.ValidationMessageFor(model => model.Instrumentos, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Prioridad</label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.Prioridad, (SelectList)ViewBag.listPrioridad, "Seleccione la prioridad", new { @class = "form-control select" })
+                        @Html.ValidationMessageFor(model => model.Prioridad, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Cantidad</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.Cantidad, new { @class = "form-control text", @maxlength = "1000" })
+                        @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <br />
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="push-up-20 push-down-20">
+                    <button type="button" id="btnAgregarInstrumento" class="btn btn-success  pull-left" data-dismiss="modal">Agregar</button>
+                    @Html.HiddenFor(model => model.DotacionId)
+                </div>
+            </div>
+            <br />
+        </div>
+        <br />
+        <div class="row">
+
+            <div class="row push-down-20">
+                <h3><span class="fa-clasificados fa-2x"></span> Listado Instrumento</h3>
+
+            </div>
+        </div>
+        <div id="TablaInstumento" class="panel-body">
+            @Html.Action("TablaInstrumento", new { Id = Model.DotacionId, EliminarId = 0 })
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    function CargarModalInstrumento(Id) {
+        $('#item-to-delete-instrumento').val(Id);
+
+    }
+
+
+    function EliminarInstrumento() {
+        var varid = $('#item-to-delete-instrumento').val();
+        var varDotacionId = '@Model.DotacionId';
+        ActualizarListadoInstrumentos(varDotacionId, varid);
+        return false;
+    }
+
+    function ActualizarListadoInstrumentos(varID, varEliminar) {
+
+        $("#Instrumentos").val("").change();
+        $("#Prioridad").val("").change();
+        $("#Cantidad").val("");
+        $.ajax({
+
+            url: "/Convocatoria/TablaInstrumento",
+            type: "GET",
+            data: { Id: varID, EliminarId: varEliminar }
+        })
+       .done(function (partialViewResult) {
+           $("#TablaInstumento").html(partialViewResult);
+           $('#item-to-delete-instrumento').val(0);
+           if (varEliminar > 0) {
+               $("#modalConfirmarInstrumentos").modal('hide');
+               $('body').removeClass('modal-open');
+               $('.modal-backdrop').remove();
+           }
+       });
+
+    }
+
+</script>

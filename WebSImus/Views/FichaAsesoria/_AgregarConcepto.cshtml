@@ -1,0 +1,42 @@
+﻿@model SM.LibreriaComun.DTO.FichaAsesoria.AsesoriaConceptoDTO
+
+
+<div class="mf-section-title">
+    <i class="fas fa-file-alt"></i> Descripción General de la Asesoría
+</div>
+
+@Html.HiddenFor(m => m.EscuelaId)
+
+<div class="mf-modal-body">
+
+    <div class="form-group">
+        <label class="mf-label">Aspectos asesorados</label>
+        @Html.TextAreaFor(model => model.AspectoAsesorado, new { @class = "form-control", rows = "6" })
+        @Html.ValidationMessageFor(model => model.AspectoAsesorado, "", new { @class = "mf-validation-error" })
+    </div>
+
+    <div class="form-group">
+        <label class="mf-label">Recomendaciones</label>
+        @Html.TextAreaFor(model => model.Recomendacion, new { @class = "form-control", rows = "6" })
+        @Html.ValidationMessageFor(model => model.Recomendacion, "", new { @class = "mf-validation-error" })
+    </div>
+
+    <div class="form-group">
+        <label class="mf-label">Mecanismo, proceso y tiempos de seguimiento</label>
+        @Html.TextBoxFor(model => model.Mecanismo, new { @class = "form-control", maxlength = "1000" })
+        @Html.ValidationMessageFor(model => model.Mecanismo, "", new { @class = "mf-validation-error" })
+    </div>
+
+    <div class="form-group">
+        <label class="mf-label">Concepto</label>
+        @Html.TextAreaFor(model => model.Concepto, new { @class = "form-control", rows = "6" })
+        @Html.ValidationMessageFor(model => model.Concepto, "", new { @class = "mf-validation-error" })
+    </div>
+
+</div>
+
+<div class="mf-modal-footer text-right">
+    <button type="button" id="btnConcepto" class="btn btn-success" data-dismiss="modal">
+        <i class="fas fa-sync-alt"></i> Actualizar
+    </button>
+</div>

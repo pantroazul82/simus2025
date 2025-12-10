@@ -1,0 +1,700 @@
+﻿@model SM.LibreriaComun.DTO.EscuelasEstadisticasDTO
+@{
+    ViewBag.Title = "Estadísticas - Escuelas";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row align-items-center mb-4">
+        <div class="col-md-8 col-sm-12">
+            <h1 class="titulo-indicador"><i class="fa-solid fa-chart-simple me-2"></i>Estadísticas · <span id="txtStatus1">@Html.Label("Actual")</span></h1>
+        </div>
+        <div class="col-md-4 col-sm-12 text-end">
+            @Html.DropDownListFor(model => model.selectorAno, (SelectList)ViewBag.listAnos, "Año", new { @class = "form-select selector-ano", @id = "selectorAno" })
+        </div>
+    </div>
+
+    <!-- Secciones resumen -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-3 col-sm-6">
+            <a href="#" class="stat-card" onclick="RedireccionaEscuelas();return false;">
+                <i class="fa-solid fa-school"></i>
+                <h5>Escuelas</h5>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <a href="#" class="stat-card" onclick="RedireccionaEstudiantes();return false;">
+                <i class="fa-solid fa-user-graduate"></i>
+                <h5>Estudiantes</h5>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <a href="#" class="stat-card" onclick="RedireccionaDocentes();return false;">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <h5>Docentes</h5>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <a href="#" class="stat-card" onclick="RedireccionaMapa();return false;">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <h5>Mapa</h5>
+            </a>
+        </div>
+    </div>
+
+    <!-- Contenedor para las gráficas -->
+    <div class="row">
+        <div class="col-xl-10 offset-xl-1 col-12">
+            @Html.Partial("_DatosEscuelas", Model)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/Canvas/canvasjs.js")"></script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var periodo = '@Model.selectorAno';
+            if (periodo == "1")
+            { $('#txtStatus1').text('Actual'); }
+            else {
+                $('#txtStatus1').text(periodo);
+            }
+            CargarGraficaNaturaleza(periodo);
+            CargarLegalmente(periodo);
+            CargarPractiaMusical(periodo);
+            CargarPorTipoInstrumentos(periodo);
+            $("#PanelTipoEscuela").hide();
+            var ActualAno = (new Date()).getFullYear();
+            if (periodo == 1 || periodo >= 2016) {
+                $("#PanelTipoEscuela").show();
+                CargarTipoEscuela(periodo);
+                CargarGraficaTipoEscuelaTorta(periodo);
+            }
+        }
+
+        function RedireccionaMapa() {
+            var VarTipo = $('#selectorAno').val();
+            var url = "/Indicadores/Mapa?Id=" + VarTipo;
+            window.location.href = url;
+        }
+
+        function RedireccionaEstudiantes() {
+            var VarTipo = $('#selectorAno').val();
+            var url = "/Indicadores/Estudiantes?Id=" + VarTipo;
+            window.location.href = url;
+        }
+
+        function RedireccionaDocentes() {
+            var VarTipo = $('#selectorAno').val();
+            var url = "/Indicadores/Docentes?Id=" + VarTipo;
+            window.location.href = url;
+        }
+
+        function RedireccionaEscuelas() {
+            var VarTipo = $('#selectorAno').val();
+            var url = "/Indicadores/Escuelas?Id=" + VarTipo;
+            window.location.href = url;
+        }
+
+        $('#selectorAno').change(function () {
+            var VarTipo = $('#selectorAno').val();
+            $.ajaxSetup({
+                cache: false
+            });
+            $.ajax({
+
+                url: "/Indicadores/Escuelas",
+                type: "GET",
+                data: { Id: VarTipo, modal: "1" },
+                dataType: 'html', //dataType - html
+                success: function (result) {
+                    //Create a Div around the Partial View and fill the result
+                    $('#partialViewContainerDiv').html(result);
+                    CargarGraficaNaturaleza(VarTipo);
+                    CargarLegalmente(VarTipo);
+                    CargarPractiaMusical(VarTipo);
+                    CargarPorTipoInstrumentos(VarTipo);
+                    if (VarTipo == "1")
+                    { $('#txtStatus1').text('Actual'); }
+                    else {
+                        $('#txtStatus1').text(VarTipo);
+                    }
+
+                    $("#PanelTipoEscuela").hide();
+
+                    if (VarTipo == 1 || VarTipo >= 2016) {
+                        $("#PanelTipoEscuela").show();
+                        CargarTipoEscuela(VarTipo);
+                        CargarGraficaTipoEscuelaTorta(VarTipo);
+                    }
+
+
+                }
+            })
+        });
+        function CargarGraficaNaturaleza(periodo) {
+            var chart = new CanvasJS.Chart("chartContainer",
+            {
+                theme: "theme2",
+                title: {
+                    text: ""
+                },
+                animationEnabled: true,
+                exportFileName: "Naturaleza escuelas",
+                exportEnabled: true,
+                legend: {
+                    verticalAlign: "bottom",
+                    horizontalAlign: "center",
+                    fontSize: 20,
+                    fontFamily: "Droid-Sans, sans-serif",
+                },
+                data: [
+                {
+                    indexLabelFontSize: 20,
+                    indexLabelFontFamily: "Droid-Sans, sans-serif",
+                    indexLabelFontColor: "#4C2C54",
+                    indexLabelLineColor: "darkgrey",
+                    indexLabelPlacement: "outside",
+                    type: "pie",
+                    showInLegend: true,
+                    toolTipContent: "{y} - #percent %",
+                    legendText: "{indexLabel} - {y}",
+                    indexLabel: "{indexLabel} - {y}",
+                    toolTipContent: "<b>Cantidad:</b> {y} (#percent%)",
+                    dataPoints: $.parseJSON(GraficaNaturaleza(periodo)),
+
+                }
+                ]
+            });
+            chart.render();
+        }
+
+        function CargarLegalmente(periodo) {
+            var chart = new CanvasJS.Chart("legalmenteContainer", {
+                animationEnabled: true,
+                exportFileName: "Legalmente constituida Chart",
+                exportEnabled: true,
+                theme: "theme1",
+                title: {
+                    text: ""
+                },
+
+                axisX: {
+                    title: "Naturaleza",
+                    titleFontColor: "black",
+                    titleFontFamily: "Droid-Sans, sans-serif",
+                    labelFontColor: "black",
+                     labelFontSize: "18",
+                    labelFontWeight: "Bold"
+
+
+                },
+                axisY: {
+                    title: "Cantidad escuelas",
+                    titleFontColor: "black",
+                    titleFontFamily: "Droid-Sans, sans-serif",
+                    titleFontSize: "18",
+                    lineColor: "#4C2C54",
+                    labelFontColor: "black",
+                    tickColor: "#4F81BC",
+                    interlacedColor: "#e6e6e6",
+                    gridColor: "#e3e3e3"
+                },
+
+                toolTip: {
+                    shared: true,
+                    content: toolTipFormatter
+                },
+                legend: {
+                    verticalAlign: "top",
+                    horizontalAlign: "left",
+                    fontSize: 20,
+                    fontFamily: "Droid-Sans, sans-serif",
+                    fontColor: "black",
+
+                },
+
+                data: [{
+                    type: "column",
+                    name: "SI",
+                    legendText: "SI",
+                    dataPointWidth: 10,
+                    showInLegend: true,
+                    dataPoints: $.parseJSON(GraficaLegalmenteConstituida(periodo, "1")),
+                },
+                {
+                    type: "column",
+                    name: "NO",
+                    legendText: "NO",
+                    dataPointWidth: 10,
+                    showInLegend: true,
+                    dataPoints: $.parseJSON(GraficaLegalmenteConstituida(periodo, "0"))
+                }
+                ]
+            });
+            chart.render();
+        }
+
+        function CargarTipoEscuela(periodo) {
+            var chart = new CanvasJS.Chart("TipoContainer", {
+                animationEnabled: true,
+                exportFileName: "Tipo escuela Chart",
+                exportEnabled: true,
+                theme: "theme2", //"light1", "dark1", "dark2"
+                title: {
+                    text: ""
+                },
+
+                axisX: {
+
+                    titleFontColor: "black",
+                    labelFontColor: "black",
+                    labelFontFamily: "Droid-Sans, sans-serif",
+                    labelFontSize: "16",
+                    labelFontWeight: "Bold"
+
+
+                },
+                axisY: {
+                    interval: 10,
+                    suffix: "%",
+                    titleFontColor: "#4C2C54",
+                    titleFontFamily: "Droid-Sans, sans-serif",
+                    titleFontSize: "18",
+                    labelFontColor: "#4C2C54",
+                    labelFontFamily: "Droid-Sans, sans-serif",
+                    labelFontSize: "12",
+                    interlacedColor: "#e6e6e6",
+                    gridColor: "#e3e3e3"
+                },
+                legend: {
+                    verticalAlign: "bottom",
+                    horizontalAlign: "center",
+                    fontSize: 20,
+                    fontFamily: "Droid-Sans, sans-serif",
+                    fontColor: "black"
+
+                },
+                toolTip: {
+                    shared: true,
+                    content: toolTipFormatter
+                },
+                data: [{
+                    type: "stackedBar100",
+                    toolTipContent: "{label}<br><b>{name}:</b> {y} (#percent%)",
+                    showInLegend: true,
+                    name: "Pública",
+                    dataPoints: $.parseJSON(GraficaTipoyNaturaleza(periodo, "PUBLICA"))
+
+                },
+                    {
+                        type: "stackedBar100",
+                        toolTipContent: "{label}<br><b>{name}:</b> {y} (#percent%)",
+                        showInLegend: true,
+                        name: "Privada",
+                        dataPoints: $.parseJSON(GraficaTipoyNaturaleza(periodo, "PRIVADA"))
+                    },
+                    {
+                        type: "stackedBar100",
+                        toolTipContent: "{label}<br><b>{name}:</b> {y} (#percent%)",
+                        showInLegend: true,
+                        name: "Mixta",
+                        dataPoints: $.parseJSON(GraficaTipoyNaturaleza(periodo, "MIXTA"))
+                    }]
+            });
+            chart.render();
+        }
+
+        function CargarGraficaTipoEscuelaTorta(periodo) {
+
+            var chart = new CanvasJS.Chart("TipoPieContainer", {
+                animationEnabled: true,
+                exportFileName: "Tipo escuelas",
+                exportEnabled: true,
+                theme: "theme2",
+                title: {
+                    text: "",
+                    horizontalAlign: "left"
+                },
+                data: [{
+                    type: "doughnut",
+                    startAngle: 90,
+                    //innerRadius: 60,
+                    indexLabelFontSize: 12,
+                    indexLabelFontFamily: "Droid-Sans, sans-serif",
+                    indexLabelFontColor: "#4C2C54",
+                    indexLabel: "{label} - #percent%",
+                    toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+                    dataPoints: $.parseJSON(GraficaTipoEscuela(periodo)),
+                }]
+            });
+            chart.render();
+        }
+
+
+        function CargarPractiaMusical(periodo) {
+            var chart = new CanvasJS.Chart("PracticaContainer", {
+                animationEnabled: true,
+                exportFileName: "Práctica musical Chart",
+                exportEnabled: true,
+                theme: "theme2",
+                title: {
+                    text: ""
+                },
+                dataPointWidth: 10,
+                axisX: {
+                    //title: "Práctica musical",
+                    titleFontColor: "black",
+                    labelFontColor: "black",
+                    labelFontFamily: "Droid-Sans, sans-serif",
+                    labelFontSize: "16",
+                    labelFontWeight: "Bold"
+
+
+                },
+                axisY: {
+                    title: "Cantidad de escuelas",
+                    titleFontColor: "black",
+                    titleFontSize: "18",
+                    titleFontFamily: "Droid-Sans, sans-serif",
+                    lineColor: "black",
+                    labelFontFamily: "Droid-Sans, sans-serif",
+                    labelFontColor: "#4C2C54",
+                    tickColor: "#4F81BC",
+                    labelFontSize: "14",
+                    interlacedColor: "#e6e6e6",
+                    gridColor: "#e3e3e3"
+                },
+                toolTip: {
+                    shared: true,
+                    content: toolTipFormatter
+                },
+                legend: {
+                    verticalAlign: "bottom",
+                    horizontalAlign: "center",
+                    fontSize: 20,
+                    fontFamily: "Droid-Sans, sans-serif",
+                    fontColor: "black",
+                },
+
+                data: [{
+                    type: "stackedBar",
+                    name: "Pública",
+                    showInLegend: "true",
+                    dataPoints: $.parseJSON(GraficaPracticaMusical(periodo, "PUBLICA"))
+                },
+                {
+                    type: "stackedBar",
+                    name: "Privada",
+                    showInLegend: "true",
+                    dataPoints: $.parseJSON(GraficaPracticaMusical(periodo, "PRIVADA"))
+                },
+                {
+                    type: "stackedBar",
+                    name: "Mixta",
+                    showInLegend: "true",
+                    dataPoints: $.parseJSON(GraficaPracticaMusical(periodo, "MIXTA"))
+                }]
+
+
+            });
+            chart.render();
+        }
+        function CargarPorTipoInstrumentos(periodo) {
+            var chart = new CanvasJS.Chart("TipoInstrumentoContainer", {
+                animationEnabled: true,
+                exportFileName: "Familia instrumental Chart",
+                exportEnabled: true,
+                title: {
+                    text: "",
+                    fontColor: "#4C2C54",
+                },
+                axisX: {
+
+                    titleFontColor: "black",
+                    labelFontColor: "black",
+                    labelFontFamily: "Droid-Sans, sans-serif",
+                    labelFontSize: "16",
+                    labelFontWeight: "Bold"
+
+
+                },
+                axisY: {
+                    title: "Cantidad",
+                    titleFontColor: "black",
+                    titleFontSize: "18",
+                    titleFontFamily: "Droid-Sans, sans-serif",
+                    lineColor: "black",
+                    labelFontFamily: "Droid-Sans, sans-serif",
+                    labelFontColor: "#4C2C54",
+                    tickColor: "#4F81BC",
+                    labelFontSize: "14",
+                    interlacedColor: "#e6e6e6",
+                    gridColor: "#e3e3e3"
+                },
+                legend: {
+                    verticalAlign: "bottom",
+                    horizontalAlign: "center",
+                    fontSize: 20,
+                    fontFamily: "Droid-Sans, sans-serif",
+                    fontColor: "black",
+
+                },
+                toolTip: {
+                    shared: true,
+                    content: toolTipFormatter
+
+                },
+                data: [{
+                    type: "bar",
+                    showInLegend: true,
+                    name: "Pública",
+                    labelFontColor: "#4C2C54",
+                    color: "#28B6DC",
+                    dataPoints: $.parseJSON(GraficaFamiliaInstrumental(periodo, "PUBLICA"))
+                },
+                {
+                    type: "bar",
+                    showInLegend: true,
+                    name: "Privada",
+                    labelFontColor: "#4C2C54",
+                    color: "#DD7A7A",
+                    dataPoints: $.parseJSON(GraficaFamiliaInstrumental(periodo, "PRIVADA"))
+                },
+                {
+                    type: "bar",
+                    showInLegend: true,
+                    name: "Mixta",
+                    labelFontColor: "#4C2C54",
+                    color: "#A59925",
+                    dataPoints: $.parseJSON(GraficaFamiliaInstrumental(periodo, "MIXTA"))
+                }]
+            });
+            chart.render();
+        }
+
+        function toolTipFormatter(e) {
+            var str = "";
+            var total = 0;
+            var str3;
+            var str2;
+            for (var i = 0; i < e.entries.length; i++) {
+                var str1 = "<span style= \"color:" + e.entries[i].dataSeries.color + "\">" + e.entries[i].dataSeries.name + "</span>: <strong>" + e.entries[i].dataPoint.y + "</strong> <br/>";
+                total = e.entries[i].dataPoint.y + total;
+                str = str.concat(str1);
+            }
+            str2 = "<strong>" + e.entries[0].dataPoint.label + "</strong> <br/>";
+            str3 = "<span style = \"color:Tomato\">Total: </span><strong>" + total + "</strong><br/>";
+            return (str2.concat(str)).concat(str3);
+        }
+        function toggleDataSeries(e) {
+            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            }
+            else {
+                e.dataSeries.visible = true;
+            }
+            chart.render();
+        }
+        function GraficaNaturaleza(valorAno) {
+            debugger;
+            var data = "";
+            $.ajax({
+                type: 'POST',
+                url: '/Indicadores/ObtenerEscuelasNaturaleza/' + valorAno,
+                dataType: 'json',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                data: {},
+                success: function (result) {
+
+                    data = result;
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+
+            return data;
+        }
+
+        function GraficaTipoEscuela(valorAno) {
+            debugger;
+            var data = "";
+            $.ajax({
+                type: 'POST',
+                url: '/Indicadores/ObtenerEscuelasPorTipo/' + valorAno,
+                dataType: 'json',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                data: {},
+                success: function (result) {
+
+                    data = result;
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+
+            return data;
+        }
+
+        function GraficaLegalmenteConstituida(valorAno, varSi) {
+            var resultado = "";
+            var url = '@Url.Action("ObtenerEscuelasLegalmenteConstituidas", "Indicadores")';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'json',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ Id: valorAno, si: varSi }),
+                success: function (result) {
+
+                    resultado = result;
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+
+            return resultado;
+        }
+
+        function GraficaTipoyNaturaleza(valorAno, varSi) {
+            var resultado = "";
+            var url = '@Url.Action("ObtenerEscuelasPorTipoYNaturaleza", "Indicadores")';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'json',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ Id: valorAno, si: varSi }),
+                success: function (result) {
+
+                    resultado = result;
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+
+            return resultado;
+        }
+
+        function GraficaPracticaMusical(valorAno, varSi) {
+            var resultado = "";
+            var url = '@Url.Action("ObtenerEscuelasPorPracticaMusical", "Indicadores")';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'json',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ Id: valorAno, si: varSi }),
+                success: function (result) {
+
+                    resultado = result;
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+
+            return resultado;
+        }
+
+        function GraficaFamiliaInstrumental(valorAno, varSi) {
+            var resultado = "";
+            var url = '@Url.Action("ObtenerEscuelasPorFamiliaInstrumental", "Indicadores")';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'json',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ Id: valorAno, si: varSi }),
+                success: function (result) {
+
+                    resultado = result;
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+
+            return resultado;
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('#hlegalmente').click(function () {
+                $('html, body').animate({
+                    scrollTop: 1100
+                },
+                    1500);
+                return false;
+            });
+
+            $('#hNaturaleza').click(function () {
+                $('html, body').animate({
+                    scrollTop: 500
+                },
+                    1500);
+                return false;
+            });
+
+            $('#hTipo').click(function () {
+                $('html, body').animate({
+                    scrollTop: 1700
+                },
+                    1500);
+                return false;
+            });
+            $('#hTipoNaturaleza').click(function () {
+                $('html, body').animate({
+                    scrollTop: 2200
+                },
+                    1500);
+                return false;
+            });
+            $('#hFamilia').click(function () {
+                $('html, body').animate({
+                    scrollTop: 2800
+                },
+                    1500);
+                return false;
+            });
+
+            $('#hPractica').click(function () {
+                $('html, body').animate({
+                    scrollTop: 3300
+                },
+                    1500);
+                return false;
+            });
+            $('#hDependientes').click(function () {
+                $('html, body').animate({
+                    scrollTop: 3800
+                },
+                    1500);
+                return false;
+            });
+            $('.arriba').click(function () {
+                $('html, body').animate({
+                    scrollTop: '0px'
+                },
+                    1500);
+                return false;
+            });
+        });
+    </script>
+}

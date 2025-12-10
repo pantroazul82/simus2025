@@ -1,0 +1,244 @@
+﻿@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridReporteBasico";
+        settings.CallbackRouteValues = new { Controller = "Report", Action = "GridViewReporteBasico" };
+
+    
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.Width = System.Web.UI.WebControls.Unit.Percentage(6);
+        settings.CommandColumn.Caption = "";
+
+
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        settings.KeyFieldName = "ENT_ID";
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CODIGODEPARTAMENTO";
+            column.Caption = "COD DEPARTAMENTO";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CODIGOMUNICIPIO";
+            column.Caption = "COD MUNICIPIO";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "DEPARTAMENTO";
+            column.Caption = "DEPARTAMENTO";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "MUNICIPIO";
+            column.Caption = "MUNICIPIO";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ENT_ID";
+            column.Caption = "ID";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NOMBRE_ESCUELA";
+            column.Caption = "NOMBRE";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ESTADO";
+            column.Caption = "ESTADO";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "TIPO_ESCUELA";
+            column.Caption = "TIPO ESCUELA";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "DIRECCION_ESCUELA";
+            column.Caption = "DIRECCION ESCUELA";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "TELEFONO_ESCUELA";
+            column.Caption = "TELEFONO ESCUELA";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "FAX_ESCUELA";
+            column.Caption = "FAX ESCUELA";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CORREO_ELECTRONICO_ESCUELA";
+            column.Caption = "CORREO ELECTRONICO ESCUELA";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NOMBRE_CONTACTO";
+            column.Caption = "NOMBRE CONTACTO";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "TELEFONO_CONTACTO";
+            column.Caption = "TELEFONO CONTACTO";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CORREO_ELECTRONICO_CONTACTO";
+            column.Caption = "CORREO_ELECTRONICO_CONTACTO";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NOMBRE_DIRECTOR";
+            column.Caption = "NOMBRE_DIRECTOR";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "TELEFONO_DIRECTOR";
+            column.Caption = "TELEFONO_DIRECTOR";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CATEGORIA";
+            column.Caption = "CATEGORIA";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "PORCENTAJE";
+            column.Caption = "PORCENTAJE";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "FECHA_CATEGORIZACIÓN";
+            column.Caption = "FECHA_CATEGORIZACION";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "FECHA_ACTUALIZACION";
+            column.Caption = "FECHA_ACTUALIZACION";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NOMBRE_CREADOR";
+            column.Caption = "NOMBRE_CREADOR";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NOMBRE_USUARIO_CREADOR";
+            column.Caption = "NOMBRE_USUARIO_CREADOR";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CORREO_ELECTRONICO_CREADOR";
+            column.Caption = "CORREO_ELECTRONICO_CREADOR";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+      
+      
+     
+        settings.SettingsPager.PageSize = 50;
+        settings.SettingsBehavior.FilterRowMode = GridViewFilterRowMode.Auto;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "50", "100", "200" };
+    });
+
+
+
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

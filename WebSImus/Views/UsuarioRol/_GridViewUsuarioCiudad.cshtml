@@ -1,0 +1,86 @@
+﻿
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridUsuarioUsuarioCiudad";
+        settings.CallbackRouteValues = new { Controller = "UsuarioRol", Action = "GridViewUsuarioCiudad" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "UsuarioRol", Action = "GridViewUsuarioCiudadRolAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "UsuarioRol", Action = "GridViewUsuarioCiudadRolUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "UsuarioRol", Action = "GridViewUsuarioCiudadRolDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.Width = System.Web.UI.WebControls.Unit.Percentage(6);
+        settings.CommandColumn.Caption = "";
+
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        settings.KeyFieldName = "id";
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.SetDataItemTemplateContent(container =>
+            {
+                Html.DevExpress().HyperLink(hyperlink =>
+                {
+                    var visibleIndex = container.VisibleIndex;
+                    var keyValue = container.KeyValue;
+                    var NombreEscuela = "Eliminar";
+
+                    hyperlink.Name = "hl" + keyValue.ToString();
+                    hyperlink.Properties.Text = NombreEscuela.ToString();
+                    hyperlink.NavigateUrl = Url.Action("EliminarCiudadUsuarioRol", "UsuarioRol", new { id = keyValue });
+                }).Render();
+            });
+
+        });
+
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "nomDpto";
+            column.Caption = "Departamento";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(34);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "nomMun";
+            column.Caption = "Ciudad";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+       
+
+
+        settings.SettingsPager.PageSize = 20;
+        settings.SettingsBehavior.FilterRowMode = GridViewFilterRowMode.Auto;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "20", "30", "50" };
+    });
+
+
+
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

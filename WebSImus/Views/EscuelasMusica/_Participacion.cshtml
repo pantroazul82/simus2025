@@ -1,0 +1,359 @@
+﻿@model WebSImus.Models.ParticipacionModel
+@using MvcCheckBoxList.Model
+
+@Html.HiddenFor(m => m.NombreEscuela)
+@Html.HiddenFor(m => m.EscuelaId)
+
+<div>
+    <h3 class="mf-section-title"><i class="fas fa-users-cog fa-fw"></i> Cupos existentes en la escuela</h3>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidadCupos)" class="mf-label md:mf-col-span-1">Cantidad de cupos *</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidadCupos, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidadCupos, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <hr class="mf-hr">
+    <h3 class="mf-section-title"><i class="fas fa-birthday-cake fa-fw"></i> Alumnos por rangos de edades</h3>
+    <p class="mf-helper-text mf-mb-4"><i class="fas fa-info-circle fa-fw"></i> Por lo menos un campo de alumnos por rangos de edades es obligatorio.</p>
+
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidadPrimeraInfancia)" class="mf-label md:mf-col-span-1">Primera Infancia (Menores de 6 años)</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidadPrimeraInfancia, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidadPrimeraInfancia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidaEntre6y11)" class="mf-label md:mf-col-span-1">Entre 6 y 11 años</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidaEntre6y11, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidaEntre6y11, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidaEntre12y18)" class="mf-label md:mf-col-span-1">Entre 12 y 18 años</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidaEntre12y18, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidaEntre12y18, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidaEntre19y26)" class="mf-label md:mf-col-span-1">Entre 19 y 26 años</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidaEntre19y26, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidaEntre19y26, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidaEntre27y60)" class="mf-label md:mf-col-span-1">Entre 27 y 60 años</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidaEntre27y60, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidaEntre27y60, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidadMayores60)" class="mf-label md:mf-col-span-1">Mayores de 60 años</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidadMayores60, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidadMayores60, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <hr class="mf-hr">
+    <h3 class="mf-section-title"><i class="fas fa-globe-americas fa-fw"></i> Alumnos de acuerdo a su etnia</h3>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidadIndigenas)" class="mf-label md:mf-col-span-1">Indígenas</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidadIndigenas, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidadIndigenas, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidadAfrocolombiana)" class="mf-label md:mf-col-span-1">Afrocolombiana</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidadAfrocolombiana, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidadAfrocolombiana, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidadRom)" class="mf-label md:mf-col-span-1">Rom</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidadRom, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidadRom, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidadRaizales)" class="mf-label md:mf-col-span-1">Raizales</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidadRaizales, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidadRaizales, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidadEtniaOtros)" class="mf-label md:mf-col-span-1">Otros</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidadEtniaOtros, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidadEtniaOtros, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <hr class="mf-hr">
+    <h3 class="mf-section-title"><i class="fas fa-venus-mars fa-fw"></i> Alumnos por sexo</h3>
+    <p class="mf-helper-text mf-mb-4"><i class="fas fa-info-circle fa-fw"></i> Por lo menos un campo de alumnos por sexo es obligatorio.</p>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidadHombres)" class="mf-label md:mf-col-span-1">Hombres</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidadHombres, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidadHombres, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidadMujeres)" class="mf-label md:mf-col-span-1">Mujeres</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidadMujeres, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidadMujeres, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <hr class="mf-hr">
+    <h3 class="mf-section-title"><i class="fas fa-map-marked-alt fa-fw"></i> Alumnos por área de ubicación</h3>
+    <p class="mf-helper-text mf-mb-4"><i class="fas fa-info-circle fa-fw"></i> Por lo menos un campo de alumnos área de ubicación es obligatorio.</p>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidadRural)" class="mf-label md:mf-col-span-1">Rural</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidadRural, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidadRural, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidadUrbana)" class="mf-label md:mf-col-span-1">Urbana</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidadUrbana, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidadUrbana, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <hr class="mf-hr">
+    <h3 class="mf-section-title"><i class="fas fa-universal-access fa-fw"></i> Alumnos pertenecientes a alguna de las siguientes condiciones</h3>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidadDicapacitados)" class="mf-label md:mf-col-span-1">Discapacitados</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidadDicapacitados, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidadDicapacitados, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidadDesplazados)" class="mf-label md:mf-col-span-1">Desplazados</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidadDesplazados, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidadDesplazados, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label for="@Html.IdFor(model => model.CantidadRedUnidos)" class="mf-label md:mf-col-span-1">Red Unidos</label>
+            <div class="md:mf-col-span-3">
+                @Html.TextBoxFor(model => model.CantidadRedUnidos, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                @Html.ValidationMessageFor(model => model.CantidadRedUnidos, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <hr class="mf-hr">
+    <h3 class="mf-section-title"><i class="fas fa-sitemap fa-fw"></i> Organización Comunitaria</h3>
+    <div class="mf-field-group">
+        <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+            <label class="mf-label md:mf-col-span-1">¿Organización comunitaria?</label>
+            <div class="md:mf-col-span-3 mf-radio-group">
+                <label class="mf-radio-label">
+                    @Html.RadioButtonFor(m => m.TieneOrganizacionComunitaria, 1, new { onClick = "validarOrganizacion()", id = "tieneOrganizacionSi" }) Si
+                </label>
+                <label class="mf-radio-label">
+                    @Html.RadioButtonFor(m => m.TieneOrganizacionComunitaria, 2, new { onClick = "validarOrganizacion()", id = "tieneOrganizacionNo" }) No
+                </label>
+                @Html.ValidationMessageFor(model => model.TieneOrganizacionComunitaria, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div id="PanelOrganizacion" style="display:none;" class="mf-indented-panel">
+        <div class="mf-field-group">
+            <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+                <label for="@Html.IdFor(model => model.TipoOrganizacionComunitaria)" class="mf-label md:mf-col-span-1">Tipo organización</label>
+                <div class="md:mf-col-span-3">
+                    @Html.DropDownListFor(model => model.TipoOrganizacionComunitaria, (SelectList)ViewBag.listTipoOrganizacion, "Seleccione un valor", new { @class = "w-full px-3 py-2 border rounded styled-select" })
+                    @Html.ValidationMessageFor(model => model.TipoOrganizacionComunitaria, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="mf-field-group">
+            <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+                <label for="@Html.IdFor(model => model.OrganizacionComunitaria)" class="mf-label md:mf-col-span-1">Nombre organización</label>
+                <div class="md:mf-col-span-3">
+                    @Html.TextBoxFor(model => model.OrganizacionComunitaria, new { @class = "w-full px-3 py-2 border rounded", @maxlength = "100", placeholder = "Nombre de la organización" })
+                    @Html.ValidationMessageFor(model => model.OrganizacionComunitaria, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="mf-field-group">
+            <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+                <label for="@Html.IdFor(model => model.NumeroIntegrantes)" class="mf-label md:mf-col-span-1">Número de integrantes</label>
+                <div class="md:mf-col-span-3">
+                    @Html.TextBoxFor(model => model.NumeroIntegrantes, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0" })
+                    @Html.ValidationMessageFor(model => model.NumeroIntegrantes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="mf-field-group">
+            <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+                <label for="@Html.IdFor(model => model.NombrePresidente)" class="mf-label md:mf-col-span-1">Nombre Presidente</label>
+                <div class="md:mf-col-span-3">
+                    @Html.TextBoxFor(model => model.NombrePresidente, new { @class = "w-full px-3 py-2 border rounded", @maxlength = "100", placeholder = "Nombre completo" })
+                    @Html.ValidationMessageFor(model => model.NombrePresidente, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="mf-field-group">
+            <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+                <label for="@Html.IdFor(model => model.TelefonoCelular)" class="mf-label md:mf-col-span-1">Tel. Celular Presidente</label>
+                <div class="md:mf-col-span-3">
+                    @Html.TextBoxFor(model => model.TelefonoCelular, new { @class = "w-full px-3 py-2 border rounded", @maxlength = "100", type = "tel", placeholder = "Ej: 3001234567" })
+                    @Html.ValidationMessageFor(model => model.TelefonoCelular, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="mf-field-group">
+            <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+                <label for="@Html.IdFor(model => model.TelefonoFijo)" class="mf-label md:mf-col-span-1">Tel. Fijo Presidente</label>
+                <div class="md:mf-col-span-3">
+                    @Html.TextBoxFor(model => model.TelefonoFijo, new { @class = "w-full px-3 py-2 border rounded", @maxlength = "100", type = "tel", placeholder = "Ej: (1) 2345678" })
+                    @Html.ValidationMessageFor(model => model.TelefonoFijo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="mf-field-group">
+            <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+                <label for="@Html.IdFor(model => model.CorreoElectronicoParticipacion)" class="mf-label md:mf-col-span-1">Email Presidente</label>
+                <div class="md:mf-col-span-3">
+                    @Html.TextBoxFor(model => model.CorreoElectronicoParticipacion, new { @class = "w-full px-3 py-2 border rounded", @maxlength = "100", type = "email", placeholder = "correo@ejemplo.com" })
+                    @Html.ValidationMessageFor(model => model.CorreoElectronicoParticipacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="mf-field-group">
+            <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-4 mf-gap-4 items-center">
+                <label class="mf-label md:mf-col-span-1">¿Proyectos desarrollados?</label>
+                <div class="md:mf-col-span-3 mf-radio-group">
+                    <label class="mf-radio-label">
+                        @Html.RadioButtonFor(m => m.TieneProyectosMusica, 1, new { onClick = "validarProyectos()", id = "tieneProyectosSi" }) Si
+                    </label>
+                    <label class="mf-radio-label">
+                        @Html.RadioButtonFor(m => m.TieneProyectosMusica, 2, new { onClick = "validarProyectos()", id = "tieneProyectosNo" }) No
+                    </label>
+                    @Html.ValidationMessageFor(model => model.TieneProyectosMusica, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Panelproyectos" style="display:none;" class="mf-mt-4 mf-indented-panel">
+        <div class="mf-field-group">
+            <label class="mf-label">Proyectos realizados por la organización</label>
+            <div class="mf-checkbox-list-container">
+                @if (Model.ProyectosData != null)
+                {
+                    var name = Html.NameFor(m => m.ProyectosPublicado).ToString(); // Asegúrate que ProyectosPublicado sea la propiedad correcta para bindear los IDs seleccionados
+                    foreach (var proyectoItem in Model.ProyectosData)
+                    {
+                        var isChecked = Model.ProyectosSeleccionada != null && Model.ProyectosSeleccionada.Any(dto => dto.Id == proyectoItem.Id);
+                        <div class="mf-checkbox-item">
+                            <input type="checkbox"
+                                   name="@name" @* Importante para el binding de la lista de IDs seleccionados *@
+                                   value="@proyectoItem.Id"
+                                   id="proyecto_@proyectoItem.Id"
+                                   @(isChecked ? "checked=\"checked\"" : "")
+                                   class="mf-checkbox-input" />
+                            <label for="proyecto_@proyectoItem.Id" class="mf-checkbox-label">@proyectoItem.Nombre</label>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="mf-helper-text">No hay proyectos disponibles para seleccionar.</p>
+                }
+                @Html.ValidationMessageFor(model => model.ProyectosPublicado, "", new { @class = "text-danger mf-mt-2" })
+            </div>
+        </div>
+    </div>
+
+    <div class="mf-form-footer">
+        @Html.ActionLink("Anterior", "EditarNuevo", "EscuelasMusica", new { Id = Model.EscuelaId, wizard = 1 }, new { @class = "btn border" })
+        <input type="submit" value="Siguiente" name="TabParticipacion" class="btn btn-success" id="btnGuardarParticipacion" />
+    </div>
+</div>
+
+<script type="text/javascript">
+    // Funciones validarOrganizacion y validarProyectos deben existir en tu JS
+    // para mostrar/ocultar los paneles #PanelOrganizacion y #Panelproyectos
+    function validarOrganizacion() {
+        if ($('#tieneOrganizacionSi').is(':checked')) {
+            $('#PanelOrganizacion').slideDown();
+        } else {
+            $('#PanelOrganizacion').slideUp();
+            // Podrías querer limpiar los campos dentro de #PanelOrganizacion aquí
+        }
+    }
+
+    function validarProyectos() {
+        if ($('#tieneProyectosSi').is(':checked')) {
+            $('#Panelproyectos').slideDown();
+        } else {
+            $('#Panelproyectos').slideUp();
+            // Podrías querer deseleccionar los checkboxes aquí
+        }
+    }
+
+    $(document).ready(function () {
+        // Ejecutar al cargar para establecer el estado inicial de los paneles
+        validarOrganizacion();
+        validarProyectos();
+    });
+</script>

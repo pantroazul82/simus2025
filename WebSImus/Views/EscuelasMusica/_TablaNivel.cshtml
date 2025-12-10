@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.NivelesFormacionDTO>
+
+<div class="mf-table-container mf-table-nested">
+    @* mf-table-nested para un estilo ligeramente diferente si está dentro de otra tarjeta/sección *@
+    @Html.Hidden("item-to-deletef", "", new { @id = "item-to-deletef" }) @* Se mantiene si el script de eliminación lo usa *@
+    <table class="mf-table">
+        <thead>
+            <tr>
+                <th style="width: 30%;">Nivel</th>
+                <th style="width: 15%; text-align: center;"># Grupos</th>
+                <th style="width: 20%; text-align: center;"># Integrantes Inicio</th>
+                <th style="width: 20%; text-align: center;">Hora/Semanal Final</th>
+                <th style="width: 15%; text-align: center;">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.NombreNiveles</td>
+                        <td style="text-align: center;">@item.Cantidadgrupos</td>
+                        <td style="text-align: center;">@item.CantidadIntegrantes</td>
+                        <td style="text-align: center;">@item.HoraSemanal</td>
+                        <td style="text-align: center;">
+                            <a href="#" class="mf-action-icon-btn mf-action-delete"
+                               title="Eliminar nivel"
+                               data-id="@item.Id" 
+                               onclick="javascript: EliminarNivel('@item.FormacionPracticaNuevoId','@item.Id'); return false;">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="mf-table-empty">
+                        No hay niveles de formación para mostrar.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

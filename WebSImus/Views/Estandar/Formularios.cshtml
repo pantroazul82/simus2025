@@ -1,0 +1,319 @@
+﻿
+@{
+    ViewBag.Title = "Formulario de registro";
+    Layout = "~/Views/Shared/_LayoutDiseño.cshtml";
+    
+}
+
+@section Scripts 
+{
+	<script type="text/javascript">
+
+	</script>
+
+}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- START WIZARD WITH VALIDATION -->
+        <div class="panel panel-colorful">
+            <div class="panel-body">
+                <form action="javascript:alert('Algo pasará');" role="form" class="form-horizontal" id="wizard-validation">
+                    <div class="wizard show-submit wizard-validation">
+                        <!-- Pasos del formulario (10)-->
+                        <ul>
+                            <li>
+                                <a href="#step-1">
+                                    <span class="stepNumber">1</span>
+                                    <span class="stepDesc">Registrarse <br /><small>Datos básicos</small></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#step-2">
+                                    <span class="stepNumber">2</span>
+                                    <span class="stepDesc">Completar <br /><small>Formación y experiencia</small></span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div id="step-1">
+                            <h3><span class="fa-representante fa-2x"></span> Datos b&aacute;sicos</h3>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">ID usuario</label>
+                                <div class="col-md-10">
+                                    <input type="text" value="0001" readonly="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Tipo de documento</label>
+                                <div class="col-md-10">
+                                    <select class="form-control">
+                                        <option>Cédula</option>
+                                        <option>Nit</option>
+                                        <option>Cédula de extrangería</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Número de documento</label>
+                                <div class="col-md-10">
+                                    <input type="text" value="635445" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Nombres</label>
+                                <div class="col-md-10">
+                                    <input type="text" value="José Benito" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Apellidos</label>
+                                <div class="col-md-10">
+                                    <input type="text" value="Barros Palomino" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">País</label>
+                                <div class="col-md-10">
+                                    <input class="form-control ui-autocomplete-input" id="quick-search" autocomplete="off" value="http://angularscript.com/simple-city-country-selector-with-angularjs-and-google-maps/">
+                                </div>
+                            </div>
+	                        <div class="form-group">
+	                            <label class="col-md-2 control-label">Ciudad o municipio</label>
+	                            <div class="col-md-4">                                                                                
+	                                <select class="form-control select" data-live-search="true">
+	                                    <option>Bogot&aacute;</option>
+	                                    <option>Cali</option>
+	                                    <option>Medell&iacute;n</option>
+	                                    <option>Barranquilla</option>
+	                                    <option>Leticia</option>
+	                                </select>
+	                            </div>
+	                            <label class="col-md-2 control-label">Departamento</label>
+	                            <div class="col-md-4">                                                                                
+	                                <select class="form-control select" data-live-search="true">
+	                                    <option>Bogot&aacute; D.C</option>
+	                                    <option>Valle del Cauca</option>
+	                                    <option>Antioquia</option>
+	                                    <option>Atl&aacute;ntico</option>
+	                                    <option>Amazonas</option>
+	                                </select>
+	                            </div>
+	                        </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Correo electrónico</label>
+                                <div class="col-md-10">
+                                    <input type="text" value="jose.barros@dominio.com" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Fecha de nacimiento</label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control datepicker" value="1915-03-21">
+                                </div>
+                                <label class="col-md-2 control-label">Sexo</label>
+                                <div class="col-md-4"> 
+                                    <select class="form-control">
+                                        <option>Femenino</option>
+                                        <option>Masculino</option>
+                                        @*<option>Otro</option> línea comentada por sugerencia del componete de información *@
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Dirección</label>
+                                <div class="col-md-10">
+                                    <input type="text" value="Barrio El Carm&eacute;n" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Teléfono</label>
+                                <div class="col-md-10">
+                                    <input type="text" value="3133483563" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="step-2">
+                            <h3><span class="fa fa-thumbs-o-up"></span> Perfil</h3>
+                            <div class="panel panel-colorful">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Portafolio</h3>
+                                    <ul class="panel-controls">
+                                        <li><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>
+                                    </ul>  
+                                </div>
+                                <div class="panel-body">
+		                            <div class="form-group">
+		                                <label class="col-md-2 control-label">Galer&iacute;a de imagenes</label>
+		                                <div class="form-group">
+		                                    <div class="col-md-10">
+		                                        <input type="file" multiple class="file" data-preview-file-type="any"/>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                            <div class="form-group">
+		                                <label class="col-md-2 control-label">Enlace al protafolio</label>
+		                                <div class="col-md-10">
+		                                    <input type="text" value="http://" class="form-control">
+		                                </div>
+		                            </div>
+		                            <div class="form-group">
+		                                <label class="col-md-2 control-label">Tipificación de agentes</label>
+		                                <div class="col-md-10">
+		                                    <form role="form" class="form-horizontal">
+		                                        <div class="form-group">
+		                                            <div class="col-md-12">
+		                                                <input type="text" class="tagsinput" value="Productor, Músico" />
+		                                            </div>
+		                                        </div>
+		                                    </form>
+		                                </div>
+		                            </div>
+		                            <div class="form-group">
+		                                <label class="col-md-2 control-label">Preferencias musicales</label>
+		                                <div class="col-md-10">
+		                                    <form role="form" class="form-horizontal">
+		                                        <div class="form-group">
+		                                            <div class="col-md-12">
+		                                                <input type="text" class="tagsinput" value="Calipso, Marimba" />
+		                                            </div>
+		                                        </div>
+		                                    </form>
+		                                </div>
+		                            </div>	
+	                            </div>
+	                            <div class="panel-footer">
+                                    <button class="btn btn-primary pull-right">Guardar cambios<span class="fa fa-floppy-o fa-right"></span></button>
+                                </div>
+                            </div>
+                            <h3><span class="fa-question"></span> Formación y experiencia</h3>
+                            <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Agregar formación</h3>
+                                    <ul class="panel-controls">
+                                        <li><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>
+                                    </ul>   
+                                </div>
+                                <div class="panel-body">
+	                                <div class="form-group">
+		                            <label class="col-md-2 control-label">Tipo de formación</label>
+		                            <div class="col-md-4">                                                                                
+		                                <select class="form-control select">
+	                                        <option>Formal</option>
+	                                        <option>Informal</option>
+	                                        <option>Particular</option>
+                                        </select>
+		                            </div>
+		                            <label class="col-md-2 control-label">Institución</label>
+		                            <div class="col-md-4">                                                                                
+		                                <select class="form-control select" data-live-search="true">
+		                                    <option>Universidad de Antioquia</option>
+		                                    <option>Universidad del Norte</option>
+		                                    <option>Universidad Católica de Manizales</option>
+		                                    <option>Universidad de la Guajira</option>
+		                                </select>
+		                            </div>
+		                            </div>
+		                            <div class="form-group">
+		                                <label class="col-md-2 control-label">Fecha de inicio</label>
+		                                <div class="col-md-4">
+		                                    <input type="text" class="form-control datepicker" value="1940-05-21">
+		                                </div>
+		                                <label class="col-md-2 control-label">Fecha de finalización</label>
+		                                <div class="col-md-4">
+		                                    <input type="text" class="form-control datepicker" value="1945-03-21">
+		                                </div>
+		                            </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Título</label>
+		                                <div class="col-md-6">
+		                                	<input type="text" value="" class="form-control">
+		                                </div>
+		                                <div class="col-md-2">                                    
+                                            <label class="check"><input type="radio" class="iradio" name="iradio"/> Finalizado</label>
+                                        </div>
+                                        <div class="col-md-2">                                    
+                                            <label class="check"><input type="radio" class="iradio" name="iradio" checked="checked"/> No finalizado</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Descripción</label>
+		                                <div class="col-md-10">
+		                                	<textarea rows="5" class="form-control"></textarea>
+		                                </div>
+                                    </div>
+                           		</div>
+                           		<div class="panel-footer">
+                                    <button class="btn btn-primary pull-right">Agregar formación <span class="fa fa-floppy-o fa-right"></span></button>
+                                </div>
+                            </div>
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Agregar experiencia</h3>
+                                    <ul class="panel-controls">
+                                        <li><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>
+                                    </ul>  
+                                </div>
+                                <div class="panel-body">
+	                                <div class="form-group">
+			                            <label class="col-md-2 control-label">Tipo de experiencia</label>
+			                            <div class="col-md-4">                                                                                
+			                                <select class="form-control select">
+		                                        <option>Experiencia</option>
+		                                        <option>Investigación</option>
+	                                        </select>
+			                            </div>
+			                            <label class="col-md-2 control-label">Entidad realcionada</label>
+			                            <div class="col-md-4">                                                                                
+			                                <select class="form-control select" data-live-search="true">
+			                                    <option>Universidad de Antioquia</option>
+			                                    <option>Universidad del Norte</option>
+			                                    <option>Universidad Católica de Manizales</option>
+			                                    <option>Universidad de la Guajira</option>
+			                                </select>
+			                            </div>
+		                            </div>
+		                            <div class="form-group">
+                                        <label class="col-md-2 control-label">Título</label>
+		                                <div class="col-md-10">
+		                                	<input type="text" value="" class="form-control">
+		                                </div>
+                                    </div>
+		                            <div class="form-group">
+		                                <label class="col-md-2 control-label">Fecha de inicio</label>
+		                                <div class="col-md-4">
+		                                    <input type="text" class="form-control datepicker" value="1940-05-21">
+		                                </div>
+		                                <label class="col-md-2 control-label">Fecha de finalización</label>
+		                                <div class="col-md-4">
+		                                    <input type="text" class="form-control datepicker" value="1945-03-21">
+		                                </div>
+		                            </div>
+		                            <div class="form-group">
+                                        <label class="col-md-2 control-label">Link</label>
+		                                <div class="col-md-10">
+		                                	<input type="text" value="http://" class="form-control">
+		                                </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Descripción</label>
+		                                <div class="col-md-10">
+		                                	<textarea rows="5" class="form-control"></textarea>
+		                                </div>
+                                    </div>
+                           		</div>
+                           		<div class="panel-footer">
+                                    <button class="btn btn-primary pull-right">Agregar experiencia <span class="fa fa-floppy-o fa-right"></span></button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- END WIZARD WITH VALIDATION -->
+    </div>
+</div>

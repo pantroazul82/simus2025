@@ -1,0 +1,53 @@
+@model WebSImus.Models.ConsultaPublicaFestivalesViewModel
+@{
+    Layout = null;
+}
+
+@if (Model != null && Model.Festivales != null && Model.Festivales.Any())
+{
+    foreach (var festival in Model.Festivales)
+    {
+        <div class="festival-card" onclick="verDetalleFestival(@festival.Id)" style="cursor: pointer;">
+            <div class="festival-imagen">
+                @if (!string.IsNullOrEmpty(festival.ImagenUrl))
+                {
+                    <img src="@festival.ImagenUrl" alt="@festival.Nombre" />
+                }
+                else
+                {
+                    <div class="festival-imagen-default">
+                        <div class="festival-sol"></div>
+                        <div class="festival-nubes">
+                            <div class="nube nube1"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="festival-info">
+                <div class="festival-nombre">@festival.Nombre</div>
+                <div class="festival-detalles">
+                    @if (festival.FechaInicio.HasValue)
+                    {
+                        <div class="festival-detalle-item">@festival.FechaInicio.Value.ToString("dd/MM/yyyy")</div>
+                    }
+                    @if (festival.FechaFin.HasValue)
+                    {
+                        <div class="festival-detalle-item">@festival.FechaFin.Value.ToString("dd/MM/yyyy")</div>
+                    }
+                </div>
+                <div class="festival-ubicacion">
+                    <strong>Ubicaci&oacute;n:</strong> @festival.Ubicacion
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <!-- Mostrar mensaje de no resultados cuando no hay festivales -->
+    <div class="sin-resultados" style="display: block; grid-column: 1 / -1;">
+        <i class="fas fa-search"></i>
+        <h3>No se encontraron festivales</h3>
+        <p>Intenta ajustar los filtros de b&uacute;squeda</p>
+    </div>
+}

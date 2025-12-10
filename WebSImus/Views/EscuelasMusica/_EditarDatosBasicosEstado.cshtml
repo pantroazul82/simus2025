@@ -1,0 +1,219 @@
+﻿@model WebSImus.Models.Escuelas
+
+<div class="modern-form-container">
+    <div class="form-header">
+        <h2 class="form-title">
+            <i class="fas fa-school fa-fw"></i> Información básica
+        </h2>
+    </div>
+
+    @Html.HiddenFor(model => model.EstadoOldId)
+
+    <div class="mf-grid md:mf-grid-cols-3 mf-gap-6 mb-6">
+        <div class="mf-col-span-1">
+            <div id="user_image" class="mf-image-container">
+                <img src="@Url.Content(ViewBag.ImageData)" alt="Imagen Escuela" />
+            </div>
+        </div>
+        <div class="mf-col-span-2">
+            <div class="mf-field-group">
+                <label class="mf-label">Fecha de Actualización</label>
+                <div class="px-3 py-2 mf-readonly-input">@Model.FechaActualizacion.ToString("yyyy-MM-dd")</div>
+            </div>
+
+            <div class="mf-field-group">
+                <label for="@Html.IdFor(model => model.Resena)" class="mf-label">* Reseña de la Escuela</label>
+                @Html.TextAreaFor(model => model.Resena, new { @class = "w-full px-3 py-2 border rounded", rows = "5" })
+                @Html.ValidationMessageFor(model => model.Resena, "", new { @class = "mf-validation-error" })
+            </div>
+
+            <div class="mf-grid md:mf-grid-cols-2 mf-gap-4">
+                <div class="mf-field-group">
+                    <label for="@Html.IdFor(model => model.OperacionEscuela)" class="mf-label">Operatividad</label>
+                    @Html.DropDownListFor(model => model.OperacionEscuela, (SelectList)ViewBag.listOperacion, "Seleccione", new { @class = "w-full px-3 py-2 border rounded styled-select" })
+                    @Html.ValidationMessageFor(model => model.OperacionEscuela, "", new { @class = "mf-validation-error" })
+                </div>
+                <div class="mf-field-group">
+                    <label for="@Html.IdFor(model => model.EstadoId)" class="mf-label">Estado</label>
+                    @Html.DropDownListFor(model => model.EstadoId, (SelectList)ViewBag.listEstado, "Seleccione", new { @class = "w-full px-3 py-2 border rounded styled-select" })
+                    @Html.ValidationMessageFor(model => model.EstadoId, "", new { @class = "mf-validation-error" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="panelMotivo" class="mf-notice-box">
+        <p><i class="fas fa-info-circle fa-fw"></i> Por favor, escriba el motivo del rechazo o incompleto.</p>
+        <div class="mf-field-group mf-mt-2">
+            <label for="@Html.IdFor(model => model.Motivo)" class="mf-label">* Motivo</label>
+            @Html.TextAreaFor(model => model.Motivo, new { @class = "w-full px-3 py-2 border rounded", rows = "5" })
+            @Html.ValidationMessageFor(model => model.Motivo, "", new { @class = "mf-validation-error" })
+        </div>
+    </div>
+
+    <hr class="mf-hr">
+
+    <h3 class="text-xl font-semibold text-gray-800 mf-section-title">
+        <i class="fas fa-id-card fa-fw"></i> Datos de Identificación
+    </h3>
+    <div class="mf-fields-container">
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.NombreEscuela)" class="mf-label">* Nombre de la Escuela</label>
+            @Html.TextBoxFor(model => model.NombreEscuela, new { @class = "w-full px-3 py-2 border rounded", @maxlength = "100" })
+            @Html.ValidationMessageFor(model => model.NombreEscuela, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.Nit)" class="mf-label">Nit</label>
+            @Html.TextBoxFor(model => model.Nit, new { @class = "w-full px-3 py-2 border rounded" })
+            @Html.ValidationMessageFor(model => model.Nit, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.AnoValue)" class="mf-label">* Año de inicio de actividades</label>
+            @Html.DropDownListFor(model => model.AnoValue, (SelectList)ViewBag.Anos, "Seleccione un Año", new { @class = "w-full px-3 py-2 border rounded styled-select" })
+            @Html.ValidationMessageFor(model => model.AnoValue, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.Naturaleza)" class="mf-label">* Naturaleza</label>
+            @Html.DropDownListFor(model => model.Naturaleza, (SelectList)ViewBag.listNaturaleza, "Seleccione un valor", new { @class = "w-full px-3 py-2 border rounded styled-select" })
+            @Html.ValidationMessageFor(model => model.Naturaleza, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.TipoEscuelas)" class="mf-label">* Tipo escuela</label>
+            @Html.DropDownListFor(model => model.TipoEscuelas, (SelectList)ViewBag.listTipoEscuelasMusica, "Seleccione un valor", new { @class = "w-full px-3 py-2 border rounded styled-select" })
+            @Html.ValidationMessageFor(model => model.TipoEscuelas, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="imagenPerfil" class="mf-label">Foto de la Escuela</label>
+            <input onclick="resizePanel()" id="imagenPerfil" name="imagenPerfil" type="file" class="w-full px-3 py-2 border rounded text-sm">
+            <p class="text-sm text-gray-500 mf-mt-1">Tipos de archivo permitidos: .jpg y .png de tamaño máximo 1 Mb</p>
+        </div>
+    </div>
+
+    <hr class="mf-hr">
+
+    <h3 class="text-xl font-semibold text-gray-800 mf-section-title">
+        <i class="fas fa-map-marker-alt fa-fw"></i> Datos de Ubicación
+    </h3>
+    <div class="mf-fields-container">
+        <div class="mf-grid mf-grid-cols-2 mf-gap-4">
+            <div class="mf-field-group">
+                <label for="@Html.IdFor(model => model.DepartamentoSelector)" class="mf-label">* Departamento</label>
+                @Html.DropDownListFor(model => model.DepartamentoSelector, (SelectList)ViewBag.departamentos, "Seleccione un valor", new { @class = "w-full px-3 py-2 border rounded styled-select" })
+                @Html.ValidationMessageFor(model => model.DepartamentoSelector, "", new { @class = "mf-validation-error" })
+            </div>
+            <div class="mf-field-group">
+                <label for="@Html.IdFor(model => model.MunicipioSelector)" class="mf-label">* Municipio</label>
+                @Html.DropDownListFor(model => model.MunicipioSelector, (SelectList)ViewBag.municipios, "Seleccione un valor", new { @class = "w-full px-3 py-2 border rounded styled-select" })
+                @Html.ValidationMessageFor(model => model.MunicipioSelector, "", new { @class = "mf-validation-error" })
+            </div>
+        </div>
+
+        <div class="mf-field-group">
+            <label class="mf-label">Área</label>
+            <div class="mf-radio-group">
+                <label class="mf-radio-label">
+                    @Html.RadioButtonFor(m => m.Area, 5) Rural
+                </label>
+                <label class="mf-radio-label">
+                    @Html.RadioButtonFor(m => m.Area, 4) Urbana
+                </label>
+            </div>
+            @Html.ValidationMessageFor(model => model.Area, "", new { @class = "mf-validation-error" })
+        </div>
+
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.Direccion)" class="mf-label">* Dirección</label>
+            <div class="mf-input-with-button">
+                @Html.TextBoxFor(model => model.Direccion, new { @class = "w-full px-3 py-2 border rounded", @maxlength = "100" })
+                <button type="button" id="btnBuscarMapa" class="btn btn-success" data-dismiss="modal">
+                    <i class="fas fa-map-marked-alt fa-fw"></i> Ver Mapa
+                </button>
+            </div>
+            @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "mf-validation-error" })
+        </div>
+
+        <div class="mf-grid mf-grid-cols-2 mf-gap-4">
+            <div class="mf-field-group">
+                <label for="@Html.IdFor(model => model.Latitud)" class="mf-label">Latitud</label>
+                @Html.TextBoxFor(model => model.Latitud, new { @class = "w-full px-3 py-2 border rounded mf-readonly-input", @readonly = "readonly", @maxlength = "100" })
+                @Html.ValidationMessageFor(model => model.Latitud, "", new { @class = "mf-validation-error" })
+            </div>
+            <div class="mf-field-group">
+                <label for="@Html.IdFor(model => model.Longitud)" class="mf-label">Longitud</label>
+                @Html.TextBoxFor(model => model.Longitud, new { @class = "w-full px-3 py-2 border rounded mf-readonly-input", @readonly = "readonly", @maxlength = "100" })
+                @Html.ValidationMessageFor(model => model.Longitud, "", new { @class = "mf-validation-error" })
+            </div>
+        </div>
+
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.TelefonoEscuela)" class="mf-label">* Teléfono</label>
+            @Html.TextBoxFor(model => model.TelefonoEscuela, new { @class = "w-full px-3 py-2 border rounded", @maxlength = "100" })
+            @Html.ValidationMessageFor(model => model.TelefonoEscuela, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.Fax)" class="mf-label">Fax</label>
+            @Html.TextBoxFor(model => model.Fax, new { @class = "w-full px-3 py-2 border rounded", @maxlength = "100" })
+            @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.CorreoElectronicoEscuela)" class="mf-label">* Correo electrónico de la Escuela</label>
+            @Html.TextBoxFor(model => model.CorreoElectronicoEscuela, new { @class = "w-full px-3 py-2 border rounded", @maxlength = "100" })
+            @Html.ValidationMessageFor(model => model.CorreoElectronicoEscuela, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.SitioWeb)" class="mf-label">Sitio Web</label>
+            @Html.TextBoxFor(model => model.SitioWeb, new { @class = "w-full px-3 py-2 border rounded", @maxlength = "100" })
+            @Html.ValidationMessageFor(model => model.SitioWeb, "", new { @class = "mf-validation-error" })
+            <p class="text-sm text-gray-500 mf-mt-1">Ejemplo: https://www.mincultura.gov.co</p>
+        </div>
+    </div>
+
+    <hr class="mf-hr">
+
+    <h3 class="text-xl font-semibold text-gray-800 mf-section-title">
+        <i class="fas fa-address-book fa-fw"></i> Datos del Contacto
+    </h3>
+    <div class="mf-fields-container">
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.NombreContacto)" class="mf-label">* Nombre del Contacto</label>
+            @Html.TextBoxFor(model => model.NombreContacto, new { @class = "w-full px-3 py-2 border rounded", @maxlength = "100" })
+            @Html.ValidationMessageFor(model => model.NombreContacto, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.Cargo)" class="mf-label">* Cargo del Contacto</label>
+            @Html.TextBoxFor(model => model.Cargo, new { @class = "w-full px-3 py-2 border rounded", @maxlength = "100" })
+            @Html.ValidationMessageFor(model => model.Cargo, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.Telefono)" class="mf-label">* Teléfonos (Celular y/o Fijo)</label>
+            @Html.TextBoxFor(model => model.Telefono, new { @class = "w-full px-3 py-2 border rounded", @maxlength = "100" })
+            @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.CorreoElectronico)" class="mf-label">* Correo Electronico</label>
+            @Html.TextBoxFor(model => model.CorreoElectronico, new { @class = "w-full px-3 py-2 border rounded", @maxlength = "100" })
+            @Html.ValidationMessageFor(model => model.CorreoElectronico, "", new { @class = "mf-validation-error" })
+        </div>
+    </div>
+
+    @*<div class="mf-form-footer">
+            <input type="submit" value="Siguiente" name="Guardar" class="btn btn-success py-2 px-4" id="btnGuardar" />
+        </div>*@
+</div>
+
+<div id="modalEscuelasCreadas" class="modal modal-vcenter fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content card p-0">
+            <div class="mf-modal-header">
+                <h5 class="text-lg font-semibold text-gray-800" id="myModalLabel">Confirmación</h5>
+            </div>
+            <div class="mf-modal-body">
+                <p>Esta a punto de eliminar un vídeo. <strong>Tenga en cuenta que esta acción no se puede revertir</strong>.</p>
+            </div>
+            <div class="mf-modal-footer">
+                <button type="button" class="btn border" data-dismiss="modal">Cancelar</button>
+                <button type="button" id="myAceptar" class="btn mf-btn-danger" data-dismiss="modal" onclick="EliminarVideo()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>

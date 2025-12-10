@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.FichaAsesoria.ClasificacionNuevoDTO>
+
+
+<div class="mf-table-container">
+    @Html.Hidden("item-to-deletec", "", new { @id = "item-to-deletec" })
+
+    <table class="table mf-table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Bueno</th>
+                <th>Regular</th>
+                <th>Deficiente</th>
+                <th>No Se Realiza</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Clasificacion</td>
+                        <td>@item.Bueno</td>
+                        <td>@item.REGULAR</td>
+                        <td>@item.DEFICIENTE</td>
+                        <td>@item.NOSEREALIZA</td>
+                        <td>
+                            <a href="#" class="mf-action-icon-btn" data-toggle="modal"
+                                data-target="#modal_datosClasificacion"
+                                title="Editar la información"
+                                onclick="javascript: CargarModalClasificacion('@item.Id', '@item.Tipo');">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    @* Modal de confirmación *@
+    <div id="modalConfirmarClasificacion" class="modal fade mf-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="mf-modal-body">
+                    Está a punto de eliminar un elemento de su lista de instrumentos.
+                    <strong>Tenga en cuenta que esta acción no se puede revertir.</strong>
+                </div>
+                <div class="mf-modal-footer text-right">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="myDeleteForma" class="btn btn-danger" data-dismiss="modal" onclick="EliminarInstrumentos()">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

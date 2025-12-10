@@ -1,0 +1,72 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.Servicios.HerramientaDTO>
+
+
+<div id="Tabla">
+    <div class="row">
+        <div class="col-md-12">
+            @if (Model != null && Model.Any())
+            {
+                var alternarColor = true;
+                foreach (var item in Model)
+                {
+                    var fondoClase = alternarColor ? "herramienta-item par" : "herramienta-item impar";
+                    alternarColor = !alternarColor;
+                    <div class="@fondoClase">
+                        <div class="herramienta-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <a href="#" data-toggle="modal" data-target="#modal_datosherramientas" data-id="@item.Id" onclick="CargarDetalle('@item.Id'); return false;">
+                            <div class="herramienta-nombre">@item.Nombre</div>
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+
+<style>
+
+    .herramienta-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        border-radius: 10px;
+        transition: background-color 0.3s ease;
+        margin-bottom: 8px;
+        cursor: pointer;
+    }
+
+        .herramienta-item:hover {
+            background-color: #f1f0fa;
+        }
+
+        .herramienta-item.par {
+            background-color: #f9f9fb;
+        }
+
+        .herramienta-item.impar {
+            background-color: #ffffff;
+        }
+
+    .herramienta-icon {
+        flex: 0 0 40px;
+        text-align: center;
+        color: #4b3c8c;
+        font-size: 1.2rem;
+    }
+
+    .herramienta-nombre {
+        flex: 1;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #333;
+        padding-left: 10px;
+    }
+
+        .herramienta-nombre:hover {
+            text-decoration: underline;
+        }
+
+</style>

@@ -1,0 +1,208 @@
+﻿@model WebSImus.Models.AgenteModel
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2><span class="fa-representante fa-2x"></span> Información Perfil</h2>
+    </div>
+    <div class="panel-body">
+        <div class="row push-down-20">
+            <h3><span class="fa-representante fa-2x"></span> Datos de Ocupación</h3>
+        </div>
+        <div class="row push-down-20">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Ocupación</label>
+                    <div class="col-md-9">
+                        @Html.Editor("Ocupacion", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+
+                    <div class="col-md-6">
+                        <button type="button" id="mySubmitOcupac" class="btn btn-success glyphicon glyphicon-plus-sign" data-dismiss="modal"> Agregar</button>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="TablaOcupacion" class="panel-body">
+        @Html.Action("CargarOcupacion", new { AgenteId = Model.AgenteId, EliminarId = 0 })
+    </div>
+
+    <!-- FORMACIÓN -->
+    <div class="panel-body">
+        <div class="row push-down-20">
+            <h3><span class="fa fa-book"></span> Datos de Estudios e Investigaciones</h3>
+
+        </div>
+        <div class="row push-up-20">
+            <div class="col-md-12">
+
+                <div class="form-group">
+                    <div class="col-md-12 col-xs-12">
+                        <a href="#" class="btn btn-success glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#modal_agregarFormacion"> Agregar</a>
+                    </div>
+                </div>
+                <!-- MODAL AGREGAR FORMACIÓN -->
+                <div id="panelAgregar" class="panel-body">
+                    @Html.Action("_AgregarFormacion")
+                </div>
+                <!-- FIN MODAL -->
+                <!-- INICIO GRILLA  -->
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Listado de Estudios</h4>
+
+                    </div>
+                    <div id="formacionTabla" class="panel-body">
+                        @Html.Action("_TablaFormacion", new { Id = Model.AgenteId, Eliminar = 0 })
+                    </div>
+                </div>
+                <!-- FIN GRILLA  -->
+            </div>
+        </div>
+    </div>
+
+    <!-- EXPERIENCIA -->
+    <div class="panel-body">
+        <div class="row push-down-20">
+            <h3><span class="fa fa-suitcase"></span> Datos de Experiencia y Trayectoria</h3>
+        </div>
+        <div class="row push-up-20">
+            <div class="col-md-12">
+
+                <div class="form-group">
+                    <div class="col-md-12 col-xs-12">
+                        <a href="#" class="btn btn-success glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#modal_agregarExperiencia"> Agregar</a>
+                    </div>
+                </div>
+                <!-- MODAL AGREGAR FORMACIÓN -->
+                <div id="panelAgregar" class="panel-body">
+                    @Html.Action("_AgregarExperiencia")
+                </div>
+                <!-- FIN MODAL -->
+                <!-- INICIO GRILLA  -->
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Listado de Experiencia</h4>
+
+                    </div>
+                    <div id="experienciaTabla" class="panel-body">
+                        @Html.Action("_TablaExperiencia", new { Id = Model.AgenteId, Eliminar = 0 })
+                    </div>
+                </div>
+                <!-- FIN GRILLA  -->
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+  
+    function CargarModalFormacion(Id) {
+       $('#item-to-deletef').val(Id);
+
+    }
+    function CargarModalExperiencia(Id) {
+        $('#item-to-deletex').val(Id);
+
+    }
+    function EliminarOcupacion(varid) {
+        var varAgenteId = '@Model.AgenteId';
+        ActualizarListado(varAgenteId, varid);
+    }
+    function EliminarFormacion() {
+        var varid = $('#item-to-deletef').val();
+        actualizarFormacion(varid);
+        return false;
+       
+    }
+    function EliminarExperiencia() {
+        var varid = $('#item-to-deletex').val();
+        actualizarExperiencia(varid);
+        return false;
+    }
+
+    function AgregarInstrumentos(Id, varOficioId) {
+        alert("Entro " + varOficioId);
+        var varValor = $("#Instrumentos" + Id).val();
+        alert(varValor);
+        if (varValor == '') {
+            alert("Es obligatorio escribir un instrumento");
+            return;
+        }
+
+        var url = '@Url.Action("AgregarInstrumento", "Agente")';
+        var varAgenteId = '@Model.AgenteId';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                atributo: varValor, OficioId: varOficioId, agenteId: varAgenteId
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    ActualizarListadoInstrumento(varAgenteId, varOficioId, 0);
+                }
+            },
+
+        });
+        return false;
+    }
+
+    function RecargarInstrumento() {
+        alert("Preuba  4322");
+        //Desde aquí autocompletar para instrumentos
+        $(".instrumento").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Agente/CargarListaInstrumentos",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Nombre, value: item.Nombre };
+                        }))
+
+                    }
+
+                })
+            },
+            messages: {
+                //noResults: "", results: ""
+
+            }
+
+        });
+
+
+    }
+
+    function ActualizarListadoInstrumento(VarAgenteId, varOficioId, varEliminar) {
+
+        $('#Ocupacion').val("");
+        $.ajax({
+
+            url: "/Agente/CargarInstrumentos",
+            type: "GET",
+            data: { AgenteId: VarAgenteId, OficioId: varOficioId, EliminarId: varEliminar }
+        })
+       .done(function (partialViewResult) {
+           $("#TablaOcupacion").html(partialViewResult);
+
+       });
+
+    }
+</script>

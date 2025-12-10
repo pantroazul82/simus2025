@@ -1,0 +1,998 @@
+﻿
+@{
+    ViewBag.Title = "Escuelas de música";
+    Layout = "~/Views/Shared/_LayoutDiseño.cshtml";
+    
+}
+
+@section Scripts 
+{
+@Scripts.Render("~/bundles/jqueryval")
+	<script type="text/javascript">
+        $(function () {
+            $('.page-container').addClass('page-navigation-toggled page-container-wide');
+            $('#encabezado').css("background-image", "url(../assets/images/ocean.jpg)");
+            $('#encabezado').css("background-size", "cover");
+            $('#encabezado').css("background-position", "0 50%");
+        });
+
+
+	</script>
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- START WIZARD WITH VALIDATION -->
+        <div class="panel panel-colorful">
+            <div class="panel-body">
+                <!-- INICIO CABEZOTE -->
+                <div id="encabezado" class="panel-body panel-body-image">
+                    <div class="page-title">
+                        <h2>Corporación artística y cultural Scala Musical</h2>
+                    </div>
+                    <blockquote class="blockquote-success">
+                        <p class="text-danger ">Los campos marcados con asterisco (*) son obligatorios</p>
+                    </blockquote>
+                    
+                </div>
+                <!-- FIN CABEZOTE -->
+                <form action="javascript:alert('Hola Grey');" role="form" class="form-horizontal" id="wizard-validation">
+                    <div class="wizard show-submit wizard-validation">
+                        <!-- Pasos del formulario (3)-->
+                        <ul>
+                            <li>
+                                <a href="#step-1">
+                                    <span class="stepNumber">1</span>
+                                    <span class="stepDesc">Registrarse <br /><small>Datos básicos</small></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#step-2">
+                                    <span class="stepNumber">2</span>
+                                    <span class="stepDesc">Consolidación <br /><small>Estado de la escuela</small></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#step-3">
+                                    <span class="stepNumber">3</span>
+                                    <span class="stepDesc">Redes sociales<br /><small>y multimedia</small></span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div id="step-1">
+                            <div class="row">
+                            <div class="col-md-12">
+                                <form class="form-horizontal">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h2><span class="fa-representante fa-2x"></span> Informaci&oacute;n b&aacute;sica</h2>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Departamento</label>
+                                                <div class="col-md-4">
+                                                    <select class="form-control select" data-live-search="true">
+                                                        <option>Bogot&aacute; D.C</option>
+                                                        <option>Valle del Cauca</option>
+                                                        <option>Antioquia</option>
+                                                        <option>Atl&aacute;ntico</option>
+                                                        <option>Amazonas</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Municipio</label>
+                                                <div class="col-md-4">
+                                                    <select class="form-control select" data-live-search="true">
+                                                        <option>Bogot&aacute;</option>
+                                                        <option>Cali</option>
+                                                        <option>Medell&iacute;n</option>
+                                                        <option>Barranquilla</option>
+                                                        <option>Leticia</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Estado actual de la escuela</label>
+                                                <div class="col-md-4">
+                                                    <label class="check"><input type="radio" class="radio" name="iradio" /> Publicado</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="check"><input type="radio" class="radio" name="iradio" checked="checked" /> No Publicado</label>
+                                                </div>
+                                            </div>
+                                            <h3><span class="fa-pencil-1 fa-2x"></span> Datos de Identificaci&oacute;n de la Escuela</h3>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Nombre de la Escuela</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" value="" class="form-control text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Nit</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" value="" class="form-control text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">A&ntilde;o de inicio de actividades</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" value="" class="form-control datepicker">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Foto de la Escuela</label>
+                                                <div class="col-md-10">
+                                                    <input type="file" class="fileinput" name="filename1" id="filename1" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Rese&ntilde;a de la Escuela</label>
+                                                <div class="col-md-10">
+                                                    <div class="col-md-10">
+                                                        <textarea class="form-control" rows="5"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3><span class="fa-pencil-1 fa-2x"></span> Datos del Contacto de la Escuela</h3>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Nombre del Contacto</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" value="" class="form-control text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Cargo del Contacto</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" value="" class="form-control text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Tel&eacute;fonos (Celular y/o Fijo)</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" value="" class="form-control text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Correo Electronico</label>
+                                                <div class="col-md-10">
+                                                    <input type="email" value="" class="form-control" placeholder="ejemplo@correo.com">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">&Aacute;rea</label>
+                                                <div class="col-md-4">
+                                                    <label class="check"><input type="radio" class="radio" name="iradio" /> Rural</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="check"><input type="radio" class="radio" name="iradio" checked="checked" /> Urbana</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Direcci&oacute;n</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" value="" class="form-control text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Tel&eacute;fono</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" value="" class="form-control text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Fax</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" value="" class="form-control text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Correo electr&oacute;nico de la Escuela</label>
+                                                <div class="col-md-10">
+                                                    <input type="email" value="" placeholder="ejemplo@correo.com" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Sitio Web</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" value="" class="form-control text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-footer">
+                                            <button class="btn btn-default">Limpiar formulario</button>
+                                            <button class="btn btn-primary pull-right">Guardar<span class="fa fa-floppy-o fa-right"></span></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>  
+                        </div>
+                        <div id="step-2">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <form class="form-horizontal">
+
+                                        <div class="panel panel-default tabs">
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">Institucionalidad</a></li>
+                                                <li><a href="#tab-second" role="tab" data-toggle="tab">Infraestructura y dotación</a></li>
+                                                <li><a href="#tab-third" role="tab" data-toggle="tab">Participación</a></li>
+                                                <li><a href="#tab-fourth" role="tab" data-toggle="tab">Formación</a></li>
+                                                <li><a href="#tab-fifth" role="tab" data-toggle="tab">Producción</a></li>
+                                            </ul>
+                                            <div class="panel-body tab-content">
+                                                <div class="tab-pane active" id="tab-first">
+                                                        <form class="form-horizontal">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    <h3><span class="fa-representante fa-2x"></span> INSTITUCIONALIDAD</h3>
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <h3><span class="fa-pencil-1 fa-2x"></span> Caracteristicas Generales de la Escuela</h3>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">¿La escuela fue creada legalmente?</label>
+                                                                        <div class="col-md-4">
+                                                                            <label class="check"><input type="radio" class="radio" name="radio" /> Si </label>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label class="check"><input type="radio" class="radio" name="radio" checked="checked" /> No </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">R&eacute;gimen</label>
+                                                                        <div class="col-md-10">
+                                                                            <select class="form-control select">
+                                                                                <option>Seleccione un r&eacute;gimen..</option>
+                                                                                <option>Especial</option>
+                                                                                <option>Com&uacute;n</option>
+                                                                                <option>No Contribuyente</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Sub R&eacute;gimen</label>
+                                                                        <div class="col-md-10">
+                                                                            <select class="form-control select">
+                                                                                <option>Seleccione un r&eacute;gimen..</option>
+                                                                                <option>Fundaci&oacute;n</option>
+                                                                                <option>Asociaci&oacute;n</option>
+                                                                                <option>Cooperativa</option>
+                                                                                <option>Corporaci&oacute;n</option>
+                                                                                <option>Otro</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Naturaleza</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" value="" class="form-control text">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">¿Depende de alguna Entidad?</label>
+                                                                        <div class="col-md-4">
+                                                                            <label class="check"><input type="radio" class="radio" name="radio" /> Si </label>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label class="check"><input type="radio" class="radio" name="radio" checked="checked" /> No </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <h3><span class="fa-pencil-1 fa-2x"></span> Informaci&oacute;n del Director de la Escuela</h3>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Nombre Completo del Director</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" value="" class="form-control text">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Fecha de Nacimiento</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" value="" class="form-control datepicker">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Tel&eacute;fono Celular</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" value="" class="form-control text">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Correo Electr&oacute;nico</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" value="" class="form-control text">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Tipo de Vinculaci&oacute;n</label>
+                                                                        <div class="col-md-10">
+                                                                            <select class="form-control select">
+                                                                                <option>Seleccione una vinculaci&oacute;n…</option>
+                                                                                <option>Voluntario</option>
+                                                                                <option>Por Orden de Prestaci&oacute;n de Servicios</option>
+                                                                                <option>Por contrato de honorarios</option>
+                                                                                <option>Por contrato laboral de n&oacute;mina</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Entidad Contratante</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" value="" class="form-control text">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">¿Ha recibido o recibe formaci&oacute;n musical por parte del Plan Nacional de M&uacute;sica para la Convivencia?</label>
+                                                                        <div class="col-md-4">
+                                                                            <label class="check"><input type="radio" class="radio" name="iradio" /> Si</label>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label class="check"><input type="radio" class="radio" name="iradio" /> No</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">¿En cu&aacute;l practica musical?</label>
+                                                                        <div class="col-md-2">
+                                                                            <label class="check"><input type="checkbox" class="checkbox" name="iradio" /> Bandas</label>
+                                                                        </div>
+                                                                        <div class="col-md-2">
+                                                                            <label class="check"><input type="checkbox" class="checkbox" name="iradio" /> Musicas Tradicionales</label>
+                                                                        </div>
+                                                                        <div class="col-md-2">
+                                                                            <label class="check"><input type="checkbox" class="checkbox" name="iradio" /> Coros</label>
+                                                                        </div>
+                                                                        <div class="col-md-2">
+                                                                            <label class="check"><input type="checkbox" class="checkbox" name="iradio" /> Orquestas Sinf&oacute;nicas</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <h3><span class="fa-pencil-1 fa-2x"></span> Informaci&oacute;n de los Docentes</h3>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Voluntarios</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" class="form-control spinner_default" value="1" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Contrato Laboral (N&oacute;mina)</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" class="form-control spinner_default" value="1" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Contrato por honorarios</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" class="form-control spinner_default" value="1" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Orden de prestación de servicios</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" class="form-control spinner_default" value="1" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <h3><span class="fa-pencil-1 fa-2x"></span> Indique la cantidad de docentes seg&uacute;n su tipo de vinculaci&oacute;n</h3>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Primaria</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" class="form-control spinner_default" value="1" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Secundaria</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" class="form-control spinner_default" value="1" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">T&eacute;cnico – tecn&oacute;logo</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" class="form-control spinner_default" value="1" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Universitaria sin t&iacute;tulo</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" class="form-control spinner_default" value="1" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Pregrado en M&uacute;sica</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" class="form-control spinner_default" value="1" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Pregado en otra &Aacute;rea</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" class="form-control spinner_default" value="1" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">Postgrado</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" class="form-control spinner_default" value="1" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">¿Cuenta la escuela con apoyo administrativo?</label>
+                                                                        <div class="col-md-4">
+                                                                            <label class="check"><input type="radio" class="radio" name="iradio" /> Si</label>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label class="check"><input type="radio" class="radio" name="iradio" /> No</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-2 control-label">¿En el Plan de Desarrollo municipal se incluye la actividad musical?</label>
+                                                                        <div class="col-md-4">
+                                                                            <label class="check"><input type="radio" class="radio" name="iradio" /> Si</label>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label class="check"><input type="radio" class="radio" name="iradio" /> No</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                <div class="tab-pane" id="tab-second">
+                                                    <form class="form-horizontal">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                <h3><span class="fa-representante fa-2x"></span> INFRAESTRUCTURA Y DOTACI&Oacute;N</h3>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <h3><span class="fa-pencil-1 fa-2x"></span> Infraestructura</h3>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Nombre de la Sede de Trabajo</label>
+                                                                    <div class="col-md-10">
+                                                                        <select class="form-control select" data-live-search="true">
+                                                                            <option>El Encanto</option>
+                                                                            <option>La Chorrera</option>
+                                                                            <option>La Pedrera</option>
+                                                                            <option>La Victoria</option>
+                                                                            <option>Etc</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Espacio</label>
+                                                                    <div class="col-md-10">
+                                                                        <select class="form-control select">
+                                                                            <option>Propio</option>
+                                                                            <option>En Arriendo</option>
+                                                                            <option>En Comodato</option>
+                                                                            <option>No Tiene</option>
+                                                                            <option>Pr&eacute;stamos</option>
+                                                                            <option>Dato No Disponible</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">¿La sede es asignada con soporte escrito?</label>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="radio" /> Si </label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="radio" /> No </label>
+                                                                    </div>
+                                                                </div>
+                                                                <h3><span class="fa-pencil-1 fa-2x"></span> Indique la cantidad de mobiliario según la siguiente lista.</h3>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Sillas</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Atriles</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Tableros Acr&iacute;licos</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Estanter&iacute;a</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">¿La sede está adecuada acústicamente?</label>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="iradio" /> Si</label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="iradio" /> No</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Porcentaje de la sede adecuada acústicamente</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Tipo de Servicio de Internet</label>
+                                                                    <div class="col-md-10">
+                                                                        <select class="form-control select">
+                                                                            <option>Banda Ancha</option>
+                                                                            <option>Móvil o Celular</option>
+                                                                            <option>Conmutado</option>
+                                                                            <option>Dedicado</option>
+                                                                            <option>No Tiene Internet</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <h3><span class="fa-pencil-1 fa-2x"></span> Dotaci&oacute;n Instrumental</h3>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Cuerdas Pulsadas</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Cuerdas Sinf&oacute;nicas</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Vientos Maderas</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Vientos Metales</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Percusi&oacute;n Menor</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Percusi&oacute;n Sinf&oacute;nica</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Otros</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <h3><span class="fa-pencil-1 fa-2x"></span> Formatos Instrumentales con los que Cuenta</h3>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Coro</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Banda de Viento</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Banda Marcial</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Orquesta</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">M&uacute;sica Tradicional</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">M&uacute;sica Popular Urbana</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">¿La escuela de m&uacute;sica cuenta con material pedag&oacute;gico?</label>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="iradio" /> Si</label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="iradio" /> No</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Cantidad de T&iacute;tulos Bibliogr&aacute;ficos</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">La adquisici&oacute;n del material pedag&oacute;gico ha sido mediante</label>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="checkbox" class="icheckbox" name="iradio" /> Por Compra</label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="checkbox" class="icheckbox" name="iradio" /> Por Donaci&oacute;n</label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="checkbox" class="icheckbox" name="iradio" /> Producci&oacute;n Propia</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="tab-pane" id="tab-third">
+                                                    <form class="form-horizontal">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                <h3><span class="fa-representante fa-2x"></span> PARTICIPACI&Oacute;N</h3>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <h3><span class="fa-pencil-1 fa-2x"></span> Indique la cantidad de alumnos de acuerdo con los rangos de edades dados a continuaci&oacute;n</h3>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Primera Infancia (Menores de 6 a&ntilde;os)</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Entre 6 y 11 a&ntilde;os </label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Entre 12 y 18 a&ntilde;os </label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Entre 19 y 26 a&ntilde;os </label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Entre 27 y 60 a&ntilde;os </label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Mayores de 60 a&ntilde;os </label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <h3><span class="fa-pencil-1 fa-2x"></span> Indique la cantidad de alumnos de acuerdo a su etnia</h3>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Ind&iacute;genas</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Afrocolombiana</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Rom</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Raizales</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Otros</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <h3><span class="fa-pencil-1 fa-2x"></span> Indique la cantidad de alumnos por sexo</h3>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Hombres</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Mujeres</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <h3><span class="fa-pencil-1 fa-2x"></span> Indique la cantidad de alumnos por &Aacute;rea</h3>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Rural</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Urbana</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <h3><span class="fa-pencil-1 fa-2x"></span> Indique la cantidad de alumnos pertenecientes a alguna de las siguientes condiciones</h3>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Discapacitados</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Desplazados</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">¿La escuela de m&uacute;sica cuenta con organizaci&oacute;n comunitaria?</label>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="iradio" /> Si</label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="iradio" /> No</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Nombre de la Organizaci&oacute;n Comunitaria</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" value="" class="form-control text">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">N&uacute;mero de Integrantes</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Nombre y Apellido del Presidente de la Organizaci&oacute;n Comunitaria</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" value="" class="form-control text">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Tel&eacute;fono Celular del Presidente</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" value="" class="form-control text">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Tel&eacute;fono Fijo del Presidente</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" value="" class="form-control text">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Correo Electr&oacute;nico del Presidente</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" value="" class="form-control text">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">¿La organizaci&oacute;n comunitaria ha desarrollado proyectos entorno a la escuela de m&uacute;sica?</label>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="iradio" /> Si</label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="iradio" /> No</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Seleccione los proyectos que ha realizado la organizaci&oacute;n comunitaria alrededor de la escuela</label>
+                                                                    <div class="col-md-2">
+                                                                        <label class="check"><input type="checkbox" class="icheckbox" name="iradio" /> De Formaci&oacute;n</label>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <label class="check"><input type="checkbox" class="icheckbox" name="iradio" /> Recolecci&oacute;n de Fondos</label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="checkbox" class="icheckbox" name="iradio" /> Reparaciones locativas de la escuela</label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="checkbox" class="icheckbox" name="iradio" /> Apoyo a la Gesti&oacute;n</label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="checkbox" class="icheckbox" name="iradio" /> Dotaci&oacute;n</label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="checkbox" class="icheckbox" name="iradio" /> Otra</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">¿Cuáles?</label>
+                                                                    <div class="col-md-10">
+                                                                        <textarea class="form-control" rows="5"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="tab-pane" id="tab-fourth">
+                                                    <form class="form-horizontal">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                <h3><span class="fa-representante fa-2x"></span> FORMACI&Oacute;N</h3>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">¿Cu&aacute;les son los procesos de formaci&oacute;n que imparte la escuela?</label>
+                                                                    <div class="col-md-10">
+                                                                        <textarea class="form-control" rows="5"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Seleccione las prácticas musicales realizadas en la escuela</label>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="checkbox" class="checkbox" name="radio" /> Bandas </label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="checkbox" class="checkbox" name="radio" /> M&uacute;sicas Tradicionales </label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="checkbox" class="checkbox" name="radio" /> Coros </label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="checkbox" class="checkbox" name="radio" /> Orquestas Sinf&oacute;nica </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">¿Realiza la escuela pr&aacute;cticas musicales orientadas por un m&uacute;sico?</label>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="iradio" /> Si</label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="iradio" /> No</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">¿Realiza la escuela talleres independientes?</label>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="iradio" /> Si</label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="iradio" /> No</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">¿Posee la escuela programas formulados por escrito?</label>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="iradio" /> Si</label>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label class="check"><input type="radio" class="radio" name="iradio" /> No</label>
+                                                                    </div>
+                                                                </div>
+                                                                <h3><span class="fa-pencil-1 fa-2x"></span> Educaci&oacute;n por Niveles</h3>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">¿?</label>
+                                                                    <div class="col-md-10">
+                                                                        <textarea class="form-control" rows="5"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <h3><span class="fa-pencil-1 fa-2x"></span> Educaci&oacute;n Informal</h3>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">¿?</label>
+                                                                    <div class="col-md-10">
+                                                                        <textarea class="form-control" rows="5"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="tab-pane" id="tab-fifth">
+                                                    <form class="form-horizontal">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                <h3><span class="fa-representante fa-2x"></span> PRODUCCI&Oacute;N</h3>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Indique el n&uacute;mero de giras nacionales que se realizaron durante el &uacute;ltimo a&ntilde;o</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Indique el n&uacute;mero de giras internacionales que se realizaron durante el &uacute;ltimo a&ntilde;o</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Indique el n&uacute;mero de presentaciones o conciertos realizados en su localidad durante el &uacute;ltimo a&ntilde;o</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <h3><span class="fa-pencil-1 fa-2x"></span> Indique el n&uacute;mero de productos musicales o pedag&oacute;gicos elaborados durante el &uacute;ltimo a&ntilde;o</h3>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Discos</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Repertorios</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Material Divulgativo</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Material Pedag&oacute;gico de Apoyo</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">Agrupaciones Art&iacute;sticas Conformadas Vigentes</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control spinner_default" value="1" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="panel-footer">
+                                                <button class="btn btn-default">Limpiar formulario</button>   
+                                                <button class="btn btn-primary pull-right">Guardar<span class="fa fa-floppy-o fa-right"></span></button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                            </div>  
+                        </div>
+                        <div id="step-3">
+                            <p>Hola paso 3</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- END WIZARD WITH VALIDATION -->
+    </div>
+</div>

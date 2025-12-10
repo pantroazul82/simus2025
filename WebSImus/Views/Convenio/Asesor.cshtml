@@ -1,0 +1,41 @@
+﻿
+
+@{
+    ViewBag.Title = "Cronogramas Asesor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Convenios", "Index", "Convenio")</li>
+    </ul>
+    <div class="col-md-12">
+
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.ActionLink(" Exportar", "ExportToResponsable", "Convenio", null, new { @class = "btn btn-warning glyphicon glyphicon-export" })
+               
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+
+        <br />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div id="Tabla">
+                        @Html.Action("GridViewPartialResponsable")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

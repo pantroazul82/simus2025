@@ -1,0 +1,87 @@
+﻿@model SM.LibreriaComun.DTO.EntidadesOperadoras.ConvenioDTO
+@{
+    ViewBag.Title = "Convenio";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Editar", "Convenio", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Convenio", "Index", "Convenio")</li>
+        <li>@Html.ActionLink("Ver entidad", "Editar", "Entidad", new { Id = Model.EntidadId }, null)</li>
+    </ul>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.ActionLink("Agregar actividad", "Crear", "Actividad", new { Id = Model.Id }, new { @class = "btn btn-warning glyphicon glyphicon-plus-sign" })
+                @Html.ActionLink("Ver actividades", "Index", "Actividad", new { Id = Model.Id }, new { @class = "btn btn-success glyphicon glyphicon-plus-sign" })
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary form-horizontal">
+        @Html.ValidationSummary(true)
+       
+        <div class="panel-body" id="panelEditar">
+            @Html.Partial("_Datos", Model)
+            <div class="panel-footer">
+                <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script type="text/javascript">
+        $('#FechaInicio').datepicker({
+            minDate: 0,
+            maxDate: "+60D",
+            numberOfMonths: 2,
+            format: 'yyyy-mm-dd',
+            onSelect: function (selected) {
+                $("#FechaFin").datepicker("option", "minDate", selected)
+            }
+        })
+
+        $('#FechaFin').datepicker({
+
+            format: 'yyyy-mm-dd',
+            minDate: 0,
+            maxDate: "+60D",
+            numberOfMonths: 2,
+            onSelect: function (selected) {
+                $("#FechaInicio").datepicker("option", "maxDate", selected)
+            }
+        })
+
+        function ValidaSoloNumeros() {
+            console.log("ValidaSoloNumeros");
+            if ((event.keyCode < 48) || (event.keyCode > 57))
+                event.returnValue = false;
+        }
+
+        $('#Valor').keypress(function () {
+            ValidaSoloNumeros();
+        });
+        
+        $("#FechaFin").change(function () {
+            var startDate = document.getElementById("FechaInicio").value;
+            var endDate = document.getElementById("FechaFin").value;
+
+            if ((Date.parse(startDate) > Date.parse(endDate))) {
+                alert("La fecha final no puede ser menor a la inicial");
+                document.getElementById("FechaFin").value = "";
+            }
+        });
+
+      
+    </script>
+}

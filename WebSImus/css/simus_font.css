@@ -1,0 +1,379 @@
+/*@charset "UTF-8";
+
+@font-face {
+  font-family: "simus";
+  src:url("fonts/simus.eot");
+  src:url("fonts/simus.eot?#iefix") format("embedded-opentype"),
+    url("fonts/simus.woff") format("woff"),
+    url("fonts/simus.ttf") format("truetype"),
+    url("fonts/simus.svg#simus") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Font Awesome 6 Free';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/fontawesome-free-6.7.2-web/webfonts/fa-regular-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Font Awesome 6 Solid';
+    font-style: normal;
+    font-weight: 900;
+    src: url('../fonts/fontawesome-free-6.7.2-web/webfonts/fa-solid-900.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Font Awesome 6 Brands';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/fontawesome-free-6.7.2-web/webfonts/fa-brands-400.woff2') format('woff2');
+}
+
+
+
+[data-icon]:before {
+    font-family: "simus", "Font Awesome 6 Free", "Font Awesome 6 Brands", "Font Awesome 6 Solid";
+    content: attr(data-icon);
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="fa-"]:before,
+[class*="fa-"]:before {
+    font-family: "simus", "Font Awesome 6 Free", "Font Awesome 6 Brands";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-pacifico-n:before {
+  content: "\61";
+}
+.fa-pacifico-s:before {
+  content: "\62";
+}
+.fa-llanera:before {
+  content: "\63";
+}
+.fa-islena:before {
+  content: "\64";
+}
+.fa-frontera:before {
+  content: "\65";
+}
+.fa-caribe-occ:before {
+  content: "\66";
+}
+.fa-caribe-o:before {
+  content: "\67";
+}
+.fa-andina-suro:before {
+  content: "\68";
+}
+.fa-andina-so:before {
+  content: "\69";
+}
+.fa-acustica:before {
+  content: "\6a";
+}
+.fa-solid fa-chevron-right:before {
+  content: "\6b";
+}
+.fa-agrupacion:before {
+  content: "\6c";
+}
+.fa-alumnos:before {
+  content: "\6d";
+}
+.fa-ayuda:before {
+  content: "\6e";
+}
+.fa-caracterizacion:before {
+  content: "\6f";
+}
+.fa-cartografia:before {
+  content: "\70";
+}
+.fa-celebra:before {
+  content: "\71";
+}
+.fa-celular:before {
+  content: "\72";
+}
+.fa-correo:before {
+  content: "\73";
+}
+.fa-datos:before {
+  content: "\74";
+}
+.fa-docentes:before {
+  content: "\75";
+}
+.fa-editorial:before {
+  content: "\76";
+}
+.fa-perfil:before {
+  content: "\77";
+}
+.fa-organiza:before {
+  content: "\78";
+}
+.fa-oferta:before {
+  content: "\79";
+}
+.fa-marcador:before {
+  content: "\7a";
+}
+.fa-mapas:before {
+  content: "\41";
+}
+.fa-youtube2:before {
+  content: "\42";
+}
+.fa-wifi:before {
+  content: "\43";
+}
+.fa-infraestructura:before {
+  content: "\44";
+}
+.fa-web:before {
+  content: "\45";
+}
+.fa-formacion:before {
+  content: "\46";
+}
+.fa-flickr2:before {
+  content: "\47";
+}
+.fa-twitter2:before {
+  content: "\48";
+}
+.fa-face:before {
+  content: "\4a";
+}
+.fa-revista:before {
+  content: "\4b";
+}
+.fa-experiencia:before {
+  content: "\4c";
+}
+.fa-escuelas:before {
+  content: "\4d";
+}
+.fa-representante:before {
+  content: "\4e";
+}
+.fa-produccion:before {
+  content: "\4f";
+}
+.fa-entidades:before {
+  content: "\50";
+}
+.fa-andina-cs:before {
+  content: "\51";
+}
+.fa-pencil-1:before {
+  content: "\52";
+}
+.fa-telephone:before {
+  content: "\53";
+}
+.fa-question:before {
+  content: "\54";
+}
+.fa-musical:before {
+  content: "\55";
+}
+.fa-virtual:before {
+  content: "\56";
+}
+.fa-align:before {
+  content: "\57";
+}
+.fa-reloj:before {
+  content: "\58";
+}
+.fa-comunitaria:before {
+  content: "\59";
+}
+.fa-educativa:before {
+  content: "\5a";
+}
+.fa-soundcloud2:before {
+  content: "\32";
+}
+.fa-lock-open:before {
+  content: "\49";
+}
+.fa-bars:before {
+  content: "\30";
+}
+.fa-indigenas:before {
+  content: "\31";
+}
+.fa-convocatorias:before {
+  content: "\33";
+}
+.fa-documentos:before {
+  content: "\35";
+}
+.fa-festivales:before {
+  content: "\36";
+}
+.fa-noticias:before {
+  content: "\37";
+}
+.fa-caja:before {
+  content: "\38";
+}
+.fa-clasificados:before {
+  content: "\39";
+}
+.fa-ojo-2:before {
+  content: "\21";
+}
+.fa-file-pdf:before {
+  content: "\22";
+}
+.fa-file-text:before {
+  content: "\23";
+}
+.fa-map:before {
+  content: "\24";
+}
+.fa-angle-left:before {
+  content: "\25";
+}
+.fa-angle-right:before {
+  content: "\26";
+}
+.fa-trash-a:before {
+  content: "\27";
+}
+.fa-dash:before {
+  content: "\34";
+}
+.fa-play:before {
+  content: "\28";
+}
+.fa-urbano:before {
+  content: "\29";
+}
+.fa-rural:before {
+  content: "\2a";
+}
+.fa-rom:before {
+  content: "\2b";
+}
+.fa-menos6:before {
+  content: "\2c";
+}
+.fa-masculino:before {
+  content: "\2d";
+}
+.fa-local:before {
+  content: "\2e";
+}
+.fa-indigena:before {
+  content: "\2f";
+}
+.fa-femenino:before {
+  content: "\3a";
+}
+.fa-colombia:before {
+  content: "\3b";
+}
+.fa-afro:before {
+  content: "\3c";
+}
+.fa-60mas:before {
+  content: "\3d";
+}
+.fa-26y60:before {
+  content: "\3e";
+}
+.fa-15y25:before {
+  content: "\3f";
+}
+.fa-12y18:before {
+  content: "\40";
+}
+.fa-7y11:before {
+  content: "\5b";
+}
+.fa-mixta:before {
+  content: "\5d";
+}
+.fa-publica:before {
+  content: "\5e";
+}
+.fa-privada:before {
+  content: "\5f";
+}
+.fa-sinfonia:before {
+  content: "\60";
+}
+.fa-trumpet:before {
+  content: "\7b";
+}
+.fa-urbanidad:before {
+  content: "\7c";
+}
+.fa-excel:before {
+  content: "\7d";
+}
+.fa-arrow-right-b:before {
+  content: "\7e";
+}
+.fa-contraer:before {
+  content: "\5c";
+}
+.fa-lock:before {
+  content: "\e000";
+}
+.fa-salir:before {
+  content: "\e001";
+}
+.fa-refrescar:before {
+  content: "\e002";
+}
+.fa-redimension:before {
+  content: "\e003";
+}
+.fa-cerrar:before {
+  content: "\e004";
+}
+.fa-imagen:before {
+  content: "\e005";
+}
+.fa-triangle-down:before {
+  content: "\e006";
+}
+.fa-angle-down:before {
+  content: "\e007";
+}
+.fa-dentada:before {
+  content: "\e008";
+}
+.fa-lupa:before {
+  content: "\e009";
+}
+.fa-android-search:before {
+  content: "\e00a";
+}
+*/

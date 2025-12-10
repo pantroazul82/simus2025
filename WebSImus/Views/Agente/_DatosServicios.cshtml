@@ -1,0 +1,77 @@
+﻿@model WebSImus.Models.AgenteModel
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2><span class="fa-representante fa-2x"></span> Información Oferta</h2>
+    </div>
+    <div class="panel-body">
+        <div class="row push-down-20">
+            <h3><span class="fa-representante fa-2x"></span> Datos de Servicios /Productos</h3>
+        </div>
+        <div class="row push-down-20">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Servicio/ Producto</label>
+                    <div class="col-md-8">
+                        @Html.Editor("Servicio", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+
+                    <div class="col-md-6">
+                        <button type="button" id="mySubmitServ" class="btn btn-success glyphicon glyphicon-plus-sign" data-dismiss="modal"> Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="TablaServicio" class="panel-body">
+        @Html.Action("CargarServicio", new { AgenteId = Model.AgenteId, EliminarId = 0 })
+    </div>
+
+    <div class="panel-body">
+        <div class="row push-down-20">
+            <h3><span class="fa-representante fa-2x"></span> Datos de Intereses</h3>
+        </div>
+        <div class="row push-down-20">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label"> Interés</label>
+                    <div class="col-md-8">
+                        @Html.Editor("Interes", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+
+                    <div class="col-md-6">
+                        <button type="button" id="mySubmitInter" class="btn btn-success glyphicon glyphicon-plus-sign" data-dismiss="modal"> Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="TablaInteres" class="panel-body">
+        @Html.Action("CargarInteres", new { AgenteId = Model.AgenteId, EliminarId = 0 })
+    </div>
+   
+</div>
+<script type="text/javascript">
+  
+    function EliminarServicio(varid) {
+        var varAgenteId = '@Model.AgenteId';
+        ActualizarListadoServicio(varAgenteId, varid)
+    }
+
+    function EliminarInteres(varid) {
+        var varAgenteId = '@Model.AgenteId';
+        ActualizarListadoInteres(varAgenteId, varid)
+    }
+</script>
+

@@ -1,0 +1,342 @@
+﻿@{
+    ViewBag.Title = "Agenda Musical SIMUS";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+@Styles.Render("~/bundles/fontawesome")
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2 col-sm-5 col-xs-5"><img style="padding-top:10px; padding-left:30px;" class="img-responsive" src="~/img/iconos/agenda.png"></div>
+        <div class="titulo_seccionagenda col-md-10 col-sm-7 col-xs-7">Agenda Musical</div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span class="fa-andina-so fa-lg" style="text-align: left; padding: 5px;"></span>Eventos Musicales</div>
+</div>
+<div class="col-md-12 well carousel-search" style="margin-top:40px;">
+    <div class="page-content">
+        <div class="row">
+            <div class="col-sm-12 col-sd-12 col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="row">
+                    <div class="col-sm-8 col-sd-12 col-xs-12">
+                        <div class="space"></div>
+                        <!-- #section:plugins/data-time.calendar -->
+                        <div id="calendar"></div>
+                        <!-- /section:plugins/data-time.calendar -->
+                    </div>
+                    <div class="col-md-3 col-sd-12 col-xs-12 caja_gris">
+                        @Html.Action("_DatosRecientes")
+
+                    </div>
+                </div>
+                <!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div>
+
+    <div id="modalInformacion" class="panel-body">
+        @Html.Action("_DatosAgenda", new { id = "0" })
+    </div>
+
+</div>
+
+
+@section Scripts {
+    <link href="@Url.Content("~/css/fullcalendar.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/jquery-ui.custom.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/ace.onpage-help.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/ace.css")" rel="stylesheet" type="text/css">
+
+
+    <script src="@Url.Content("~/Scripts/plugins/mixitup/jquery.mixitup.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/appear/jquery.appear.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/agenda/jquery-ui.custom.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/jquery.ui.touch-punch.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/moment.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/bootbox.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/fullcalendar.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/agenda/ace/elements.scroller.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/elements.colorpicker.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/elements.fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/elements.typeahead.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/elements.wysiwyg.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/elements.spinner.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/elements.treeview.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/elements.wizard.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/elements.aside.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/ace.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/ace.ajax-content.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/ace.touch-drag.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/ace.sidebar.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/ace.sidebar-scroll-1.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/ace.submenu-hover.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/ace.widget-box.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/ace.settings.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/ace.settings-rtl.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/ace.settings-skin.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/ace.widget-on-reload.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/ace.searchbox-autocomplete.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/agenda/ace/elements.onpage-help.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/ace/ace.onpage-help.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/rainbow.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/agenda/language/generic.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/language/html.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/language/css.js")"></script>
+    <script src="@Url.Content("~/Scripts/agenda/language/javascript.js")"></script>
+
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='js/jquery.js'>" + "<" + "/script>");
+    </script>
+    @*<script type="text/javascript">
+            if('ontouchstart' in document.documentElement) document.write("<script src='Scripts/agenda/jquery.mobile.custom.js'>"+"<"+"/script>");
+        </script>*@
+
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        jQuery(function ($) {
+
+            /* initialize the external events
+                -----------------------------------------------------------------*/
+
+            $('#external-events div.external-event').each(function () {
+
+                // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+                // it doesn't need to have a start or end
+                var eventObject = {
+                    title: $.trim($(this).text()) // use the element's text as the event title
+                };
+
+                // store the Event Object in the DOM element so we can get to it later
+                $(this).data('eventObject', eventObject);
+
+                // make the event draggable using jQuery UI
+                $(this).draggable({
+                    zIndex: 999,
+                    revert: true,      // will cause the event to go back to its
+                    revertDuration: 0  //  original position after the drag
+                });
+
+            });
+
+
+
+
+            /* initialize the calendar
+            -----------------------------------------------------------------*/
+
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+            var urlHost = "http://" + window.location.host;
+
+            var calendar = $('#calendar').fullCalendar({
+                //isRTL: true,
+                buttonHtml: {
+                    prev: '<i class="fa fa-chevron-left"></i>',
+                    next: '<i class="fa fa-chevron-right"></i>'
+                },
+
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                events: urlHost + '/Api/Agenda',
+                editable: true,
+                droppable: true, // this allows things to be dropped onto the calendar !!!
+                drop: function (date, allDay) { // this function is called when something is dropped
+
+                    // retrieve the dropped element's stored Event Object
+                    var originalEventObject = $(this).data('eventObject');
+                    var $extraEventClass = $(this).attr('data-class');
+
+
+                    // we need to copy it, so that multiple events don't have a reference to the same object
+                    var copiedEventObject = $.extend({}, originalEventObject);
+
+                    // assign it the date that was reported
+                    copiedEventObject.start = date;
+                    copiedEventObject.allDay = allDay;
+                    if ($extraEventClass) copiedEventObject['className'] = [$extraEventClass];
+
+                    // render the event on the calendar
+                    // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+                    $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+
+                    // is the "remove after drop" checkbox checked?
+                    if ($('#drop-remove').is(':checked')) {
+                        // if so, remove the element from the "Draggable Events" list
+                        $(this).remove();
+                    }
+
+                }
+                ,
+                selectable: false,
+                selectHelper: false,
+                select: function (start, end, allDay) {
+
+                    bootbox.prompt("New Event Title:", function (title) {
+                        if (title !== null) {
+                            calendar.fullCalendar('renderEvent',
+                                {
+                                    title: title,
+                                    start: start,
+                                    end: end,
+                                    allDay: allDay,
+                                    className: 'label-info'
+                                },
+                                true // make the event "stick"
+                            );
+                        }
+                    });
+
+
+                    calendar.fullCalendar('unselect');
+                }
+                ,
+                eventClick: function (calEvent, jsEvent, view) {
+                    ActualizarListado(calEvent.id);
+                    //display a modal
+
+                }
+
+            });
+
+
+        })
+
+        function ActualizarListado(varcodigo) {
+
+            $.ajax({
+
+                url: "/UtilidadHome/_DatosAgenda",
+                type: "GET",
+                data: { id: varcodigo }
+            })
+                .done(function (partialViewResult) {
+                    $("#modalInformacion").html(partialViewResult);
+                    $("#modal_datosconciertos").modal('show');
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+                });
+
+        }
+    </script>
+
+    <script type="text/javascript">ace.vars['base'] = '..';</script>
+
+    <script type="text/javascript">
+        var selText = $(this).text();
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+        });
+
+        $("#btnSearch").click(function () {
+            alert($('.btn-select').text() + ", " + $('.btn-select2').text());
+        });
+
+
+        $(function () {
+
+            var $formLogin = $('#login-form');
+            var $formLost = $('#lost-form');
+            var $formRegister = $('#register-form');
+            var $divForms = $('#div-forms');
+            var $modalAnimateTime = 300;
+            var $msgAnimateTime = 150;
+            var $msgShowTime = 2000;
+
+            $("form").submit(function () {
+                switch (this.id) {
+                    case "login-form":
+                        var $lg_username = $('#login_username').val();
+                        var $lg_password = $('#login_password').val();
+                        if ($lg_username == "ERROR") {
+                            msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Login error");
+                        } else {
+                            msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-ok", "Login OK");
+                        }
+                        return false;
+                        break;
+                    case "lost-form":
+                        var $ls_email = $('#lost_email').val();
+                        if ($ls_email == "ERROR") {
+                            msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-remove", "Send error");
+                        } else {
+                            msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "success", "glyphicon-ok", "Send OK");
+                        }
+                        return false;
+                        break;
+                    case "register-form":
+                        var $rg_username = $('#register_username').val();
+                        var $rg_email = $('#register_email').val();
+                        var $rg_password = $('#register_password').val();
+                        if ($rg_username == "ERROR") {
+                            msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register error");
+                        } else {
+                            msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register OK");
+                        }
+                        return false;
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            });
+
+            $('#login_register_btn').click(function () { modalAnimate($formLogin, $formRegister) });
+            $('#register_login_btn').click(function () { modalAnimate($formRegister, $formLogin); });
+            $('#login_lost_btn').click(function () { modalAnimate($formLogin, $formLost); });
+            $('#lost_login_btn').click(function () { modalAnimate($formLost, $formLogin); });
+            $('#lost_register_btn').click(function () { modalAnimate($formLost, $formRegister); });
+            $('#register_lost_btn').click(function () { modalAnimate($formRegister, $formLost); });
+
+            function modalAnimate($oldForm, $newForm) {
+                var $oldH = $oldForm.height();
+                var $newH = $newForm.height();
+                $divForms.css("height", $oldH);
+                $oldForm.fadeToggle($modalAnimateTime, function () {
+                    $divForms.animate({ height: $newH }, $modalAnimateTime, function () {
+                        $newForm.fadeToggle($modalAnimateTime);
+                    });
+                });
+            }
+
+            function msgFade($msgId, $msgText) {
+                $msgId.fadeOut($msgAnimateTime, function () {
+                    $(this).text($msgText).fadeIn($msgAnimateTime);
+                });
+            }
+
+            function msgChange($divTag, $iconTag, $textTag, $divClass, $iconClass, $msgText) {
+                var $msgOld = $divTag.text();
+                msgFade($textTag, $msgText);
+                $divTag.addClass($divClass);
+                $iconTag.removeClass("glyphicon-chevron-right");
+                $iconTag.addClass($iconClass + " " + $divClass);
+                setTimeout(function () {
+                    msgFade($textTag, $msgOld);
+                    $divTag.removeClass($divClass);
+                    $iconTag.addClass("glyphicon-chevron-right");
+                    $iconTag.removeClass($iconClass + " " + $divClass);
+                }, $msgShowTime);
+            }
+        });
+
+
+
+
+
+    </script>
+
+}
+
+

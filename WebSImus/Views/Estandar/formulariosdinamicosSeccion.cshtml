@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Formularios dinámicos Sección";
+    Layout = "~/Views/Shared/_LayoutDiseño.cshtml";
+}
+
+        <div class="panel panel-primary form-horizontal">
+            <div class="col-md-12">
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Secciones</label>
+                                <div class="col-md-8">
+                                    <select class="form-control select">
+                                        <option>Seleccione...</option>
+                                        <option>Adicionar una nueva sección</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Nombre*</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" value="..." />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="panel-footer text-center">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-success">Guardar</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-default">Cancelar</button>
+                </div>
+            </div> 
+        </div>
+

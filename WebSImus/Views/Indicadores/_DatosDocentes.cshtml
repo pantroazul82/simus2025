@@ -1,0 +1,62 @@
+﻿@model SM.LibreriaComun.DTO.DocentesEstadisticasDTO
+
+<div class="row mb-4">
+    <div class="col-12 d-flex flex-wrap justify-content-center gap-3">
+        <a id="hNivel" href="#" class="btn btn-outline-primary">Nivel Educativo</a>
+        <a id="hCirculacion" href="#" class="btn btn-outline-primary">Circulación Agrupaciones</a>
+        <a id="hDocentes" href="#" class="btn btn-outline-primary">Alumnos por Docente</a>
+    </div>
+</div>
+
+<div class="chart-section">
+    <h2 class="chart-title">Nivel educativo de los docentes</h2>
+    <div class="chart-desc">Docentes reportados por las escuelas según su nivel educativo.</div>
+    <div class="chart-container">
+        <div id="docenteContainer" style="height: 450px; width: 100%;"></div>
+    </div>
+    <div class="d-flex justify-content-between mt-2">
+        <a href="#top" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-up"></i> Ir arriba</a>
+        @Html.ActionLink("Exportar datos a Excel", "descargar", "Indicadores", new { numReporte = 10, periodo = Model.selectorAno }, new { @class = "btn btn-outline-primary" })
+    </div>
+</div>
+
+<div class="chart-section">
+    <h2 class="chart-title">Circulación de las agrupaciones</h2>
+    <div class="chart-container">
+        <div id="producionContainer" style="height: 220px; width: 100%;"></div>
+    </div>
+    <div class="d-flex justify-content-between mt-2">
+        <a href="#top" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-up"></i> Ir arriba</a>
+        @Html.ActionLink("Exportar datos a Excel", "descargar", "Indicadores", new { numReporte = 11, periodo = Model.selectorAno }, new { @class = "btn btn-outline-primary" })
+    </div>
+</div>
+
+<div class="chart-section">
+    <h2 class="chart-title">Alumnos por docente</h2>
+    <div class="chart-desc">Relación promedio de estudiantes por docente en las escuelas de música.</div>
+    <div class="chart-container">
+        <div class="row">
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                <img src="~/img/Dashboard/docente_alumno.png" class="img-fluid" style="max-height: 150px;">
+                <div class="ms-4 fw-bold" style="font-size: 2rem; color: #4C2C54;">38-1</div>
+            </div>
+            <div class="col-md-6 pt-4">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="circle_azule me-3"></div>
+                    <span class="fw-bold text-primary" style="font-size: 1.8rem;">@Html.DisplayFor(m => m.Publica)-1</span>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <div class="circle_privada me-3"></div>
+                    <span class="fw-bold text-primary" style="font-size: 1.8rem;">@Html.DisplayFor(m => m.Privada)-1</span>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="circle_mixta me-3"></div>
+                    <span class="fw-bold text-primary" style="font-size: 1.8rem;">@Html.DisplayFor(m => m.Mixta)-1</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between mt-2">
+        <a href="#top" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-up"></i> Ir arriba</a>
+    </div>
+</div>

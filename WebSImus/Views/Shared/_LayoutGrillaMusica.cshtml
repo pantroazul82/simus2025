@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Celebra La Música</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="~/img/favicon.ico" type="image/x-icon" />
+
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="@Url.Content("~/css/theme-default_oscuro.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet">
+
+    @Html.DevExpress().GetStyleSheets(
+        new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.GridView },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.PivotGrid },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Chart },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Report },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Scheduler },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.TreeList },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Spreadsheet },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.RichEdit },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.SpellChecker },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor, Theme = "Office2010Silver" },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors, Theme = "Office2010Silver" },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.GridView, Theme = "Office2010Silver" },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout, Theme = "Office2010Silver" }
+    )
+
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+        new Script { ExtensionSuite = ExtensionSuite.HtmlEditor },
+        new Script { ExtensionSuite = ExtensionSuite.GridView },
+        new Script { ExtensionSuite = ExtensionSuite.PivotGrid },
+        new Script { ExtensionSuite = ExtensionSuite.Editors },
+        new Script { ExtensionSuite = ExtensionSuite.Chart },
+        new Script { ExtensionSuite = ExtensionSuite.Report },
+        new Script { ExtensionSuite = ExtensionSuite.Scheduler },
+        new Script { ExtensionSuite = ExtensionSuite.TreeList },
+        new Script { ExtensionSuite = ExtensionSuite.Spreadsheet },
+        new Script { ExtensionSuite = ExtensionSuite.RichEdit },
+        new Script { ExtensionSuite = ExtensionSuite.SpellChecker },
+       new Script { ExtensionSuite = ExtensionSuite.All }
+    )
+</head>
+<body>
+    <div class="page-content-wrap">
+        <div class="row">
+            <div class="col-md-12">
+                @{ Html.RenderPartial("_Alertas"); }
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/Scripts/bootstrap")
+
+    @RenderSection("scripts", required: false)
+    <!-- END PLUGINS -->
+    <!-- START TEMPLATE-->
+
+    <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+    @*<script src="@Url.Content("~/Scripts/toDo/actions.js")"></script>
+        <script src="@Url.Content("~/Scripts/toDo/plugins.js")"></script>*@
+</body>
+</html>

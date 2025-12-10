@@ -1,0 +1,74 @@
+﻿@model WebSImus.Models.MapaMusicalModelo
+
+<div class="modal animated fadeIn" id="myModal" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <div class="modal-header">
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12 col-xs-9">
+
+                            <div class="img-responsive">
+                                <img class=" img-responsive" alt="Foto ejes" src="@(Model.Foto == null ? "" : Url.Content(Model.Foto)) " />
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                    <div class="@Model.Estilo">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Model.Eje - @Model.Ubicacion
+                            </div>
+                        </div>
+
+
+                        @if (Model.ListGeneros != null)
+                    {
+                        foreach (var item in Model.ListGeneros)
+                        {
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 tabla_blanca2">
+
+                            <div class="col-md-3 col-sm-3 col-xs-3 primera_tabla titulo_concierto">
+                                @item.Genero
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xs-3 primera_tabla">
+                                @item.Titulo
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 col-xs-6 primera_tabla" id="player">
+                                <audio controls>
+                                    <source src=@item.Ruta type="audio/mpeg" />
+                                    <source src="vincent.ogg" type="audio/ogg" />
+                                    <object type="application/x-shockwave-flash" data="media/OriginalMusicPlayer.swf" width="225" height="86">
+                                        <param name="movie" value="media/OriginalMusicPlayer.swf" />
+                                        <param name="FlashVars" value="mediaPath=vincent.mp3" />
+                                    </object>
+                                </audio>
+                            </div>
+                        </div>
+                    </div>
+                        }
+                    }
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-3 ">
+                                    <a href="@Model.Ver_Mas" class="btn vermas" target="_blank">Ver Mas</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </div>
+</div>

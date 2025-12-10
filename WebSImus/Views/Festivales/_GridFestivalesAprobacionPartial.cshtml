@@ -1,0 +1,91 @@
+﻿@using DevExpress.Web.Mvc
+@using DevExpress.Web
+@model List<WebSImus.Models.FestivalAprobacionItemViewModel>
+
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "grdFestivalesAprobacion";
+        settings.CallbackRouteValues = new { Controller = "Festivales", Action = "GridFestivalesAprobacionPartialCallback" };
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.KeyFieldName = "VersionId";
+        settings.SettingsPager.PageSize = 10;
+        settings.SettingsPager.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "10", "20", "50", "100" };
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+        
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Acciones";
+            column.Width = System.Web.UI.WebControls.Unit.Pixel(120);
+            column.SetDataItemTemplateContent(container =>
+            {
+                var item = container.DataItem as WebSImus.Models.FestivalAprobacionItemViewModel;
+                if (item != null)
+                {
+                    Html.DevExpress().HyperLink(h =>
+                    {
+                        h.Name = "ver_" + item.VersionId;
+                        h.Properties.Text = "Ver";
+                        h.NavigateUrl = Url.Action("RegistrarVersion", "Festivales", new { idFestival = item.FestivalId, idVersion = item.VersionId });
+                        h.ControlStyle.CssClass = "btn btn-primary btn-xs";
+                        h.Properties.Target = "_self";
+                    }).Render();
+                    ViewContext.Writer.Write("&nbsp;");
+                    Html.DevExpress().HyperLink(h =>
+                    {
+                        h.Name = "aprobar_" + item.VersionId;
+                        h.Properties.Text = "Aprobar";
+                        h.NavigateUrl = Url.Action("RegistrarVersion", "Festivales", new { idFestival = item.FestivalId, idVersion = item.VersionId, accion = "aprobar" });
+                        h.ControlStyle.CssClass = "btn btn-success btn-xs";
+                        h.Properties.Target = "_self";
+                    }).Render();
+                }
+            });
+        });
+        
+        settings.Columns.Add(c => { c.FieldName = "FestivalId"; c.Caption = "ID Festival"; c.Width = System.Web.UI.WebControls.Unit.Pixel(80); });
+        settings.Columns.Add(c => { c.FieldName = "VersionId"; c.Caption = "ID Versión"; c.Width = System.Web.UI.WebControls.Unit.Pixel(80); });
+        settings.Columns.Add(c => { c.FieldName = "NombreFestival"; c.Caption = "Nombre Festival"; c.Width = System.Web.UI.WebControls.Unit.Percentage(15); });
+        settings.Columns.Add(c => { c.FieldName = "NombreVersion"; c.Caption = "Nombre Versión"; c.Width = System.Web.UI.WebControls.Unit.Percentage(15); });
+        settings.Columns.Add(c => { c.FieldName = "Departamento"; c.Caption = "Departamento"; c.Width = System.Web.UI.WebControls.Unit.Percentage(10); });
+        settings.Columns.Add(c => { c.FieldName = "Municipio"; c.Caption = "Municipio"; c.Width = System.Web.UI.WebControls.Unit.Percentage(10); });
+        settings.Columns.Add(c => { c.FieldName = "Director"; c.Caption = "Director"; c.Width = System.Web.UI.WebControls.Unit.Percentage(12); });
+        settings.Columns.Add(c => { c.FieldName = "CorreoContacto"; c.Caption = "Correo Contacto"; c.Width = System.Web.UI.WebControls.Unit.Percentage(12); });
+        
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Estado";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Pixel(150);
+            column.SetDataItemTemplateContent(container =>
+            {
+                var item = container.DataItem as WebSImus.Models.FestivalAprobacionItemViewModel;
+                if (item != null)
+                {
+                    var badgeStyle = "background-color:#f0ad4e; color:#fff; padding:4px 8px; border-radius:3px; font-size:12px;";
+                    ViewContext.Writer.Write("<span style='" + badgeStyle + "'>" + item.Estado + "</span>");
+                }
+            });
+        });
+        
+        settings.Columns.Add(c => { c.FieldName = "NombreUsuarioRegistro"; c.Caption = "Usuario Registro"; c.Width = System.Web.UI.WebControls.Unit.Percentage(10); });
+    });
+}
+
+@if (Model != null && Model.Any())
+{
+    @grid.Bind(Model).GetHtml()
+}
+else
+{
+    <div class="alert alert-info" style="margin-top:20px;">
+        <i class="fa fa-info-circle"></i> 
+        No hay festivales pendientes de aprobación en este momento.
+    </div>
+}

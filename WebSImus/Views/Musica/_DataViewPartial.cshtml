@@ -1,0 +1,33 @@
+@Html.DevExpress().DataView(settings => {
+    settings.Name = "DataView";
+    settings.Theme = "Office2010Silver";
+    settings.CallbackRouteValues = new { Controller = "Musica", Action = "DataViewPartial" };
+    settings.AllowPaging = true;
+    settings.PagerAlign = DevExpress.Web.PagerAlign.Justify;
+		settings.SettingsTableLayout.RowsPerPage = 2;
+		settings.SettingsTableLayout.ColumnCount = 3;
+	settings.SetItemTemplateContent(c => {
+        ViewContext.Writer.Write(
+                   "<table>" +
+                       "<tr>" +
+                           "<td colspan=\"2\">" +
+                               "<img   src=\"" + Url.Content(DataBinder.Eval(c.DataItem, "imageDataURL").ToString()) + "\" alt=\"\" + class=\"" + "img-responsive" + "\"/>" +
+                               
+                           "</td>" +
+                            "<br/>" +
+                       "</tr>" +
+                     
+                       "<tr>" +
+                           "<td colspan=\"2\"><b><span>" + DataBinder.Eval(c.DataItem, "NombreDepartamento") + "</span></b></td>" +
+                       "</tr>" +
+                       "<tr>" +
+                          "<td colspan=\"2\"><span>" + DataBinder.Eval(c.DataItem, "EntidadOrganizadora") + "</span></td>" +
+                       "</tr>" +
+                       "<tr>" +
+                                    "<td colspan=\"2\"><span>" + DataBinder.Eval(c.DataItem, "LugarEvento") + "</span></td>" +
+                       "</tr>" +
+                        
+                   "</table>"
+               );
+	});
+}).Bind(Model).GetHtml()

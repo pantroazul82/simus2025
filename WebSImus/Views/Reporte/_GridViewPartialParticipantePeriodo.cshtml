@@ -1,0 +1,159 @@
+﻿@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridParticipantesPeriodo";
+        settings.CallbackRouteValues = new { Controller = "Reporte", Action = "GridViewPartialParticipantesPeriodo" };
+
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.Width = System.Web.UI.WebControls.Unit.Percentage(6);
+        //settings.CommandColumn.Caption = "Eliminar";
+
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        settings.KeyFieldName = "Identificacion";
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Periodo";
+            column.Caption = "Periodo";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(7);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Entidad";
+            column.Caption = "Entidad";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Actividad";
+            column.Caption = "Actividad";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(12);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Departamento";
+            column.Caption = "Departamento";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Municipio";
+            column.Caption = "Municipio";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "FechaInicio";
+            column.Caption = "FechaInicio";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "FechaFin";
+            column.Caption = "FechaFin";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Identificacion";
+            column.Caption = "Identificacion";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Participante";
+            column.Caption = "Participante";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "DepartamentoResidencia";
+            column.Caption = "DepartamentoResidencia";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "MunicipioResidencia";
+            column.Caption = "MunicipioResidencia";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Telefono";
+            column.Caption = "Telefono";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CorreoElectronico";
+            column.Caption = "CorreoElectronico";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        });
+
+
+        settings.SettingsPager.PageSize = 50;
+        settings.SettingsBehavior.FilterRowMode = GridViewFilterRowMode.Auto;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "50", "100", "150" };
+    });
+
+
+
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

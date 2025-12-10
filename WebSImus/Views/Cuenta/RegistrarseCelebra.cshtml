@@ -1,0 +1,292 @@
+﻿@model WebSImus.Models.Usuarios
+@{
+    ViewBag.Title = "Registrarse";
+    Layout = "~/Views/Shared/_LayoutCelebra.cshtml";
+}
+
+
+<link href="@Url.Content("~/css/theme-default_oscuro.css")" rel="stylesheet">
+
+@using (Html.BeginForm("RegistrarseCelebra", "Cuenta", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+      <br />
+       @Html.ValidationSummary(true)
+    <div class="panel panel-primary form-horizontal">
+       
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-star"></span> Formulario de Registro – Portal Celebra la Danza</h3>
+        </div>
+        <div class="panel-body" id="panelEditar">
+
+            <div class="row">
+             
+            </div>
+            <div class="row">
+
+                <div class="form-group">
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Correo electrónico *</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.usuario, new { @class = "form-control text", type = "email", title = "Correo electrónico invalido", @maxlength = "100" })
+                            @Html.ValidationMessageFor(model => model.usuario, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Id)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Contraseña *</label>
+                        <div class="col-md-9">
+                            <p>La contraseña debe tener al menos ocho caracteres, al menos uno en mayúscula, uno en minúscula y por lo menos un número</p>
+                            @Html.PasswordFor(model => model.contrasena, new { @class = "form-control text", @maxlength = "50" })
+                            @Html.ValidationMessageFor(model => model.contrasena, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Confirmar contraseña *</label>
+                        <div class="col-md-9">
+                            @Html.PasswordFor(model => model.confcontrasena, new { @class = "form-control text", @maxlength = "50" })
+                            @Html.ValidationMessageFor(model => model.confcontrasena, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Tipo de documento *</label>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.tipoDocumento, (SelectList)ViewBag.listTipoDocumento, "Seleccione un valor", new { @class = "styled-select" })
+                            @Html.ValidationMessageFor(model => model.tipoDocumento, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Número de documento *</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.numeroDocumento, new { @class = "form-control text", @maxlength = "50" })
+                            @Html.ValidationMessageFor(model => model.numeroDocumento, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Foto</label>
+                        <!--Modal imagen-->
+
+                        <div class="col-md-9">
+                            <p>Tipos de archivo permitidos: .jpg y .png de tamaño máximo 1 Mb</p>
+                            <input onclick="resizePanel()" id="imagenPerfil" name="imagenPerfil" type="file">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">País de origen *</label>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.pais, (SelectList)ViewBag.listPaises, "Seleccione un valor", new { @class = "styled-select" })
+                            @Html.ValidationMessageFor(model => model.pais, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Departamento de origen</label>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.departamento, (SelectList)ViewBag.listDpto, "", new { @class = "styled-select" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Municipio de origen</label>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.municipio, (SelectList)ViewBag.listMun, "", new { @class = "styled-select" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Sexo</label>
+                        <div class="col-md-9">
+                            <label class="check">
+                                @Html.RadioButtonFor(m => m.sexo, "Femenino", Model.sexo != null && Model.sexo == "Femenino" ? new { Checked = "checked" } : null)<span class="fa fa-female"></span> Femenino
+
+                            </label>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                            <div class="col-md-9">
+                                <label class="check">
+                                    @Html.RadioButtonFor(m => m.sexo, "Masculino", Model.sexo != null && Model.sexo == "Masculino" ? new { Checked = "checked" } : null)<span class="fa fa-male"></span> Masculino
+                                    @Html.ValidationMessageFor(model => model.sexo, "", new { @class = "text-danger" })
+                                </label>
+                                
+                            </div>
+                        </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Fecha de nacimiento *</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.fechaNacimiento, new { @class = "form-control datepicker" })
+                                @Html.ValidationMessageFor(model => model.fechaNacimiento, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Primer nombre *</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.primerNombre, new { @class = "form-control text", @maxlength = "50" })
+                                @Html.ValidationMessageFor(model => model.primerNombre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Segundo nombre</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.segundoNombre, new { @class = "form-control text", @maxlength = "50" })
+                                @Html.ValidationMessageFor(model => model.segundoNombre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Primer apellido *</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.primerApellido, new { @class = "form-control text", @maxlength = "50" })
+                                @Html.ValidationMessageFor(model => model.primerApellido, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Segundo apellido</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.segundoApellido, new { @class = "form-control text", @maxlength = "50" })
+                                @Html.ValidationMessageFor(model => model.segundoApellido, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label class="col-md-3 control-label">
+                                <a href="~/Cuenta/TerminosDanza" onclick="window.open(this.href, this.target, 'width=625,height=400'); return false;">Acepta terminos y codiciones</a>
+
+                            </label>
+
+                            <div class="col-md-9">
+                                @Html.CheckBoxFor(model => model.aceptaCondiciones)
+                                @Html.ValidationMessageFor(model => model.aceptaCondiciones, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+            <div class="btn btn-default pull-left">
+                <i class="fa fa-arrow-circle-o-left"></i>@Html.ActionLink("Regresar", "LoginCelebra", "Cuenta")
+            </div>
+
+        </div>
+    </div>
+
+
+}
+
+
+@section Scripts {
+  @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script type="text/javascript">
+
+
+        var today = new Date("01/31/1910");
+        $('#fechaNacimiento').datepicker({
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+            endDate: 'd',
+            format: 'yyyy-mm-dd'
+        })
+
+        $('#imagenPerfil').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 1024,
+            allowedFileExtensions: ['jpg', 'png'],
+        });
+
+
+        function resizePanel() {
+
+            var h = $("#panelEditar").height();
+
+        };
+
+
+
+        $(function () {
+            if ($('#fechaNacimiento').val() == "1970-01-01")
+            { $('#fechaNacimiento').val(''); }
+            $('#departamento').change(function () {
+                var selectedDep = $(this).val();
+
+                var city = $('#municipio');
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("obtenerMunicipio")', { coddpto: selectedDep }, function (data) {
+                        var items = '';
+
+                        items = '<option>Seleccione un valor </option>';
+                        $.each(data, function (i, dpto) {
+                            items += "<option value='" + dpto.value + "'>" + dpto.text + "</option>";
+
+                        });
+
+                        city.empty();
+                        city.html(items);
+                        city.click();
+                        //city.removeAttr('disabled');
+
+                    });
+
+                }
+
+            })
+        });
+
+
+
+
+        $(function () {
+
+            $('#pais').change(function () {
+                var selectedDep = $(this).val();
+
+                var city = $('#departamento');
+                var varmunicipio = $('#municipio');
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("obtenerDepartamento")', { codpais: selectedDep }, function (data) {
+                        var items = '';
+
+                        items = '<option>Seleccione un valor </option>';
+                        $.each(data, function (i, dpto) {
+                            items += "<option value='" + dpto.value + "'>" + dpto.text + "</option>";
+
+                        });
+
+                        city.empty();
+                        city.html(items);
+                        city.click();
+                        varmunicipio.empty();
+
+                    });
+
+                }
+
+            })
+        });
+
+
+
+
+    </script>
+}
+
+
+
+

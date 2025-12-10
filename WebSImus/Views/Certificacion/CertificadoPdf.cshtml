@@ -1,0 +1,189 @@
+﻿@model SM.LibreriaComun.DTO.Certificacion.CertificacionDTO
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Certificación SIMUS</title>
+    <style>
+        body {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            background-color: #fff;
+            color: #333 !important;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+            border: 4px double #4b3c8c;
+            background-color: #fff;
+        }
+
+        .header-img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-size: 20px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 25px;
+            font-weight: 900;
+            color: #4b3c8c;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .nombre {
+            font-size: 25px;
+            font-weight: 700;
+            text-align: center;
+            color: #4b3c8c;
+            margin: 10px 0 20px;
+        }
+        .section-divider {
+            border-top: 2px solid #23A9D3;
+            margin: 20px 0;
+            color: #4b3c8c;
+        }
+
+        .info-block {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            flex: 1;
+            margin-bottom: 10px;
+        }
+
+        .info-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .info-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #4b3c8c;
+            margin-bottom: 10px;
+        }
+
+        .paragraph {
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.5;
+            margin: 20px 0;
+        }
+
+        .date-paragraph {
+            text-align: justify;
+            font-size: 16px;
+            margin-top: 40px;
+        }
+
+        .qr-section {
+            display: flex;
+            align-items: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #666;
+        }
+
+            .qr-section img {
+                width: 100px;
+                height: auto;
+                margin-right: 20px;
+            }
+
+        .footer-text {
+            font-size: 16px;
+        }
+
+        a {
+            color: #23A9D3;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="@Server.MapPath("~/img/back_3.png")" alt="Encabezado" class="header-img" />
+
+        <div class="title" style="margin-bottom: 30px;">
+            El Sistema de Información de la Música SIMUS del Ministerio de las Culturas, las Artes y los Saberes
+        </div>
+        <div class="subtitle">
+            CERTIFICA QUE
+        </div>
+
+        <div class="nombre">@Html.DisplayFor(m => m.Nombre)</div>
+        <p class="paragraph">Ubicada en el Municipio de <span style="color: #4b3c8c; font-weight: 600;">@Html.DisplayFor(m => m.Municipio)</span> del Departamento de <span style="color: #4b3c8c; font-weight: 600;">@Html.DisplayFor(m => m.Departamento)</span></p>
+
+            <div class="section-divider"></div>
+
+        <p class="paragraph">
+            Se encuentra registrado(a) en el módulo de
+            <span style="color: #4b3c8c; font-weight: 600;">@Html.DisplayFor(m => m.Modulo)</span><br />
+            del Sistema de Información de la Música – <strong>SIMUS</strong>:
+        </p>
+
+        <div class="info-block">
+            <div class="info-item">
+                <div class="info-label">Número de Registro</div>
+                <div class="info-value">@Html.DisplayFor(m => m.Id)</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Estado del Registro</div>
+                <div class="info-value">@Html.DisplayFor(m => m.Estado)</div>
+            </div>
+        </div>
+
+        <div class="info-block">
+            <div class="info-item">
+                <div class="info-label">Fecha de Registro</div>
+                <div class="info-value">@Html.DisplayFor(m => m.FechaRegistro)</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Última Actualización</div>
+                <div class="info-value">@Html.DisplayFor(m => m.FechaActualizacion)</div>
+            </div>
+        </div>
+
+        <div class="date-paragraph">
+            Expedido en Bogotá D.C., el <strong>@Html.DisplayFor(m => m.Dia)</strong> de
+            <strong>@Html.DisplayFor(m => m.Mes)</strong> de <strong>@Html.DisplayFor(m => m.Year)</strong>,
+            a solicitud del interesado(a).
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="qr-section">
+            @*<img src="@Server.MapPath("~/img/correo/codqr.jpg")" alt="Código QR" />*@
+            <p class="footer-text">
+                Le recordamos que le enviamos la presente comunicación al amparo de nuestra Política de Privacidad.<br />
+                Sistema de Información de Música SIMUS | Ministerio de las Culturas, las Artes y los Saberes - Colombia.<br />
+                Envíenos sus aportes y comentarios a:
+                <a href="mailto:simus@mincultura.gov.co">simus@mincultura.gov.co</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

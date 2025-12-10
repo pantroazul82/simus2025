@@ -1,0 +1,468 @@
+﻿@model WebSImus.Models.UtilidadPadreModels
+@{
+    ViewBag.Title = @ViewBag.Nombre;
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("CambiarEstado", "Utilidad", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Utilidad", "Index", "Utilidad")</li>
+    </ul>
+    <!-- START DEFAULT WIZARD -->
+    <div class="panel panel-colorful" id="panelEditar">
+        <div class="panel-body">
+            <h3>@ViewBag.Nombre</h3>
+            @*<blockquote class="blockquote-success">
+                <p class="text-danger ">Los campos marcados con asterisco (*) son obligatorios</p>
+            </blockquote>*@
+            <div class="wizard" id="wizardEditarA">
+
+                <ul>
+                    <li>
+                        <a href="#step-1">
+                            <span class="stepNumber">1</span>
+                            <span class="stepDesc">Registrarse <br /><small>Datos básicos</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-2">
+                            <span class="stepNumber">2</span>
+                            <span class="stepDesc">Géneros musicales <br /><small>Estudios/Experiencias/Ocupación </small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-3">
+                            <span class="stepNumber">3</span>
+                            <span class="stepDesc">Oferta<br /><small>Servicios</small></span>
+                        </a>
+                    </li>
+
+                </ul>
+                <div id="step-1">
+                    @Html.Partial("_DatosBasicosEstados", Model)
+                </div>
+                <div id="step-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.Partial("_DatosGeneros", Model.DatosBasicos)
+                        </div>
+                    </div>
+                </div>
+                <div id="step-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.Partial("_DatosServicios", Model.DatosBasicos)
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END DEFAULT WIZARD -->
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/smartwizard/jquery.smartWizard-2.0.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#encabezado').css("background-size", "cover");
+            $('#encabezado').css("background-position", "0 50%");
+            $('#CodigoPais').attr('data-live-search', true)
+            $('#TipoActor').attr('data-live-search', true)
+
+            $(window).resize(function () { // Remover alto del panel cuando la ventana cambie de tamaño
+                $('.stepContainer').css("height", "");
+            });
+        });
+
+        $('#wizardEditarA').smartWizard({
+            selected: 0,
+            enablePagination: false,
+            enableFinishButton: false,
+            enableAllSteps: true,
+        });
+
+
+    </script>
+
+    <script type="text/javascript">
+
+        validarUbicacion('@Model.CodigoPais');
+        var pagecontentwrapHeight = $(".page-content-wrap").height();
+        $('#panelEditar').css("height", pagecontentwrapHeight);
+
+        $('#Documento').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: false,
+            maxFileSize: 2048,
+            allowedFileExtensions: ['pdf'],
+        });
+
+        $('#imagenPerfil').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 1024,
+            allowedFileExtensions: ['jpg', 'png'],
+        });
+
+        $('#HoraInicio').timepicker({
+            template: false,
+            showInputs: false,
+            minuteStep: 5
+        });
+        $('#HoraFin').timepicker({
+            template: false,
+            showInputs: true,
+            minuteStep: 5
+        });
+        $('#FechaInicio').datepicker({
+            minDate: 0,
+            maxDate: "+60D",
+            numberOfMonths: 2,
+            format: 'yyyy-mm-dd',
+            onSelect: function (selected) {
+                $("#FechaFin").datepicker("option", "minDate", selected)
+            }
+        })
+
+        $('#FechaFin').datepicker({
+
+            format: 'yyyy-mm-dd',
+            minDate: 0,
+            maxDate: "+60D",
+            numberOfMonths: 2,
+            onSelect: function (selected) {
+                $("#FechaInicio").datepicker("option", "maxDate", selected)
+            }
+        })
+
+
+        $(window).on('resize', function () {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_panelbodyHeight);
+            $('#panelEditar').css("min-height", pagecontentwrapHeight + 350);
+        });
+
+        function resizePanel() {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_pagecontentwrapHeight);
+        };
+
+        $(function () {
+            $('#FechaInicio').select(function () {
+                var from = $("#FechaInicio").val();
+                var to = $("#FechaFin").val();
+
+                if (Date.parse(from) > Date.parse(to)) {
+                    $("#FechaFin").val('');
+                    alert("La fecha final no puede ser menor a la inicial");
+                }
+
+            })
+        });
+
+        $(function () {
+            $('#FechaFin').select(function () {
+                var from = $("#FechaInicio").val();
+                var to = $("#FechaFin").val();
+
+                if (Date.parse(from) > Date.parse(to)) {
+                    $("#FechaFin").val('');
+                    alert("La fecha final no puede ser menor a la inicial");
+                }
+
+            })
+        });
+        $(function () {
+            $('#Tipo').change(function () {
+                var selected = $(this).val();
+                var city = $('#TipoActor');
+
+                if (selected != null && selected != '') {
+
+                    $.getJSON('@Url.Action("GetActor","Convocatoria")', { tipo: selected }, function (data) {
+                    var items = '';
+                    items = '<option>Seleccione un actor </option>';
+
+                    $.each(data, function (i, municipio) {
+                        items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                    });
+                    city.empty();
+                    city.html(items);
+                    city.click();
+
+                });
+
+            }
+
+            })
+        });
+
+    $(function () {
+        $('#Tipoutilidad').change(function () {
+            var selected = $(this).val();
+            var city = $('#TipoEvento');
+
+            if (selected != null && selected != '') {
+
+                $.getJSON('@Url.Action("GetEvento","Utilidad")', { tipo: selected }, function (data) {
+                    var items = '';
+                    items = '<option>Seleccione la clasificación </option>';
+
+                    $.each(data, function (i, municipio) {
+                        items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                    });
+                    city.empty();
+                    city.html(items);
+                    city.click();
+
+                });
+
+            }
+
+        })
+    });
+
+    $(function () {
+
+        $('#CodigoDepartamento').change(function () {
+            var selectedDep = $(this).val();
+            var city = $('#CodigoMunicipio');
+            var varmunicipio = $('#CodigoMunicipio');
+            if (selectedDep != null && selectedDep != '') {
+
+                $.getJSON('@Url.Action("ObtenerMunicipio", "Agente")', { departamento: selectedDep }, function (data) {
+                    var items = '';
+                    items = '<option>Seleccione un municipio </option>';
+                    $.each(data, function (i, municipio) {
+                        items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                    });
+                    city.empty();
+                    city.html(items);
+                    city.click();
+
+
+                });
+
+            }
+
+        })
+
+        $('#CodigoPais').change(function () {
+            var selectedDep = $(this).val();
+            var city = $('#CodigoDepartamento');
+
+            if (selectedDep != null && selectedDep != '') {
+                var varmunicipio = $('#CodigoMunicipio');
+                validarUbicacion(selectedDep);
+                $.getJSON('@Url.Action("ObtenerDepartamento", "Agente")', { codigopais: selectedDep }, function (data) {
+                    var items = '';
+                    items = '<option>Seleccione un departamento </option>';
+                    $.each(data, function (i, departamento) {
+                        items += "<option value='" + departamento.value + "'>" + departamento.text + "</option>";
+
+                    });
+                    city.empty();
+                    city.html(items);
+                    city.click();
+                    varmunicipio.empty();
+
+                });
+
+            }
+
+        })
+
+    });
+
+    function validarUbicacion(varcodPais) {
+        if (varcodPais == "52") {
+            $("#PanelOtraCiudad").hide();
+            $("#PanelNacional").show();
+        }
+        else {
+            $("#PanelNacional").hide();
+            $("#PanelOtraCiudad").show();
+        }
+    }
+    $(function () {
+        $("#btnBuscarMapa").click(function () {
+            $('#Latitud').val("");
+            $('#Longitud').val("");
+            dialogMap.show({
+                coord_separator: ".",
+                initial: { // Inidica llos parametros de entrada del componente en funcion de selector de JQuery
+                    'address': "#Direccion",
+                    'municipality': "#CodigoMunicipio",
+                    'department': "#CodigoDepartamento",
+                    'latitude': "#Latitud",
+                    'longitude': "#Longitud"
+                },
+                target: { // Nodos(Inputs) objetivo en el cual se va a volcar la informacion
+                    "Latitud": "marker.getPosition().lat()",
+                    "Longitud": "marker.getPosition().lng()",
+                    "Direccion": "marker.info.address",
+                },
+                onComplete: function () { },
+                onAccept: function (self, marker) {
+
+                }
+            });
+        });
+
+
+
+    });
+
+    $("#generos").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "/Agrupacion/CargarListaGenero",
+                type: "POST",
+                dataType: "json",
+                data: { Prefix: request.term },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.Nombre, value: item.Nombre };
+                    }))
+
+                }
+
+            })
+        },
+        messages: {
+            //noResults: "", results: ""
+
+        }
+
+    });
+    $('#mySubmitGeneros').click(function () {
+        var varServicio = $("#generos").val();
+
+        if (varServicio == '') {
+            alert("Es obligatorio escribir un genero");
+            return;
+        }
+
+        var url = '@Url.Action("AgregarGeneros", "Utilidad")';
+        var varagrupacionId = '@Model.UtilidadId';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                atributo: $('#generos').val(), utilidadId: varagrupacionId
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    ActualizarListadoGenero(varagrupacionId, 0);
+                }
+            },
+
+        });
+    });
+
+    function ActualizarListadoGenero(varAgrupacionId, varEliminar) {
+
+        $('#generos').val("");
+        $.ajax({
+
+            url: "/Utilidad/Cargargeneros",
+            type: "GET",
+            data: { utilidadid: varAgrupacionId, EliminarId: varEliminar }
+        })
+       .done(function (partialViewResult) {
+           $("#TablaGeneros").html(partialViewResult);
+
+       });
+    }
+
+    $('#mySubmitServ').click(function () {
+        var varServicio = $("#Servicio").val();
+
+        if (varServicio == '') {
+            alert("Es obligatorio escribir un servicio");
+            return;
+        }
+
+        var url = '@Url.Action("AgregarServicio", "Utilidad")';
+        var varAgenteId = '@Model.UtilidadId';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                atributo: $('#Servicio').val(), utilidadId: varAgenteId
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    ActualizarListadoServicio(varAgenteId, 0);
+                }
+            },
+
+        });
+    });
+
+   
+    $("#Servicio").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "/Agente/CargarListaServicio",
+                type: "POST",
+                dataType: "json",
+                data: { Prefix: request.term },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.Nombre, value: item.Nombre };
+                    }))
+
+                }
+
+            })
+        },
+        messages: {
+            //noResults: "", results: ""
+
+        }
+
+    });
+
+    function ActualizarListadoServicio(VarAgenteId, varEliminar) {
+
+        $('#Servicio').val("");
+        $.ajax({
+
+            url: "/Utilidad/CargarServicio",
+            type: "GET",
+            data: { utilidadId: VarAgenteId, EliminarId: varEliminar }
+        })
+       .done(function (partialViewResult) {
+           $("#TablaServicio").html(partialViewResult);
+
+       });
+    }
+    </script>
+}

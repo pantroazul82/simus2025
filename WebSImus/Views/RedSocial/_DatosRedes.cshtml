@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SM.LibreriaComun.DTO.RedSocialDTO>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2><span class="fa fa-registered"></span> Redes Sociales</h2>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-12">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                @Html.HiddenFor(m => item.RedSocialId)
+                <div class="row">
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            @Html.DisplayFor(m => item.Etiqueta)
+                        </div>
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon"><i class="@item.Estilo"></i></span>
+                            @Html.TextBoxFor(m => item.valor, new { @class = "form-control text", @maxlength = "200", @Id = item.Nombre })
+                            @*@Html.ValidationMessageFor(m => item.valor, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+                }
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="button" id="btnAgrergarRedes" class="btn btn-success glyphicon glyphicon-plus-sign pull-right" data-dismiss="modal"> Agregar</button>
+        </div>
+    </div>
+
+</div>

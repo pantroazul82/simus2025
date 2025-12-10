@@ -1,0 +1,229 @@
+﻿@model SM.LibreriaComun.DTO.EntidadesOperadoras.DotacionDTO
+
+<div class="modal animated fadeIn" id="modal_datosDotacion" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-md">
+            <div class="modal-header">
+                <div class=" fondo_caja_item row">
+                    @Html.HiddenFor(model => model.CronogramaId)
+                    @Html.HiddenFor(model => model.Id)
+
+
+                    <div class="col-md-12 titulo_alumnos">
+                        <span><i class="fa fa-musical"></i>Dotación </span>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                </div>
+                <br />
+                <div class="row push-down-20">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> Tipo</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.TipoId, (SelectList)ViewBag.listTipoDotacion, "Seleccione", new { @class = "styled-select" })
+                                @Html.ValidationMessageFor(model => model.TipoId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Elemento</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.ElementoId, (SelectList)ViewBag.listElemento, "Seleccione", new { @class = "styled-select" })
+                                @Html.ValidationMessageFor(model => model.ElementoId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                    <br />
+
+                </div>
+
+                <div class="row push-down-20">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> Formato</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.FormatoId, (SelectList)ViewBag.listFormato, "Seleccione", new { @class = "styled-select" })
+                                @Html.ValidationMessageFor(model => model.FormatoId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Marca</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Marca, new { @class = "form-control text", @maxlength = "250" })
+                                @Html.ValidationMessageFor(model => model.Marca, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <br />
+
+                </div>
+
+                <div class="row push-down-20">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> Referencia</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Referencia, new { @class = "form-control text", @maxlength = "250" })
+                                @Html.ValidationMessageFor(model => model.Referencia, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Serial</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Serial, new { @class = "form-control text", @maxlength = "100" })
+                                @Html.ValidationMessageFor(model => model.Serial, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                </div>
+                <div class="row push-down-20">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> Precio</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Precio, new { @class = "form-control text", @maxlength = "10" })
+                                @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Aprobado</label>
+                            <div class="col-md-9">
+                                @Html.CheckBoxFor(model => model.Aprobado, new { @checked = 1 })
+                                @Html.ValidationMessageFor(model => model.Aprobado, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                </div>
+                <div class="row push-down-20">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> Garantía</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Garantia, new { @class = "form-control text", @maxlength = "1000" })
+                                @Html.ValidationMessageFor(model => model.Garantia, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                  
+                    <br />
+
+                </div>
+                <div class="row push-down-20">
+
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Proveedor</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Proveedor, new { @class = "form-control text", @maxlength = "511" })
+                                @Html.ValidationMessageFor(model => model.Proveedor, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                </div>
+                <div class="row push-down-20">
+                   
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Diagnóstico</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Diagnostico, new { @class = "form-control text", @maxlength = "1000" })
+                                @Html.ValidationMessageFor(model => model.Diagnostico, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                </div>
+             
+                <div class="row push-down-20">
+
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Descripción</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Descripcion, new { @class = "form-control text", @maxlength = "511" })
+                                @Html.ValidationMessageFor(model => model.Diagnostico, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12 col-sm-6 col-xs-6">
+                            <button type="button" id="btnGuardarMatriz" class="btn btn-success" data-dismiss="modal" onclick="DotacionAgregar('@Model.Id')">Guardar</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+
+        $('#TipoId').change(function () {
+            var selectedDep = $(this).val();
+            var elementovar = $('#ElementoId');
+
+            if (selectedDep != null && selectedDep != '') {
+
+                $.getJSON('@Url.Action("obtenerElemento", "Cronograma")', { tipo: selectedDep }, function (data) {
+
+                    var items = '';
+                    items = '<option>Seleccione  </option>';
+                    $.each(data, function (i, municipio) {
+                        items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                    });
+
+                    elementovar.empty();
+                    elementovar.html(items);
+                    elementovar.click();
+
+                });
+
+            }
+
+        })
+    });
+
+    </script>

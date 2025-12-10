@@ -1,0 +1,185 @@
+﻿@{
+    ViewBag.Title = "Asignar";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Asignar", "UsuarioRol", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2><span class="fa-representante fa-2x"></span> Asignación de Usuarios - Escuelas de Música</h2>
+        </div>
+        <div class="panel-body">
+            <div class="row push-down-20">
+                <h3><span class="fa-representante fa-2x"></span> Datos de Usuario</h3>
+            </div>
+            <div class="row push-down-20">
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Correo electrónico </label>
+                        <div class="col-md-9">
+                            @Html.Editor("Correo", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                    </div>
+                </div>
+            </div>
+            <div class="row push-down-20">
+                <h3><span class="fa-representante fa-2x"></span> Datos de Ubicación</h3>
+            </div>
+            <div class="row push-down-20">
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label"> Departamento</label>
+                    <div class="col-md-4">
+                        @Html.DropDownList("DepartamentoSelector", (SelectList)ViewBag.departamentos, "Seleccione un valor", new { @class = "styled-select" })
+
+                    </div>
+                    <label class="col-md-2 control-label"> Municipio</label>
+                    <div class="col-md-4">
+
+                        @Html.DropDownList("MunicipioSelector", (SelectList)ViewBag.municipios, "Seleccione un valor", new { @class = "styled-select" })
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Listado de escuelas</h4>
+
+                </div>
+                <div id="escuelastabla" class="panel-body">
+                    @Html.Action("_TablaEscuelas", "EscuelasMusica", new { CodMunicipio = "" })
+                </div>
+            </div>
+        </div>
+        <div id="TablaInstumentos" class="panel-body">
+            @*@Html.Action("CargarInstrumentos", new { AgenteId = Model.AgenteId, EliminarId = 0 })*@
+        </div>
+
+    </div>
+}
+@section Scripts {
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#Correo").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/UsuarioRol/CargarLista",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            //alert(item.text);
+                            return { label: item.Nombre, value: item.Nombre };
+                        }))
+
+                    }
+
+                })
+            },
+            messages: {
+                //noResults: "", results: ""
+
+            }
+
+        });
+    })
+
+
+    $(function () {
+
+        $('#DepartamentoSelector').change(function () {
+            var selectedDep = $(this).val();
+            var city = $('#MunicipioSelector');
+
+            if (selectedDep != null && selectedDep != '') {
+
+                $.getJSON('@Url.Action("GetMunicipio", "EscuelasMusica")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+
+                        items = '<option>Seleccione un valor </option>';
+
+                        $.each(data, function (i, municipio) {
+                            //alert(municipio.value);
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+
+                        city.empty();
+                        city.html(items);
+                        city.click();
+                        //city.removeAttr('disabled');
+
+                    });
+
+                }
+
+            })
+
+            $('#MunicipioSelector').change(function () {
+                var selectedMun = $(this).val();
+
+                if (selectedMun != null && selectedMun != '') {
+                    CargarEscuelas(selectedMun);
+                }
+
+            })
+        });
+        function CargarEscuelas(varMunicipio) {
+
+            $.ajax({
+
+                url: "/EscuelasMusica/_TablaEscuelas",
+                type: "GET",
+                data: { CodMunicipio: varMunicipio }
+            })
+           .done(function (partialViewResult) {
+               $("#escuelastabla").html(partialViewResult);
+
+               
+           });
+
+        }
+
+        function SolicitarPermisos(varEscuelaId) {
+            var varcorreo = $('#Correo').val();
+            var varMunci = $('#MunicipioSelector').val();
+            if ($('#Correo').val() == "") {
+                alert("El correo del usuario es obligatorio");
+                return;
+            }
+            var url = '@Url.Action("AsignarUsuario", "UsuarioRol")';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    EscuelaId: varEscuelaId, correo: varcorreo
+                },
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                        CargarEscuelas(varMunci);
+                        alert("Se asigno correctamente el usuario");
+
+                    }
+                },
+
+            });
+
+        }
+    </script>
+}

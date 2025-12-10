@@ -1,0 +1,142 @@
+﻿@model SM.LibreriaComun.DTO.EntidadesOperadoras.CronogramaDTO
+@{
+    ViewBag.Title = "Nuevo Cronograma";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Crear", "Cronograma", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Cronograma", "Index", "Cronograma")</li>
+        <li>@Html.ActionLink("Ver Actividad", "Editar", "Actividad", new { Id = Model.ActividadId }, null)</li>
+    </ul>
+
+    <div class="panel panel-primary form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ActividadId)
+        <div class="panel-body" id="panelEditar">
+            @Html.Partial("_Datos", Model)
+            <div class="panel-footer">
+                <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script type="text/javascript">
+        $('#FechaInicio').datepicker({
+            minDate: 0,
+            maxDate: "+60D",
+            numberOfMonths: 2,
+            format: 'yyyy-mm-dd',
+            onSelect: function (selected) {
+                $("#FechaFin").datepicker("option", "minDate", selected)
+            }
+        })
+
+        $('#FechaFin').datepicker({
+
+            format: 'yyyy-mm-dd',
+            minDate: 0,
+            maxDate: "+60D",
+            numberOfMonths: 2,
+            onSelect: function (selected) {
+                $("#FechaInicio").datepicker("option", "maxDate", selected)
+            }
+        })
+
+        $("#FechaFin").change(function () {
+            var startDate = document.getElementById("FechaInicio").value;
+            var endDate = document.getElementById("FechaFin").value;
+
+            if ((Date.parse(startDate) > Date.parse(endDate))) {
+                alert("La fecha final no puede ser menor a la inicial");
+                document.getElementById("FechaFin").value = "";
+            }
+        });
+
+      
+        function ValidaSoloNumeros() {
+            console.log("ValidaSoloNumeros");
+            if ((event.keyCode < 48) || (event.keyCode > 57))
+                event.returnValue = false;
+        }
+
+        $('#Cupo').keypress(function () {
+            ValidaSoloNumeros();
+        });
+
+       
+        $(function () {
+            $('#Cod_departamento').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#Cod_municipio');
+                var varmunicipio = $('#Cod_municipio');
+                var varescuela = $('#Escuela');
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerMunicipio", "Agente")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione  </option>';
+                        var itemescuela = '';
+                        itemescuela = '<option>Seleccione  </option>';
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                      
+                        varescuela.empty();
+                        varescuela.html(itemescuela);
+                        varescuela.click();
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                }
+
+            })
+        });
+
+        $(function () {
+            $('#Cod_municipio').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#Escuela');
+              
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerEscuela", "Cronograma")', { municipio: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione  </option>';
+                        $.each(data, function (i, registro) {
+                            items += "<option value='" + registro.value + "'>" + registro.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                }
+
+            })
+        });
+
+
+       
+    </script>
+}
+
+

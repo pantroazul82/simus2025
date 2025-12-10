@@ -1,0 +1,193 @@
+﻿@using MvcCheckBoxList.Model
+@model WebSImus.Models.InfraestructuraModel
+
+<div class="modern-form-container">
+    <div class="form-header">
+        <h2 class="form-title">
+            <i class="fas fa-building"></i> Infraestructura
+        </h2>
+    </div>
+
+    <!-- SEDE -->
+    <div class="mf-section-title">
+        <i class="fas fa-map-marker-alt"></i> Sede
+    </div>
+
+    @Html.HiddenFor(model => model.NombreEscuela)
+    @Html.HiddenFor(model => model.EscuelaId)
+
+    <div class="mf-grid md:mf-grid-cols-2 mf-gap-x-6 mf-mb-6">
+        <div class="mf-field-group">
+            <label class="mf-label">Nombre de la sede de trabajo</label>
+            @Html.TextBoxFor(model => model.Sede, new { @class = "w-full px-3 py-2 border rounded", maxlength = "100" })
+            @Html.ValidationMessageFor(model => model.Sede, "", new { @class = "mf-validation-error" })
+        </div>
+
+        <div class="mf-field-group">
+            <label class="mf-label">Espacio</label>
+            @Html.DropDownListFor(model => model.Espacio, (SelectList)ViewBag.listEspacio, "Seleccione un valor", new { @class = "w-full px-3 py-2 border rounded styled-select" })
+            @Html.ValidationMessageFor(model => model.Espacio, "", new { @class = "mf-validation-error" })
+        </div>
+    </div>
+
+    <div class="mf-field-group">
+        <label class="mf-label">¿La sede es asignada con soporte escrito?</label>
+        <div class="mf-radio-group">
+            <label class="mf-radio-label">@Html.RadioButtonFor(m => m.EsSedeAsignada, 1) Sí</label>
+            <label class="mf-radio-label">@Html.RadioButtonFor(m => m.EsSedeAsignada, 2) No</label>
+        </div>
+    </div>
+
+    <!-- MOBILIARIO -->
+    <div class="mf-section-title">
+        <i class="fas fa-chair"></i> Mobiliario
+    </div>
+    <p class="mf-helper-text mf-mb-4"><i class="fas fa-info-circle fa-fw"></i> Por favor ingrese la cantidad.</p>
+    <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-2 mf-gap-x-6">
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.CantidadSillas)" class="mf-label">Sillas</label>
+            @Html.TextBoxFor(model => model.CantidadSillas, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0", id = "Sillas" })
+            @Html.ValidationMessageFor(model => model.CantidadSillas, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.CantidadTableros)" class="mf-label">Tableros</label>
+            @Html.TextBoxFor(model => model.CantidadTableros, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0", id = "Tableros" })
+            @Html.ValidationMessageFor(model => model.CantidadTableros, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.CantidadAtriles)" class="mf-label">Atriles</label>
+            @Html.TextBoxFor(model => model.CantidadAtriles, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0", id = "Atriles" })
+            @Html.ValidationMessageFor(model => model.CantidadAtriles, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.CantidadEstanterias)" class="mf-label">Estantería</label>
+            @Html.TextBoxFor(model => model.CantidadEstanterias, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0", id = "Estanteria" })
+            @Html.ValidationMessageFor(model => model.CantidadEstanterias, "", new { @class = "mf-validation-error" })
+        </div>
+    </div>
+
+    <!-- ADECUACION ACUSTICA -->
+    <div class="mf-section-title">
+        <i class="fas fa-volume-up"></i> Adecuación Acústica
+    </div>
+    <div class="mf-field-group">
+        <label class="mf-label">¿La sede está adecuada acústicamente?</label>
+        <div class="mf-radio-group">
+            <label class="mf-radio-label">@Html.RadioButtonFor(m => m.EsAdecuadaAcusticamente, 1, new { onClick = "validarsede()" }) Sí</label>
+            <label class="mf-radio-label">@Html.RadioButtonFor(m => m.EsAdecuadaAcusticamente, 2, new { onClick = "validarsede()" }) No</label>
+        </div>
+    </div>
+    <div class="mf-grid md:mf-grid-cols-2 mf-gap-x-6 mf-mt-4" id="PanelSede">
+        <div>
+            <label class="mf-label">Soluciones implementadas</label>
+            @{ var htmlListInfo = new HtmlListInfo(HtmlTag.vertical_columns, 1); }
+            @Html.CheckBoxListFor(model => model.TipoSolucionesAcusticasPublicado, model => model.TipoSolucionesAcusticasData, entity => entity.Id, entity => entity.Nombre, model => model.TipoSolucionesAcusticasSeleccionada, htmlListInfo)
+        </div>
+        <div>
+            <label for="@Html.IdFor(model => model.PorcentajeAdecuacion)" class="mf-label">Porcentaje (%) adecuado</label>
+            @Html.TextBoxFor(model => model.PorcentajeAdecuacion, new { @class = "w-full px-3 py-2 border rounded", type = "numer", min = "0", max = "100", placeholder = "0", id = "Porcentaje" })
+            @Html.ValidationMessageFor(model => model.PorcentajeAdecuacion, "", new { @class = "mf-validation-error" })
+        </div>
+    </div>
+
+    <!-- INTERNET -->
+    <div class="mf-section-title">
+        <i class="fas fa-wifi"></i> Acceso a Internet
+    </div>
+    <div class="mf-field-group">
+        <label class="mf-label">¿La escuela tiene acceso a internet?</label>
+        <div class="mf-radio-group">
+            <label class="mf-radio-label">@Html.RadioButtonFor(m => m.TieneAccesoInternet, 1, new { onClick = "validarInternet()" }) Sí</label>
+            <label class="mf-radio-label">@Html.RadioButtonFor(m => m.TieneAccesoInternet, 2, new { onClick = "validarInternet()" }) No</label>
+        </div>
+    </div>
+    <div id="PanelInternet" class="mf-mt-4">
+        <label class="mf-label">Tipos de servicio de Internet</label>
+        @{ var htmlListInfoInternet = new HtmlListInfo(HtmlTag.vertical_columns, 1); }
+        @Html.CheckBoxListFor(model => model.TipoInternetPublicado, model => model.TiposInternetData, entity => entity.Id, entity => entity.Nombre, model => model.TiposInternetSeleccionada, htmlListInfoInternet)
+    </div>
+
+    <!-- DOTACION INSTRUMENTAL -->
+    <div class="mf-section-title">
+        <i class="fas fa-drum"></i> Dotación Instrumental
+    </div>
+    <p class="mf-helper-text mf-mb-4"><i class="fas fa-info-circle fa-fw"></i> Por favor ingrese la cantidad.</p>
+    <div class="mf-grid md:mf-grid-cols-2 mf-gap-x-6">
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.CantidadCuerdasPulsadas)" class="mf-label">Cuerdas pulsadas</label>
+            @Html.TextBoxFor(model => model.CantidadCuerdasPulsadas, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0", id = "CuerdasPulsadas" })
+            @Html.ValidationMessageFor(model => model.CantidadCuerdasPulsadas, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.CantidadVientosMadera)" class="mf-label">Vientos madera</label>
+            @Html.TextBoxFor(model => model.CantidadVientosMadera, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0", id = "VientosMadera" })
+            @Html.ValidationMessageFor(model => model.CantidadVientosMadera, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.CantidadVientosMetales)" class="mf-label">Vientos metales</label>
+            @Html.TextBoxFor(model => model.CantidadVientosMetales, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0", id = "VientosMetales" })
+            @Html.ValidationMessageFor(model => model.CantidadVientosMetales, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.CantidadOtros)" class="mf-label">Otros instrumentos</label>
+            @Html.TextBoxFor(model => model.CantidadOtros, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0", id = "Otros" })
+            @Html.ValidationMessageFor(model => model.CantidadOtros, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.CantidadCuerdasSinfonicas)" class="mf-label">Cuerdas sinfónicas</label>
+            @Html.TextBoxFor(model => model.CantidadCuerdasSinfonicas, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0", id = "Sinfonicas" })
+            @Html.ValidationMessageFor(model => model.CantidadCuerdasSinfonicas, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.CantidadPercusionMenor)" class="mf-label">Percusión menor</label>
+            @Html.TextBoxFor(model => model.CantidadPercusionMenor, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0", id = "PercusionMenor" })
+            @Html.ValidationMessageFor(model => model.CantidadPercusionMenor, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.CantidadPercusionSinfonica)" class="mf-label">Percusión sinfónica</label>
+            @Html.TextBoxFor(model => model.CantidadPercusionSinfonica, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0", id = "PercusionSinfonica" })
+            @Html.ValidationMessageFor(model => model.CantidadPercusionSinfonica, "", new { @class = "mf-validation-error" })
+        </div>
+    </div>
+
+    <!-- FUENTES DOTACION -->
+    <div class="mf-section-title">
+        <i class="fas fa-box"></i> Fuentes de Dotación
+    </div>
+    <div class="mf-field-group">
+        <label class="mf-label">Fuentes dotación instrumental</label>
+        @Html.CheckBoxListFor(model => model.FuentesDotacionPublicado, model => model.FuentesDotacionData, entity => entity.Id, entity => entity.Nombre, model => model.FuentesDotacionSeleccionada, htmlListInfoInternet)
+    </div>
+    <div class="mf-field-group">
+        <label class="mf-label">Tipos de fuente de dotación</label>
+        @Html.CheckBoxListFor(model => model.TipoFuentesDotacionPublicado, model => model.TiposFuentesDotacionData, entity => entity.Id, entity => entity.Nombre, model => model.TiposFuentesDotacionSeleccionada, htmlListInfoInternet)
+    </div>
+
+    <!-- MATERIAL PEDAGOGICO -->
+    <div class="mf-section-title">
+        <i class="fas fa-book"></i> Material Pedagógico
+    </div>
+    <div class="mf-field-group">
+        <label class="mf-label">¿La escuela cuenta con material pedagógico y musical?</label>
+        <div class="mf-radio-group">
+            <label class="mf-radio-label">@Html.RadioButtonFor(m => m.TieneMaterialPedagogico, 1, new { onClick = "validarMaterial()" }) Sí</label>
+            <label class="mf-radio-label">@Html.RadioButtonFor(m => m.TieneMaterialPedagogico, 2, new { onClick = "validarMaterial()" }) No</label>
+        </div>
+    </div>
+    <div class="mf-grid md:mf-grid-cols-2 mf-gap-x-6" id="PanelMaterial">
+        <div class="mf-field-group">
+            <label for="@Html.IdFor(model => model.CantidadTitulosBibliograficos)" class="mf-label">Cantidad de títulos bibliográficos</label>
+            @Html.TextBoxFor(model => model.CantidadTitulosBibliograficos, new { @class = "w-full px-3 py-2 border rounded", type = "number", min = "0", max = "9999", placeholder = "0", id = "TitulosBibliograficos" })
+            @Html.ValidationMessageFor(model => model.CantidadTitulosBibliograficos, "", new { @class = "mf-validation-error" })
+        </div>
+        <div class="mf-field-group">
+            <label class="mf-label">Adquisición de material pedagógico</label>
+            @Html.CheckBoxListFor(model => model.MaterialPedagogicoPublicado, model => model.MaterialPedagogicoData, entity => entity.Id, entity => entity.Nombre, model => model.MaterialPedagogicoSeleccionada, htmlListInfoInternet)
+        </div>
+    </div>
+
+    <div class="mf-form-footer">
+        @Html.ActionLink("Anterior", "Formacion", "EscuelasMusica", new { Id = Model.EscuelaId }, new { @class = "btn border" })
+        <input type="submit" value="Siguiente" name="TabInfraestructura" class="btn btn-success py-2 px-4" id="btnGuardarInfraestructura" />
+    </div>
+</div>

@@ -1,0 +1,83 @@
+﻿@model WebSImus.Models.EscuelaDocumentoModels
+
+<div>
+    <h3 class="mf-section-title">
+        <i class="fas fa-file-alt fa-fw"></i> Documentos
+    </h3>
+
+    <div class="mf-grid mf-grid-cols-1 md:mf-grid-cols-12 mf-gap-6 mf-mb-6">
+        <div class="md:mf-col-span-4 mf-field-group">
+            <label for="@Html.IdFor(model => model.Categoria)" class="mf-label">Categoría</label>
+            @Html.DropDownListFor(model => model.Categoria, (SelectList)ViewBag.listCategoria, "Seleccione", new { @class = "w-full px-3 py-2 border rounded styled-select" })
+            @Html.ValidationMessageFor(model => model.Categoria, "", new { @class = "mf-validation-error" })
+        </div>
+
+        <div class="md:mf-col-span-6 mf-field-group">
+            <label for="@Html.IdFor(model => model.DocumentoEscuela)" class="mf-label">Subir documento</label>
+            @Html.TextBoxFor(model => model.DocumentoEscuela, new { @class = "w-full px-3 py-2 border rounded", type = "file", onclick = "resizePanel()" })
+            @Html.ValidationMessageFor(model => model.DocumentoEscuela, "", new { @class = "mf-validation-error" })
+            <p class="mf-helper-text"><i class="fas fa-info-circle fa-fw"></i> Tipos de archivos permitidos: .pdf, .csv, .xls, .xlsx, .doc y .docx de tamaño máximo 3 Mb.</p>
+            @Html.HiddenFor(model => model.EscuelaDocumentoId)
+        </div>
+
+        <div class="md:mf-col-span-2 mf-field-group mf-flex-end-button">
+            <button type="button" id="btnDocumentoEscuela" class="btn btn-success">
+                <i class="fas fa-plus fa-fw"></i> Agregar
+            </button>
+        </div>
+    </div>
+
+    <hr class="mf-hr">
+
+    <h4 class="mf-subsection-title">
+        <i class="fas fa-list-ul fa-fw"></i> Listado de Documentos
+    </h4>
+    @Html.HiddenFor(model => model.EscuelaId)
+
+    <div id="TablaDocumento" class="mf-mt-4">
+        @Html.Action("TablaDocumentos", new { Id = Model.EscuelaId, EliminarId = 0 })
+    </div>
+
+    <div class="mf-form-footer">
+            <input type="submit" value="Siguiente" name="Guardar" class="btn btn-success py-2 px-4" id="btnGuardar" />
+    </div>
+</div>
+
+<script type="text/javascript">
+    function CargarModalDocumentos(Id) {
+        $('#item-to-delete-documento').val(Id);
+        $('#modalConfirmarDocumentos').modal('show');
+    }
+
+
+    function EliminarDocumento() {
+        var varid = $('#item-to-delete-documento').val();
+        // alert(varid);
+        var varEscuelaId = '@Model.EscuelaId';
+        ActualizarListadoDocumentos(varEscuelaId, varid);
+        return false;
+    }
+
+    function ActualizarListadoDocumentos(varID, varEliminar) {
+
+        $("#Categoria").val("").change();
+        $("#DocumentoEscuela").val("").change();
+        $.ajax({
+
+            url: "/EscuelasMusica/TablaDocumentos",
+            type: "GET",
+            data: { Id: varID, EliminarId: varEliminar }
+        })
+       .done(function (partialViewResult) {
+           $("#TablaDocumento").html(partialViewResult);
+           $('#item-to-delete-documento').val(0);
+           if (varEliminar > 0) {
+               $("#modalConfirmarDocumentos").modal('hide');
+               $('body').removeClass('modal-open');
+               $('.modal-backdrop').remove();
+           }
+       });
+
+    }
+
+</script>

@@ -1,0 +1,148 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<SM.LibreriaComun.DTO.GEO.AgenteMunicipioDTO>
+
+<div class="modal animated fadeIn" id="modal_datosagentes" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+
+                    <div class="col-md-8 col-sm-6 col-xs-6 titulo_municipio"> @ViewBag.NombreDepto<img style="padding-top:10px;" src="../img/iconos/agentes_window.png"></div>
+                    <div class="col-md-4 col-sm-6 col-xs-6 titulo_infowindow"> Agentes</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 tabla_gris2">
+                        <div class="col-md-5 col-sm-4 col-xs-4 primera_tabla">
+                            #Total agentes
+                        </div>
+                        <div class="col-md-5 col-sm-4 col-xs-4 primera_tabla">
+                            @ViewBag.CantidadAgentes
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 cabeza_modal">
+
+                        <div class="col-md-5 col-sm-4 col-xs-4 primera_tabla">
+                            Municipio
+                        </div>
+                        <div class="col-md-5 col-sm-4 col-xs-4 primera_tabla">
+                            # Agentes
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="row">
+                  
+                    @if (Model != null)
+                    {
+                        var i = "Gris";
+                        foreach (SM.LibreriaComun.DTO.GEO.AgenteMunicipioDTO item in Model)
+                        {
+                            <div class="row">
+                                @if (i == "Gris")
+                                {
+                                    <div class="col-md-12 tabla_gris">
+
+                                        <div class="col-md-5 col-sm-4 col-xs-4">
+                                            @item.Municipio
+                                        </div>
+                                        <div class="col-md-5 col-sm-4 col-xs-4">
+                                            @item.cantidad
+                                        </div>
+
+
+                                    </div>
+                                    i = "Blanco";
+                                }
+                                else
+                                {
+                                    i = "Gris";
+                                    <div class="col-md-12 tabla_blanca">
+
+                                        <div class="col-md-5 col-sm-4 col-xs-4">
+                                            @item.Municipio
+                                        </div>
+                                        <div class="col-md-5 col-sm-4 col-xs-4">
+                                            @item.cantidad
+                                        </div>
+
+
+
+                                    </div>
+                                }
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="col-md-12 col-sm-9 col-xs-9">
+                                <div id="myPager" class="pagination">
+                                    @Html.PagedListPager(
+        Model,
+        page => Url.Action(
+                              "_DatosAgentes",
+            new
+            {
+                CodDepto = ViewBag.CodDepto,
+                porcentaje = ViewBag.porcentaje,
+                nombre = ViewBag.NombreDepto,
+                page = page
+            }
+        ),
+        new PagedListRenderOptions
+        {
+            LinkToFirstPageFormat = "<<",
+            LinkToPreviousPageFormat = "<",
+            LinkToNextPageFormat = ">",
+            LinkToLastPageFormat = ">>",
+        }
+    )
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12 col-sm-6 col-xs-6">
+                                <button type="button" class="btn vermas" data-dismiss="modal">Cerrar</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<script type="text/javascript">
+    //$(function () {
+    $('#myPager').on('click', 'a', function () {
+      
+        $.ajax({
+            url: this.href,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#modalInformacion').html(result);
+                $("#modal_datosagentes").modal('show');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+            }
+        });
+        return false;
+    });
+    //});
+
+</script>
+
+

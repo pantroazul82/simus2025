@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simus - Público</title>
+    <link rel="icon" href="~/img/favicon.ico" type="image/x-icon" />
+
+  
+    <link href="@Url.Content("~/css/newstyles.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/simus_font.css")" rel="stylesheet">
+    @*<link href="@Url.Content("~/css/theme-default_oscuro.css")" rel="stylesheet">*@
+
+    @Html.DevExpress().GetStyleSheets(
+        new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.GridView },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.PivotGrid },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Chart },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Report },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Scheduler },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.TreeList },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Spreadsheet },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.RichEdit },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.SpellChecker }
+    )
+   
+    @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+        new Script { ExtensionSuite = ExtensionSuite.HtmlEditor },
+        new Script { ExtensionSuite = ExtensionSuite.GridView },
+        new Script { ExtensionSuite = ExtensionSuite.PivotGrid },
+        new Script { ExtensionSuite = ExtensionSuite.Editors },
+        new Script { ExtensionSuite = ExtensionSuite.Chart },
+        new Script { ExtensionSuite = ExtensionSuite.Report },
+        new Script { ExtensionSuite = ExtensionSuite.Scheduler },
+        new Script { ExtensionSuite = ExtensionSuite.TreeList },
+        new Script { ExtensionSuite = ExtensionSuite.Spreadsheet },
+        new Script { ExtensionSuite = ExtensionSuite.RichEdit },
+        new Script { ExtensionSuite = ExtensionSuite.SpellChecker },
+       new Script { ExtensionSuite = ExtensionSuite.All }
+    )
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-76203017-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</head>
+<body>
+    <!-- START PAGE CONTAINER -->
+    <div class="page-container">
+
+        <!-- START PAGE SIDEBAR -->
+        <div class="page-header">
+            <!-- page header holder -->
+            <div class="page-header-holder">
+
+                <!-- page logo -->
+
+                <div class="container-fluid cabeza">
+                    <div class=" col-md-12">
+                        <a href="~/Home/index">
+                            <div class="col-md-6 col-sm-12 col-xs-12 logo_simus"></div>
+                        </a>
+                       
+                        <div class="col-md-6 redes">
+                            <div class="col-md-12 col-xs-12">
+                                <div class="col-md-6">
+
+                                    <div class="col-md-3 col-sm-3 col-xs-3 redes_header">  <a href="https://www.facebook.com/plandemusica" target="_blank"> <span class="fa-face fa-2x  icon_top"/> </a>  </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-3  redes_header"> <a href="https://www.youtube.com/channel/UCWv5Kl8hH6kKqdMkLXVJzZA" target="_blank"> <span class="fa-youtube2 fa-2x  icon_top"/> </a> </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-3 redes_header">  <a href="https://www.youtube.com/channel/UCWv5Kl8hH6kKqdMkLXVJzZA" target="_blank"><span class="fa-soundcloud2  fa-2x  icon_top"/> </a> </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-3 redes_header"><a href="https://twitter.com/Plandemusica?lang=es" target="_blank"> <span class="fa-twitter2  fa-2x  icon_top"/> </a>  </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-12 hidden-xs" data-animate="fadeInRight">
+
+                                    <a class="col-md-6 col-sm-6 col-xs-6  ingreso " href="~/Cuenta/Login"><span class="">Ingresar</span> </a>
+                                    <a class="col-md-6 col-sm-6 col-xs-6  ingreso" href="~/Cuenta/Registrarse"><span class="">Registrarse</span> </a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ./page logo -->
+                <!-- search -->
+                <!-- #section:basics/content.searchbox -->
+                <!-- /.nav-search -->
+                <!-- ./search -->
+                <!-- nav mobile bars -->
+                <div class="navigation-toggle">
+                    <div class="navigation-toggle-button"><span class="fa fa-bars"></span></div>
+                </div>
+                <!-- ./nav mobile bars -->
+                <!-- navigation -->
+                <div class="row barra_negra">
+
+                    <ul class="navigation">
+
+                        <li>
+                            <a href="#"><span class="fa-solid fa-chevron-right  fa-2x icon_top"></span> Actores</a>
+                            <ul>
+                                <li><a href="~/Home/ConsultaAgentes"><span class="fa-solid fa-chevron-right  fa-2x icon_top"></span> Agentes</a></li>
+                                <li><a href="~/Home/ConsultaAgrupaciones"><span class="fa-agrupacion  fa-2x icon_top"></span> Agrupaciones</a></li>
+                                <li><a href="~/Home/ConsultaEntidades"><span class="fa-entidades  fa-2x icon_top"></span> Entidades</a></li>
+                                <li><a href="~/Home/ConsultaEscuelas"> <span class="fa-escuelas fa-2x icon_top"></span> Escuelas</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#"><span class="fa-mapas  fa-2x icon_top"></span> Mapas</a>
+                            <ul>
+                                <li><a href="~/ReporteMapas/MapaMusical"> <span class="fa fa-musical fa-2x"></span> Mapa Musical</a></li>
+                                <li><a href="~/ReporteMapas/MapaEscuelas"> <span class="fa fa-escuelas fa-2x"></span> Mapa Escuelas</a></li>
+                                <li><a href="~/ReporteMapas/TematicoEscuelas"> <span class="fa fa-escuelas fa-2x"></span> Mapa Escuelas Temático</a></li>
+                                <li><a href="~/ReporteMapas/MapaCelebra"> <span class="fa-celebra fa-2x"></span>  Mapa Celebra </a></li>
+                                <li><a href="~/ReporteMapas/TematicoCelebra"> <span class="fa-celebra fa-2x"></span>  Mapa Celebra Temático</a></li>
+                                <li><a href="~/ReporteMapas/TematicoAgentes"> <span class="fa-solid fa-chevron-right fa-2x"></span> Mapa Agentes Temático</a></li>
+                                <li><a href="~/ReporteMapas/MapaAgrupaciones"> <span class="fa-agrupacion fa-2x"></span>  Mapa Agrupaciones</a></li>
+                                <li><a href="~/ReporteMapas/MapaEntidades"> <span class="fa-entidades fa-2x"></span>  Mapa Entidades</a></li>
+                                @*<li><a href="~/ReporteMapas/MapaGeneral"> <span class="fa-mapas fa-2x"></span> Mapa General</a></li>*@
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="fa-perfil  fa-2x icon_top"></span>Promoción de artistas</a>
+                            <ul>
+                                <li><a href="http://asisuenameta.com/" target="_blank"> <span class="fa fa-perfil fa-2x"></span> Así suena Meta</a></li>
+                                <li><a href="http://www.asisuenacesar.com" target="_blank"> <span class="fa fa-perfil fa-2x"></span>Así suena Cesar</a></li>
+                                <li><a href="http://simr.gov.co/asi-suena-risaralda/index" target="_blank"> <span class="fa-perfil fa-2x"></span>  Así suena Risaralda </a></li>
+                                <li><a href="http://www.asisuenahuila.com/" target="_blank"> <span class="fa-perfil fa-2x"></span> Así suena Huila</a></li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="fa-caja  fa-2x icon_top"></span> Caja de Herramientas</a>
+                            <ul>
+                                <li><a href="~/Herramientas/Index"><span class="fa-caja  fa-2x icon_top"></span> Convocatorias Estímulos 2017</a></li>
+                                <li><a href="~/Herramientas/Convocatorias"><span class="fa-convocatorias  fa-2x icon_top"></span> Listado de Convocatorias</a></li>
+                                <li><a href="~/assets/pdf/MusicaCuentaDigital.pdf" target="_blank"> <span class="fa-revista fa-2x"></span> La Música Cuenta</a></li>
+                            </ul>
+
+                        </li>
+
+                        <li>
+                            <a href="#"><span class="fa-regular fa-circle-question icon_top"></span> Ayuda</a>
+                            <ul>
+                                <li><a href="~/Estatico/AcercaDe"> <span class="fa fa-solid fa-chevron-right fa-2x"></span> Acerca de</a></li>
+                                <li><a href="~/assets/pdf/ManualNavegacion.pdf" target="_blank"> <span class="fa-revista fa-2x"></span> Manual de navegación</a></li>
+                                <li><a href="~/assets/pdf/ManualEscuelasMusica.pdf" target="_blank"> <span class="fa-revista fa-2x"></span> Manual escuelas de música</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- ./navigation -->
+
+            </div>
+            <!-- ./page header holder -->
+
+        </div>
+
+        <!-- END PAGE SIDEBAR -->
+        <!-- PAGE CONTENT -->
+        <div class="page-content">
+
+            <!-- PAGE CONTENT WRAPPER -->
+            <div class="page-content-wrap bg-light">
+                <div class="row">
+                    <div class="col-md-12">
+                        @{ Html.RenderPartial("_Alertas"); }
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+
+            <!-- page footer -->
+            <div class="page-footer">
+                <!-- page footer wrap -->
+                <div class="page-footer-wrap bg-dark-gray">
+                    <!-- page footer holder -->
+                    <div class="page-footer-holder page-footer-holder-main">
+                        <div class="container">
+                            <!-- quick links -->
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <h3>Enlaces de interés</h3>
+                                    <div class="list-links">
+                                        <a href="http://www.mincultura.gov.co" target="_blank">MinCultura</a>
+                                        <a href="http://sinic.gov.co/" target="_blank">SINIC</a>
+                                        <a href="http://pulep.mincultura.gov.co/" target="_blank">PULEP</a>
+                                        <a href="http://www.bibliotecanacional.gov.co/rnbp/" target="_blank">Red Nacional de Bibliotecas</a>
+                                        <a href="http://sig.mincultura.gov.co" target="_blank">SIG</a>
+                                    </div>
+                                </div>
+                                <!-- ./quick links -->
+                                <!-- recent tweets -->
+                                <div class="col-md-4">
+                                    <h3>Suena en las redes</h3>
+                                    <div class="list-with-icon small">
+                                        <div class="redes">
+                                            <a href="https://www.facebook.com/plandemusica" target="blank">  <span class="fa-face fa-2x"></span> </a>
+                                            <a href="https://www.facebook.com/plandemusica" target="blank" class="texto_footer">Encuéntranos en facebook </a>
+                                        </div>
+
+                                        <div class="redes">
+                                            @*<div class="fa-twitter2 fa-2x">*@
+                                            <a href="https://twitter.com/Plandemusica?lang=es" target="blank">  <span class="fa-twitter2 fa-2x"></span> </a>
+                                            <a href="https://twitter.com/Plandemusica?lang=es" target="blank" class="texto_footer"> Síguenos en Twitter</a>
+                                            @*</div>*@
+
+                                        </div>
+                                        <div class="redes">
+                                            <a href="https://www.youtube.com/channel/UCWv5Kl8hH6kKqdMkLXVJzZA" target="blank">  <span class="fa-youtube2 fa-2x"></span> </a>
+                                            <a href="https://www.youtube.com/channel/UCWv5Kl8hH6kKqdMkLXVJzZA" target="blank" class="texto_footer">  Suscríbete a nuestro canal </a>
+                                        </div>
+                                        <div class="redes">
+
+
+                                            <a href="https://soundcloud.com/plan-nacional-de-m-sica" target="blank">  <span class="fa-soundcloud2 fa-2x"></span> </a>
+                                            <a href="https://soundcloud.com/plan-nacional-de-m-sica" target="blank" class="texto_footer"> Síguenos en SoundCloud</a>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ./recent tweets -->
+                                <!-- contacts -->
+                                <div class="col-md-4">
+                                    <h3>Contacto</h3>
+                                    <div class="list-with-icon small">
+                                        <div class="redes">
+                                            <span class="fa-mapas fa-2x"></span>
+                                            Carrera 8 No. 8 - 55 Bogotá D.C., Colombia
+                                        </div>
+                                        <div class="fc-row">
+                                            <span class="fa-telephone fa-2x"></span>
+                                            (571) 3424100 Ext. 1511
+                                        </div>
+                                        <div class="fc-row">
+                                            <span class="fa-correo fa-2x"></span>
+                                            <a href="mailto:simus@mincultura.gov.co"><strong>Atención al Usuario SIMUS <br />  </strong></a>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- ./contacts -->
+                        </div>
+                    </div>
+                    <!-- ./page footer holder -->
+                </div>
+                <!-- ./page footer wrap -->
+                <!-- page footer wrap -->
+                <div class="page-footer-wrap bg-darken-gray">
+                    <!-- page footer holder -->
+                    <div class="page-footer-holder">
+                        <!-- copyright -->
+                        <div class="copyright">
+                            Sistema de información de la música · Ministerio de Cultura
+                        </div>
+                        <!-- ./copyright -->
+
+                    </div>
+                    <!-- ./page footer holder -->
+                </div>
+                <!-- ./page footer wrap -->
+            </div>
+            <!-- ./page footer -->
+
+
+        </div>
+        <!-- END PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTAINER -->
+    <!-- START SCRIPTS -->
+    <!-- START PLUGINS-->
+
+
+    @RenderSection("scripts", required: false)
+    <!-- END PLUGINS -->
+    <!-- START TEMPLATE-->
+  @*   <script src="@Url.Content("~/Scripts/bootstrap/bootstrap.js")"></script>>*@
+    <script src="@Url.Content("~/Scripts/toDo/actions_front-end.js")"></script>
+   
+
+    <!-- END SCRIPTS -->
+
+</body>
+</html>
+
+
+
+

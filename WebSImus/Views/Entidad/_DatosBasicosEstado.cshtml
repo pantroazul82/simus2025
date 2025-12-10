@@ -1,0 +1,168 @@
+﻿@model WebSImus.Models.EntidadModels
+@using MvcCheckBoxList.Model  
+ <div class="panel panel-primary form-horizontal">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-star"></span> Datos básicos y ubicación</h3>
+    </div>
+    <div class="panel-body">
+        <div class="panel panel-default">
+            <div class="row">
+                <div class="col-md-4 push-up-20">
+                    <div class="form-group">
+                        <div class="" id="user_image">
+                            <img src="@Url.Content(ViewBag.ImageData)" class="img-thumbnail" />
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="col-md-8 push-up-20">
+                    @Html.HiddenFor(model => model.EstadoOldId)
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">* Nombre</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control text", @maxlength = "200" })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">* Nit</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.Nit, new { @class = "form-control text", @maxlength = "9" })
+                            @Html.ValidationMessageFor(model => model.Nit, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Digito Verificación</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.DigitoVerificacion, new { @class = "form-control text", @maxlength = "1" })
+                            @Html.ValidationMessageFor(model => model.DigitoVerificacion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Estado</label>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.EstadoId, (SelectList)ViewBag.listEstado, "Seleccione un estado", new { @class = "styled-select" })
+                            @Html.ValidationMessageFor(model => model.EstadoId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+             
+                    <div class="row push-down-20" id="panelMotivo">
+                        <p class="text-info"><i class="fa-ayuda"></i> Por favor, escriba el motivo del rechazo o incompleto.</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">* Motivo</label>
+                                    <div class="col-md-8 push-down-20">
+                                        @Html.TextAreaFor(model => model.Motivo, new { @class = "form-control text", @rows = "7", @cols = "50" })
+                                        @Html.ValidationMessageFor(model => model.Motivo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.CodigoPais)
+                        <label class="col-md-3 control-label">Departamento</label>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.CodigoDepartamento, (SelectList)ViewBag.listDepartamentos, "Seleccione un departamento", new { @class = "styled-select" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Municipio</label>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.CodigoMunicipio, (SelectList)ViewBag.listMunicipio, "Seleccione un municipio", new { @class = "styled-select" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">* Dirección</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.Direccion, new { @class = "form-control text", @maxlength = "200" })
+                            @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"> Teléfono</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control text", @maxlength = "50" })
+                            @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">* Correo Electrónico</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.CorreoElectronico, new { @class = "form-control text", @maxlength = "50" })
+                            @Html.ValidationMessageFor(model => model.CorreoElectronico, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 push-up-20">
+                </div>
+                <div class="col-md-8 push-up-20">
+
+
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"> Subir foto</label>
+
+                        <div class="col-md-9">
+                            <p>Tipos de archivo permitidos: .jpg y .png de tamaño máximo 1 Mb</p>
+                            <input onclick="resizePanel()" id="imagenPerfil" name="imagenPerfil" type="file">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Pagina Web</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.LinkPortafolio, new { @class = "form-control text", @maxlength = "200", @placeholder = "http://www.mincultura.gov.co" })
+                            @Html.ValidationMessageFor(model => model.LinkPortafolio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Naturaleza</label>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.Naturaleza, (SelectList)ViewBag.listNaturaleza, "Seleccione un valor", new { @class = "styled-select" })
+                            @Html.ValidationMessageFor(model => model.Naturaleza, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Tipo entidad</label>
+                        <div class="col-md-9">
+                            @{
+                                var htmlListInfo = new HtmlListInfo(HtmlTag.vertical_columns, 1);
+
+                                @Html.CheckBoxListFor(model => model.TipoEntidadPublicado,
+                                              model => model.TipoEntidadData,
+                                              entity => entity.Id,
+                                              entity => entity.Nombre,
+                                   model => model.TipoEntidadSeleccionada, htmlListInfo);
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Descripción</label>
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control text", @rows = "5", @cols = "50" })
+                            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+       
+        </div>
+
+        <div class="panel-footer">
+            <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+
+        </div>
+    </div>
+</div>

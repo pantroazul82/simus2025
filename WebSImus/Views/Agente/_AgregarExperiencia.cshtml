@@ -1,0 +1,71 @@
+﻿@model WebSImus.Models.ExperienciaModels
+<div class="modal animated fadeIn" id="modal_agregarExperiencia" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="smallModalHead">Agregar experiencia</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Nombre</label>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.EmpresaExp, new { @class = "form-control text", @maxlength = "500" })
+                            @Html.ValidationMessageFor(model => model.EmpresaExp, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Título</label>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.TituloExp, new { @class = "form-control text", @maxlength = "500" })
+                            @Html.ValidationMessageFor(model => model.TituloExp, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><span class="fa fa-calendar"></span>Periodo Inicio</label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.MesInicioExp, (SelectList)ViewBag.listMeses, "Seleccione el mes", new { @class = "form-control select" })
+                            @Html.ValidationMessageFor(model => model.MesInicioExp, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.AnoInicioExp, (SelectList)ViewBag.listAno, "Seleccione el Año", new { @class = "form-control select" })
+                            @Html.ValidationMessageFor(model => model.AnoInicioExp, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"><span class="fa fa-calendar"></span>Periodo final</label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.MesFinExp, (SelectList)ViewBag.listMeses, "Seleccione el mes", new { @class = "form-control select" })
+                            @Html.ValidationMessageFor(model => model.MesFinExp, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.AnoFinExp, (SelectList)ViewBag.listAno, "Seleccione el Año", new { @class = "form-control select" })
+                            @Html.ValidationMessageFor(model => model.AnoFinExp, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="push-up-20">
+                <div class="form-group">
+                    <label class="col-md-4 control-label"> Descripción</label>
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(model => model.DescripcionExp, new { @class = "form-control text", @rows = "5", @cols = "50" })
+                        @Html.ValidationMessageFor(model => model.DescripcionExp, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="mySubmitExp" class="btn btn-danger" data-dismiss="modal">Guardar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,875 @@
+@model WebSImus.Models.FestivalVersionRegistroViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Revision de Versi&oacute;n del Festival";
+}
+
+<!-- Forzar codificación UTF-8 para caracteres especiales -->
+<meta charset="utf-8" />
+
+<div class="modern-profile-form">
+    <div class="form-header">
+        <h2 class="form-title"><i class="fas fa-eye"></i> Revisi&oacute;n de Versi&oacute;n del Festival</h2>
+        <p class="text-muted" style="margin-top: 10px; font-size: 14px;">Esta pantalla permite revisar la informaci&oacute;n registrada del festival. Todos los campos son de solo lectura.</p>
+    </div>
+
+    @if (TempData["Msg"] != null)
+    {
+        <div class="alert alert-success">@TempData["Msg"]</div>
+    }
+    @Html.ValidationSummary(false, "", new { @class = "alert alert-error text-warning" })
+
+    @using (Html.BeginForm("GestionarSolicitud", "Festivales", FormMethod.Post, new { @id = "frmRevisarVersion", @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.FestivalId)
+
+        <!-- Secciones del festival (sin accordion, siempre visibles) -->
+        <div class="festival-sections">
+
+            <!-- Sección: Generalidades -->
+            <div class="panel panel-default" style="margin-bottom:20px;">
+                <div class="panel-heading" style="background-color:#e8f5f4; border-bottom:2px solid #2c9c94; padding:15px;">
+                    <h4 style="margin:0; color:#2c9c94; font-weight:bold;">
+                        <i class="fas fa-info-circle"></i> Generalidades
+                    </h4>
+                </div>
+                <div class="panel-body" style="padding:20px;">
+                        <p class="text-muted" style="margin-bottom:15px;">Informaci&oacute;n b&aacute;sica sobre el festival.</p>
+
+                        <!-- Versión del festival -->
+                        <div class="form-section">
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Versi&oacute;n del festival</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.VersionNumero" readonly />
+                                </div>
+                            </div>
+
+                            <!-- Nombre de la versión -->
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Nombre de la versi&oacute;n</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.NombreVersion" readonly />
+                                </div>
+                            </div>
+
+                            <!-- Descripción -->
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Descripci&oacute;n</label>
+                                    <textarea class="form-control modern-input" rows="5" readonly>@Model.Descripcion</textarea>
+                                </div>
+                            </div>
+
+                            <!-- Material multimedia -->
+                            <h4 class="section-subtitle" style="margin-top:20px; margin-bottom:10px; color:#2c9c94;">Material multimedia:</h4>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered" style="margin-bottom:20px;">
+                                    <thead style="background-color:#2c9c94; color:#fff;">
+                                        <tr>
+                                            <th style="width:30%;">Evidencia</th>
+                                            <th style="width:70%; text-align:center;">Archivo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="vertical-align:middle; font-weight:bold;">Programa</td>
+                                            <td style="text-align:center; vertical-align:middle;">
+                                                @if (!string.IsNullOrWhiteSpace(Model.UrlPrograma))
+                                                {
+                                                    <a href="@Url.Content(Model.UrlPrograma)" target="_blank" class="btn btn-sm btn-primary" title="@Model.UrlPrograma">
+                                                        <i class="fas fa-file-pdf"></i> Abrir
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted" title="Url: '@(Model.UrlPrograma ?? "null")'">Sin archivo</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="vertical-align:middle; font-weight:bold;">Afiche</td>
+                                            <td style="text-align:center; vertical-align:middle;">
+                                                @if (!string.IsNullOrWhiteSpace(Model.UrlAfiche))
+                                                {
+                                                    <button type="button" class="btn btn-sm btn-primary btn-ver-imagen" data-url="@Url.Content(Model.UrlAfiche)" data-titulo="Afiche">
+                                                        <i class="fas fa-file-image"></i> Ver imagen
+                                                    </button>
+                                                    <a href="@Url.Content(Model.UrlAfiche)" target="_blank" class="btn btn-sm btn-info" title="@Model.UrlAfiche">
+                                                        <i class="fas fa-download"></i> Descargar
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted" title="Url: '@(Model.UrlAfiche ?? "null")'">Sin archivo</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="vertical-align:middle; font-weight:bold;">Logo</td>
+                                            <td style="text-align:center; vertical-align:middle;">
+                                                @if (!string.IsNullOrWhiteSpace(Model.UrlLogo))
+                                                {
+                                                    <button type="button" class="btn btn-sm btn-primary btn-ver-imagen" data-url="@Url.Content(Model.UrlLogo)" data-titulo="Logo">
+                                                        <i class="fas fa-file-image"></i> Ver imagen
+                                                    </button>
+                                                    <a href="@Url.Content(Model.UrlLogo)" target="_blank" class="btn btn-sm btn-info" title="@Model.UrlLogo">
+                                                        <i class="fas fa-download"></i> Descargar
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted" title="Url: '@(Model.UrlLogo ?? "null")'">Sin archivo</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Tipo de ingreso -->
+                            <h4 class="section-subtitle" style="margin-top:20px; margin-bottom:10px; color:#2c9c94;">Tipo de ingreso:</h4>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    @if (Model.TiposIngreso != null && Model.TiposIngreso.Any())
+                                    {
+                                        foreach (var tipoIngreso in Model.TiposIngreso.Where(t => t.Selected))
+                                        {
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" checked disabled />
+                                                    @tipoIngreso.Nombre
+                                                </label>
+                                            </div>
+                                        }
+                                        if (!Model.TiposIngreso.Any(t => t.Selected))
+                                        {
+                                            <div class="text-muted">No hay tipos de ingreso seleccionados.</div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="text-muted">No hay tipos de ingreso configurados.</div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Sección: Territorio Sonoro -->
+            <div class="panel panel-default" style="margin-bottom:20px;">
+                <div class="panel-heading" style="background-color:#e8f5f4; border-bottom:2px solid #2c9c94; padding:15px;">
+                    <h4 style="margin:0; color:#2c9c94; font-weight:bold;">
+                        <i class="fas fa-map-marker-alt"></i> Territorios sonoros
+                    </h4>
+                </div>
+                <div class="panel-body" style="padding:20px;">
+                        <p class="text-muted" style="margin-bottom:15px;">
+                            Los Territorios Sonoros (TS) son espacios simb&oacute;licos construidos a partir de la identidad y pr&aacute;cticas de las comunidades, donde los sonidos y la m&uacute;sica desempe&ntilde;an un papel central.
+                        </p>
+
+                        <h4 class="section-subtitle" style="margin-top:20px; margin-bottom:15px; color:#2c9c94;">Territorios sonoros:</h4>
+
+                        @{
+                            var listaTS = Model.TerritoriosSonoros ?? new List<WebSImus.Models.TerritorioSonoroSeleccionItem>();
+                            var mitad = (int)Math.Ceiling((listaTS.Count) / 2.0);
+                            var col1 = listaTS.Take(mitad).ToList();
+                            var col2 = listaTS.Skip(mitad).ToList();
+                        }
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                @foreach (var item in col1)
+                                {
+                                    <div class="checkbox">
+                                        <label style="font-weight:normal;">
+                                            <input type="checkbox" @(item.Selected ? "checked" : "") disabled />
+                                            <span>@Html.Raw(System.Web.HttpUtility.HtmlEncode(item.Nombre))</span>
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @foreach (var item in col2)
+                                {
+                                    <div class="checkbox">
+                                        <label style="font-weight:normal;">
+                                            <input type="checkbox" @(item.Selected ? "checked" : "") disabled />
+                                            <span>@Html.Raw(System.Web.HttpUtility.HtmlEncode(item.Nombre))</span>
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Campo de prácticas musicales -->
+                        <div class="form-row" style="margin-top:20px;">
+                            <div class="form-group col-md-12">
+                                <label class="form-label">&#191;Qu&#233; pr&#225;cticas musicales congrega?</label>
+                                <input type="text" class="form-control modern-input" value="@Model.PracticasMusicalesTS" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Sección: Localización -->
+            <div class="panel panel-default" style="margin-bottom:20px;">
+                <div class="panel-heading" style="background-color:#e8f5f4; border-bottom:2px solid #2c9c94; padding:15px;">
+                    <h4 style="margin:0; color:#2c9c94; font-weight:bold;">
+                        <i class="fas fa-map"></i> Localizaci&oacute;n
+                    </h4>
+                </div>
+                <div class="panel-body" style="padding:20px;">
+                        <p class="text-muted" style="margin-bottom:15px;">Lugar en el que se desarrolla la versi&oacute;n del festival.</p>
+
+                        <!-- Grilla de localizaciones (solo lectura) -->
+                        <div id="gridLocalizacionesContainer">
+                            @if (Model.Id > 0)
+                            {
+                                @Html.Action("GridLocalizacionesPartial", new { versionId = Model.Id, soloLectura = true })
+                            }
+                            else
+                            {
+                                <div class="text-muted">No hay localizaciones registradas.</div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Sección: Tiempo -->
+            <div class="panel panel-default" style="margin-bottom:20px;">
+                <div class="panel-heading" style="background-color:#e8f5f4; border-bottom:2px solid #2c9c94; padding:15px;">
+                    <h4 style="margin:0; color:#2c9c94; font-weight:bold;">
+                        <i class="fas fa-clock"></i> Tiempo
+                    </h4>
+                </div>
+                <div class="panel-body" style="padding:20px;">
+                        <p class="text-muted" style="margin-bottom:15px;">Informaci&oacute;n sobre la duraci&oacute;n y fecha de realizaci&oacute;n del festival.</p>
+
+                        <div class="form-section">
+                            <!-- Fila con Fecha inicio y Fecha fin -->
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Fecha inicio</label>
+                                    <input type="text" class="form-control modern-input" value="@(Model.FechaInicio.HasValue ? Model.FechaInicio.Value.ToString("yyyy-MM-dd") : "")" readonly />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Fecha fin</label>
+                                    <input type="text" class="form-control modern-input" value="@(Model.FechaFin.HasValue ? Model.FechaFin.Value.ToString("yyyy-MM-dd") : "")" readonly />
+                                </div>
+                            </div>
+                            <!-- Fila con Mes de realización y Duración del evento -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Mes de realizaci&oacute;n</label>
+                                    @{
+                                        var meses = new Dictionary<int, string>
+                                        {
+                                            {1, "Enero"}, {2, "Febrero"}, {3, "Marzo"}, {4, "Abril"},
+                                            {5, "Mayo"}, {6, "Junio"}, {7, "Julio"}, {8, "Agosto"},
+                                            {9, "Septiembre"}, {10, "Octubre"}, {11, "Noviembre"}, {12, "Diciembre"}
+                                        };
+                                        var mesNombre = Model.MesRealizacion.HasValue && meses.ContainsKey(Model.MesRealizacion.Value) 
+                                            ? meses[Model.MesRealizacion.Value] 
+                                            : "";
+                                    }
+                                    <input type="text" class="form-control modern-input" value="@mesNombre" readonly />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Duraci&oacute;n del evento en d&iacute;as</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.DuracionDias" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Sección: Caracterización -->
+            <div class="panel panel-default" style="margin-bottom:20px;">
+                <div class="panel-heading" style="background-color:#e8f5f4; border-bottom:2px solid #2c9c94; padding:15px;">
+                    <h4 style="margin:0; color:#2c9c94; font-weight:bold;">
+                        <i class="fas fa-list"></i> Caracterizaci&oacute;n
+                    </h4>
+                </div>
+                <div class="panel-body" style="padding:20px;">
+                        <p class="text-muted" style="margin-bottom:15px;">Caracter&iacute;sticas del festival.</p>
+
+                        <div class="form-row">
+                            <!-- Columna izquierda -->
+                            <div class="form-group col-md-6">
+                                <!-- Tipología -->
+                                <div class="form-group">
+                                    <label class="form-label">Tipolog&iacute;a</label>
+                                    @{
+                                        var tipologias = ViewBag.Tipologias as List<SM.Datos.DTO.Festivales.TipologiaDTO> ?? new List<SM.Datos.DTO.Festivales.TipologiaDTO>();
+                                        var tipologiaSeleccionada = tipologias.FirstOrDefault(t => t.Id == Model.IdTipologia);
+                                        var tipologiaNombre = tipologiaSeleccionada != null ? tipologiaSeleccionada.Nombre : "";
+                                    }
+                                    <input type="text" class="form-control modern-input" value="@tipologiaNombre" readonly />
+                                </div>
+
+                                <!-- Modalidad de participación -->
+                                <div class="form-group">
+                                    <label class="form-label">Modalidad de participaci&oacute;n</label>
+                                    @if (Model.ModalidadesParticipacion != null && Model.ModalidadesParticipacion.Any())
+                                    {
+                                        foreach (var modalidad in Model.ModalidadesParticipacion.Where(m => m.Selected))
+                                        {
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" checked disabled />
+                                                    @modalidad.Nombre
+                                                </label>
+                                            </div>
+                                        }
+                                        if (!Model.ModalidadesParticipacion.Any(m => m.Selected))
+                                        {
+                                            <p class="text-muted"><em>No hay modalidades seleccionadas</em></p>
+                                        }
+                                    }
+                                </div>
+
+                                <!-- Expresiones artísticas o culturales -->
+                                <div class="form-group">
+                                    <label class="form-label">Expresiones art&iacute;sticas o culturales</label>
+                                    @if (Model.ExpresionesArtisticas != null && Model.ExpresionesArtisticas.Any())
+                                    {
+                                        foreach (var expresion in Model.ExpresionesArtisticas.Where(e => e.Selected))
+                                        {
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" checked disabled />
+                                                    @expresion.Nombre
+                                                </label>
+                                            </div>
+                                        }
+                                        if (!Model.ExpresionesArtisticas.Any(e => e.Selected))
+                                        {
+                                            <p class="text-muted"><em>No hay expresiones art&iacute;sticas seleccionadas</em></p>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Columna derecha -->
+                            <div class="form-group col-md-6">
+                                <!-- ¿Qué tipo de evento es? -->
+                                <div class="form-group">
+                                    <label class="form-label">&#191;Qu&#233; tipo de evento es?</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.OtraTipologia" readonly />
+                                </div>
+
+                                <!-- ¿Qué modalidades posee? -->
+                                <div class="form-group">
+                                    <label class="form-label">&#191;Qu&#233; modalidades posee?</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.OtraModalidadParticipacion" readonly />
+                                </div>
+
+                                <!-- ¿Qué otra expresión artística? -->
+                                <div class="form-group">
+                                    <label class="form-label">&#191;Qu&#233; otra expresi&#243;n art&#237;stica?</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.OtraExpresionArtistica" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Sección: Financiación -->
+            <div class="panel panel-default" style="margin-bottom:20px;">
+                <div class="panel-heading" style="background-color:#e8f5f4; border-bottom:2px solid #2c9c94; padding:15px;">
+                    <h4 style="margin:0; color:#2c9c94; font-weight:bold;">
+                        <i class="fas fa-dollar-sign"></i> Financiaci&oacute;n
+                    </h4>
+                </div>
+                <div class="panel-body" style="padding:20px;">
+                        <p class="text-muted">Fuentes de financiaci&oacute;n del festival.</p>
+
+                        <div class="form-section">
+                            <!-- Fila 1: Principal y Secundaria -->
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Principal fuente de financiaci&oacute;n</label>
+                                    @{
+                                        var fuentesFinanciacion = ViewBag.FuentesFinanciacion as List<SM.Datos.DTO.Festivales.FuenteFinanciacionDTO> ?? new List<SM.Datos.DTO.Festivales.FuenteFinanciacionDTO>();
+                                        var fuentePrincipal = fuentesFinanciacion.FirstOrDefault(f => f.Id == Model.FuenteFinanciacionPrincipal);
+                                        var fuentePrincipalNombre = fuentePrincipal != null ? fuentePrincipal.Nombre : "";
+                                    }
+                                    <input type="text" class="form-control modern-input" value="@fuentePrincipalNombre" readonly />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Fuente de financiaci&oacute;n secundaria</label>
+                                    @{
+                                        var fuenteSecundaria = fuentesFinanciacion.FirstOrDefault(f => f.Id == Model.FuenteFinanciacionSecundaria);
+                                        var fuenteSecundariaNombre = fuenteSecundaria != null ? fuenteSecundaria.Nombre : "";
+                                    }
+                                    <input type="text" class="form-control modern-input" value="@fuenteSecundariaNombre" readonly />
+                                </div>
+                            </div>
+
+                            <!-- Fila 2: Campos de "Otra" fuente -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">&#191;Qu&#233; otra fuente de financiaci&#243;n principal?</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.OtraFuenteFinanciacionPrimaria" readonly />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">&#191;Qu&#233; otra fuente de financiaci&#243;n secundaria?</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.OtraFuenteFinanciacionSecundaria" readonly />
+                                </div>
+                            </div>
+
+                            <!-- Fila 3: Uso de estampilla Procultura -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Uso de estampilla Procultura</label>
+                                    <input type="text" class="form-control modern-input" value="@(Model.UsaEstampillaProcultura.HasValue ? (Model.UsaEstampillaProcultura.Value ? "S&iacute;" : "No") : "")" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Sección: Contacto -->
+            <div class="panel panel-default" style="margin-bottom:20px;">
+                <div class="panel-heading" style="background-color:#e8f5f4; border-bottom:2px solid #2c9c94; padding:15px;">
+                    <h4 style="margin:0; color:#2c9c94; font-weight:bold;">
+                        <i class="fas fa-address-book"></i> Contacto
+                    </h4>
+                </div>
+                <div class="panel-body" style="padding:20px;">
+                        <p class="text-muted" style="margin-bottom:15px;">Datos de contacto de los organizadores del festival.</p>
+
+                        <div class="form-section">
+                            <!-- Directoria -->
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Directoria</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.Directoria" readonly />
+                                </div>
+                            </div>
+
+                            <!-- ¿Pertenece a una organización o colectivo? -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">&#191;Pertenece a una organizaci&#243;n o colectivo?</label>
+                                    <input type="text" class="form-control modern-input" value="@(Model.PerteneceOrganizacion.HasValue ? (Model.PerteneceOrganizacion.Value ? "S&iacute;" : "No") : "")" readonly />
+                                </div>
+                            </div>
+
+                            <!-- Nombre de la organización -->
+                            @if (Model.PerteneceOrganizacion.HasValue && Model.PerteneceOrganizacion.Value)
+                            {
+                                <div class="form-row" style="margin-top:15px;">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label">Nombre de la organizaci&oacute;n</label>
+                                        <input type="text" class="form-control modern-input" value="@Model.NombreOrganizacion" readonly />
+                                    </div>
+                                </div>
+                            }
+
+                            <!-- Tipo de organizador -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">Tipo de organizador</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.TipoOrganizador" readonly />
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">&#191;Qu&#233; otro tipo de organizador?</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.OtroTipoOrganizador" readonly />
+                                </div>
+                            </div>
+
+                            <!-- Correo electrónico de contacto -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Correo electr&oacute;nico de contacto</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.CorreoContacto" readonly />
+                                </div>
+                            </div>
+
+                            <!-- Redes sociales y enlaces -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-3">
+                                    <label class="form-label">Instagram</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.Instagram" readonly />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label">Facebook</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.Facebook" readonly />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label">P&aacute;gina WEB</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.PaginaWeb" readonly />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label">Otro enlace</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.OtroEnlace" readonly />
+                                </div>
+                            </div>
+
+                            <!-- Teléfono celular -->
+                            <div class="form-row" style="margin-top:15px;">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Tel&eacute;fono celular</label>
+                                    <input type="text" class="form-control modern-input" value="@Model.TelefonoCelular" readonly />
+                                </div>
+                            </div>
+
+                            <!-- Entidades aliadas -->
+                            @if (Model.TieneEntidadesAliadas.HasValue && Model.TieneEntidadesAliadas.Value)
+                            {
+                                <div class="form-row" style="margin-top:20px;">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label">Entidades aliadas</label>
+                                        
+                                        @if (Model.EntidadesAliadas != null && Model.EntidadesAliadas.Any())
+                                        {
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-hover">
+                                                    <thead style="background-color:#2c9c94; color:#fff;">
+                                                        <tr>
+                                                            <th style="width:40%;">Nombre</th>
+                                                            <th style="width:30%;">Naturaleza</th>
+                                                            <th style="width:30%;">Correo</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var entidad in Model.EntidadesAliadas)
+                                                        {
+                                                            <tr>
+                                                                <td>@entidad.Nombre</td>
+                                                                <td>@entidad.Naturaleza</td>
+                                                                <td>@entidad.CorreoElectronico</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <p class="text-muted"><em>No hay entidades aliadas registradas</em></p>
+                                        }
+                                    </div>
+                                </div>
+                            }
+
+                            <!-- Observaciones -->
+                            <div class="form-row" style="margin-top:20px;">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Observaciones</label>
+                                    <textarea class="form-control modern-input" rows="5" readonly>@Model.ObservacionesContacto</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div><!-- Cierre de festival-sections -->
+
+        <!-- Sección: Formulario de gestión de la solicitud -->
+        <div class="panel panel-default" style="margin-top:20px; border:2px solid #2c9c94;">
+            <div class="panel-heading" style="background-color:#2c9c94; color:#fff;">
+                <h4 class="panel-title" style="margin:0;">
+                    <i class="fas fa-tasks"></i> Formulario de gesti&oacute;n de la solicitud
+                </h4>
+            </div>
+            <div class="panel-body" style="padding:25px; background-color:#f9f9f9;">
+                <div class="form-section">
+                    <!-- Opciones de acción -->
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <div class="radio" style="margin-bottom:10px;">
+                                <label style="font-size:15px; font-weight:600;">
+                                    <input type="radio" name="accionSolicitud" id="radioAprobar" value="Aprobar" />
+                                    Aprobar
+                                </label>
+                            </div>
+                            <div class="radio" style="margin-bottom:10px;">
+                                <label style="font-size:15px; font-weight:600;">
+                                    <input type="radio" name="accionSolicitud" id="radioSolicitarAclaraciones" value="SolicitarAclaraciones" />
+                                    Solicitar aclaraciones
+                                </label>
+                            </div>
+                            <div class="radio" style="margin-bottom:10px;">
+                                <label style="font-size:15px; font-weight:600;">
+                                    <input type="radio" name="accionSolicitud" id="radioRechazar" value="Rechazar" />
+                                    Rechazar
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campo de observaciones -->
+                    <div class="form-row" style="margin-top:20px;">
+                        <div class="form-group col-md-12">
+                            <label class="form-label" style="font-size:15px; font-weight:600;">
+                                Observaciones:
+                            </label>
+                            <textarea name="observacionesGestion" id="observacionesGestion" class="form-control modern-input" rows="6" placeholder="Escriba sus observaciones aqu&iacute;..." style="resize:vertical;"></textarea>
+                            <small class="text-muted">Las observaciones ser&aacute;n enviadas al solicitante.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="form-row" style="margin-top:25px;">
+            <div class="col-md-12 text-right">
+                <button type="submit" class="btn btn-success" style="background-color:#2c9c94; border-color:#2c9c94; padding:10px 30px; font-size:15px;">
+                    <i class="fas fa-check"></i> Enviar decisi&oacute;n
+                </button>
+                <a href="@Url.Action("Crear", "Festivales", new { id = Model.FestivalId, activeTab = "versiones" })" class="btn btn-default" style="padding:10px 30px; font-size:15px;">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Modal para mostrar imágenes -->
+<div class="modal fade" id="modalImagen" tabindex="-1" role="dialog" aria-labelledby="modalImagenLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document" style="max-width:900px;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#2c9c94; color:#fff;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar" style="color:#fff; opacity:1;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modalImagenLabel">
+                    <i class="fas fa-image"></i> <span id="modalImagenTitulo">Imagen</span>
+                </h4>
+            </div>
+            <div class="modal-body" style="text-align:center; padding:20px; background-color:#f5f5f5;">
+                <img id="modalImagenSrc" src="" alt="Imagen" style="max-width:100%; height:auto; border-radius:4px; box-shadow:0 2px 8px rgba(0,0,0,0.2);" />
+                <div id="modalImagenError" style="display:none; color:#a94442; padding:20px;">
+                    <i class="fas fa-exclamation-triangle fa-3x"></i>
+                    <p style="margin-top:15px; font-size:16px; font-weight:bold;">La imagen no se encuentra disponible.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="modalImagenDescargar" href="" target="_blank" class="btn btn-primary" download>
+                    <i class="fas fa-download"></i> Descargar
+                </a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .modern-profile-form {
+        background: #fff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        margin-bottom: 30px;
+    }
+
+    .form-header {
+        border-bottom: 2px solid #2c9c94;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+
+    .form-title {
+        color: #2c9c94;
+        font-size: 24px;
+        margin: 0;
+    }
+
+    .form-section {
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        color: #2c9c94;
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .section-subtitle {
+        color: #2c9c94;
+        font-size: 16px;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -7.5px;
+        margin-right: -7.5px;
+    }
+
+    .form-group {
+        padding-left: 7.5px;
+        padding-right: 7.5px;
+        margin-bottom: 15px;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .modern-input {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 8px 12px;
+        transition: border-color 0.3s;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: 38px;
+        background-color: #f5f5f5;
+    }
+
+    .modern-input:focus {
+        border-color: #2c9c94;
+        box-shadow: 0 0 0 0.2rem rgba(44, 156, 148, 0.25);
+    }
+
+    .panel-default > .panel-heading {
+        background-color: #f5f5f5;
+        border-color: #ddd;
+    }
+
+    .panel-default {
+        border-color: #ddd;
+        margin-bottom: 10px;
+    }
+
+    /* Mantener todos los paneles abiertos */
+    .panel-collapse.in {
+        display: block !important;
+        height: auto !important;
+    }
+
+    /* Estilo para checkboxes y radios deshabilitados */
+    input[type="checkbox"]:disabled,
+    input[type="radio"]:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    /* Estilos para la sección de gestión */
+    .radio label {
+        cursor: pointer;
+        padding-left: 25px;
+        position: relative;
+    }
+
+    .radio input[type="radio"] {
+        position: absolute;
+        left: 0;
+        top: 3px;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+</style>
+
+@section scripts {
+<script type="text/javascript">
+(function () {
+    console.log('Script de RevisarVersion cargado');
+    
+    // Manejador para mostrar imágenes en modal
+    $('.btn-ver-imagen').on('click', function() {
+        var url = $(this).data('url');
+        var titulo = $(this).data('titulo');
+        
+        $('#modalImagenTitulo').text(titulo);
+        
+        var img = $('#modalImagenSrc');
+        var errorDiv = $('#modalImagenError');
+        var downloadBtn = $('#modalImagenDescargar');
+        
+        // Resetear estado
+        img.show();
+        errorDiv.hide();
+        downloadBtn.removeClass('disabled').attr('href', url);
+        
+        // Configurar imagen y manejar error de carga
+        img.off('error').on('error', function() {
+            console.log('Error al cargar la imagen:', url);
+            $(this).hide();
+            errorDiv.show();
+            downloadBtn.addClass('disabled').removeAttr('href');
+        }).attr('src', url);
+        
+        // Intentar abrir el modal de forma segura
+        if (typeof $.fn.modal === 'function') {
+            $('#modalImagen').modal('show');
+        } else {
+            console.error('Bootstrap modal no está disponible en $.fn.modal');
+            // Fallback simple si bootstrap no carga bien
+            alert('La imagen no se puede mostrar en este momento.');
+        }
+        
+        console.log('Intentando mostrar imagen:', titulo, url);
+    });
+    
+    // Validación del formulario antes de enviar
+    $('#frmRevisarVersion').on('submit', function(e) {
+        // Verificar que se haya seleccionado una acción
+        var accionSeleccionada = $('input[name="accionSolicitud"]:checked').val();
+        
+        if (!accionSeleccionada) {
+            e.preventDefault();
+            alert('Por favor seleccione una acci\u00F3n: Aprobar, Solicitar aclaraciones o Rechazar.');
+            return false;
+        }
+        
+        // Verificar que se hayan escrito observaciones si se solicitan aclaraciones o se rechaza
+        var observaciones = $('#observacionesGestion').val().trim();
+        
+        if ((accionSeleccionada === 'SolicitarAclaraciones' || accionSeleccionada === 'Rechazar') && observaciones === '') {
+            e.preventDefault();
+            var mensaje = accionSeleccionada === 'SolicitarAclaraciones' 
+                ? 'Por favor escriba las aclaraciones que desea solicitar.' 
+                : 'Por favor escriba el motivo del rechazo.';
+            alert(mensaje);
+            return false;
+        }
+        
+        // Confirmación antes de enviar
+        var mensajeConfirmacion = '';
+        switch(accionSeleccionada) {
+            case 'Aprobar':
+                mensajeConfirmacion = '\u00BFEst\u00E1 seguro de aprobar esta solicitud de registro de festival?';
+                break;
+            case 'SolicitarAclaraciones':
+                mensajeConfirmacion = '\u00BFEst\u00E1 seguro de solicitar aclaraciones para este registro?';
+                break;
+            case 'Rechazar':
+                mensajeConfirmacion = '\u00BFEst\u00E1 seguro de rechazar esta solicitud de registro de festival?';
+                break;
+        }
+        
+        if (!confirm(mensajeConfirmacion)) {
+            e.preventDefault();
+            return false;
+        }
+        
+        return true;
+    });
+    
+    console.log('Script de RevisarVersion inicializado correctamente');
+    console.log('URLs de archivos:', {
+        programa: '@(Model.UrlPrograma ?? "null")',
+        afiche: '@(Model.UrlAfiche ?? "null")',
+        logo: '@(Model.UrlLogo ?? "null")'
+    });
+})();
+</script>
+}

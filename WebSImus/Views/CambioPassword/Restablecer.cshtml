@@ -1,0 +1,39 @@
+﻿@model WebSImus.Models.RestablecerModel
+@{
+    ViewBag.Title = "CambioPassword";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@Styles.Render("~/bundles/fontawesome")
+
+@using (Html.BeginForm("Restablecer", "CambioPassword", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="login-container">
+        <div class="logo-login">
+            <img src="~/img/logo_simus.png" alt="SIMUS Logo" />
+        </div>
+
+        <h2 class="login-title">Cambiar Contraseña</h2>
+        <p class="subtitulo-login">Ingrese su nueva contraseña y confírmela para actualizar el acceso.</p>
+
+        <div class="form-group input-with-icon">
+            <i class="fa-solid fa-at"></i>
+            @Html.TextBoxFor(m => m.correo, new { @class = "form-control", placeholder = "Correo electrónico", type = "email" })
+            @Html.ValidationMessageFor(model => model.correo, "", new { @class = "validation-message" })
+        </div>
+
+        <div class="form-group input-with-icon">
+            @Html.PasswordFor(m => m.contrasena, new { @class = "form-control", placeholder = "Nueva contraseña", maxlength = "20" })
+            @Html.ValidationMessageFor(model => model.contrasena, "", new { @class = "validation-message" })
+        </div>
+
+        <div class="form-group input-with-icon">
+            @Html.PasswordFor(m => m.confcontrasena, new { @class = "form-control", placeholder = "Confirmar contraseña", maxlength = "20" })
+            @Html.ValidationMessageFor(model => model.confcontrasena, "", new { @class = "validation-message" })
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Guardar
+        </button>
+    </div>
+}

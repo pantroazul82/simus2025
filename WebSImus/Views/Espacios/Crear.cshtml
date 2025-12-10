@@ -1,0 +1,142 @@
+﻿@model SM.LibreriaComun.DTO.Circulacion.EscenarioDTO
+@{
+    ViewBag.Title = "Nuevo Escenario";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("Crear", "Espacios", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+     <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Escenarios", "Index", "Espacios")</li>
+    </ul>
+            <!-- END BREADCRUMB -->
+     <!-- START DEFAULT WIZARD -->
+    <div class="panel panel-colorful" id="panelEditar">
+        <div class="panel-body">
+
+            @*<blockquote class="blockquote-success">
+                    <p class="text-danger ">Los campos marcados con asterisco (*) son obligatorios</p>
+                </blockquote>*@
+            @Html.Partial("_AgregarDatosBasicos", Model)
+        </div>
+    </div>
+    <!-- END DEFAULT WIZARD -->
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+   <script src="~/Scripts/escuelasvalidate.js"></script>
+
+    <script type="text/javascript">
+
+        $('#HoraCierre').timepicker({
+            template: false,
+            showInputs: false,
+            showTimePicker: false,
+            minuteStep: 5
+        });
+
+        $('#HoraApertura').timepicker({
+            template: false,
+            showInputs: false,
+            showTimePicker: false,
+            minuteStep: 5
+        });
+       
+        $('#aforo').keypress(function () {
+         
+            ValidaSoloNumeros();
+        });
+
+
+        $('#imagenPerfil').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 1024,
+            allowedFileExtensions: ['jpg', 'png'],
+        });
+
+        $('#Documento').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 2048,
+            allowedFileExtensions: ['pdf'],
+        });
+
+        function resizePanel() {
+
+            var h = $("#panelEditar").height();
+            $('#panelEditar').css("height", h + (h * 0.2));
+        };
+
+        $(function () {
+
+            $('#CodDepartamento').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#codMunicipio');
+                var varmunicipio = $('#codMunicipio');
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerMunicipio", "Agente")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un municipio </option>';
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+
+                    });
+
+                }
+
+            })
+
+
+        });
+
+        $(function () {
+            $('#Tipo').change(function () {
+                var selected = $(this).val();
+                var city = $('#ActorId');
+
+                if (selected != null && selected != '') {
+
+                    $.getJSON('@Url.Action("GetActor", "Convocatoria")', { tipo: selected }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un actor </option>';
+
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                }
+
+            })
+        });
+    </script>
+}
+
+
+
+

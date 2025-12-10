@@ -1,0 +1,212 @@
+﻿@model WebSImus.Models.Usuarios
+@{
+    ViewBag.Title = "Modificar perfil";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+@using (Html.BeginForm("Guardar", "AuthExternal", FormMethod.Post))
+{
+
+    <div class="panel panel-primary form-horizontal">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-star"></span> Datos básicos y ubicación</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                @Html.ValidationSummary(false, "", new { @class = "alert alert-error text-warning" })
+                <div class="form-group">
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Correo electronico*</label>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.usuario, new { @class = "form-control text", @maxlength = "50" })
+                            @Html.HiddenFor(model => model.idRedSocial, new { @class = "form-control text", @maxlength = "50" })
+                            @Html.HiddenFor(model => model.tipoRedSocial, new { @class = "form-control text", @maxlength = "50" })
+                            @Html.HiddenFor(model => model.Id, new { @class = "form-control text", @maxlength = "50" })
+                            @Html.HiddenFor(model => model.rutafoto, new { @class = "form-control text", @maxlength = "50" })
+                            @Html.TextBoxFor(model => model.contrasena, new { style = "display:none", @class = "form-control text", @maxlength = "50" })
+                            @Html.TextBoxFor(model => model.confcontrasena, new { style = "display:none", @class = "form-control text", @maxlength = "50" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Tipo de documento</label>
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.tipoDocumento, (SelectList)ViewBag.listTipoDocumento, "Seleccione un valor", new { @class = "form-control select" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Numero de documento*</label>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.numeroDocumento, new { @class = "form-control text", @maxlength = "50" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Sexo</label>
+                        <div class="col-md-4">
+                            <label class="check">
+                                @Html.RadioButtonFor(m => m.sexo, "Femenino", Model.sexo != null && Model.sexo == "Femenino" ? new { Checked = "checked" } : null)<span class="fa fa-female"></span> Femenino
+
+                            </label>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="check">
+                                @Html.RadioButtonFor(m => m.sexo, "Masculino", Model.sexo != null && Model.sexo == "Masculino" ? new { Checked = "checked" } : null)<span class="fa fa-male"></span> Masculino
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Pais de origen</label>
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.pais, (SelectList)ViewBag.listPaises, "Seleccione un valor", new { @class = "form-control select" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Depertamento de origen</label>
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.departamento, (SelectList)ViewBag.listDpto, "", new { @class = "departamento" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Municipio de origen</label>
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.municipio, (SelectList)ViewBag.listMun, "", new { @class = " municipio" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Fecha de nacimiento</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.fechaNacimiento, new { @class = "form-control datepicker" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Primer nombre</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.primerNombre, new { @class = "form-control text", @maxlength = "50" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Segundo nombre</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.segundoNombre, new { @class = "form-control text", @maxlength = "50" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Primer apellido</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.primerApellido, new { @class = "form-control text", @maxlength = "50" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Segundo apellido</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.segundoApellido, new { @class = "form-control text", @maxlength = "50" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+            <div class="btn btn-default pull-left">
+                <i class="fa fa-arrow-circle-o-left"></i>
+                @if (@Model != null && @Model.Id > 0)
+                {
+                    @Html.ActionLink("Regresar", "Index", "Inicio")
+                }
+                else
+                {
+                    @Html.ActionLink("Regresar", "Index", "Home")
+                }
+
+
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+
+        var today = new Date("01/31/1910");
+        $('#fechaNacimiento').datepicker({
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+            endDate: 'd',
+            format: 'yyyy-mm-dd'
+        })
+
+        $(function () {
+
+            $('#departamento').change(function () {
+                var selectedDep = $(this).val();
+
+                var city = $('#municipio');
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("obtenerMunicipio")', { coddpto: selectedDep }, function (data) {
+                        var items = '';
+
+                        items = '<option>Seleccione un valor </option>';
+                        $.each(data, function (i, dpto) {
+                            items += "<option value='" + dpto.value + "'>" + dpto.text + "</option>";
+
+                        });
+
+                        city.empty();
+                        city.html(items);
+                        city.click();
+                        //city.removeAttr('disabled');
+
+                    });
+
+                }
+
+            })
+        });
+
+
+
+
+        $(function () {
+
+            $('#pais').change(function () {
+                var selectedDep = $(this).val();
+
+                var city = $('#departamento');
+                var varmunicipio = $('#municipio');
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("obtenerDepartamento")', { codpais: selectedDep }, function (data) {
+                        var items = '';
+
+                        items = '<option>Seleccione un valor </option>';
+                        $.each(data, function (i, dpto) {
+                            items += "<option value='" + dpto.value + "'>" + dpto.text + "</option>";
+
+                        });
+
+                        city.empty();
+                        city.html(items);
+                        city.click();
+                        varmunicipio.empty();
+
+                    });
+
+                }
+
+            })
+        });
+
+
+
+
+    </script>
+}

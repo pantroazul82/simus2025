@@ -1,0 +1,42 @@
+@model WebSImus.Models.FestivalListadoViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Festivales";
+}
+<div class="container-fluid" style="padding:10px;">
+    <h3>Festivales</h3>
+
+    <div class="row" style="margin-bottom:10px;">
+        <div class="col-sm-8 col-md-9">
+            <p style="margin:8px 0; color:#666;">
+                <i class="fa fa-info-circle"></i> 
+                Utilice los filtros en cada columna de la tabla para buscar y filtrar registros.
+            </p>
+        </div>
+        <div class="col-sm-4 col-md-3 text-right">
+            <a class="btn btn-primary" href="@Url.Action("Crear","Festivales")">
+                <i class="fa fa-plus"></i> Crear Registro
+            </a>
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom:15px;">
+        <div class="col-md-12" style="border:1px dashed #2c9c94; padding:15px; background:#f9fdfd;">
+            <p style="margin-bottom:8px; font-weight:bold;">Este registro tiene el prop&oacute;sito de consolidar y actualizar la informaci&oacute;n de festivales en el pa&iacute;s. Los datos ser&aacute;n un insumo indispensable para la creaci&oacute;n de una plataforma multiprop&oacute;sito que permita:</p>
+            <ol style="padding-left:18px; margin:0;">
+                <li>Facilitar la articulaci&oacute;n del trabajo adelantado por diferentes &aacute;reas/grupos de la Direcci&oacute;n de Artes.</li>
+                <li>Establecer lazos con otras entidades del estado interesadas en las potencialidades econ&oacute;micas, sociales y culturales de estos eventos.</li>
+                <li>Poner al servicio de la ciudadan&iacute;a una herramienta que abra canales de comunicaci&oacute;n entre agentes, as&iacute; como entre estos y el estado, promoviendo din&aacute;micas de trabajo conjunto, apoyo mutuo y organizaci&oacute;n asociativa.</li>
+                <li>Generar un instrumento para el levantamiento de informaci&oacute;n actualizada que facilite la formulaci&oacute;n de pol&iacute;ticas p&uacute;blicas.</li>
+            </ol>
+        </div>
+    </div>
+
+    <div id="Tabla">
+        @Html.Action("GridViewPartial")
+    </div>
+</div>
+
+@section Scripts {
+    
+}

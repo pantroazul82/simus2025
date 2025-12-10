@@ -1,0 +1,112 @@
+﻿@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridSolicitud";
+        settings.CallbackRouteValues = new { Controller = "EscuelasMusica", Action = "GridViewSolicitud" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "EscuelasMusica", Action = "GridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "EscuelasMusica", Action = "GridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "EscuelasMusica", Action = "GridViewSolicitudAprobar" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.SettingsCommandButton.DeleteButton.Image.Url = "~/img/Aprobar.png";
+        settings.SettingsCommandButton.DeleteButton.Image.ToolTip = "Aprobar";
+        settings.SettingsCommandButton.DeleteButton.ButtonType = GridCommandButtonRenderMode.Image;
+        settings.SettingsCommandButton.DeleteButton.Text = "Aprobar";
+        settings.CommandColumn.Width = System.Web.UI.WebControls.Unit.Percentage(6);
+        settings.CommandColumn.Caption = "Acción";
+
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        settings.KeyFieldName = "Id";
+              
+
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Departamento";
+            column.Caption = "Departamento";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Municipio";
+            column.Caption = "Municipio";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+
+        });
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NombreEscuela";
+            column.Caption = "Escuela";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(20);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NombreUsuario";
+            column.Caption = "Usuario";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(20);
+
+        });
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CorreoUsuario";
+            column.Caption = "Correo electrónico";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(14);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Estado";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "FechaSolicitud";
+            column.Caption = "Fecha Solicitud";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+       
+
+
+        settings.SettingsPager.PageSize = 50;
+        settings.SettingsBehavior.FilterRowMode = GridViewFilterRowMode.Auto;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "20", "30", "50" };
+    });
+
+
+
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()
+

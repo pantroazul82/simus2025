@@ -1,0 +1,203 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<SM.LibreriaComun.DTO.GEO.EscuelaMunicipioDTO>
+
+<div class="modal animated fadeIn" id="modal_datosescuelas" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+
+                    <div class="col-md-8 col-sm-6 col-xs-6 titulo_municipio"> @ViewBag.NombreDepto<img style="padding-top:10px;" src="../img/iconos/escuelas_window.png"></div>
+                    <div class="col-md-4 col-sm-6 col-xs-6 titulo_infowindow"> Escuelas de Música</div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 tabla_gris2">
+
+                        <div class="col-md-3 col-sm-3 col-xs-3 primera_tabla">
+                            %Departamento
+                        </div>
+                      
+                        <div class="col-md-3 col-sm-3 col-xs-3 primera_tabla">
+                            #Total Mun.
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 primera_tabla">
+                            #Total Mun. Escuelas
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 primera_tabla">
+                            #Total Escuelas
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 tabla_blanca2">
+
+                        <div class="col-md-3 col-sm-3 col-xs-3 primera_tabla">
+                            @ViewBag.porcentaje
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-3 primera_tabla">
+                            @ViewBag.CantidadMun
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-3 primera_tabla">
+                            @ViewBag.CantidadMunEscuelas
+                        </div>
+                      
+                        <div class="col-md-3 col-sm-3 col-xs-3 primera_tabla">
+                            @ViewBag.CantidadEscuelas
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 cabeza_modal">
+
+                        <div class="col-md-4 col-sm-4 col-xs-4 primera_tabla">
+                            Municipio
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-2 primera_tabla">
+                            # Escuelas
+                        </div>
+
+                        <div class="col-md-2 col-sm-2 col-xs-2 primera_tabla">
+                            # Públicas
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-2 primera_tabla">
+                            # Privada
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-2 primera_tabla">
+                            # Mixta
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                  
+                    @if (Model != null)
+                    {
+                        var i = "Gris";
+                        foreach (SM.LibreriaComun.DTO.GEO.EscuelaMunicipioDTO item in Model)
+                        {
+                            <div class="row">
+                                @if (i == "Gris")
+                                {
+                                    <div class="col-md-12 tabla_gris">
+
+                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                            @item.Municipio
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                            @item.Cantidad
+                                        </div>
+
+                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                            @item.Cantidad_Publica
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                            @item.Cantidad_Privada
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                            @item.Cantidad_Mixta
+                                        </div>
+                                    </div>
+                                    i = "Blanco";
+                                }
+                                else
+                                {
+                                    i = "Gris";
+                                    <div class="col-md-12 tabla_blanca">
+
+                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                            @item.Municipio
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                            @item.Cantidad
+                                        </div>
+
+                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                            @item.Cantidad_Publica
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                            @item.Cantidad_Privada
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-2">
+                                            @item.Cantidad_Mixta
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="col-md-12 col-sm-9 col-xs-9">
+                                <div id="myPager" class="pagination">
+                                    @Html.PagedListPager(
+                                            Model,
+                                            page => Url.Action(
+                                                         "_DatosEscuelas",
+                                                new
+                                                {
+                                                    CodDepto = ViewBag.CodDepto,
+                                                    porcentaje = ViewBag.porcentaje,
+                                                    nombre = ViewBag.NombreDepto,
+                                                    page = page
+                                                }
+                                            ),
+                                            new PagedListRenderOptions
+                                            {
+                                                LinkToFirstPageFormat = "<<",
+                                                LinkToPreviousPageFormat = "<",
+                                                LinkToNextPageFormat = ">",
+                                                LinkToLastPageFormat = ">>",
+                                            }
+                                        )
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12 col-sm-6 col-xs-6">
+                                <button type="button" class="btn vermas" data-dismiss="modal">Cerrar</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#myPager').on('click', 'a', function () {
+       
+            $.ajax({
+                url: this.href,
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $('#modalInformacion').html(result);
+                    $("#modal_datosescuelas").modal('show');
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+                }
+            });
+            return false;
+        });
+    });
+
+</script>

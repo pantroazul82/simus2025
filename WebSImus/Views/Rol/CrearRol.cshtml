@@ -1,0 +1,229 @@
+﻿@model WebSImus.Models.RolModel
+@{
+    ViewBag.Title = "CrearRol";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .modern-role-form {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 30px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-title {
+        font-size: 26px;
+        font-weight: 600;
+        color: #4b3c8c;
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #34495e;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #e1e5eb;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+        height: 46px;
+        transition: all 0.3s;
+    }
+
+        .form-control:focus {
+            border-color: #4b3c8c;
+            box-shadow: 0 0 0 3px rgba(75, 60, 140, 0.1);
+            outline: none;
+            background-color: #fff;
+        }
+
+    .btn-primary {
+        background-color: #4b3c8c;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #281e52;
+        }
+
+    .btn-default {
+        background-color: #ecf0f1;
+        border: 1px solid #d5dbdb;
+        color: #34495e;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+
+        .btn-default:hover {
+            background-color: #e0e0e0;
+        }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        flex: 1;
+        min-width: 280px;
+    }
+
+    .privileges-list,
+    .privileges-list ul {
+        list-style-type: none;
+        padding-left: 0;
+        margin: 0;
+    }
+
+        .privileges-list > li {
+            background-color: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+
+        .privileges-list li label,
+        .privileges-list li a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .privileges-list ul {
+            margin-top: 8px;
+            margin-left: 20px;
+        }
+
+            .privileges-list ul li {
+                padding: 6px 0;
+            }
+
+    .xn-text {
+        margin-left: 4px;
+    }
+</style>
+
+@using (Html.BeginForm("Guardar", "Rol", FormMethod.Post))
+{
+    <div class="modern-role-form">
+        <div class="form-title">
+            <i class="fas fa-user-lock"></i> Creación de roles asociados a los menús y páginas de acceso
+        </div>
+
+        @Html.ValidationSummary(false, "", new { @class = "alert alert-error text-warning" })
+
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">*Código</label>
+                @Html.TextBoxFor(m => m.codigo, new { @class = "form-control", @maxlength = "20" })
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">*Nombre del rol</label>
+                @Html.TextBoxFor(s => s.nombre, new { @class = "form-control", @maxlength = "20" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">*Privilegios</label>
+                <ul class="privileges-list">
+                    @for (int i = 0; i < @Model.recusos.Count; i++)
+                    {
+                        var name = "toppings" + @Model.recusos[i].id.ToString();
+                        <li>
+                            @Html.HiddenFor(x => @Model.recusos[i].id)
+                            @Html.CheckBoxFor(x => @Model.recusos[i].aplica, new
+                            {
+                                id = @Model.recusos[i].id.ToString(),
+                                @onchange = "setCompleteStatusPadre('" + @Model.recusos[i].id.ToString() + "','" + name + "')"
+                            })
+                            <a href="#">
+                                <span class="fa @Model.recusos[i].rec_estilo"></span>
+                                <span class="xn-text">@Model.recusos[i].rec_titulo</span>
+                            </a>
+
+                            <div id="@name">
+                                <ul>
+                                    @for (int child = 0; child < @Model.recusos[i].opciones.Count(); child++)
+                                    {
+                                        var c = @Model.recusos[i].opciones[child].id.ToString();
+                                        <li>
+                                            @Html.HiddenFor(x => @Model.recusos[i].opciones[child].id)
+                                            @Html.CheckBoxFor(x => @Model.recusos[i].opciones[child].aplica, new
+                                            {
+                                                id = @Model.recusos[i].opciones[child].id.ToString(),
+                                                @onchange = "setCompleteStatus('" + @Model.recusos[i].id.ToString() + "','" + @Model.recusos[i].opciones[child].aplica + "','" + name + "')"
+                                            })
+                                            <a href="#">
+                                                <span class="fa @Model.recusos[i].opciones[child].rec_estilo"></span>
+                                                <span class="xn-text">@Model.recusos[i].opciones[child].rec_titulo</span>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-footer" style="display: flex; justify-content: space-between; margin-top: 20px;">
+            <div>
+                <a href="@Url.Action("ConsultarRol", "Rol")" class="btn btn-default">
+                    <i class="fa fa-arrow-circle-left"></i> Regresar
+                </a>
+            </div>
+            <div>
+                <input type="submit" value="Guardar" class="btn btn-primary" id="btnGuardar" />
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    function setCompleteStatus(id, aplica, divs) {
+        var el = document.getElementById(divs);
+        var tops = el.getElementsByTagName('input');
+        var existe = 0;
+        for (var i = 0, len = tops.length; i < len; i++) {
+            if (tops[i].type === 'checkbox' && tops[i].checked) {
+                existe = 1;
+            }
+        }
+        document.getElementById(id).checked = (existe === 1);
+    }
+
+    function setCompleteStatusPadre(idPadre, divs) {
+        var el = document.getElementById(divs);
+        var tops = el.getElementsByTagName('input');
+        var isChecked = document.getElementById(idPadre).checked;
+        for (var i = 0, len = tops.length; i < len; i++) {
+            if (tops[i].type === 'checkbox') {
+                tops[i].checked = isChecked;
+            }
+        }
+    }
+</script>

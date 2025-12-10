@@ -1,0 +1,266 @@
+﻿@model WebSImus.Models.EventoPadreModels
+@{
+    ViewBag.Title = "Evento";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("CambiarEstado", "Evento", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    <ul class="breadcrumb">
+        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+        <li>@Html.ActionLink("Consulta", "Consulta", "Evento")</li>
+        <li>@Html.ActionLink("Nuevo Concierto", "Evento", "Evento")</li>
+    </ul>
+    <div class="panel panel-primary form-horizontal">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-star"></span> Aprobar Conciertos</h3>
+        </div>
+      
+        <div class="panel-body" id="panelEditar">
+            @Html.Partial("_datosbasicosEstado", Model.DatosBasicos)
+            <div class="panel-footer">
+                <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+                <div class="btn btn-default pull-left">
+                    <i class="fa fa-arrow-circle-o-left"></i>@Html.ActionLink("Regresar", "Consulta", "Evento")
+                </div>
+            </div>
+
+            <div class="row push-up-20">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"> @Html.ActionLink("Agregar artista", "Artista", "Evento", new { Id = Model.DatosBasicos.Id }, null)</h3>
+                        </div>
+                       
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Listado Artistas</h4>
+
+                            </div>
+                            <div id="agenteTabla" class="panel-body">
+                                @Html.Partial("_TablaGrupos", Model.listArtista)
+                            </div>
+                        </div>
+                        <!-- FIN GRILLA  -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script type="text/javascript">
+
+        $('#HoraEvento').timepicker({
+            template: false,
+            showInputs: false,
+            minuteStep: 5
+        });
+        var pagecontentwrapHeight = $(".page-content-wrap").height();
+        $('#panelEditar').css("height", pagecontentwrapHeight);
+
+        $('#imagenPerfil').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 2600,
+            allowedFileExtensions: ['jpg', 'png'],
+        });
+
+
+        $(window).on('resize', function () {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_panelbodyHeight);
+            $('#panelEditar').css("min-height", pagecontentwrapHeight + 350);
+        });
+
+        function resizePanel() {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_pagecontentwrapHeight);
+        };
+
+
+
+         $(function () {
+            $('#CodigoDepartamento').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#CodigoMunicipio');
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerMunicipio", "Entidad")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un municipio </option>';
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                }
+
+            })
+
+            // por país
+            $('#CodigoPais').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#CodigoDepartamento');
+                var varmunicipio = $('#CodigoMunicipio');
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("ObtenerDepartamento")', { codigopais: selectedDep }, function (data) {
+                        var items = '';
+                        items = '<option>Seleccione un departamento </option>';
+                        $.each(data, function (i, departamento) {
+                            items += "<option value='" + departamento.value + "'>" + departamento.text + "</option>";
+
+                        });
+                        city.empty();
+                        city.html(items);
+                        city.click();
+                        varmunicipio.empty();
+
+                    });
+
+                }
+
+            })
+        });
+
+
+    </script>
+
+
+
+    <script type="text/javascript">
+
+    $(function () {
+
+        $('#mySubmit').click(function () {
+
+            if ($('#NombreGrupo').valid() == false) {
+                alert("El nombre es obligatorio");
+                return;
+            }
+
+            if ($('#Contacto').val() == "") {
+                alert("El contacto es obligatorio");
+                return;
+            }
+
+            if ($('#Telefono').val() == "") {
+                alert("El teléfono es obligatorio");
+                return;
+            }
+
+            if ($('#Orden').val() == "") {
+                alert("El orden es obligatorio");
+                return;
+            }
+
+            if ($('#CantidadMiembros').val() == "") {
+                alert("El cantidad de miembros es obligatoria");
+                return;
+            }
+
+            if ($('#Resena').val() == "") {
+                alert("La reseña es obligatoria");
+                return;
+            }
+
+            var url = '@Url.Action("AgregarGrupo", "Evento")';
+            var varEventoId = '@Model.DatosBasicos.Id';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    id: 0, nombre: $('#NombreGrupo').val(), contacto: $('#Contacto').val(), enlace: $('#Enlace').val(),
+                    telefono: $('#Telefono').val(), orden: $('#Orden').val(), cantidad: $('#CantidadMiembros').val(),
+                    resena: $('#Resena').val(), eventoId: varEventoId
+                },
+                success: function (data) {
+                    if (data) {
+                        $(':input', '#myForm')
+                          .not(':button, :submit, :reset, :hidden')
+                          .val('')
+                          .removeAttr('checked')
+                          .removeAttr('selected');
+                        actualizartabla(0);
+                    }
+                },
+
+            });
+        });
+
+       
+
+        $('.delete').click(function (e) {
+            e.preventDefault();
+
+            //Update the item to delete id so our model knows which one to delete
+            var id = $(this).data('id');
+            $('#item-to-delete').val(id);
+
+        });
+        $('#myDelete').click(function () {
+
+            var varid = $('#item-to-delete').val();
+           
+            actualizartabla(varid);
+        });
+
+        function actualizartabla(vaerliminar) {
+            var varEventoId = '@Model.DatosBasicos.Id';
+            $('#NombreGrupo').val("");
+            $('#CantidadMiembros').val("");
+            $('#Contacto').val("");
+            $('#Telefono').val("");
+            $('#Resena').val("");
+            $('#Orden').val("");
+            $('#Enlace').val("");
+            $.ajaxSetup({
+                cache: false
+            });
+            $.ajax({
+
+                url: "/Evento/_TablaGrupo",
+                type: "GET",
+                data: { Id: varEventoId, Eliminar: vaerliminar }
+            })
+           .done(function (partialViewResult) {
+               $("#agenteTabla").html(partialViewResult);
+               $('#item-to-delete').val(0);
+
+               if (vaerliminar > 0) {
+                   $('#modalConfirmar').modal('hide');
+                   location.reload();
+               }
+           });
+
+        }
+    });
+</script>
+
+}
+
+
+
+
+
+
+

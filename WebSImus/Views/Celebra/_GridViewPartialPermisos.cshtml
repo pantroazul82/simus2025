@@ -1,0 +1,162 @@
+﻿@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridEventoPermisos";
+        settings.Theme = "Youthful";
+        settings.CallbackRouteValues = new { Controller = "Celebra", Action = "GridViewPartialPermisos" };
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;   
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+        //settings.CommandColumn.Caption = "Eliminar";
+
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        settings.KeyFieldName = "EventoId";
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NombreMunicipio";
+            column.Caption = "Municipio";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.GroupIndex = 1;
+
+        });
+
+
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Evento";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.SetDataItemTemplateContent(container =>
+            {
+                Html.DevExpress().HyperLink(hyperlink =>
+                {
+                    var visibleIndex = container.VisibleIndex;
+                    var keyValue = container.KeyValue;
+                    var ver = "Ver detalle";
+
+                    hyperlink.Name = "hl" + keyValue.ToString();
+                    hyperlink.Properties.Text = ver.ToString();
+                    hyperlink.NavigateUrl = Url.Action("Detalle", "Celebra", new { id = keyValue });
+                }).Render();
+            });
+
+        });
+
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Nombre";
+            column.Caption = "Nombre";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(15);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EntidadOrganizadora";
+            column.Caption = "Entidad";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "LugarEvento";
+            column.Caption = "Lugar";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NombreDepartamento";
+            column.Caption = "Departamento";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.GroupIndex = 0;
+
+        });
+       
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "FechaEvento";
+            column.Caption = "Inicio";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "FechaEventoFinal";
+            column.Caption = "Final";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EsNacional";
+            column.Caption = "Nacional";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.ColumnType = MVCxGridViewColumnType.CheckBox;
+            column.ReadOnly = true;
+
+        });
+
+             
+
+        settings.SettingsPager.PageSize = 30;
+        settings.SettingsBehavior.FilterRowMode = GridViewFilterRowMode.Auto;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+     
+        settings.SettingsBehavior.AllowFixedGroups = true;
+
+        //settings.BeforeGetCallbackResult = (sender, e) =>
+        //{
+        //    if (ViewBag.GroupedColumns == null)
+        //        return;
+
+        //    MVCxGridView grid1 = (MVCxGridView)sender;
+        //    string[] columnNames = ViewBag.GroupedColumns.Split(';');
+        //    grid1.ClearSort();
+        //    foreach (string name in columnNames)
+        //    {
+        //        grid1.GroupBy(grid1.Columns[name]);
+        //    }
+        //    grid1.ExpandAll();
+        //};
+
+        settings.PreRender = (s, e) =>
+        {
+            MVCxGridView grid1 = s as MVCxGridView;
+            if (grid1 != null)
+                grid1.ExpandAll();
+        };
+    });
+
+
+
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()
+
+

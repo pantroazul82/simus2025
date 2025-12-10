@@ -1,0 +1,158 @@
+﻿@model List<SM.LibreriaComun.DTO.Servicios.ConvocatoriaListadoEstimuloDTO>
+@{
+    ViewBag.Title = "Caja de Herramientas";
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2 col-sm-5 col-xs-5"><img style="padding-top:10px; padding-left:30px;" class="img-responsive" src="~/img/iconos/caja_big.png"></div>
+        <div class="titulo_seccion col-md-10 col-sm-7 col-xs-7">Caja de Herramientas</div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span class="fa-agrupacion fa-lg" style="text-align: left; padding: 5px;"></span>Listado Convocatorias de Estímulos 2018</div>
+</div>
+<div class="col-md-12 well carousel-search" style="margin-top:40px;">
+    <div class="row">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="htab1">
+                <div class="divider"></div>
+                <div class="page-content-wrap">
+
+                    <!-- page content holder -->
+                    <div class="page-content-holder">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="http://convocatorias.mincultura.gov.co/Inscripciones/Ingreso/Login.aspx?AREID=5&SECID=75&SERID=87&SUBID=0&OPC_ID=460&Redir=%2fConvocatorias_PUBLICO%2fEstimulos%2fInscripcionesListado.aspx%3fAREID%3d5%26SECID%3d75%26SERID%3d87%26SUBID%3d0%26OPC_ID%3d460" target="_blank">
+                                    <h4>Participa aquí</h4>
+                                </a>
+                            </div>
+                            <div class="col-md-offset-9">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <div class="row">
+
+                                            <div class=" col-md-12 titulo_alumnos">Música </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12 tabla_linea ">
+
+                                                    <div class="col-md-4 col-sm-4 col-xs-4 txt_morado">
+                                                        Convocatoria
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-2 col-xs-4 txt_morado">
+                                                        Fecha de Apertura
+                                                    </div>
+
+                                                    <div class="col-md-2 col-sm-2 col-xs-4 txt_morado">
+                                                        Fecha de Cierre
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-2 col-xs-4 txt_morado">
+                                                        Publicación Resultados
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-2 col-xs-4 txt_morado">
+                                                        Archivos
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @if (Model != null)
+                                            {
+                                                var color = "blanca";
+
+                                                foreach (var item in Model)
+                                                {
+                                                    if (color == "blanca")
+                                                    {
+                                                        <div class="row">
+                                                            <div class="col-md-12 tabla_blanca ">
+
+                                                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                                                    @item.Titulo
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-2 col-xs-4">
+                                                                    @item.FechaApertura.ToLongDateString()
+                                                                </div>
+
+                                                                <div class="col-md-2 col-sm-2 col-xs-4">
+                                                                    @item.FechaCierre.ToLongDateString()
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-2 col-xs-4">
+                                                                    @item.FechaPublicacion.ToLongDateString()
+                                                                </div>
+
+                                                                <div class="col-md-2 col-sm-2 col-xs-4">
+                                                                    @if (item.DocumentoId > 0)
+                                                               {
+                                                                    <a href='@Url.Action("Descargar", "Documento", new { Id = item.DocumentoId })'>
+                                                                        <img src='@Url.Content("~/img/download-icon.png")' />
+                                                                    </a>
+
+                                                               }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                                    color = "gris";
+                                                    }
+                                                    else if (color == "gris")
+                                                    {
+                                                            <div class="row">
+                                                                <div class="col-md-12 tabla_gris">
+                                                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                                                        @item.Titulo
+                                                                    </div>
+                                                                    <div class="col-md-2 col-sm-2 col-xs-4">
+                                                                        @item.FechaApertura.ToLongDateString()
+                                                                    </div>
+
+                                                                    <div class="col-md-2 col-sm-2 col-xs-4">
+                                                                        @item.FechaCierre.ToLongDateString()
+                                                                    </div>
+                                                                    <div class="col-md-2 col-sm-2 col-xs-4">
+                                                                        @item.FechaPublicacion.ToLongDateString()
+                                                                    </div>
+                                                                    <div class="col-md-2 col-sm-2 col-xs-4">
+                                                                        @if (item.DocumentoId > 0)
+                                                                    {
+                                                                            <a href='@Url.Action("Descargar", "Documento", new { Id = item.DocumentoId })'>
+                                                                                <img src='@Url.Content("~/img/download-icon.png")' />
+                                                                            </a>
+
+                                                                    }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                                        color = "blanca";
+                                                        }
+                                                    }
+                                                }
+
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    @section Scripts {
+        <script src="@Url.Content("~/Scripts/plugins/mixitup/jquery.mixitup.js")"></script>
+        <script src="@Url.Content("~/Scripts/plugins/appear/jquery.appear.js")"></script>
+        <script src="@Url.Content("~/Scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.js")"></script>
+    }

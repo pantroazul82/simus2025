@@ -1,0 +1,148 @@
+﻿@model SM.LibreriaComun.DTO.Servicios.HerramientaDetalleDTO
+
+<div class="modal animated fadeIn" id="modal_datosherramientas" tabindex="-1" role="dialog" aria-labelledby="modalTituloHerramienta" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header herramienta-modal-header">
+
+                <div class="herramienta-header-content">
+                    <div class="herramienta-icon">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div>
+                        <h4 class="herramienta-titulo" id="modalTituloHerramienta">@Html.DisplayFor(m => m.Nombre)</h4>
+                        <div class="herramienta-autor">Autor/es: @Html.DisplayFor(m => m.Autores)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body herramienta-modal-body">
+                <div class="herramienta-autor">Descripción:</div>
+                <div class="herramienta-descripcion">
+                    @Html.DisplayFor(m => m.Descripcion)
+                </div>
+
+                @if (Model.DocumentoId > 0)
+                {
+                    <div class="herramienta-item">
+                        <div class="herramienta-icono"><i class="fas fa-file-pdf"></i></div>
+                        <div class="herramienta-enlace">
+                            @Html.ActionLink("Descargar documento", "Descargar", "Documento", new { Id = Model.DocumentoId }, new { title = "Descargar archivo de portafolio" })
+                        </div>
+                    </div>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.UrlArchivo))
+                {
+                    <div class="herramienta-item">
+                        <div class="herramienta-icono"><i class="fas fa-map"></i></div>
+                        <div class="herramienta-enlace">
+                            <a href="@Model.UrlArchivo" target="_blank">Link de la publicación</a>
+                        </div>
+                    </div>
+                }
+
+                @if (Model.EsVideo)
+                {
+                    <div class="herramienta-item-video">
+                        <div class="herramienta-icono"><i class="fas fa-play-circle"></i> Video</div>
+                        <div class="herramienta-video">
+                            <iframe width="100%" height="315" src="@Model.UrlVideoEmbebido" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .herramienta-modal-header {
+        background-color: #f8f9fc;
+        padding: 25px 30px;
+        border-bottom: 1px solid #dee2e6;
+        border-top-left-radius: .5rem;
+        border-top-right-radius: .5rem;
+    }
+
+    .herramienta-header-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .herramienta-icon {
+        color: #4b3c8c;
+        font-size: 1.7rem;
+        padding-top: 6px;
+    }
+
+    .herramienta-titulo {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin: 0;
+        color: #343a40;
+    }
+
+    .herramienta-autor {
+        font-size: 1.2rem;
+        color: #6c757d;
+        margin-top: 4px;
+    }
+
+    .herramienta-modal-body {
+        padding: 25px 30px;
+    }
+
+    .herramienta-descripcion {
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        padding: 18px;
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+        color: #444;
+        line-height: 1.6;
+    }
+
+    .herramienta-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .herramienta-icono {
+        color: #4b3c8c;
+        font-size: 1.4rem;
+        margin-right: 10px;
+        min-width: 30px;
+        text-align: center;
+    }
+
+    .herramienta-enlace a, .herramienta-enlace {
+        color: #333;
+        font-weight: 600;
+        font-size: 1.2rem;
+        text-decoration: none;
+    }
+
+        .herramienta-enlace a:hover {
+            text-decoration: underline;
+        }
+
+    .herramienta-item-video {
+        margin-top: 25px;
+    }
+
+    .herramienta-video iframe {
+        border-radius: 6px;
+        width: 100%;
+        max-height: 360px;
+    }
+
+</style>

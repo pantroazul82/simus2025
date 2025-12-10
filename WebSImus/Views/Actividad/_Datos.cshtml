@@ -1,0 +1,107 @@
+﻿@model SM.LibreriaComun.DTO.EntidadesOperadoras.ActividadDTO
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-2">
+                <h3> Convenio #</h3>
+            </div>
+            <div class="col-md-5">
+                <h3>  @Html.DisplayFor(model => model.NumeroConvenio)</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <h3> Entidad</h3>
+            </div>
+            <div class="col-md-5">
+                <h3>  @Html.DisplayFor(model => model.NombreEntidad)</h3>
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal">
+        <h4>Actividad</h4>
+        @Html.HiddenFor(model => model.ConvenioId)
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+      
+        <div class="form-group">
+            <label class="col-md-2 control-label">Tipo actividad*</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.TipoActividadId, (SelectList)ViewBag.listTipoActividad, "Seleccione", new { @class = "styled-select" })
+                @Html.ValidationMessageFor(model => model.TipoActividadId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ValorProgramado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ValorProgramado, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ValorProgramado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ValorEjecutado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ValorEjecutado, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ValorEjecutado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumeroDias, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumeroDias, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NumeroDias, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.EstadoId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.EstadoId, (SelectList)ViewBag.listEstado, "Seleccione", new { @class = "styled-select" })
+                @Html.ValidationMessageFor(model => model.EstadoId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      
+        <div class="form-group">
+            <label class="col-md-3 control-label">Subir documento</label>
+            <div class="col-md-9">
+
+                @Html.TextBoxFor(model => model.DocumentoEPK, new { @class = "form-control", type = "file", onclick = "resizePanel()" })
+                @Html.ValidationMessageFor(model => model.DocumentoEPK, "", new { @class = "text-danger" })
+                <p class="text-info"><i class="fa-question"></i> Tipos de archivos permitidos: .pdf  de tamaño máximo 2 Mb.</p>
+                @if (Model.documentoArchivo != null && Model.documentoArchivo.Count > 0)
+                {
+
+                    foreach (var item in Model.documentoArchivo)
+                    {
+                        <br />
+                        @Html.ActionLink(item.NombreArchivo, "Descargar", "Documento", new { id = item.DocumentoId }, new { title = string.Format("Descargar archivo: {0}\nFecha registro: {1}\nTamaño: {2} bytes", item.NombreArchivo, item.FechaRegistro.ToString("dd/MM/yyyy"), item.TamanoArchivo) })
+                    }
+
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control text", @rows = "5", @cols = "50" })
+                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+}
+
+

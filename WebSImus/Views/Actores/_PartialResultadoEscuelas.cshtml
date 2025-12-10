@@ -1,0 +1,100 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<WebSImus.Models.ActoresHomeModels>
+
+<div class="row mb-3">
+    <div class="col-12">
+        <h5 class="text-muted">Cantidad Registros: @ViewBag.CantidadRegistros</h5>
+    </div>
+</div>
+
+<div class="row g-4">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 col-sm-6">
+            <div class="card-agente">
+                <div class="card-img">
+                    <a href="@item.verMas">
+                        @if (!String.IsNullOrEmpty(item.rutaFoto))
+                        {
+                            <img src="@item.rutaFoto" alt="@item.Nombres" />
+                        }
+                        else
+                        {
+                            <img src="@WebSImus.Models.Usuarios.CreateImage(item.Imagen, 440, 300)" alt="@item.Nombres" />
+                        }
+                    </a>
+                </div>
+                <div class="card-body p-3">
+                    <h6 class="card-title mb-1">
+                        <a href="@item.verMas" class="text-dark text-decoration-none">@item.Nombres</a>
+                    </h6>
+                    <p class="mb-0 text-muted">@item.Tipo</p>
+                    <p class="mb-2 text-muted">@item.Dato</p>
+                    <div class="social-icons d-flex gap-2">
+                        @if (!item.PerfilFacebook.IsEmpty())
+                        {
+                            <a href="@item.PerfilFacebook" target="_blank" class="text-primary"><i class="fa-brands fa-facebook-f"></i></a>
+                        }
+                        @if (!item.CanalYoutube.IsEmpty())
+                        {
+                            <a href="@item.CanalYoutube" target="_blank" class="text-danger"><i class="fa-brands fa-youtube"></i></a>
+                        }
+                        @if (!item.PerfilSoundCloud.IsEmpty())
+                        {
+                            <a href="@item.PerfilSoundCloud" target="_blank" class="text-warning"><i class="fa-brands fa-soundcloud"></i></a>
+                        }
+                        @if (!item.PerfilTwitter.IsEmpty())
+                        {
+                            <a href="@item.PerfilTwitter" target="_blank" class="text-info"><i class="fa-brands fa-x-twitter"></i></a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div id="myPager" class="pagination d-flex justify-content-center">
+            @Html.PagedListPager(
+                Model,
+                page => Url.Action("Escuelas", new
+                {
+                    CodDepto = ViewBag.CodDepto,
+                    codMunicipio = ViewBag.codMunicipio,
+                    tipo = ViewBag.tipoAgrupacionId,
+                    page = page
+                }),
+                new PagedListRenderOptions
+                {
+                    LinkToFirstPageFormat = "<<",
+                    LinkToPreviousPageFormat = "<",
+                    LinkToNextPageFormat = ">",
+                    LinkToLastPageFormat = ">>",
+                }
+            )
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //$(function () {
+    $('#myPager').on('click', 'a', function () {
+        $.ajax({
+
+            url: this.href,
+            type: "GET",
+            cache: false,
+        })
+            .done(function (partialViewResult) {
+                //alert("entro aqui 1244");
+                $("#formacion1").html(partialViewResult);
+
+            });
+        return false;
+    });
+    //});
+
+</script>

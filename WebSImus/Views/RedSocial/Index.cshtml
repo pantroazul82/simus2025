@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm("Guardar", "RedSocial", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Action("_DatosRedes", new { Id = "70264", Tipo= "Agente" })
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+@Scripts.Render("~/Scripts/jqueryval")
+    <script type="text/javascript">
+        $('#btnAgrergarRedes').click(function () {
+            var varRegistroId = "70264";
+            var varTipo = "Agente";
+               var url = '@Url.Action("Guardar", "RedSocial")';
+    
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                facebook: $('#Facebook').val(), twitter: $('#Twitter').val(), instagram: $('#Instagram').val(), flick: $('#Flick').val(),
+                youtube: $('#Youtube').val(), sound: $('#Sound').val(), sound: $('#Sound').val(), registroId: varRegistroId, tipo: varTipo
+            },
+            success: function (data) {
+                if (data) {
+                    $(':input', '#myForm')
+                      .not(':button, :submit, :reset, :hidden')
+                      .val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected');
+                    ActualizarListado(varAgenteId, 0);
+                    //location.reload();
+
+                }
+            },
+
+        });
+    });
+
+    </script>
+}

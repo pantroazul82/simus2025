@@ -1,0 +1,648 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<style type="text/css">
+    #PanelMapa {
+        height: 900px;
+    }
+
+    html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .custom-iw .gm-style-iw {
+        top: 15px !important;
+        left: 0 !important;
+        border-radius: 2px;
+    }
+
+    .custom-iw > div:first-child > div:nth-child(2) {
+        display: none;
+    }
+
+    .custom-iw .gm-style-iw, .custom-iw .gm-style-iw > div, .custom-iw .gm-style-iw > div > div {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    /** set here the width **/
+    .custom-iw, .custom-iw > div:first-child > div:last-child {
+        width: 600px !important;
+    }
+
+        .custom-iw > div:first-child > div:last-child {
+            left: 0 !important;
+            top: 0px;
+            box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 6px;
+            z-index: -1 !important;
+        }
+        /** set here the desired background-color **/
+        #div-main-infoWindow, .custom-iw > div:first-child > div:nth-child(n-1) > div > div, .custom-iw > div > div:last-child, .custom-iw .gm-style-iw, .custom-iw .gm-style-iw > div, .custom-iw .gm-style-iw > div > div {
+            /*background-color:orange !important;*/
+        }
+        /** close-button **/
+        .custom-iw > div:last-child {
+            top: 1px !important;
+            right: 0 !important;
+        }
+    /** padding of the content **/
+    #infowin_escuelas {
+        padding: 6px;
+    }
+
+    #player {
+        position: relative;
+        top: 10px;
+        width: 260px;
+        overflow: hidden;
+        /*direction: ltl;*/
+        border-top-right-radius: 0.5em 0.5em;
+        border-bottom-right-radius: 1em 0.7em;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-1 col-sm-6 col-xs-6"><img style="padding-top:10px;" src="~/img/iconos/mapas_big.png"></div>
+        <div class="titulo_seccion col-md-11 col-sm-6 col-xs-6">MAPAS</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="subtitulo_seccion col-md-6 col-sm-12 col-xs-12 "><span class="fa-musical fa-lg" style="text-align: left; padding: 5px;"></span>Mapa Musical</div>
+</div>
+
+<div class="col-md-12 well carousel-search">
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="row">
+
+                <div class="usuarios col-md-2 col-sm-2 col-xs-4">
+                    <a href="#" id="EjeIcono3">
+                        <div class="iconos_usuarios fa-brands fa-bluesky fa-3x"></div>
+                    </a>
+                    <a href="#" id="Eje3"><p class="titulo_porcentaje">Andinas Nor-Occidente</p></a>
+                </div>
+                <div class="usuarios col-md-2 col-sm-2 col-xs-4">
+                    <a href="#" id="EjeIcono2">
+                        <div class="iconos_usuarios fa-brands fa-bluesky fa-3x"></div>
+                    </a>
+                    <a href="#" id="Eje2"><p class="titulo_porcentaje">Andinas Centro-Sur</p></a>
+                </div>
+                <div class="usuarios col-md-2 col-sm-2 col-xs-4">
+                    <a href="#" id="EjeIcono1">
+                        <div class="iconos_usuarios fa-brands fa-bluesky fa-3x"></div>
+                    </a>
+                    <a href="#" id="Eje1"><p class="titulo_porcentaje">Andina Centro-Oriente</p></a>
+                </div>
+
+                <div class="usuarios col-md-2 col-sm-2 col-xs-3">
+                    <a href="#" id="EjeIcono4">
+                        <div class="iconos_usuarios fa-brands fa-bluesky fa-3x"></div>
+                    </a>
+                    <a href="#" id="Eje4"><p class="titulo_porcentaje">Andinas Sur-Occidente</p></a>
+
+                </div>
+                <div class="usuarios col-md-2 col-sm-2 col-xs-4">
+                    <a href="#" id="EjeIcono7">
+                        <div class="iconos_usuarios fa-brands fa-bluesky fa-3x"></div>
+                    </a>
+                    <a href="#" id="Eje7"><p class="titulo_porcentaje">Amazonía</p></a>
+
+                </div>
+                <div class="usuarios col-md-2 col-sm-2 col-xs-4">
+                    <a href="#" id="EjeIcono9">
+                        <div class="iconos_usuarios fa-brands fa-bluesky fa-3x"></div>
+                    </a>
+                    <a href="#" id="Eje9"><p class="titulo_porcentaje">Orinoquía</p></a>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="row">
+                <div class="usuarios col-md-2 col-sm-2 col-xs-4">
+                    <a href="#" id="EjeIcono5">
+                        <div class="iconos_usuarios fa-brands fa-bluesky fa-3x"></div>
+                    </a>
+                    <a href="#" id="Eje5"><p class="titulo_porcentaje ">Caribe Occidental</p></a>
+
+                </div>
+                <div class="usuarios col-md-2 col-sm-2 col-xs-4">
+                    <a href="#" id="EjeIcono6">
+                        <div class="iconos_usuarios fa-brands fa-bluesky fa-3x"></div>
+                    </a>
+                    <a href="#" id="Eje6"><p class="titulo_porcentaje">Caribe Oriental</p> </a>
+
+                </div>
+
+                <div class="usuarios col-md-2 col-sm-2 col-xs-4">
+                    <a href="#" id="EjeIcono10">
+                        <div class="iconos_usuarios fa-brands fa-bluesky fa-3x"></div>
+                    </a>
+                    <a href="#" id="Eje10"><p class="titulo_porcentaje">Pácifico Norte</p></a>
+
+                </div>
+
+                <div class="usuarios col-md-2 col-sm-2 col-xs-4">
+                    <a href="#" id="EjeIcono11">
+                        <div class="iconos_usuarios fa-brands fa-bluesky fa-3x"></div>
+                    </a>
+                    <a href="#" id="Eje11"> <p class="titulo_porcentaje">Pácifico Sur</p></a>
+
+                </div>
+                <div class="usuarios col-md-2 col-sm-2 col-xs-4">
+                    <a href="#" id="EjeIcono8">
+                        <div class="iconos_usuarios fa-brands fa-bluesky fa-3x"> </div>
+                    </a>
+                    <a href="#" id="Eje8"><p class="titulo_porcentaje"> Isleñas </p></a>
+
+                </div>
+                <div class="usuarios col-md-2 col-sm-2 col-xs-4">
+                    <a href="#" id="EjeIcono12">
+                        <div class="iconos_usuarios fa-brands fa-bluesky fa-3x"> </div>
+                    </a>
+                    <a href="#" id="Eje12"><p class="titulo_porcentaje"> Indígenas </p></a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class=" col-md-6 ">
+
+            <form>
+                <div class="hidden-sm" style="padding-top:20px; ">
+                    <div class="btn-group">
+                        @Html.DropDownList("DepartamentoSelector", (SelectList)ViewBag.departamentos, "Departamento", new { @class = "btn btn-default dropdown-toggle btn-select" })
+                    </div>
+
+                    <div class="btn-group">
+                        @Html.DropDownList("MunicipioSelector", (SelectList)ViewBag.municipios, "Municipio", new { @class = "btn btn-default dropdown-toggle btn-select2" })
+
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" id="btnSearch" class="btn btn-primary">Volver a cargar</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <form action="#" class="form-horizontal">
+                <div class="panel panel-default">
+
+                    <div id="PanelMapa" class="col-md-12">
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+        <!-- FIN GRILLA  -->
+
+    </div>
+</div>
+
+<div id="modalInformacion" class="panel-body">
+    @Html.Action("_DatosMapaMusical", new { codigo = "" })
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).on('ONCLICK_MARKER_INLAYER', function (e) {
+
+            ActualizarListado(e.detail.info.cod_Municipio);
+        });
+
+        function ActualizarListado(varCodigo) {
+
+            $.ajax({
+
+                url: "/ReporteMapas/_DatosMapaMusical",
+                type: "GET",
+                data: { codigo: varCodigo }
+            })
+           .done(function (partialViewResult) {
+               $("#modalInformacion").html(partialViewResult);
+               $("#myModal").modal('show');
+               $('body').removeClass('modal-open');
+               $('.modal-backdrop').remove();
+
+           });
+
+        }
+
+
+
+        $(document).on('ON_COMPLETE_LOAD_COMPONENT', function () {
+            window.componentMaps = new com.servinf[window.spaceName].ComponentMaps('#PanelMapa', {
+                'module': com.servinf.ComponentMaps.Config.modules.VIEWER_DATA, //Indica que el mapa va a visualizar capas
+                'request_position': false,  // Realizar la solicitud de la posicion actual del usuario
+                'search_bar': false,        // Barra de busqueda dentro del mapa
+                'streetview_panel': false,  // El panel de streetview en un porcentaje de la pantalla. Ej: 50
+                'map_type': "roadmap",      // Tipo de mapa a iniciar: hybrid, satellite, terrain, roadmap
+                'map_options': false,
+                'initial_position': {
+                    'lat': 5.065781,
+                    'lng': -75.507820,
+                    'zoom': 6
+                },
+                'details': {                // Especificaciones del vista
+                    '_initialPoint': {
+                        'name': "Casa Museo Casa de Nariño",
+                        'routing': true,
+                        'streetview': false,
+                        'Latitud': 4.599872,
+                        'Longitud': -74.072898,
+                        'templateString': "Este es el punto inicial"
+                    },
+                    'layers': [{            // Capas a mostrar
+                        'id': "mapa_tradicional",     // Identificador de la capa, sirve para accederla de manera remota.
+                        'name': "Mapa Musical",   // Nombre de la capa
+                        'type': "webservice",           // Tipo de capa (catodb,webservice,cartoviz)
+                        'autoload': true,               // Indica que se cargara de manera automatica la capa al iniciar el mapa
+                        'keyTitle': "ubicacion",           // Indica el tooltip que llevaran los OVERLAYS (Objetos dibujados en el mapa)
+                        'fitBounds': false,             // Indica que se hara zoom a la capa en donde sea dibujada
+                        'cluster': true,                // True si quieres que clusterize (solo si la capa es de puntos)
+                        'cluster_options': {            // Opciones de cluster
+                            'group_key': "municipio",
+                            'primary_key': "eje",
+                            'seconday_key': "municipio"
+                        },
+                        'heat_map': false,              // True si quieres que realize el mapa de calor (solo si la capa es de puntos)
+                        'heat_map_options': {           // Opciones del Mapa de calor
+                            'max_zoom': 7               // Zoom Maximo a cambiar de Mapa de calor a puntos
+                        },
+                        'url': "/api/TradicionalGeo/", // Url del servicio (En caso de que sea de tipo 'webservice)
+                        'specifications': {                             // Especificaciones del servicio
+                            'node_list': "municipios"                     // Indica el NODO de responseData sobre cual iterar
+                        },
+                        'thematic': [                   // Tematicos (Indicar Iconos, colores, etc..)
+                             {
+                                 'name': "Andinas Centro-Oriente",
+                                 'icon': "@Url.Content("~/img/marcadores/andina_centro.png")",
+                                 'rule': {
+                                     'key': "ejeId",
+                                     'operator': "equals",
+                                     'value': "1",
+                                 }
+                             }, {
+                                 'name': "Andinas Centro-Sur",
+                                 'icon': "@Url.Content("~/img/marcadores/andina_centrosu.png")",
+                                 'rule': {
+                                     'key': "ejeId",
+                                     'operator': "equals",
+                                     'value': "2",
+                                 }
+                             }, {
+                                 'name': "Andinas Nor-Occidente",
+                                 'icon': "@Url.Content("~/img/marcadores/andina_noocc.png")",
+                                 'rule': {
+                                     'key': "ejeId",
+                                     'operator': "equals",
+                                     'value': "3",
+                                 }
+                             }, {
+                                 'name': "Andinas Sur-Occidente",
+                                 'icon': "@Url.Content("~/img/marcadores/andina_suro.png")",
+                                 'rule': {
+                                     'key': "ejeId",
+                                     'operator': "equals",
+                                     'value': "4",
+                                 }
+                             }, {
+                                 'name': "Caribe Occidental",
+                                 'icon': "@Url.Content("~/img/marcadores/caribe.png")",
+                                 'rule': {
+                                     'key': "ejeId",
+                                     'operator': "equals",
+                                     'value': "5",
+                                 }
+                             }, {
+                                 'name': "Caribe Oriental",
+                                 'icon': "@Url.Content("~/img/marcadores/caribe_oriental.png")",
+                                 'rule': {
+                                     'key': "ejeId",
+                                     'operator': "equals",
+                                     'value': "6",
+                                 }
+                             }, {
+                                 'name': "Frontera",
+                                 'icon': "@Url.Content("~/img/marcadores/frontera.png")",
+                                 'rule': {
+                                     'key': "ejeId",
+                                     'operator': "equals",
+                                     'value': "7",
+                                 }
+                             }, {
+                                 'name': "Isleñas",
+                                 'icon': "@Url.Content("~/img/marcadores/islenas.png")",
+                                 'rule': {
+                                     'key': "ejeId",
+                                     'operator': "equals",
+                                     'value': "8",
+                                 }
+                             }, {
+                                 'name': "Llaneras",
+                                 'icon': "@Url.Content("~/img/marcadores/llanera.png")",
+                                 'rule': {
+                                     'key': "ejeId",
+                                     'operator': "equals",
+                                     'value': "9",
+                                 }
+                             }, {
+                                 'name': "Pacífico Norte",
+                                 'icon': "@Url.Content("~/img/marcadores/pacifico_norte.png")",
+                                 'rule': {
+                                     'key': "ejeId",
+                                     'operator': "equals",
+                                     'value': "10",
+                                 }
+                             }, {
+                                 'name': "Pacífico Sur",
+                                 'icon': "@Url.Content("~/img/marcadores/pacifico_sur.png")",
+                                 'rule': {
+                                     'key': "ejeId",
+                                     'operator': "equals",
+                                     'value': "11",
+                                 }
+                             }, {
+                                 'name': "Indigena",
+                                 'icon': "@Url.Content("~/img/marcadores/indigenas.png")",
+                                 'rule': {
+                                     'key': "ejeId",
+                                     'operator': "equals",
+                                     'value': "12",
+                                 }
+                             }
+                        ]
+                    }]//Hasta aqui
+                }
+            });
+        });
+
+
+
+        $(function () {
+
+            $('#DepartamentoSelector').change(function () {
+                var selectedDep = $(this).val();
+                var city = $('#MunicipioSelector');
+
+                if (selectedDep != null && selectedDep != '') {
+
+                    $.getJSON('@Url.Action("GetMunicipio")', { departamento: selectedDep }, function (data) {
+                        var items = '';
+
+                        items = '<option>Municipio </option>';
+
+                        $.each(data, function (i, municipio) {
+                            items += "<option value='" + municipio.value + "'>" + municipio.text + "</option>";
+
+                        });
+
+                        city.empty();
+                        city.html(items);
+                        city.click();
+
+                    });
+
+                    var filter = [{ 'key': 'cod_Departamento', 'operator': 'equals', value: selectedDep }];
+                    componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                        if (result.length === 0) {
+                            alert("No existe datos");
+                        }
+                    })
+                }
+
+            })
+
+            $('#MunicipioSelector').change(function () {
+                var cod = $(this).val();
+                var filter = [{ 'key': 'cod_Municipio', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                    if (result.length === 0) {
+                        alert("No existe datos");
+                    }
+                })
+            })
+
+
+            $('#Eje1').click(function () {
+                var cod = "1";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#EjeIcono1').click(function () {
+                var cod = "1";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Eje2').click(function () {
+                var cod = "2";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#EjeIcono2').click(function () {
+                var cod = "2";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Eje3').click(function () {
+                var cod = "3";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#EjeIcono3').click(function () {
+                var cod = "3";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#Eje4').click(function () {
+                var cod = "4";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#EjeIcono4').click(function () {
+                var cod = "4";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Eje5').click(function () {
+                var cod = "5";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#EjeIcono5').click(function () {
+                var cod = "5";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Eje6').click(function () {
+                var cod = "6";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#EjeIcono6').click(function () {
+                var cod = "6";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Eje7').click(function () {
+                var cod = "7";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#EjeIcono7').click(function () {
+                var cod = "7";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Eje8').click(function () {
+                var cod = "8";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#EjeIcono8').click(function () {
+                var cod = "8";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Eje9').click(function () {
+                var cod = "9";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#EjeIcono9').click(function () {
+                var cod = "9";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Eje10').click(function () {
+                var cod = "10";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#EjeIcono10').click(function () {
+                var cod = "10";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Eje11').click(function () {
+                var cod = "11";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#EjeIcono11').click(function () {
+                var cod = "11";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+            $('#Eje12').click(function () {
+                var cod = "12";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+
+            $('#EjeIcono12').click(function () {
+                var cod = "12";
+                var filter = [{ 'key': 'ejeId', 'operator': 'equals', value: cod }];
+                componentMaps.getLayers()['mapa_tradicional'].filter(filter, function (result) {
+
+                })
+            });
+        });
+
+        $('#btnSearch').click(function () {
+            componentMaps.getLayers()['mapa_tradicional'].filter()
+            $("#DepartamentoSelector").val("").change();
+            $("#EjeSelector").val("").change();
+            ActualizarMunicipios();
+        });
+        function ActualizarMunicipios() {
+            var city = $('#MunicipioSelector')
+            var items = '';
+            items = '<option>Municipios </option>';
+            city.empty();
+            city.html(items);
+            city.click();
+
+        }
+    </script>
+}
+
+

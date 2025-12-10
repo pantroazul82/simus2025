@@ -1,0 +1,187 @@
+﻿@model WebSImus.Models.RolModel
+@{
+    ViewBag.Title = "Modificar Rol";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("editar", "Rol", FormMethod.Post))
+{
+    // @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Modificacion de roles  asociados a los menu y paginas de acceso.</h3>
+                </div>
+                <div class="panel-body">
+
+                    @Html.ValidationSummary(false, "", new { @class = "alert alert-error text-warning" })
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <!-- izquierda -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">*Codigo</label>
+                                <div class="col-md-8">
+                                    @Html.HiddenFor(x => @Model.id)
+                                    @Html.TextBoxFor(m => m.codigo, new { @readonly = "readonly", @class = "form-control text", @maxlength = "20" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">*Nombre del rol</label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(s => s.nombre, new { @class = "form-control text", @maxlength = "20" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">*Privilegios</label>
+
+                                <div class="col-md-8">
+
+                                    @for (int i = 0; i < @Model.recusos.Count; i++)
+                                    {
+                                        var name = "toppings" + @Model.recusos[i].id.ToString();
+                                        <li class="xn-openable">
+                                            @Html.HiddenFor(x => @Model.recusos[i].id)
+                                            @Html.CheckBoxFor(x => @Model.recusos[i].aplica, new { id = @Model.recusos[i].id.ToString(), @onchange = "setCompleteStatusPadre('" + @Model.recusos[i].id.ToString() + "','" + name + "')" })
+                                            @Html.HiddenFor(x => @Model.recusos[i].rec_estilo)
+                                            @Html.HiddenFor(x => @Model.recusos[i].rec_titulo)
+                                             <a href="#"><span class="@String.Format("fa {0}", @Model.recusos[i].rec_estilo)"></span>
+                                             <span class="xn-text">@Model.recusos[i].rec_titulo</span></a>
+
+
+
+
+                                            <div id="@name">
+                                                @if (@Model.recusos[i].opciones != null)
+                                                {
+                                                    for (int child = 0; child < @Model.recusos[i].opciones.Count(); child++)
+                                                    {
+                                                        var c = @Model.recusos[i].opciones[child].id.ToString();
+                                                        <ul>
+                                                            <li>
+                                                                @Html.HiddenFor(x => @Model.recusos[i].opciones[child].id)
+                                                                @Html.CheckBoxFor(x => @Model.recusos[i].opciones[child].aplica, new { id = @Model.recusos[i].opciones[child].id.ToString(), @onchange = "setCompleteStatus('" + @Model.recusos[i].id.ToString() + "','" + @Model.recusos[i].opciones[child].aplica + "','" + name + "')" })
+                                                                @Html.HiddenFor(x => @Model.recusos[i].opciones[child].rec_estilo)
+                                                                @Html.HiddenFor(x => @Model.recusos[i].opciones[child].rec_titulo)
+                                                                <a href="#"><span class="@String.Format("fa {0}", @Model.recusos[i].opciones[child].rec_estilo)"></span> 
+                                                                <span class="xn-text">@Model.recusos[i].opciones[child].rec_titulo</span></a>
+
+                                                            </li>
+                                                        </ul>
+
+
+                                                    }
+                                                }
+                                            </div>
+
+
+                                        </li>
+
+
+                                    }
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+                        <!-- START GOOGLE MAP WITH MARKER -->
+                        <!-- END GOOGLE MAP WITH MARKER -->
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-md-7">
+
+
+
+        <input type="submit" value="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+        <div class="btn btn-default pull-left">
+            <i class="fa fa-arrow-circle-o-left"></i>@Html.ActionLink("Regresar", "ConsultarRol", "Rol")
+        </div>
+    </div>
+
+
+
+
+
+
+}
+<script type="text/javascript">
+
+    function setCompleteStatus(id, aplica, divs) {
+
+
+        var el = document.getElementById('' + divs + '');
+        var tops = el.getElementsByTagName('input');
+        var existe = 0;
+        for (var i = 0, len = tops.length; i < len; i++) {
+            if (tops[i].type === 'checkbox') {
+                if (tops[i].checked == 1) {
+                    existe = 1
+                }
+
+
+            }
+        }
+
+        if (existe == 1) {
+
+            document.getElementById(id).checked = true;
+        }
+        else {
+
+            document.getElementById(id).checked = false;
+        }
+    }
+
+
+
+
+    function setCompleteStatusPadre(idPadre, divs) {
+
+
+        var el = document.getElementById('' + divs + '');
+        var tops = el.getElementsByTagName('input');
+        var existe = 0;
+        for (var i = 0, len = tops.length; i < len; i++) {
+            if (tops[i].type === 'checkbox') {
+
+                var estrue = document.getElementById(idPadre).checked;
+
+                if (estrue == true);
+                {
+                    document.getElementById(tops[i].id).checked = true;
+
+                }
+                if (estrue == false) {
+                    document.getElementById(tops[i].id).checked = false;
+                }
+
+
+
+
+
+
+            }
+
+
+        }
+    }
+</script>
+

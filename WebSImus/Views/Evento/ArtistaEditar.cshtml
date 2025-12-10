@@ -1,0 +1,226 @@
+﻿@model WebSImus.Models.ArtistaModels
+@using MvcCheckBoxList.Model
+@{
+    ViewBag.Title = "Concierto";
+    Layout = "~/Views/Shared/_LayoutEstandar.cshtml";
+}
+
+@using (Html.BeginForm("ArtistaEditar", "Evento", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    <br />
+    <br />
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.EventoId)
+    <div class="panel panel-primary form-horizontal">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-star"></span> Editar Artista </h3>
+        </div>
+        <div class="panel-body" id="panelEditar">
+            <div class="panel panel-default">
+                <div class="row">
+                    <div class="col-md-4 push-up-20">
+                        <div class="form-group">
+                            <div class="" id="user_image">
+                                <img src="@Url.Content(ViewBag.ImageData)" class="img-thumbnail" />
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-8 push-up-20">
+                        @Html.HiddenFor(model => model.EventoId)
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">* Nombre</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control text", @maxlength = "255" })
+                                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Enlace</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Enlace, new { @class = "form-control text", @maxlength = "200" })
+                                @Html.ValidationMessageFor(model => model.Enlace, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">* Contacto</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Contacto, new { @class = "form-control text", @maxlength = "500" })
+                                @Html.ValidationMessageFor(model => model.Contacto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">* Teléfono del contacto</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control text" })
+                                @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Correo electrónico del contacto</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control text" })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">* Orden</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.Orden, new { @class = "form-control spinner_default" })
+                                @Html.ValidationMessageFor(model => model.Orden, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row push-down-20">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">¿Es grupo?</label>
+
+                                <div class="col-md-4">
+                                    <label class="check">@Html.RadioButtonFor(m => m.EsGrupo, 1, new { @class = "iradio_minimal-grey", onClick = "validarNacional()" }) Si</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="check">@Html.RadioButtonFor(m => m.EsGrupo, 2, new { @class = "iradio_minimal-grey", onClick = "validarNacional()" }) No</label>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.EsGrupo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">* Cantidad de miembros</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.CantidadMiembros, new { @class = "form-control text", @maxlength = "5" })
+                                @Html.ValidationMessageFor(model => model.CantidadMiembros, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">* Categoría musical</label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.CategoriaId, (SelectList)ViewBag.listCategoria, "Seleccione una categoría", new { @class = "styled-select" })
+                                @Html.ValidationMessageFor(model => model.CategoriaId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Proceso de formación </label>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.ProcesoId, (SelectList)ViewBag.listProceso, "Seleccione un proceso", new { @class = "styled-select" })
+                                @Html.ValidationMessageFor(model => model.ProcesoId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> Subir foto</label>
+
+                            <div class="col-md-9">
+                                <p>Tipos de archivo permitidos: .jpg y .png de tamaño máximo 1 Mb</p>
+                                <input onclick="resizePanel()" id="imagenPerfil" name="imagenPerfil" type="file">
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 push-up-20">
+                    </div>
+                    <div class="col-md-8 push-up-20">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Reseña</label>
+                            <div class="col-md-9">
+                                @Html.TextAreaFor(model => model.Resena, new { @class = "form-control text", @rows = "5", @cols = "50" })
+                                @Html.ValidationMessageFor(model => model.Resena, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel-footer">
+                <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary pull-right" id="btnGuardar" />
+                <div class="btn btn-default pull-left">
+                    <i class="fa fa-arrow-circle-o-left"></i>@Html.ActionLink("Regresar al concierto", "CambiarEstado", "Evento", new { Id = Model.EventoId }, null)
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jqueryval")
+    <script src="@Url.Content("~/Scripts/plugins/icheck/icheck.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/fileinput/fileinput_locale_es.js")"></script>
+
+    <script type="text/javascript">
+        $('#HoraEvento').timepicker({
+            template: false,
+            showInputs: false,
+            minuteStep: 5
+        });
+
+        var pagecontentwrapHeight = $(".page-content-wrap").height();
+        $('#panelEditar').css("height", pagecontentwrapHeight);
+
+        $('#imagenPerfil').fileinput({
+            showUpload: false,
+            language: 'es',
+            overwriteInitial: true,
+            maxFileSize: 1024,
+            allowedFileExtensions: ['jpg', 'png'],
+        });
+
+
+        $(window).on('resize', function () {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_panelbodyHeight);
+            $('#panelEditar').css("min-height", pagecontentwrapHeight + 350);
+        });
+
+        function resizePanel() {
+            var new_pagecontentwrapHeight = pagecontentwrapHeight + 200;
+            $('#panelEditar').css("height", new_pagecontentwrapHeight);
+        };
+
+        var Informacion = ["#Orden", "#CantidadMiembros"];
+        var InformacionLength = Informacion.length;
+        for (var i = 0; i < InformacionLength; i++) {
+            var spinner = $(Informacion[i]).spinner({
+                step: 1,
+                min: 0,
+                max: 999,
+                icons: { down: "ui-icon-custom-down", up: "ui-icon-custom-up" },
+                stop: function (event, ui) {
+
+                }
+            });
+        }
+
+
+        /* Validar escribir solo números */
+        function ValidaSoloNumeros() {
+            console.log("ValidaSoloNumeros");
+            if ((event.keyCode < 48) || (event.keyCode > 57))
+                event.returnValue = false;
+        }
+
+
+        for (var i = 0; i < InformacionLength; i++) {
+            $(Informacion[i]).keypress(function () {
+                ValidaSoloNumeros();
+            });
+        }
+
+    </script>
+}
+
+
+
+
+

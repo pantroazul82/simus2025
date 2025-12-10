@@ -1,0 +1,287 @@
+@model WebSImus.Models.MapaFestivalesViewModel
+@{
+    Layout = null;
+    ViewBag.Title = "Mapa de festivales";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - SIMUS</title>
+    <link rel="icon" href="~/img/favicon.ico" type="image/x-icon" />
+    
+    @* Bootstrap y estilos base *@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    
+    @* Leaflet para el mapa *@
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    @* Estilos personalizados *@
+    <link href="~/css/mapa-festivales.css" rel="stylesheet" />
+    
+    @* jQuery *@
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    
+    @* Chart.js para gráficas *@
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    @* Leaflet Scripts *@
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+</head>
+<body>
+    <div class="mapa-festivales-container">
+        <!-- Encabezado -->
+        <header class="mapa-header">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="~/img/logo-login.png" alt="SIMUS" />
+                </div>
+                <div class="header-title">
+                    <h1>Mapa de festivales</h1>
+                    <p>Consulta de festivales</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Contenido principal -->
+        <div class="mapa-content">
+            <!-- Columna izquierda: Mapa de calor -->
+            <div class="mapa-section">
+                <div class="panel-mapa">
+                    <h2 class="panel-title">Mapa de Colombia</h2>
+                    <div id="mapa-colombia" class="mapa-container"></div>
+                </div>
+            </div>
+
+            <!-- Columna derecha: Gr&aacute;ficas estad&iacute;sticas -->
+            <div class="graficas-section">
+                <!-- Fila 1: Festivales por ciudad -->
+                <div class="grafica-panel">
+                    <h3 class="grafica-title">Festivales por ciudad</h3>
+                    <div class="grafica-container">
+                        <canvas id="chartCiudad"></canvas>
+                    </div>
+                </div>
+
+                <!-- Fila 1: Territorios sonoros -->
+                <div class="grafica-panel">
+                    <h3 class="grafica-title">Territorios sonoros</h3>
+                    <div class="grafica-container">
+                        <canvas id="chartTerritorios"></canvas>
+                    </div>
+                </div>
+
+                <!-- Fila 2: Festivales por tipo -->
+                <div class="grafica-panel">
+                    <h3 class="grafica-title">Festivales por tipo</h3>
+                    <div class="grafica-container">
+                        <canvas id="chartTipo"></canvas>
+                    </div>
+                </div>
+
+                <!-- Fila 2: Festivales por expresi&oacute;n musical -->
+                <div class="grafica-panel">
+                    <h3 class="grafica-title">Festivales por expresi&oacute;n musical</h3>
+                    <div class="grafica-container">
+                        <canvas id="chartExpresion"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            console.log('Iniciando carga de mapa y gr&aacute;ficas...');
+            
+            // Inicializar mapa de Colombia con Leaflet
+            var map = L.map('mapa-colombia').setView([4.5709, -74.2973], 6);
+
+            // Agregar capa de mapa base
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors',
+                maxZoom: 18
+            }).addTo(map);
+
+            // Obtener ubicaciones de festivales y crear mapa de calor
+            $.ajax({
+                url: '@Url.Action("ObtenerUbicacionesFestivales", "Festivales")',
+                type: 'GET',
+                success: function (data) {
+                    if (data && data.length > 0) {
+                        // Crear array de puntos para mapa de calor (normalizar intensidad)
+                        var heatData = data.map(function (festival) {
+                            // Normalizar la intensidad del mapa de calor
+                            var intensidad = Math.min(festival.CantidadVersiones / 10, 1.0);
+                            return [festival.Latitud, festival.Longitud, intensidad];
+                        });
+
+                        // Agregar capa de mapa de calor con colores morados
+                        L.heatLayer(heatData, {
+                            radius: 30,
+                            blur: 25,
+                            maxZoom: 8,
+                            max: 1.0,
+                            gradient: {
+                                0.0: '#667eea',
+                                0.3: '#764ba2',
+                                0.5: '#f093fb',
+                                0.7: '#fa709a',
+                                1.0: '#e74c3c'
+                            }
+                        }).addTo(map);
+
+                        // Agregar marcadores con íconos personalizados
+                        data.forEach(function (festival) {
+                            // Icono según cantidad de versiones
+                            var iconColor = '#667eea';
+                            if (festival.CantidadVersiones > 50) iconColor = '#e74c3c';
+                            else if (festival.CantidadVersiones > 30) iconColor = '#f39c12';
+                            else if (festival.CantidadVersiones > 15) iconColor = '#764ba2';
+
+                            var customIcon = L.divIcon({
+                                className: 'custom-marker',
+                                html: '<div style="background-color: ' + iconColor + '; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></div>',
+                                iconSize: [12, 12],
+                                iconAnchor: [6, 6]
+                            });
+
+                            L.marker([festival.Latitud, festival.Longitud], { icon: customIcon })
+                                .bindPopup('<div style="text-align: center; min-width: 150px;">' +
+                                          '<b style="color: #667eea; font-size: 14px;">' + festival.Nombre + '</b><br>' + 
+                                          '<span style="color: #666;">' + festival.Ciudad + ', ' + festival.Departamento + '</span><br>' +
+                                          '<span style="background: #667eea; color: white; padding: 2px 8px; border-radius: 10px; font-size: 12px; margin-top: 5px; display: inline-block;">Versiones: ' + festival.CantidadVersiones + '</span>' +
+                                          '</div>')
+                                .addTo(map);
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error al cargar ubicaciones:', error);
+                }
+            });
+
+            // Colores para las gráficas
+            var coloresPaleta = [
+                '#667eea', '#764ba2', '#f093fb', '#4facfe', 
+                '#43e97b', '#fa709a', '#feca57', '#ee5a6f',
+                '#48dbfb', '#0abde3'
+            ];
+
+            // Función auxiliar para crear gráficas de pie
+            function crearGraficaPie(elementId, url, titulo) {
+                console.log('Creando gr&aacute;fica:', titulo, 'en elemento:', elementId);
+                
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log('Datos recibidos para', titulo, ':', data);
+                        
+                        if (data && data.length > 0) {
+                            var canvas = document.getElementById(elementId);
+                            if (!canvas) {
+                                console.error('No se encontr&oacute; el elemento canvas:', elementId);
+                                return;
+                            }
+                            
+                            var ctx = canvas.getContext('2d');
+                            
+                            var labels = data.map(function(item) { return item.Categoria || 'Sin categor&iacute;a'; });
+                            var valores = data.map(function(item) { return item.Cantidad || 0; });
+                            
+                            console.log('Labels:', labels);
+                            console.log('Valores:', valores);
+                            
+                            // Destruir gráfica existente si hay una
+                            if (Chart.getChart(elementId)) {
+                                Chart.getChart(elementId).destroy();
+                            }
+                            
+                            new Chart(ctx, {
+                                type: 'pie',
+                                data: {
+                                    labels: labels,
+                                    datasets: [{
+                                        data: valores,
+                                        backgroundColor: coloresPaleta.slice(0, data.length),
+                                        borderWidth: 2,
+                                        borderColor: '#fff'
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: true,
+                                    aspectRatio: 1.5,
+                                    plugins: {
+                                        legend: {
+                                            position: 'bottom',
+                                            labels: {
+                                                padding: 8,
+                                                font: {
+                                                    size: 10
+                                                },
+                                                boxWidth: 12
+                                            }
+                                        },
+                                        tooltip: {
+                                            callbacks: {
+                                                label: function(context) {
+                                                    var label = context.label || '';
+                                                    var value = context.parsed || 0;
+                                                    var total = context.dataset.data.reduce(function(a, b) { return a + b; }, 0);
+                                                    var percentage = ((value / total) * 100).toFixed(1);
+                                                    return label + ': ' + value + ' (' + percentage + '%)';
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                            
+                            console.log('Gr&aacute;fica creada exitosamente para:', titulo);
+                        } else {
+                            console.warn('No hay datos para:', titulo);
+                            // Mostrar mensaje en el canvas
+                            var canvas = document.getElementById(elementId);
+                            if (canvas) {
+                                var ctx = canvas.getContext('2d');
+                                ctx.font = '14px Arial';
+                                ctx.textAlign = 'center';
+                                ctx.fillStyle = '#999';
+                                ctx.fillText('No hay datos disponibles', canvas.width / 2, canvas.height / 2);
+                            }
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error al cargar ' + titulo + ':', error);
+                        console.error('Status:', status);
+                        console.error('Response:', xhr.responseText);
+                    }
+                });
+            }
+
+            // Esperar a que Chart.js esté disponible
+            if (typeof Chart !== 'undefined') {
+                console.log('Chart.js est&aacute; disponible, versi&oacute;n:', Chart.version);
+                
+                // Pequeño delay para asegurar que DOM esté completamente listo
+                setTimeout(function() {
+                    // Cargar todas las gráficas
+                    crearGraficaPie('chartCiudad', '@Url.Action("ObtenerFestivalesPorCiudad", "Festivales")', 'Festivales por ciudad');
+                    crearGraficaPie('chartTerritorios', '@Url.Action("ObtenerTerritoriosSonoros", "Festivales")', 'Territorios sonoros');
+                    crearGraficaPie('chartTipo', '@Url.Action("ObtenerFestivalesPorTipo", "Festivales")', 'Festivales por tipo');
+                    crearGraficaPie('chartExpresion', '@Url.Action("ObtenerFestivalesPorExpresionMusical", "Festivales")', 'Festivales por expresi&oacute;n musical');
+                }, 300);
+            } else {
+                console.error('Chart.js no est&aacute; disponible');
+            }
+        });
+    </script>
+</body>
+</html>

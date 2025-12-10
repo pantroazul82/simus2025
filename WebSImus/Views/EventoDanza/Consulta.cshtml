@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Consulta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.DevExpress().Button(settings =>
+                    {
+                        settings.Name = "ButtonExportar";
+                        settings.UseSubmitBehavior = false;
+                        settings.Text = "Exportar";
+                        settings.RouteValues = new { Controller = "EventoDanza", Action = "ExportToPermisos" };
+                        settings.ControlStyle.ForeColor = System.Drawing.Color.White;
+                        settings.ControlStyle.BackColor = System.Drawing.ColorTranslator.FromHtml("#4b3c8c");
+                        settings.ControlStyle.CssClass = "custom-button";
+                    }).GetHtml()
+
+                    @Html.DevExpress().Button(settings =>
+                    {
+                        settings.Name = "ButtonNuevo";
+                        settings.UseSubmitBehavior = false;
+                        settings.Text = "Nueva";
+                        settings.RouteValues = new { Controller = "EventoDanza", Action = "Evento" };
+                        settings.ControlStyle.ForeColor = System.Drawing.Color.White;
+                        settings.ControlStyle.BackColor = System.Drawing.ColorTranslator.FromHtml("#4b3c8c");
+                        settings.ControlStyle.CssClass = "custom-button";
+                    }).GetHtml()
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div id="Tabla">
+                @Html.Action("GridViewPartialPermisos")
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .custom-button {
+        border-radius: 8px !important;
+        padding: 4px 8px;
+        font-weight: 400;
+        border-color: #4b3c8c;
+    }
+</style>
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/globalize/globalize.js")"></script>
+    <script src="@Url.Content("~/Scripts/dx.webappjs.js")"></script>
+
+}
+
+
+
+
+
